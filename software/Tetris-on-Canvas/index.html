@@ -1,0 +1,86 @@
+<!--
+
+Tetris on Canvas, v.2.0
+Sergey A Kryukov, derived work
+http://www.SAKryukov.org
+http://www.codeproject.com/Members/SAKryukov
+
+Based on algorithms and working prototype developed by Jake Gordon:
+http://codeincomplete.com
+http://codeincomplete.com/posts/2011/10/10/javascript_tetris
+https://github.com/jakesgordon/javascript-tetris
+
+License: MIT (http://en.wikipedia.org/wiki/MIT_License)
+
+S A Kryukov implemented:
+Configurable game: board size, tetromino colors/shapes, score rules, timing
+Auto-resizeable depending on the browser window size 
+Drop of tetromino to bottom
+Pause/continue
+Help
+FSM (states)
+Fixed random tetromino generation
+Javascript "strict mode"
+Code improvements, exception handling, readability, fixes
+
+Published here:
+http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
+
+-->
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
+		<title>Tetris on Canvas</title>
+		<style type="text/css">
+			/* http://www.w3schools.com/cssref/css_colornames.asp */ /* for color shading/mixing */
+			body, html { font-family: Verdana, sans-serif; background-color: Brown; }
+			.noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+			#main { display:table; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
+			#left, #right { display: table-cell; white-space: nowrap; vertical-align: middle; text-align: center; }
+			canvas { background-color: LemonChiffon; width:100%; }
+			#upcoming { background-color: /* #DBAAAA; */ Lavender; outline: solid black thin; }
+			#score, #rows { font-style: normal; font-weight: bold; }
+			#score { color: red; }
+			#rows { color: darkGreen; }
+			#helpIcon {
+				position: absolute; left: 0.4em; top: 0.4em; font-size: 80%;
+				padding-left: 0.2em; padding-right: 0.22em; padding-top: 0.18em; padding-bottom: 0.24em;
+				border: solid black thin; border-radius: 10px; background-color: Yellow;
+				cursor: help;
+			}
+			#help { position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
+			h1 { text-align: center; font-size:120%; }
+		</style> 
+	</head>
+<body>
+
+<div id="help">
+<h1>Tetris on Canvas v.<span id="version">2.0<span></h1>
+<p><big>&larr;</big>, <big>&rarr;</big>, <big>&darr;</big>: move</p>
+<p><big>&uarr;</big>: rotate <big>&orarr;</big></p>
+<p>Space: drop down</p>
+<p>Enter: start/pause/continue game</p>
+<p>Escape: cancel game</p>
+<p>F1: show/hide help</p><hr/>
+<p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
+<br/><p>Press F1 or click on this text or &cross; to close help window&hellip;</p>
+</div>
+
+<div id="main"><span id="helpIcon" class="noselect">&nbsp;</span>
+	<div id="left">
+		<p id="prompt">Press Enter to <span id="statusVerb"/></p>
+		<div><canvas id="upcoming"/></div>
+		<br/><br/><p>Score: <em id="score"></em></p>
+		<p>Rows: <em id="rows"></em></p>
+		<br/><p id="paused">Paused</p>
+	</div>
+	<div id="right"><canvas id="board"/></div>
+</div>
+
+<script src="settings.js"></script>
+<script src="application.js"></script>
+
+</body>
+</html>
