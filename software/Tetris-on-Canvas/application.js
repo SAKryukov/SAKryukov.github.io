@@ -289,8 +289,9 @@ const rendering = {
 	rowsText: element("rows"),
 	pausedText: element("paused"),
 	helpWindow: element("help"),
-	helpIcon: element("helpIcon"),
-        badBrowser: element("bad-browser"),
+	helpImageHelp: element("id.help"),
+	helpImageExit: element("id.exit"),	
+    badBrowser: element("bad-browser"),
 	statusVerb: element("statusVerb"),
 	boardContext: layout.board.getContext("2d"),
 	upcomingContext: layout.upcoming.getContext("2d"),
@@ -301,18 +302,25 @@ const rendering = {
 	invalidateRows: function () { this.invalid.rows = true; },
 	invalidateState: function () { this.invalid.state = true; },
 	showingHelp: false,
-	showHelpIcon: "F1", hideHelpIcon: "&nbsp;&cross;&nbsp;",
 
+	showHelpImage: function(doShow) {
+		if (doShow) {
+			this.helpImageHelp.style.display = "inline"; 
+			this.helpImageExit.style.display = "none"; 
+		} else {
+			this.helpImageHelp.style.display = "none"; 
+			this.helpImageExit.style.display = "inline"; 
+		} //if
+	}, //showHelpImage
 	initializeHelp: function () {
 		const versionElement = element("version");
-                versionElement.textContent = version;
+        versionElement.textContent = version;
 		hide(this.helpWindow);
-                hide(this.badBrowser, true);
-		setText(this.helpIcon, this.showHelpIcon);
+		hide(this.badBrowser, true);
 	}, //initializeHelp
 	help: function () {
+		this.showHelpImage(this.showingHelp);		
 		setVisibility(this.helpWindow, this.showingHelp = !this.showingHelp);
-		setText(this.helpIcon, !this.showingHelp ? this.showHelpIcon : this.hideHelpIcon);
 	}, //help
 
 	draw: function () {
@@ -429,7 +437,8 @@ try {
 		document.onkeydown = function (event) { game.keydown(event); };
 		window.onclick = function () { game.click(); };
 		rendering.helpWindow.onclick = function () { rendering.help(); };
-		rendering.helpIcon.onclick = function () { rendering.help(); };
+		rendering.helpImageHelp.onclick = function () { rendering.help(); };
+		rendering.helpImageExit.onclick = function () { rendering.help(); };
 		let after, before = now();
 		(function frame() {
 			after = now();
