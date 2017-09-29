@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.2.0
+Tetris on Canvas, v.3.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -290,6 +290,7 @@ const rendering = {
 	pausedText: element("paused"),
 	helpWindow: element("help"),
 	helpIcon: element("helpIcon"),
+        badBrowser: element("bad-browser"),
 	statusVerb: element("statusVerb"),
 	boardContext: layout.board.getContext("2d"),
 	upcomingContext: layout.upcoming.getContext("2d"),
@@ -303,7 +304,10 @@ const rendering = {
 	showHelpIcon: "F1", hideHelpIcon: "&nbsp;&cross;&nbsp;",
 
 	initializeHelp: function () {
+		const versionElement = element("version");
+                versionElement.textContent = version;
 		hide(this.helpWindow);
+                hide(this.badBrowser, true);
 		setText(this.helpIcon, this.showHelpIcon);
 	}, //initializeHelp
 	help: function () {
@@ -389,7 +393,7 @@ const rendering = {
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function element(id) { return document.getElementById(id); }
 function now() { return new Date().getTime(); }
-function hide(object) { object.style.visibility = "hidden"; }
+function hide(object, noDisplay) { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; }
 function show(object) { object.style.visibility = null; }
 function setVisibility(object, visible) { if (visible) show(object); else hide(object); }
 function setText(object, text) { object.innerHTML = text; }
