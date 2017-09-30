@@ -46,6 +46,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 			#score, #rows { font-style: normal; font-weight: bold; }
 			#score { color: red; }
 			#rows { color: darkGreen; }
+			#prompt { margin-top: 3em; margin-bottom: 4em; }
 			svg {
 				position: absolute;
 				left: 0.4em; top: 0.4em;
@@ -163,7 +164,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 <div id="main">
 	<div id="left">
-		<p id="prompt">Press Enter to <span id="statusVerb"/></p>
+		<p id="prompt">&nbsp;&nbsp;Press Enter&nbsp;&nbsp;<br/>to <span id="statusVerb"/></p>
 		<div><canvas id="upcoming"/></div>
 		<br/><br/><p>Score: <em id="score"></em></p>
 		<p>Rows: <em id="rows"></em></p>
