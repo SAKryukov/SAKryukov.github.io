@@ -4,7 +4,7 @@
 	code { font-size: 130%; }
         pre, code { color: darkGreen; padding:0; font-family: 'Consolas', sans-serif }
         pre, pre code { color: black; font-size: 100%; background-color: antiqueWhite; }
-        html, body, p { font-family: 'Verdana', 'Ububtu', serif; }
+        html, body, p { font-family: 'Ububtu', 'Helvetica', 'Verdana', serif; }
         blockquote { margin-left: 2em; }
 	th, td { border: thin solid black; padding-left: 1em; padding-right: 1em; }
 	th { border-bottom: solid black 2px; }
