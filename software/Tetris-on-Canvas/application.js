@@ -322,7 +322,7 @@ const rendering = {
 	helpWindow: element("help"),
 	helpImageHelp: element("id.help"),
 	helpImageExit: element("id.exit"),	
-    badBrowser: element("bad-browser"),
+	badBrowser: element("bad-browser"),
 	statusVerb: element("statusVerb"),
 	boardContext: layout.board.getContext("2d"),
 	upcomingContext: layout.upcoming.getContext("2d"),
@@ -344,10 +344,8 @@ const rendering = {
 		} //if
 	}, //showHelpImage
 	initializeHelp: function () {
-		const versionElement = element("version");
-        versionElement.textContent = version;
-		hide(this.helpWindow);
-		hide(this.badBrowser, true);
+	    const versionElement = element("version");
+            versionElement.textContent = version;
 	}, //initializeHelp
 	help: function () {
 		this.showHelpImage(this.showingHelp);		
@@ -434,7 +432,13 @@ function element(id) { return document.getElementById(id); }
 function now() { return new Date().getTime(); }
 function hide(object, noDisplay) { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; }
 function show(object) { object.style.visibility = null; }
-function setVisibility(object, visible) { if (visible) show(object); else hide(object); }
+function setVisibility(object, visible) {
+    if (visible) {
+        show(object);
+        object.style.display = "block";
+    } else
+        hide(object);
+} //setVisibility
 function setText(object, text) { object.innerHTML = text; }
 function maximum() {
 	let big = Number.NEGATIVE_INFINITY;
