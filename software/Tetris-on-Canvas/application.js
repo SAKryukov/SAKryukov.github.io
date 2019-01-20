@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.3.0
+Tetris on Canvas, v.4.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -27,6 +27,36 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 */
 
 "use strict";
+
+// class syntax works, ECMAScript 2015, but may be incompatible with some browsers
+// class Tetromino {
+// 	constructor (shape, x, y, orientation) {
+// 		this.shape = shape; //TetrominoShape
+// 		this.x = x;
+// 		this.y = y;
+// 		this.orientation = orientation;
+// 	}
+// 	first (x0, y0, orientation, fn, doBreak) { // fn(x, y), accepts coordinates of each block, returns true to break
+// 		let row = 0, col = 0, result = false, blocks = this.shape.blocks[orientation];
+// 		for (let bit = 0x8000; bit > 0; bit = bit >> 1) {
+// 			if (blocks & bit) {
+// 				result = fn(x0 + col, y0 + row);
+// 				if (doBreak && result)
+// 					return result;
+// 			} //if
+// 			if (++col === 4) {
+// 				col = 0;
+// 				++row;
+// 			} //if
+// 		} //loop
+// 		return result;
+// 	} //first
+// 	all(fn) { // fn(x, y), accepts coordinates of each block
+// 		this.first(this.x, this.y, this.orientation, fn, false); // no break
+// 	} //all
+// } //class Tetromino
+
+// Equivalent code without ECMAScript 2015 class syntax:
 
 function Tetromino(shape, x, y, orientation) {
 	this.shape = shape; //TetrominoShape
@@ -208,6 +238,7 @@ const game = {
 
 	dropDown: function () {
 		while (this.move(this.actions.down)) { }
+                this.drop()
 	}, //dropDown
 
 	removeLine: function (n) {
