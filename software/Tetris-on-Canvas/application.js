@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.4.0
+Tetris on Canvas, v.4.1
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -282,7 +282,9 @@ const game = {
 		else
 			this.startContinue();
 	}, //clickBody
+
 	click: function (event) { try { this.clickBody(event); } catch (e) { showException(e); } },
+	
 	keydownBody: function (event) {
 		if (event.keyCode === key.help) {
 			rendering.help();
@@ -296,7 +298,14 @@ const game = {
 				case key.right: this.queue.push(this.actions.right); handled = true; break;
 				case key.rotate: this.queue.push(this.actions.rotate); handled = true; break;
 				case key.down: this.queue.push(this.actions.down); handled = true; break;
-				case key.dropDown: this.queue.push(this.actions.bottom); handled = true; break;
+				case key.dropDown:
+				    // using this.repeatedKeyDropDown because event.repeat, reportedly, is not currently supported by some smartphone/tablet browsers:
+                    if (event.ctrlKey || !this.repeatedKeyDropDown) {
+						this.repeatedKeyDropDown = true;
+						this.queue.push(this.actions.bottom);
+					} //if
+					handled = true;
+					break;
 				case key.cancel: this.cancel(); handled = true; break;
 				case key.start: this.pause(); handled = true; break;
 			} //switch 
@@ -307,7 +316,18 @@ const game = {
 		if (handled)
 			event.preventDefault(); // prevent arrow keys from scrolling the page (supported in IE9+ and all other browsers)
 	}, //keydownBody
-	keydown: function (event) { try { this.keydownBody(event); } catch (e) { showException(e); } }
+
+	repeatedKeyDropDown: false, //using it because event.repeat, reportedly, is not currently supported by some smartphone/tablet browsers
+
+	keyupBody: function (event) {
+		if (event.keyCode == key.dropDown)
+			this.repeatedKeyDropDown = false;
+		event.preventDefault();
+	}, //keyupBody
+	
+	keydown: function (event) { try { this.keydownBody(event); } catch (e) { showException(e); } },
+	
+	keyup: function (event) { try { this.keyupBody(event); } catch (e) { showException(e); } }
 
 } //game
 
@@ -470,6 +490,7 @@ try {
 		game.reset();
 		window.onresize = function () { layout.resize(); };
 		document.onkeydown = function (event) { game.keydown(event); };
+		document.onkeyup = function (event) { game.keyup(event); };
 		window.onclick = function () { game.click(); };
 		rendering.helpWindow.onclick = function () { rendering.help(); };
 		rendering.helpImageHelp.onclick = function () { rendering.help(); };
