@@ -2,7 +2,7 @@
 
 <!--
 
-Tetris on Canvas, v.4.1
+Tetris on Canvas, v.5.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -31,32 +31,32 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 -->
 
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
-		<title>Tetris on Canvas</title>
-		<style type="text/css">
-			/* http://www.w3schools.com/cssref/css_colornames.asp */ /* for color shading/mixing */
-			body, html { font-family: Verdana, sans-serif; background-color: Brown; }
-			.noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-			#main { display:table; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
-			#left, #right { display: table-cell; white-space: nowrap; vertical-align: middle; text-align: center; }
-			canvas { background-color: LemonChiffon; width:100%; }
-			#upcoming { background-color: /* #DBAAAA; */ Lavender; outline: solid black thin; }
-			#score, #rows { font-style: normal; font-weight: bold; }
-			#score { color: red; }
-			#rows { color: darkGreen; }
-			#prompt { margin-top: 3em; margin-bottom: 4em; }
-			svg {
-				position: absolute;
-				left: 0.4em; top: 0.4em;
-				cursor: help;
-			}
-			#help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
-			h1 { text-align: center; font-size:120%; }
-      #bad-browser { color: red; text-align: left; }
-		</style> 
-	</head>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
+    <title>Tetris on Canvas</title>
+    <style type="text/css">
+      /* http://www.w3schools.com/cssref/css_colornames.asp */ /* for color shading/mixing */
+      body, html { font-family: Verdana, sans-serif; background-color: Brown; }
+      .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+      #main { display:table; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
+      #left, #right { display: table-cell; white-space: nowrap; vertical-align: middle; text-align: center; }
+      canvas { background-color: LemonChiffon; width:100%; }
+      #upcoming { background-color: /* #DBAAAA; */ Lavender; outline: solid black thin; }
+      #score, #rows { font-style: normal; font-weight: bold; }
+      #score { color: red; }
+      #rows { color: darkGreen; }
+      #prompt { margin-top: 3em; margin-bottom: 4em; }
+      svg {
+        position: absolute;
+        left: 0.4em; top: 0.4em;
+        cursor: help;
+      }
+      #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
+      h1 { text-align: center; font-size:120%; }
+      code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0 3 0 3; }
+    </style> 
+  </head>
 <body>
 
 <svg
@@ -151,27 +151,29 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"><span></h1>
-<h1 id="bad-browser"><big>If you can see this line, your browser does not support requred essential features</big></h1>
 <p><big>&larr;</big>, <big>&rarr;</big>, <big>&darr;</big>: move current tetromino</p>
 <p><big>&uarr;</big>: rotate current tetromino <big>&orarr;</big></p>
 <p>Space: drop down current tetromino</p>
-<p>Ctrl+Space: drop down current tetromino, not ignoring auto-repeat key</p>
 <p>Enter: start/pause/continue game</p>
 <p>Escape: cancel game</p>
 <p>F1: show/hide help</p><hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
-<br/><p>Press F1 or click on this text or &cross; to close help window&hellip;</p>
+<br/><p>Press F1 or click on this text or <code>X</code> to close help window&hellip;</p>
 </div>
 
 <div id="main">
-	<div id="left">
-		<p id="prompt">&nbsp;&nbsp;Press Enter&nbsp;&nbsp;<br/>to <span id="statusVerb"/></p>
-		<div><canvas id="upcoming"/></div>
-		<br/><br/><p>Score: <em id="score"></em></p>
-		<p>Rows: <em id="rows"></em></p>
-		<br/><p id="paused">Paused</p>
-	</div>
-	<div id="right"><canvas id="board"/></div>
+  <div id="left">
+    <p id="prompt">&nbsp;&nbsp;Press Enter&nbsp;&nbsp;<br/>to <span id="statusVerb"/></p>
+    <div><canvas id="upcoming"/></div>
+    <br/><br/><p>Score: <em id="score"></em></p>
+    <p>Rows: <em id="rows"></em></p>
+    <br/><p id="paused">Paused</p>
+    <section id="sectionClutter">
+      <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="true"/>Cl<u>u</u>tter</label>&ThinSpace;
+      <select id="clutterSelector"></select>
+    </section>
+  </div>
+  <div id="right"><canvas id="board"/></div>
 </div>
 
 <script src="settings.js"></script>
