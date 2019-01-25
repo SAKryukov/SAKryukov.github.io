@@ -103,7 +103,8 @@ const elements = {
     pausedText: element("paused"),
     helpWindow: element("help"),
     helpImageHelp: element("id.help"),
-    helpImageExit: element("id.exit"),	
+    helpImageExit: element("id.exit"),
+    helpDownload: element("download"),	
     statusVerb: element("statusVerb")
 }; //elements
 
@@ -348,6 +349,7 @@ const game = {
     click: function (event) { try { this.clickBody(event); } catch (e) { showException(e); } },
     
     keydownBody: function (event) {
+        if (rendering.showingHelp && event.keyCode != key.help) return;
         if (event.keyCode === key.help) {
             rendering.help();
             event.preventDefault();
@@ -382,6 +384,7 @@ const game = {
     repeatedKeyDropDown: false, //using it because event.repeat, reportedly, is not currently supported by some smartphone/tablet browsers
 
     keyupBody: function (event) {
+        if (rendering.showingHelp && event.keyCode != key.help) return;
         if (indirectChildOf(event.target, elements.sectionClutter))
             return;
         if (event.keyCode == key.dropDown)
@@ -425,6 +428,8 @@ const rendering = {
     help: function () {
         this.showHelpImage(this.showingHelp);		
         setVisibility(elements.helpWindow, this.showingHelp = !this.showingHelp);
+        if (this.showingHelp)
+            elements.helpDownload.focus();
     }, //help
 
     draw: function () {
