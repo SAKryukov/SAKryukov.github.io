@@ -48,84 +48,29 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       #score { color: red; }
       #rows { color: darkGreen; }
       #prompt { margin-top: 3em; margin-bottom: 4em; }
-      svg {
+      img.help, img.close {
         position: absolute;
+        width: 2em; height: 2em;
         left: 0.4em; top: 0.4em;
         cursor: help;
       }
+      img.close { display: none; }
+      a.download {
+        position: absolute;
+        left: 0.4em; top: 2.8em;
+        cursor: grab;
+      }
+      img.download { width: 2em; height: 2em; }
       #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
       h1 { text-align: center; font-size:120%; }
       code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0 3 0 3; }
     </style> 
   </head>
-<body>
+<body title="Tetris on Canvas">
 
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   width="8mm"
-   height="8mm"
-   viewBox="0 0 84 84"
-   version="1.1">
-  <g
-     id="id.pad"
-     style="display:none"
-     transform="translate(219.58333,-242.08333)">
-    <rect
-       style="opacity:1;vector-effect:none;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:4.4000001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       width="84"
-       height="84"
-       x="-219.58333"
-       y="242.08333" />
-  </g>
-  <g
-     id="id.exit"
-     style="display:none"
-     transform="translate(219.58333,-242.08333)">
-    <g>
-      <g
-         aria-label="X"
-         transform="scale(1.0507459,0.95170488)"
-         style="font-style:normal;font-weight:normal;font-size:90.42823029px;line-height:0%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
-        <g>
-          <rect
-             style="display:inline;opacity:1;vector-effect:none;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:4.4000001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-             width="74.708336"
-             height="74.708336"
-             x="-214.9375"
-             y="246.72916"
-             transform="scale(0.95170489,1.0507459)" />
-          <path
-             style="font-size:90.42823029px;fill:#d40000;stroke-width:0.26458332px"
-             d="m -141.01302,265.62643 -22.69537,32.49764 22.65122,33.24827 h -10.11136 l -17.92669,-27.06665 -18.36824,27.06665 h -9.53735 l 22.91614,-32.85088 -22.38629,-32.89503 h 10.06721 l 17.70592,26.71342 18.1033,-26.71342 z" />
-        </g>
-      </g>
-    </g>
-  </g>
-  <g
-     id="id.help"
-     style="display:inline"
-     transform="translate(219.58333,-242.08333)">
-    <circle
-       style="opacity:1;vector-effect:none;fill:#ffff00;fill-opacity:1;stroke:#000000;stroke-width:4.4000001;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
-       cx="-177.58333"
-       cy="284.08334"
-       r="37.354168" />
-    <g
-       aria-label="F1"
-       style="font-style:normal;font-weight:normal;font-size:50.79999924px;line-height:0%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
-      <path
-         d="m -179.00835,270.0439 h -18.67793 v 10.41797 h 16.04863 v 4.36563 h -16.04863 v 17.78496 h -4.91133 v -36.93418 h 23.58926 z"
-         style="font-size:50.79999924px;stroke-width:0.26458332px"/>
-      <path
-         d="m -151.49995,302.61246 h -19.99258 v -3.77032 h 7.68945 v -24.75507 h -7.68945 v -3.37344 q 1.56269,0 3.34863,-0.24805 1.78594,-0.27285 2.70371,-0.76894 1.14102,-0.62012 1.78594,-1.5627 0.66973,-0.96738 0.76894,-2.57969 h 3.84473 v 33.28789 h 7.54063 z"
-         style="font-size:50.79999924px;stroke-width:0.26458332px"/>
-    </g>
-  </g>
-</svg>
+<img id="id.help" class="help" src="images/help.svg" title="Help"/>
+<img id="id.closehelp" class="close" src="images/close.svg" title="Help"/>
+<a id="id.download" class="download" href="Tetris.zip" title="Download source code"><img class="download" src="images/download.svg"/></a>
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"><span></h1>
@@ -136,18 +81,17 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <p>Escape: cancel game</p>
 <p>F1: show/hide help</p><hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
-<p><a href="Tetris.zip" id="download">Download source code&hellip;</a></p>
-<br/><p>Press F1 or click on this text or <code>X</code> to close help window&hellip;</p>
+<br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
 </div>
 
-<div id="main">
+<div id="main" title="Use Enter, Escape, &larr;&rarr;&thinsp;&darr;&uarr;, F1 for help">
   <div id="left">
     <p id="prompt">&nbsp;&nbsp;Press Enter&nbsp;&nbsp;<br/>to <span id="statusVerb"/></p>
-    <div><canvas id="upcoming"/></div>
+    <div><canvas id="upcoming" title="Next tetromino"/></div>
     <br/><br/><p>Score: <em id="score"></em></p>
     <p>Rows: <em id="rows"></em></p>
     <br/><p id="paused">Paused</p>
-    <section id="sectionClutter">
+    <section id="sectionClutter" title="Clutter created at the start of the game">
       <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="true"/>Cl<u>u</u>tter</label>&ThinSpace;
       <select id="clutterSelector"></select>
     </section>
