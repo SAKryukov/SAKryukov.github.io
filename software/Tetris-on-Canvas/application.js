@@ -15,6 +15,7 @@ S A Kryukov implemented:
 Configurable game: board size, tetromino colors/shapes, score rules, timing
 Auto-resizeable depending on the browser window size 
 Drop of tetromino to bottom
+Automatic optional clutter at the end of the game (since v.5.0)
 Pause/continue
 Help
 FSM (states)
@@ -22,7 +23,7 @@ Fixed random tetromino generation
 Javascript "strict mode"
 Code improvements, exception handling, readability, fixes
 
-Published here:
+Publication:
 http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 */
 
@@ -338,11 +339,14 @@ const game = {
         } //switch
     }, //handle
 
-    clickBody: function () {
-        if (this.states.current === this.states.playing)
-            this.pause();
-        else
-            this.startContinue();
+    clickBody: function (event) {
+        if (!indirectChildOf(event.target, elements.sectionClutter)) {
+            if (this.states.current === this.states.playing)
+                this.pause();
+            else
+                this.startContinue();
+        } //if
+        event.stopPropagation();
     }, //clickBody
 
     click: function (event) { try { this.clickBody(event); } catch (e) { showException(e); } },
@@ -534,6 +538,7 @@ function showException(exception) {
 
 try {
     (function () {
+        document.body.title = document.title;
         if (!window.requestAnimationFrame) // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
             window.requestAnimationFrame =
                 window.webkitRequestAnimationFrame ||
@@ -548,11 +553,7 @@ try {
         window.onresize = function () { layout.resize(); };
         window.onkeydown = function (event) { game.keydown(event); };
         window.onkeyup = function (event) { game.keyup(event); };
-        window.onclick = function (event) {
-            if (!indirectChildOf(event.target, elements.sectionClutter))
-                game.click();
-            event.stopPropagation();
-        }; //window.onclick
+        window.onclick = function (event) { game.click(event); };
         elements.helpWindow.onclick = function () { rendering.help(); };
         elements.helpImageHelp.onclick = function () { rendering.help(); };
         elements.helpImageClose.onclick = function () { rendering.help(); };
