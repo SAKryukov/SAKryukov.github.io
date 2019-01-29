@@ -1,0 +1,228 @@
+<DOCTYPE html>
+<html>
+    <head>
+        <title>Tetris on Canvas &mdash; Settings</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
+        <title>Tetris on Canvas</title>
+        <style type="text/css">
+            * { font-family: "Arial", sans-serif; }
+            src { font-family: monospace; font-size: 120%; color: darkblue; font-weight: bold; }
+            p + ul, details ul { list-style-type: none; margin-top: 0.1em; }
+            p { margin-top: 1em; margin-bottom: 0; }
+            main { display: table-row; width: 100%; }
+            section { display: table-cell; }
+            main > section:first-child { background-color: transparent; width: 50%; padding-left: 2em; padding-right: 2em; }
+            main > section:last-child { background-color: transparent; border-left: solid thin black; padding-left: 2em; vertical-align: bottom; }
+            button { white-space: nowrap; margin-bottom: 2em; }
+            li { margin-bottom: 0.25em; }
+            table { margin-top: 0.4em; }
+            ul.keyboard button { padding-left: 0.2em;; padding-right: 0.2em; }
+            ul.keyboard button, ul.keyboard li input { margin: 0; }
+            ul.keyboard input { width: 5em; }
+        </style>
+    <head>
+<body>
+
+<h2>Settings</h2>
+
+<main><section>
+<h4>Tetris On Canvas v.&ThinSpace;<span id="version"></span></h4>
+
+<p>Game size:</p>
+<ul>
+    <li>Horizontal: <select data-property="gameSizeInBlocks.x" data-editor="gameSizeInBlocksEditor.x"></select></li>
+    <li>Vertical: <select data-property="gameSizeInBlocks.y" data-editor="gameSizeInBlocksEditor.y"></select></li>
+</ul>
+
+<p>Delays:</p>
+<ul>
+    <li>Start: <select data-property="delays.start" data-editor="delaysEditor.start"></select></li>
+    <li>Decrement: <select data-property="delays.decrement" data-editor="delaysEditor.decrement"></select></li>
+    <li>Minimum: <select data-property="delays.min" data-editor="delaysEditor.min"></select></li>
+</ul>
+
+<p>Colors:</p>
+<table>
+    <tr>
+    <td><img id="image.J" src="images/settings.J.png"/></li>
+    <td><img id="image.S" src="images/settings.S.png"/></li>
+    <td><img id="image.T" src="images/settings.T.png"/></li>
+    </tr>
+    <tr>
+    <td><select data-property="tetrominoColor.J"></select></td>
+    <td><select data-property="tetrominoColor.S"></select></td>
+    <td><select data-property="tetrominoColor.T"></select></td>
+    </tr>
+</table>
+<table>
+    <tr>
+    <td><img id="image.L" src="images/settings.L.png"/></td>
+    <td><img id="image.Z" src="images/settings.Z.png"/></td>
+    <td><img id="image.O" src="images/settings.O.png"/></td>
+    <td><img id="image.I" src="images/settings.I.png"/></li>
+    </tr>
+    <tr>
+    <td><select data-property="tetrominoColor.L"></select></td>
+    <td><select data-property="tetrominoColor.Z"></select></td>
+    <td><select data-property="tetrominoColor.O"></select></td>
+    <td><select data-property="tetrominoColor.I"></select></td>
+    </tr>
+</table>
+
+<p>Clutter:</p>
+<ul>
+    <li><label for="clutterEnabledDefault" accesskey="E"><u>E</u>nabled by default: <input type="checkbox" data-property="clutterOptionSet.clutterEnabledDefault" id="clutterEnabledDefault"></input></label></li>
+    <li>Minimum: <select data-property="clutterOptionSet.min" data-editor="clutterEditor.min"></select></li>
+    <li>Maximum: <select data-property="clutterOptionSet.max" data-editor="clutterEditor.max"></select></li>
+    <li>Step: <select data-property="clutterOptionSet.step" data-editor="clutterEditor.step"></select></li>
+    <li><u>D</u>efault value: <select accesskey="D" data-property="clutterOptionSet.default" data-editor="clutterEditor.default"></select></li>
+</ul>
+
+<!--
+<details>
+    <summary>Keyboard</summary>
+    <ul class="keyboard">
+        <li>Start/Pause/Continue: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Cancel: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Left: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Rotate<big>&orarr;</big>: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Rotate<big>&olarr;</big>: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Right: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Down: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Drop Down: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Help: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Download Source Code: <input type="text"></input><button>&Congruent;</button> 34</li>
+        <li>Settings: <input type="text"></input><button>&Congruent;</button> 34</li>
+    </ul>
+</details>
+-->
+</section>
+
+<section>
+    <button id="apply" accesskey="A" title="Store custom settings and play game"><u>A</u>pply</button><br/>
+    <button id="reset" accesskey="R" title="Reset settings to default values"><u>R</u>eset</button><br/>
+    <button id="clean" accesskey="L" title="Clean Tetris data from browser local storage">Clean <u>L</u>ocal Storage</button>    
+</section>
+</main>
+
+<script src="settings.js"></script>
+<script>
+    
+    "use strict";
+
+    const setTargetImage = (node) => {
+        const cell = node.parentElement;
+        if (cell.constructor != HTMLTableCellElement) return;
+        let tetrominoName = node.dataset.property.split('.');
+        tetrominoName = tetrominoName[tetrominoName.length - 1];
+        const tetrominoId = "image." + tetrominoName;
+        const targetImage = document.getElementById(tetrominoId);
+        if (!targetImage) return null; 
+        node.targetImage = targetImage; 
+        return targetImage;
+    }; //setTargetImage
+    
+    const populate = (defaultOnly) => {
+        const effectiveSettings = getSettings(defaultOnly);
+        const effectiveSettingsNamePrefix = settingsEditor.getVariableName({effectiveSettings}) + ".";
+        settingsEditor.traverse(document.body, function(node) {
+            if (!node.dataset) return;
+            if (!node.dataset.property) return;
+            let value = eval(effectiveSettingsNamePrefix + node.dataset.property);
+            if (node.constructor == HTMLSelectElement) {
+                while (node.firstChild)
+                    node.removeChild(node.firstChild);
+                if (setTargetImage(node)) { // case of image
+                    node.onchange = function(event) {
+                        if (event.target.targetImage.constructor == HTMLImageElement)
+                            event.target.targetImage.style.backgroundColor = event.target.value;
+                    }; //node.onselect
+                    for (let color of settingsEditor.namedCssColors) {
+                        const option = document.createElement("option");
+                        const colorBox = document.createElement("span");
+                        colorBox.style.backgroundColor = color;
+                        colorBox.innerHTML = "&emsp;&emsp;";
+                        const colorName = document.createTextNode(" "+ color);
+                        option.appendChild(colorBox);
+                        option.appendChild(colorName);
+                        option.selected = value.toLowerCase() == color.toLowerCase();
+                        option.value = color;
+                        node.add(option);
+                    } //loop
+                    node.targetImage.style.backgroundColor = node.value;
+                } else { //if image, now considering text
+                    const editorOptionSet = eval(effectiveSettingsNamePrefix + node.dataset.editor);
+                    if (!editorOptionSet) return;
+                    const count = ((editorOptionSet.max - editorOptionSet.min) / editorOptionSet.step) + 1;
+                    let rounder = 1;
+                    const fraction = editorOptionSet.step.toString().split('.');
+                    if (fraction.length == 2)
+                        rounder = parseInt("1" + "0".repeat(fraction[1].length));
+                    for (let index = 0; index < count; ++index) {
+                        let optionValue = editorOptionSet.min + index * editorOptionSet.step;
+                        optionValue = Math.floor(optionValue * rounder) / rounder; 
+                        const option = document.createElement("option");
+                        option.selected = optionValue == value;
+                        option.textContent = optionValue + editorOptionSet.unit;
+                        node.add(option);
+                    } //loop
+                } //if text
+            } else if (node.constructor == HTMLInputElement) {
+                node.checked = value;
+            } else // not editable
+                settingsEditor.setText(node.id, value);
+        });
+    }; //populate
+
+    const apply = () => {
+        const target = {};
+        settingsEditor.traverse(document.body, function(node) {
+            if (!node.dataset) return;
+            if (!node.dataset.property) return;
+            if (node.constructor != HTMLSelectElement && node.type != "checkbox") return;
+            const propertyChain = node.dataset.property.split(".");
+            let currentObject = target;
+            let lastSlot = null;
+            let value = node.value;
+            if (node.type == "checkbox") 
+                value = node.checked;
+            else {
+                const numericValue = parseFloat(node.value);
+                if (!Number.isNaN(numericValue)) value = numericValue;
+            } //if
+            for (let index = 0; index < propertyChain.length; ++index) {
+                if (currentObject[propertyChain[index]] != undefined)
+                    currentObject = currentObject[propertyChain[index]];
+                else {
+                    if (index == propertyChain.length - 1)
+                        currentObject[propertyChain[index]] = value;
+                    else
+                        currentObject[propertyChain[index]] = {};
+                    currentObject = currentObject[propertyChain[index]]; 
+                } //if
+            } //loop slots
+        });
+        const result = JSON.stringify(target);
+        localStorage.setItem(settingsEditor.localStorageKey, result);
+        window.location = fileNames.main;
+    }; //apply
+
+    window.onload = () => {
+        document.getElementById("version").textContent = version;
+        populate(false);
+        const buttonApply = document.getElementById("apply");
+        buttonApply.onclick = apply;
+        const buttonClean = document.getElementById("clean");
+        const buttonReset = document.getElementById("reset");
+        buttonReset.onclick = () => {
+            populate(true);
+        }; //buttonReset.onclick
+        buttonClean.onclick = () => {
+            localStorage.removeItem(settingsEditor.localStorageKey);
+            location.reload(true);
+        }; //buttonClean.onclick
+    }; //window.onload
+</script>
+
+</body></html>

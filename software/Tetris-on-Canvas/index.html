@@ -2,7 +2,7 @@
 
 <!--
 
-Tetris on Canvas, v.5.0
+Tetris on Canvas, v.6.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -18,7 +18,7 @@ S A Kryukov implemented:
 Configurable game: board size, tetromino colors/shapes, score rules, timing
 Auto-resizeable depending on the browser window size 
 Drop of tetromino to bottom
-Automatic optional clutter at the end of the game (since v.5.0)
+Automatic optional clutter at the end of the game (since v.5)
 Pause/continue
 Help
 FSM (states)
@@ -48,19 +48,15 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       #score { color: red; }
       #rows { color: darkGreen; }
       #prompt { margin-top: 3em; margin-bottom: 4em; }
-      img.help, img.close {
+      img.help, img.close, img.settings, img.download {
         position: absolute;
         width: 2em; height: 2em;
-        left: 0.4em; top: 0.4em;
-        cursor: help;
       }
       img.close { display: none; }
-      a.download {
-        position: absolute;
-        left: 0.4em; top: 2.8em;
-        cursor: grab;
-      }
-      img.download { width: 2em; height: 2em; }
+      img.help, img.close { left: 0.4em; top: 0.4em; cursor: help; }
+      img.download { left: 0.4em; top: 2.8em; cursor: grab; }
+      img.settings { left: 0.4em; top: 5.2em; } /* remove "display: none;" to implement settings */
+      img.helpImage { position: relative; width: 1em; height: 1em; background-color: black; color: red; }
       #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
       h1 { text-align: center; font-size:120%; }
       code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0 3 0 3; }
@@ -69,17 +65,20 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <body>
 
 <img id="id.help" class="help" src="images/help.svg" title="Help"/>
-<img id="id.closehelp" class="close" src="images/close.svg" title="Help"/>
-<a id="id.download" class="download" href="Tetris.zip" title="Download source code"><img class="download" src="images/download.svg"/></a>
+<img id="id.close-help" class="close" src="images/close.svg" title="Help"/>
+<img id="id.download" class="download" src="images/download.svg" title="Download source code"/>
+<img id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"><span></h1>
-<p><big>&larr;</big>, <big>&rarr;</big>, <big>&darr;</big>: move current tetromino</p>
-<p><big>&uarr;</big>: rotate current tetromino <big>&orarr;</big></p>
-<p>Space: drop down current tetromino</p>
-<p>Enter: start/pause/continue game</p>
-<p>Escape: cancel game</p>
-<p>F1: show/hide help</p><hr/>
+<p><big id="help.left"></big>, <big id="help.right"></big>, <big id="help.down"></big>: move current tetromino</p>
+<p><big id="help.rotateRight"></big>: rotate current tetromino <big>&orarr;</big>; Ctrl+<big id="help.rotateLeft"></big>: rotate <big>&olarr;</big></p>
+<p><b id="help.dropDown"></b>: drop down current tetromino</p>
+<p><b id="help.startPauseContinue"></b>: start/pause/continue game</p>
+<p><b id="help.cancelGame"></b>: cancel game</p>
+<p><b id="help.downloadSource"></b>: download source code <img class="helpImage" src="images/download.svg"/></p>
+<p><b id="help.settings"></b>: settings <img class="helpImage" src="images/settings.svg"/></p>
+<p><b id="help.help"></b>: show/hide help</p><hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
 <br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
 </div>

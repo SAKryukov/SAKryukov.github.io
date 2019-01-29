@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.5.0
+Tetris on Canvas, v.6.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -15,7 +15,7 @@ S A Kryukov implemented:
 Configurable game: board size, tetromino colors/shapes, score rules, timing
 Auto-resizeable depending on the browser window size 
 Drop of tetromino to bottom
-Automatic optional clutter at the end of the game (since v.5.0)
+Automatic optional clutter at the end of the game (since v.5)
 Pause/continue
 Help
 FSM (states)
@@ -59,8 +59,9 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 // Equivalent code without ECMAScript 2015 class syntax:
 
-function Tetromino(shape, x, y, orientation) {
+function Tetromino(shape, x, y, orientation, color) {
     this.shape = shape; //TetrominoShape
+    this.shape.color = color;
     this.x = x;
     this.y = y;
     this.orientation = orientation;
@@ -104,7 +105,9 @@ const elements = {
     pausedText: element("paused"),
     helpWindow: element("help"),
     helpImageHelp: element("id.help"),
-    helpImageClose: element("id.closehelp"),	
+    helpImageClose: element("id.close-help"),
+    downloadImage: element("id.download"),
+    settingsImage: element("id.settings"),
     statusVerb: element("statusVerb")
 }; //elements
 
@@ -126,10 +129,10 @@ const layout = {
         elements.right.style.paddingTop = this.spacing.inside;
         elements.right.style.paddingBottom = this.spacing.inside;
         let verticalSize = window.innerHeight - 2 * this.spacing.outsize - 2 * this.spacing.inside - 2 * this.spacing.border;
-        this.blockSize = Math.floor(verticalSize / gameSizeInBlocks.y);
-        let adjustedVerticalSize = this.blockSize * gameSizeInBlocks.y;
+        this.blockSize = Math.floor(verticalSize / this.effectiveSettings.gameSizeInBlocks.y);
+        let adjustedVerticalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.y;
         elements.board.style.height = adjustedVerticalSize;
-        let boardWidth = this.blockSize * gameSizeInBlocks.x;
+        let boardWidth = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
         elements.board.style.width = boardWidth;
         let upcomingWidth = this.blockSize * this.upcomingPreviewSize;
         elements.upcoming.style.height = upcomingWidth;
@@ -148,7 +151,18 @@ const layout = {
         elements.upcoming.height = elements.upcoming.clientHeight;
         rendering.invalidate();
     }, //resizeBody
-    resize: function () { try { this.resizeBody(); } catch (e) { showException(e); } }
+    resize: function () { try { this.resizeBody(); } catch (e) { showException(e); } },
+    showKeyboard : function (settings) {
+        for (let index in settings.key) {
+            const keyboardItem = settings.key[index];
+            for (let id in keyboardItem.ids)
+                document.getElementById(keyboardItem.ids[id]).innerHTML = keyboardItem.display;
+        } //loop
+        const spacer = ": "; //SA???
+        elements.helpImageHelp.title = settings.key.help.display + spacer + elements.helpImageHelp.title;
+        elements.downloadImage.title = settings.key.downloadSource.display + spacer + elements.downloadImage.title;
+        elements.settingsImage.title = settings.key.settings.display + spacer + elements.settingsImage.title;
+    } //showKeyboard
 
 }; //layout
 
@@ -156,7 +170,7 @@ const layout = {
 
 const game = {
 
-    actions: { rotate: 0, right: 1, down: 2, left: 3, bottom: 4 },
+    actions: { rotateRight: 0, rotateLeft: 1, right: 2, down: 3, left: 4, bottom: 5 },
     orientation: { min: 0, max: 3 },
     states: { cancelled: 0, paused: 1, playing: 2, current: 0 },
     blocks: [],
@@ -169,12 +183,12 @@ const game = {
     next: null,
 
     initializeClutterLevels: function () {
-        checkboxClutter.checked = clutterOptionSet.clutterEnabledDefault;
-        for (let percent = clutterOptionSet.min; percent <= clutterOptionSet.max; percent += clutterOptionSet.step) {
+        checkboxClutter.checked = this.effectiveSettings.clutterOptionSet.clutterEnabledDefault;
+        for (let percent = this.effectiveSettings.clutterOptionSet.min; percent <= this.effectiveSettings.clutterOptionSet.max; percent += this.effectiveSettings.clutterOptionSet.step) {
             const option = document.createElement("option");
             option.textContent = percent + "%";
             option.value = percent/100.0;
-            if (percent == clutterOptionSet.default)
+            if (percent == this.effectiveSettings.clutterOptionSet.default)
                 option.selected = true;
             elements.clutterSelector.appendChild(option);
         }
@@ -204,6 +218,7 @@ const game = {
     pause: function () { this.setState(this.states.paused); },
 
     willHitObstacle: function (tetromino, x0, y0, orientation) { // tentative move is blocked with some obstacle
+        const gameSizeInBlocks = this.effectiveSettings.gameSizeInBlocks;
         return tetromino.first(x0, y0, orientation, function (x, y) {
             if ((x < 0) || (x >= gameSizeInBlocks.x) || (y < 0) || (y >= gameSizeInBlocks.y) || game.getBlock(x, y))
                 return true; // performance gain
@@ -211,13 +226,14 @@ const game = {
     }, //willHitObstacle
 
     randomTetromino: function () {
-        const chosen = tetrominoSet[randomInt(0, tetrominoSet.length - 1)];
-        return new Tetromino(chosen, randomInt(0, gameSizeInBlocks.x - chosen.size), 0, 0);
+        const chosen = this.effectiveSettings.tetrominoSet[randomInt(0, this.effectiveSettings.tetrominoSet.length - 1)];
+        const color = this.effectiveSettings.tetrominoColor[chosen.colorIndex];
+        return new Tetromino(chosen, randomInt(0, this.effectiveSettings.gameSizeInBlocks.x - chosen.size), 0, 0, color);
     }, //randomTetromino
 
     setScore: function (n) { this.score = n; rendering.invalidateScore(); },
     addScore: function (n) { this.setScore(this.score + n); },
-    setRows: function (n) { this.rows = n; this.delay = Math.max(delays.min, delays.start - (delays.decrement * this.rows)); rendering.invalidateRows(); },
+    setRows: function (n) { this.rows = n; this.delay = Math.max(this.effectiveSettings.delays.min, this.effectiveSettings.delays.start - (this.effectiveSettings.delays.decrement * this.rows)); rendering.invalidateRows(); },
     addRows: function (n) { this.setRows(this.rows + n); },
     getBlock: function (x, y) { return (this.blocks && this.blocks[x] ? this.blocks[x][y] : null); },
     setBlock: function (x, y, shape) { this.blocks[x] = this.blocks[x] || []; this.blocks[x][y] = shape; rendering.invalidate(); },
@@ -258,8 +274,11 @@ const game = {
             return false;
     }, //move
 
-    rotate: function () {
-        const newOrientation = (this.current.orientation === this.orientation.max ? this.orientation.min : this.current.orientation + 1);
+    rotate: function (left) {
+        const newOrientation = left ? 
+            (this.current.orientation === this.orientation.max ? this.orientation.min : this.current.orientation + 1)
+            :
+            (this.current.orientation === this.orientation.min ? this.orientation.max : this.current.orientation - 1);
         if (this.willHitObstacle(this.current, this.current.x, this.current.y, newOrientation)) return;
         this.current.orientation = newOrientation;
         rendering.invalidate();
@@ -267,7 +286,7 @@ const game = {
 
     drop: function () {
         if (this.move(this.actions.down)) return;
-        this.addScore(scoreRules.addOnDrop(this.rows, this.score));
+        this.addScore(this.effectiveSettings.scoreRules.addOnDrop(this.rows, this.score));
         this.dropTetromino();
         this.removeLines();
         this.setCurrentTetromino(this.next);
@@ -289,32 +308,32 @@ const game = {
     }, //dropDown
 
     getTopmostBlock: function() {
-        for (let y = 0; y < gameSizeInBlocks.y; ++y)
-            for (let x = 0; x < gameSizeInBlocks.x; ++x)
+        for (let y = 0; y < this.effectiveSettings.gameSizeInBlocks.y; ++y)
+            for (let x = 0; x < this.effectiveSettings.gameSizeInBlocks.x; ++x)
                 if (this.getBlock(x, y))
                     return y;
-        return gameSizeInBlocks.y;
+        return this.effectiveSettings.gameSizeInBlocks.y;
     }, //getTopmostBlock
 
     autoClutter: function() {
         while (true) {
-            const level = gameSizeInBlocks.y - this.getTopmostBlock() - 1;
-            if ( level / gameSizeInBlocks.y >= elements.clutterSelector.value ) break; 
+            const level = this.effectiveSettings.gameSizeInBlocks.y - this.getTopmostBlock() - 1;
+            if ( level / this.effectiveSettings.gameSizeInBlocks.y >= elements.clutterSelector.value ) break; 
             this.dropDown();
         } //loop
     }, //autoClutter
 
     removeLine: function (lineLocation) {
         for (let y = lineLocation; y >= 0; --y)
-            for (let x = 0; x < gameSizeInBlocks.x; ++x)
+            for (let x = 0; x < this.effectiveSettings.gameSizeInBlocks.x; ++x)
                 this.setBlock(x, y, (y === 0) ? null : this.getBlock(x, y - 1));
     }, //removeLine
 
     removeLines: function () {
         let complete, removedLines = 0;
-        for (let y = gameSizeInBlocks.y; y > 0; --y) {
+        for (let y = this.effectiveSettings.gameSizeInBlocks.y; y > 0; --y) {
             complete = true;
-            for (let x = 0; x < gameSizeInBlocks.x; ++x)
+            for (let x = 0; x < this.effectiveSettings.gameSizeInBlocks.x; ++x)
                 if (!this.getBlock(x, y))
                     complete = false;
             if (complete) {
@@ -325,7 +344,7 @@ const game = {
         } //loop y
         if (removedLines > 0) {
             this.addRows(removedLines);
-            this.addScore(scoreRules.addOnRemovedLines(removedLines, this.rows, this.score));
+            this.addScore(this.effectiveSettings.scoreRules.addOnRemovedLines(removedLines, this.rows, this.score));
         } //if removedLines
     }, //removeLines
 
@@ -333,38 +352,57 @@ const game = {
         switch (action) {
             case this.actions.left: this.move(action); break;
             case this.actions.right: this.move(action); break;
-            case this.actions.rotate: this.rotate(); break;
+            case this.actions.rotateRight: this.rotate(false); break;
+            case this.actions.rotateLeft: this.rotate(true); break;
             case this.actions.down: this.drop(); break;
             case this.actions.bottom: this.dropDown(); break;
         } //switch
     }, //handle
 
     clickBody: function (event) {
-        if (!indirectChildOf(event.target, elements.sectionClutter)) {
-            if (this.states.current === this.states.playing)
-                this.pause();
-            else
-                this.startContinue();
-        } //if
-        event.stopPropagation();
+        if (event.target.constructor == HTMLAnchorElement) return;
+        if (event.target.constructor == HTMLImageElement) return;
+        if (indirectChildOf(event.target, elements.sectionClutter)) return;
+        if (this.states.current === this.states.playing)
+            this.pause();
+        else
+            this.startContinue();
     }, //clickBody
 
     click: function (event) { try { this.clickBody(event); } catch (e) { showException(e); } },
-    
+
+    downloadHandler: function() {
+        const downloadAnchor = (function() {
+            const downloader = document.createElement('a');
+            downloader.href = fileNames.sourceCode;
+            document.body.appendChild(downloader);
+            return downloader;    
+        })();
+        downloadAnchor.click();
+        document.body.removeChild(downloadAnchor);
+    },
+    settingsHandler: function() { window.location = fileNames.settingsEditor; },
+
     keydownBody: function (event) {
-        if (event.keyCode === key.help) {
-            rendering.help();
+        if (this.specialKeySet.has(event.keyCode)) {
+            if (event.keyCode === this.effectiveSettings.key.help.keyCode) rendering.help();
+            if (event.keyCode === this.effectiveSettings.key.downloadSource.keyCode) this.downloadHandler();
+            if (event.keyCode === this.effectiveSettings.key.settings.keyCode) this.settingsHandler();
             event.preventDefault();
             return;
         } //if help		
         let handled = false;
         if (this.states.current === this.states.playing) {
             switch (event.keyCode) {
-                case key.left: this.queue.push(this.actions.left); handled = true; break;
-                case key.right: this.queue.push(this.actions.right); handled = true; break;
-                case key.rotate: this.queue.push(this.actions.rotate); handled = true; break;
-                case key.down: this.queue.push(this.actions.down); handled = true; break;
-                case key.dropDown:
+                case this.effectiveSettings.key.left.keyCode: this.queue.push(this.actions.left); handled = true; break;
+                case this.effectiveSettings.key.right.keyCode: this.queue.push(this.actions.right); handled = true; break;
+                case this.effectiveSettings.key.rotate.keyCode:
+                    const action = event.ctrlKey ? this.actions.rotateLeft : this.actions.rotateRight;
+                    this.queue.push(action);
+                    handled = true;
+                    break;
+                case this.effectiveSettings.key.down.keyCode: this.queue.push(this.actions.down); handled = true; break;
+                case this.effectiveSettings.key.dropDown.keyCode:
                     // using this.repeatedKeyDropDown because event.repeat, reportedly, is not currently supported by some smartphone/tablet browsers:
                     if (!this.repeatedKeyDropDown) {
                         this.repeatedKeyDropDown = true;
@@ -372,10 +410,10 @@ const game = {
                     } //if
                     handled = true;
                     break;
-                case key.cancel: this.cancel(); handled = true; break;
-                case key.start: this.pause(); handled = true; break;
+                case this.effectiveSettings.key.cancel.keyCode: this.cancel(); handled = true; break;
+                case this.effectiveSettings.key.start.keyCode: this.pause(); handled = true; break;
             } //switch 
-        } else if (event.keyCode === key.start) {
+        } else if (event.keyCode === this.effectiveSettings.key.start.keyCode) {
             this.startContinue();
             handled = true;
         } //if
@@ -388,7 +426,7 @@ const game = {
     keyupBody: function (event) {
         if (indirectChildOf(event.target, elements.sectionClutter))
             return;
-        if (event.keyCode == key.dropDown)
+        if (event.keyCode == this.effectiveSettings.key.dropDown.keyCode)
             this.repeatedKeyDropDown = false;
         event.preventDefault();
     }, //keyupBody
@@ -424,7 +462,7 @@ const rendering = {
     }, //showHelpImage
     initializeHelp: function () {
         const versionElement = element("version");
-            versionElement.textContent = version;
+            versionElement.textContent = this.effectiveSettings.version;
     }, //initializeHelp
     help: function () {
         this.showHelpImage(this.showingHelp);		
@@ -470,10 +508,11 @@ const rendering = {
             if (game.states.current === game.states.playing)
                 drawTetromino(context, game.current);
             let block;
-            for (let y = 0; y < gameSizeInBlocks.y; y++)
-                for (let x = 0; x < gameSizeInBlocks.x; x++)
-                    if (block = game.getBlock(x, y))
+            for (let y = 0; y < this.effectiveSettings.gameSizeInBlocks.y; y++)
+                for (let x = 0; x < this.effectiveSettings.gameSizeInBlocks.x; x++)
+                    if (block = game.getBlock(x, y)) {
                         drawBlock(context, x, y, block.color);
+                    }
             context.strokeRect(0, 0, context.canvas.width - 1, context.canvas.height - 1); // board boundary
             context.restore();
             this.invalid.board = false;
@@ -508,7 +547,7 @@ const rendering = {
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function element(id) { return document.getElementById(id); }
-function indirectChildOf(child, parent) { while((child = child.parentNode) && child !== parent); return !!child; }
+function indirectChildOf(child, parent) { if (child == parent) return true; while((child = child.parentNode) && child !== parent); return !!child; }
 function now() { return new Date().getTime(); }
 function hide(object, noDisplay) { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; }
 function show(object) { object.style.visibility = null; }
@@ -538,6 +577,12 @@ function showException(exception) {
 
 try {
     (function () {
+        const effectiveSettings = getSettings();
+        layout.effectiveSettings = effectiveSettings;
+        game.effectiveSettings = effectiveSettings;
+        rendering.effectiveSettings = effectiveSettings;
+        layout.showKeyboard(effectiveSettings);
+        game.specialKeySet = new Set([effectiveSettings.key.help.keyCode, effectiveSettings.key.downloadSource.keyCode, effectiveSettings.key.settings.keyCode]);
         document.body.title = document.title;
         if (!window.requestAnimationFrame) // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
             window.requestAnimationFrame =
@@ -565,6 +610,14 @@ try {
             before = after;
             requestAnimationFrame(frame, elements.board);
         })()
+        const downloadAnchor = (function() {
+            const downloader = document.createElement('a');
+            downloader.href = effectiveSettings.fileNames.sourceCode;
+            document.body.appendChild(downloader);
+            return downloader;    
+        })();
+        elements.downloadImage.onclick = game.downloadHandler;
+        elements.settingsImage.onclick = game.settingsHandler;     
         elements.checkboxClutter.focus();
     })();
 } catch (e) { showException(e); }
