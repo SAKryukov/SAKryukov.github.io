@@ -160,6 +160,7 @@ const layout = {
         } //loop
         const spacer = ": "; //SA???
         elements.helpImageHelp.title = settings.key.help.display + spacer + elements.helpImageHelp.title;
+        elements.helpImageClose.title = settings.key.help.display + spacer + elements.helpImageClose.title;
         elements.downloadImage.title = settings.key.downloadSource.display + spacer + elements.downloadImage.title;
         elements.settingsImage.title = settings.key.settings.display + spacer + elements.settingsImage.title;
     } //showKeyboard
