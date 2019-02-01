@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.6.0
+Tetris on Canvas, v.7.0
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -276,9 +276,9 @@ const game = {
 
     rotate: function (left) {
         const newOrientation = left ? 
-            (this.current.orientation === this.orientation.max ? this.orientation.min : this.current.orientation + 1)
+            (this.current.orientation === this.orientation.min ? this.orientation.max : this.current.orientation - 1)
             :
-            (this.current.orientation === this.orientation.min ? this.orientation.max : this.current.orientation - 1);
+            (this.current.orientation === this.orientation.max ? this.orientation.min : this.current.orientation + 1);
         if (this.willHitObstacle(this.current, this.current.x, this.current.y, newOrientation)) return;
         this.current.orientation = newOrientation;
         rendering.invalidate();
