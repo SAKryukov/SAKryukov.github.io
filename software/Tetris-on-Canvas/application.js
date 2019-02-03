@@ -108,7 +108,8 @@ const elements = {
     helpImageClose: element("id.close-help"),
     downloadImage: element("id.download"),
     settingsImage: element("id.settings"),
-    statusVerb: element("statusVerb")
+    statusVerb: element("statusVerb"),
+    statusKeyName: element("statusKeyName")
 }; //elements
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,6 +141,7 @@ const layout = {
         setText(elements.statusVerb, this.statusWordSet.continue);
         let width1 = elements.promptText.offsetWidth;
         setText(elements.statusVerb, this.statusWordSet.start);
+        setText(elements.statusKeyName, this.effectiveSettings.key.start.display);
         let width2 = elements.promptText.offsetWidth;
         elements.left.style.width = maximum(upcomingWidth, width1, width2, upcomingWidth);
         elements.main.style.borderWidth = this.spacing.border;

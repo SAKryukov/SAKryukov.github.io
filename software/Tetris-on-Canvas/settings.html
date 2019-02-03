@@ -7,7 +7,6 @@
         <title>Tetris on Canvas</title>
         <style type="text/css">
             * { font-family: "Verdana", sans-serif; }
-            src { font-family: monospace; font-size: 120%; color: darkblue; font-weight: bold; }
             details ul { list-style-type: none; margin-top: 0.1em; }
             details { margin-top: 0.2em; margin-bottom: 0.2em; }
             p { margin-top: 1em; margin-bottom: 0; }
@@ -16,7 +15,8 @@
             main > section:first-child { background-color: transparent; width: 50%; padding-left: 2em; padding-right: 2em; }
             main > section:last-child { background-color: transparent; border-left: solid thin black; padding-left: 2em; vertical-align: bottom; }
             button { white-space: nowrap; }
-	        main > section:last-child button { margin-top: 2em; }
+            td button { padding-left: 0.1em; padding-right: 0.1em; }
+            main > section:last-child button { margin-top: 2em; }
             table { margin-top: 0.4em; margin-left: 2em; }
             td, tr { margin: 0; padding: 0; }
             td.keyCode { text-align: right; }
@@ -190,7 +190,7 @@
         const inputName = node.lastElementChild.firstElementChild;
         return { numericKeyCodeElement: numericKeyCodeElement, button: button, inputName: inputName };
     }; //detectKeyboardEditorElements
-    
+
     const populate = (elements, defaultOnly) => {
         const effectiveSettings = getSettings(defaultOnly);
         const effectiveSettingsNamePrefix = settingsEditor.getVariableName({effectiveSettings}) + ".";
@@ -216,11 +216,11 @@
                         keyboardEditorElements.numericKeyCodeElement.textContent = event.keyCode; 
                         keyboardEditorElements.inputName.focus();
                     }; //elements.keyEditor
-                    const bounds = keyboardEditorElements.button.getBoundingClientRect();
                     elements.keyEditor.innerHTML = settingsEditor.keyEditorInstruction;
                     elements.keyEditor.style.display = "block";
-                    elements.keyEditor.style.top = (bounds.top + window.pageYOffset).toString();
-                    elements.keyEditor.style.left = (bounds.right + window.pageXOffset).toString();
+                    const buttonBounds = keyboardEditorElements.button.getBoundingClientRect();
+                    elements.keyEditor.style.top = (buttonBounds.top + window.pageYOffset).toString();
+                    elements.keyEditor.style.left = (buttonBounds.right + window.pageXOffset).toString();
                     elements.keyEditor.focus();
                 }; //keyboardEditorElements.button.onclick
             } else if (node.constructor == HTMLSelectElement) {
@@ -314,17 +314,18 @@
     }; //apply
 
     window.onload = () => {
-        const elements = { keyEditor: document.getElementById("keyEditor") };
-        document.getElementById("version").textContent = version;
+        const elements = {
+            version: document.getElementById("version"),
+            keyEditor: document.getElementById("keyEditor"),
+            buttonApply: document.getElementById("apply"),
+            buttonClean: document.getElementById("clean"),
+            buttonReset: document.getElementById("reset")
+        };
+        elements.version.textContent = version;
         populate(elements, false);
-        const buttonApply = document.getElementById("apply");
-        buttonApply.onclick = apply;
-        const buttonClean = document.getElementById("clean");
-        const buttonReset = document.getElementById("reset");
-        buttonReset.onclick = () => {
-            populate(elements, true);
-        }; //buttonReset.onclick
-        buttonClean.onclick = () => {
+        elements.buttonApply.onclick = apply;
+        elements.buttonReset.onclick = () => { populate(elements, true); };
+        elements.buttonClean.onclick = () => {
             localStorage.removeItem(settingsEditor.localStorageKey);
             location.reload(true);
         }; //buttonClean.onclick
