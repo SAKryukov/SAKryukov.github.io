@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.7.0
+Tetris on Canvas, v.7.1
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov

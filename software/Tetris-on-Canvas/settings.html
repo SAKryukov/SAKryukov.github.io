@@ -34,7 +34,7 @@
     <head>
 <body>
 
-<h2>Settings</h2>
+<h2>Settings <span id="badBrowser"></span></h2>
 
 <div id="keyEditor"></div>
 
@@ -262,6 +262,7 @@
             } else // not editable
                 settingsEditor.setText(node.id, value);
         });
+        return effectiveSettings.localStorageAccessible; 
     }; //populate
 
     const extractKeyboardData = (node) => {
@@ -319,16 +320,24 @@
             keyEditor: document.getElementById("keyEditor"),
             buttonApply: document.getElementById("apply"),
             buttonClean: document.getElementById("clean"),
-            buttonReset: document.getElementById("reset")
+            buttonReset: document.getElementById("reset"),
+            badBrowser: document.getElementById("badBrowser")
         };
         elements.version.textContent = version;
-        populate(elements, false);
-        elements.buttonApply.onclick = apply;
+        const localStorageAccessible = populate(elements, false);
         elements.buttonReset.onclick = () => { populate(elements, true); };
-        elements.buttonClean.onclick = () => {
-            localStorage.removeItem(settingsEditor.localStorageKey);
-            location.reload(true);
-        }; //buttonClean.onclick
+        if (localStorageAccessible) {
+            elements.buttonApply.onclick = apply;
+            elements.buttonClean.onclick = () => {
+                localStorage.removeItem(settingsEditor.localStorageKey);
+                location.reload(true);
+            }; //buttonClean.onclick
+        } else {
+            elements.badBrowser.innerHTML = settingsEditor.badBrowserHTML;
+            elements.badBrowser.parentElement.style.color = settingsEditor.badBrowserColor;
+            elements.buttonApply.disabled = true;
+            elements.buttonClean.disabled = true;
+        } //if
     }; //window.onload
 </script>
 
