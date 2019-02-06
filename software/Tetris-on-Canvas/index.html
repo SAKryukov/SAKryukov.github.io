@@ -1,42 +1,9 @@
-<DOCTYPE html>
-
-<!--
-
-Tetris on Canvas, v.7.1
-Sergey A Kryukov, derived work
-http://www.SAKryukov.org
-http://www.codeproject.com/Members/SAKryukov
-
-Based on algorithms and working prototype developed by Jake Gordon:
-http://codeincomplete.com
-http://codeincomplete.com/posts/2011/10/10/javascript_tetris
-https://github.com/jakesgordon/javascript-tetris
-
-License: MIT (http://en.wikipedia.org/wiki/MIT_License)
-
-S A Kryukov implemented:
-Configurable game: board size, tetromino colors/shapes, score rules, timing
-Auto-resizeable depending on the browser window size 
-Drop of tetromino to bottom
-Automatic optional clutter at the end of the game (since v.5)
-Pause/continue
-Help
-FSM (states)
-Fixed random tetromino generation
-Javascript "strict mode"
-Code improvements, exception handling, readability, fixes
-
-Publication:
-http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
-
--->
-
-<html>
+<html lang="en-US">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
     <title>Tetris on Canvas</title>
-    <style type="text/css">
+    <style>
       /* http://www.w3schools.com/cssref/css_colornames.asp */ /* for color shading/mixing */
       body, html { font-family: "Verdana", sans-serif; background-color: Brown; }
       .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -59,25 +26,25 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       img.helpImage { position: relative; width: 1em; height: 1em; background-color: black; color: red; }
       #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
       h1 { text-align: center; font-size:120%; }
-      code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0 3 0 3; }
+      code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0px 3px 0px 3px; }
     </style> 
   </head>
 <body>
 
-<img id="id.help" class="help" src="images/help.svg" title="Help"/>
-<img id="id.close-help" class="close" src="images/close.svg" title="Help"/>
-<img id="id.download" class="download" src="images/download.svg" title="Download source code"/>
-<img id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
+<img alt="Help" id="id.help" class="help" src="images/help.svg" title="Help"/>
+<img alt="Close Help" id="id.close-help" class="close" src="images/close.svg" title="Help"/>
+<img alt="Download source code" id="id.download" class="download" src="images/download.svg" title="Download source code"/>
+<img alt="Settings" id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
 
 <div id="help">
-<h1>Tetris on Canvas v.&thinsp;<span id="version"><span></h1>
-<p><big id="help.left"></big>, <big id="help.right"></big>, <big id="help.down"></big>: move current tetromino</p>
-<p><big id="help.rotateRight"></big>: rotate current tetromino <big>&orarr;</big>; Ctrl+<big id="help.rotateLeft"></big>: rotate <big>&olarr;</big></p>
+<h1>Tetris on Canvas v.&thinsp;<span id="version"></span></h1>
+<p><b id="help.left"></b>, <b id="help.right"></b>, <b id="help.down"></b>: move current tetromino</p>
+<p><b id="help.rotateRight"></b>: rotate current tetromino <b>&orarr;</b>; Ctrl+<b id="help.rotateLeft"></b>: rotate <b>&olarr;</b></p>
 <p><b id="help.dropDown"></b>: drop down current tetromino</p>
 <p><b id="help.startPauseContinue"></b>: start/pause/continue game</p>
 <p><b id="help.cancelGame"></b>: cancel game</p>
-<p><b id="help.downloadSource"></b>: download source code <img class="helpImage" src="images/download.svg"/></p>
-<p><b id="help.settings"></b>: settings <img class="helpImage" src="images/settings.svg"/></p>
+<p><b id="help.downloadSource"></b>: download source code <img alt="Help" class="helpImage" src="images/download.svg"/></p>
+<p><b id="help.settings"></b>: settings <img alt="Settings" class="helpImage" src="images/settings.svg"/></p>
 <p><b id="help.help"></b>: show/hide help</p><hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
 <br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
@@ -85,17 +52,17 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 <div id="main">
   <div id="left">
-    <p id="prompt">&nbsp;&nbsp;Press <span id="statusKeyName"></span>&nbsp;&nbsp;<br/>to <span id="statusVerb"/></p>
-    <div><canvas id="upcoming" title="Next tetromino"/></div>
+    <p id="prompt">&nbsp;&nbsp;Press <span id="statusKeyName"></span>&nbsp;&nbsp;<br/>to <span id="statusVerb"></span></p>
+    <div><canvas id="upcoming" title="Next tetromino"></canvas></div>
     <br/><br/><p>Score: <em id="score"></em></p>
     <p>Rows: <em id="rows"></em></p>
     <br/><p id="paused">Paused</p>
-    <section id="sectionClutter" title="Clutter created at the start of the game">
-      <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="true"/>Cl<u>u</u>tter</label>&ThinSpace;
+    <div id="sectionClutter" title="Clutter created at the start of the game">
+      <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="checked"/>Cl<u>u</u>tter</label>&ThinSpace;
       <select id="clutterSelector"></select>
-    </section>
+    </div>
   </div>
-  <div id="right"><canvas id="board"/></div>
+  <div id="right"><canvas id="board"></canvas></div>
 </div>
 
 <script src="settings.js"></script>
