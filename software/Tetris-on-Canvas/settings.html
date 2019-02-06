@@ -219,8 +219,8 @@
                     elements.keyEditor.innerHTML = settingsEditor.keyEditorInstruction;
                     elements.keyEditor.style.display = "block";
                     const buttonBounds = keyboardEditorElements.button.getBoundingClientRect();
-                    elements.keyEditor.style.top = (buttonBounds.top + window.pageYOffset).toString();
-                    elements.keyEditor.style.left = (buttonBounds.right + window.pageXOffset).toString();
+                    elements.keyEditor.style.top = settingsEditor.sizeStyle((buttonBounds.top + window.pageYOffset));
+                    elements.keyEditor.style.left = settingsEditor.sizeStyle((buttonBounds.right + window.pageXOffset));
                     elements.keyEditor.focus();
                 }; //keyboardEditorElements.button.onclick
             } else if (node.constructor == HTMLSelectElement) {

@@ -122,36 +122,38 @@ const layout = {
     blockSize: 0,
 
     resizeBody: function () {
-        elements.left.style.paddingLeft = this.spacing.inside;
-        elements.left.style.paddingRight = this.spacing.inside;
-        elements.left.style.paddingTop = this.spacing.inside;
-        elements.left.style.paddingBottom = this.spacing.inside;
-        elements.right.style.paddingRight = this.spacing.inside;
-        elements.right.style.paddingTop = this.spacing.inside;
-        elements.right.style.paddingBottom = this.spacing.inside;
+        try {
+        elements.left.style.paddingLeft = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.left.style.paddingRight = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.left.style.paddingTop = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.left.style.paddingBottom = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.right.style.paddingRight = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.right.style.paddingTop = settingsEditor.sizeStyle(this.spacing.inside);
+        elements.right.style.paddingBottom = settingsEditor.sizeStyle(this.spacing.inside);
         let verticalSize = window.innerHeight - 2 * this.spacing.outsize - 2 * this.spacing.inside - 2 * this.spacing.border;
         this.blockSize = Math.floor(verticalSize / this.effectiveSettings.gameSizeInBlocks.y);
         let adjustedVerticalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.y;
-        elements.board.style.height = adjustedVerticalSize;
+        elements.board.style.height = settingsEditor.sizeStyle(adjustedVerticalSize);
         let boardWidth = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
-        elements.board.style.width = boardWidth;
+        elements.board.style.width = settingsEditor.sizeStyle(boardWidth);
         let upcomingWidth = this.blockSize * this.upcomingPreviewSize;
-        elements.upcoming.style.height = upcomingWidth;
-        elements.upcoming.style.width = upcomingWidth;
+        elements.upcoming.style.height = settingsEditor.sizeStyle(upcomingWidth);
+        elements.upcoming.style.width = settingsEditor.sizeStyle(upcomingWidth);
         setText(elements.statusVerb, this.statusWordSet.continue);
         let width1 = elements.promptText.offsetWidth;
         setText(elements.statusVerb, this.statusWordSet.start);
         setText(elements.statusKeyName, this.effectiveSettings.key.start.display);
         let width2 = elements.promptText.offsetWidth;
-        elements.left.style.width = maximum(upcomingWidth, width1, width2, upcomingWidth);
-        elements.main.style.borderWidth = this.spacing.border;
-        elements.main.style.marginTop = (window.innerHeight - elements.main.offsetHeight) / 2;
-        elements.main.style.marginLeft = (window.innerWidth - elements.main.offsetWidth) / 2;
+        elements.left.style.width = settingsEditor.sizeStyle(maximum(upcomingWidth, width1, width2, upcomingWidth));
+        elements.main.style.borderWidth = settingsEditor.sizeStyle(this.spacing.border);
+        elements.main.style.marginTop = settingsEditor.sizeStyle((window.innerHeight - elements.main.offsetHeight) / 2);
+        elements.main.style.marginLeft = settingsEditor.sizeStyle((window.innerWidth - elements.main.offsetWidth) / 2);
         elements.board.width = elements.board.clientWidth;
         elements.board.height = elements.board.clientHeight;
         elements.upcoming.width = elements.upcoming.clientWidth;
         elements.upcoming.height = elements.upcoming.clientHeight;
         rendering.invalidate();
+        } catch(ex) { showException(ex); }
     }, //resizeBody
     resize: function () { try { this.resizeBody(); } catch (e) { showException(e); } },
     showKeyboard : function (settings) {
