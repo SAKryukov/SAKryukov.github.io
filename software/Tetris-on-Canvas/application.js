@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.7.5
+Tetris on Canvas, v.7.5.1
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -139,9 +139,9 @@ const layout = {
         let upcomingWidth = this.blockSize * layoutMetrics.upcomingPreviewSize;
         elements.upcoming.style.height = settingsEditor.sizeStyle(upcomingWidth);
         elements.upcoming.style.width = settingsEditor.sizeStyle(upcomingWidth);
-        setText(elements.statusVerb, statusWordSet.continue);
+        setText(elements.statusVerb, UiTexts.statusWordSet.continue);
         let width1 = elements.promptText.offsetWidth;
-        setText(elements.statusVerb, statusWordSet.start);
+        setText(elements.statusVerb, UiTexts.statusWordSet.start);
         setText(elements.statusKeyName, this.effectiveSettings.key.start.display);
         let width2 = elements.promptText.offsetWidth;
         const leftWidth = maximum(upcomingWidth, width1, width2, upcomingWidth);
@@ -162,11 +162,10 @@ const layout = {
             for (let id in keyboardItem.ids)
                 document.getElementById(keyboardItem.ids[id]).innerHTML = keyboardItem.display;
         } //loop
-        const spacer = ": "; //SA???
-        elements.helpImageHelp.title = settings.key.help.display + spacer + elements.helpImageHelp.title;
-        elements.helpImageClose.title = settings.key.help.display + spacer + elements.helpImageClose.title;
-        elements.downloadImage.title = settings.key.downloadSource.display + spacer + elements.downloadImage.title;
-        elements.settingsImage.title = settings.key.settings.display + spacer + elements.settingsImage.title;
+        elements.helpImageHelp.title = settings.key.help.display + UiTexts.toolBayKeyboardHintSpacer + elements.helpImageHelp.title;
+        elements.helpImageClose.title = settings.key.help.display + UiTexts.toolBayKeyboardHintSpacer + elements.helpImageClose.title;
+        elements.downloadImage.title = settings.key.downloadSource.display + UiTexts.toolBayKeyboardHintSpacer + elements.downloadImage.title;
+        elements.settingsImage.title = settings.key.settings.display + UiTexts.toolBayKeyboardHintSpacer + elements.settingsImage.title;
     } //showKeyboard
 
 }; //layout
@@ -389,6 +388,8 @@ const game = {
     settingsHandler: function() { window.location = fileNames.settingsEditor; },
 
     keydownBody: function (event) {
+        if (rendering.showingHelp && event.keyCode != this.effectiveSettings.key.help.keyCode)
+            return;            
         if (this.specialKeySet.has(event.keyCode)) {
             if (event.keyCode === this.effectiveSettings.key.help.keyCode) rendering.help();
             if (event.keyCode === this.effectiveSettings.key.downloadSource.keyCode) this.downloadHandler();
@@ -470,7 +471,7 @@ const rendering = {
             versionElement.textContent = this.effectiveSettings.version;
     }, //initializeHelp
     help: function () {
-        this.showHelpImage(this.showingHelp);		
+        this.showHelpImage(this.showingHelp);
         setVisibility(elements.helpWindow, this.showingHelp = !this.showingHelp);
     }, //help
 
@@ -534,7 +535,7 @@ const rendering = {
         }; //drawRows
         const drawState = function () {
             if (!this.invalid.state) return;
-            setText(elements.statusVerb, game.states.current === game.states.paused ? statusWordSet.continue : statusWordSet.start);
+            setText(elements.statusVerb, game.states.current === game.states.paused ? UiTexts.statusWordSet.continue : UiTexts.statusWordSet.start);
             setVisibility(elements.pausedText, game.states.current === game.states.paused);
             setVisibility(elements.promptText, game.states.current != game.states.playing);
             this.invalid.state = false;
