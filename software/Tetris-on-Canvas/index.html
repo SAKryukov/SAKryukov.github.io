@@ -2,7 +2,7 @@
 
 <!--
 
-Tetris on Canvas, v.7.1
+Tetris on Canvas, v.7.5
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -24,6 +24,7 @@ Help
 FSM (states)
 Fixed random tetromino generation
 Javascript "strict mode"
+Flex layout
 Code improvements, exception handling, readability, fixes
 
 Publication:
@@ -37,65 +38,80 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
     <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
     <title>Tetris on Canvas</title>
     <style>
-      /* http://www.w3schools.com/cssref/css_colornames.asp */ /* for color shading/mixing */
-      body, html { font-family: "Verdana", sans-serif; background-color: Brown; }
+      * { padding: 0; margin: 0; box-sizing: border-box; }
+      body, html { font-family: "Verdana", sans-serif; background-color: Brown; height: 100%; }
+      body { display: flex; flex-flow: row; height: 100%; }
+      body article { display: flex; align-items: center; justify-content: center; width: 100%; }
+      nav { padding-left: 0.6em; padding-top: 1em; }
+      nav br { margin: 0.2em; }
       .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
-      #main { display:table; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
-      #left, #right { display: table-cell; white-space: nowrap; vertical-align: middle; text-align: center; }
       canvas { background-color: LemonChiffon; width:100%; }
       #upcoming { background-color: /* #DBAAAA; */ Lavender; outline: solid black thin; }
       #score, #rows { font-style: normal; font-weight: bold; }
       #score { color: red; }
       #rows { color: darkGreen; }
-      #prompt { margin-top: 3em; margin-bottom: 4em; }
-      img.help, img.close, img.settings, img.download {
-        position: absolute;
-        width: 2em; height: 2em;
-      }
+      img.help, img.close, img.settings, img.download { width: 2em; height: 2em; }
       img.close { display: none; }
-      img.help, img.close { left: 0.4em; top: 0.4em; cursor: help; }
-      img.download { left: 0.4em; top: 2.8em; cursor: grab; }
-      img.settings { left: 0.4em; top: 5.2em; } /* remove "display: none;" to implement settings */
-      img.helpImage { position: relative; width: 1em; height: 1em; background-color: black; color: red; }
-      #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; padding-top: 0.1em; background-color: white; border: solid black 2px; cursor: help; }
-      h1 { text-align: center; font-size:120%; }
+      img.help, img.close { cursor: help; }
+      img.download { cursor: grab; }
+      #help img { vertical-align: middle; width: 1em; height: 1em; background-color: Brown; color: red; }
+      #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; background-color: white; border: solid black 2px; cursor: help; }
+      #help b { font-size: 120%; }
+      #help p { margin-bottom: 0.8em; }
+      #help hr { margin-top: 1.8em; }
+      #help h1 { text-align: center; font-size:120%; margin-bottom: 1em; }
       code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0px 3px 0px 3px; }
+      #game { display: flex; flex-flow: row; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
+      #left {display: flex; flex-flow: column; justify-content: space-between; align-items: center; margin-left: 24px; margin-right: 24px; white-space: nowrap; }
+      #left p { text-align: center; }
+      #board { width: 10em; height: 20em; }
+      #upcoming { width: 8em; height: 6em; }
+      #checkboxClutter { margin-right: 0.2em; }
     </style> 
   </head>
 <body>
 
-<img alt="Help" id="id.help" class="help" src="images/help.svg" title="Help"/>
-<img alt="Close Help" id="id.close-help" class="close" src="images/close.svg" title="Help"/>
-<img alt="Download source code" id="id.download" class="download" src="images/download.svg" title="Download source code"/>
+<nav id="toolbar">
+<img alt="Help" id="id.help" class="help" src="images/help.svg" title="Help"/><img alt="Close Help" id="id.close-help" class="close" src="images/close.svg" title="Help"/><br/>
+<img alt="Download source code" id="id.download" class="download" src="images/download.svg" title="Download source code"/><br/>
 <img alt="Settings" id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
+</nav>
+
+<article id="main">
+  <div id="game">
+    <div id="left">
+      <div>
+        <p id="prompt">Press <span id="statusKeyName"></span><br/>to <span id="statusVerb"></span></p>
+        <br/>
+        <p id="paused">Paused</p>
+      </div>
+      <canvas id="upcoming" title="Next tetromino"></canvas>
+      <div>
+        <p>Score: <em id="score"></em></p>
+        <br/>
+        <p>Rows: <em id="rows"></em></p>
+      </div/>
+      <div id="sectionClutter" title="Clutter created at the start of the game">
+        <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="checked"/>Cl<u>u</u>tter</label>&ThinSpace;
+        <select id="clutterSelector"></select>
+      </div>
+    </div>
+    <div id="right"><canvas id="board"></canvas></div>
+  </div>
+</article>
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"></span></h1>
-<p><b id="help.left"></b>, <b id="help.right"></b>, <b id="help.down"></b>: move current tetromino</p>
-<p><b id="help.rotateRight"></b>: rotate current tetromino <b>&orarr;</b>; Ctrl+<b id="help.rotateLeft"></b>: rotate <b>&olarr;</b></p>
-<p><b id="help.dropDown"></b>: drop down current tetromino</p>
-<p><b id="help.startPauseContinue"></b>: start/pause/continue game</p>
-<p><b id="help.cancelGame"></b>: cancel game</p>
-<p><b id="help.downloadSource"></b>: download source code <img alt="Help" class="helpImage" src="images/download.svg"/></p>
-<p><b id="help.settings"></b>: settings <img alt="Settings" class="helpImage" src="images/settings.svg"/></p>
-<p><b id="help.help"></b>: show/hide help</p><hr/>
+<p><b id="help.left"></b>, <b id="help.right"></b>, <b id="help.down"></b>: move tetromino</p>
+<p><b id="help.rotateRight"></b>: rotate tetromino <b>&orarr;</b>; Ctrl+<b id="help.rotateLeft"></b>: rotate <b>&olarr;</b></p>
+<p><i id="help.dropDown"></i>: drop tetromino down</p>
+<p><i id="help.startPauseContinue"></i>: start/pause/continue game</p>
+<p><i id="help.cancelGame"></i>: cancel game</p>
+<p><i id="help.downloadSource"></i>: download source code <img alt="Help" src="images/download.svg"/></p>
+<p><i id="help.settings"></i>: settings <img alt="Settings" src="images/settings.svg"/></p>
+<p><i id="help.help"></i>: show/hide help</p><hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
 <br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
-</div>
-
-<div id="main">
-  <div id="left">
-    <p id="prompt">&nbsp;&nbsp;Press <span id="statusKeyName"></span>&nbsp;&nbsp;<br/>to <span id="statusVerb"></span></p>
-    <div><canvas id="upcoming" title="Next tetromino"></canvas></div>
-    <br/><br/><p>Score: <em id="score"></em></p>
-    <p>Rows: <em id="rows"></em></p>
-    <br/><p id="paused">Paused</p>
-    <div id="sectionClutter" title="Clutter created at the start of the game">
-      <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="checked"/>Cl<u>u</u>tter</label>&ThinSpace;
-      <select id="clutterSelector"></select>
-    </div>
-  </div>
-  <div id="right"><canvas id="board"></canvas></div>
 </div>
 
 <script src="settings.js"></script>

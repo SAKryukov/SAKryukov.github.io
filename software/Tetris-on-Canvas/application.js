@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.7.1
+Tetris on Canvas, v.7.5
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -21,6 +21,7 @@ Help
 FSM (states)
 Fixed random tetromino generation
 Javascript "strict mode"
+Flex layout
 Code improvements, exception handling, readability, fixes
 
 Publication:
@@ -92,6 +93,8 @@ Tetromino.prototype = {
 
 const elements = {
     main: element("main"),
+    game: element("game"),
+    nav: element("toolbar"),
     left: element("left"),
     right: element("right"),
     board: element("board"),
@@ -116,46 +119,43 @@ const elements = {
 
 const layout = {
 
-    upcomingPreviewSize: 5, // size of upcoming preview (in blocks), for "upcoming" canvas
-    spacing: { outsize: 18, inside: 24, border: 1 },
-    statusWordSet: { start: "start", continue: "continue" },
     blockSize: 0,
-
+    
     resizeBody: function () {
-        try {
-        elements.left.style.paddingLeft = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.left.style.paddingRight = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.left.style.paddingTop = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.left.style.paddingBottom = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.right.style.paddingRight = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.right.style.paddingTop = settingsEditor.sizeStyle(this.spacing.inside);
-        elements.right.style.paddingBottom = settingsEditor.sizeStyle(this.spacing.inside);
-        let verticalSize = window.innerHeight - 2 * this.spacing.outsize - 2 * this.spacing.inside - 2 * this.spacing.border;
+        elements.left.style.paddingLeft = settingsEditor.sizeStyle(layoutMetrics.spacing.inside);
+        elements.left.style.paddingRight = settingsEditor.sizeStyle(layoutMetrics.spacing.inside);
+        elements.left.style.paddingTop = settingsEditor.sizeStyle(layoutMetrics.spacing.inside * layoutMetrics.relativeVerticalInfoPanelPadding);
+        elements.left.style.paddingBottom = settingsEditor.sizeStyle(layoutMetrics.spacing.inside * layoutMetrics.relativeVerticalInfoPanelPadding);
+        elements.right.style.paddingRight = settingsEditor.sizeStyle(layoutMetrics.spacing.inside);
+        elements.right.style.paddingTop = settingsEditor.sizeStyle(layoutMetrics.spacing.inside);
+        elements.right.style.paddingBottom = settingsEditor.sizeStyle(layoutMetrics.spacing.inside);
+        let verticalSize = window.innerHeight - 2 * layoutMetrics.spacing.outsize - 2 * layoutMetrics.spacing.inside - 2 * layoutMetrics.spacing.border;
         this.blockSize = Math.floor(verticalSize / this.effectiveSettings.gameSizeInBlocks.y);
-        let adjustedVerticalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.y;
+        const adjustedVerticalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.y;
+        const horizontalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
         elements.board.style.height = settingsEditor.sizeStyle(adjustedVerticalSize);
         let boardWidth = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
         elements.board.style.width = settingsEditor.sizeStyle(boardWidth);
-        let upcomingWidth = this.blockSize * this.upcomingPreviewSize;
+        let upcomingWidth = this.blockSize * layoutMetrics.upcomingPreviewSize;
         elements.upcoming.style.height = settingsEditor.sizeStyle(upcomingWidth);
         elements.upcoming.style.width = settingsEditor.sizeStyle(upcomingWidth);
-        setText(elements.statusVerb, this.statusWordSet.continue);
+        setText(elements.statusVerb, statusWordSet.continue);
         let width1 = elements.promptText.offsetWidth;
-        setText(elements.statusVerb, this.statusWordSet.start);
+        setText(elements.statusVerb, statusWordSet.start);
         setText(elements.statusKeyName, this.effectiveSettings.key.start.display);
         let width2 = elements.promptText.offsetWidth;
-        elements.left.style.width = settingsEditor.sizeStyle(maximum(upcomingWidth, width1, width2, upcomingWidth));
-        elements.main.style.borderWidth = settingsEditor.sizeStyle(this.spacing.border);
-        elements.main.style.marginTop = settingsEditor.sizeStyle((window.innerHeight - elements.main.offsetHeight) / 2);
-        elements.main.style.marginLeft = settingsEditor.sizeStyle((window.innerWidth - elements.main.offsetWidth) / 2);
+        const leftWidth = maximum(upcomingWidth, width1, width2, upcomingWidth);
+        elements.left.style.width = settingsEditor.sizeStyle(leftWidth);
+        elements.main.style.borderWidth = settingsEditor.sizeStyle(layoutMetrics.spacing.border);
         elements.board.width = elements.board.clientWidth;
         elements.board.height = elements.board.clientHeight;
         elements.upcoming.width = elements.upcoming.clientWidth;
         elements.upcoming.height = elements.upcoming.clientHeight;
         rendering.invalidate();
-        } catch(ex) { showException(ex); }
     }, //resizeBody
+
     resize: function () { try { this.resizeBody(); } catch (e) { showException(e); } },
+    
     showKeyboard : function (settings) {
         for (let index in settings.key) {
             const keyboardItem = settings.key[index];
@@ -260,7 +260,7 @@ const game = {
         if (this.states.current != this.states.playing) return;
         this.handle(this.queue.shift());
         this.duration += dTime;
-        if (this.duration > this.delay) { this.duration -= this.delay; this.drop(); }
+        if (this.duration > this.delay) { this.duration -= this.delay; this.drop(true); }
     }, //update 
 
     move: function (direction) {
@@ -289,9 +289,9 @@ const game = {
         rendering.invalidate();
     }, //rotate
 
-    drop: function () {
+    drop: function (updateScore) {
         if (this.move(this.actions.down)) return;
-        this.addScore(this.effectiveSettings.scoreRules.addOnDrop(this.rows, this.score));
+        if (updateScore) this.addScore(this.effectiveSettings.scoreRules.addOnDrop(this.rows, this.score));
         this.dropTetromino();
         this.removeLines();
         this.setCurrentTetromino(this.next);
@@ -307,9 +307,9 @@ const game = {
         });
     }, //dropTetromino
 
-    dropDown: function () {
+    dropDown: function (updateScore) {
         while (this.move(this.actions.down)) { }
-        this.drop();
+        this.drop(updateScore);
     }, //dropDown
 
     getTopmostBlock: function() {
@@ -324,7 +324,7 @@ const game = {
         while (true) {
             const level = this.effectiveSettings.gameSizeInBlocks.y - this.getTopmostBlock() - 1;
             if ( level / this.effectiveSettings.gameSizeInBlocks.y >= elements.clutterSelector.value ) break; 
-            this.dropDown();
+            this.dropDown(false);
         } //loop
     }, //autoClutter
 
@@ -359,8 +359,8 @@ const game = {
             case this.actions.right: this.move(action); break;
             case this.actions.rotateRight: this.rotate(false); break;
             case this.actions.rotateLeft: this.rotate(true); break;
-            case this.actions.down: this.drop(); break;
-            case this.actions.bottom: this.dropDown(); break;
+            case this.actions.down: this.drop(true); break;
+            case this.actions.bottom: this.dropDown(true); break;
         } //switch
     }, //handle
 
@@ -497,10 +497,10 @@ const rendering = {
         const drawUpcoming = function (context) {
             if (!this.invalid.upcoming) return;
             if (game.states.current != game.states.playing) return;
-            const padding = (layout.upcomingPreviewSize - game.next.shape.size) / 2; // half-arsed attempt at centering next tetromino display
+            const padding = (layoutMetrics.upcomingPreviewSize - game.next.shape.size) / 2; // half-arsed attempt at centering next tetromino display
             context.save();
             finerLines(context);
-            context.clearRect(-1, -1, layout.upcomingPreviewSize * layout.blockSize + 1, layout.upcomingPreviewSize * layout.blockSize + 1);
+            context.clearRect(-1, -1, layoutMetrics.upcomingPreviewSize * layout.blockSize + 1, layoutMetrics.upcomingPreviewSize * layout.blockSize + 1);
             drawTetrominoAt(context, game.next, { x: padding, y: padding });
             context.restore();
             this.invalid.upcoming = false;
@@ -534,7 +534,7 @@ const rendering = {
         }; //drawRows
         const drawState = function () {
             if (!this.invalid.state) return;
-            setText(elements.statusVerb, game.states.current === game.states.paused ? layout.statusWordSet.continue : layout.statusWordSet.start);
+            setText(elements.statusVerb, game.states.current === game.states.paused ? statusWordSet.continue : statusWordSet.start);
             setVisibility(elements.pausedText, game.states.current === game.states.paused);
             setVisibility(elements.promptText, game.states.current != game.states.playing);
             this.invalid.state = false;
@@ -567,8 +567,8 @@ function setText(object, text) { object.innerHTML = text; }
 function maximum() {
     let big = Number.NEGATIVE_INFINITY;
     for (let argument of arguments) {
-        let value = arguments;
-        if (value > big)
+        let value = argument;
+        if (value >= big)
             big = value;
     } //loop
     return big;
