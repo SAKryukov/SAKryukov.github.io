@@ -2,7 +2,7 @@
 
 <!--
 
-Tetris on Canvas, v.7.5.1
+Tetris on Canvas, v.7.5.2
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -34,14 +34,14 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 <html lang="en-US">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
     <title>Tetris on Canvas</title>
     <style>
       * { padding: 0; margin: 0; box-sizing: border-box; }
       body, html { font-family: "Verdana", sans-serif; background-color: Brown; height: 100%; }
       body { display: flex; flex-flow: row; height: 100%; }
-      body article { display: flex; align-items: center; justify-content: center; width: 100%; }
+      body main { display: flex; align-items: center; justify-content: center; width: 100%; }
       nav { padding-left: 0.6em; padding-top: 1em; }
       nav br { margin: 0.2em; }
       .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -77,7 +77,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <img alt="Settings" id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
 </nav>
 
-<article id="main">
+<main id="main">
   <div id="game">
     <div id="left">
       <div>
@@ -90,7 +90,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
         <p>Score: <em id="score"></em></p>
         <br/>
         <p>Rows: <em id="rows"></em></p>
-      </div/>
+      </div>
       <div id="sectionClutter" title="Clutter created at the start of the game">
         <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="checked"/>Cl<u>u</u>tter</label>&ThinSpace;
         <select id="clutterSelector"></select>
@@ -98,7 +98,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
     </div>
     <div id="right"><canvas id="board"></canvas></div>
   </div>
-</article>
+</main>
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"></span></h1>

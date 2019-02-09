@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html>
-    <head>
+﻿<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+        <meta charset="utf-8" />
         <title>Tetris on Canvas &mdash; Settings</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
-        <title>Tetris on Canvas</title>
-        <style type="text/css">
+        <style>
             * { font-family: "Verdana", sans-serif; }
             details ul { list-style-type: none; margin-top: 0.1em; }
             details { margin-top: 0.2em; margin-bottom: 0.2em; }
             p { margin-top: 1em; margin-bottom: 0; }
             main { display: table-row; width: 100%; }
-            section { display: table-cell; }
-            main > section:first-child { background-color: transparent; width: 50%; padding-left: 2em; padding-right: 2em; }
-            main > section:last-child { background-color: transparent; border-left: solid thin black; padding-left: 2em; vertical-align: bottom; }
+            nav, aside { display: table-cell; }
+            main > nav { background-color: transparent; width: 50%; padding-left: 2em; padding-right: 2em; }
+            main > aside { background-color: transparent; border-left: solid thin black; padding-left: 2em; vertical-align: bottom; }
+            main > aside button { margin-top: 2em; }
             button { white-space: nowrap; }
             td button { padding-left: 0.1em; padding-right: 0.1em; }
-            main > section:last-child button { margin-top: 2em; }
             table { margin-top: 0.4em; margin-left: 2em; }
             td, tr { margin: 0; padding: 0; }
             td.keyCode { text-align: right; }
@@ -29,9 +28,9 @@
             ul.keyboard button, ul.keyboard li input { margin: 0; }
             ul.keyboard input { width: 12em; }
             #keyEditor { display: none; position: absolute; background-color: moccasin; padding: 0.2em; padding-left: 1em; padding-right: 1em;  }
-            aside { width: 2em; height: 1em; display: inline-block; margin-right: 0.4em; }
+            option aside { width: 2em; height: 1em; display: inline-block; margin-right: 0.4em; }
         </style>
-    <head>
+    </head>
 <body>
 
 <h2>Settings <span id="badBrowser"></span></h2>
@@ -42,21 +41,21 @@
 
 <main>
 
-<section>
+<nav>
 
-<details open="true">
+<details open="open">
     <summary accesskey="G"><u>G</u>ame size</summary>
     <table class="default">
         <tr>
             <td>Horizontal:</td><td><select data-property="gameSizeInBlocks.x" data-editor="gameSizeInBlocksEditor.x"></select></td>
         </tr>
         <tr>
-            <td>Vertical:</td><td><select data-property="gameSizeInBlocks.y" data-editor="gameSizeInBlocksEditor.y"></td>
+            <td>Vertical:</td><td><select data-property="gameSizeInBlocks.y" data-editor="gameSizeInBlocksEditor.y"></select></td>
         </tr>
     </table>
 </details>
 
-<details open="true">
+<details open="open">
     <summary accesskey="Y">Dela<u>y</u>s</summary>
     <table class="default">
         <tr>
@@ -65,18 +64,18 @@
             <td>Decrement:</td><td><select data-property="delays.decrement" data-editor="delaysEditor.decrement"></select></td>
         </tr>
         <tr>
-            <td>Minimum:</td><td><select data-property="delays.min" data-editor="delaysEditor.min"></select></li></td>
+            <td>Minimum:</td><td><select data-property="delays.min" data-editor="delaysEditor.min"></select></td>
         </tr>
     </table>
 </details>
 
-<details open="true">
+<details open="open">
     <summary accesskey="C"><u>C</u>olors</summary>
     <table class="colors">
         <tr>
-        <td><img id="image.J" src="images/settings.J.png"/></li>
-        <td><img id="image.S" src="images/settings.S.png"/></li>
-        <td><img id="image.T" src="images/settings.T.png"/></li>
+        <td><img id="image.J" src="images/settings.J.png" alt=""/></td>
+        <td><img id="image.S" src="images/settings.S.png" alt=""/></td>
+        <td><img id="image.T" src="images/settings.T.png" alt=""/></td>
         </tr>
         <tr>
         <td><select data-property="tetrominoColor.J"></select></td>
@@ -86,10 +85,10 @@
     </table>
     <table class="colors">
         <tr>
-        <td><img id="image.L" src="images/settings.L.png"/></td>
-        <td><img id="image.Z" src="images/settings.Z.png"/></td>
-        <td><img id="image.O" src="images/settings.O.png"/></td>
-        <td><img id="image.I" src="images/settings.I.png"/></li>
+        <td><img id="image.L" src="images/settings.L.png" alt=""/></td>
+        <td><img id="image.Z" src="images/settings.Z.png" alt=""/></td>
+        <td><img id="image.O" src="images/settings.O.png" alt=""/></td>
+        <td><img id="image.I" src="images/settings.I.png" alt=""/></td>
         </tr>
         <tr>
         <td><select data-property="tetrominoColor.L"></select></td>
@@ -104,7 +103,7 @@
     <summary accesskey="U">Cl<u>u</u>tter</summary>
     <table class="default">
         <tr>
-            <td><label for="clutterEnabledDefault" accesskey="E"><u>E</u>nabled by default:</td><td><input type="checkbox" data-property="clutterOptionSet.clutterEnabledDefault" id="clutterEnabledDefault"></input></label></td>
+            <td><label for="clutterEnabledDefault" accesskey="E"><u>E</u>nabled by default:</label></td><td><input type="checkbox" data-property="clutterOptionSet.clutterEnabledDefault" id="clutterEnabledDefault"/></td>
         </tr>
         <tr>
             <td>Minimum:</td><td><select data-property="clutterOptionSet.min" data-editor="clutterEditor.min"></select></td>
@@ -125,45 +124,45 @@
     <summary accesskey="K"><u>K</u>eyboard</summary>
     <table>
         <tr data-property="key.start">
-            <td>Start/Pause/Continue:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Start/Pause/Continue:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.cancel">
-            <td>Cancel:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Cancel:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.left">
-            <td>Left:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Left:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.right">
-            <td>Right:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Right:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.down">
-            <td>Down:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Down:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.dropDown">
-            <td>Drop Down:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Drop Down:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.rotate">
-            <td>Rotate:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Rotate:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.help">
-            <td>Help:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Help:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.downloadSource">
-            <td>Download source code:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td>
+            <td>Download source code:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
         </tr>
         <tr data-property="key.settings">
-            <td>Settings:</td><td class="keyCode"></td><td><input type="text"></input><button>&Congruent;</button></td> 
+            <td>Settings:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td> 
         </tr>
     </table>
 </details>
 
-</section>
+</nav>
 
-<section>
+<aside>
     <button id="apply" accesskey="A" title="Store custom settings and play game"><u>A</u>pply</button><br/>
     <button id="reset" accesskey="R" title="Reset settings to default values"><u>R</u>eset</button><br/>
     <button id="clean" accesskey="L" title="Clean Tetris data from browser local storage">Clean <u>L</u>ocal Storage</button>    
-</section>
+</aside>
 
 </main>
 
