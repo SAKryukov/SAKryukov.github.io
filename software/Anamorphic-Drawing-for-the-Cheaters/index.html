@@ -22,15 +22,15 @@
 
 <p>Anamorphic Drawing<a href="title"></a></p>
 <h2 id="heading.contents">Contents</h2>
-<p><div class="toc"><ul style="list-style-type: none;"><li><a href="#heading.introduction">Introduction</a></li><li><a href="#heading.illusion-effect">Illusion Effect</a></li><li><a href="#heading.the-trick">The Trick</a></li><li><a href="#heading.workflow">Workflow</a></li><li><a href="#heading.user-interface">User Interface</a></li></ul></div></p>
-<h2 id="heading.introduction">Introduction</h2>
+<p><div class="toc"><ul style="list-style-type: none;"><li><a href="#heading.illusion-effect">Illusion Effect</a></li><li><a href="#heading.the-technique">The Technique</a></li><li><a href="#heading.workflow">Workflow</a></li><li><a href="#heading.user-interface">User Interface</a></li></ul></div></p>
 <h2 id="heading.illusion-effect">Illusion Effect</h2>
-<p><em>Anamorphic Drawing</em> application helps to produce one of the anamorphic illusions: a piece of paper with a printed image which, if viewed from a specially selected <em>vantage point</em>, shows an image of rectangular piece of paper shown in <em>perspective</em> and some objects placed on top of near it, distorted to compensate the perspective projection. As a result, it produces the result of a “3D” image “sticking out” of the piece paper on which it is seemingly drawn.</p>
+<p><em>Anamorphic Drawing</em> application helps to produce one of the anamorphic illusions: a drawing printed on a piece of paper. When it is viewed from a specially selected <em>vantage point</em>, it shows an image of a rectangular piece of paper shown in <em>perspective</em> and some objects placed on top of near it, distorted to compensate the perspective projection. As a result, it produces the result of an image “sticking out” of the piece paper on which it is seemingly drawn.</p>
 <p>If some real object is placed on top of paper, so part of its background represents the image of a piece of paper and part of it is the image of the other object, it produces the effect of “impossible picture” in the spirit of <a href="https://en.wikipedia.org/wiki/M._C._Escher">Maurits Escher</a>.</p>
 <p>Presently, one can find many intricate images <a href="https://www.youtube.com/results?search_query=anamorphic+illusion">demonstrated by authors on youtube</a>.</p>
-<h2 id="heading.the-trick">The Trick</h2>
-<p>This piece of paper should be shown symmetrically in the picture, as a trapezoidal This piece of paper should be shown symmetrically in the picture, as a trapezoidal <span><img src="photograph.png" alt="[photograph]"/></span> shape.<br/></p>
-<p>SA???</p>
+<h2 id="heading.the-technique">The Technique</h2>
+<p>The idea is to photograph a rectangular piece of paper placed on a desk in a position where the perspective image of this piece is shown as a symmetric trapezoidal <span><img src="photograph.png" alt="[photograph]"/></span> shape. If we transform the image of this photographed piece the way the trapezoidal shape gets the shape and size of original piece of paper, place it on the desk in the same exact position and photograph it again from the same point, then, quite obviously, we obtain identical image of this piece of paper.</p>
+<p>If we have some other object placed over the piece of paper in first place, it will be transformed with “inverse perspective”, <em>as if</em> it was shown as an image projected onto the plane perpendicular to the axis of view. While non-transformed image would produce the impression of a photograph or drawing on a piece of paper lying on a desk, transformed image will break this impression and produce the impression of an object which “sticks out” of the plain of the drawing.</p>
+<p>The image can also be printed in very pale tones, possibly after contouring operation. In this case, the user can augment the print with some manual drawing or imitation of it, to produce the impression of even “more impossible” image: a manually crafted drawing “breaking out” the plain of the drawing paper.</p>
 <h2 id="heading.workflow">Workflow</h2>
 <p>Photograph the object on some piece of paper. Make sure that the from edge of paper is parallel to the lower boundary of the frame and looks symmetric. This requirement is approximate. Use a tripod. When the picture is taken, don’t move the tripod and mark the location of the piece of paper! You will need the same locations when you photograph the result.</p>
 <p>Photograph the object on some piece of paper. Make sure that the from edge of paper is parallel to the lower boundary of the frame and looks symmetric. This requirement is approximate. Use a tripod. When the picture is taken, don’t move the tripod and mark the location of the piece of paper! You will need the same locations when you photograph the result.</p>
@@ -39,11 +39,13 @@
 <p><img src="step1.png" alt="Load" /></p>
 <p id="image.step2">Mark four corners of the image of the paper by placing appropriate corner grip. You can quickly start by clicking on each corner clockwise, starting from the top-left one. Don't worry about accuracy: you can fix it later:</p>
 <p><img src="step2.png" alt="Mark corners" /></p>
-<p id="image.step3">Using Tab key or mouse, activate each of the corner grip and adjust their location accurately, using arrow keys. Course move: Alt+Ctrl+Shift keys, finer move: 2 of the prefix keys, even finer move: one prefix key, 1-pixel move: no prefix keys:</p>
+<p id="image.step3">Using Tab key or mouse, activate each of the corner grip and adjust their location accurately, using arrow keys:</p>
 <p><img src="step3.png" alt="Adjust corners" /></p>
-<p id="image.step4">Hit "Next" to obtain anamorphic image. Piece of paper is transformed to appear as a rectangular with the same aspect ratio as the source image:</p>
+<p>The adjustment of the grip position can be performed quickly but with the accuracy of one screen pixel — that’s why it will be the best to work with maximizes main application window. There are four steps of the motion; please see the the detailed description in the <a href="#heading.corner-grips">documentation on the user interface</a>.</p>
+<p id="image.step4">Hit "Next" to obtain anamorphic image. Piece of paper is transformed to appear as a rectangular shape with the same aspect ratio as the source image:</p>
 <p><img src="step4.png" alt="Transform" /></p>
-<p id="image.step5">Move crop grips to define crop:</p>
+<p>Note that the shape of the apple becomes not only elongated, but it is also wider on the top end. This is natural: normal perspective projection makes the image <a href="https://en.wikipedia.org/wiki/Perspective_%28graphical%29#Foreshortening">foreshortened</a>, with reduced sizes of more distant parts of the object. No wonder, our reverse perspective transform should do the opposite.</p>
+<p id="image.step5">Move four crop grips to define crop:</p>
 <p><img src="step5.png" alt="Define crop" /></p>
 <p id="image.step6">Crop is defined, matching the edges of the piece of paper. On this image, one can see that transformed image is not strictly rectangular. This is some distortion of the method. Hit "Next":</p>
 <p><img src="step6.png" alt="Crop" /></p>
