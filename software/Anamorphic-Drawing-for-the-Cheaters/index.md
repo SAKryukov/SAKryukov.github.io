@@ -22,7 +22,7 @@ The image can also be printed in very pale tones, possibly after contouring oper
 
 ## Workflow
 
-Photograph the object on some piece of paper. Make sure that the edge of the piece of paper is parallel to the lower boundary of the frame and looks symmetric. This requirement is approximate. Use a tripod. When the picture is taken, don't move the tripod and mark the location of the piece of paper! You will need the same locations when you photograph the result.
+Photograph the object on some rectangular piece of paper. Make sure that the edge of the piece of paper is parallel to the lower boundary of the frame and looks symmetric: <span><img src="photograph.png" alt="[photograph]"/></span>. This requirement is approximate. Use a tripod. When the picture is taken, don't move the tripod and mark the location of the piece of paper. You will need the same locations when you photograph the result.
 
 Make sure your picture aspect ratio is the same as of the piece of paper photographed. If needed, crop the picture to required aspect ratio using any suitable image editor.
 
@@ -50,20 +50,21 @@ Note that the shape of the apple becomes not only elongated, but it is also wide
 
 ![Define crop](step5.png)
 
-<p id="image.step6">Now a crop is defined, matching the edges of the piece of paper. On this image, one can see that the transformed image is not strictly rectangular. This is some distortion of the method.</p>
+<p id="image.step6">Now a crop is defined, matching the edges of the piece of paper. On this image, one can see that the transformed image is not strictly rectangular. This is the effect of some distortion in optics.</p>
 
 Hit "Next":
 
 ![Crop](step6.png)
 
-<p id="image.step6">Now the anamorphic image is cropped and scaled. You can save it and print out:</p>
+<p id="image.step6">Now the anamorphic image is cropped and scaled. You can save it or, optionally, print out immediately:</p>
 
 ![Save and print](step7.png)
 
-The image should be scaled for printing, to approximately match the size of the original piece of paper which was photographed. This rule is approximate. Anamorphic image has is considerably taller than this piece of paper.
-For good results, it’s better to keep the perspective moderate, otherwise anamorphic image is too tall, which, in turn, leads to high distortions.
+The image should be scaled for printing, to approximately match the size of the original piece of paper which was photographed. Anamorphic image has is considerably taller than this piece of paper.
 
-The printed image can be used as it is. Alternatively, the same image can be processed to obtain contours of the image, which can be made very pale, to serve as a convenient pad for manual drawing. The first image, full-colored one, can be used as a sample.
+For good results, it’s better to keep the perspective moderate; otherwise anamorphic image comes out too tall, which, in turn, leads to high distortions.
+
+The printed image can be used as it is. Alternatively, the same image can be processed to obtain contours of the image, which can be made very pale, to serve as a convenient pad for manual drawing. The first image, full-colored one, can be used as a reference, a model for drawing.
 
 The picture on paper is prepared. Then it needs to be cut out to remove background areas. On the pictures shown above, this is the brown-colored area.
 
