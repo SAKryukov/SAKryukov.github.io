@@ -34,7 +34,7 @@ Make sure your picture aspect ratio is the same as of the piece of paper photogr
 
 ![Mark corners](step2.png)
 
-<p id="image.step3">Using Tab key or mouse, activate each of the corner grips and adjust their location accurately, using arrow keys:</p>
+<p id="image.step3">Using Tab key or mouse, activate each of the corner grips and adjust their locations accurately, using arrow keys:</p>
 
 ![Adjust corners](step3.png)
 
@@ -50,7 +50,9 @@ Note that the shape of the apple becomes not only elongated, but it is also wide
 
 ![Define crop](step5.png)
 
-<p id="image.step6">Now a crop is defined, matching the edges of the piece of paper. On this image, one can see that the transformed image is not strictly rectangular. This is some distortion of the method. Hit "Next":</p>
+<p id="image.step6">Now a crop is defined, matching the edges of the piece of paper. On this image, one can see that the transformed image is not strictly rectangular. This is some distortion of the method.</p>
+
+Hit "Next":
 
 ![Crop](step6.png)
 
