@@ -2,7 +2,7 @@
 
 <!--
 
-Tetris on Canvas, v.7.5.2
+Tetris on Canvas
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -25,6 +25,7 @@ FSM (states)
 Fixed random tetromino generation
 Javascript "strict mode"
 Flex layout
+Touch screen support
 Code improvements, exception handling, readability, fixes
 
 Publication:
@@ -38,7 +39,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
     <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
     <title>Tetris on Canvas</title>
     <style>
-      * { padding: 0; margin: 0; box-sizing: border-box; }
+      * { padding: 0; margin: 0; box-sizing: border-box; user-select: none; }
       body, html { font-family: "Verdana", sans-serif; background-color: Brown; height: 100%; }
       body { display: flex; flex-flow: row; height: 100%; }
       body main { display: flex; align-items: center; justify-content: center; width: 100%; }
@@ -58,7 +59,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; background-color: white; border: solid black 2px; cursor: help; }
       #help b { font-size: 120%; }
       #help p { margin-bottom: 0.8em; }
-      #help hr { margin-top: 1.8em; }
+      #help hr, #help-touch, #help-touch-no-support { margin-top: 1.8em; }
+      #help-touch { display: none; }
       #help h1 { text-align: center; font-size:120%; margin-bottom: 1em; }
       code { background-color: yellow; color: red; font-family: sans-serif, "Arial"; border: solid thin black; padding: 0px 3px 0px 3px; }
       #game { display: flex; flex-flow: row; background-color: snow; border: solid black 0px; border-radius: 8px; box-shadow: 10px 10px 10px #320D0D; }
@@ -109,11 +111,25 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <p><i id="help.cancelGame"></i>: cancel game</p>
 <p><i id="help.downloadSource"></i>: download source code <img alt="Help" src="images/download.svg"/></p>
 <p><i id="help.settings"></i>: settings <img alt="Settings" src="images/settings.svg"/></p>
-<p><i id="help.help"></i>: show/hide help</p><hr/>
+<p><i id="help.help"></i>: show/hide help</p>
+<p id="help-touch-no-support"><i>This browser does not support touch screen.</i></p>
+<div id="help-touch">
+  <p>Touch screen gestures:</p>
+  <p>Single touch: start game, optionally (see <img alt="Settings" src="images/settings.svg"/>) move tetromino horizontally to touch spot.</p>
+  <p>Touch spot move, first finger: move tetromino horizontally to touch spot.</p>
+  <p>Fast swipe down, first finger: move tetromino down to touch spot.</p>
+  <p>Second-finger touch and swipe: rotate tetromino <b>&orarr;</b> or <b>&olarr;</b>, depending on swipe direction.</p>
+  <p>Single-finger click: drop tetromino down.</p>
+  <p>Two-finger click: pause game, which can be resumed with a single touch.</p>
+  <p>Three-finger click: cancel game, which can be started again with a single touch.</p>
+  <p>To avoid interference with tetromino horizontal and vertical &ldquo;to the spot&rdquo; motion (already minimized), rotation and clicks can be performed outside of the game board.</p>
+</div>
+<hr/>
 <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
 <br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
 </div>
 
+<script src="touch.js"></script>
 <script src="settings.js"></script>
 <script src="application.js"></script>
 

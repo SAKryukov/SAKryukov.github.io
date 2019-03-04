@@ -1,5 +1,5 @@
 /*
-Tetris on Canvas, v.7.5.2
+Tetris on Canvas
 Sergey A Kryukov, derived work
 http://www.SAKryukov.org
 http://www.codeproject.com/Members/SAKryukov
@@ -22,6 +22,7 @@ FSM (states)
 Fixed random tetromino generation
 Javascript "strict mode"
 Flex layout
+Touch screen support
 Code improvements, exception handling, readability, fixes
 
 Publication:
@@ -29,36 +30,6 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 */
 
 "use strict";
-
-// class syntax works, ECMAScript 2015, but may be incompatible with some browsers
-// class Tetromino {
-// 	constructor (shape, x, y, orientation) {
-// 		this.shape = shape; //TetrominoShape
-// 		this.x = x;
-// 		this.y = y;
-// 		this.orientation = orientation;
-// 	}
-// 	first (x0, y0, orientation, fn, doBreak) { // fn(x, y), accepts coordinates of each block, returns true to break
-// 		let row = 0, col = 0, result = false, blocks = this.shape.blocks[orientation];
-// 		for (let bit = 0x8000; bit > 0; bit = bit >> 1) {
-// 			if (blocks & bit) {
-// 				result = fn(x0 + col, y0 + row);
-// 				if (doBreak && result)
-// 					return result;
-// 			} //if
-// 			if (++col === 4) {
-// 				col = 0;
-// 				++row;
-// 			} //if
-// 		} //loop
-// 		return result;
-// 	} //first
-// 	all(fn) { // fn(x, y), accepts coordinates of each block
-// 		this.first(this.x, this.y, this.orientation, fn, false); // no break
-// 	} //all
-// } //class Tetromino
-
-// Equivalent code without ECMAScript 2015 class syntax:
 
 function Tetromino(shape, x, y, orientation, color) {
     this.shape = shape; //TetrominoShape
@@ -70,7 +41,8 @@ function Tetromino(shape, x, y, orientation, color) {
 
 Tetromino.prototype = {
     first: function (x0, y0, orientation, fn, doBreak) { // fn(x, y), accepts coordinates of each block, returns true to break
-        let row = 0, col = 0, result = false, blocks = this.shape.blocks[orientation];
+        let row = 0, col = 0, result = false;
+        const blocks = this.shape.blocks[orientation];
         for (let bit = 0x8000; bit > 0; bit = bit >> 1) {
             if (blocks & bit) {
                 result = fn(x0 + col, y0 + row);
@@ -109,6 +81,8 @@ const elements = {
     helpWindow: element("help"),
     helpImageHelp: element("id.help"),
     helpImageClose: element("id.close-help"),
+    helpTouch: element("help-touch"),
+    helpTouchNoSupport: element("help-touch-no-support"),
     downloadImage: element("id.download"),
     settingsImage: element("id.settings"),
     statusVerb: element("statusVerb"),
@@ -278,6 +252,36 @@ const game = {
             return false;
     }, //move
 
+    moveTo: function(clientX, clientY) { //SA??? touch
+        const left = elements.board.offsetLeft;
+        const width = elements.board.offsetWidth;
+        const shift = this.current.shape.shiftsX[this.current.orientation];
+        const x = Math.floor((clientX - left) / (width / this.effectiveSettings.gameSizeInBlocks.x)) - shift;
+        if (x < -shift || x >= this.effectiveSettings.gameSizeInBlocks.x) return;
+        while (this.current.x != x) {
+            const direction = x > this.current.x ? this.actions.right : this.actions.left;
+            if (!this.move(direction)) break;
+        } //loop
+    }, //moveTo
+
+    oneStepDown: function() { this.drop(true); }, //SA??? touch
+
+    moveDownToTouchStop: function(clientY) { //SA??? touch
+        const top = elements.board.offsetTop;
+        const height = elements.board.offsetHeight;
+        const shift = this.current.shape.shiftsY[this.current.orientation];
+        //SA??? -4 is the height, should be optional
+        const y = Math.floor((clientY - top) / (height / this.effectiveSettings.gameSizeInBlocks.y)) - shift;
+        while(this.current.y < y)
+            if (!this.drop(true))
+                break;
+    }, //moveDownToTouchStop
+
+    showTouchHelp: function() {
+        elements.helpTouchNoSupport.style.display = "none";
+        elements.helpTouch.style.display = "block";
+    }, //showTouchHelp
+
     rotate: function (left) {
         const newOrientation = left ? 
             (this.current.orientation === this.orientation.min ? this.orientation.max : this.current.orientation - 1)
@@ -289,15 +293,18 @@ const game = {
     }, //rotate
 
     drop: function (updateScore) {
-        if (this.move(this.actions.down)) return;
+        if (this.move(this.actions.down)) return false;
         if (updateScore) this.addScore(this.effectiveSettings.scoreRules.addOnDrop(this.rows, this.score));
         this.dropTetromino();
         this.removeLines();
         this.setCurrentTetromino(this.next);
         this.setNextTetromino(this.randomTetromino());
         this.clearQueue();
-        if (this.willHitObstacle(this.current, this.current.x, this.current.y, this.current.orientation))
+        if (this.willHitObstacle(this.current, this.current.x, this.current.y, this.current.orientation)) {
             this.cancel();
+            return false;
+        } //if
+        return true;
     }, //drop
 
     dropTetromino: function () {
@@ -582,7 +589,7 @@ function showException(exception) {
 } //showException
 
 try {
-    (function () {
+    (() => { // main
         const effectiveSettings = getSettings();
         layout.effectiveSettings = effectiveSettings;
         game.effectiveSettings = effectiveSettings;
@@ -590,13 +597,6 @@ try {
         layout.showKeyboard(effectiveSettings);
         game.specialKeySet = new Set([effectiveSettings.key.help.keyCode, effectiveSettings.key.downloadSource.keyCode, effectiveSettings.key.settings.keyCode]);
         document.body.title = document.title;
-        if (!window.requestAnimationFrame) // http://paulirish.com/2011/requestanimationframe-for-smart-animating/
-            window.requestAnimationFrame =
-                window.webkitRequestAnimationFrame ||
-                window.mozRequestAnimationFrame ||
-                window.oRequestAnimationFrame ||
-                window.msRequestAnimationFrame ||
-                function (callback, element) { window.setTimeout(callback, 1000 / 60); }
         game.initializeClutterLevels();
         rendering.initializeHelp();
         layout.resize();
@@ -608,22 +608,34 @@ try {
         elements.helpWindow.onclick = function () { rendering.help(); };
         elements.helpImageHelp.onclick = function () { rendering.help(); };
         elements.helpImageClose.onclick = function () { rendering.help(); };
-        let after, before = now();
-        (function frame() {
-            after = now();
-            game.update(Math.min(1, (after - before) / 1000.0));
-            rendering.draw();
-            before = after;
-            requestAnimationFrame(frame, elements.board);
-        })()
-        const downloadAnchor = (function() {
+        (() => { // downloader setup
             const downloader = document.createElement('a');
             downloader.href = effectiveSettings.fileNames.sourceCode;
             document.body.appendChild(downloader);
-            return downloader;    
-        })();
-        elements.downloadImage.onclick = game.downloadHandler;
-        elements.settingsImage.onclick = game.settingsHandler;     
-        elements.checkboxClutter.focus();
-    })();
+        })(); // downloader setup
+        (()=>{ // touch screen support:
+            elements.downloadImage.onclick = game.downloadHandler;
+            elements.settingsImage.onclick = game.settingsHandler;     
+            elements.checkboxClutter.focus();
+            game.touchStart = game.startContinue;
+            game.touchPause = game.pause;
+            game.touchMove = game.moveTo;
+            game.touchDrop = game.dropDown;
+            game.touchRotate = game.rotate;
+            game.touchCancel = game.cancel;
+            game.stepDown = game.oneStepDown;
+            game.touchRotateSvg = elements.touchRotate; 
+            setupTouch(effectiveSettings.touchScreen, elements.main, game);    
+        })(); // touch screen support:
+        (()=>{ // main animation cycle
+            let after, before = now();
+            (function frame() {
+                after = now();
+                game.update(Math.min(1, (after - before) / 1000.0));
+                rendering.draw();
+                before = after;
+                requestAnimationFrame(frame, elements.board);
+            })()    
+        })(); // main animation cycle
+    })(); // main
 } catch (e) { showException(e); }

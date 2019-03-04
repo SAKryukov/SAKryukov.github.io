@@ -1,4 +1,38 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+
+<!--
+
+Tetris on Canvas
+Sergey A Kryukov, derived work
+http://www.SAKryukov.org
+http://www.codeproject.com/Members/SAKryukov
+
+Based on algorithms and working prototype developed by Jake Gordon:
+http://codeincomplete.com
+http://codeincomplete.com/posts/2011/10/10/javascript_tetris
+https://github.com/jakesgordon/javascript-tetris
+
+License: MIT (http://en.wikipedia.org/wiki/MIT_License)
+
+S A Kryukov implemented:
+Configurable game: board size, tetromino colors/shapes, score rules, timing
+Auto-resizeable depending on the browser window size 
+Drop of tetromino to bottom
+Automatic optional clutter at the end of the game (since v.5)
+Pause/continue
+Help
+FSM (states)
+Fixed random tetromino generation
+Javascript "strict mode"
+Flex layout
+Touch screen support
+Code improvements, exception handling, readability, fixes
+
+Publication:
+http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
+
+-->
+
 <html lang="en-US">
   <head>
         <meta charset="utf-8" />
@@ -152,6 +186,23 @@
         </tr>
         <tr data-property="key.settings">
             <td>Settings:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td> 
+        </tr>
+    </table>
+</details>
+
+<details>
+    <summary accesskey="T"><u>T</u>ouch Screen</summary>
+    <table class="default">
+        <tr>
+            <td><label title="If checked, a touch moves tetromino to the touch spot" for="touchScreen.moveTetrominoToTouch">Move Tetromino on Touch:</label></td><td><input type="checkbox" data-property="touchScreen.moveTetrominoToTouch" id="touchScreen.moveTetrominoToTouch"/></td>
+        </tr>
+        <tr>
+            <td title="Threshold time used to recognize touch clicks">
+                Click Threshold:</td><td><select data-property="touchScreen.clickThresholdMs" data-editor="touchScreenEditor.clickThresholdMs"></select>
+            </td>
+        </tr>
+        <tr>
+            <td title="Threshold size of swipe in pixels used to recognize fast swipe">Swipe Down Threshold:</td><td><select data-property="touchScreen.swipeThresholdPx" data-editor="touchScreenEditor.swipeThresholdPx"></select></td>
         </tr>
     </table>
 </details>
