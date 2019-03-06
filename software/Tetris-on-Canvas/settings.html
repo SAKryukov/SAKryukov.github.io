@@ -78,33 +78,33 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <nav>
 
 <details open="open">
-    <summary accesskey="G"><u>G</u>ame size</summary>
+    <summary title="Size of game board in blocks" accesskey="G"><u>G</u>ame Board Size</summary>
     <table class="default">
-        <tr>
+        <tr title="Game board width in blocks">
             <td>Horizontal:</td><td><select data-property="gameSizeInBlocks.x" data-editor="gameSizeInBlocksEditor.x"></select></td>
         </tr>
-        <tr>
+        <tr title="Game board height in blocks">
             <td>Vertical:</td><td><select data-property="gameSizeInBlocks.y" data-editor="gameSizeInBlocksEditor.y"></select></td>
         </tr>
     </table>
 </details>
 
 <details open="open">
-    <summary accesskey="Y">Dela<u>y</u>s</summary>
+    <summary title="Delays defining speed of tetromino moving down" accesskey="Y">Dela<u>y</u>s</summary>
     <table class="default">
-        <tr>
+        <tr title="Delay at the start of the game">
             <td>Start:</td><td><select data-property="delays.start" data-editor="delaysEditor.start"></select></td>
-        <tr>
+        <tr title="Delay decrement applied when row is removed">
             <td>Decrement:</td><td><select data-property="delays.decrement" data-editor="delaysEditor.decrement"></select></td>
         </tr>
-        <tr>
+        <tr title="Minimum delay">
             <td>Minimum:</td><td><select data-property="delays.min" data-editor="delaysEditor.min"></select></td>
         </tr>
     </table>
 </details>
 
 <details open="open">
-    <summary accesskey="C"><u>C</u>olors</summary>
+    <summary title="Colors of differnt tetromino" accesskey="C"><u>C</u>olors</summary>
     <table class="colors">
         <tr>
         <td><img id="image.J" src="images/settings.J.png" alt=""/></td>
@@ -134,7 +134,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 </details>
 
 <details>
-    <summary accesskey="U">Cl<u>u</u>tter</summary>
+    <summary title="Clutter created automatically at the start of the game" accesskey="U">Cl<u>u</u>tter</summary>
     <table class="default">
         <tr>
             <td><label for="clutterEnabledDefault" accesskey="E"><u>E</u>nabled by default:</label></td><td><input type="checkbox" data-property="clutterOptionSet.clutterEnabledDefault" id="clutterEnabledDefault"/></td>
@@ -155,7 +155,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 </details>
 
 <details>
-    <summary accesskey="K"><u>K</u>eyboard</summary>
+    <summary title="Keyboard assignments" accesskey="K"><u>K</u>eyboard</summary>
     <table>
         <tr data-property="key.start">
             <td>Start/Pause/Continue:</td><td class="keyCode"></td><td><input type="text"/><button>&Congruent;</button></td>
@@ -191,18 +191,18 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 </details>
 
 <details>
-    <summary accesskey="T"><u>T</u>ouch Screen</summary>
+    <summary title="Touch screen options" accesskey="T"><u>T</u>ouch Screen</summary>
     <table class="default">
-        <tr>
-            <td><label title="If checked, a touch moves tetromino to the touch spot" for="touchScreen.moveTetrominoToTouch">Move Tetromino on Touch:</label></td><td><input type="checkbox" data-property="touchScreen.moveTetrominoToTouch" id="touchScreen.moveTetrominoToTouch"/></td>
+        <tr title="If checked, a touch moves tetromino to the touch spot">
+            <td><label for="touchScreen.moveTetrominoToTouch">Move Tetromino on Touch:</label></td><td><input type="checkbox" data-property="touchScreen.moveTetrominoToTouch" id="touchScreen.moveTetrominoToTouch"/></td>
         </tr>
-        <tr>
-            <td title="Threshold time used to recognize touch clicks">
+        <tr title="Threshold time used to recognize touch clicks">
+            <td>
                 Click Threshold:</td><td><select data-property="touchScreen.clickThresholdMs" data-editor="touchScreenEditor.clickThresholdMs"></select>
             </td>
         </tr>
-        <tr>
-            <td title="Threshold size of swipe in pixels used to recognize fast swipe">Swipe Down Threshold:</td><td><select data-property="touchScreen.swipeThresholdPx" data-editor="touchScreenEditor.swipeThresholdPx"></select></td>
+        <tr title="Threshold size of swipe in pixels used to recognize fast swipe">
+            <td>Swipe Down Threshold:</td><td><select data-property="touchScreen.swipeThresholdPx" data-editor="touchScreenEditor.swipeThresholdPx"></select></td>
         </tr>
     </table>
 </details>

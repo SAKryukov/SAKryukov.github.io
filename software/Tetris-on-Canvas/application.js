@@ -86,7 +86,8 @@ const elements = {
     downloadImage: element("id.download"),
     settingsImage: element("id.settings"),
     statusVerb: element("statusVerb"),
-    statusKeyName: element("statusKeyName")
+    statusKeyName: element("statusKeyName"),
+    touchIndicator: element("touch-indicator")
 }; //elements
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -561,7 +562,6 @@ const rendering = {
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function element(id) { return document.getElementById(id); }
 function indirectChildOf(child, parent) { if (child == parent) return true; while((child = child.parentNode) && child !== parent); return !!child; }
-function now() { return new Date().getTime(); }
 function hide(object, noDisplay) { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; }
 function show(object) { object.style.visibility = null; }
 function setVisibility(object, visible) {
@@ -624,17 +624,18 @@ try {
             game.touchRotate = game.rotate;
             game.touchCancel = game.cancel;
             game.stepDown = game.oneStepDown;
-            game.touchRotateSvg = elements.touchRotate; 
-            setupTouch(effectiveSettings.touchScreen, elements.main, game);    
+            game.touchRotateSvg = elements.touchRotate;
+            setupTouch(effectiveSettings.touchScreen, elements.main, game, elements.touchIndicator);    
         })(); // touch screen support:
         (()=>{ // main animation cycle
-            let after, before = now();
-            (function frame() {
-                after = now();
-                game.update(Math.min(1, (after - before) / 1000.0));
-                rendering.draw();
-                before = after;
-                requestAnimationFrame(frame, elements.board);
+            let before;
+            (function frame(timestamp) {
+                if (before) {
+                    game.update((timestamp - before) / 1000.0); // milliseconds to seconds
+                    rendering.draw();
+                } //if
+                before = timestamp;
+                window.requestAnimationFrame(frame, elements.board);
             })()    
         })(); // main animation cycle
     })(); // main

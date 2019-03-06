@@ -34,7 +34,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 const setupTouch = (
     touchSettings,
     container,
-    game
+    game,
+    touchIndicator
 ) => {
 
     const startAction = game.startContinue;
@@ -67,6 +68,56 @@ const setupTouch = (
     };
 
     let currentTouchCount = 0;
+    // const maxFingers = 3; //SA???
+    // const findTouch = (touches, identifier) => {
+    //     const count = touches.length;
+    //     if (maxFingers < count) count = maxFingers;
+    //     for (let index = 0; index < count; ++index)
+    //         if (touches[index].identifier == identifier) return touches[index];
+    //     return null;
+    // } //findTouch
+
+    // const indicatorState = {
+    //     touchId: null,
+    //     size: 600,
+    //     customSize: false,
+    //     moveIndicator: function(touch) {
+    //         touchIndicator.style.top = touch.clientY - this.size/2 + "px";
+    //         touchIndicator.style.left = touch.clientX - this.size/2 + "px";        
+    //     }, //moveIndicator
+    //     showIndicator: function(touch) {
+    //         if (touch) {
+    //             this.moveIndicator(touch);
+    //             touchIndicator.style.display = "block";
+    //             touchIndicator.style.width = this.size + "px";
+    //         } else
+    //             touchIndicator.style.display = "none";
+    //     }, //showIndicator
+    //     onDown: function(previousTouchCount, currentTouchCount, ev) {
+    //         if (currentTouchCount > 1) {
+    //             if (this.customSize) return;
+    //             const dx = ev.touches[1].clientX - ev.touches[0].clientX;
+    //             const dy = ev.touches[1].clientY - ev.touches[0].clientY;
+    //             this.size = Math.floor(Math.sqrt(dx*dx + dy*dy));
+    //             this.customSize = true;
+    //             if (this.touchId != null) { this.showIndicator(ev.touches[this.touchId]); return; }
+    //         } //if
+    //         if (this.touchId != null) return;
+    //         this.touchId = ev.touches[0].identifier;
+    //         this.showIndicator(ev.touches[0]);
+    //     }, //OnDown
+    //     onMove: function(previousTouchCount, currentTouchCount, ev) {
+    //         if (this.touchId == null) return;
+    //         const touch = findTouch(ev.changedTouches, this.touchId);
+    //         if (touch) this.moveIndicator(touch);
+    //     }, //OnMove
+    //     onUp: function(previousTouchCount, currentTouchCount, ev) {
+    //         if (this.touchId == null) return;
+    //         if (findTouch(ev.touches, this.touchId)) return; 
+    //         this.showIndicator(null);
+    //         this.touchId = null;
+    //     } //onUp
+    // } //indicatorState
     
     const clickState = {
         time: null,
@@ -76,14 +127,14 @@ const setupTouch = (
             this.touchCount = 0;
         }, //reset
         onDown: function(count) {
-            this.time = new Date().getTime();
+            this.time = Date.now();
             if (this.touchCount < count)
                 this.touchCount = count;
         }, //onDown
         onUp: function(count) {
             if (count != 0) return null;
             if (this.time == null) return null;
-            const deltaMs = new Date().getTime() - this.time;
+            const deltaMs = Date.now() - this.time;
             if (deltaMs > touchSettings.clickThresholdMs) { this.reset(); return null; }
             const result = this.touchCount; 
             this.reset();
@@ -94,12 +145,8 @@ const setupTouch = (
     const motionState = {
         touched: false,
         y: null,
-        lastMoveTime: null,
         lastMovePoint: null,
-        reset: function() {
-            this.lastMoveTime = null;
-            this.lastMovePoint = null;    
-        }, //reset
+        reset: function() { this.lastMovePoint = null; },
         onDown: function(previousTouchCount, currentTouchCount, ev) {
             this.touched = false;
             if (startAction && previousTouchCount == 0 && currentTouchCount == 1) {
@@ -112,15 +159,14 @@ const setupTouch = (
             } //if
         }, //onDown
         onMove: function(currentTouchCount, ev) {
-            if (ev.touches.length == 1 && ev.changedTouches.length == 1 && this.lastMoveTime != null && this.lastMovePoint != null) {
-                const currentTime = new Date().getTime();
+            if (ev.touches.length == 1 && ev.changedTouches.length == 1 && this.lastMovePoint != null) {
+                const currentTime = Date.now();
                 const dx = ev.touches[0].clientX - this.lastMovePoint.x;
                 const dy = ev.touches[0].clientY - this.lastMovePoint.y;
                 if (dy > touchSettings.swipeThresholdPx && dy*dy > dx*dx)
                     game.moveDownToTouchStop(ev.touches[0].clientY);
             } //if
             this.lastMovePoint = { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
-            this.lastMoveTime = new Date().getTime();
             if (rotateAction && this.touched && currentTouchCount == 2) {
                 const left = ((ev.touches[1].clientX - ev.touches[0].clientX) * (ev.touches[1].clientY - this.y)) < 0;
                 rotateAction.call(game, left);
@@ -149,11 +195,13 @@ const setupTouch = (
         currentTouchCount = ev.touches.length;
         clickState.onDown(currentTouchCount);
         motionState.onDown(previousTouchCount, currentTouchCount, ev);
+        //indicatorState.onDown(previousTouchCount, currentTouchCount, ev);
     }); //assignTouchStart
     
     assignTouchMove(container, (ev) => {
         ev.preventDefault();
         motionState.onMove(currentTouchCount, ev);
+        //indicatorState.onMove(0, 0, ev);
     }); //assignTouchMove
 
     assignTouchEnd(container, (ev) => {
@@ -162,6 +210,7 @@ const setupTouch = (
         currentTouchCount = ev.touches.length;
         const clicks = clickState.onUp(currentTouchCount);
         if (clicks) clickHandler(clicks);
+        //indicatorState.onUp(previousTouchCount, currentTouchCount, ev);
     }); //assignTouchEnd
 
 }; //setupTouch
