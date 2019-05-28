@@ -231,10 +231,12 @@ const game = {
     }, //
 
     update: function (dTime) {
-        if (this.states.current != this.states.playing) return;
-        this.handle(this.queue.shift());
-        this.duration += dTime;
-        if (this.duration > this.delay) { this.duration -= this.delay; this.drop(true); }
+        if (this.states.current == this.states.playing) {
+            this.handle(this.queue.shift());
+            this.duration += dTime;
+            if (this.duration > this.delay) { this.duration -= this.delay; this.drop(true); }
+        } //if
+        rendering.draw();
     }, //update 
 
     move: function (direction) {
@@ -264,8 +266,6 @@ const game = {
             if (!this.move(direction)) break;
         } //loop
     }, //moveTo
-
-    oneStepDown: function() { this.drop(true); }, //SA??? touch
 
     moveDownToTouchStop: function(clientY) { //SA??? touch
         const top = elements.board.offsetTop;
@@ -608,35 +608,25 @@ try {
         elements.helpWindow.onclick = function () { rendering.help(); };
         elements.helpImageHelp.onclick = function () { rendering.help(); };
         elements.helpImageClose.onclick = function () { rendering.help(); };
+        elements.checkboxClutter.focus();
         (() => { // downloader setup
             const downloader = document.createElement('a');
             downloader.href = effectiveSettings.fileNames.sourceCode;
             document.body.appendChild(downloader);
         })(); // downloader setup
-        (()=>{ // touch screen support:
+        (() => { // touch screen support:
             elements.downloadImage.onclick = game.downloadHandler;
             elements.settingsImage.onclick = game.settingsHandler;     
-            elements.checkboxClutter.focus();
-            game.touchStart = game.startContinue;
-            game.touchPause = game.pause;
-            game.touchMove = game.moveTo;
-            game.touchDrop = game.dropDown;
-            game.touchRotate = game.rotate;
-            game.touchCancel = game.cancel;
-            game.stepDown = game.oneStepDown;
-            game.touchRotateSvg = elements.touchRotate;
             setupTouch(effectiveSettings.touchScreen, elements.main, game, elements.touchIndicator);    
         })(); // touch screen support:
-        (()=>{ // main animation cycle
+        { // main animation cycle
             let before;
             (function frame(timestamp) {
-                if (before) {
+                if (before)
                     game.update((timestamp - before) / 1000.0); // milliseconds to seconds
-                    rendering.draw();
-                } //if
                 before = timestamp;
                 window.requestAnimationFrame(frame, elements.board);
-            })()    
-        })(); // main animation cycle
+            })();    
+        } // main animation cycle
     })(); // main
 } catch (e) { showException(e); }

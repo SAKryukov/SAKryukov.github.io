@@ -41,7 +41,7 @@ const setupTouch = (
     const startAction = game.startContinue;
     const pauseAction = game.pause;
     const moveAction = game.moveTo;
-    const stepDownAction = game.stepDown;
+    const moveDownAction = game.moveDownToTouchStop;
     const dropAction = game.dropDown;
     const rotateAction = game.rotate;
     const cancelAction = game.cancel;
@@ -163,8 +163,8 @@ const setupTouch = (
                 const currentTime = Date.now();
                 const dx = ev.touches[0].clientX - this.lastMovePoint.x;
                 const dy = ev.touches[0].clientY - this.lastMovePoint.y;
-                if (dy > touchSettings.swipeThresholdPx && dy*dy > dx*dx)
-                    game.moveDownToTouchStop(ev.touches[0].clientY);
+                if (moveDownAction && dy > touchSettings.swipeThresholdPx && dy*dy > dx*dx)
+                    moveDownAction.call(game, ev.touches[0].clientY);
             } //if
             this.lastMovePoint = { x: ev.touches[0].clientX, y: ev.touches[0].clientY };
             if (rotateAction && this.touched && currentTouchCount == 2) {

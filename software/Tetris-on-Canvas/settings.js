@@ -31,7 +31,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 "use strict";
 
-const version = "8.0.0";
+const version = "8.0.1";
 
 const gameSizeInBlocks = { x: 10, y:20 };
 
