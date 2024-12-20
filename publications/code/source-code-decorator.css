@@ -1,9 +1,11 @@
-pre, summary:has(+ pre) { background-color: papayawhip; overflow-x: auto; padding-left: 10pt; padding-right: 10pt; font-family: monospace; }
+pre, summary:has(+ pre) { background-color: rgb(255, 245, 235); overflow-x: auto; padding-left: 10pt; padding-right: 10pt; font-family: monospace; }
 summary:has(+ pre) {
-    margin-bottom: 0; border-bottom: thin solid; border-bottom-color: burlywood;
+    margin-bottom: 0;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
 }
+pre { border-bottom: thin solid burlywood; border-top: thin solid burlywood; }
+summary:has(+ pre) { border-top: thin solid burlywood; }
 summary:has(+ pre) > span:last-child { font-size: 90%; }
