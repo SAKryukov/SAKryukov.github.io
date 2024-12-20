@@ -1,0 +1,9 @@
+pre, summary:has(+ pre) { background-color: papayawhip; overflow-x: auto; padding-left: 10pt; padding-right: 10pt; font-family: monospace; }
+summary:has(+ pre) {
+    margin-bottom: 0; border-bottom: thin solid; border-bottom-color: burlywood;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+summary:has(+ pre) > span:last-child { font-size: 90%; }

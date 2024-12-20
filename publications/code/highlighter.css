@@ -1,0 +1,131 @@
+        pre span.magic.strict.highlighter {
+            color: darkviolet;
+            font-weight: bold;
+        }
+    
+        pre span.comment.text.highlighter,
+        pre span.comment.block.highlighter {
+            color: green;
+        }
+    
+        pre span.comment.pascal.highlighter {
+            color: #367
+        }
+        pre span.pascal.part.highlighter {
+            color: saddlebrown;
+            letter-spacing: 0.1em;
+        }
+        pre span.assignment.highlighter {
+            color: darkmagenta;
+        }
+  
+        pre span.keyword.highlighter,
+        pre span.storage.modifier.highlighter {
+            color: blue;
+        }
+        pre span.type.keyword.highlighter {
+            color: brown;
+        }
+    
+        pre span._custom-word_.highlighter {
+            color: darkcyan;
+        }
+    
+        pre span.literal.keyword.highlighter {
+            color: darkviolet;
+        }
+    
+        pre span.annotation.highlighter,
+        pre span.preprocessor.signature.highlighter,
+        pre span.preprocessor.keyword.highlighter {
+            color: steelBlue;
+            font-weight: bold
+        }        
+        pre span.preprocessor.value.highlighter {
+            color: sandybrown;
+            font-weight: bold
+        }
+    
+        pre span.operator.highlighter {
+            color: darkMagenta;
+        }
+    
+        pre span.property.highlighter {
+            color: #038;
+            font-weight: bold
+        }
+    
+        pre span.name.namespace.highlighter {
+            color: blue;
+        }
+        pre span.name.class.highlighter {
+            color: #B06;
+        }
+    
+        pre span.literal.string.highlighter,
+        pre span.literal.quote.highlighter,
+        pre span.literal.escape.highlighter {
+            color: #AA3300;
+        }
+    
+        pre span.name.function.highlighter {
+            color: #06B;
+            font-weight: bold
+        }
+
+        pre span.xmltag.all.highlighter,
+        pre span.xmltag.close.highlighter {
+            color: darkgreen;
+        }
+        pre span.xmltag.attribute.highlighter {
+            color: purple;
+            font-style: italic;
+        }
+        pre span.xmltag.operator.highlighter {
+            color: blue;
+            font-weight: semibold;
+        }
+        pre span.source.css.highlighter,
+        pre span.xmltag.style.tag.highlighter,
+        pre span.xmltag.style.open.highlighter,
+        pre span.xmltag.style.close.highlighter,
+        pre span.xmltag.style.name.highlighter,
+        pre span.xmltag.style.attribute.highlighter {
+            color: green;
+        }
+    
+        /* python
+        pre span.comment.docstring.highlighter { color: darkMagenta; }
+        */
+    
+        pre span.css.selector.name.highlighter {
+            color: brown;
+            font-weight: bold;
+        }
+        pre span.css.class.highlighter {
+            color: blue;
+            font-weight: bold;
+        }
+        pre span.css.vendor.prefix.highlighter {
+            color: red;
+        }
+        pre span.css.direct.descendant.highlighter {
+            color: navy;
+        }
+        pre span.css.id.highlighter {
+            color: darkorchid;
+            font-weight: bold;
+        }
+        pre span.css.pseudo.highlighter {
+            color: darkgoldenrod;
+            font-weight: bold;
+        }
+        pre span.css.numeric.highlighter {
+            color: darkorange
+        }
+        pre span.css.unit.highlighter {
+            color: darkred;
+        }
+        pre span.css.value.highlighter {
+            color: black;
+        }
