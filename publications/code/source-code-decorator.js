@@ -20,6 +20,7 @@ window.onload = () => {
         left.textContent = language;
         right.textContent = String.fromCodePoint(0x1F4CB);
         right.title = `${clipboardLabel}${element.textContent}`;
+        right.style.cursor = "pointer";
         right.onclick = event => 
             navigator.clipboard.writeText(
                 event.target.title.slice(clipboardLabel.length));
