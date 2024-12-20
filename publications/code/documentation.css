@@ -1,0 +1,11 @@
+        @import url(source-code-decorator.css);
+        @import url(highlighter.css);
+        * { font-family: sans-serif; }
+        summary + pre { margin-top: 0; }
+        pre, pre span { font-family: monospace; letter-spacing: 0; }
+        pre { padding-top: 0.4em; padding-bottom: 0.4em; }
+        p.title { font-size: 280%; text-align: center; }
+        h1 { font-size: 175%; }
+        h2 { font-size: 142%; }
+        h3 { font-size: 112%; }
+        h4 { font-size: 100%; }
