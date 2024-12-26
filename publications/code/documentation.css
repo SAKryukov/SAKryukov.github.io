@@ -9,3 +9,9 @@
         h2 { font-size: 142%; }
         h3 { font-size: 112%; }
         h4 { font-size: 100%; }
+        code { color: green; }
+        p.title { margin-top: 0; }
+        p.author { text-align: right; }
+        pre { margin-top: 0; margin-bottom: 0; }
+        p, h1, h2, h3, h4 { margin-top: 1em; margin-bottom: 0.4em; }
+        p.toc br { content: ""; display: block; margin-top: 0.2em; }
