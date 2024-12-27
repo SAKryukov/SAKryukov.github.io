@@ -9,7 +9,7 @@
         h2 { font-size: 142%; }
         h3 { font-size: 112%; }
         h4 { font-size: 100%; }
-        code { color: green; }
+        code { color: green; font-weight: bold; }
         p.title { margin-top: 0; }
         p.author { text-align: right; }
         pre { margin-top: 0; margin-bottom: 0; }
