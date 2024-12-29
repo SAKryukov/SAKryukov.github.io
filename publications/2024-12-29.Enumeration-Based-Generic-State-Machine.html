@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Enumeration-Based Generic State Machine</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        @import url(https://SAKryukov.github.io/publications/code/documentation.css);
+        img { width: 70%; display: block; margin-left: auto; margin-right: auto; }
+        p.extensible-markdown { border-top: solid thin darkgray; font-size: 80%; }
+        table, td, th { border: solid thin black; border-collapse: collapse; font-size: 120%; font-weight: normal; }
+        table { margin-left: 2em; }
+        td, th  { width: 1.3em; text-align: center; vertical-align: middle; }
+        th, tr > td:first-of-type { background-color: lightGray; }
+    </style>
+</head>
+<body>
+
+<p class="title">Enumeration-Based Generic State Machine</p><p class="author"><a href="https://www.SAKryukov.org">Sergey A Kryukov</a></p><p><a href="https://GitHub.com/SAKryukov/generic-state-machine">Source code</a><br/>
+<a href="https://SAKryukov.GitHub.io/generic-state-machine">API Documentation</a></p><h1>Contents</h1>
+<p class="toc">
+<a style="margin-left: 0em;" href="#heading-introduction">Introduction</a><br/>
+<a style="margin-left: 3em;" href="#heading-insight">Insight</a><br/>
+<a style="margin-left: 0em;" href="#heading-representation-of-a-transition-system">Representation of a Transition System</a><br/>
+<a style="margin-left: 3em;" href="#heading-enumeration-types">Enumeration Types</a><br/>
+<a style="margin-left: 3em;" href="#heading-non-enumeration-types">Non-Enumeration Types</a><br/>
+<a style="margin-left: 3em;" href="#heading-transition-labels">Transition Labels</a><br/>
+<a style="margin-left: 3em;" href="#heading-state-graph">State Graph</a><br/>
+<a style="margin-left: 6em;" href="#heading-undirected-graph-edges">Undirected Graph Edges</a><br/>
+<a style="margin-left: 3em;" href="#heading-advanced-graph-calculations">Advanced Graph Calculations</a><br/>
+<a style="margin-left: 0em;" href="#heading-deterministic-finite-state-acceptor">Deterministic Finite-State Acceptor</a><br/>
+<a style="margin-left: 3em;" href="#heading-transition-side-effect">Transition Side Effect</a><br/>
+<a style="margin-left: 3em;" href="#heading-invalid-input">Invalid Input</a><br/>
+<a style="margin-left: 0em;" href="#heading-deterministic-finite-state-transducer">Deterministic Finite-State Transducer</a><br/>
+<a style="margin-left: 3em;" href="#heading-moore-machine-versus-mealy-machine">Moore Machine Versus Mealy machine</a><br/>
+<a style="margin-left: 0em;" href="#heading-future-work">Future Work</a><br/>
+</p><h1 id="heading-introduction">Introduction</h1>
+<p>This article is the fifth article of the small series of articles on enumeration types:</p><ol data-line="17" class="code-line" dir="auto">
+<li><a href="https://www.CodeProject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">Enumeration Types do not Enumerate! Working around .NET and Language Limitations</a></li>
+<li><a href="https://www.CodeProject.com/Articles/136181/Human-readable-Enumeration-Meta-data">Human-readable Enumeration Meta-data</a></li>
+<li><a href="https://www.CodeProject.com/Articles/144349/Enumeration-based-Command-Line-Utility">Enumeration-based Command Line Utility</a></li>
+<li><a href="https://www.CodeProject.com/Articles/809357/Bitwise-Enumeration-Editor-for-PropertyGrid-and-Vi">Bitwise Enumeration Editor for PropertyGrid and Visual Studio</a></li>
+<li>The present article</li>
+</ol>
+<p>The present article describes the project <a href="https://github.com/SAKryukov/generic-state-machine">Generic state machine</a>. Please see the Please see the comprehensive <a href="https://sakryukov.github.io/generic-state-machine">API documentation</a>. The generic classes <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transitionsystem">TransitionSystem</a>, [Acceptor](https://sakryukov.github.io/generic-state-machine/#heading-class-acceptor, and <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transducer">Transducer</a> provide the functionality of <a href="https://en.wikipedia.org/wiki/Transition_system">transition systems</a> and <a href="https://en.wikipedia.org/wiki/Finite-state_machine">finite-state machines</a>. They rely on enumeration-type generic parameters representing the sets of states and the input and output alphabets.</p><h2 id="heading-insight">Insight</h2>
+<p>The system is powered by four ideas:</p><ol data-line="28" class="code-line" dir="auto">
+<li>The sets of states, input and input alphabets are sets represented by a <a href="#heading-enumeration-types">enumeration types</a>.</li>
+<li>The generic class <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transitionsystem">TransitionSystem</a> is used as a <a href="https://sakryukov.github.io/generic-state-machine/#heading-statemachines-namespace">base class</a> for the finite-state machine classes.</li>
+<li>The transition systems are <em>labelled</em> in a special way: a <a href="#heading-transition-labels"><em>transition label</em></a> carries the delegate instances representing the arbitrary <em>side effect</em> of a transition.</li>
+<li>The <em>transition relation</em> over the set of states is complemented by the relation representing <a href="#invalid-transition">invalid transitions</a>. The transition between each pair of states in this relation is not allowed, but its label carries a delegate instance used to explain why it is not allowed.</li>
+</ol>
+<p>To see the power of this approach, let’s start with a transition system.</p><h1 id="heading-representation-of-a-transition-system">Representation of a Transition System</h1>
+<p id="Cartesian-square">Let’s say, we have some system with three states, <code>A</code>, <code>B</code>, and <code>C</code>. Let’s make a <em>Cartesian square</em> out of them:</p><div  data-line="39" class="code-line" dir="auto" ></div>
+<table>
+  <tr>
+  <th></th><th>A</th><th>B</th><th>C</th>
+  <tr></tr>
+  <td>A</td><td>×</td><td> </td><td> </td>
+  <tr></tr>
+  <td>B</td><td> </td><td>×</td><td> </td>
+  <tr></tr>
+  <td>C</td><td> </td><td> </td><td>×</td>
+  </tr>
+</table>
+<p>The “white” area of the table represents the set of the elements of the Cartesian square. Let’s say the crossed cells represent some <em>subset of the Cartesian square</em>. Then we can say that this subset is a <em>relation</em> over the set <code>S = {A, B, C}</code>. That is, for each pair <code>(x, y), x ∈ S, y ∈ S</code>, we can say that the relation holds between <code>x</code> and <code>y</code>, or not. In particula, the relation can represent the set of valid transitions of a <em>transition system</em>. Let’s say that the cells of the first column of a table <code>{A, B, C}</code> represent the starting states of some transition, and the cells of the first row of a table <code>{A, B, C}</code> represent the final state of the transition. Then we can define the relation <code>T ⊂ S</code>, so for each pair <code>(x, y), x ∈ T, y ∈ T</code> the transition from <code>x</code> to <code>y</code> is permitted. We usually denote it like <code>x ⭢ y</code>.</p><p>In the table shown above we crossed out the <em>identical</em> relation; it states that “each element is related to itself”. If does not have to be the case, as a relation can be any arbitrary subset of <code>S</code>, including an <em>empty relation</em> (no two elements are related) or a <em>full relation</em> (any element is related to any other element).</p><p>For example, we can create a relation representing circular transitions <code>A ⭢ B ⭢ C ⭢ A ⭢ …</code>:</p><div  data-line="57" class="code-line" dir="auto" ></div>
+<table>
+  <tr>
+  <th></th><th>A</th><th>B</th><th>C</th>
+  <tr></tr>
+  <td>A</td> <td> </td> <td>×</td> <td> </td>
+  <tr></tr>
+  <td>B</td><td> </td><td></td> <td>×</td>
+  <tr></tr>
+  <td>C</td><td>×</td><td> </td><td> </td>
+  </tr>
+</table>
+<p>So, we can formally define a <em>transition system</em> as a <em>triple</em> <code>(S, T, s₀)</code> where:</p><ol data-line="70" class="code-line" dir="auto">
+<li><code>S</code> is a set of states,</li>
+<li><code>T ⊂ S</code></li>
+<li><code>s₀</code> is the initial state.</li>
+</ol>
+<p>Note that in the context of this article, we will consider only finite sets <code>S</code>. That said, we will talk only about <em>finite-state transition systems</em>. Therefore, we will have to consider <em>only final-state machines</em> and will limit our considerations with <em>deterministic</em> systems.</p><h2 id="heading-enumeration-types">Enumeration Types</h2>
+<p>An enumeration type is a perfect type used to represent a finite set, because this is the ultimate abstraction focused only on one aspect: object identity and uniqueness, everything else consciously reduced to a bare technical minimum. The identity is challenged by the fact that two different enumeration members can be assigned the same <em>underlying value</em>, but the members are still unique during the compile time. Also, unfortunately, <a href="https://www.CodeProject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">enumerations do not enumerate</a>.</p><p>Both problems are comprehensiverly solved by the internal representation of the sets. They are represented as a dictionary or enumeration wrappers build via reflection.</p><pre lang="C#" id="code-traverse"><span class="keyword highlighter">public</span> <span class="keyword highlighter">abstract</span> <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">TransitionSystemBase</span>&lt;<span class="_custom-word_ highlighter">STATE</span>&gt; {
+
+    <span class="keyword highlighter">internal</span> <span class="keyword highlighter">protected</span> <span class="keyword highlighter">delegate</span> <span class="keyword highlighter">void</span> <span class="_custom-word_ highlighter">TraverseHandler</span>&lt;<span class="_custom-word_ highlighter">ELEMENT</span>&gt;(<span class="type keyword highlighter">string</span> name, <span class="_custom-word_ highlighter">ELEMENT</span> element);
+    <span class="keyword highlighter">internal</span> <span class="keyword highlighter">protected</span> <span class="keyword highlighter">void</span> Traverse&lt;<span class="_custom-word_ highlighter">ELEMENT</span>&gt;(<span class="_custom-word_ highlighter">TraverseHandler</span>&lt;<span class="_custom-word_ highlighter">ELEMENT</span>&gt; handler) {
+        FieldInfo[] fields = <span class="keyword highlighter">typeof</span>(<span class="_custom-word_ highlighter">ELEMENT</span>).GetFields(BindingFlags.Static | BindingFlags.Public);
+        <span class="keyword highlighter">foreach</span> (<span class="keyword highlighter">var</span> field <span class="keyword highlighter">in</span> fields) {
+            <span class="keyword highlighter">if</span> (field.GetCustomAttributes(<span class="keyword highlighter">typeof</span>(ExcludeAttribute), inherit: <span class="literal keyword highlighter">false</span>).Length &gt; <span class="literal numeric highlighter">0</span>)
+                <span class="keyword highlighter">continue</span>;
+            <span class="_custom-word_ highlighter">ELEMENT</span> element = (<span class="_custom-word_ highlighter">ELEMENT</span>)field.GetValue(<span class="literal keyword highlighter">null</span>);
+            handler(field.Name, element);
+        } <span class="comment text highlighter">//loop</span>
+    } <span class="comment text highlighter">//Traverse</span>
+
+    <span class="keyword highlighter">internal</span> <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">Element</span>&lt;<span class="_custom-word_ highlighter">ELEMENT</span>&gt; {
+        <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">Element</span>(<span class="type keyword highlighter">string</span> name, <span class="_custom-word_ highlighter">ELEMENT</span> element) {
+            Name = name; UnderlyingMember = element;
+        } <span class="comment text highlighter">//Element</span>
+        <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">string</span> Name { <span class="keyword highlighter">get</span>; init; }
+        <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">ELEMENT</span> UnderlyingMember { <span class="keyword highlighter">get</span>; init; }
+    } <span class="comment text highlighter">//Element</span>
+
+}
+</pre><p>The generic method <code>Traverse</code> is used for different enumeration types, not only for <code>STATE</code>. This is because an <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transitionsystem">Acceptor</a> have to traverse also the <em>input alphabet</em> set, and a <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transitionsystem">Transducer</a> — also the <em>output alphabet</em> set.</p><h2 id="heading-non-enumeration-types">Non-Enumeration Types</h2>
+<p>We could apply to the transition system and state-machine classes the <code>System.Enum</code> generic constraint since C# 7.3. I could not do it because I’ve developed this approach in 2009. But do we really need it. Surprisingly, no. What happens when we use some other type to instantiate the classes for <code>STATE</code>, <code>INPUT</code>, or <code>OUTPUT</code>?</p><p>Nothing wrong. The <a href="#code-traverse"><code>Traverse</code></a> code will simply pick up all public static fields of the type and interpret them as set elements. Such an exotic example is demonstrated <a href="https://github.com/SAKryukov/generic-state-machine/tree/main/code/Tests/Test.Non-Emumeration">here</a>. In this example, the type <code>double</code> is used, and the states are <code>double.NegativeInfinity</code>, <code>double.MinValue</code>, <code>double.Epsilon</code>, <code>double.MaxValue</code>, <code>double.PositiveInfinity</code>, and <code>double.NaN</code>.</p><h2 id="heading-transition-labels">Transition Labels</h2>
+<p>Let’s look at a <a href="#Cartesian-square">Cartesian square</a> again. When we mark some cells with a cross, what information it adds?
+Obviously, nothing but a Boolean value: is the transition valid or not. So, formally we can represent a transtion table as matrix, a rank-two array of Boolean values.
+But is it good enough, technically?</p><p>It doesn’t seem so. First, for many application the matrix would be a <em>sparce matrix</em>, so the arrays would be the waste of memory.
+More importantly, this is not informative enough. For many practical purposes, we need some <em>labelling</em>.</p><p>The idea is to have the same label for both the relation representing the valid transitions and the relation representing invalid ones.</p><p>In the first case, the label will provide the delegate instance called each time the transition is performed.
+This is the most important practically important feature. First of all, I have used it for hardware automation.
+When the transition system walks between states, it can actually drive the machinery.
+At the same time, the state machine itself is abstracted from the hardware operations.</p><p id="invalid-transition">In the second case of the invalid transitions, the label provides a delegate instance used to explain why it is not allowed.</p><p>For further detail, please see the <a href="https://github.com/SAKryukov/generic-state-machine/blob/main/code/StateMachines/StateMachines/TransitionSystem.cs">source code, <code>TransitionLabel</code>, <code>StateTransitionAction</code>, <code>InvalidStateTransitionAction</code>, <code>TryTransitionTo</code></a>.</p><h2 id="heading-state-graph">State Graph</h2>
+<p>Taking into account all of the above, the <em>state graph</em> is represented by the dictionary</p><pre lang="C#"><span class="keyword highlighter">readonly</span> Dictionary&lt;<span class="_custom-word_ highlighter">StateGraphKey</span>, <span class="_custom-word_ highlighter">TransitionLabel</span>&gt; stateGraph = <span class="keyword highlighter">new</span>();
+</pre><p>The elements of this dictionary represent both valid and invalid transitions, or the edges of the graph. Technically, all the edges are <em>directional</em>, because the transition from <code>x ⭢ y</code> is not the same as <code>y ⭢ x</code>.
+To describe the valid transition between both <code>x ⭢ y</code> and <code>y ⭢ x</code> we would need to add two different dictionary elements using <a href="https://sakryukov.github.io/generic-state-machine#heading-addvalidstatetransition"><code>TransitionSystem.AddValidStateTransition</code></a>. The <code>StateTransitionAction</code> delegate instance can be the same, as the starting and finishing states are passed to it.</p><p>However, this approach would be far from the optimum. If the transition is valid on two ways, we can use the flag <code>undirected</code> much better, adding only one element to the State Graph dictionary. Let’s take a look at this implementation.</p><h3 id="heading-undirected-graph-edges">Undirected Graph Edges</h3>
+<p>The problem of the undirected graph edge is completely resolved by using special implementation of <code>System.GetHashCode</code> and <code>System.Equals</code>:</p><pre lang="C#">    <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">StateGraphKey</span> {
+        <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">StateGraphKey</span>(State start, State finish, <span class="type keyword highlighter">bool</span> undirected = <span class="literal keyword highlighter">false</span>) {
+            StartState = start; FinishState = finish;
+            IsUndirected = undirected;
+        }
+        <span class="keyword highlighter">public</span> <span class="keyword highlighter">override</span> <span class="type keyword highlighter">int</span> GetHashCode() { <span class="comment text highlighter">// important!</span>
+            <span class="keyword highlighter">return</span> StartState.Name.GetHashCode()
+                ^ FinishState.Name.GetHashCode();
+        }
+        <span class="keyword highlighter">public</span> <span class="keyword highlighter">override</span> <span class="type keyword highlighter">bool</span> Equals(<span class="type keyword highlighter">object</span> @<span class="type keyword highlighter">object</span>) { <span class="comment text highlighter">// important!</span>
+            <span class="keyword highlighter">if</span> (@<span class="type keyword highlighter">object</span> == <span class="literal keyword highlighter">null</span>) <span class="keyword highlighter">return</span> <span class="literal keyword highlighter">false</span>;
+            <span class="keyword highlighter">if</span> (@<span class="type keyword highlighter">object</span> <span class="keyword highlighter">is</span> not <span class="_custom-word_ highlighter">StateGraphKey</span> objectStateGraphKey) <span class="keyword highlighter">return</span> <span class="literal keyword highlighter">false</span>;
+            <span class="type keyword highlighter">bool</span> nameMatch = (objectStateGraphKey.StartState.Name == StartState.Name
+                &amp;&amp; objectStateGraphKey.FinishState.Name == FinishState.Name);
+            <span class="keyword highlighter">return</span> IsUndirected
+                ? nameMatch || 
+                    (objectStateGraphKey.StartState.Name == FinishState.Name
+                    &amp;&amp; objectStateGraphKey.FinishState.Name == StartState.Name)
+                : nameMatch;
+        } <span class="comment text highlighter">//Equals</span>
+        <span class="keyword highlighter">internal</span> State StartState { <span class="keyword highlighter">get</span>; init; }
+        <span class="keyword highlighter">internal</span> State FinishState { <span class="keyword highlighter">get</span>; init; }
+        <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">bool</span> IsUndirected { <span class="keyword highlighter">get</span>; init; }
+    }
+</pre><p>This way, when we inquire for the <a href="https://sakryukov.github.io/generic-state-machine#heading-istransitionvalid">validity of a transition</a> from <code>x</code> to <code>y</code> or perform <a href="https://sakryukov.github.io/generic-state-machine#heading-trytransitionto"><code>TryTransitionTo</code></a>, we get the same state dictionary element as for the transition from  <code>y</code> to <code>x</code> in case <code>IsUndirected</code> is <code>true</code>.</p><p>Now, let’s go ahead and get to the finite-state machine classes.</p><h2 id="heading-advanced-graph-calculations">Advanced Graph Calculations</h2>
+<p><a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transitionsystem">TransitionSystem</a> implements some advanced calculations on the state graph. It includes</p><ul data-line="187" class="code-line" dir="auto">
+<li><p><a href="https://sakryukov.github.io/generic-state-machine/#heading-labyrinth"><code>Labyrinth</code></a>. This methods returns all the permitted paths between the states start and finish.</p></li>
+<li><p><a href="https://sakryukov.github.io/generic-state-machine/#heading-finddeadends"><code>FindDeadEnds</code></a>. This methods Finds all “dead ends”, the states not visited along any paths between the states start and finish.</p></li>
+<li><p><a href="https://sakryukov.github.io/generic-state-machine/#heading-longestpaths"><code>LongestPaths</code></a>. This property finds the longest path lengh in the state graph. When this number is found, it finds all the possible paths with this length and retuns all these paths.</p></li>
+<li><p><a href="https://sakryukov.github.io/generic-state-machine/#heading-maximumpaths"><code>MaximumPaths</code></a> This property finds the maximum number of paths between all <code>STATE</code>-to-<code>STATE</code> pairs. When this number is found, it returns the pairs having this number of paths between them.</p></li>
+</ul>
+<p>All these methods and properties depend on <code>Labyrinth</code>. Note that the properties <code>LongestPaths</code> and <code>MaximumPaths</code> involve <a href="https://en.wikipedia.org/wiki/NP-hardness">NP-hard</a> calculations.</p><h1 id="heading-deterministic-finite-state-acceptor">Deterministic Finite-State Acceptor</h1>
+<p>Basically, an <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Mathematical_model">acceptor</a> can be considered as a transition system with an additional function: it get some transition based on the <em>input signal</em>.</p><p>Formally, a <em>deterministic finite-state machine</em> or <em>deterministic finite-state acceptor</em> is a <em>quintuple</em> <code>(Σ, S, s₀, δ, F)</code>, where:</p><ol data-line="203" class="code-line" dir="auto">
+<li><code>Σ</code> is the input alphabet (a finite non-empty set of symbols)</li>
+<li><code>S</code> is the finite set of states, same as in the transition system</li>
+<li><code>s₀ ∈ S</code> is the is an initial state, same as in the transition system</li>
+<li><code>δ</code> is the <em>state-transition function</em>: <code>δ: S ⨉ Σ ⭢ S</code></li>
+<li><code>F ⊂ S</code> is the set of final states, defined implicitely via <code>δ</code></li>
+</ol>
+<p>The input signal causes an acceptor instance to perform a transition, but only for the signal-state pairs where the state-transition function is defined.</p><p>In the <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-acceptor"><code>Acceptor</code> implementation</a>, the state-transition function is defined via the calls to <a href="https://sakryukov.github.io/generic-state-machine/#heading-addstatetransitionfunctionpart"><code>Acceptor.AddStateTransitionFunctionPart</code></a> and the transition is performed using the call to <a href="https://sakryukov.github.io/generic-state-machine/#heading-transitionsignal"><code>Acceptor.TransitionSignal</code></a>.</p><h2 id="heading-transition-side-effect">Transition Side Effect</h2>
+<p>When an acceptor signal causes succussful transition, it causes the same side effect as the <a href="https://sakryukov.github.io/generic-state-machine/#heading-trytransitionto"><code>TransitionSystem.TryTransitionTo</code></a>.</p><p>However, if the valid transition is not defined via the base-class method <a href="https://sakryukov.github.io/generic-state-machine/#heading-addvalidstatetransition"><code>TransitionSystem.AddValidStateTransition</code></a> the transition is performed as soon as it is defined via <a href="https://sakryukov.github.io/generic-state-machine/#heading-addstatetransitionfunctionpart">AddStateTransitionFunctionPart</a>. In other words, even thought the transition system’s transition side effect is respected, the validity of a transition in <code>Acceptor</code> is defined by its state-transition function.</p><p>The similar thing happens to the invalid input.</p><h2 id="heading-invalid-input">Invalid Input</h2>
+<p>The invalid input is defined via <a href="https://sakryukov.github.io/generic-state-machine/#heading-addinvalidinput%22">AddInvalidInput</a>. However if some signal causes an invalid input, the <a href="https://sakryukov.github.io/generic-state-machine/#heading-transition-labels">transition label</a> is respected.</p><h1 id="heading-deterministic-finite-state-transducer">Deterministic Finite-State Transducer</h1>
+<p>A <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Mathematical_model">acceptor</a> can be considered as an acceptor with another additional function: the output function. The input signal causes a transducer instance to perform a transition for the signal-state pairs where the state-transition function is defined. Additionally, upon the successful transition, a transducer instance produces an output signal.</p><p>Formally, a <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Mathematical_model"><em>finite-state transducer</em></a> is a <em>sextuple</em> <code>(Σ, Γ, S, s₀, δ, ω)</code>, where:</p><ol data-line="231" class="code-line" dir="auto">
+<li><code>Σ</code> is the input alphabet (a finite non-empty set of symbols)</li>
+<li><code>Γ</code> is the output alphabet (a finite non-empty set of symbols)</li>
+<li><code>S</code> is a finite non-empty set of states</li>
+<li><code>s₀ ∈ S</code> is the initial state</li>
+<li><code>δ</code> is the state-transition function: <code>δ: S ⨉ Σ ⭢ S</code></li>
+<li><code>ω</code> is the <em>output function</em> <code>ω: S ⨉ Σ ⭢ Γ (ω: S ⭢ Γ)</code></li>
+</ol>
+<p>In the <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transducer"><code>Transducer</code> implementation</a>,
+the output function is defined via the calls to <a href="https://sakryukov.github.io/generic-state-machine/#heading-addoutputfunctionpart"><code>Transducer.AddOutputFunctionPart</code></a> and the transition is performed using the call to <a href="https://sakryukov.github.io/generic-state-machine#heading-signal"><code>Transducer.Signal</code></a>.</p><h2 id="heading-moore-machine-versus-mealy-machine">Moore Machine Versus Mealy machine</h2>
+<p>The same class <a href="https://sakryukov.github.io/generic-state-machine/#heading-class-transducer"><code>Transducer</code></a> is used for the implementation of the <em>Moore Machine</em> and <em>Mealy machine</em>. When an output function is defined using <a href="https://sakryukov.github.io/generic-state-machine#heading-addoutputfunctionpart"><code>AddOutputFunctionPart</code></a>, the user can pass the instance of either
+<a href="https://sakryukov.github.io/generic-state-machine#heading-delegate-mooremachineoutputaction"><code>MooreMachineOutputAction</code></a> or
+<a href="https://sakryukov.github.io/generic-state-machine#heading-delegate-mealymachineoutputaction"><code>MealyMachineOutputAction</code></a>.</p><p>If an output function of a state machine uses a mixture of Moore and Mealy functions for different function arguments, it is, formally speaking, a Mealy machine.</p><h1 id="heading-future-work">Future Work</h1>
+<p><a href="https://en.wikipedia.org/wiki/Finite-state_transducer#Operations_on_finite-state_transducers">Operations on finite-state transducers</a> can be implemented.</p><p>Besides, the <em>stochastic</em> behavior can be easily added to the state machine.</p><p><em>December 29, 2024</em></p><p class="extensible-markdown">This documentation is generated from the extended Markdown documentation using <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.extensible-markdown">Extensible Markdown</a>
+for Visual Studio Code.</p>
+
+</body>
+</html>
