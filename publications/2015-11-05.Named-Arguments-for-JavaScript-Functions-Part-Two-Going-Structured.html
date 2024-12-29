@@ -1,0 +1,723 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0094)https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Named Arguments for JavaScript Functions, Part Two: Going Structured- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Well-known pass an object approach with a twist">
+<meta name="Keywords" content="Javascript, HTML, Beginner, Intermediate">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="11/5/2015 1:58:00 AM">
+<meta property="article:modified_time" content="2/17/2017 11:40:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="7 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two">
+<meta property="og:title" content="Named Arguments for JavaScript Functions, Part Two: Going Structured">
+<meta property="og:description" content="Well-known pass an object approach with a twist">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two"
+   },
+  "name": "Named Arguments for JavaScript Functions, Part Two: Going Structured",
+  "headline": "Named Arguments for JavaScript Functions, Part Two: Going Structured",
+  "url": "https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two",
+  "discussionUrl": "https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,HTML,Beginner,Intermediate",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Well-known pass an object approach with a twist",
+  "articleSection": "HTML",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2015-11-05",
+  "dateCreated": "2015-11-05",
+  "dateModified": "2017-02-17"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.98,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML",
+      "name" : "HTML"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML">HTML</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1047623/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML" data-id="104">HTML</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Named Arguments for JavaScript Functions, Part Two: Going Structured</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1047623">
+
+	<meta itemprop="upvoteCount" content="11">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.98/5  (12 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">5 Nov 2015</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">7 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 16.5K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 92</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Well-known pass an object approach with a twist</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Named-Arguments-for-JavaScript-Functions-Part-Two-Going-Structured.zip">Download populateWithDefault with code samples — 24.7 KB</a></li></ul>
+
+<p><img alt="2015-11-05.Named-Arguments-for-JavaScript-Functions-Part-Two-Going-Structured.webp" src="./Resources-articles/2015-11-05.Named-Arguments-for-JavaScript-Functions-Part-Two-Going-Structured.webp" /></p>
+
+<ol>
+	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a1">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a2">Use Case</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a3">Deep Cloning</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a4">The Solution</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a5">The Usage</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a6">What if the Object Graph is not a Tree?</a></li>	<li><a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a7">Conclusion</a></li></ol>
+
+<h2 id="a1">1 Introduction</h2>
+
+<p>This short article is written to continue my <a href="http://www.codeproject.com/Articles/1045966/Named-Arguments-for-JavaScript-Functions-Yet-Anoth"><u>previous article on the named arguments topic</u></a>, to look at the problem from a very different point of view. Let's come back to the very basic and well-known idea I described in the section <a href="http://www.codeproject.com/Articles/1045966/Named-Arguments-for-JavaScript-Functions-Yet-Anoth#a2"><u>2. <i>Some Good Ideas</i></u></a>: passing an object. I described the problems of this approach and suggested one alternative.</p>
+
+<p>Since this point, let's make it clear: in JavaScript, there are no such mechanism as passing function arguments by name, we can only devise some mechanisms serving as <i>syntactic sugar</i> aimed to reach some of the goals of by-name passing; the formal JavaScript mechanism of passing arguments is either not used at all, as in my previous article, or the arguments are passed by position. In this article, I will focus only on one argument, an actual JavaScript function positional argument, which is a structured object. It's property takes the load of the argument's semantic.</p>
+
+<p>If we think at why such mechanism is used, we can notice that the correspondence by name gives us loose coupling between actual and formal arguments: the properties can come in any order and be missing. So, the biggest point here is using the missing arguments, or the problem of <i>default values</i>. It's interesting to note that the case of non-object properties (strings, numbers, <code>null</code> and <code>undefined</code>) the problem of defaults looks quite trivial: the missing properties are passed as <code>undefined</code>. This can be checked up in the implementation of the function. This is not trivial if one or more properties are also of the object type. Then we can get a hierarchy of arbitrary depth of nesting; a less trivial fact is that it's possible to build object graph of general topology, not just a tree.</p>
+
+<p>To get the feel of the problem, it will probably be the best to consider some use case.</p>
+
+<h2 id="a2">2 Use Case</h2>
+
+<p>Let's say, we develop some UI component to be used in a Web or just browser-based application. When we start development, we define some reasonable set of UI styles and other properties, to make it reasonably good looking, keeping in mind that later on this set can be customized by the user. This is some representative example:</p>
+
+<div class="pre-lang" id="premain213833"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="213833" id="preShrink213833">Shrink ▲</span> &nbsp; <span id="copycode213833" class="copy-code" data-index="213833" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre213833" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">function</span> createControl() {
+
+	<span class="code-keyword">var</span> defaultOptionSet = {
+		behavior: {
+			selectable: <span class="code-keyword">true</span>,
+			editable: <span class="code-keyword">true</span>,
+			shiftEditPosition: <span class="code-keyword">false</span>,
+			RTL: <span class="code-keyword">false</span>
+		}, <span class="code-comment">//</span><span class="code-comment">behavior</span>
+		colors: {
+			activeCell: { foreground: <span class="code-string">"</span><span class="code-string">Yellow"</span>, background: <span class="code-string">"</span><span class="code-string">Navy"</span>},
+			inactiveCell: { foreground: <span class="code-string">"</span><span class="code-string">Black"</span>, background: <span class="code-string">"</span><span class="code-string">Silver"</span>},
+			unselectedCell: { foreground: <span class="code-string">"</span><span class="code-string">Black"</span>, background: <span class="code-string">"</span><span class="code-string">White"</span>}
+		}, <span class="code-comment">//</span><span class="code-comment">colors</span>
+		styles: {
+			cell: <span class="code-string">"</span><span class="code-string">border: solid thin black"</span>, 
+			table: <span class="code-string">"</span><span class="code-string">border-spacing: 0; padding: 0; outline-offset: -4px"</span>,
+			superscript: <span class="code-string">"</span><span class="code-string">font-size:70%"</span>
+		} <span class="code-comment">//</span><span class="code-comment"> styles</span>
+	};
+
+	<span class="code-keyword">var</span> options = defaultOptionSet;
+
+	<span class="code-comment">//</span><span class="code-comment"> use options here</span>
+
+}</pre>
+
+<p>Look at the code sample "demoA-structured-option-set.html".</p>
+
+<p>Naturally, we plan on passing options as an argument supplied by the user. Then we will remove the line "<code>var option = …</code>", as it will be supplied by the user. But what to do with <code>defaultOptionSet</code>. We don't want to assign it to <code>options</code>, because the user wants to change some options, but we don't want to remove it at all, because, in this case, how the user will know what properties to supply? By scanning the implementation code? Or should we just leave <code>defaultOptionSet</code> in a commented-out form, to give the user some kind of documentation. Silly, isn't it?</p>
+
+<p>But better let's admit that we are facing a real problem, not an <i>accidental-complexity</i> problem. What we really want is this: we want to use both. Roughly speaking, we want to <i>deep-clone</i> <code>defaultOptionSet</code> to <code>options</code>, but in some special way: we expect <i>some properties</i> of <code>options</code> to be preserved. Which ones? The question seems trivial at first, but it's not so easy to formulate what it should be. The name of such property should match some property in <code>defaultOptionSet</code>, but not every one of them. The same property name can occur more than once, in different positions in the structure. But what does it mean, "same position"? And so on… Say, we can define the following option value:</p>
+
+<div class="pre-lang" id="premain526570"><div>JavaScript</div><div class="pre-action-link"><span id="copycode526570" class="copy-code" data-index="526570" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre526570" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">{ colors: { activeCell: { foreground: <span class="code-string">"</span><span class="code-string">LightGoldenRodYellow"</span> } } }</pre>
+
+<p>Look at the <code>defaultOptionSet</code> structure. Isn't it obvious that the property with the value "Yellow" should change this value to "LightGoldenRodYellow"; and all other properties should be the same as the deep clone of <code>defaultOptionSet</code> would have? This is something we are really looking for. Take a look at the picture on top of the present article — is should give a pretty good idea.</p>
+
+<p>Anyway, after some thinking, it becomes obvious that this is not cloning. Some more thinking can lead to the conclusion that it is not <i>merge</i>. However…</p>
+
+<h2 id="a3">3 Deep Cloning</h2>
+
+<p>Actually, the present section is a side dish, a short discussion of deep cloning in JavaScript. Out of curiosity, I decided to take a look, what developers suggest to do when they need deep cloning. I was really surprised. I found several code samples where the properties are hierarchically created in a target objects, recursively, of course. At least one article suggested a wonderful thing: to serialize an object using AJAX and then deserialize it to a brand-new object; of course, it should work. Another approach is using <code>eval</code>. Well, developer's fantasy is unlimited.</p>
+
+<p>At the same time, it's quite easy to find out that deep cloning of an object is as easy as this:</p>
+
+<div class="pre-lang" id="premain914634"><div>JavaScript</div><div class="pre-action-link"><span id="copycode914634" class="copy-code" data-index="914634" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre914634" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> clone = Object.create(sourceObject);</pre>
+
+<p>Please see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create"><u>https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create</u></a></p>
+
+<p>Good to know, isn't it? :-)</p>
+
+<h2 id="a4">4 The Solution</h2>
+
+<p>This is the complete solution:</p>
+
+<div class="pre-lang" id="premain686422"><div>JavaScript</div><div class="pre-action-link"><span id="copycode686422" class="copy-code" data-index="686422" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre686422" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> constants = { objectType: <span class="code-keyword">typeof</span> {} };
+
+<span class="code-keyword">function</span> populateWithDefault(value, defaultValue) {
+	<span class="code-keyword">if</span> (!defaultValue) <span class="code-keyword">return</span>;
+	<span class="code-keyword">if</span> (!value) <span class="code-keyword">return</span>;
+	<span class="code-keyword">if</span> (<span class="code-keyword">typeof</span> defaultValue == constants.objectType &amp;&amp; <span class="code-keyword">typeof</span> value == constants.objectType) {
+		<span class="code-keyword">for</span> (<span class="code-keyword">var</span> index <span class="code-keyword">in</span> defaultValue)
+			<span class="code-keyword">if</span> (!(index <span class="code-keyword">in</span> value))
+				value[index] = defaultValue[index];
+			<span class="code-keyword">else</span>
+				populateWithDefault(value[index], defaultValue[index]);
+	} <span class="code-keyword">else</span>
+		value = defaultValue;
+} <span class="code-comment">//</span><span class="code-comment">populateWithDefault</span></pre>
+
+<p>Note that the roles of value and defaultValue are not symmetrical. This is not merge and not cloning. The target object is <code>value</code>; <code>defaultValue</code> remains unmodified, but this fact is not principal. The key to understanding it is this: if some property in the tree structure of <code>value</code> is not <code>undefined</code>, it is preserved, no matter where in the structure it is located, it's only important that this value is never overridden with any data taken from <code>defaultValue</code>. If you think about it, you will see: this is what we really need.</p>
+
+<h2 id="a5">5 The Usage</h2>
+
+<p>Let's see how it works on other working samples. First of all, in the section <a href="http://www.codeproject.com/Articles/1045966/Named-Arguments-for-JavaScript-Functions-Yet-Anoth#a4"><u>4. <i>Testing Code Samples on JavaScript Playground</i></u></a> of my previous article, I explain how I use micro platform for JavaScript execution, development and demonstration of operation on code samples.</p>
+
+<p>The code sample "demoB-structured-argument.html" demonstrates the usage on the object value which is configured to modify only one of the color properties (<code>foreground</code>) on third level of the hierarchy. The dump of both objects after population is shown.</p>
+
+<p>The code sample "demoB-structured-argument.html" demonstrates that null properties are very different from undefined. Null will be really treated as any other defined property, that is, it will be preserved, not overridden with homological value taken from <code>defaultValue</code>.</p>
+
+<p>If our <code>value</code> is <code>{ colors: null }</code>, the resulting property colors becomes <code>null</code>.</p>
+
+<h2 id="a6">6 What if the Object Graph is not a Tree?</h2>
+
+<p>Quick answer: not a problem!</p>
+
+<p>I mentioned in my <a href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two#a1"><u>Introduction</u></a> section that it's possible to create an object graph, which is not a tree. <a href="http://en.wikipedia.org/wiki/Tree_(graph_theory)"><u>By definition</u></a>, a tree is a <a href="https://en.wikipedia.org/wiki/Graph_%28mathematics%29#Undirected_graph"><u>graph</u></a> without loops. In other words, this is an hierarchy of objects. We can break a hierarchy by adding additional reference which can form a loop. It's not a very obvious thing, so I'll explain it on some simple example how to make such thin in JavaScript, based on the structure from our use case (some properties are omitted):</p>
+
+<div class="pre-lang" id="premain871516"><div>JavaScript</div><div class="pre-action-link"><span id="copycode871516" class="copy-code" data-index="871516" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre871516" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> defaultOptionSet = {
+	behavior: { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> },
+	colors: { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> },
+	<span class="code-comment">//</span><span class="code-comment"> ...</span>
+	badProperty: <span class="code-keyword">undefined</span>
+};
+
+defaultOptionSet.badProperty = defaultOptionSet.colors;</pre>
+
+<p>Due to some very reasonable JavaScript syntactic limitations, it's only possible to produce in two steps, so there are two statements in the code sample shown above. Such structures are pretty dangerous in careless or inexperienced hands. They are notoriously easily breaks execution of recursive code. Of course, such problem can be and should be resolved. For one example, take a look at the JavaScript file of JavaScript Playground provided with the demo code. Locate the code of <code>Object.prototype.dump</code> and a local object <code>recursionBreaker</code>. As the name suggests, it helps to break "<i>infinite</i>" recursion. I think you can get an idea by looking at this function. But what's up with <code>populateWithDefault</code>?</p>
+
+<p>Let's take some risk and execute our recursive code:</p>
+
+<div class="pre-lang" id="premain993413"><div>JavaScript</div><div class="pre-action-link"><span id="copycode993413" class="copy-code" data-index="993413" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre993413" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> value = { };
+populateWithDefault(value, defaultOptionSet);</pre>
+
+<p>For simplicity, I started with an empty project, which of course should produce a deep clone of <code>defaultOptionSet</code>. Will it slip into <i>infinite recursion</i>? Surprisingly, not. Why? It does not happen due to the check <code>!(index in value)</code>, exact same check which helps to preserve existing properties of target <code>value</code>.</p>
+
+<p>Please see the code sample "demoD-not-a-tree-object-graph.html".</p>
+
+<h2 id="a7">7 Conclusion</h2>
+
+<p>I had some time to come to the conclusion, based on several projects, that the simple technique I described can play really important role. Not only it provides customization of options and other data passed to functions, it also suggests a very naturally structured workflow of project development.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1047623/Named-Arguments-for-JavaScript-Functions-Part-Two?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2015 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

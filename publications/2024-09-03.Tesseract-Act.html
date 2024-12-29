@@ -1,0 +1,818 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0058)https://www.codeproject.com/Articles/5387592/Tesseract-Act -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Tesseract Act- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A Visual Studio Code extension, a convenient UI wrapper for Tesseract OCR — in the VSCode style: it performs Optical Character Recognition of data found in an image file and opens the recognition result in a text editor.">
+<meta name="Keywords" content="Javascript, Windows, Linux, Intermediate, Advanced, macOS, Node.js, VS-Code">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="9/3/2024 9:15:00 AM">
+<meta property="article:modified_time" content="9/10/2024 9:51:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="10 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5387592/Tesseract-Act">
+<meta property="og:title" content="Tesseract Act">
+<meta property="og:description" content="A Visual Studio Code extension, a convenient UI wrapper for Tesseract OCR — in the VSCode style: it performs Optical Character Recognition of data found in an image file and opens the recognition result in a text editor.">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5387592/Tesseract-Act"
+   },
+  "name": "Tesseract Act",
+  "headline": "Tesseract Act",
+  "url": "https://www.codeproject.com/Articles/5387592/Tesseract-Act",
+  "discussionUrl": "https://www.codeproject.com/Articles/5387592/Tesseract-Act#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,Windows,Linux,Intermediate,Advanced,macOS,Node.js,VS-Code",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "This tiny extension is also used to explain the general Visual Studio Code extension writing techniques for the cases when an external application is used and when non-text input data needs to be processed.",
+  "articleSection": "Node.js",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2024-09-03",
+  "dateCreated": "2024-09-03",
+  "dateModified": "2024-09-10"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Node.js",
+      "name" : "Node.js"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Node.js">Node.js</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5387592/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="3nJLS1Vi3PgpGDKa4CcFeFH30eAZQwqpv9dea6rLlg7rA7JfTFD0LsSdJnMj0HzSG0+e0/dn/6Cmioc+3P1rHaiVKavQ8gYHNbHQ0JEzOrKB5iKXu3Wod5tlHyF4MEEnPbKZmaoepJ73L2VSXF2ew9uoAsWp6lJ3xZrYZuqWD4ZnxPum6vRTvHPcQcvnlENBcJH3gqI/rrWmZTk3zJph3wQHb+NF9BnQbfYDheWvFJN+I5biYV5poYLET7Xs8hoN5VKeC9IIp6anoZoCQy0NpCiRnfPjUGrLV6x2DCbHsxO9xGz19UzzG8XAAMLtnGg0h834Q/c3nRgZumHG+ufaER3wu39mBWZ8Q9D0x9X6TMuBWNt89e0ZdQ2UezmPvWVcmqr1XQtsS+39aP3GJFTlybFZpbpGu4R3Regc1Oa1sj4FD6W0iMbaH68/3t5Ce56uHauIJhuPB8JsTUsG1aZr/QMZFJNRKLQoj8PLgpb32IdZFVEdpJmMmpC1Z9n/y4eI3/GU3fIcuVuXSSuLwma5tM0xhoB1eXpv6JVx4CNgXkvqeR4PGBE7RMZBePdF2geJzFhZvFTcqQZJ7d/4wXq05bcGCpc214ePNMWt6MU5Br2/3prAXThLP4yTRyzPHq2KDJQSfUSOLxg6vTIJtrWvBmVhwdBdBlHgHoV2kpw6Fx6HDV7cFPmukTLA230GJsz8Cm5s8nCASs6ZdXFSyV+OvxGP4ZIpeQhap4kmahgwv/Qgh9Nnyukg/kk7W2e9RelarG6b0H5sljFZ2hI5tUkrtSottznPWG5ijFYV1PFovy+7m6Uajabumf2qJNO05Xd4Lx77LvhQ7k21xNs/sflpzwT9+cVMZoUcEvkmolPk6GjOfE+62kJwFjEhcDlj1T003l71cxJA//2pOs5NFOUOkIgavUgjFw5j8wf+EP2WhVsU0Dv6rP8BzejvnaPY8/5OtD6kjexlUBkbB1B6o4pO862cX/VQ2guCkHi63s+ijS/OMqcPOE04hPOPJDRYXlo0Z6ySWyr0EAjFFx0HKIxaxpUy/iQ21uj/upPHbYzwF8fLdm8mB1XgYiEdNAODUyEyzzgog7jDVHANSHPSrnIDGQbZwcUU47mh7/2f3zrEE7UGQwCljbmJvq47AAYerpFi7tgG2HRr1ehXi/Eyhbo8L1lIWCRAmJR7BKrn2QEzB4ujYYODQxbjH4ZYIVKcRZ9wAlQZyFnp0ez+I8SC/3vLRmqumb1KkhdRTH2z3eTdrnWqNjIQxtDzZU6xeacZfVDQnauABU0eamXQ/ysrPbQbWwc0fz7G0qCuUObSliAdraXYBbFJG09HN+BK2vzsndRaUcrkUN5k8PtUubOFPRQsKe+SO2Vnwk0mSbkb6DiOs5Xn6OOJ/du2s5jC0psu2FbtGJ6Mep1/rqlva8hoYS08OhjrPTux/fT7gf6QAXJG7I891+kviQbpz4Xi/QwODPUpxhCK3CQicpyN347mEFBlmiU4pV8va9Xl0vOwBCY5/T+vpDz3BiJUhnOqagb2kaNQO++tuJtZHkXD44T0xul+KkodwYypMo+trULH8ZSdBTcTHtF55URB3qmEnhTE3gJN3rxmW4ZapoyK/JOgXSwznCaX4YATB0VUCbX5OwzNNPe+ygtwHtljS7Tk9hUQibN3xcKR3lskJiML6jcv/NyGdo9l1Qr5SRix9RtpMn6CPavvVtWsn16t+cAsWeL6xao02RdkEQKMjWF5famqPHCoGduqj7EgKZXbMrWxQBFelnkrzEJkNSorIPpSoenid264jISYYSWvfi9syODQeyEXseqZlyJQ7l/LyezatiMfh9sqjn9nS9f1e8ZRZgGEN2nj3kVvsegd0Th63j4KCc9gZRk8AUs7Xp6+oqb3bF9WsvAHilynyGsl3PrNHaF/w6SC4/xAkq9eD7r1YMt2TzT7ef4JvqkobPv+4B1+WP8TqKylFseDZjI6EPTAaHjDx6DZT1+9WtAC9xEDA5AlRWTcs/YjcrEKel509ErKLYdgXpCl0GabCiOE8I+yMMCQXbifwDLeRm7HcGbOPC4m8FfKH4s7kcvv8kXTC9aP8EximAeGEZYsODeRdA1nTCJmFFy6tNHPbGDdLr64wqyjsUq1R+ZqabxilF+tCZ/35k/4NrZyzqiu3TsA12rw1UNDe3xpFg4nKtsTOsZGMFkgxKDhz6hgtkx/VD57ZmXmfMX7G6r+LTY72/AZM3u0hKobtcI0NVricEviZRDpTRftsbSLTMhlVbVQfDuCribbV6JabzEZX/fKPbB/HaYjWSEp6zGPjvVFcQ==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Windows" data-id="94">Windows</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Linux" data-id="120">Linux</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/macOS" data-id="281">macOS</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Node.js" data-id="2652">Node.js</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS-Code" data-id="4610">VS-Code</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Tesseract Act</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5387592">
+
+	<meta itemprop="upvoteCount" content="1">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (1 vote)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">10 Sep 2024</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">10 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 3.8K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 54</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A Visual Studio Code extension, a convenient UI wrapper for Tesseract OCR — in the VSCode style: it performs Optical Character Recognition of data found in an image file and opens the recognition result in a text editor.</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">This tiny extension is also used to explain the general Visual Studio Code extension writing techniques for the cases when an external application is used and when non-text input data needs to be processed.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<p id="image-title"><img alt="Tesseract Act Logo" src="./Resources-articles/2024-09-03.Tesseract-Act.logo.webp" width="320px"></p>
+
+<ul class="download">
+    <li><a href="https://github.com/SAKryukov/vscode-tesseract-act">Download or clone source code from GitHub</a></li>
+    <li><a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.tesseract-act">Tesseract Act on Visual Studio Marketplace</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/Articles/5387592/vscode-tesseract-act.zip">Download source — 9.1 KB</a></li>-->
+</ul>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-motivation" style="margin-left: 0">Motivation</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-tesseract-introduction" style="margin-left: 0">Tesseract Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-implementation2c-issues2c-and-solutions" style="margin-left: 0">Implementation, Issues, and Solutions</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-introduction" style="margin-left: 3em">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-event-deficit" style="margin-left: 3em">Event Deficit</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-enablement" style="margin-left: 3em">Enablement</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-recognition-of-an-external-application" style="margin-left: 3em">Recognition of an External Application</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-one-way-default" style="margin-left: 3em">One-Way Default</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-pathological-cases" style="margin-left: 3em">Pathological Cases</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-asynchronous-ocr" style="margin-left: 3em">Asynchronous OCR</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-versions" style="margin-left: 0">Versions</a><br>
+<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-motivation">Motivation</h2>
+
+<p>I think we all hate paper documents. But in many cases, we don’t have a choice. Stupid financial, legal, insurance, or government services keep sending us paper-only documents we cannot ignore. In some countries, the so-called&nbsp;<em>digital government</em>&nbsp;is notoriously weak if not disastrous. With the combination of a scanner, OCR, and graphical editors, we can still combine paper data and generate maintainable documents in response.</p>
+
+<p>I have started to use Tesseract OCR very recently, with yet another enrollment. Before that time, I only tried different OCR tools, and I rejected Tesseract because its older versions were not Unicode, which is a big no-no. The recent version, however, is quite usable. When I tested it and found it acceptable, I started my practical use of it by crafting a Visual Studio Code extension. When the product matured, I published it on the <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.tesseract-act">Visual Studio Marketplace</a>.</p>
+
+<p>The extension appeared very useful, and convenient, and it became fairly popular. In this article, I would like to share some findings related to specific issues associated with this extension. They are relatively simple but took time to figure out. They are related to two things: 1) processing of non-textual pages, and 2) using an external application.</p>
+
+<h2 id="heading-tesseract-introduction">Tesseract Introduction</h2>
+
+<p>Tesseract can be <a href="https://github.com/tesseract-ocr/tesseract?tab=readme-ov-file#installing-tesseract">installed</a> on Linux, Windows, and MacOS.</p>
+
+<p>The source code is <a href="https://github.com/tesseract-ocr/tesseract">available on GitHub</a>.</p>
+
+<p>Trained data for additional languages can be installed separately. Trained data for different models can be found in separate <code>pinned</code> Git repositories found on the page of the Tesseract OCR account <a href="https://github.com/tesseract-ocr">tesseract-ocr</a>. The simplest way of installing a language pack is copying a single file *.traineddata to the subdirectory “tessdata” of the Tesseract executable directory. The list of currently installed languages can be obtained by the command line:</p>
+
+<div class="pre-lang" id="premain747484"><div>Command</div><div class="pre-action-link"><span id="copycode747484" class="copy-code" data-index="747484" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre747484" style="margin-top:0;" class="lang-command notranslate" data-language="Command" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">tesseract --list-langs</pre>
+
+<p>For further details, please see the <a href="https://github.com/tesseract-ocr/tessdoc">Tesseract documentation repository</a>.</p>
+
+<h2 id="heading-implementation2c-issues2c-and-solutions">Implementation, Issues, and Solutions</h2>
+
+<h3 id="heading-introduction">Introduction</h3>
+
+<p>The extension Tesseract Act is really a tiny product. It makes it convenient for explanations of some issues. I don’t want to explain the entire Visual Studio extension writing concepts but I want to rely on the general reader’s knowledge of them. It can better be found in the <a href="https://code.visualstudio.com/api">original documentation</a>. The complete current source code of my extension can always be found in the <a href="https://github.com/SAKryukov/vscode-tesseract-act">code repository</a>.</p>
+
+<p>The user-level documentation can be found on the <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.tesseract-act">Visual Studio Marketplace</a> or the <a href="https://github.com/SAKryukov/vscode-tesseract-act">code repository</a>.</p>
+
+<p>The extension has only two commands, “Tesseract: Recognize Text” and “Tesseract: Language” and only one parameter in the Settings: “tesseract.executableFileLocation”. The user’s choice of a language is persistently remembered for the current workspace.</p>
+
+<h3 id="heading-event-deficit">Event Deficit</h3>
+
+<p>A first pretty trivial problem took the most investigation. The problem is that we need to capture the event when an image file of a file type Tesseract OCR can handle is loaded or selected in the editor. We always need such a thing at least to enable or disable the commands related to the application.</p>
+
+<p>The problem is that Visual Studio Code is well-sharpened for text editing but it does not provide the event analogous to the appropriate event for a text file. Here is what can be done quite conveniently for the text files:</p>
+
+<div class="pre-lang" id="premain615052"><div>JavaScript</div><div class="pre-action-link"><span id="copycode615052" class="copy-code" data-index="615052" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre615052" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">exports.activate = context =&gt; {
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-comment">//</span><span class="code-comment"> not applicable to the present extension:</span>
+    context.subscriptions.push(
+        vscode.workspace.onDidOpenTextDocument(
+            textDocument =&gt; doSomething(textDocument)));
+};</pre>
+
+<p>Additionally, we could use <code>textDocument.languageId</code> to do different actions for different languages.</p>
+
+<p>We cannot do the same thing for an arbitrary file. The solution is a bit more complicated. We need to handle the combination of two events, <code>onDidChangeTabGroups</code>, and <code>onDidChangeTabs</code> — only the combination covers all the cases. This is how the magic works:</p>
+
+<div class="pre-lang" id="premain708358"><div>JavaScript</div><div class="pre-action-link"><span id="copycode708358" class="copy-code" data-index="708358" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre708358" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">exports.activate = context =&gt; {
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-keyword">const</span> tabGroupSet = vscode.<span class="code-sdkkeyword">window</span>.tabGroups;
+    context.subscriptions.push(
+        tabGroupSet.onDidChangeTabGroups(() =&gt; updateEnablement()));
+    context.subscriptions.push(
+        tabGroupSet.onDidChangeTabs(() =&gt; updateEnablement()));
+};</pre>
+
+<p>I think it is pretty much obvious what <code>updateEnablement</code> should do. Please see the <a href="https://github.com/SAKryukov/vscode-tesseract-act">source code</a> for the comprehensive information. However, I need to clarify how to find the active file and figure out if it applies to the OCR operation.</p>
+
+<h3 id="heading-enablement">Enablement</h3>
+
+<p>This is the skeleton of the function <code>updateEnablement</code>:</p>
+
+<div class="pre-lang" id="premain928665"><div>JavaScript</div><div class="pre-action-link"><span id="copycode928665" class="copy-code" data-index="928665" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre928665" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">exports.activate = context =&gt; {
+    vscode.commands.executeCommand(
+        definitionSet.commands.setContext,
+        definitionSet.commands.setLanguageContext,
+        tesseractExecutableFound);
+    <span class="code-keyword">const</span> isGoodImage = () =&gt; {
+        <span class="code-keyword">if</span> (!statusBarItem) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        <span class="code-keyword">const</span> file = activeUri();
+        <span class="code-keyword">if</span> (!file) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        <span class="code-keyword">return</span> definitionSet.isImageFileSupported(file);
+    };
+    <span class="code-comment">//</span><span class="code-comment"> using isGoodImage...</span>
+};</pre>
+
+<p>Note that the <code>file</code> is found as <code>activeUri</code>, and the file name is tested for compatibility with Tesseract using <code>definitionSet.isImageFileSupported</code>.</p>
+
+<p>Here is how to find the active URI:</p>
+
+<div class="pre-lang" id="premain432940"><div>JavaScript</div><div class="pre-action-link"><span id="copycode432940" class="copy-code" data-index="432940" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre432940" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> activeUri = () =&gt;
+    vscode.<span class="code-sdkkeyword">window</span>?.tabGroups?.activeTabGroup?.activeTab?.input?.uri?.fsPath;</pre>
+
+<p>We also need to find out that the file is supported by Tesseract OCR. We have nothing to do but read the Tesseract documentation listing the set of suffixes indicating compatible file types:</p>
+
+<div class="pre-lang" id="premain385366"><div>JavaScript</div><div class="pre-action-link"><span id="copycode385366" class="copy-code" data-index="385366" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre385366" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> definitionSet = {
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    supportedInputFileTypes: [<span class="code-string">"</span><span class="code-string">png"</span>, <span class="code-string">"</span><span class="code-string">jpg"</span>, <span class="code-string">"</span><span class="code-string">jpeg"</span>, <span class="code-string">"</span><span class="code-string">tif"</span>, <span class="code-string">"</span><span class="code-string">tiff"</span>, <span class="code-string">"</span><span class="code-string">gif"</span>, <span class="code-string">"</span><span class="code-string">webp"</span>, <span class="code-string">"</span><span class="code-string">bmp"</span>],
+    isImageFileSupported: <span class="code-keyword">function</span>(file) {
+        <span class="code-keyword">if</span> (!file) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        file = file.toLowerCase();
+        <span class="code-keyword">return</span> <span class="code-keyword">this</span>.supportedInputFileTypes.some(
+            suffix =&gt; file.endsWith(<span class="code-string">`</span><span class="code-string">.${suffix}`</span>));
+    }, <span class="code-comment">//</span><span class="code-comment">isImageFileSupported</span>
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+};</pre>
+
+<p>Finally, the commands are enabled or disabled using the special command <code>"setContext"</code>. This is a string, predefined in the Visual Studio Code API, and <code>definitionSet.commands.setContext</code> is equal to this value. The contexts work via the <code>when</code> clause declared in “package.json”. Please find the lines <code>"when": "tesseract.act.recognize.enabled"</code> and <code>"when": "tesseract.act.language.enabled"</code> in <a href="https://github.com/SAKryukov/vscode-tesseract-act/blob/main/package.json">“package.json”</a>.</p>
+
+<h3 id="heading-recognition-of-an-external-application">Recognition of an External Application</h3>
+
+<p>The default for the Settings parameter “tesseract.executableFileLocation” is the string <code>"tesseract"</code>. It is not necessarily an executable file location, but it can be a <code>command</code>. Usually, it works by including the location of an executable part in the system <code>PATH</code> for all or certain users. In many cases, I personally avoid <code>PATH</code> modifications. Note that the content of the <code>PATH</code> is unknown to the Visual Studio Code application, so we cannot directly check the existence of the executable path. Besides, this is not enough.</p>
+
+<p>The Tesseract application is recognized on the activation events (please see <code>"activationEvents"</code> in <a href="https://github.com/SAKryukov/vscode-tesseract-act/blob/main/package.json">“package.json”</a> and on the event triggered when the Settings are changed. This is done by the function <code>changeConfigurationHandle(context)</code>, please see its code.</p>
+
+<p>The presence of the Tesseract OCR application does not rely on the existence of the executable file, because the user may enter the name of an unrelated file. Instead, the checkup relies on <code>childProcess.execSync</code>. The application is executed and the exceptions are caught to check if it is successful:</p>
+
+<div class="pre-lang" id="premain240705"><div>JavaScript</div><div class="pre-action-link"><span id="copycode240705" class="copy-code" data-index="240705" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre240705" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> commandExists = fileOrCommand =&gt; {
+    <span class="code-keyword">try</span> {
+        childProcess.execSync(
+            definitionSet.tesseract.commandLineLanguages(
+                fileOrCommand));
+    } <span class="code-keyword">catch</span> { <span class="code-comment">//</span><span class="code-comment"> all cases</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    } <span class="code-comment">//</span><span class="code-comment">exception</span>
+    <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+}; <span class="code-comment">//</span><span class="code-comment">commandExists</span></pre>
+
+<p>The Tesseract OCR process is executed synchronously, because the OCR is not actually performed, and it makes the execution fast.</p>
+
+<p>Sometimes this approach is called <em>offensive</em> in contrast to not very informative in this case <em>defensive</em>.</p>
+
+<h3 id="heading-one-way-default">One-Way Default</h3>
+
+<p>Note that the function <code>commandExists</code> works with the command-line parameter passed to Tesseract OCR used to report the installed languages. One of the languages reported can be used as a parameter passed to the application to specify the language for text recognition.</p>
+
+<p>There is one subtle case here: when the language parameter is omitted, the default language is used. This is English. There is no language choice in the UI of the extension because the default means making no choice. When a language is never selected, the status bar item shows: “Tesseract Language: default”. When a user chooses any language, there is no way to get back to this condition. The user can only pick a different language, but not get back to the “no choice” condition. Why is it so and how does it work?</p>
+
+<p>In fact, it is possible to get back to the “no choice” situation. To achieve that, the user needs to wipe the workspace data. By the way, its location depends on the platform and probably the editor’s release, but it can be found using the VSCode command “Developer: Open User Data Folder”. The exact location of the workspace storage is not documented, but at the moment of writing, it can be found in the sub-directory “User/workspaceStorage”. It’s important to note that deletion of all files from this directory and the directories “Backup”, “Cache”, and “CachedData” is safe.</p>
+
+<p>When the user picks up any language from the list, the choice is stored in the workspace state:</p>
+
+<div class="pre-lang" id="premain646636"><div>JavaScript</div><div class="pre-action-link"><span id="copycode646636" class="copy-code" data-index="646636" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre646636" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> setState = (context, language) =&gt; {
+    context.workspaceState.update(definitionSet.tesseractLanguageKey, language);
+}; <span class="code-comment">//</span><span class="code-comment">setState</span>
+<span class="code-keyword">const</span> getState = context =&gt;
+    context.workspaceState.get(definitionSet.tesseractLanguageKey);</pre>
+
+<p>A state can be removed by calling <code>context.workspaceState.update(definitionSet.tesseractLanguageKey, undefined)</code>, but why?</p>
+
+<p>According to the general VSCode style, I also show the choice in a status bar item created using <code>vscode.window.createStatusBarItem</code> and also working as a choice command. When a choice is not yet made, it shows “Tesseract Language: default”. When a choice is made at least once, it shows the chosen language, and getting back to the default is not possible. Also, when a user makes the choice, I show the list of available languages, placing an already chosen language on top, and I also make it selected. Please see the function <code>selectLanguage</code> for more details.</p>
+
+<p>I could not see any point in showing the default again. It would require an additional redundant UI element, and it would be hard to explain to the user. I can imagine only two kinds of users. One would never choose a language, always working with the default English. A user who changed a language at least once probably knows what language should be used and may need to change the choice consciously, at least for the given workspace. All the currently installed languages are there anyway.</p>
+
+<p>Also, it would make no sense to store the choice per user. Obviously enough, the languages of the documents are only relevant to the workspace where the user works with those documents.</p>
+
+<p>If someone has a different opinion on my decisions related to the default, I would like to know the motivation for it.</p>
+
+<h3 id="heading-pathological-cases">Pathological Cases</h3>
+
+<p>The issues with the language selection raise a question: what happens when a user installs or uninstalls the language during the operation?</p>
+
+<p>First of all, changing Tesseract data cannot send any notification to Visual Studio Code when the editor and even the input image files are loaded. The modified list of the installed Tesseract languages will only appear when the user changes the active workspace or reloads the editor.</p>
+
+<p>What can happen when the user uninstalls the language already chosen by the user from Tesseract? It is even possible to uninstall the default language, English, by removing the trained data files.</p>
+
+<p>Let’s test it. The missing language is chosen, and the image recognition command is enabled, so let’s activate it. We can see the error message:</p>
+
+<div class="pre-lang" id="premain474598"><div>Error</div><div class="pre-action-link"><span id="copycode474598" class="copy-code" data-index="474598" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre474598" style="margin-top:0;" class="lang-error notranslate" data-language="Error" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Error opening data file {absolute path to} eng.traineddata</pre>
+
+<p>Another abnormal situation may happen if the user uninstalls or removes tesseract during the Visual Studio Code session. This is another relatively rare situation when nothing can send a notification to the editor. If it happens between sessions or followed by the modification of the Settings, the Tesseract Code application is recognized anyway — please see the section <a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-recognition-of-an-external-application">Recognition of an External Application</a>. But when it happens inside a session, the problem is recognized only at the attempt to perform OCR. Let’s test it, too:</p>
+
+<div class="pre-lang" id="premain85520"><div>Error</div><div class="pre-action-link"><span id="copycode85520" class="copy-code" data-index="85520" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre85520" style="margin-top:0;" class="lang-error notranslate" data-language="Error" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-string">'</span><span class="code-string">tesseract'</span> <span class="code-keyword">is</span> not recognized <span class="code-keyword">as</span> an <span class="code-keyword">internal</span> or external command,
+operable program or batch file.</pre>
+
+<p>I think this behavior is fair enough. Of course, it happens because the error information is captured from the child process and transparently represented as a VSCode error message. By the way, for a final point, let’s take a quick look at the child process used for the recognition.</p>
+
+<h3 id="heading-asynchronous-ocr">Asynchronous OCR</h3>
+
+<p>Finally, let’s consider a very well-known, trivial, but quite important aspect: the asynchronous execution of the Tesseract OCR. It is only required when the image is being recognized, as it may take noticeable time. At the same time, it is not very important when the recognition result appears in the editor — the user may need to do something else during the operation, and it requires the editor’s UI to be always responsive.</p>
+
+<div class="pre-lang" id="premain8913"><div>JavaScript</div><div class="pre-action-link"><span id="copycode8913" class="copy-code" data-index="8913" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre8913" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> recognizeText = (context, configuration) =&gt; {
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-keyword">const</span> act = () =&gt; {
+        childProcess.exec(commandLine, (error, stdout, stderr) =&gt; {
+            <span class="code-comment">//</span><span class="code-comment"> examine stdout and strerr for errors,</span>
+            <span class="code-comment">//</span><span class="code-comment"> handle them, etc.</span>
+            <span class="code-comment">//</span><span class="code-comment"> ...</span>
+            <span class="code-keyword">if</span> (!error &amp;&amp; fileSystem.existsSync(outputFileName))
+                vscode.workspace.openTextDocument(outputFileName).
+                then(<span class="code-sdkkeyword">document</span> =&gt;
+                    vscode.<span class="code-sdkkeyword">window</span>.showTextDocument(
+                        <span class="code-sdkkeyword">document</span>, { preview: <span class="code-keyword">true</span> }));
+        });
+    }; <span class="code-comment">//</span><span class="code-comment">act</span>
+    <span class="code-comment">//</span><span class="code-comment"> Figure out if the user's confirmation for file overwrite</span>
+    <span class="code-comment">//</span><span class="code-comment"> is required, call act(...) with or without confirmation,</span>
+    <span class="code-comment">//</span><span class="code-comment"> or cancel...</span>
+}; <span class="code-comment">//</span><span class="code-comment"> recognizeText</span></pre>
+
+<p>Note the combination of synchronous and asynchronous operation and the two-step callback-<em>promise</em> chain, the callback accepted by <code>childProcess.exec</code> as a parameter, and the promise created by <code>vscode.workspace.openTextDocument</code>.</p>
+
+<h2 id="heading-versions">Versions</h2>
+
+<p>Please see the <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.tesseract-act">version history on the product page</a> on the Visual Studio Marketplace.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>I hope that the descriptions of the simple subtleties described in this article cover a wide set of extensions using an external application.</p>
+
+<p>I will gladly try to answer any questions related to Visual Studio Code extension writing in general. I’ll also be much grateful for any questions, comments, suggestions, and especially for criticism.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2024 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

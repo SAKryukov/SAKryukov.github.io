@@ -1,0 +1,1088 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0063)https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Thread Wrapper for Modern C++- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Thread wrapper (v. 2.0) based on std::thread offers synchronization, status control and termination in safe encapsulated manner">
+<meta name="Keywords" content="C++, C#, Visual-Studio, VS2013">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="3/20/2017 2:23:00 AM">
+<meta property="article:modified_time" content="1/19/2018 4:25:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="16 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus">
+<meta property="og:title" content="Thread Wrapper for Modern C++">
+<meta property="og:description" content="Thread wrapper (v. 2.0) based on std::thread offers synchronization, status control and termination in safe encapsulated manner">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus"
+   },
+  "name": "Thread Wrapper for Modern C++",
+  "headline": "Thread Wrapper for Modern C++",
+  "url": "https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus",
+  "discussionUrl": "https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C++,C#,Visual-Studio,VS2013",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Thread wrapper (v. 2.0) based on std::thread offers synchronization, status control and termination in safe encapsulated manner",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2017-03-20",
+  "dateCreated": "2017-03-20",
+  "dateModified": "2018-01-19"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.98,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1177478/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="E4ToPoFJMw/FAA1fmOBFLBmDz5kfoDgatOzztu4tSAlUPHXHhjJHFvyy3fDaMUCyWZYtJcHrpqXrkVl/4jQl6jut4bKf4KvBS9BIMSBPHlrYkA/P0kq1CicI0lnsZkqec0oh4KHKwIoi8j9q2P61dI2tXZi7V6enyL0KscrYzqm5Beh7v7LgmvhHnmOQfH+Qgd3ZivaqI5d1pAeGKlcV97Le7ysgDAiZy0geFORsOctxH+/qjc2Kc9LATRyb7jpAW7Gy1bNLO7kYq0X9QwmCh1PGAzJrhF6TGhABG8Dfp23eJJ4fOOnd1U3n2G1JVQMgDoKRjQu6PN0XRrLMbw9A1DRv04HExnrOz7hnJI2OTs+rQpNkvBq85IP4gEr1YlONK8r/CwfFDuoZdz4tu+HAxS4sSw1LD0Kca5ovQMbgrMumBbPm4tQ1FEtQUKsp8nIvYu6m5vCMZ5PXaedQ6dCYcVEHXM5AwmVq7XV0uYMP3rl3HH0g6andGZv2bDNC2cmLv00uCZ13/N878yB7V9t+EHbS4yFQ1aKSoyxWnRMkEhhbRbaqhoVWlXiePOvv+7wGLwZqukXX5gRGos5MwfZ4hNPia3OQD+xYgrG6QvFBgq6lBEGmBYt/59VDvgh6zdbONLOj7BYWhpgyoJaXG7zAFlH2FLYJyMY8lwxKDlN24d3BR5xuKKf9+mIEEG4JKfHpzmEUUbm9pKU6OZJHy+cYkbmMgR9uXjd1FilOeaAirzXQS0dajBi6TcNBGywqUwVKaEhCnO7+HMT6DmLB29Iyhs5tqMQ8c6Sj6xivdaPUiA+G2iE3vjpJJQN+Qa4NenG/is5MkrbGlyDvakDR5aBZFzU6kz1Hzb3VO7fbPeqOLQzKeBckJBybx1wHZ5rp7W0aPleDv6M82bFJ/VJa7AHmV6PKZQkE3qhG3JYYjK9mWjCY4KWoW9yqK3YzHXrR7DdydLITAROZA84EwUbC5Mz7+qzfat6edg4HbapRZOcwsfG9XeQB4OUBJAx1MgoguOqCFjBn3BTuIvQL2HW556PZOzRfyorJJ3tXO0YejGBYaaNgwns3fOemTOWdC4k026Nu3Oj9qYsjJ0Qd/DDfwIEXYIEgjyL38VU77js9eEt8eE0UWb0Fp3KyYCLTv8QowQb/bObu71vRxHNgF7BDOlC18qQF40TckH+QJppiYFVUv2ZcUs3048AiczOJmlaX/BJ2QZ5flvHKByaMKxrweW+/F7PvBcPZ6KBnDvOOH1mFip/6lcKVyCJIJ3depwf3r+VsenAvtp/BlmrORdr2z/5jrlmUQ4PxISLFegf40e4sYlVJ8Jt7zHA4rQIvmfn6G7Mdo700Kw4C3kcaMqMeAs1k/Y9WWsmdi3qpfdnJHOljumBSXfF9ZrKLtQELP0+g47eMXTxjx6Ob2hhke6770dYUj3cRb3iQU+RD55h0Zxz2trZSLcx//X0MvGVcTjBk/C0uayo2pMscIY9h/BAjN0KznbMwHnca+XhDOvYgnT5vAsZIRHIrO6/sAfR0tHsbYORUczFWH2BqQaisv7P0bABUgTQU6eBbxYtoZJWG91ztjKKCwkAG0vVkIY4EskYZXdzVLoUJUzfbly3KlbvQN5Qjmuf69GX6bCIDMwbYFNupObuJmqTl7upMnsOdYahDuASLXYuv0mSqXVA7sJCzjPxjVhnaQ5vtMxi4p1PRoxpaqLLhqJYRJnMMrf9xe9iSHmoq0M9Y/zw5DdX77banhakv4gp0sIT3oi6QRwqmykzg3RZ/EJIfF89iEloBa34mrWXzR/JeSS+Uk2slMSTfEwqJc8lkZMU+f24JINA04jWdPNT6IMeDN2fOE9MgT2PAh0ZzXeP1Vd5SiPxwblXKTPZsiRvuLrOeAaCRedxhpXqdhWkDk5uxnutkrfdkin2vSJusglC0b7hsRBQaoAXL5JC23yBXCweo4Xr1//JgBdSioewYL+ClHnPHFsxLCvuHsKeCo1nM+B/KpWMNePDw9/lKdN1i1AybLkZGlHBT0tZQsooOl/XKifgPPS9YpzArLGsy8Y9OWeFU8N/6rQp19b08Ljlwl6qnQszA9ZFIYr4ZYJ8OifW30DcBpjsKJftO7BYSRHbLUg==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Cplusplus" data-id="78">C++</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Visual-Studio" data-id="103">Visual-Studio</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2013" data-id="2768">VS2013</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Thread Wrapper for Modern C++</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1177478">
+
+	<meta itemprop="upvoteCount" content="58">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.98/5  (64 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">20 Mar 2017, last revision: 19 Jan 2018</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">16 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 117.7K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 1.9K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Thread wrapper (v. 2.0) based on std::thread offers synchronization, status control and termination in safe encapsulated manner</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Thread-Wrapper-for-Modern-C++.zip">Download source code — 16.3 KB</a></li></ul>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>Homeless idea will always find refuge in the home of some human.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Stanis%C5%82aw_Jerzy_Lec">Stanisław Jerzy Lec</a></dd></dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<div id="TOC">
+<ul style="list-style-type: none">
+	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#motivation">Motivation</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#why-thread-wrapper">Why Thread Wrapper?</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#thread-wrapper-usage">Thread Wrapper Usage</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#derived-thread-wrapper-classes-and-thread-body">Derived Thread Wrapper Classes and Thread Body</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#put-to-sleep-and-wake-up">Put to Sleep and Wake Up</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#thread-termination">Thread Termination</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#exceptions">Exceptions</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#joining-non-joinable-thread">Joining Non-Joinable Thread</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#interlocked-properties">Interlocked Properties</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#initialization-of-interlockedproperty">Initialization of <code>InterlockedProperty</code></a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#usage-all-put-together">Usage, All Put Together</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#versions">Versions</a></li>	<li><a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#final-notes">Final Notes</a></li></ul>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is the first article from the short series devoted to thread wrappers:</p>
+
+<ol>
+	<li>Present article.</li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP"><em>Conveyor Thread Wrapper for Modern C++</em></a>.</li></ol>
+
+<p>Both articles share the same downloadable source code.</p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>By mentioning “modern C++” in the article abstract, I mean that C++11 or later version is required, as threading and thread synchronization features of the standard are essentially used. The standardization of threading is a great progress, it leads to fix of C++ to become a real cross-platform technology; but this standardization activity is still not so close to completion.</p>
+
+<p>I put forward the <em>thread wrapper</em> conception and basic design years ago and first published some relevant code samples on CodeProject, in response to some <a href="https://www.codeproject.com/Questions/ask.aspx">Q&amp;A</a> questions. I answered, first of all, to the following questions on .NET: <a href="http://www.codeproject.com/Answers/155852/How-to-pass-ref-parameter-to-the-thread#answer2"><em>How to pass ref parameter to the thread</em></a>, <a href="http://www.codeproject.com/Answers/223412/change-paramters-of-thread-producer-after-it-start#answer1"><em>Change parameters of thread (producer) after it is started</em></a>, <a href="http://www.codeproject.com/Answers/485734/MultiThreadingplusinplusC-23#answer4"><em>Multithreading in C#</em></a>, <a href="https://www.codeproject.com/answers/191391/passing-arguments-to-a-threaded-longrunningprocess#answer1"><em>Passing arguments to a threaded Long-Running Process</em></a>, and later to many other related questions. The CodeProject member <a href="https://www.codeproject.com/script/Membership/View.aspx?mid=5412916">VSNetVbHarry</a> was so kind to <a href="http://www.codeproject.com/Answers/191391/Passing-arguments-to-a-threaded-LongRunningProcess#answer2">translate one of my code fragments into VB.NET</a>. In these answers, I covered passing the reference to the wrapper object and hence all its instance members, to make them accessible from the thread code, encapsulation of thread interlocking, used for data exchange between threads, throttling of the thread, joining, thread abortion and related issues, which clearly demonstrated the benefits of the conception.</p>
+
+<p>Some main ideas date back to the design of <a href="https://en.wikibooks.org/wiki/Ada_Programming/Tasking">the Ada tasks mechanism</a>.</p>
+
+<p>Now we have C++11 <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a> and other standard library features related to multithreading. <a href="https://gcc.gnu.org/">GCC</a> 4.8.1 was the first feature-complete implementation of C++11 in 2013, <a href="http://clang.llvm.org/">Clang</a> was also ready in 2013; and Microsoft started to support C++11 only in 2015. Since then, the development of analogous thread wrapper in C++ really makes a lot of sense. Other factors stimulating this publication are maturing of the concept and getting more experience with it, and, importantly enough, lots of related questions CodeProject members keep asking, <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms">as well of my old idea to write articles and blog posts trying to answer many questions at once</a>.</p>
+
+<h2 id="why-thread-wrapper">Why Thread Wrapper?</h2>
+
+<p>Thread wrapper class is based on <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a>. This class is standard and is perfectly fine. Another, more flexible option could be <a href="http://www.boost.org/doc/libs/1_63_0/doc/html/thread/thread_management.html#thread.thread_management.thread"><code>boost::thread</code></a> found in <a href="https://en.wikipedia.org/wiki/Boost_%28C%2B%2B_libraries%29"><em>boost</em> set of libraries</a>, but this is a big library beyond the official C++ standard.</p>
+
+<p>As to the <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a>, this is a <em>raw</em> standard class which allows doing all the threading <a href="http://en.cppreference.com/w/cpp/thread">the standard threading library</a> is capable of. Naturally, it provides maximum flexibility achievable with this library, but there are tons of subtleties and subliminal or not very obvious usage techniques. In contrast to that, thread wrapper offers extreme simplicity yet covering majority of typical or not so typical applications. From the other hand, thread wrapper design is fundamentally based on <em>programming by extension</em>, so each and every more advanced behavior can be naturally added to the wrapper in the derived classes.</p>
+
+<h2 id="thread-wrapper-usage">Thread Wrapper Usage</h2>
+
+<p>The idea is: the use creates a derived class and overrides the virtual function <code>ThreadWrapper::Body</code>. When the instance is already constructed, the thread is not yet started. It can be started any time later, on the call to the separate function, <code>ThreadWrapper::Start(bool)</code>. The parameter offers the option to specify detached (background) mode, which is explained in detail in the section <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#joining-non-joinable-thread">Joining Non-Joinable Thread</a>. A separate start is a very important flexibility feature badly missing in <em>raw</em> <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a>.</p>
+
+<p>There are more virtual functions to override, but this is optional, because the rest of them are <em>pseudo-abstract</em> <code>Aborted()</code>, <code>Terminated()</code>, <code>ExceptionCaught(std::exception)</code> and <code>UnknownExceptionCaught()</code>. I don’t show their usage, because it’s quite trivial; their calls are shown <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper">here</a>.</p>
+
+<p>The complete usage sample is shown as the <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#usage">very last code sample</a>.</p>
+
+<h2 id="derived-thread-wrapper-classes-and-thread-body">Derived Thread Wrapper Classes and Thread Body</h2>
+
+<p>There is one little problem in implementing of the separate method <code>ThreadWrapper::Start</code>: the instance of <code>std::thread</code> has to be a member of <code>ThreadWrapper</code>, so it is constructed with the trivial constructor without parameters. The thread body comes into play only later.</p>
+
+<p>One way to implement such behavior is using the <em>move semantics</em> of the <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a> function <a href="http://en.cppreference.com/w/cpp/thread/thread/operator%3D"><code>thread&amp; operator=(thread&amp;&amp; other)</code></a>:</p>
+
+<div id="start">
+<div class="pre-lang" id="premain411570"><div>C++</div><div class="pre-action-link"><span id="copycode411570" class="copy-code" data-index="411570" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre411570" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+public:
+
+    <span class="code-keyword">void</span> Start(<span class="code-keyword">bool</span> background = <span class="code-keyword">false</span>) {
+        <span class="code-keyword">thread</span> = <span class="code-sdkkeyword">std::thread</span>(BodyWrapper, <span class="code-keyword">this</span>);
+        <span class="code-keyword">if</span> (background)
+            <span class="code-keyword">thread</span>.detach();
+    } <span class="code-comment">//Start
+</span>
+    <span class="code-comment">// ...
+</span>
+};</pre>
+
+<p>This is the idea behind thread operator <code>=</code> with move semantic: the constructor-call expression <code>std::thread(BodyWrapper, this)</code> is recognized by the compiler as a r-value expression, which is temporary; so r-value reference <code>&amp;&amp;</code> parameter is expected, but not l-value, because all other assignment operators are absent (deleted). Therefore, the implementation of the operator can safely modify the temporary thread instance created on the right of the assignment — it is guaranteed that it won’t be used later. The thread handle and all properties of the newly constructed thread instance are moved to the left operant, the instance member <code>ThreadWrapper::thread</code>.</p>
+
+<p>The similar behavior could be achieved in a different way, via the function <a href="http://en.cppreference.com/w/cpp/thread/thread/swap"><code>swap</code></a>:</p>
+
+<div id="start-alt">
+<div class="pre-lang" id="premain724543"><div>C++</div><div class="pre-action-link"><span id="copycode724543" class="copy-code" data-index="724543" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre724543" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+public:
+
+    <span class="code-keyword">void</span> Start(<span class="code-keyword">bool</span> background = <span class="code-keyword">false</span>) {
+        <span class="code-sdkkeyword">std::thread</span> tmp(BodyWrapper, <span class="code-keyword">this</span>);
+        <span class="code-keyword">thread</span>.swap(tmp);
+        <span class="code-keyword">if</span> (background)
+            <span class="code-keyword">thread</span>.detach();
+    } <span class="code-comment">//Start
+</span>
+    <span class="code-comment">// ...
+</span>
+};</pre>
+
+<p>I wonder if anyone was confused by this seemingly weird function, <a href="http://en.cppreference.com/w/cpp/thread/thread/swap"><code>swap</code></a> &amp;dmash; why would some developers ever need to swap two thread handlers? The above code sample is just one example of its use.</p>
+
+<p>The behavior of detached thread is a very special problem; dealing with it is described in the section <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#joining-non-joinable-thread">Joining Non-Joinable Thread</a>.</p>
+
+<p>The function <code>BodyWrapper</code> is needed to handle exceptions and <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#joining-non-joinable-thread">the join</a>. This is how it is done:</p>
+
+<div id="bodyWrapper">
+<div class="pre-lang" id="premain379635"><div>C++</div><div class="pre-action-link"><span class="code-collapse" data-index="379635" id="preShrink379635">Shrink ▲</span> &nbsp; <span id="copycode379635" class="copy-code" data-index="379635" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre379635" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+
+<span class="code-comment">// ...
+</span>
+private:
+
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> BodyWrapper(ThreadWrapper* instance) {
+        <span class="code-keyword">try</span> {
+            instance-<span class="code-keyword">&gt;</span>Body();
+        } <span class="code-keyword">catch</span> (ThreadAbortException&amp;) {
+            instance-<span class="code-keyword">&gt;</span>Aborted();
+        } <span class="code-keyword">catch</span> (std::exception&amp; ex) {
+            instance-<span class="code-keyword">&gt;</span>ExceptionCaught(ex);
+        } <span class="code-keyword">catch</span> (...) {
+            instance-<span class="code-keyword">&gt;</span>UnknownExceptionCaught();
+        } <span class="code-comment">//exception
+</span>        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(instance-<span class="code-keyword">&gt;</span>joinMutex);
+        instance-<span class="code-keyword">&gt;</span>done = <span class="code-keyword">true</span>;
+        instance-<span class="code-keyword">&gt;</span>joinEvent.notify_all();
+        instance-<span class="code-keyword">&gt;</span>Terminated();
+    } <span class="code-comment">//BodyWrapper
+</span>
+    <span class="code-sdkkeyword">std::thread</span> <span class="code-keyword">thread</span>;
+    <span class="code-sdkkeyword">std::condition_variable</span> stateEvent, joinEvent;
+    <span class="code-sdkkeyword">std::mutex</span> stateMutex, joinMutex;
+    Action state = Action::wakeup; <span class="code-comment">// protected by statusMutex, statusEvent
+</span>    <span class="code-keyword">bool</span> done = <span class="code-keyword">false</span>; <span class="code-comment">// protected by joinMutex, joinEvent
+</span>
+}; </pre>
+
+<p>This way of binding the thread with the thread wrapper instance is the actually the main idea of the wrapper. Once we have this binding, we can safely encapsulate thread control (<em>throttling</em>, abortion, exception handling) and synchronized data exchange between threads.</p>
+
+<p>Let’s start with <em>thread throttling</em>.</p>
+
+<h2 id="put-to-sleep-and-wake-up">Put to Sleep and Wake Up</h2>
+
+<p>Is some threading APIs, one could find some functions for suspending and resuming a thread. The example of such API is Windows <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686345%28v=vs.85%29.aspx"><code>SuspendThread</code></a> and <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms685086%28v=vs.85%29.aspx"><code>ResumeThread</code></a>. In modern thread APIs, such as C++ <code>std::thread</code> or <a href="https://en.wikipedia.org/wiki/Common_Language_Infrastructure">CLI</a>, such functions are never included. They are no less dangerous than <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms686717%28v=vs.85%29.aspx"><code>TerminateThread</code></a> (we will discuss thread termination <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#thread-termination">below</a>).</p>
+
+<p>The problem with such API is that they are totally <em>asynchronous</em> to the thread execution. One possible trouble is suspending a thread when it owns a mutual exclusion object. In this case, suspension of one thread will indirectly suspend all threads trying to acquire the same mutual exclusion object — those threads will be put in a wait state, until the mutex is released by the suspended thread. But this is not the worse situation. Worse, the same very thread which is supposed to eventually resume the thread holding the mutex, can try to acquire the same mutex later after suspending but before releasing. It will create a deadlock, when two (or more) threads are in wait state and are waiting for each other. And even worse, it can happen with some very low probability, so the testing could not reveal the problem; and the deadlock could happen to the customer in the most embarrassing situation, in perfect agreement with the <a href="https://en.wikipedia.org/wiki/Murphy&#39;s_law">Murphy’s law</a>.</p>
+
+<p>At the same time, suspending and resuming threads is a very important feature. In some applications, it is critically important. And it can be perfectly safe. It’s enough to synchronize suspension with the thread execution. A thread to be suspended should repeatedly check call some function used to put it to the wait state, conditionally. In the present thread wrapper implementation, this function is the protected function <code>ThreadWrapper::SyncPoint</code>. It uses the mechanism based on <a href="http://en.cppreference.com/w/cpp/thread/condition_variable"><code>std::condition_variable</code></a>. In combination with <a href="http://en.cppreference.com/w/cpp/thread/mutex"><code>std::mutex</code></a>, it provides thread <em>throttling</em> effect in a way similar to the <a href="https://en.wikipedia.org/wiki/Common_Language_Infrastructure">CLI</a> <a href="https://msdn.microsoft.com/en-us/library/system.threading.eventwaithandle%28v=vs.110%29.aspx"><code>System.Threading.EventWaitHandle</code></a>.</p>
+
+<p>This is how it works:</p>
+
+<div id="syncPoint">
+<div class="pre-lang" id="premain698597"><div>C++</div><div class="pre-action-link"><span id="copycode698597" class="copy-code" data-index="698597" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre698597" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+
+    <span class="code-comment">// ...
+</span>
+protected:
+
+    <span class="code-keyword">void</span> SyncPoint(<span class="code-keyword">bool</span> autoReset = <span class="code-keyword">false</span>) {
+        <span class="code-sdkkeyword">std::unique_lock</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> ul(stateMutex);
+        stateEvent.wait(ul, [=] {
+            <span class="code-keyword">auto</span> result = ((<span class="code-keyword">int</span>)state &amp; (<span class="code-keyword">int</span>)Action::wakeup) <span class="code-keyword">&gt;</span> <span class="code-digit">0</span>;
+            <span class="code-keyword">if</span> (state == Action::deepAbort)
+                <span class="code-keyword">throw</span> ThreadAbortException();
+            <span class="code-keyword">else</span> <span class="code-keyword">if</span> (state == Action::shallowAbort)
+                <span class="code-keyword">throw</span> ShallowThreadAbortException();
+            <span class="code-keyword">if</span> (autoReset)
+                state = Action::sleep;
+            <span class="code-keyword">return</span> result;
+        });
+    } <span class="code-comment">//SyncPoint
+</span>
+};</pre>
+
+<p>This function is also used for thread termination discussed <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#thread-termination">below</a>. The declarations of the relevant thread synchronization fields (<code>stateEvent</code>, <code>stateMutex</code>, <code>state</code>) was already shown in <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper">the code sample showing <code>BodyWrapper</code></a>.</p>
+
+<p>The thread wrapper methods used to throttle a thread are intentionally named differently, <code>PutToSleep</code> and <code>WakeUp</code>. Even if the naming is a bit ugly, it emphasizes that the function are not associated with dreaded “suspend” and “resume”. From the other hand, this naming suggests what really happens to the thread: when a thread calls <code>SyncPoint</code> when its status set to <code>suspend</code>, it is put to the <em>wait state</em>, that is, it is switched off and not scheduled back to execution until it is waken up. Wait state does not mean spin wait, there is no polling; the thread is really waken up by the event notification mechanism.</p>
+
+<p>This is how the thread is throttled:</p>
+
+<div id="sleep-wakeup">
+<div class="pre-lang" id="premain739361"><div>C++</div><div class="pre-action-link"><span id="copycode739361" class="copy-code" data-index="739361" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre739361" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+public:
+
+    <span class="code-comment">// ...
+</span>
+    <span class="code-keyword">void</span> PutToSleep() {
+        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(stateMutex);
+        state = Action::sleep;
+        stateEvent.notify_one();
+    } <span class="code-comment">//PutToSleep
+</span>
+    <span class="code-keyword">void</span> WakeUp() {
+        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(stateMutex);
+        state = Action::wakeup;
+        stateEvent.notify_one();
+    } <span class="code-comment">//WakeUp
+</span>
+    <span class="code-comment">// ...
+</span>
+}; </pre>
+
+<h2 id="thread-termination">Thread Termination</h2>
+
+<p>With <code>std::thread</code>, there is nothing similar to the <a href="https://en.wikipedia.org/wiki/Common_Language_Infrastructure">CLI</a> <a href="https://msdn.microsoft.com/en-us/library/ty8d3wta(v=vs.110).aspx">System.Threading.Thread.Abort</a>, which is the thread termination mechanism fully <em>asynchronous</em> to the thread execution. The use of this mechanism sometimes sparks flame wars, so I don’t discuss it here.</p>
+
+<p>In contrast to that, the thread wrapper’s thread can be aborted by another thread in sync with the thread execution, through the same <code>SyncPoint</code> function <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#syncPoint">shown above</a>. Note that there are two Note that there are two levels of abort: deep and shallow. In the class <code>ThreadWrapper</code> only the deep abort is used, but the shallow abort is reserved the use in descendant classes and actually used in the class <code>ConveyorThreadWrapper</code> described in <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP">separate article</a>. As to the class <code>ThreadWrapper</code>, it is important that two exceptions thrown by <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#syncPoint">SyncPoint</a> are derived one from another:</p>
+
+<div id="exception-types">
+<div class="pre-lang" id="premain953782"><div>C++</div><div class="pre-action-link"><span id="copycode953782" class="copy-code" data-index="953782" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre953782" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+
+<span class="code-comment">// ...
+</span>
+private:
+
+    <span class="code-comment">// ...
+</span>
+    <span class="code-keyword">class</span> ThreadAbortException : <span class="code-sdkkeyword">std::exception</span> {};
+
+protected:
+
+    <span class="code-keyword">class</span> ShallowThreadAbortException : ThreadAbortException {};
+
+    <span class="code-comment">// ...
+</span>
+}; </pre>
+
+<p>As <code>ThreadAbortException</code> is caught in the function <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper"><code>bodyWrapper</code></a>, it also catches <code>ShallowThreadAbortException</code>. It means that if some descendant class throws this exception (indirectly, as shown <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#abort">below</a> and does not handle it, it will be caught anyway. See also the section <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#exceptions">Exceptions</a>.</p>
+
+<p>The function <code>ThreadWrapper::Abort</code> is quite similar to <code>PutToSleep/WakeUp</code> (<a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#sleep-wakeup">shown above</a>):</p>
+
+<div id="abort">
+<div class="pre-lang" id="premain761374"><div>C++</div><div class="pre-action-link"><span class="code-collapse" data-index="761374" id="preShrink761374">Shrink ▲</span> &nbsp; <span id="copycode761374" class="copy-code" data-index="761374" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre761374" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+public:
+
+    <span class="code-comment">// ...
+</span>
+    <span class="code-keyword">void</span> Abort() {
+        SetAbort(<span class="code-keyword">true</span>);
+    } <span class="code-comment">//Abort
+</span>
+    <span class="code-comment">// ...
+</span>
+private:
+
+    <span class="code-keyword">enum</span> <span class="code-keyword">class</span> Action {
+        sleep = <span class="code-digit">0</span>, wakeup = <span class="code-digit">1</span>,
+        shallowAbort = wakeup | <span class="code-digit">2</span>, deepAbort = wakeup | <span class="code-digit">4</span>
+    };
+
+    <span class="code-keyword">void</span> SetAbort(<span class="code-keyword">bool</span> set, <span class="code-keyword">bool</span> shallow = <span class="code-keyword">true</span>) {
+        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(statusMutex);
+        <span class="code-keyword">if</span> (set) {
+            <span class="code-keyword">if</span> (shallow)
+                state = Action::shallowAbort;
+            <span class="code-keyword">else</span>
+                state = Action::deepAbort;
+        } <span class="code-keyword">else</span> <span class="code-comment">//clear abort
+</span>            state = Action::wakeup;
+        statusEvent.notify_one();
+    } <span class="code-comment">//SetAbort
+</span>
+    <span class="code-comment">// ...
+</span>
+};</pre>
+
+<p>Note that the <code>abort</code> status is bit-mapped value combined with <code>wakeup</code>. The <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#syncPoint">implementation of SyncPoint</a> shows that the thread is waken up based on the <code>wakeup</code> bit extracted from the status. This is done to make sure that a thread can be aborted when it is in a wait (sleep) state. Further execution with the <code>abort</code> status throws the exception of the type <code>ThreadWrapper::ThreadAbortException</code>, which is <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper">caught on the top stack frame of the thread body</a>.</p>
+
+<p>Using exception handling for thread abortion is perfectly safe. Apparently, it is important to bring the thread execution to the top stack frame where is will exit its body function unconditionally. It the body function is written correctly, the <em>stack unwinding</em> mechanism involves proper destruction of all the objects constructed to the point of abortion and complete clean-up.</p>
+
+<h2 id="exceptions">Exceptions</h2>
+
+<p>All thread exceptions should be handled on the very top stack frame of the thread stack, at the latest. If this is not done, <a href="http://en.cppreference.com/w/cpp/error/terminate"><code>std::terminate</code></a> is called; and eventually the whole process will be terminated.</p>
+
+<p>C++ does not have a single base class for all exception types, but there is one standard base class for some standard exceptions, <a href="http://en.cppreference.com/w/cpp/error/exception"><code>std:exception</code></a>. All exceptions of the types derived from , <a href="http://en.cppreference.com/w/cpp/error/exception"><code>std:exception</code></a> can be caught by handling this exception. Therefore, this exception type should be handled first; and all other exceptions should be handled at the end of the <code>try</code> block. This is what is done in the method <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper"><code>BodyWrapper</code></a> shown <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper">above</a> — this method makes the very top stack frame of the thread, as it can be seen from the <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#start">first code sample</a>.</p>
+
+<p>By the same reasons, there are three different <em>hook functions</em> to the exception handler: <code>Aborted()</code>, <code>ExceptionCaught(std::exception)</code> and <code>UnknownExceptionCaught()</code>. Even though <code>ThreadAbortException</code> is technically an exception class, throwing and propagation of this exception should not be considered as abnormal situation.</p>
+
+<h2 id="joining-non-joinable-thread">Joining Non-Joinable Thread</h2>
+
+<p>One problems of <em>raw</em> <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a> which causes a lot of mistakes is its <a href="http://en.cppreference.com/w/cpp/thread/thread/join"><code>join</code></a> function. It simply blocks the calling thread until the target thread terminates. It can be used only when the thread is joinable, which is true, unless the thread is <a href="http://en.cppreference.com/w/cpp/thread/thread/detach"><em>detached</em></a>. The detached thread is analogous to the <a href="https://en.wikipedia.org/wiki/Common_Language_Runtime">CLR</a> <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread%28v=vs.110%29.aspx#Foreground"><em>background thread</em></a>: a detached or background thread does not keep a process running if all foreground threads have terminated. When <a href="http://en.cppreference.com/w/cpp/thread/thread/join"><code>join</code></a> is used just to make sure a thread is terminated before the application is finally closed, it might not be needed for a background thread.</p>
+
+<p>But what to do if we still need to synchronize the calling thread with the termination of a given thread? The status of the <a href="http://en.cppreference.com/w/cpp/thread/thread"><code>std::thread</code></a> object (or at its wrapper) is still accessible, so first thing which can come to one’s mind is polling of this status, <em>spin wait</em>. Of course, such solution could not be considered acceptable.</p>
+
+<p>This problem can be solved with the same mechanism of <code>std::condition_variable</code>:</p>
+
+<div id="join">
+<div class="pre-lang" id="premain667033"><div>C++</div><div class="pre-action-link"><span id="copycode667033" class="copy-code" data-index="667033" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre667033" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> ThreadWrapper {
+public:
+
+    <span class="code-comment">// ...
+</span>
+    <span class="code-keyword">void</span> Join() {
+        <span class="code-keyword">if</span> (<span class="code-keyword">thread</span>.joinable())
+            <span class="code-keyword">thread</span>.join();
+        <span class="code-keyword">else</span> { <span class="code-comment">//fallback for the case the thread was detached:
+</span>            <span class="code-sdkkeyword">std::unique_lock</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> ul(joinMutex);
+            joinEvent.wait(ul, [=] { <span class="code-keyword">return</span> done; });
+        } <span class="code-comment">// if
+</span>    } <span class="code-comment">//Join
+</span>
+    <span class="code-comment">// ...
+</span>};</pre>
+
+<p>Naturally, on the top stack frame of the thread body, the notification is sent on the thread termination. Importantly, in contrast to the thread throttling methods, all threads which could possibly synchronize themselves with thread termination are notified. This is shown <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper">above</a> in the code of the <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#bodyWrapper"><code>BodyWrapper</code></a>.</p>
+
+<h2 id="interlocked-properties">Interlocked Properties</h2>
+
+<p>In general case, the developer of the class derived from <code>ThreadWrapper</code> can easily organize the interlocking between threads in encapsulated manner; the wrapper class makes is quite convenient. All public members of such class potentially can be accessed from any other thread. If they are also used inside the wrapped thread, thread synchronization should apply. The derived wrapper can add all thread synchronization primitives needed, in the form of some private wrapper members, and use them for interlocking in the implementation of the public members.</p>
+
+<p>However, on top of that, I wanted to add a supplementary template class to cover most typical mutual exclusive execution patterns which would cover vast majority of application. The simplest way to start describing these techniques is probably showing the whole class:</p>
+
+<div id="interlockedProperty">
+<div class="pre-lang" id="premain158374"><div>C++</div><div class="pre-action-link"><span class="code-collapse" data-index="158374" id="preShrink158374">Shrink ▲</span> &nbsp; <span id="copycode158374" class="copy-code" data-index="158374" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre158374" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">#include</span><span class="code-preprocessor"> <span class="code-keyword">&lt;</span><span class="code-leadattribute">mutex</span><span class="code-keyword">&gt;</span>
+</span>
+<span class="code-keyword">template</span><span class="code-keyword">&lt;</span><span class="code-keyword">typename</span> T<span class="code-keyword">&gt;</span>
+<span class="code-keyword">class</span> InterlockedProperty {
+public:
+
+    InterlockedProperty() : InterlockedProperty(<span class="code-keyword">nullptr</span>, <span class="code-keyword">nullptr</span>) { }
+    InterlockedProperty(<span class="code-keyword">const</span> T &amp;value) : InterlockedProperty(<span class="code-keyword">nullptr</span>, &amp;value) { }
+    InterlockedProperty(std::mutex&amp; sharedMutex) : InterlockedProperty(&amp;sharedMutex, <span class="code-keyword">nullptr</span>) { }
+    InterlockedProperty(std::mutex&amp; sharedMutex, <span class="code-keyword">const</span> T &amp;value) : InterlockedProperty(&amp;sharedMutex, &amp;value) { }
+
+    InterlockedProperty&amp; <span class="code-keyword">operator</span>=(InterlockedProperty&amp; other) {
+        <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span>mutex = other.mutex;
+        <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span><span class="code-keyword">value</span> = other.<span class="code-keyword">value</span>;
+        <span class="code-keyword">return</span> *<span class="code-keyword">this</span>;
+    } <span class="code-comment">//operator=
+</span>
+    <span class="code-keyword">void</span> UseSharedMutex(std::mutex&amp; mutext) {
+        <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span>mutex = mutex;
+    } <span class="code-comment">//UseSharedMutex
+</span>
+    <span class="code-keyword">operator</span> T() <span class="code-keyword">const</span> {
+        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(*mutex);
+        <span class="code-keyword">return</span> <span class="code-keyword">value</span>;
+    } <span class="code-comment">//operator T
+</span>
+    T <span class="code-keyword">operator</span>=(<span class="code-keyword">const</span> T &amp;value) {
+        <span class="code-sdkkeyword">std::lock_guard</span><span class="code-keyword">&lt;</span><span class="code-sdkkeyword">std::mutex</span><span class="code-keyword">&gt;</span> lock(*mutex);
+        <span class="code-keyword">return</span> <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span><span class="code-keyword">value</span> = <span class="code-keyword">value</span>;
+    } <span class="code-comment">//operator=
+</span>
+private:
+
+    InterlockedProperty(<span class="code-sdkkeyword">std::mutex</span> * sharedMutex, <span class="code-keyword">const</span> T * <span class="code-keyword">value</span>) {
+        <span class="code-keyword">if</span> (sharedMutex == <span class="code-keyword">nullptr</span>)
+            mutex = &amp;uniqueMutex;
+        <span class="code-keyword">else</span>
+            mutex = sharedMutex;
+        <span class="code-keyword">if</span> (<span class="code-keyword">value</span> != <span class="code-keyword">nullptr</span>) <span class="code-comment">// don't use mutex to interlock value here: it could be not yet fully constructed
+</span>            <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span><span class="code-keyword">value</span> = *<span class="code-keyword">value</span>;
+    } <span class="code-comment">//InterlockedProperty
+</span>
+    <span class="code-sdkkeyword">std::mutex</span> uniqueMutex;
+    <span class="code-sdkkeyword">std::mutex</span> * mutex;
+    T <span class="code-keyword">value</span>;
+
+}; <span class="code-comment">// class InterockedProperty</span></pre>
+
+<p>The template class <code>InterlockedProperty</code> simply defines two operators for reading and writing of the property value and wraps the access to the value in the same mutex object.</p>
+
+<p>Of course, not all types can be used as a template parameter; the class with deleted default constructor could not be used.</p>
+
+<p>The initialization the <code>InterlockedProperty</code> instance requires some understanding.</p>
+
+<h2 id="initialization-of-interlockedproperty">Initialization of <code>InterlockedProperty</code></h2>
+
+<p>Look at the set of the public <code>InterlockedProperty</code> constructors. Two of them use the mutex object <code>uniqueMutex</code> constructed in the class, the other two use some external mutex instance supplied by the constructor. The simpler constructors, those without the external mutex parameter, implement the simplest case when the access to the property is interlocked between the thread wrapper’s thread, and other threads. It probably covers most of the most typical applications.</p>
+
+<p>However, for a different sort of applications, also a very typical one, this is not enough. The thread wrapper may have more than one property, and some properties have to be <em>synchronized together</em>. For example, a thread wrapper may operate two properties which values are not random, but they obey some <em>invariant</em>; that is, not all combination of the two property values is valid. In other words, it can be incorrect to modify one property in one thread and another one in another thread, because intermediate state of the thread wrapper may eventually become incorrect. The modification of the whole set of some properties should be mutually exclusive. Actually, this is a general purpose of the mutex.</p>
+
+<p>That said, all such properties should simply share the same instance of the mutex, which is possible to do by using the constructors with the <code>sharedMutex</code> parameters. Another ways to share a mutex are: using the <code>InterlockedProperty&amp; operator=(InterlockedProperty&amp;)</code> (only works for two instances of <code>InterlockedProperty</code> of the same template parameter type) or the <code>UseSharedMutex(std::mutex&amp;)</code> (can be called, for example, from the body of a thread wrapper constructor).</p>
+
+<p>Now, two of the constructors can be used to initialize property value. Not that the modification of the property value in the constructors is not interlocked. First, it is not needed. More importantly, it won’t work in all cases. One such case is shown on the <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP#usage">usage sample shown below</a>. In this sample, the shared mutex is the member of the thread wrapper class, and it is passed to the property instances in a constructor’s <em>initializer list</em>, where the <code>InterlockedProperty</code> constructors are called, but the <code>mutex</code> object is not yet fully constructed at that time. It can be easily observed under the debugger; and the class <a href="http://en.cppreference.com/w/cpp/thread/mutex"><code>std::mutex</code></a> is the one which cannot be used for locking in this state. In general, take extra care trying to call the functions of objects passed in a constructor’s initializer list.</p>
+
+<h2 id="usage-all-put-together">Usage, All Put Together</h2>
+
+<p>Now when all parts are explained, I can show some more or less comprehensive usage sample, complete with interlocked properties synchronized together:</p>
+
+<div id="usage">
+<div class="pre-lang" id="premain287483"><div>C++</div><div class="pre-action-link"><span class="code-collapse" data-index="287483" id="preShrink287483">Shrink ▲</span> &nbsp; <span id="copycode287483" class="copy-code" data-index="287483" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre287483" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> natural = <span class="code-keyword">unsigned</span> <span class="code-keyword">long</span> <span class="code-keyword">long</span> <span class="code-keyword">int</span>;
+
+<span class="code-keyword">class</span> MyThread : <span class="code-keyword">public</span> ThreadWrapper {
+public:
+    MyThread() : id(mutex, <span class="code-digit">2</span>), name(mutex) {}
+    InterlockedProperty<span class="code-keyword">&lt;</span><span class="code-keyword">int</span><span class="code-keyword">&gt;</span> id;
+    InterlockedProperty<span class="code-keyword">&lt;</span><span class="code-keyword">const</span> <span class="code-keyword">char</span>*<span class="code-keyword">&gt;</span> name, help;
+    InterlockedProperty<span class="code-keyword">&lt;</span>natural<span class="code-keyword">&gt;</span> delayMs;
+protected:
+    <span class="code-keyword">void</span> Body() <span class="code-keyword">override</span> {
+        <span class="code-keyword">auto</span> sleep = [=] {
+            std::this_thread::sleep_for(std::chrono::milliseconds(delayMs));
+        }; <span class="code-comment">//sleep
+</span>        <span class="code-keyword">int</span> count = <span class="code-digit">0</span>;
+        name = oldName;
+        <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+            <span class="code-keyword">this</span>-<span class="code-keyword">&gt;</span>SyncPoint();
+            <span class="code-sdkkeyword">std::cout</span> <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> count++ <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> help;
+            <span class="code-sdkkeyword">std::cout</span> <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> <span class="code-string">"</span><span class="code-string">id: "</span> <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> id <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> <span class="code-string">"</span><span class="code-string">, name: "</span> <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> name <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> <span class="code-sdkkeyword">std::endl</span>;
+            sleep();
+        } <span class="code-comment">//loop
+</span>    } <span class="code-comment">//Body
+</span>private:
+    <span class="code-keyword">const</span> <span class="code-keyword">char</span>* oldName = <span class="code-string">"</span><span class="code-string">none"</span>;
+    <span class="code-sdkkeyword">std::mutex</span> mutex;
+}; <span class="code-comment">//class MyThread
+</span>
+<span class="code-keyword">class</span> ThreadWrapperDemo {
+    <span class="code-keyword">enum</span> <span class="code-keyword">class</span> command {
+        abort = <span class="code-string">'</span><span class="code-string">a'</span>, <span class="code-comment">// abort thread
+</span>        quit = <span class="code-string">'</span><span class="code-string">q'</span>, <span class="code-comment">// also abort thread
+</span>        sleep = <span class="code-string">'</span><span class="code-string">s'</span>,
+        wakeUp = <span class="code-string">'</span><span class="code-string">w'</span>,
+    };
+    <span class="code-keyword">static</span> <span class="code-keyword">const</span> <span class="code-keyword">char</span>* help() { <span class="code-keyword">return</span> <span class="code-string">"</span><span class="code-string"> a, q: quit, s: sleep, w: wake up, else: change property; "</span>; }
+    <span class="code-keyword">static</span> <span class="code-keyword">bool</span> commandIs(<span class="code-keyword">char</span> c, command cmd) { <span class="code-keyword">return</span> (<span class="code-keyword">int</span>)cmd == (<span class="code-keyword">int</span>)c; }
+public:
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> Run(natural delayMs) {
+        <span class="code-keyword">const</span> <span class="code-keyword">char</span>* newName = <span class="code-string">"</span><span class="code-string">new"</span>;
+        MyThread <span class="code-keyword">thread</span>;
+        <span class="code-keyword">thread</span>.help = help();
+        <span class="code-keyword">thread</span>.delayMs = delayMs;
+        <span class="code-comment">//thread.Suspend(); // can be suspended before start, waken up after
+</span>        <span class="code-keyword">thread</span>.Start(); <span class="code-comment">// thread.Start(true) for the detached (background)
+</span>        <span class="code-keyword">char</span> cmd;
+        <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+            <span class="code-sdkkeyword">std::cin</span> <span class="code-keyword">&gt;</span><span class="code-keyword">&gt;</span> cmd;
+            <span class="code-keyword">if</span> (commandIs(cmd, command::abort) || commandIs(cmd, command::quit)) {
+                <span class="code-keyword">thread</span>.Abort();
+                <span class="code-keyword">break</span>;
+            } <span class="code-keyword">else</span> <span class="code-keyword">if</span> (commandIs(cmd, command::sleep))
+                <span class="code-keyword">thread</span>.PutToSleep();
+            <span class="code-keyword">else</span> <span class="code-keyword">if</span> (commandIs(cmd, command::wakeUp))
+                <span class="code-keyword">thread</span>.WakeUp();
+            <span class="code-keyword">else</span> {
+                <span class="code-keyword">thread</span>.id = <span class="code-keyword">thread</span>.id + <span class="code-digit">1</span>; <span class="code-comment">// no ++ defined
+</span>                <span class="code-keyword">thread</span>.name = newName;
+            } <span class="code-comment">//if
+</span>        } <span class="code-comment">//loop
+</span>        <span class="code-keyword">thread</span>.Join();
+    } <span class="code-comment">//Run
+</span>}; <span class="code-comment">// class ThreadWrapperDemo</span></pre>
+
+<p>This code fragment also shows thread termination and the access to thread members from two threads. Two comments show the option of starting a thread in the wait (sleep) state and the option of using the thread in background (detached) mode, still being able to join it.</p>
+
+<h2 id="compatibility-and-build">Compatibility and Build</h2>
+
+<p>All the thread wrapper solution is contained in just two files:</p>
+
+<ul>
+	<li>“ThreadWrapper.h”,</li>	<li>“InterlockedProperty.h”,</li></ul>
+
+<p>they can be added to any project.</p>
+
+<p>The compiler should support <a href="https://en.wikipedia.org/wiki/C%2B%2B11">C++11</a> or later standard. For GCC, this is an option which should be set to <code>-std=c++11</code> or, say, <code>-std=c++14</code>.</p>
+
+<p>The demo project is provided in two forms: 1) Visual Studio 2015 solution and project using Microsoft C++ compiler and <a href="http://clang.llvm.org/">Clang</a> — see “ThreadWrapper.sln” and 2) <a href="http://www.codeblocks.org/">Code::Blocks</a> project using <a href="https://gcc.gnu.org/">GCC</a> — “ ThreadWrapper.cbp”. For all other options, one can assemble a project or a make file by adding all “*.h” and “*.cpp” files in the code directory “Cpp”, a subdirectory of the directory of the solution file.</p>
+
+<p>I tested the code with Visual Studio 2015, <a href="http://clang.llvm.org/">Clang</a> 4.0.0, <a href="https://gcc.gnu.org/">GCC</a> 5.1.0.</p>
+
+<p>The C++ options included “disable language extensions” (<code>/Za</code> for Microsoft and Clang), which seems to be essential for Microsoft.</p>
+
+<h2 id="versions">Versions</h2>
+
+<h3 id="initial-version">Initial version</h3>
+
+<p>March 20, 2017</p>
+
+<h3 id="section">1.0</h3>
+
+<p>March 21, 2017</p>
+
+<p>Added <code>ConveyorThreadWrapper</code> derived from <code>ThreadWrapper</code>. This class is described in detail in a separate article, <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP"><em>Conveyor Thread Wrapper for Modern C++</em></a>. Re-designed demo application.</p>
+
+<h3 id="section-1">2.0</h3>
+
+<p>March 24, 2017</p>
+
+<p>Changed design of <code>ConveyorThreadWrapper</code>. In <code>ThreadWrapper</code>, extended the set of protected members, in order to support <code>ConveyorThreadWrapper</code>. Thread state synchronization separated from <code>ConveyorThreadWrapper</code> blocking queue synchronization.</p>
+
+<h3>2.1</h3>
+
+<p>October 29, 2017</p>
+
+<p>Fixed a bug in <code>ThreadWrapper::ExceptionCaught</code> function signature. Must be: <code>virtual void ExceptionCaught(std::exception&amp; exception) {}</code></p>
+
+<h2 id="final-notes">Final Notes</h2>
+
+<p>C# project with <code>Threading.ThreadWrapper</code> class is added for reference purposes. It is possible that I decide to write more articles on related topics. In this case, I’ll probably upgrade and share the source code downloadable from the present article page.</p>
+
+<p>I hope for informative feedback, criticism and suggestions on this article. Thank you for your time and patience.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-for-Modern-Cplusplus">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2017 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

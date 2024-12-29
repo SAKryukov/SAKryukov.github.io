@@ -1,0 +1,934 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0094)https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Microtonal Music Study with Chromatic Lattice Keyboard- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A pure Web browser application as a tool for advanced music harmony study in different tone systems">
+<meta name="Keywords" content="Javascript, HTML">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="9/1/2017 7:30:00 PM">
+<meta property="article:modified_time" content="7/24/2023 2:52:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="17 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb">
+<meta property="og:title" content="Microtonal Music Study with Chromatic Lattice Keyboard">
+<meta property="og:description" content="A pure Web browser application as a tool for advanced music harmony study in different tone systems">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb"
+   },
+  "name": "Microtonal Music Study with Chromatic Lattice Keyboard",
+  "headline": "Microtonal Music Study with Chromatic Lattice Keyboard",
+  "url": "https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb",
+  "discussionUrl": "https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,HTML",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "A pure Web browser application as a tool for advanced music harmony study in different tone systems",
+  "articleSection": "HTML",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2017-09-01",
+  "dateCreated": "2017-09-01",
+  "dateModified": "2023-07-24"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML",
+      "name" : "HTML"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML">HTML</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1204180/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="NKyugulmAiVskOJ1BZ/MmgTkHrsDRLzOgfrXx/SM+Jj4l7fB1Wy3qQ/N5+USxYX9MANcuW+jmysOpiZ5OHYawil4EB1d6LJ4uiusu/CS11PvO5jkiWZPsZY3LuuEXhn8yhGy60qbtk2vezogHzcYXemSjrkbl5RYDVcWUquaT4G0JfZ2K+sXhk9vBmsodPnyOoU9Sw0eL2tMx8n8z2T3wRCnQ2jXsaQujK4bW5iM6z/lMCHNB2x6e8OVYX2ZCjkeOkPO40PFpU1ec+OFftMWRfiDWubFbBO4QACpn5HpDgEGQ+YyrQkih0wx6R2su2D6ZC74XcYQHaP6TLKHgOgTxdLXBJ5YppG9hjQC+GpG6KA7n7fWgV4Z1+g3cfhM2mTi+attdTLDm7LmV19l+TGh1u3NcuuLWpIoXV8FJeHJsMPUB+d7p3m2Gy7Z/EegNfvaJzz5nnMBsQqgtgN/0eaC6CIE9GGmBxJNOcOdU2cPfCz7Yh0EL91g+qBJ0oYWHn2H3ZHbb53jqYQOPgn5/ezYdo/gghH0GeYMAvhFif5aKXofNCAeSw8Q200X8O0Owy8lvePoxEWO/eDeEm8rt88wQrwesB8m3n7eTZ8FYOIhwCP3XbBmAceYyYE2vzUeoU55ljnmDRT9FuKZ1Gr37qPQM5n/qwwqCNgeRRIKRVFviRd0nRotTZ/8TOeK3/lRE6F7mKQH6e87N+53N+Zq56DiN7/D9OXk5jDSYa9j4JEM6emB7yJS7Zpj0/4GhWcH+gXzdY0AFeFeznUvC1m3E84LYu77SyDjuSxNcZbSLJg/cJrY/0Aao43BMc+GlBHh/pgzxlDNcuWaF6wqqAqX+5I4aOpzi8uzF3eT5vZ5edc1NPy+KxqRfsiTqUQHDnq6PTHp8gWQkAOQx3yerMP+QT4mLVuA6LtzrjY417RBQNNpMWydit7vtz06VqFViMJj83PicxGln1/2XgOyRMR6qVgoVCnqkI5jk3p/cvIy5A8rJIR6KqRtOrX4SUfqlUCh57ESZAaNrai3uGMLcyvmnq91H/J9tdwQ4V0HOx5/+D3vo1BZxwiq19obBQeFSZtgMBYe/msDuELbnJV4U1Wqzp5sAZE8lcvmqRREAcEiLoabH+t+5euHRQm/A0WeZKUgqJoQAEG8JefJHEoJlAtZs71+3s2/6a85K+0u3STt/I/sNxe+iyEQRMhU6rNZR+c5sFoh/goJnW91pN658K+rmI1hi5/goCU5Kbiil+CbwZs8mJ7PUOFsLcl7d2eKbwmLHVtewP2wpEnGHC6UqFgrAdDYozTv3OxMBMez4FVbxbfXkFGrXl5ae7KW9FVRxiWiri/0OLoyqeuhB8hRSqzdiWS5h8j5sse62DqBLBX2oq8h5kdCYjZiwb1BdJVqpYAvBJraBZvY9WiMZJU9eJyMaCQWq6QbXq1YTI+K/cs23VfIlwpnBOFxy3wEkN7xn1ZJdHqccForsf4tTBcY8GEbBRdjPfVhSBpdc0A2LRxKKYMFxelXcYJPKxChK4z4pasCj1LkAF15pgg/ARVZwO3YnIXl6dVctZaxm78gCirzZARUXYjFEZwAicePp6dfInB1l6wsuzLWn0CaqHryY8ES5LLYA0/jXfesSPLPNoEY9byzK4v7rZsNDmeNqf8Ec/iSDJ4+CPggB2eoz65Ss0SskYGRzEA7xEr/DWwplU3wpZQGtXsqBkn15Ou+jJsp9VtoE+fJf8TmLuxkvMjZnQ9UeWL9DgKMKyloaftuPK+0L9fwYTf2F67sstwS1sxeE4bMEZSad+ub/XMHH95m+KIIufDvdxizrKody5G4EF1hzDXTK/w6bk8B3EgU4o3gH95Qaj0METdh6aPZhdGgwUAR3HuugkwGC7oXr56tGrDbtlXlCVVCqH2OKRA99hqP+xQBNqGGbl8/4O2nhuQwccpZppGnaXA2IL4rDSVJR3HHYNHh5aFH9eSB2HaoAyOphwT+Sm+AuXZnSMBddr1Sy7jYJco0IVHccQa62jyrzqplrKIxg6k+CL5rdVVcmTa5GYELHBex/NQ3F3lDqNp+e8fDzIXzbmtDq78B0tA4zH9c/qe4pK76iZxSK7wt7pmDp1809Bcx4AQIIHCRH3TKE3uGVWQVidKp64hglV/+rDolxoXUJHNCcvWl9phfzgOi5Y5NSN2ljj5vk6GSXOhnOp2nqcycLgOgB6E=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML" data-id="104">HTML</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Microtonal Music Study with Chromatic Lattice Keyboard</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1204180">
+
+	<meta itemprop="upvoteCount" content="21">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (22 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">1 Sept 2017, last revision: 24 Jul 2023</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">17 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 62.3K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 524</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A pure Web browser application as a tool for advanced music harmony study in different tone systems</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+    <li><a href="https://www.github.com/SAKryukov/microtonal-fabric.git">Download or clone source code from GitHub</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/Articles/1204180/Microtonal-Fabric.zip">Download Microtonal Fabric source code — 294.9 KB</a></li>-->
+</ul>
+
+<p id="image.title">&nbsp;</p>
+
+<p><img alt="31-EDO Keyboard, harmonic seventh chord" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.new-title.webp"/></p>
+
+<p>&nbsp;</p>
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-introduction" style="margin-left: 0">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-live-play" style="margin-left: 0">Live Play</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-why-microtonal3f" style="margin-left: 0">Why Microtonal?</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-supported-tone-systems" style="margin-left: 0">Supported Tone Systems</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-features" style="margin-left: 0">Features</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-using-the-application" style="margin-left: 0">Using the Application</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-microtonal-tone-systems-comparison" style="margin-left: 3em">Microtonal Tone Systems Comparison</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-microtonal-chromatic-lattice" style="margin-left: 3em">Microtonal Chromatic Lattice</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-why-start-button3f" style="margin-left: 3em">Why Start Button?</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-sound-synthesis" style="margin-left: 3em">Sound Synthesis</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-sound-quality" style="margin-left: 3em">Sound Quality</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-scalable-vector-graphics" style="margin-left: 3em">Scalable Vector Graphics</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-visual-development" style="margin-left: 6em">Visual Development</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-programmatical-development" style="margin-left: 6em">Programmatical Development</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-compatibility" style="margin-left: 3em">Compatibility</a><br>
+<a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#heading-versions" style="margin-left: 0">Versions</a></p>
+
+<h2 id="heading-introduction">Introduction</h2>
+
+<p>This is the second article in the series dedicated to musical study using specialized keyboards based on the computer keyboard:</p>
+<ol>
+<li><em><a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard">Musical Study with Isomorphic Computer Keyboard</a></em></li><li><em>Present article</em></li><li><em><a href="https://www.codeproject.com/Articles/5268512/Sound-Builder">Sound Builder, Web Audio Synthesizer</a></em></li><li><em><a href="https://www.codeproject.com/Articles/5362252/Multitouch-Support">Multitouch Support for Ten-Finger Playing</a></em></li></ol>
+
+<p>In my <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard">first article</a> of this series, I tried to explain very basic mathematical and physical aspects of music and put forward a keyboard structured to be very suggestive of music harmony. However, the application illustrates everything based on a much less general case of the <a href="https://en.wikipedia.org/wiki/Common_practice_period">common-practice</a> <a href="https://en.wikipedia.org/wiki/Musical_tuning">tone system</a>.</p>
+
+<p>The present and next article introduce the browser-based platform for microtonal music study, composers’ experiments, and more, called <a href="https://github.com/SAKryukov/microtonal-fabric">Microtonal Fabric</a>.</p>
+
+<p>The present article describes two Microtonal Fabric applications. The first one corresponds to the topic described by the title of the article, it is called Multi-EDO Chromatic Lattice; its source code can be found in “Multi-EDO”.</p>
+
+<p>The name “Microtonal Fabric” was created after these two applications were published. Its word “Fabric” is associated with two things. First, this is a matter of music, its material structure. Second, it suggests that the product is not only a set of browser applications sharing some common code. It is actually a platform for the <em>fabrication</em> of the applications, implementing any thinkable musical tonal systems, tunings, and keyboard layouts.</p>
+
+<p>The microtonal keyboard I’ve proposed provides more flexible ways for the very basic study of the field. I will often refer to certain points in my previous article. In the present article, I’m not going to get into theoretical reasoning much, mostly because my own study of microtonal music is only starting.</p>
+
+<p>The second application is the auxiliary one used for the study and the comparison of different tonal systems, the source code can be found in “tone-system-comparison”. It is useful for understanding how different EDO systems work. In particular, it can be used to play and listen to the chords to detect the compromised harmonic quality of the traditional present-day <em>common practice</em> <a href="https://en.xen.wiki/w/12edo">12-EDO system</a>.</p>
+
+<p>Here, “EDO” stands for “Equal Division of Octave” on a <em>logarithmic scale</em>. For example, the 12-EDO means the most widely used equal division of the octave into 12 “semitone” intervals. An alternative term is “12-TET”, it stands for “twelve-tone equal temperament”. Some authors do not consider EDO and TET terminology equivalent on the following basis: the term EDO does not imply <a href="https://en.wikipedia.org/wiki/Musical_temperament"><em>“temperament”</em></a>, because if we simply divide the octave into an arbitrary number of intervals, we can obtain intervals between tones that are very far from harmonical intervals. However, in this article we are going to consider only the tonal systems which approximate the harmonical intervals very well, so they can be considered temperaments.</p>
+
+<p>See also <a href="https://en.xen.wiki/w/Sergey_A_Kryukov">my page</a> at the microtonal community Web site <a href="https://en.xen.wiki/">Xenharmonic Wiki</a>. In addition to the Microtonal Fabric links, there are some useful links on different microtonal topics and personalities.</p>
+
+<h2 id="heading-live-play">Live Play</h2>
+
+<p>The ready-to-play applications, presently available in Microtonal Fabric can be found on the <a href="https://sakryukov.github.io/microtonal-fabric">Microtonal Fabric main documentation page</a>. One can try out the applications and play music directly in a Web browser.</p>
+
+<p>The application discussed in the present article is named <a href="https://sakryukov.github.io/microtonal-fabric/code/Multi-EDO">Multi-EDO Chromatic Lattice and can be played here</a>.</p>
+
+<p>Another application discussed in this article is the application for <a href="https://sakryukov.github.io/microtonal-fabric/code/tone-system-comparison">Microtonal System Comparison</a>.</p>
+
+<h2 id="heading-why-microtonal3f">Why Microtonal?</h2>
+
+<p>There can be very <a href="https://en.xen.wiki/">many answers</a> to this question. Not trying to cover the topic, I’ll try to point out four aspects I consider the most fundamental:</p>
+
+<ol>
+	<li>	<p>Traditional Western <a href="https://en.wikipedia.org/wiki/Equal_temperament">equal temperament</a> system <a href="https://en.xen.wiki/w/12edo">12-EDO</a> faces serious problems. Strictly speaking, its harmony does not sound quite harmonically. The basic sense of harmony is based on fundamental physical and mathematical principles independent of a particular culture. At the same time, <a href="https://en.wikipedia.org/wiki/Transposition_%28music%29#Transpositional_equivalence">transpositional equivalence</a> is impossible to achieve with strict harmonics – in my previous article, <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard#heading.rational-and-irrational-numbers">I tried to explain it</a>. However, hearing the defects require a pretty well-trained ear. So, here is the first principle: with microtonal systems, it’s possible to play music, which sounds very traditional, but more with improved harmony. At the same time, it’s possible to play something very different and unusual.</p>
+	</li>	<li>	<p>The historical musical instrument tuning and tonal systems can be considered microtonal in the following sense: they cannot be rendered using the modern common practice approach and the 12-tonal system, 12-EDO. However, they cannot be approximated very well using microtonal systems. Those historical systems are usually more refined in terms of musical harmony. The problem with these systems is the fixed tonality of a music piece, and the lack of <em>transpositional equivalence</em>, so arbitrary <a href="https://en.wikipedia.org/wiki/Transposition_(music)"><em>transposition</em></a> is impossible. The rendering of historical tonal systems can be considered as actual, in particular, for so-called <a href="https://en.wikipedia.org/wiki/Historically_informed_performance"><em>historically informed performance</em></a>.</p>
+	</li>	<li>	<p>In non-Western cultures, the microtonal approach is more actual. Traditional tuning systems can have more tones than twelve, they can use different principles rather than EDO. Microtonal Fabric helps to render any of those systems. For example, the application Microtonal Playground (source code: “playground”) contains the implementation of Indian <a href="https://en.wikipedia.org/wiki/Shruti_(music)">sruti</a>, traditional Chinese, and other systems. Microtonal Playground deserves a separate article.</p>
+	</li>	<li>	<p>How about the possibility to create new music? At first glance, it may sound impossible. I often heard from people, including musicians, that such music is awful and “out of tune”. Is it, really? I think, it depends. It can sound totally <a href="https://en.wikipedia.org/wiki/Xenharmonic_music">xenharmonic</a>, but it actually depends on the listener. The ability to perceive microtonal music can be limited by too strong bonding with the current cultural environment. The musical sense is a complicated combination of fundamental laws of nature and culture — I also <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard#heading.culture-versus-physics">tried to explain it</a>, very roughly. It simply means that understanding anything which can be called “music” always required involvement in culture and considerable listening experience. Microtonal music just needs involvement in a wider cultural context and more experience.</p>
+	</li></ol>
+
+<h2 id="heading-supported-tone-systems">Supported Tone Systems</h2>
+
+<p>The application Multi-EDO Chromatic Lattice supports the following systems:</p>
+
+<ul>
+	<li><a href="https://en.wikipedia.org/wiki/Just_intonation">Just Intonation</a> (only <a href="https://sakryukov.github.io/microtonal-fabric/code/tone-system-comparison">presented by the Multi-EDO Chromatic Lattice application</a> on the <a href="https://en.wikipedia.org/wiki/Chromatic_circle">chromatic-circle</a> keyboard)</li>	<li><a href="https://en.wikipedia.org/wiki/Common_practice_period">Common-practice</a> system <a href="https://en.xen.wiki/w/12edo">12-EDO</a></li>	<li><a href="https://en.wikipedia.org/wiki/19_equal_temperament">19-EDO</a></li>	<li><a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>.</li></ul>
+
+<p><a href="https://en.wikipedia.org/wiki/19_equal_temperament">29-EDO</a> is supported by a separate application (source code: “29-EDO”). This application is more advanced and is currently used for teaching music in the famous international Brainin school of music on a regular basis. It deserves a separate article.</p>
+
+<p>Any arbitrary tonal systems can be created using Microtonal Playground (source code: “playground”),</p>
+
+<h2 id="heading-features">Features</h2>
+
+<ul>
+	<li>For three chromatic tone systems, the same keyboard is used; the choice of tone system can be changed dynamically</li>	<li>Due to the very special keyboard layout, basic playing skills acquired and techniques learned for one tone system are immediately applicable to other tone systems</li>	<li>Side-by-side comparison of the sound of tones and chords in different tone systems</li>	<li>Choice of 5 instruments or 4 basic waveforms</li>	<li>Chord generation</li>	<li>Optional chord visualization</li>	<li>Compatible browsers include, but are not limited to Google Chrome, Mozilla Firefox, Mozilla SeaMonkey, and Opera.</li></ul>
+
+<p>Since v. 4.0:</p>
+
+<ul>
+	<li>Touch screen support. With a touch screen, one can play with ten fingers, any chords, and <em>glissando</em> (important) in any combination.</li></ul>
+
+<h2 id="heading-using-the-application">Using the Application</h2>
+
+<p>The applications presented in this article are two independent <a href="https://en.wikipedia.org/wiki/Single-page_application">single-page applications</a>.</p>
+
+<ol>
+	<li><a href="https://sakryukov.github.io/microtonal-fabric/code/tone-system-comparison">Microtonal Tone Systems Comparison</a> based on four chromatic-circle keyboards. Chords can be defined directly on the chromatic-circle keyboard and played separately in fast succession comparison.</li>	<li><a href="https://sakryukov.github.io/microtonal-fabric/code/Multi-EDO">Multi-EDO Chromatic Lattice</a> keyboard, which allows playing a wide range of tones. Chords can be defined through chord tables, auto-generated, and played with a single click or key press.</li></ol>
+
+<p>The full source code can be downloaded, but there is no need to download software to use it — everything can be played directly on the <a href="https://sakryukov.github.io/microtonal-fabric">main Microtonal Fabric documentation page</a>.</p>
+
+<h3 id="heading-microtonal-tone-systems-comparison">Microtonal Tone Systems Comparison</h3>
+
+<p>On the <a href="https://sakryukov.github.io/microtonal-fabric/code/tone-system-comparison">Microtonal System Comparison page</a>, all the round shapes can be used as musical instrument keys. Lower octaves are closer to the center. Central areas are used to play chords. The round shapes at the center are hidden and are visualized when at least one note is added to a chord. Shift+note toggles a note of a chord (double click to clear the chord). For example, the <a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#imagetitle">picture on the top</a> shows an inversion of the harmonic seventh chord, at the moment of playing, in the <a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a> system.</p>
+
+<p>The chords can be played by clicking at the centers of the round areas. Besides, if more than two chords are selected, two different temperaments can be listened to in fast alteration on the special control “<u>C</u>ompare (Ctrl+ ← →)”. When sound is activated, moving a mouse pointer between two halves quickly alters the chords:</p>
+
+<p><img alt="Chord Comparer" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.comparer.webp"/></p>
+
+<p>Now, let’s consider the circular keyboards to be used for the study of different tone systems.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Just_intonation">Just Intonation</a> compared with 12-EDO (gray):<br>
+<img alt="Just Intonation Keyboard" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.just.webp"/></p>
+
+<p>Just intonation is shown in comparison with the positions of <a href="https://en.wikipedia.org/wiki/Common_practice_period">Common-practice</a> <a href="https://en.xen.wiki/w/12edo">12-EDO</a> <em>semitones</em> depicted as gray radial lines. This picture reveals the bigger problem of tuning accuracy of 12-EDO: pure rendering of the 6th and, even more importantly, 3rd, which is the central note of the very important <a href="https://en.wikipedia.org/wiki/Major_chord">major chord</a>. The errors are 15.6 <a href="https://en.wikipedia.org/wiki/Cent_%28music%29">cents</a> for the 6th and 13.7 for the 3rd. Most probably people can hear the pretty subtle difference, perhaps after certain training, but the difference becomes more apparent in cases where inter-string resonances of the instruments (like piano or guitar) are noticeable.</p>
+
+<p>Note that <a href="https://en.wikipedia.org/wiki/Just_intonation">Just Intonation</a> is based on pure <a>harmonic relationships</a> between tones, is very important for comparison of tone systems, but is fairly impractical for the playing of most musical pieces due to the lack of <a href="https://en.wikipedia.org/wiki/Transposition_%28music%29#Transpositional_equivalence">transpositional equivalence</a>.</p>
+
+<p><a href="https://en.xen.wiki/w/12edo">12-EDO</a>:<br>
+<img alt="12-EDO Keyboard" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.12-EDO.webp"/></p>
+
+<p><a href="https://en.wikipedia.org/wiki/19_equal_temperament">19-EDO</a>:<br>
+<img alt="19-EDO Keyboard"/></p>
+
+<p>With <a href="https://en.wikipedia.org/wiki/19_equal_temperament">19-EDO</a>, two different intervals between the degrees of the <a href="https://en.wikipedia.org/wiki/Major_scale">major scale</a>: 2 (for B-C and E-F intervals) or 3 microtones. So, there is only one kind of sharp and one kind of flat, ±1 microtone. However, I avoid using ♯ and ♭ inside minor second intervals, to avoid the choice between <a href="https://en.wikipedia.org/wiki/Enharmonic">enharmonically equivalent</a> notations, because, in microtonal systems, enharmonic equivalence generally cannot be assumed – it is not the case for the 3-microtone minor second intervals.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>:<br>
+<img alt="31-EDO Keyboard" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.31-EDO.webp"/></p>
+
+<p>With <a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>, there are two sharp and flat intervals, 2 and 4 microtones. The “inverted” order of ♯ and ♭ is not a mistake, because they are sharp and flat based on different notes. For example, all the tones in C to D and B to C intervals are:</p>
+
+<p>C — D♭² — Db — C♯ — C♯² — D B — C♭ — B♯ — C</p>
+
+<p>Here, I denoted “double flat” (also known as half-sharp if counted from C) as D♭² and (also known as half-flat if counted from D) C♯². The Unicode characters for half/double sharp/flat are not standardized (and many other characters for musical notation are not implemented by default on most systems), so I decided to use my own notation, which is not shown on small keys.</p>
+
+<p>This way, there is only one kind of ♯ and one kind of ♭: ±2 microtones.</p>
+
+<p>So, there are two different intervals between the degrees of the <a href="https://en.wikipedia.org/wiki/Major_scale">major scale</a>: either 5 or 3 (between B and C and between E and F) microtones. It makes 31 microtones and very good rendering of the <a href="https://en.wikipedia.org/wiki/Major_scale">major scale</a>. At the same time altered intervals and chords can sound very differently.</p>
+
+<p id="special-chord-tables">Another way to define a chord is based on the degrees of the scale, which can be chosen from a table.</p>
+
+<p>This is the example of the table for <a href="https://en.wikipedia.org/wiki/19_equal_temperament">19-EDO</a> showing the default selection of <a href="https://en.wikipedia.org/wiki/Major_chord">major chord</a>:</p>
+
+<p><img alt="19-EDO Chord Table" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.table.webp"/></p>
+
+<p>For <a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>, the table is wider, because two more columns are added: “Double ♯” and “Double ♭”.</p>
+
+<p>For <a href="https://en.wikipedia.org/wiki/Just_intonation">Just Intonation</a> and <a href="https://en.xen.wiki/w/12edo">12-EDO</a>, I imposed some constraints to keep the chords matching the definition of a “valid” chord accepted as a modern music term. For example, for <a href="https://en.wikipedia.org/wiki/Equal_temperament">12-EDO</a> there major/minor/diminished/augmented triad is always either present or replaced with sus2 or sus4 — look at the last line:</p>
+
+<p><img alt="12-EDO Chord Table" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.table-12-EDO.webp"/></p>
+
+<p>This is not the case for microtonal systems. For consistency, generalization, and simplification, any subset of notes can be chosen, even the empty set, but no more than one alteration per zone. Note that the 6th and 7th zones are not united for microtonal systems, because generally there is no <a href="https://en.wikipedia.org/wiki/Enharmonic">enharmonically equivalent</a> between 6th and 7−; for the same reasons, there are no empty table cells for altered notes.</p>
+
+<p>The chord <a href="https://en.wikipedia.org/wiki/Inversion_(music)">inversions</a> are created by the check boxes “/2” and “/4”, which lower notes by one or two octaves.</p>
+
+<p>The same system of chord selection, based on shared JavaScript code, is used for the “big” chromatic lattice keyboard. Such selection provides the only way to play a chord in one click.</p>
+
+<h3 id="heading-microtonal-chromatic-lattice">Microtonal Chromatic Lattice</h3>
+
+<p>Basically, the idea of the lattice is based on the <a href="https://en.wikipedia.org/wiki/Wicki-Hayden_note_layout">Wicki-Hayden layout</a>, but the geometry is different. Instead of being hexagonal, it is rectangular, which is simpler and better matches the symmetry of the grid of tone relationships.</p>
+
+<p>The keyboard takes the same share, dimensions, and structure as the one offered in the <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard">previous article</a>. Its <em>fragment</em> is shown for <a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>:</p>
+
+<p><img alt="Microtonal Chromatic Lattice" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.keyboard.webp"/></p>
+
+<p>The green area is used to play part of the tones using the physical computer keyboard (sorry, modeled based on standard US keyboard layout, without any options; anyone who needs something else is welcome to address me).</p>
+
+<p>The controls are different. First of all, one of the three tonal systems and four layouts (<a href="https://en.xen.wiki/w/12edo">12-EDO</a>, 12-EDO in <a href="https://en.wikipedia.org/wiki/Jank%C3%B3_keyboard">Jankó layout</a>, <a href="https://en.wikipedia.org/wiki/19_equal_temperament">19-EDO</a>, and <a href="https://en.wikipedia.org/wiki/31_equal_temperament">31-EDO</a>) can be chosen at any time.</p>
+
+<p>Other controls enable optional highlighting of chords (played prefixed with Ctrl+) that are chosen from the tables <a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard#special-chord-tables">described above</a> and chord note marking using the scale degree notation.</p>
+
+<p>First surprising thing is that the tone layout looks nearly identical to that of 12-EDO. This layout is very special: 1) it is very suggestive of harmonic relationship between notes; 2) the layouts for different tone systems are “locally identical”. The differences become apparent, for example, in the attempt to perform <a href="https://en.wikipedia.org/wiki/Modulation_%28music%29">harmonic modulation</a>, which is very easy though, due to the chromatic nature of the keyboard. How does it work?</p>
+
+<p>Here is how the layout is structured:</p>
+
+<p><img alt="Fundamental Domain" src="./Resources-articles/2017-09-01.Microtonal-Music-Study-with-Chromatic-Lattice-Keyboard.3.webp"/></p>
+
+<p>The intervals in semitones depend on the tone system:</p>
+
+
+	<table class="grid"><tbody>		<tr>			<td>12-EDO</td>			<td>K=2</td>			<td>L=5</td>			<td>M=7</td>		</tr>		<tr>			<td>19-EDO</td>			<td>K=3</td>			<td>L=8</td>			<td>M=11</td>		</tr>		<tr>			<td>31-EDO</td>			<td>K=5</td>			<td>L=13</td>			<td>M=18</td>		</tr>		<tr>		</tr>	</tbody></table>
+
+<p>Obviously, the ratio values 3/2, 4/3, and 9/8 are only approximated by microtonal intervals, because rational frequency ratio values are <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard#heading.rational-and-irrational-numbers">impossible with equal temperaments</a>.</p>
+
+<h2 id="heading-implementation">Implementation</h2>
+
+<p>The implementation section does not cover all the Microtonal Fabric techniques, it is only focused on some key or interesting aspects relevant to the two applications described in the present articles. Some may need a separate article to cover.</p>
+
+<h3 id="heading-why-start-button3f">Why Start Button?</h3>
+
+<p>Both applications have “Start” or power-on <img alt="power-on" class="loading lazyload" id="image-hash--943712093" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="standby-on.png" style="max-width: 700px; height: auto"> buttons. Before the user clicks the button, nothing playable is visualized. Why? Basically, this is done to avoid the loss of the very first note played by the user. It would happen due to Web Audio <em>autoplay blocking</em>. The audio is available only after the user has interacted with the site (by clicking, tapping, pressing keys, etc.) Please see the [autoplay documentation] for more detail.</p>
+
+<p>The major part of the initialization of the Microtonal Fabric application happens in response to the click on this button. In particular, the keyboards become visible, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext">AudioContext</a> is initialized. If <code>AudioContext</code> was initialized before the first user input event, the very first sound activation would have been ignored by the Web Audio system. h</p>
+
+<h3 id="heading-sound-synthesis">Sound Synthesis</h3>
+
+<p>Firstly, sound synthesis is totally based on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> implemented by nearly all major browsers. Presently, it is based on the <a href="https://webaudio.github.io/web-audio-api">W3C working draft of August 2017</a>.</p>
+
+<p>Since v. 5.0, the synthesis is fully based on the code of Sound Builder and the instrument data it generates. Please see the <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder">article on Sound Builder</a> for further detail.</p>
+
+<h3 id="heading-sound-quality">Sound Quality</h3>
+
+<p>Because of the problems explained above, I would consider the quality as basically acceptable, but far from decent. First of all, I just failed to find a sufficient number of good samples. I would gladly try to use any data or advice. Perhaps sample-free synthesis of sounds from scratch. Perhaps the sample-free synthesis of sounds from scratch based on <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a> would be more suitable.</p>
+
+<h3 id="heading-scalable-vector-graphics">Scalable Vector Graphics</h3>
+
+<p>The on-screen keyboards of the Mictotonal Fabric applications use Scalable Vector Graphics based on embedded <code>&lt;svg&gt;</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/SVGGElement">elements</a>. The applications use two methods of keyboard initialization.</p>
+
+<p>The first method is based on the visual development of the keyboard. The entire keyboard is prepared using some kind of vector graphics editor. I use and recommend open-source <a href="https://en.wikipedia.org/wiki/Inkscape">InkScape</a>. In the code, the keyboard is initialized based on pre-created SVG elements.</p>
+
+<p>The second method is the programmatic population of the empty or dynamically created <code>&lt;svg&gt;</code> element.</p>
+
+<p>For different applications, both methods are useful. Let’s discuss them.</p>
+
+<h4 id="heading-visual-development">Visual Development</h4>
+
+<p>This method can be useful for <em>ad-hoc</em> programming when the keyboard is somewhat irregular and not too big. It is used for the tone system comparison application.</p>
+
+<p>When a keyboard is created with a vector graphics editor, it can be cleaned up: redundant metadata and identifiers can be removed, and the elements to be used in the code should be named consistently. Besides, numeric colors should better be replaced with suitable CSS names. Not all elements need to be identified with the <code>id</code> attribute; the references to most of them can be obtained via enumeration. This technique is shown in the source code file “tone-system-comparison/main-circular.js”:</p>
+
+<div class="pre-lang" id="premain826421"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="826421" id="preShrink826421">Shrink ▲</span> &nbsp; <span id="copycode826421" class="copy-code" data-index="826421" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre826421" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> populateKeyboard = <span class="code-keyword">function</span> (keyboard, chordActivator, toneSet, tonalSystem) {
+
+    <span class="code-keyword">const</span> frequencyArray = [];
+    <span class="code-keyword">const</span> keyMap = <span class="code-keyword">new</span> Map();
+
+    <span class="code-keyword">let</span> instrument;
+    <span class="code-keyword">const</span> soundHandler = (key, on) =&gt; {
+        instrument.play(on, keyMap.get(key).index);
+    }; <span class="code-comment">//</span><span class="code-comment">soundHandler</span>
+
+    chordActivator.chord = { count: <span class="code-digit">0</span> };
+
+    <span class="code-keyword">const</span> octaveGroups = [];
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> node of keyboard.childNodes) {
+        <span class="code-keyword">if</span> (node.<span class="code-sdkkeyword">constructor</span> != SVGGElement) <span class="code-keyword">continue</span>;
+        <span class="code-keyword">let</span> circleCount = <span class="code-digit">0</span>;
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> circle of node.childNodes)
+            <span class="code-keyword">if</span> (circle.<span class="code-sdkkeyword">constructor</span> == SVGCircleElement)
+                circleCount++;
+        <span class="code-keyword">if</span> (circleCount &gt; <span class="code-digit">5</span>) {
+            <span class="code-keyword">const</span> octave = [];
+            <span class="code-keyword">for</span> (<span class="code-keyword">let</span> circle of node.childNodes)
+                <span class="code-keyword">if</span> (circle.<span class="code-sdkkeyword">constructor</span> == SVGCircleElement)
+                    octave.push(circle);
+            octaveGroups.push(octave);
+        } <span class="code-comment">//</span><span class="code-comment">if</span>
+    } <span class="code-comment">//</span><span class="code-comment">loop counting</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> populate keyboard with event handlers, etc.</span>
+
+};</pre>
+
+<p>The references to the elements identified by their <code>id</code> attribute can be best obtained using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>Document.querySelector</code></a>.</p>
+
+<h4 id="heading-programmatical-development">Programmatical Development</h4>
+
+<p>Programmatical SVG development is much more maintainable in most cases, especially when graphics is more complicated and regular, which is the case for musical keyboards that are built based on some regular tonal system. Therefore, it is used for the Multi-EDO Chromatic Lattice application.</p>
+
+<p>The skeleton sample of the SVG population is shown in “Multi-EDO/keyboard.js”:</p>
+
+<div class="pre-lang" id="premain677426"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="677426" id="preShrink677426">Shrink ▲</span> &nbsp; <span id="copycode677426" class="copy-code" data-index="677426" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre677426" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-string">"</span><span class="code-string">use strict"</span>;
+
+<span class="code-keyword">const</span> keyboard = (definitionSet) =&gt; {
+
+    <span class="code-keyword">const</span> svgPreparer = (<span class="code-keyword">function</span> (svg) {
+        <span class="code-keyword">const</span> findNamespace = () =&gt; {
+            <span class="code-keyword">for</span> (<span class="code-keyword">let</span> index <span class="code-keyword">in</span> svg.attributes) {
+                <span class="code-keyword">const</span> attribute = svg.attributes[index];
+                <span class="code-keyword">if</span> (attribute.localName == <span class="code-string">"</span><span class="code-string">xmlns:svg"</span>)
+                    <span class="code-keyword">return</span> attribute.value;
+            } <span class="code-comment">//</span><span class="code-comment"> loop</span>
+        } <span class="code-comment">//</span><span class="code-comment">findNamespace</span>
+        <span class="code-keyword">const</span> namespace = findNamespace(svg);
+        <span class="code-keyword">return</span> { svg: svg, elementCreator: (tagName) =&gt; {
+            <span class="code-keyword">return</span> <span class="code-sdkkeyword">document</span>.createElementNS(namespace, tagName); } };
+    })(definitionSet.elements.keyboard);
+        
+    <span class="code-keyword">const</span> keyboardStructure = { rows: []};
+
+    <span class="code-keyword">const</span> svg = svgPreparer.svg;
+
+    svg.style.display = <span class="code-string">"</span><span class="code-string">none"</span>; <span class="code-comment">//</span><span class="code-comment"> to be visualized after initialization</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> populate keyboardStructure with keys, using svgPreparer</span>
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+    <span class="code-keyword">return</span> keyboardStructure;
+
+};</pre>
+
+<p>Keyboard structure is used to create a keyboard event handler, see “multi-EDO/keyboard-handler.js” for the detail.</p>
+
+<p>For detail, please see the complete source code.</p>
+
+<h3 id="heading-compatibility">Compatibility</h3>
+
+<p>At the moment of writing, Web Audio API exists as a W3C editor’s <a href="https://webaudio.github.io/web-audio-api">draft of 7 November 2022</a>. Nevertheless, the applications described in the present article work with most major browsers.</p>
+
+<p>Another advanced aspect is the use of SVG embedded in HTML. This feature is presently the part of <a href="https://www.w3.org/TR/html5/embedded-content-0.html#svg">W3C Recommendation of October 28, 2014</a>, and also should be quite usable.</p>
+
+<p>Besides, more modern JavaScript syntax is used, including <code>const</code>, <code>let</code> and <code>for... of</code>, not supported by some old browsers.</p>
+
+<p>The applications are successfully tested on Google Chrome, Opera, Mozilla Firefox, and Seamonkey.</p>
+
+<p>Not too surprisingly, nothing works on Microsoft browsers, and, for some reason, not even Microsoft Edge (despite Mozilla documentation claiming that both Audio API and embedded SVG are supported by Microsoft Edge). As these products often demonstrated a lack of compliance throughout their history and improvements have been very limited, it seems to be practical to curb their operation with advanced applications and provide some information on their incompatibility. However, this brings us to the problem solved in not a very trivial way.</p>
+
+<h2 id="heading-versions">Versions</h2>
+
+<h4>1.0.0</h4>
+
+<p>Initial production version.</p>
+
+<h4>1.1.0</h4>
+
+<ul>
+	<li>Added option “Use Computer Keyboard”.</li>	<li>On application pages, added links to the original publication.</li></ul>
+
+<p>The option added is important because some key combinations such as Ctrl+W (usually, the browser’s close tab) are busy with the physical computer keyboard function.</p>
+
+<h4>4.0.0</h4>
+
+<ul>
+	<li>Touch screen support.</li></ul>
+
+<h4>4.1.0</h4>
+
+<ul>
+	<li>The keyboard layout is generated dynamically rather than imported from a vector graphics image; it helped to make the keyboard layout variable.</li>	<li>Markup of the hardware keyboard on an on-screen keyboard (shown in green) is automatically calculated based on the on-screen keyboard data.</li>	<li>Several minor improvements.</li></ul>
+
+<h4>4.2.0</h4>
+
+<ul>
+	<li>Major refactoring to improve modularity and untangle dependencies between modules.</li>	<li>Unification of keyboard.html and tone-system-comparison.html applications, improved code, and reduced unwanted dependencies between applications.</li>	<li>Developed conversion of objects to read-only, recursive or not, applied to the definition sets of applications.</li>	<li>Solved the problem of the silent first note in file-based instruments, due to the use of futures and a need for deferring.</li></ul>
+
+<h4>5.0</h4>
+
+<p>Sound generation is migrated to the use of <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder">Sound Builder</a>.</p>
+
+<h4>5.4</h4>
+
+<ul>
+	<li>Wave FFT (see <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder">Sound Builder</a>) is migrated to .NET from .NET Core.</li>	<li>Refactoring related to the newly created project name, “Microtonal Fabric”.</li></ul>
+
+<h4>5.6</h4>
+
+<ul>
+	<li>Multitouch functionality is upgraded in order to support the simulation of plucked string instruments, such as guitars, mandolins, and the like. The application mimicking simulation of plucked string instruments is currently under development.</li>	<li>Sound system is upgraded to implement volume dynamics and pitch modification effects, such as portamento, finger vibrato, tremolo, or string bending. These effects can be applied to plucked string and other instruments.</li></ul>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-with-Chromatic-Lattice-Keyb">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2017 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

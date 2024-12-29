@@ -1,0 +1,916 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0090)https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Simple Blocking Queue for Thread Communication and Inter-thread Invocation- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A generic class to be used as a conveyor for data and tasks between threads">
+<meta name="Keywords" content="C#, threads">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="1/23/2011 4:52:00 PM">
+<meta property="article:modified_time" content="1/23/2011 9:40:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="4 min read">
+<meta property="og:url" content="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">
+<meta property="og:title" content="Simple Blocking Queue for Thread Communication and Inter-thread Invocation">
+<meta property="og:description" content="A generic class to be used as a conveyor for data and tasks between threads">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and"
+   },
+  "name": "Simple Blocking Queue for Thread Communication and Inter-thread Invocation",
+  "headline": "Simple Blocking Queue for Thread Communication and Inter-thread Invocation",
+  "url": "https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and",
+  "discussionUrl": "https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C#,threads",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "A generic class to be used as a conveyor for data and tasks between threads",
+  "articleSection": "threads",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2011-01-23",
+  "dateCreated": "2011-01-23",
+  "dateModified": "2011-01-23"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.98,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=programming",
+      "name" : "programming"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=threads",
+      "name" : "threads"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=programming">programming</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=threads">threads</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Tips/149540/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/threads" data-id="821">threads</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Simple Blocking Queue for Thread Communication and Inter-thread Invocation</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_149540">
+
+	<meta itemprop="upvoteCount" content="20">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.98/5  (20 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">23 Jan 2011</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">4 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 82.7K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A generic class to be used as a conveyor for data and tasks between threads</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/tip100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<p>I want to provide this advice on thread communication, because I already gave several answers on the use of threads to CodeProject members. I post my Answers to Questions found in Question &amp; Answers section of the site; and usually my answers are accepted very well. The only problem is that many questions cause me to reproduce nearly the same ideas over and over. I need to place some code and explanation in a permanent place and refer to it. At the same time, the techniques I offer may not fit the format of whole article. So, I think the form of Tips/Tricks will serve my purpose well.</p>
+
+<p>Here is the most typical situation. A developer creates some UI, most typically with <code>System.Windows.Forms</code>; WFP is less usual at this time. Some UI action requires long time processing; this is where the handling of the UI event does not work well. In this case, some developers don't know what to do, and some use threads, but try to create a thread repeatedly, using Background worker, created a regular threads or a thread from thread pool. In simple cases this is enough, but in massive processing and more complex logics the problem is the total number of threads that becomes unpredictable. Of course, the extra cost of repeated creation and later abandoning of a thread can easily cause a performance hit, and more importantly, a problem of clean-up (and generally, of support).</p>
+
+<p>&nbsp;</p>
+
+<p>In many such cases, I advice to create a fixed number of threads and permanently keep them running, posting some task to such thread when needed. What is relatively difficult to explain is how to keep a thread in a wait state (wasting zero CPU time) between tasks. It also takes some nerve to explain why spin wait is wrong.</p>
+
+<p>&nbsp;</p>
+
+<p>Another problem which seems to be different is a desire to implement behavior similar to <code>System.Windows.Forms.Control.Invoke</code> or <code>System.Windows.Threading.Dispatcher</code>. There is a popular misconception about this class, caused by the method <code>System.Windows.Threading.Dispatcher.GetCurrectDispatcher</code>. It always works, but the <code>Invoke</code> method can only be called on the target thread if this thread is designed in a special way. In practice, such inter-thread processing really takes place if the target thread if the specially designed UI thread created in the UI cycle of <code>Window.Form.Application</code> or WPF Application. The problem is that the class <code>Dispatcher</code> is sealed. So, the question is how to provide similar functionality a custom thread.</p>
+
+<p>&nbsp;</p>
+
+<p>The two groups of problems depicted above can be resolved using some queue encapsulated in the thread used as a target of the invocation. First, I made a simple blocking queue class to provide both data transport and synchronization between threads:</p>
+
+<p>&nbsp;</p>
+
+<div class="pre-lang" id="premain431473"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="431473" id="preShrink431473">Shrink ▲</span> &nbsp; <span id="copycode431473" class="copy-code" data-index="431473" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre431473" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Threading;
+<span class="code-keyword">using</span> System.Collections.Generic;
+
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> DataQueue&lt;ITEM&gt; {
+
+    <span class="code-keyword">public</span> DataQueue() { <span class="code-keyword">this</span>.IsBlocking = <span class="code-keyword">true</span>; }
+    <span class="code-keyword">public</span> DataQueue(<span class="code-keyword">bool</span> blocking) { <span class="code-keyword">this</span>.IsBlocking = blocking; }
+
+    <span class="code-keyword">public</span> EventWaitHandle WaitHandle { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FWaitHandle; } }
+
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Close() {
+        <span class="code-keyword">this</span>.FWaitHandle.Set();
+    } <span class="code-comment">//</span><span class="code-comment">Close</span>
+
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Submit(ITEM item) {
+        <span class="code-keyword">lock</span> (LockObject) 
+            Queue.Enqueue(item);
+        FWaitHandle.Set();
+    } <span class="code-comment">//</span><span class="code-comment">Submit</span>
+
+    <span class="code-keyword">public</span> ITEM GetMessage() {
+        <span class="code-keyword">if</span> (IsBlocking)
+            FWaitHandle.WaitOne();
+        ITEM result = <span class="code-keyword">default</span>(ITEM);
+        <span class="code-keyword">lock</span> (LockObject) {
+            <span class="code-keyword">if</span> (Queue.Count &gt; <span class="code-digit">0</span>)
+                result = Queue.Dequeue();
+            <span class="code-keyword">if</span> (IsBlocking &amp;&amp; (Queue.Count &lt; <span class="code-digit">1</span>))
+                FWaitHandle.Reset();
+            <span class="code-keyword">return</span> result;
+        } <span class="code-comment">//</span><span class="code-comment">lock</span>
+    } <span class="code-comment">//</span><span class="code-comment">GetMessage</span>
+
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Clear() {
+        <span class="code-keyword">lock</span> (LockObject)
+            Clear(Queue);
+    } <span class="code-comment">//</span><span class="code-comment">Clear</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Clear(Func&lt;ITEM, bool&gt; removalCriterion) {
+        <span class="code-keyword">lock</span> (LockObject)
+            Clear(Queue, removalCriterion);
+    } <span class="code-comment">//</span><span class="code-comment">Clear</span>
+
+    <span class="code-region">#region implementation
+</span>    
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> Clear(Queue&lt;ITEM&gt; queue) { queue.Clear(); }
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> Clear(Queue&lt;ITEM&gt; queue, Func&lt;ITEM, bool&gt; removalCriterion) {
+        <span class="code-keyword">if</span> (removalCriterion == <span class="code-keyword">null</span>) {
+            queue.Clear();
+            <span class="code-keyword">return</span>;
+        } <span class="code-comment">//</span><span class="code-comment">if</span>
+        Queue&lt;ITEM&gt; copy = <span class="code-keyword">new</span> Queue&lt;ITEM&gt;();
+        <span class="code-keyword">while</span> (queue.Count &gt; <span class="code-digit">0</span>) {
+            ITEM item = queue.Dequeue();
+            <span class="code-keyword">if</span> (!removalCriterion(item))
+                copy.Enqueue(item);
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        <span class="code-keyword">while</span> (copy.Count &gt; <span class="code-digit">0</span>)
+            queue.Enqueue(copy.Dequeue());
+    } <span class="code-comment">//</span><span class="code-comment">Clear</span>
+
+    <span class="code-keyword">bool</span> IsBlocking;
+    Queue&lt;ITEM&gt; Queue = <span class="code-keyword">new</span> Queue&lt;ITEM&gt;();
+    
+    <span class="code-comment">//</span><span class="code-comment">SA!!! important ManualReset.</span>
+    <span class="code-comment">//</span><span class="code-comment">See GetMessage for re-setting</span>
+    EventWaitHandle FWaitHandle = <span class="code-keyword">new</span> EventWaitHandle(<span class="code-keyword">false</span>, EventResetMode.ManualReset);
+    <span class="code-sdkkeyword">Object</span> LockObject = <span class="code-keyword">new</span> <span class="code-keyword">object</span>();
+
+    <span class="code-region">#endregion implementation
+</span>
+} <span class="code-comment">//</span><span class="code-comment">DataQueue</span></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>I recommend using blocking operation nearly in all cases, otherwise the mechanism would behave like spin wait, causing unwanted abuse of the CPU.</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Here is the simple sample of the target thread and the usage, a Console application:</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div class="pre-lang" id="premain62206"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="62206" id="preShrink62206">Shrink ▲</span> &nbsp; <span id="copycode62206" class="copy-code" data-index="62206" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre62206" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Threading;
+
+<span class="code-keyword">class</span> QueuedThread {
+    <span class="code-keyword">internal</span> QueuedThread() { <span class="code-keyword">this</span>.Thread = <span class="code-keyword">new</span> Thread(Body); }
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Start() { <span class="code-keyword">this</span>.Thread.Start(); }
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Abort() { <span class="code-comment">//</span><span class="code-comment">be extra careful!</span>
+        <span class="code-keyword">this</span>.Queue.Close();
+        <span class="code-keyword">this</span>.Thread.Abort();
+    } <span class="code-comment">//</span><span class="code-comment">Abort</span>
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> PostMessage(<span class="code-keyword">string</span> message) {
+        <span class="code-keyword">this</span>.Queue.Submit(message);
+    } <span class="code-comment">//</span><span class="code-comment">void PostMessage</span>
+    <span class="code-region">#region implementaion
+</span>    <span class="code-keyword">void</span> Body() {
+        <span class="code-keyword">try</span> {
+            <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+                <span class="code-keyword">string</span> message = Queue.GetMessage();
+                <span class="code-comment">//</span><span class="code-comment">safe way to exit, not alway possible</span>
+                <span class="code-keyword">if</span> (message == <span class="code-keyword">null</span>)
+                    <span class="code-keyword">break</span>;
+                ProcessMessage(message);
+            } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        } <span class="code-keyword">catch</span> (ThreadAbortException) {
+            <span class="code-comment">//</span><span class="code-comment">Very important in case Abort is used</span>
+            <span class="code-comment">//</span><span class="code-comment">Provide last-will processing here</span>
+            <span class="code-comment">//</span><span class="code-comment">even if Abort is not a designed option</span>
+        } <span class="code-keyword">catch</span> (Exception e) { <span class="code-comment">//</span><span class="code-comment">always needed</span>
+            Console.WriteLine(<span class="code-string">"</span><span class="code-string">{0}: {1}"</span>, e.GetType().Name, e.Message);
+        } <span class="code-comment">//</span><span class="code-comment">exception</span>
+    } <span class="code-comment">//</span><span class="code-comment">Body</span>
+    <span class="code-keyword">void</span> ProcessMessage(<span class="code-keyword">string</span> message) {
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">message Processed {0}"</span>, message);
+    } <span class="code-comment">//</span><span class="code-comment">ProcessMessage</span>
+    Thread Thread;
+    DataQueue&lt;string&gt; Queue = <span class="code-keyword">new</span> DataQueue&lt;string&gt;();
+    <span class="code-region">#endregion implementaion
+</span>} <span class="code-comment">//</span><span class="code-comment">class QueuedThread</span>
+
+<span class="code-keyword">class</span> Program {
+
+    <span class="code-keyword">void</span> Run() {
+        QueuedThread t = <span class="code-keyword">new</span> QueuedThread();
+        t.Start();
+        t.PostMessage(<span class="code-string">"</span><span class="code-string">first"</span>);
+        Thread.Sleep(<span class="code-digit">400</span>);
+        t.PostMessage(<span class="code-string">"</span><span class="code-string">second"</span>);
+        Thread.Sleep(<span class="code-digit">400</span>);
+        t.PostMessage(<span class="code-string">"</span><span class="code-string">third"</span>);
+        Console.WriteLine();
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">Finished. Press any key..."</span>);
+        Console.ReadKey(<span class="code-keyword">true</span>);
+        <span class="code-comment">//</span><span class="code-comment">safest way of exiting of the thread,</span>
+        <span class="code-comment">//</span><span class="code-comment">unfortunatelly, not applicable to 100% cases:</span>
+        t.PostMessage(<span class="code-keyword">null</span>);
+        <span class="code-comment">//</span><span class="code-comment">less safe way, need extra care in thread implementation,</span>
+        <span class="code-comment">//</span><span class="code-comment">safe enough for this sample though:</span>
+        <span class="code-comment">//</span><span class="code-comment">t.Abort();</span>
+    } <span class="code-comment">//</span><span class="code-comment">Run</span>
+
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main(string[] args) {
+        <span class="code-keyword">new</span> Program().Run();
+    } <span class="code-comment">//</span><span class="code-comment">Main</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class Program</span></pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>I don't want to go deeper into the relatively complex issue related to acceptance of <code>Abort</code> method (see sample code). Sometimes, such discussions lead to flame wars. The final decision should be made by the developer who wants to use my advice (and, generally, any developer using threads). Anyway, when a data queue is used, Abort could easily be avoided using a special “termination” message (like an empty string in my simple example above).</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Finally, one can also use delegates to implement processing tasks instead just of data elements:</p>
+
+<p>&nbsp;</p>
+
+<p>The above may appear to be not flexible enough. The thread needs to know what to do with the data item; hence <code>ProcessMessage</code> is just one fixed method. Here is when inter-thread invocation similar to <code>Dispatcher</code> should come into play.</p>
+
+<p>&nbsp;</p>
+
+<p>So, how about the Delegate invocation? Well, nothing prevents adding a delegate to the <code>ITEM</code> type. This is a just bit more complex. The first thing to understand is that a parameter (or parameters) for delegate invocation should be supplied as well. This is a minimalistic sample, again a Console application:</p>
+
+<p>&nbsp;</p>
+
+<div class="pre-lang" id="premain755942"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="755942" id="preShrink755942">Shrink ▲</span> &nbsp; <span id="copycode755942" class="copy-code" data-index="755942" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre755942" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Threading;
+
+<span class="code-keyword">class</span> DelegateInvocationThread {
+
+    <span class="code-keyword">class</span> ActionWithParameter&lt;PARAMETER&gt; {
+        <span class="code-keyword">internal</span> ActionWithParameter(Action&lt;PARAMETER&gt; action, PARAMETER parameterValue) {
+            <span class="code-keyword">this</span>.Action = action;
+            <span class="code-keyword">this</span>.Parameter = parameterValue;
+        } <span class="code-comment">//</span><span class="code-comment">ActionWithParameter</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">static</span> ActionWithParameter&lt;PARAMETER&gt; ExitAction { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FExitAction; } }
+        <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Invoke() {
+            <span class="code-keyword">if</span> (Action != <span class="code-keyword">null</span>)
+                Action(Parameter);
+        } <span class="code-comment">//</span><span class="code-comment">Invoke</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">bool</span> ExitCondition { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> Action == <span class="code-keyword">null</span> || Parameter == <span class="code-keyword">null</span>; } }
+        Action&lt;PARAMETER&gt; Action;
+        PARAMETER Parameter;
+        <span class="code-keyword">static</span> ActionWithParameter&lt;PARAMETER&gt; FExitAction =
+            <span class="code-keyword">new</span> ActionWithParameter&lt;PARAMETER&gt;(<span class="code-keyword">null</span>, <span class="code-keyword">default</span>(PARAMETER));
+    } <span class="code-comment">//</span><span class="code-comment">ActionWithParameter</span>
+
+    <span class="code-keyword">internal</span> DelegateInvocationThread() { <span class="code-keyword">this</span>.Thread = <span class="code-keyword">new</span> Thread(Body); }
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Start() { <span class="code-keyword">this</span>.Thread.Start(); }
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Invoke(Action&lt;string&gt; action, <span class="code-keyword">string</span> parameter) {
+        Queue.Submit(<span class="code-keyword">new</span> ActionWithParameter&lt;string&gt;(action, parameter));
+    } <span class="code-comment">//</span><span class="code-comment">Invoke</span>
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> InvokeExit() {
+        Queue.Submit(ActionWithParameter&lt;string&gt;.ExitAction);
+    } <span class="code-comment">//</span><span class="code-comment">InvokeExit()</span>
+    <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Abort() { <span class="code-comment">//</span><span class="code-comment">be extra careful!</span>
+        <span class="code-keyword">this</span>.Queue.Close();
+        <span class="code-keyword">this</span>.Thread.Abort();
+    } <span class="code-comment">//</span><span class="code-comment">Abort</span>
+    
+    <span class="code-region">#region implementaion
+</span>    <span class="code-keyword">void</span> Body() {
+        <span class="code-keyword">try</span> {
+            <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+                ActionWithParameter&lt;string&gt; action = Queue.GetMessage();
+                <span class="code-comment">//</span><span class="code-comment">safe way to exit, not alway possible</span>
+                <span class="code-keyword">if</span> (action.ExitCondition)
+                    <span class="code-keyword">break</span>;
+                action.Invoke();
+            } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        } <span class="code-keyword">catch</span> (ThreadAbortException) {
+            <span class="code-comment">//</span><span class="code-comment">Very important in case Abort is used</span>
+            <span class="code-comment">//</span><span class="code-comment">Provide last-will processing here</span>
+            <span class="code-comment">//</span><span class="code-comment">even if Abort is not a designed option</span>
+        } <span class="code-keyword">catch</span> (Exception e) { <span class="code-comment">//</span><span class="code-comment">always needed</span>
+            Console.WriteLine(<span class="code-string">"</span><span class="code-string">{0}: {1}"</span>, e.GetType().Name, e.Message);
+        } <span class="code-comment">//</span><span class="code-comment">exception</span>
+    } <span class="code-comment">//</span><span class="code-comment">Body</span>
+    <span class="code-keyword">void</span> ProcessMessage(<span class="code-keyword">string</span> message) {
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">message Processed {0}"</span>, message);
+    } <span class="code-comment">//</span><span class="code-comment">ProcessMessage</span>
+    Thread Thread;
+    DataQueue&lt;ActionWithParameter&lt;string&gt;&gt; Queue = 
+        <span class="code-keyword">new</span> DataQueue&lt;ActionWithParameter&lt;string&gt;&gt;();
+    <span class="code-region">#endregion implementaion
+</span>} <span class="code-comment">//</span><span class="code-comment">class DelegateInvocationThread</span>
+
+<span class="code-keyword">class</span> Program {
+
+    <span class="code-keyword">void</span> Run() {
+        DelegateInvocationThread t = <span class="code-keyword">new</span> DelegateInvocationThread();
+        t.Start();
+        t.Invoke(
+            <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) {
+                Console.WriteLine(<span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">Method #1, parameter: {0}"</span>, <span class="code-sdkkeyword">value</span>));
+            }, <span class="code-string">"</span><span class="code-string">first"</span>);
+        Thread.Sleep(<span class="code-digit">400</span>);
+        t.Invoke(
+            <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) {
+                Console.WriteLine(<span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">Method #2, parameter: {0}"</span>, <span class="code-sdkkeyword">value</span>));
+            }, <span class="code-string">"</span><span class="code-string">second"</span>);
+        Thread.Sleep(<span class="code-digit">400</span>);
+        t.Invoke(
+            <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) {
+                Console.WriteLine(<span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">Method #3, parameter: {0}"</span>, <span class="code-sdkkeyword">value</span>));
+            }, <span class="code-string">"</span><span class="code-string">third"</span>);
+        Console.WriteLine();
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">Finished. Press any key..."</span>);
+        Console.ReadKey(<span class="code-keyword">true</span>);
+        <span class="code-comment">//</span><span class="code-comment">safest way of exiting of the thread,</span>
+        <span class="code-comment">//</span><span class="code-comment">unfortunatelly, not applicable to 100% cases:</span>
+        t.InvokeExit();
+        <span class="code-comment">//</span><span class="code-comment">less safe way, need extra care in thread implementation,</span>
+        <span class="code-comment">//</span><span class="code-comment">safe enough for this sample though:</span>
+        <span class="code-comment">//</span><span class="code-comment">t.Abort();</span>
+    } <span class="code-comment">//</span><span class="code-comment">Run</span>
+
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main(string[] args) {
+        <span class="code-keyword">new</span> Program().Run();
+    } <span class="code-comment">//</span><span class="code-comment">Main</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class Program</span></pre>
+
+<p>I've shown anonymous delegate syntax which can be compiled with C# v.2 or later. With C# v.3 lambda form of anonymous delegate can also be used:</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<div class="pre-lang" id="premain767206"><div>C#</div><div class="pre-action-link"><span id="copycode767206" class="copy-code" data-index="767206" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre767206" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">t.Invoke(
+    <span class="code-keyword">new</span> Action&lt;string&gt;((<span class="code-sdkkeyword">value</span>) =&gt; {
+        Console.WriteLine(<span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">Method #3, parameter: {0}"</span>, <span class="code-sdkkeyword">value</span>));
+    }), <span class="code-string">"</span><span class="code-string">third"</span>);</pre>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>This idea could further be used to combine more than one queue in the same target thread. The warning is: it is not possible to use more than one instance of <code>DataQueue</code> in the same thread: they will block each other, if blocking operation is used. The modifications should go inside the class <code>DataQueue</code>. At the same time, such generalization is easy using the techniques I offer.</p>
+
+<p>Thank you,</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<dl>
+	<dd>— Sergey A Kryukov</dd></dl>
+
+<p>&nbsp;</p>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2011 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

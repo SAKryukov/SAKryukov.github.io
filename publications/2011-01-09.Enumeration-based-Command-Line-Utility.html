@@ -1,0 +1,1027 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0082)https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Enumeration-based Command Line Utility- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="An example the application of Enumeration class, third article of the series">
+<meta name="Keywords" content="VS2005, VS2008, C#, .NET, Beginner, Intermediate, Advanced, VS2010">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="1/9/2011 5:23:00 PM">
+<meta property="article:modified_time" content="5/14/2017 2:48:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="19 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">
+<meta property="og:title" content="Enumeration-based Command Line Utility">
+<meta property="og:description" content="An example the application of Enumeration class, third article of the series">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility"
+   },
+  "name": "Enumeration-based Command Line Utility",
+  "headline": "Enumeration-based Command Line Utility",
+  "url": "https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility",
+  "discussionUrl": "https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "VS2005,VS2008,C#,.NET,Beginner,Intermediate,Advanced,VS2010",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "An example the application of Enumeration class, third article of the series",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2011-01-09",
+  "dateCreated": "2011-01-09",
+  "dateModified": "2017-05-14"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.99,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/144349/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="U486Li1XbGY+j3MvPJiCxsxNhT2Y77LMD5M4qPYgVN72Gy8RGdQmnv+9ZMgFws556h2ztzaJ0c+2AQ8XrSyxLXg1WWx5uEhyyVBrha48ZJWhCHkvYSzVQjsQ2mV6ZkneK/IHOxj30Sa2CCrDmlcoaMrAELqRk8WqVrFwAFBP/5dcMEpKCeSwX74k4z2YhfU6uTZOm0Xxe89DIPth0fOBdxs0/jFT4NjzvQByoyhwKmAJefBaRsFvOBlRV2zF0pEnhHo3PSrsdfFEps8UaWpRV8PCGyeWj2SBBLsPzm2l1SKHglU2Sx9/lrOFZO32A5nhKVqJGIUKCD06MV7bsIpPSsiJu6LYlIi6smsymPMI8sWc1bRh3Lij9z09Tq9T07dIwv24LIvmRzYKVOUSUUsON21YNH++bwjcUA/ot/TlSQFd/e7uAFPfbdeHlNVJvlMCncgIjjaZ2hEH6GxgUmTWDAe/3fvlKadcaLGjYyUDB5WJb5NF5AitScvN+MEG0ynjbOAvuoILuHewCh6cszAp0vJ3g3GFBcff7yoJ96cGLvfj/uHqCGIcH2K206pTyP+l/DQjuDPdgUtsfhteKe54ADaikZM60QSfMmLQyWnB+j6TRtxXOYgp8skcYbFXnvvdpeDhfQ/PC/osM8cedrBUbMr/mdrc9NGuf/7zMeM6X5DWbaUX6mzBk7eQjVOo9nowkjoVn3ke3ESs2m83j+ZDBMLayZHfHZ4BG91Q84WeSREyvMUE8K3NEsb+W5o79WygVQYOAfoCzZa3gFoj1fKGpL5n4L55Atw15fwy+3wD8aS34phu+6vGsucbq/U1YMS8qJgLAE3dpOORyN6a45ykAL6U9OeLehcH1Yfqfn3J1WzalHDP50JM7UrXrcZaphkoWn37Su9U4OdEMD4y3h7kZ0iQ9AWYguu2RUYj7Mv7KTjx6p1i7TKGPXoFefEgpO3xLKyN3r/f2NTdlQb3oCpzzEjyw3aXoMUpCjyegcpRUClkqQseSkcUV6q/hoflWnNCeNMhEXM1Kz3DaQMIrCBKKurpFJhTk2A8EO/CfNSmhJKFeCHZ1jl9Ty5Z9B9OR6OkcN3nD51SGevlpcoNq7vxp9ZuLVY6SijVhKUaLBvbf/vvxSMRmA+OtR/RffJGqjLxLtdyRiz1bYoOuto4Lr9yqavWgRhHWmo0PQNVRY6iMMAz966p7oWD9N0I7BSPsE5175eI/dWrf9u1/tkjYgMFapnlSyLQPkhBduYiTD0SOw+nktaesGC2r49cnd62ldQW1/chwCJ6P6MePcpYl6lTir8BEBzUfG0gSHZvzfNQt3RjNbJqsodAxeR79RoLt3XnLB5dHIxI6REj6Nb6rIPREuBqrj2egfBNJdJy7kdTU5qK44bbRk1nhOaDssSOL1L8G6Zsx0wCQSCpXfp1acRRniIdQN99yfcSo1B+7Ip37EomiuhK/WkdX1dupkBzIh/bBingpxwHRXsSXVKMxDUI43fAc2x5uYup7eRzBAf5jou93Ka+Q6y899n+Mk67MMFdNCxYzo9iFGx7gxHJEjG/oR5rvW4zVJuF4/4G81/UDcpXDT6cj0Z6fwy/CLgh4qfxtgMvDuUfbQHjnhc5dmjbLpEpoFXXd32OUJxUiFRH2mZpHfdAlEdINVKyfDiueCtZJHKP9wxIAKLx9OHhQYHIF+m27snZok0Thfo1JY/7XxCpszHMmojcAyFWJRGcCTZb3rwNqK2TXYACOHDbgGTdzuaBg3NuUOVG+45HGvhnriqFB8Wip3r4Ajv77r8rxkeJbO0rb2FsD4runIQZwPEazulY8jlX35TLQLmoqVJOOiaRE+xxLyhBs33YcgzT2f7zrulxPdPWCHeMkbN5E53ngN+1qEjQ/cqQD5l8uIibqacACHZLkhZwi//QjF5sEDqQCMBT5jAe06au073k06GKPQH/maFqaXV9vWn3QyRdjE95U6b2uBtjsUbKVrfHgj9BiAHQT01ppW2JLFxe5dkgufSHmw6QKP30HYwb3a2ABr5cyqP3oCjzuHqU5/ODRXOWywiRmhWtCKA+qX9saohxXX9iPDwqRRC5KrpQsjbU77mDtXHw7nscQykjFEcV1RJWMOWf/eiFzrPCrpluLxBbWw0va5okpKFtRRVhYV8dnCfxEn3t">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2005" data-id="39">VS2005</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2008" data-id="77">VS2008</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2010" data-id="314">VS2010</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Enumeration-based Command Line Utility</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_144349">
+
+	<meta itemprop="upvoteCount" content="47">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.99/5  (49 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">14 May 2017</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">19 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 105.9K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 934</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">An example the application of Enumeration class, third article of the series</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Enumeration-based-Command-Line-Utility.zip">Download source code — 75.95 KB</a></li></ul>
+<p><img alt="2011-01-09.Enumeration-based-Command-Line-Utility.webp" title="Enumeration-based command-line utility" src="./Resources-articles/2011-01-09.Enumeration-based-Command-Line-Utility.webp"/></p>
+<!--<p><img alt="EnumerationCommandLine/EnumerationCommandLine.png" height="522" src="./Resources/EnumerationCommandLine.png" style="width: 494px; height: 522px" width="494" class="lazyautosizes ls-is-cached lazyloaded" data-sizes="auto" data-srcset="/KB/dotnet/EnumerationCommandLine/EnumerationCommandLine-r-400.png 400w, /KB/dotnet/EnumerationCommandLine/EnumerationCommandLine.png 494w" sizes="494px" srcset="/KB/dotnet/EnumerationCommandLine/EnumerationCommandLine-r-400.png 400w, /KB/dotnet/EnumerationCommandLine/EnumerationCommandLine.png 494w"></p>-->
+
+<h2>Table of Contents</h2>
+
+<ul style="list-style-type: none; list-style-image: initial">
+	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a1">1. Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a2">2. Why Yet Another Command Line Utility?</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a3">3. Basic Usage</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a4">4. Command Line Schema</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5">5. CommandLine Class</a>
+	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.1">5.1. Command Line Parsing Options</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.2">5.2. Accessing Switch Option Status</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.3">5.3. Accessing Value Option: Value and Status</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.4">5.4. Accessing File Options</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.5">5.5. Reporting Command Line Errors</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.6">5.6. Enumeration Instances for Iteration through Options</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.7">5.7. Can Command Line Meta-data be Inconsistent?</a></li>		<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.8">5.8. Command Line Documentation</a></li>	</ul>
+	</li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a6">6. CommandLine Testing</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a7">7. Building Code and Compatibility</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a8">8. Alternatives</a></li>	<li><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a9">9. Conclusion</a></li></ul>
+
+<h2 id="a1">1. Introduction</h2>
+
+<p>This article is the third article of the small series of articles on enumeration types I'm presenting to CodeProject members:</p>
+
+<ol>
+	<li><a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">Enumeration Types do not Enumerate! Working around .NET and Language Limitations</a>;</li>	<li><a href="https://www.codeproject.com/KB/dotnet/HumanReadableEnumerations.aspx">Human-readable Enumeration Meta-data</a>;</li>	<li>The present article;</li>	<li><a href="http://www.codeproject.com/Articles/809357/Bitwise-Enumeration-Editor-for-PropertyGrid-and-Vi">Bitwise Enumeration Editor for PropertyGrid and Visual Studio</a>.</li></ol>
+
+<p>I will use the same code base, upgraded with new features (version 3.0.0.0). I will also refer to my previous works where it is needed for proper understanding of the matter.</p>
+
+<p>While the first two&nbsp;articles were dedicated to extending of .NET functionality through enumeration-based generic classes, the third article is about application of all the features introduced in the first two. And this is a very interesting application.</p>
+
+<p>My command line utility does not cover an extensive range of different options and validation methods, as some advanced utilities do. Just the opposite, it is confined to a very modest yet practical set of options and formatting styles of command line parameters.</p>
+
+<p>The real value of my utility is the ease of use and robustness. This is explained in the next section.</p>
+
+<h2 id="a2">2. Why Yet Another Command Line Utility?</h2>
+
+<p>There are many solutions used to parse and categorize command line. I did not like any of them. They all require massive data that define what parameters are expected. The problem is that it is mostly string data which should be used in two places: when command line documentation is generated and when command line data is checked. This presents a support challenge: if the description of command line has to be modified, it will probably be modified in functional part first, when a parameter is checked. The documentation can be easily forgotten.</p>
+
+<p>More importantly, the consistency of command line parameters described using string data allows no validation during compile time.</p>
+
+<p>A while ago, I realized that the data use to define command line functionality should be meta-data. The enumeration types were the candidate number one for me, because they immediately provide string representation of every member and at the same time guarantee uniqueness of every member, which is validated during run time.</p>
+
+<p>Also, my solution looks very light weight and easy to use, especially from the point of view of the application developer. To appreciate this, see the next section.</p>
+
+<h2 id="a3">3. Basic Usage</h2>
+
+<p>I'll illustrate the usage based on two enumeration types I used in my <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">second article</a> of the series, with few changes:</p>
+
+<div class="pre-lang" id="premain718362"><div>C#</div><div class="pre-action-link"><span id="copycode718362" class="copy-code" data-index="718362" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre718362" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> DescriptionAttribute = SA.Universal.Enumerations.DescriptionAttribute;
+<span class="code-keyword">using</span> AbbreviationAttribute = SA.Universal.Enumerations.AbbreviationAttribute;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+[Description(<span class="code-keyword">typeof</span>(EnumerationDeclaration.Descriptions))]
+<span class="code-keyword">enum</span> StringOption {
+    [Abbreviation(<span class="code-digit">1</span>)] InputDirectory,
+    InputFileMask,
+    [Abbreviation(<span class="code-digit">1</span>)] OutputDirectory,
+    [Abbreviation(<span class="code-digit">1</span>)] ForceOutputFormat,
+    [Abbreviation(<span class="code-digit">1</span>)] ConfigurationFile,
+    [Abbreviation(<span class="code-digit">3</span>)] LogFile,
+} <span class="code-comment">//</span><span class="code-comment">enum StringOption</span>
+
+[Description(<span class="code-keyword">typeof</span>(EnumerationDeclaration.Descriptions))]
+<span class="code-keyword">enum</span> BitsetOption {
+    [Abbreviation(<span class="code-digit">1</span>)] Default,
+    [Abbreviation(<span class="code-digit">1</span>)] Recursive,
+    [Abbreviation(<span class="code-digit">1</span>)] CreateOutputDirectory,
+    [Abbreviation(<span class="code-digit">1</span>)] Quite,
+} <span class="code-comment">//</span><span class="code-comment">BitsetOption</span></pre>
+
+<p>Here are the differences: we do not need <code>DisplayName</code> attribute; we also do not need to specify integer value for enumeration members or <code>System.Flags</code> attribute — bit set functionality will be replaced with <code>CommandLine </code>class functionality. Therefore, the type <code>BitsetOptions</code> is renamed to <code>BitsetOption</code>, just to obey Microsoft naming recommendations. Instead, we're using newly introduced <code>Abbreviation</code> attribute used to specify each or every command options in two forms: full and abbreviated.</p>
+
+<p>Now we can instantiate the command line with two generic parameters:</p>
+
+<div class="pre-lang" id="premain300623"><div>C#</div><div class="pre-action-link"><span id="copycode300623" class="copy-code" data-index="300623" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre300623" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> CommandLine = SA.Universal.Utilities.CommandLine&lt;BitsetOption, StringOption&gt;; 
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+CommandLine CommandLine = <span class="code-keyword">new</span> CommandLine(CommandLineParsingOptions.DefaultMicrosoft);</pre>
+
+<p>Here is the example of command line:</p>
+
+<div class="pre-lang" id="premain295328"><div> </div><div class="pre-action-link"><span id="copycode295328" class="copy-code" data-index="295328" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre295328" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">-Log:log.txt /ForceOutputFormat:mp3 -C+ /R input1.wav
+input2.wav /q- /q /some_invalid_parameter
+-another_invalid:blah-blah</pre>
+
+<p>From this example, one can see: the enumeration members are used to specify some kind of command line keywords prefixed with slash or dash character; some command line parameters go without this prefix character (and they are valid); keywords can be abbreviated according to number of characters specified in Abbreviation attribute.</p>
+
+<p>This is how to access command line parameters during run-time:</p>
+
+<div class="pre-lang" id="premain374410"><div>C#</div><div class="pre-action-link"><span id="copycode374410" class="copy-code" data-index="374410" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre374410" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">string</span> outputDirectory = CommandLine[StringOption.OutputDirectory];
+
+<span class="code-keyword">if</span> (CommandLine[BitsetOption.CreateOutputDirectory]
+        &amp;&amp; <span class="code-keyword">string</span>.IsNullOrEmpty(outputDirectory))
+    System.IO.Directory.CreateDirectory(outputDirectory);
+<span class="code-keyword">bool</span> recursive = CommandLine[BitsetOption.Recursive];
+
+string[] files = CommandLine.Files; <span class="code-comment">//</span><span class="code-comment"> will return ["input1.wav", "input2.wav"]</span>
+
+<span class="code-comment">//</span><span class="code-comment">will return ["/some_invalid_parameter", another_invalid:blah-blah"]:</span>
+string[] unrecognized = CommandLine.UnrecognizedOptions;
+
+<span class="code-comment">//</span><span class="code-comment">will return "/q":</span>
+string[] repeatedSwitch = CommandLine.RepeatedSwitches;</pre>
+
+<h2 id="a4">4. Command Line Schema</h2>
+
+<p>Let's describe the general data schema used by the command line in detail. Command line is represented as a set of parameters delimited by blank spaces or combinations of blank spaces and quotation marks (<code>""</code>); we classify the options into three forms:</p>
+
+<div class="pre-lang" id="premain692874"><div> </div><div class="pre-action-link"><span id="copycode692874" class="copy-code" data-index="692874" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre692874" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">1)   Switch Parameter:
+     /|-&lt;keyword&gt;[-|+]
+2)   Value Parameter:
+     /|-&lt;keyword&gt;:[&lt;value&gt;]
+3)   File Parameter: any string not prefixed with keyword indicator (dash or slash)</pre>
+
+<p>Here, squared brackets, vertical bar and angular brackets <a href="http://en.wikipedia.org/wiki/Backus%E2%80%94Naur_Form">Backus-Naur Form</a> meta-symbols, <code>&lt;keyword&gt;</code> is one of the enumeration member names of the types passed to <code>CommandLine </code>as generic type arguments: the first parameter provides meta-data for the Switch Parameter form, second one — for Value Parameter form.</p>
+
+<p>A File Parameter goes without keyword indicator and can be any arbitrary string. This kind of parameter is called File just because most typical use is specification of a set of file names for general purpose. For example, editors usually attempt to open each file from this set; media players put the filenames in the play list, etc. However, Files could be anything.</p>
+
+<p>A keyword can come in full or abbreviated form. The abbreviated form can be used if the <code>SA.Universal.Enumerations.Abbrevation</code> attribute is applied:</p>
+
+<div class="pre-lang" id="premain150998"><div>C#</div><div class="pre-action-link"><span id="copycode150998" class="copy-code" data-index="150998" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre150998" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> AbbreviationLength = System.<span class="code-sdkkeyword">Byte</span>;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+ 
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = <span class="code-keyword">false</span>, Inherited = <span class="code-keyword">false</span>)]
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AbbreviationAttribute : Attribute {
+    <span class="code-keyword">public</span> AbbreviationAttribute() {
+        <span class="code-keyword">this</span>.FAbbreviationLength = <span class="code-digit">1</span>;
+    } <span class="code-comment">//</span><span class="code-comment">AbbreviationAttribute</span>
+    <span class="code-keyword">public</span> AbbreviationAttribute(AbbreviationLength length) {
+        <span class="code-keyword">this</span>.FAbbreviationLength = length;
+    } <span class="code-comment">//</span><span class="code-comment">AbbreviationAttribute</span>
+    <span class="code-keyword">public</span> AbbreviationLength AbbreviationLength {
+        <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FAbbreviationLength; }
+    } <span class="code-comment">//</span><span class="code-comment">AbbreviationLength</span>
+    AbbreviationLength FAbbreviationLength;
+} <span class="code-comment">//</span><span class="code-comment">class AbbreviationAttribute</span></pre>
+
+<p>The full form of a keyword is a full name of an enumeration member; the abbreviated form uses the same name truncated to the length of <code>AbbreviationLength</code>; if <code>AbbreviationLength</code> is zero, equal or greater than the actual length of the full name, full name and abbreviated name are equal strings.</p>
+
+<p>A whole parameter can be enclosed in quotation marks. In this case, a parameter can contain one or more blank space characters. This is a way to enter string values <code>&lt;value&gt;</code> containing space characters. Leading space characters immediately following “<code>:</code>” are also parsed as a part if the <code>&lt;value&gt;</code> string.</p>
+
+<p>This colon-separated form of the Value Parameters allows for major simplification of the command line model: the order of parameters is arbitrary. At the same time, <code>CommandLine</code> properties of the type <code>string[]</code> return strings in the order they appear in command line. Same natural order is used to report unrecognized options (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.5">5.5</a>). This order is especially important in case of two or more options with the same keyword contradict to each other. In this case, first occurrence of the option in command line in natural order is considered as valid, all others can be accessed from <code>CommandLine</code> and reported as repeated.</p>
+
+<p>The keywords and files can optionally be case-sensitive or case-insensitive. This behavior is controlled by the <code>CommandLineParsingOptions</code> parameter optionally passed to the <code>CommandLine</code> constructor (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.1">5.1</a>).</p>
+
+<h2 id="a5">5. CommandLine Class</h2>
+
+<p>All the command line functionality is provided by a single class <code>CommandLine</code>:</p>
+
+<div class="pre-lang" id="premain110542"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="110542" id="preShrink110542">Shrink ▲</span> &nbsp; <span id="copycode110542" class="copy-code" data-index="110542" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre110542" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">sealed</span> <span class="code-keyword">class</span> CommandLine&lt;SWITCHES, VALUES&gt; {
+
+    <span class="code-keyword">public</span> <span class="code-keyword">struct</span> CommandLineSwitchStatusWrapper {
+        <span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">implicit</span> <span class="code-keyword">operator</span> CommandLineSwitchStatus(
+                 CommandLineSwitchStatusWrapper wrapper) {
+             <span class="code-keyword">return</span> wrapper.FStatus;
+        } <span class="code-comment">//</span><span class="code-comment">operator CommandLineSwitchStatus</span>
+        <span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">implicit</span> <span class="code-keyword">operator</span> <span class="code-keyword">bool</span>(CommandLineSwitchStatusWrapper wrapper) {
+            <span class="code-keyword">return</span> wrapper.FStatus ==
+                CommandLineSwitchStatus.Plus ||
+                wrapper.FStatus == CommandLineSwitchStatus.Present;
+        } <span class="code-comment">//</span><span class="code-comment">operator bool</span>
+        <span class="code-keyword">internal</span> CommandLineSwitchStatusWrapper(CommandLineSwitchStatus status) {
+            <span class="code-keyword">this</span>.FStatus = status;
+        } <span class="code-comment">//</span><span class="code-comment">CommandLineSwitchStatusWrapper</span>
+        CommandLineSwitchStatus FStatus;
+    } <span class="code-comment">//</span><span class="code-comment">struct CommandLineSwitchStatusWrapper</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> constructors:</span>
+    <span class="code-keyword">public</span> CommandLine() { Construct(ExtractCommandLine()); }
+    <span class="code-keyword">public</span> CommandLine(CommandLineParsingOptions options) {
+        Construct(ExtractCommandLine(), options);
+    } <span class="code-comment">//</span><span class="code-comment">CommandLine</span>
+    <span class="code-keyword">public</span> CommandLine(string[] commandLine) { Construct(commandLine); }
+    <span class="code-keyword">public</span> CommandLine(string[] commandLine, CommandLineParsingOptions options) {
+        Construct(commandLine, options);
+    } <span class="code-comment">//</span><span class="code-comment">CommandLine</span>
+    
+    <span class="code-comment">//</span><span class="code-comment"> accessing valid command line parameters:</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">string</span> this[VALUES key] { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> Values[key]; } }
+    <span class="code-keyword">public</span> CommandLineSwitchStatusWrapper this[SWITCHES index] {
+        <span class="code-keyword">get</span> {
+            <span class="code-keyword">return</span> <span class="code-keyword">new</span> CommandLineSwitchStatusWrapper(Switches[index]);
+        }
+    } <span class="code-comment">//</span><span class="code-comment">this</span>
+    <span class="code-keyword">public</span> string[] Files { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FFiles; } }
+
+    <span class="code-comment">//</span><span class="code-comment"> Enumeration instances:</span>
+    <span class="code-keyword">public</span> Enumeration&lt;SWITCHES&gt; SwitchEnumeration { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FSwitchEnumeration; } }
+    <span class="code-keyword">public</span> Enumeration&lt;VALUES&gt; ValueEnumeration { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FValueEnumeration; } }
+
+    <span class="code-comment">//</span><span class="code-comment"> accessing command line errors:</span>
+    <span class="code-keyword">public</span> string[] UnrecognizedOptions { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FUnrecognizedOptions; } }
+    <span class="code-keyword">public</span> string[] RepeatedFiles { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FRepeatedFiles; } }
+    <span class="code-keyword">public</span> string[] RepeatedSwitches { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FRepeatedSwitches; } }
+    <span class="code-keyword">public</span> string[] RepeatedValues { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> FRepeatedValues; } }
+
+    <span class="code-keyword">public</span> CommandLineParsingOptions CommandLineParsingOptions
+        { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> Options; } }
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> CommandLineParsingOptions DefaultCommandLineParsingOptions
+        { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> GetDefaultCommandLineParsingOptions(); } }
+
+    <span class="code-region">#region implementation
+</span>    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-region">#endregion implementation
+</span>
+} <span class="code-comment">//</span><span class="code-comment">class CommandLine</span></pre>
+
+<p>The original source code contains more detailed XML comments removed from the article for clarity. Detailed usage of the class is explained below.</p>
+
+<h3 id="a5.1">5.1. Command Line Parsing Options</h3>
+
+<p>This is a declaration of Command Line Parsing Options optionally passed to the class constructor:</p>
+
+<div class="pre-lang" id="premain813169"><div>C#</div><div class="pre-action-link"><span id="copycode813169" class="copy-code" data-index="813169" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre813169" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-bracket">[</span><span class="code-sdkkeyword">System</span>.Flags]
+<span class="code-keyword">public</span> <span class="code-keyword">enum</span> CommandLineParsingOptions {
+    CaseSensitiveKeys = <span class="code-digit">1</span>,
+    CaseSensitiveAbbreviations = <span class="code-digit">2</span>,
+    CaseSensitiveFiles = <span class="code-digit">4</span>,
+    DefaultMicrosoft =
+        CaseSensitiveKeys |
+        CaseSensitiveAbbreviations,
+    DefaulUnix =
+        CaseSensitiveKeys |
+        CaseSensitiveAbbreviations |
+        CommandLineParsingOptions.CaseSensitiveFiles,
+    CaseInsensitive = <span class="code-digit">0</span>,
+} <span class="code-comment">//</span><span class="code-comment">enum CommandLineParsingOptions</span></pre>
+
+<p>The options control which parts of command line are treated as case-sensitive, separate for keywords (<code>CaseSensitiveKeys</code>), keywords in their abbreviated form (<code>CaseSensitiveAbbreviations</code>) and files (<code>CaseSensitiveFiles</code>); these options can be combined using bitwise operations. It is an instance of <code>CommandLine</code> is constructing without a <code>CommandLineParsingOptions</code> parameter, appropriate default value is used based on the <code>PlatformID</code> value obtained as <code>System.Environment.OSVersion.Platform</code>.</p>
+
+<p>As using set <code>CommandLineParsingOptions</code> other than default may be needed, it is still important to get initial default value, because it depends on the operating system. For this purpose, <code>static </code>property <code>DefaultCommandLineParsingOptions</code> can be used. This property enables the application developer to get the operating system-depended defaults and then modify the value before creating an instance of <code>CommandLine</code>. It is recommended to modify case-sensitivity for keys and/or abbreviated keys, but not Files.</p>
+
+<p>Note, that using this default is important for <code>Files</code> (if these command line options are used for their intended purpose of specifying of file or directory names). The options are accepted by command line only if they are not repeated (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.5">5.5</a>), so, for files, case-sensitive or case-insensitive string comparison should match behavior of platform's file system. As to the keywords or their abbreviated forms, this is a matter of convenience: case-sensitive approach allows packing more options per command line of the same length, but case-insensitive is more liberal to the user.</p>
+
+<h3 id="a5.2">5.2. Accessing Switch Option Status</h3>
+
+<p>The <code>Switch </code>Option can come in a command line in three forms: with plus sign or minus sign at the end (of and off indicator) or without any of those signs. Besides, an option can be simply omitted from the command line.</p>
+
+<p>This makes three cases described through the enumeration type <code>CommandLineSwitchStatus</code>:</p>
+
+<div class="pre-lang" id="premain456400"><div>C#</div><div class="pre-action-link"><span id="copycode456400" class="copy-code" data-index="456400" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre456400" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-bracket">[</span><span class="code-sdkkeyword">System</span>.Flags]
+<span class="code-keyword">public</span> <span class="code-keyword">enum</span> CommandLineSwitchStatus : <span class="code-keyword">byte</span> {
+    Absent,
+    Present,
+    Minus,
+    Plus,
+} <span class="code-comment">//</span><span class="code-comment">enum CommandLineSwitchStatus</span></pre>
+
+<p>The indexed property <code>CommandLine.this[VALUES]</code> allows for dual usage:</p>
+
+<div class="pre-lang" id="premain906222"><div>C#</div><div class="pre-action-link"><span id="copycode906222" class="copy-code" data-index="906222" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre906222" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-bracket">[</span><span class="code-sdkkeyword">System</span>.Flags]
+CommandLine commandLine = <span class="code-keyword">new</span> CommandLine();
+<span class="code-keyword">bool</span> isRecursive = commandLine[BitsetOption.Recursive];
+CommandLineSwitchStatus recursiveStatus =
+    commandLine[BitsetOption.Recursive];</pre>
+
+<p>The boolean variant of this usage returns <code>True</code> if the option's status is <code>CommandLineSwitchStatus.Present</code> or <code>CommandLineSwitchStatus.Plus</code> and can be considered as simplified usage when all the detailed status of the option is not required; this is also the most typical case.</p>
+
+<p>This feature is interesting enough: such apparently double-typed behavior of the same indexed property is achieved through its type (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5">5</a>) and its implicit cast operators to the two types: <code>bool</code> and <code>CommandLineSwitchStatus</code>. I used a similar trick in the situation of perhaps more demanding requirements in my work “<a href="https://www.codeproject.com/KB/dotnet/WishYouWereHere.aspx">Wish You Were Here… Only Once</a>”.</p>
+
+<h3 id="a5.3">5.3. Accessing Value Option: Value and Status</h3>
+
+<p>A Value Option is accessed using string indexed property <code>CommandLine.this[VALUES key]</code>. As an option of this form also can be omitted from the command line, this condition should be tested. Normally, this is the way to perform this check:</p>
+
+<div class="pre-lang" id="premain532308"><div>C#</div><div class="pre-action-link"><span id="copycode532308" class="copy-code" data-index="532308" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre532308" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">bool</span> useConfigurationFile =
+    <span class="code-keyword">string</span>.IsNullOrEmpty(
+        commandLine[StringOption.ConfigurationFile]);</pre>
+
+<p>If someone is interested, is it supposed to be <code>null</code> or empty string, here is the answer: If an option is missing, corresponding property value will return <code>null</code>. However, there is a valid way to explicitly specify an option with the value of empty string through the command line:</p>
+
+<div class="pre-lang" id="premain80169"><div> </div><div class="pre-action-link"><span id="copycode80169" class="copy-code" data-index="80169" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre80169" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">-ConfigurationFile:</pre>
+
+<p>This is a valid form of a Value Option. In some for application such a “delicate” difference between these two cases should be taken into account (hardly a typical case), this is the way to do it:</p>
+
+<div class="pre-lang" id="premain497541"><div>C#</div><div class="pre-action-link"><span id="copycode497541" class="copy-code" data-index="497541" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre497541" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">string</span> configurationFile =
+    commandLine[StringOption.ConfigurationFile]);
+<span class="code-keyword">bool</span> noConfiguration =
+    configurationFile == <span class="code-keyword">null</span>;
+<span class="code-keyword">bool</span> emptyConfiguration =
+    configurationFile == <span class="code-keyword">string</span>.Empty;
+<span class="code-keyword">if</span> (!(noConfiguration || emptyConfiguration)) {
+    System.IO.StreamReader reader =
+        <span class="code-keyword">new</span> StreamReader(configurationFile, <span class="code-keyword">true</span>);
+} <span class="code-comment">//</span><span class="code-comment">if</span>
+
+<span class="code-comment">//</span><span class="code-comment">...</span></pre>
+
+<h3 id="a5.4">5.4. Accessing File Options</h3>
+
+<p>File options are accessed using property <code>CommandLine.Files</code> or the type <code>string[]</code>. The purpose and ordering for this kind of Option is explained in <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a4">4</a>.</p>
+
+<p>Usage example:</p>
+
+<div class="pre-lang" id="premain987520"><div>C#</div><div class="pre-action-link"><span id="copycode987520" class="copy-code" data-index="987520" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre987520" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">foreach</span> (<span class="code-keyword">string</span> file <span class="code-keyword">in</span> CommandLine.Files)
+    OpenFile(file);</pre>
+
+<h3 id="a5.5">5.5. Reporting Command Line Errors</h3>
+
+<p>Command line string parsed during run time may contain all kinds of errors. In case of errors, no exceptions are thrown. All the errors are detected by <code>CommandLine</code>, classified into categories and are accessible via the properties <code>UnrecognizedOptions</code>, <code>RepeatedFiles</code>, <code>RepeatedSwitches</code> and <code>RepeatedValues</code> of the type <code>string[]</code>. The application using <code>CommandLine</code> is responsible for further handling such errors: they can by ignored, reported back to the user or considered critical, so the application could stop further processing and ask the user to restart application with better command line. The last option is allowed but not recommended: basically, only missing critically important parameters should cause an application to stop processing.</p>
+
+<p>First of all, a parameter may come is some form not following any of the three patterns designed for parameters (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a4">4</a>). Another possibility is parameters matching a form for either switch or value parameter with a keyword not matching any of the enumeration members of the corresponding enumeration type. A match here is considered taking into account the value of <code>CommandLineParsingOptions</code> parameter used in the constructor of <code>CommandLine</code> (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.1">5.1</a>).</p>
+
+<p>In all the cases described above, a parameter is considered as unrecognized. All such parameters are collected in natural order (left to right) and accessible via the property <code>UnrecognizedOptions</code>.</p>
+
+<p>All the well-formed (recognized) options in the form of <code>switch </code>or value parameter may appear more than once and may contradict each other in status or value, respectively. What to do with those? The options are parsed in natural order (left to right) and only the leftmost occurrence of each option for each keyword is assigned to the status or value accessible via the correspondent indexed property (<code>this[]</code>). All other occurrences are collected as repeated, separately for <code>switch </code>and value forms. The repeated options are accessible via the properties <code>RepeatedSwitches</code> and <code>RepeatedValues</code>.</p>
+
+<p>All the parameters of the form for Files (with no option indicator or keyword) are considered unique, so only the leftmost occurrence of each unique value is considered valid and collected to be accessible via the property Files, all other occurrences are considered repeated and are accessible via the property <code>RepeatedFiles</code>. Needless to say, the uniqueness of the file name is considered taking into account the value of <code>CommandLineParsingOptions</code> parameter used in the constructor of <code>CommandLine</code> (see also <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a4">4</a>).</p>
+
+<h3 id="a5.6">5.6. Enumeration Instances for Iteration through Options</h3>
+
+<p>The class <code>CommandLine</code> exposes two instances of the generic class <code>Enumeration</code>: <code>SwitchEnumeration</code> and <code>ValueEnumeration</code>, one for <code>switch </code>options, another for value option, respectively. For detailed description of this generic class and the introduction of the support of iterations through enumeration types, please see my first article of the series. Since the time of publication of that article, the generic type was upgraded to carry abbreviated form an enumeration member name (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a3">3</a>, <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a4">4</a> and <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.8">5.8</a>). One application of the iteration is the generation of command line documentation (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.8">5.8</a>, other uses are demonstrated in Command Line Test applications, see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a6">6</a> and the source code.</p>
+
+<h3 id="a5.7">5.7. Can Command Line Meta-data be Inconsistent?</h3>
+
+<p>Yes, it can, when a name clash is created in the specification of the enumeration types. First of all, two generic parameters never clash between each other, even if identical enumeration names in two different types used as generic parameters in <code>CommandLine</code> can be found.</p>
+
+<p>This code will not cause any problem:</p>
+
+<div class="pre-lang" id="premain600784"><div>C#</div><div class="pre-action-link"><span id="copycode600784" class="copy-code" data-index="600784" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre600784" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> CommandLine =
+    SA.Universal.Utilities.CommandLine&lt;CommandLineSwitches, CommandLineStringValues&gt;;
+
+<span class="code-keyword">enum</span> CommandLineSwitches { A, B, C, }
+<span class="code-keyword">enum</span> CommandLineStringValues { A, B, D, E, }
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+CommandLine CommandLine = <span class="code-keyword">new</span> CommandLine();</pre>
+
+<p>This is because during run time, the command line options will be recognized by their formats, so, for example, in the command line “<code>/A /A:value</code>” first parameter will be recognized as a <code>switch </code>options and will be resolved using the type <code>CommandLineSwitches</code>, and the second parameter will be resolved using the type <code>CommandLineStringValues</code>; both parameters will be considered as valid.</p>
+
+<p>At the same time, abbreviations can create ambiguity within the same enumeration type:</p>
+
+<div class="pre-lang" id="premain493518"><div>C#</div><div class="pre-action-link"><span id="copycode493518" class="copy-code" data-index="493518" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre493518" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> StringOption {
+    [Abbreviation(<span class="code-digit">5</span>)] InputDirectory,
+    [Abbreviation(<span class="code-digit">5</span>)] InputFileMask,
+    [Abbreviation(<span class="code-digit">1</span>)] OutputDirectory,
+    [Abbreviation(<span class="code-digit">1</span>)] ForceOutputFormat,
+    [Abbreviation(<span class="code-digit">1</span>)] ConfigurationFile,
+    [Abbreviation(<span class="code-digit">3</span>)] LogFile,
+} <span class="code-comment">//</span><span class="code-comment">enum StringOption</span></pre>
+
+<p>In this example, there is no way to tell <code>InputDirectory</code> from <code>InputFileMask</code> if the command line specifies “<code>-Input:c:\data\input -Input:*.mp3</code>”.</p>
+
+<p>To troubleshoot such situation, early run-time detection of the situation is used. The method <code>CommandLine.ValidateEnumeration</code> performs the necessary analysis and uses <code>System.Diagnostics.Debug.Assert</code> to indicate the problem during run-time; the method is called during class construction. Apparently, it is not possible to check up during compile time. The definition of the method and its call are compiled under pre-compiler directive checking is <code>Debug</code> compilation symbol is defined, so this check does not go to release. This is enough if the code is run under <code>Debug</code> configuration at least every time new command line meta-data is specified.</p>
+
+<h3 id="a5.8">5.8. Command Line Documentation</h3>
+
+<p>The principles of using human-readable meta-data and a sample for documentation of the enumeration types are explained in my <a href="https://www.codeproject.com/KB/dotnet/HumanReadableEnumerations.aspx">second article</a> of the series.</p>
+
+<p>Command line usage can be automatically documented based on the <code>Description</code> attribute; and this documentation can be done in a&nbsp;globalized way, that is, the documentation can be localized to any culture without touching of available code and resource using <a href="http://msdn.microsoft.com/en-us/library/70s77c20.aspx">satellite assemblies</a> only.</p>
+
+<p>The class <code>CommandLine</code> exposes two instances of the generic class <code>Enumeration</code>, described in my <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">first article</a> of this series. This class provides support of enumeration functionality through implementation of <code>IEnumerable</code> generic interface. See also <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.6">5.6</a>.</p>
+
+<p>The generic class <code>EnumerationItem</code> is extended to include abbreviated names of the enumeration member in addition to the previously created cashed meta-data <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a5.6">5.6</a>, see also my <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">first article</a> of the series for more detail. This is useful for generation of the documentation. For console application, the presentation of the documentation can look like this:</p>
+
+<div class="pre-lang" id="premain6751"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="6751" id="preShrink6751">Shrink ▲</span> &nbsp; <span id="copycode6751" class="copy-code" data-index="6751" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre6751" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> SA.Universal.Utilities;
+<span class="code-keyword">using</span> SA.Universal.Enumerations;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-keyword">static</span> <span class="code-keyword">string</span> GenerateDoubleName&lt;ENUM&gt;(EnumerationItem&lt;ENUM&gt; item) {
+    <span class="code-keyword">string</span> name = item.Name;
+    <span class="code-keyword">string</span> abbreviation = item.AbbreviatedName;
+    <span class="code-keyword">if</span> (name == abbreviation)
+        <span class="code-keyword">return</span> name;
+    <span class="code-keyword">else</span>
+        <span class="code-keyword">return</span> <span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">{0} (-{1})"</span>, name, abbreviation);
+} <span class="code-comment">//</span><span class="code-comment">GenerateDoubleName</span>
+
+<span class="code-keyword">static</span> <span class="code-keyword">void</span> ShowDocumentation&lt;SWITCHES, VALUES&gt;
+	(CommandLine&lt;SWITCHES, VALUES&gt; commandLine) {
+    Console.WriteLine(<span class="code-string">"</span><span class="code-string">Command line parameters:"</span>);
+    Console.WriteLine(<span class="code-string">"</span><span class="code-string">     /|-&lt;switch&gt;[-|+]"</span>);
+    Console.WriteLine(<span class="code-string">"</span><span class="code-string">     /|-&lt;option&gt;:[&lt;value&gt;]"</span>);
+    Console.WriteLine();
+    Console.WriteLine(<span class="code-string">"</span><span class="code-string">SWITCHES:"</span>);
+    <span class="code-keyword">foreach</span> (EnumerationItem&lt;SWITCHES&gt; item <span class="code-keyword">in</span> commandLine.SwitchEnumeration)
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">      -{0}: {1}"</span>, 
+	GenerateDoubleName(item), item.Description);
+    Console.WriteLine();
+    Console.WriteLine(<span class="code-string">"</span><span class="code-string">OPTIONS:"</span>);
+    <span class="code-keyword">foreach</span> (EnumerationItem&lt;VALUES&gt; item <span class="code-keyword">in</span> commandLine.ValueEnumeration) {
+        Console.WriteLine(<span class="code-string">"</span><span class="code-string">      -{0}: {1}"</span>, 
+	GenerateDoubleName(item), item.Description);
+ } <span class="code-comment">//</span><span class="code-comment">ShowDocumentation</span></pre>
+
+<p>The code of this sample is generic. This sample assumes that the attribute <code>SA.Universal.Enumerations.DescriptionAttribute</code> is applied to the enumeration types, as shown in <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a3">3</a>. This attribute, in turn, assumes that appropriate resources are created. My <a href="https://www.codeproject.com/KB/dotnet/HumanReadableEnumerations.aspx">second article</a> of the series explains all steps needed to created such resources and use <code>DescriptionAttribute</code>. This technique uses <a href="http://msdn.microsoft.com/en-us/library/c08a467e.aspx">globalized</a> approach to documentation: it can later be <a href="http://msdn.microsoft.com/en-us/library/5839we2z.aspx">localized</a> to required cultures by adding <a href="http://msdn.microsoft.com/en-us/library/70s77c20.aspx">satellite assemblies</a>, without modification of the already created assembly.</p>
+
+<p>The similar documentation for non-console application can be created by using <code>System.Text.StringBuilder</code>. The instance of <code>StringBuilder</code> should be created first; and the calls to <code>Console.WriteLine</code> should be replaced with calls to <code>string.Format</code>; obtained strings should be appended to this instance of <code>StringBuilder</code> (with appropriate end-of-line characters). The whole documentation string can be obtained as <code>StringBuilder.ToString()</code>.</p>
+
+<p>Of course, this sample is simplified. In really well-built applications, all the immediate string constants found in this piece of code should go to resources.</p>
+
+<h2 id="a6">6. CommandLine Testing</h2>
+
+<p>The generic class <code>CommandLine</code> is already tested more or less thoroughly (rather more than less), so what I describe in this section is not relevant for understanding of how this class can be used or how it is implemented.</p>
+
+<p>It's just interesting to note that it apparently took a major effort to create testing facility to allow for easier and faster testing, testing itself and debugging, compared to relatively simple implementation of the class <code>CommandLine</code> itself. This activity indeed revealed some bugs and helped to fix them quickly. The reason for the difficulty of testing is this: testing many different cases of native command line would require re-starting test application with every new modification of a test case. This would take too much time.</p>
+
+<p>To overcome this hassle, I decided to simulate command line behavior from the raw form typed in the text edit box. This initial content of this text box is filled from real command line supplied at the moment of application start; but these two tasks appeared to be not quite trivial. The problem is that the way .NET splits the raw command line in string array of command line parameter is not so trivial considering the use of quotation characters uses to allow blank spaces in parameters. This behavior is simulated by the test applications as well.</p>
+
+<p>The utility <code>static </code>class <code>SA.Universal.Utilities.CommandLineSimulationUtility</code> helps to implement command line simulation. It exposes only two members: the property <code>UnparsedCommandLine</code> which returns a single-<code>string </code>raw command line and the method <code>SimulateCommandLineParsingIntoArray</code> which returns the array of <code>string</code>s using tokenization in the way it is done by .NET when command line parameter is passed to an application entry point (“<code>main</code>”), taking into account quotation characters. One minor difficulty with <code>UnparsedCommandLine</code> is that it should remove first parameter representing main module of an application's entry assembly. This is done in different ways for different ways of hosting the application; the difference between Visual Studio host and stand-along run is a notorious case.</p>
+
+<p>In the source code provided with this article, the utility class is included in the main library <em>Enumerations.dll</em>. It is important to note that this class is not required to use for development of applications and can be removed. The only purpose of including this class in the library is code re-use and more compact packaging of the source code complete with the Command Line Test applications: <em>CommandLineTestWPF.exe</em> and <em>CommandLineTest.exe</em>. The utility class is re-used because I present two versions of the Command Class utility: for WPF and <code>System.Windows.Forms</code>. Historically, WPF version was created first; and most of the testing and bug fixing was done using WPF version. The version with <code>System.Windows.Forms</code> was created exclusively for this article to support my claim of support of .NET Framework v. 2.0 and Mono as well (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a7">7</a>).</p>
+
+<p>Both versions of the Command Line Test application show the usage of the <code>CommandLine</code>, <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx"><code>Enumeration</code></a> and related <code>Attribute</code> classes — please see the source code.</p>
+
+<h2 id="a7">7. Building Code and Compatibility</h2>
+
+<p>The code is provided for Microsoft .NET Framework versions 2.0 to 4.0, and tested on Mono using Ubuntu Linux v. 8.04. It can be built using Visual Studio 2005, 2008, or 2010, or using batch build for any of the named Framework versions, which does not require Visual Studio. See the <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx" #a5"="">Build section</a> of my <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">first article</a> of the series for further details.</p>
+
+<p>Please refer to <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx" #a5.1"="">.NET</a> and <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx" #a5.2"="">Mono</a> compatibility sections of <a href="https://www.codeproject.com/KB/dotnet/EnumTypesDoNotEnumerate.aspx">this article</a> for more details.</p>
+
+<p>The only project not compatible with each of the listed platform is the WPF version of the Command Line Test application <em>CommandLineTestWPF.exe</em>. Naturally, it is targeted to Microsoft .NET versions 3.5 and later (I did not test on v. 3.0) and, at the moment of writing, it does not support Mono. The application <em>CommandLineTest.exe</em> based on <code>System.Windows.Forms </code>can be used instead (see <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility#a6">6</a>).</p>
+
+<h2 id="a8">8. Alternatives</h2>
+
+<p>I cannot say I have done comprehensive search for all the sensible alternatives ever created. Nearly all works depend on some hard-coded <code>string </code>data; so I don't think such methods promote or help creating well-supportable code.</p>
+
+<p>From what I know, I like only one work: “<a href="http://www.codeproject.com/KB/recipes/plossum_commandline.aspx">Powerful and simple command line parsing in C#</a>” by <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=250915">Peter Palotas</a>, 15 Aug 2007. The tool is powerful beyond all my expectations, albeit the use of it is probably not as simple as mine.</p>
+
+<p>The power of this approach is really using meta-data to specify the command line rules. However, I don't know if this meta-data can be defined in a&nbsp;globalized way and can be localized. Command line parsing is driven by&nbsp;some <code>Option</code> class created by the application developer; there is a rich set of attributes used to define interpretation of the command line options as the properties if such <code>Option</code>, as well as validation rules for each member. This set of validation rules is another powerful feature. Also, a rich set of different command line styles is supported.</p>
+
+<p>Nevertheless, I can see certain benefits in my approach and I can see some reasons for lack of parameter validation. First of all, it is not possible to perform complete validation based on local attributed rules (that is, the rules applied to every separate attribute, not to the combination). It is not possible to devise a universal set of validation rules applicable to every thinkable application. That's why my vision of the validation rule assumes there should be some separate layer totally located in the application. My approach delivers just the lower level of functionality, but it is done thoroughly. Also, more light-weight solution and promotion of a simpler, somewhat restrictive but clearer command line model both have pronounced values.</p>
+
+<p>Despite what I say above, Peter's work has tremendous value. For complex applications demanding complex and advance command line features, which fit in the validation rule set, the utility can be indispensable — I highly recommend it.</p>
+
+<h2 id="a9">9. Conclusion</h2>
+
+<p>The proposed method of command line processing offers near-optimal combination of features, compactness, robustness and ease-of-use.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2011 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

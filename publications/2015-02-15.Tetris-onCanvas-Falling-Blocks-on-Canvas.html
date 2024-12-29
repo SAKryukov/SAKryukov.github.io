@@ -1,0 +1,869 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0060)https://www.codeproject.com/Articles/876475/Tetris-on-Canvas -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Falling Blocks on Canvas- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="V.7.5.1: Derived work: customizable Falling Blocks with pure HTML + JavaScript + Canvas, using strict mode, complete with help and all classic Falling Blocks operations">
+<meta name="Keywords" content="Javascript, HTML, Beginner, Intermediate, Advanced, HTML5, text, Canvas">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2/15/2015 9:16:00 PM">
+<meta property="article:modified_time" content="2/8/2019 5:55:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="15 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas">
+<meta property="og:title" content="Falling Blocks on Canvas">
+<meta property="og:description" content="V.7.5.1: Derived work: customizable Falling Blocks with pure HTML + JavaScript + Canvas, using strict mode, complete with help and all classic Falling Blocks operations">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas"
+   },
+  "name": "Falling Blocks on Canvas",
+  "headline": "Falling Blocks on Canvas",
+  "url": "https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas",
+  "discussionUrl": "https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,HTML,Beginner,Intermediate,Advanced,HTML5,text,Canvas",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=3873871"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "V.7.5.1: Derived work: customizable Falling Blocks with pure HTML + JavaScript + Canvas, using strict mode, complete with help and all classic Falling Blocks operations",
+  "articleSection": "HTML5",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2015-02-15",
+  "dateCreated": "2015-02-15",
+  "dateModified": "2019-02-08"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.97,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML5",
+      "name" : "HTML5"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML5">HTML5</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/876475/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="fGmxI871WhKLuujGxjmmTYX0HUbBva5FfCz6sy4T/4LEPVALlqL7WjYMCHso4WmxCIbZtmswBi2geI65A/bC7H63CiwXMiz08hCZmAAyP4SOCtwt5OiJNocbDqDWRII8dKUL1agC4MR0/eQsSPtAeU7ghJ40R4kGDDfQEffP/KU72Jdc6qME6wBHIrUebIWrhXwVlIRhnA0HfBwGtnZUwzLt4J2FhoD+Au3w6S/AR9f3ndT0toDD5zc4UEoIYCb+8os5nMMEV9N2hF3Jrzi1TzDjtcYH9YraX3MuDh36gFfL6FO1YrJt+SykrW0nE7tJ8LhYuuUMxlB5UBwXsFWFhEtFWbaxZw/pdTZPICsbpcF6pjovaB+MW6RBKMaA1zRNjRHkv0dpfLlGHnUkbZVMNy8nNUEmfaaWzlQKTVJ37Tw5yEtkvhEBfNEhPRFrIUWZg6unqw3GJSEKU4GXk283q9NrlXoCtVj2bslT90DW0w3vxjr90SbPVvSjv4XxhO/naK3A+SV5aQKY0Oh6rpxh8xAr3Kc63eakosWd7zHO3/E5PoUJAXH5wRjUWqo9CsXV5wqSao2vlZeqqd7oY5gtkRF6Ce9izot2sJOAuUS+NPMOBXXhFyEdso9HVkVxuNSqfR/dKn/TpwgL7jLCvWF+xJIa9a1Ji2LtzshQ0DQ3VhZ3l0RV/5qRTMnVHN6hhflcbGdY4Uf9lkUrSKLtO/XEhnvH/L02/uuXmpE7MbHsM4d6Qh+l36qdpb8E3MBLzeJyE66hLpFBxX39wy0wOiM/BTTM0dVdBcoutoShEdiY2aTLFK1LxSLC+neijvw6SoipNORh7ieE6i1QYAq31cjk/NB/Bcsz7MBWy/wMNcsaKbj1/ohgRMHGAMm/Cx9B2ylNWFkiL5si5yBmfyiGLOnGelXdQgGWg7QktL5ucgqApLBHlzqFB3Q1IkqL0LKf71G5TETziRz/Sv0O0RwgurMpoMNfJZKRV9clSqNh/p1vGsZfksv/GILUimVkYNpFI0fYF5TkmRXHIjxG2WSNUNUHrBFCmBb9xk8D1+8y+7zJrhJSRJZIbYThtnXZqQKsvqPnXoPIt6lA+QR8TWON+sS5mTj5AJhci6PxcysJje/hnl1djfZqdMNJX3gIzFB8TDH24HBf2wqj2ePjL1wbHz4J1wxrPs53Gn6E3gw64hsxuCLJRgXVQhJBWlkrxJZeQS7hHvAXcG8ymQHBosGjBfzJkwi+zUcmsZBiN+YSIUfwb1LChWrXCSTrdzkEVI9w1bcSCtiD2gQr/v78LIqIOBvOdHAwHteLHQElITR60sgtPTfQPq4/eqvbt+LXbvoQXDN/Zf15PoDN75ys9l2TwHKUMm3LePjpaDqbOr0MXKrSN9rAmWamED8p6wA4R7xUq8saOBCznz+cgwOdAzpqtHEYEhCWnZhh063MrqCIMmRAlJ6qgqX/UkdjQr1PHdwr7Z76DZdnmIyGmohsiAEXJjngmzFdcsgn3WkbJI/MAWPoZSpjD4RsHWtWQBzArymCTIKn5g3vihwUDAutZk0nP816ijOQf/w3wj0qqEbHx9USj1gBMrrBJf4LFiWrczBV+Gr3n8Ntm1Bp63atxCrx9mJLLDDkGtVNtDSLZ5mpL427/RDJ9BXpRFVOkJ4hH4Ow+R/vmkJy81wyMt9pfV1WP7D+lN7iyVRnIxod67O4G0vIJDAsxeC2SIYtzwTPciAvdjx96BOOxZ3B5F7ERRYYxbYAzBGxyKcqjPDCP2Fwm8NRh0BYidMLhqSykktfcA0NVEvupfOrt9bj50ZMa41IyUmtyH0mQBEIeGXqgJwDODSyiPttq/p7lwgTRDkBTzYyFKD3kIRaSmkNGyHzuwb+LvMd4QhemFyyRzq8yignxohKNERodOFJeHq0a40QKZprK9Ut2la/lqbRVBE35/uhMtHO4lUg7OMHONu8FJSDkA7AaisU5MmNJYHN/qCNfDx85cyD7uBZrL68j01KnaCFVvgZJruyp0Re68j+MTCu6i2m3cCocZuqCltVYdA4kIK+CPZ2vHlUBQ==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML" data-id="104">HTML</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML5" data-id="1241">HTML5</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/text" data-id="1351">text</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Canvas" data-id="1653">Canvas</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Falling Blocks on Canvas</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_876475">
+
+	<meta itemprop="upvoteCount" content="64">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.97/5  (66 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">15 Feb 2015, last revision: 8 Feb 2019</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">15 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 150.4K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 3.4K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">V.7.5.1: Derived work: customizable Falling Blocks with pure HTML + JavaScript + Canvas, using strict mode, complete with help and all classic Falling Blocks operations</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Tetris-onCanvas-Falling-Blocks-on-Canvas.zip" style="">Download source code — 23.9 KB</a></li></ul>
+
+<p><img title="The game" alt="2015-02-15.Tetris-onCanvas-Falling-Blocks-on-Canvas.webp" src="./Resources-articles/2015-02-15.Tetris-onCanvas-Falling-Blocks-on-Canvas.webp" /></p>
+
+<h2>Table of Contents</h2>
+
+<ol>
+	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a1">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a2">Derived Work</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a3">New Features</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a4">Customization</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a5">General Code Design</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a6">Low-Level Tetromino</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a7">Tetromino Constructor and Prototype</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a8">Inner Functions and Event Handling: Passing "this"</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a9">Future Development?</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a10">Versions</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a11">Live Play</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a12">Conclusions</a></li></ol>
+
+<h2>1. Introduction</h2>
+
+<p>This is my very first complete work on JavaScript, not counting something totally trivial. I cannot say I never tried anything in the field of pure entertainment before, but, again, nothing worth mentioning.</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Tetris">Falling Blocks</a> is a legendary game with unique combination of extreme simplicity and attractiveness.</p>
+
+<p>Unfortunately, I haven't seen a really playable implementation of the game for a long time. No, I'm not a gamer and did not see much. First of all, I would not risk anything without open source, but what I saw wasn't really playable, due to the lack of most important features and proper look and feel, making no match with the old-time implementations for DOS.</p>
+
+<p>At the same time, HTML with JavaScript using new HTML (HTML5) canvas element is the most attractive platform for simple games. It does not require anything except a browser, should work on all platforms and always comes with source code. So, when I, just be some chance, came across such implementation, I was much pleased. It was apparent that the incomplete work I found was written by quite a qualified author. At the same time, it wasn't yet playable and the quality of code did not satisfy me at the level of its general design, despite of its clarity and general correctness. This was mostly due to the lack of flexibility already put in the initial design and lack of important features. But how can it be a problem if you have a neat source code? So I decided to rewrite it from scratch.</p>
+
+<h2 id="a2">2. Derived Work</h2>
+
+<p>This is the original work by Jake Gordon which caught my attention:</p>
+
+<ul>
+	<li><a href="http://codeincomplete.com/">http://codeincomplete.com</a>,</li>	<li><a href="http://codeincomplete.com/posts/2011/10/10/javascript_tetris">http://codeincomplete.com/posts/2011/10/10/javascript_tetris</a>,</li>	<li><a href="https://github.com/jakesgordon/javascript-tetris">https://github.com/jakesgordon/javascript-tetris</a></li></ul>
+
+<p>I re-wrote nearly 100% of the code from scratch, but I used all the low-level algorithms developed by Jake and followed most of his algorithmic ideas, as well as the general design of the application, decomposition into major blocks: basic helper methods, game with its event queue, rendering with invalidation mechanism and main application. The original Jake's work was incomplete, but some initial design feature already led the development in wrong direction, and the lack of at least one feature made the game not really playable. But I liked the basics of the solution and really wanted to fix it all, to create a really operational and well maintained product.</p>
+
+<p>I did not follow the original code design with the further decomposition of the game into such parts as "constants", "variable", "logics" and so on. Instead, I designed the separation of the settings objects places in a separate file "settings.js", introduced a separate constructor with prototype methods representing <a href="http://en.wikipedia.org/wiki/Tetromino">Tetromino</a> elements and other structural elements formally expressed as a set of separate JavaScript objects, such as simple FSM and layout.</p>
+
+<p>So, first of all, it allows to easily customize things which were totally rigid in the original work, first of all, the size of the game in blocks can be modified in reasonable limits. Even playing on the board of the size of some 100 x 100 blocks became quite possible (but, by the way, really irritating :-)).</p>
+
+<h2>3. New Features</h2>
+
+<p>I mentioned the lack of the feature which rendered the implementation of the game not playable. Unfortunately, the lack of this feature is typical for most of the implementations I saw. What is it? There should be a key press (space bar, originally) which should drop a current tetromino to the bottom, where it still can be moved, if there is a room for that. So, I added this important feature.</p>
+
+<p>I completely changed the layout of the page. Original Jake's design was based on the fixed set of predefined layouts for different page sizes. Probably he thought it would be simpler, but it wasn't. Not only it added superfluous CSS code, but looked ugly. Now, the game looks symmetrical on the Web page of any size. A user can adjust the page size at any time, even during the game play. The layout is recalculated according to the <code>window.innerHeight</code> and the size of the game board in blocks. The recalculation is made to keep the size of the block to an integer (not fractional value), so the relative size of the board compared to the inner height of the page vary to keep all the aspects ratio values at the expense of variable game area margins. In other words, it is designed in the style of a well-resized desktop application.</p>
+
+<p>More importantly, the game can be customized. First of all, the size of the game board in block could not be changed, due to the layout and aspect ratio problems I mentioned above. Now, as I mentioned before, it can be changed in a separate file, as well as the block colors and even shapes. I'll describe it in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a4">next section</a> of the article. I actually changed the colors and original orientation, to make the game more playable and closer to its original design.</p>
+
+<p>I also added help showing on the same page at any moment of time.</p>
+
+<p>Internally, I created a different thoroughly structured code design, used JavaScript <i>strict mode</i> and exception handling, and improved performance. I'll briefly describe this design in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a5">section 5</a>, but first will describe what can be customized.</p>
+
+<h2>4. Customization</h2>
+
+<p>The customizable part of the game is placed in a separate file "settings.js".</p>
+
+<ol>
+	<li>Game size in blocks can be changed, due to the changes in the layout described above. This declaration can be changed:
+	<div class="pre-lang" id="premain571187"><div>JavaScript</div><div class="pre-action-link"><span id="copycode571187" class="copy-code" data-index="571187" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre571187" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> gameSizeInBlocks = { x:<span class="code-digit">10</span>, y:<span class="code-digit">20</span> }</pre>
+	</li>	<li>Key assignment can be changed in the object <code>key</code>. The properties of this object are named by function, not by key name. By default, [Enter] is used to start/pause/continue the game, [Esc] stops currently played game, arrow keys move the current tetromino element ("up" key rotates it), blank space drops it down, [F1] shows and hides help.<br>
+	&nbsp;</li>	<li>Timing of the game can be changed in the object <code>delays</code>. This object defines the delays in seconds before moving a tetromino element by a line: initial, minimal and decrement of the delay applied for acceleration of the game as the user progress. The delay is incremented by a constant value as total number of lines, according to the game rule, grows.<br>
+	&nbsp;</li>	<li>Score rules can be changed in the object <code>scoreRules</code>. The rules define the added score on the drop of each tetromino and when some rows are removed. The rules can be any user-defined functions calculated the added score depending on current count of removed lines, score and the number of lines to be removed at once. By default, a fixed amount of points is added for each dropped line, and the amount of points added for removed lines grows as a power function of the number of lines removed at once. This is done according the original game design, where the player is given the incentive to collect numbers of incomplete rows and then complete up to 4 of them at once.<br>
+	&nbsp;</li>	<li>Finally, tetromino colors and shapes can be changed. I'll explain it in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a6">section 6</a>.</li></ol>
+
+<h2>5. General Code Design</h2>
+
+<p>The central unit of the game is the <code>Tetromino</code> constructor and two methods of its prototype object described in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a7">section 7</a>.</p>
+
+<p>The code starts with the file "settings.js" including in HTML first, and the main code is in "application.js".</p>
+
+<p>The object <code>layout</code> gets main DOM elements and implements original layout and the layout behavior on the change of the window size. Next object, <code>game</code>, defines the game logic abstracted from the graphical rendering, which is delegated to the object <code>rendering</code>, which uses <a href="http://en.wikipedia.org/wiki/Canvas_element">HTML5 Canvas feature</a>,</p>
+
+<p>A set of few simple basic utility functions is put below all that, followed by the game's main <i>anonymous</i> function, which is implemented in the IIFE form, which helps to keep all local functions inaccessible from outside the main function. This pattern is used throughout the code. (Please see this article on the IIFE JavaScript <i>design pattern</i>, <a href="http://en.wikipedia.org/wiki/Immediately-invoked_function_expression">"Immediately-invoked function expression"</a>.)</p>
+
+<p>Another problem elegantly solved by this design pattern is the resolution of the requirements of JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">strict mode</a>. It helps to use inner functions and, at the same time, sandwich the main code in the try-catch block, which is important, especially for development.</p>
+
+<p>Main function initialize the game, installs event handlers and starts the first frame; other frames are requested through <code>window.requestAnimationFrame</code>. The use of exception catching is limited to the very top level: on each event handler and main function, according to the structural exception handling philosophy.</p>
+
+<p>As a next step, I'll describe the most interesting part of the code: the code of the algorithms and its implementation.</p>
+
+<h2>6. Low-Level Tetromino</h2>
+
+<p>This is a fragment if bitwise definition of tetromino shapes:</p>
+
+<div class="pre-lang" id="premain670776"><div>JavaScript</div><div class="pre-action-link"><span id="copycode670776" class="copy-code" data-index="670776" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre670776" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">function</span> TetrominoShape(size, blocks, color) {
+   <span class="code-keyword">this</span>.size = size; <span class="code-keyword">this</span>.blocks = blocks; <span class="code-keyword">this</span>.color = color;
+}
+<span class="code-keyword">const</span> tetrominoSet = [
+   <span class="code-keyword">new</span> TetrominoShape(<span class="code-digit">4</span>, [0x0F00, 0x2222, 0x00F0, 0x4444], tetrominoColor.I),
+   <span class="code-comment">//</span><span class="code-comment">...</span>
+];</pre>
+
+<p>This is the description of the binary representation of each shape object:</p>
+
+<div class="pre-lang" id="premain157579"><div>JavaScript</div><div class="pre-action-link"><span id="copycode157579" class="copy-code" data-index="157579" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre157579" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> blocks: each element represents a rotation of the piece (0, 90, 180, 270)</span>
+<span class="code-comment">//</span><span class="code-comment">         each element is a 16 bit integer where the 16 bits represent</span>
+<span class="code-comment">//</span><span class="code-comment">         a 4x4 set of blocks, e.g. "J"-shaped tetrominoSet[1].blocks[1] = 0x44C0</span>
+<span class="code-comment">//</span><span class="code-comment"></span>
+<span class="code-comment">//</span><span class="code-comment">             0100 = 0x4 &lt;&lt; 3 = 0x4000</span>
+<span class="code-comment">//</span><span class="code-comment">             0100 = 0x4 &lt;&lt; 2 = 0x0400</span>
+<span class="code-comment">//</span><span class="code-comment">             1100 = 0xC &lt;&lt; 1 = 0x00C0</span>
+<span class="code-comment">//</span><span class="code-comment">             0000 = 0x0 &lt;&lt; 0 = 0x0000</span>
+<span class="code-comment">//</span><span class="code-comment">                               ------</span>
+<span class="code-comment">//</span><span class="code-comment">                               0x44C0</span></pre>
+
+<h2>7. Tetromino Constructor and Prototype</h2>
+
+<p>I introduced the <code>Tetromino</code> constructor object for some very good reasons: to improve performance of the code and maintainability at the same time. Related JavaScript features are often referred to as "OOP" and "class", but these are very misleading or at least controversial terms; JavaScript prototype-based object machinery is principally different from "OOP with classes".</p>
+
+<p>Here is the constructor:</p>
+
+<div class="pre-lang" id="premain295242"><div>JavaScript</div><div class="pre-action-link"><span id="copycode295242" class="copy-code" data-index="295242" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre295242" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">function</span> Tetromino(shape, x, y, orientation) {
+    <span class="code-keyword">this</span>.shape = shape; <span class="code-comment">//</span><span class="code-comment">TetrominoShape</span>
+    <span class="code-keyword">this</span>.x = x;
+    <span class="code-keyword">this</span>.y = y;
+    <span class="code-keyword">this</span>.orientation = orientation;
+} <span class="code-comment">//</span><span class="code-comment">Tetromino</span></pre>
+
+<p>And two method are added to its prototype:</p>
+
+<div class="pre-lang" id="premain279654"><div>JavaScript</div><div class="pre-action-link"><span id="copycode279654" class="copy-code" data-index="279654" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre279654" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Tetromino.prototype = {
+    <span class="code-comment">//</span><span class="code-comment"> fn(x, y), accepts coordinates of each block, returns true to break</span>
+    first: <span class="code-keyword">function</span>(x0, y0, orientation, fn, doBreak) {
+        <span class="code-keyword">let</span> row = <span class="code-digit">0</span>, col = <span class="code-digit">0</span>, result = <span class="code-keyword">false</span>,
+        blocks = <span class="code-keyword">this</span>.shape.blocks[orientation];
+        <span class="code-keyword">for</span>(<span class="code-keyword">let</span> bit = 0x8000; bit &gt; <span class="code-digit">0</span>; bit = bit &gt;&gt; <span class="code-digit">1</span>) {
+            <span class="code-keyword">if</span> (blocks &amp; bit) {
+                result = fn(x0 + col, y0 + row);
+                <span class="code-keyword">if</span> (doBreak &amp;&amp; result)
+                    <span class="code-keyword">return</span> result;
+            } <span class="code-comment">//</span><span class="code-comment">if</span>
+            <span class="code-keyword">if</span> (++col === <span class="code-digit">4</span>) {
+                col = <span class="code-digit">0</span>;
+                ++row;
+            } <span class="code-comment">//</span><span class="code-comment">if</span>
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        <span class="code-keyword">return</span> result;
+    }, <span class="code-comment">//</span><span class="code-comment">Tetromino.prototype.first</span>
+    all: <span class="code-keyword">function</span>(fn) { <span class="code-comment">//</span><span class="code-comment"> fn(x, y), accepts coordinates of each block</span>
+        <span class="code-keyword">this</span>.first(<span class="code-keyword">this</span>.x, <span class="code-keyword">this</span>.y, <span class="code-keyword">this</span>.orientation, fn, <span class="code-keyword">false</span>); <span class="code-comment">//</span><span class="code-comment"> no break</span>
+    } <span class="code-comment">//</span><span class="code-comment">Tetromino.prototype.all</span>
+} <span class="code-comment">//</span><span class="code-comment">Tetromino.prototype</span></pre>
+
+<p>These two methods is the heart of the low-level algorithms: they implement well-known "first of" and "all" patterns. They traverse all the blocks in the tetromino shape and the first one breaks the search when some condition supplied by the function argument becomes true.</p>
+
+<p>This break one of the major performance improvements as original code traversed all blocks of a given shape in all cases. (Also note, that the <code>first</code> and <code>all</code> are created only once; that's why this prototype assignment is done outside of the constructor.)</p>
+
+<p>This is how the function <code>first</code> is used in the game logic:</p>
+
+<div class="pre-lang" id="premain623724"><div>JavaScript</div><div class="pre-action-link"><span id="copycode623724" class="copy-code" data-index="623724" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre623724" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">willHitObstacle: <span class="code-keyword">function</span>(tetromino, x0, y0, orientation) {
+<span class="code-comment">//</span><span class="code-comment"> tentative move is blocked with some obstacle</span>
+   <span class="code-keyword">return</span> tetromino.first(x0, y0, orientation, <span class="code-keyword">function</span>(x, y) {
+      <span class="code-keyword">if</span> ((x &lt; <span class="code-digit">0</span>)
+         || (x &gt;= gameSizeInBlocks.x)
+         || (y &lt; <span class="code-digit">0</span>)
+         || (y &gt;= gameSizeInBlocks.y)
+         || game.getBlock(x,y))
+            <span class="code-keyword">return</span> <span class="code-keyword">true</span>; 
+   }, <span class="code-keyword">true</span>);
+}, <span class="code-comment">//</span><span class="code-comment">willHitObstacle </span></pre>
+
+<p>As soon as the anonymous function passed to <code>tetromino.first</code> returs true, the function <code>first</code> also returns true immediately, breaking from the loop traversing the tetromino blocks. This indicates that the first obstacle has been encountered, which could be one of the walls or another block. Detecting the very first obstacle makes further consideration of obstacle redundant, so the function <code>willHitObstacle</code> returns true at this point.</p>
+
+<p>The use of the function <code>Tetromino.all</code> is simpler: all blocks of the shape are traversed. This is used, in particular, for drawing the tetromino elements on the HTML canvas.</p>
+
+<p><a name="a8"></a></p>
+
+<h2>8. Inner Functions and Event Handling: Passing "this"</h2>
+
+<p>Let's look at one more interesting detail: now an event handlers are added. It's enough to consider just one. This is how it can be done:</p>
+
+<div class="pre-lang" id="premain609388"><div>JavaScript</div><div class="pre-action-link"><span id="copycode609388" class="copy-code" data-index="609388" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre609388" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">function</span> someFunction(event) { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-sdkkeyword">document</span>.onkeydown = someFunction;</pre>
+
+<p>Will it work? One little problem is that the handler function is implemented as a member of the game object. So will the below code also work?</p>
+
+<div class="pre-lang" id="premain941440"><div>JavaScript</div><div class="pre-action-link"><span id="copycode941440" class="copy-code" data-index="941440" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre941440" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-sdkkeyword">document</span>.onkeydown = game.keydown;</pre>
+
+<p>Not quite. The problem is that the <code>keydown</code> function uses not only the event argument, but also the implicit argument <code>this</code>, which is used to access other members of the <code>game</code> object. If the event handler is added the way showed above, this this argument will still be passed, as always, but it will, not too surprisingly, reference… <code>document</code> object. Didn't I created some artificial problem for myself? Not at all. This problem is easily solved this way:</p>
+
+<div class="pre-lang" id="premain765292"><div>JavaScript</div><div class="pre-action-link"><span id="copycode765292" class="copy-code" data-index="765292" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre765292" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-sdkkeyword">document</span>.onkeydown = <span class="code-keyword">function</span>(event) { game.keydown(event); };</pre>
+
+<p>Note that the <code>event</code> argument should be explicitly passed.</p>
+
+<p>Similar story goes with inner functions. Look at the short fragment of the object <code>rendering</code>:</p>
+
+<div class="pre-lang" id="premain867040"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="867040" id="preShrink867040">Shrink ▲</span> &nbsp; <span id="copycode867040" class="copy-code" data-index="867040" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre867040" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> rendering = { 
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+   promptText: element(<span class="code-string">"</span><span class="code-string">prompt"</span>), 
+   rowsText: element(<span class="code-string">"</span><span class="code-string">rows"</span>), 
+   pausedText: element(<span class="code-string">"</span><span class="code-string">paused"</span>), 
+   invalid: { board: <span class="code-keyword">true</span>, upcoming: <span class="code-keyword">true</span>, score: <span class="code-keyword">true</span>, rows: <span class="code-keyword">true</span>, state: <span class="code-keyword">true</span> }, 
+   <span class="code-comment">//</span><span class="code-comment"> ... </span>
+ 
+<span class="code-comment">//</span><span class="code-comment"> ... </span>
+    
+   draw: <span class="code-keyword">function</span>() { 
+      <span class="code-keyword">const</span> drawRows = <span class="code-keyword">function</span>() { 
+         <span class="code-keyword">if</span> (!this.invalid.rows) <span class="code-keyword">return</span>; 
+         setText(<span class="code-keyword">this</span>.rowsText, game.rows); 
+         <span class="code-keyword">this</span>.invalid.rows = <span class="code-keyword">false</span>; 
+      }; <span class="code-comment">//</span><span class="code-comment">drawRows </span>
+      <span class="code-keyword">const</span> drawState = <span class="code-keyword">function</span>() { 
+         <span class="code-keyword">if</span> (!this.invalid.state) <span class="code-keyword">return</span>; 
+         setText(statusVerb, game.states.current === game.states.paused ? <span class="code-string">"</span><span class="code-string">continue"</span> : <span class="code-string">"</span><span class="code-string">start"</span>); 
+         setVisibility(<span class="code-keyword">this</span>.pausedText, game.states.current === game.states.paused); 
+         setVisibility(<span class="code-keyword">this</span>.promptText, game.states.current != game.states.playing); 
+         <span class="code-keyword">this</span>.invalid.state = <span class="code-keyword">false</span>; 
+      }; <span class="code-comment">//</span><span class="code-comment">drawState </span>
+      <span class="code-comment">//</span><span class="code-comment"> ...  </span>
+      drawRows.call(<span class="code-keyword">this</span>); 
+      drawState.call(<span class="code-keyword">this</span>); 
+      <span class="code-comment">//</span><span class="code-comment"> compare: </span>
+      <span class="code-comment">//</span><span class="code-comment"> drawState(); //won't work </span>
+      <span class="code-comment">//</span><span class="code-comment"> drawState(this); //won't work </span>
+      <span class="code-comment">//</span><span class="code-comment"> ...  </span>
+   } <span class="code-comment">//</span><span class="code-comment">draw </span>
+ 
+} <span class="code-comment">//</span><span class="code-comment">rendering</span></pre>
+
+<p>In the beginning of my design, several drawing methods like <code>drawRows</code> or <code>drawState</code> were defined as rendering properties, until I figured out that they won't be used anywhere but in <code>draw</code>, so it's better to hide them from outside context by making them inner functions. From the code fragment shown above, one can see that they use implicit <code>this</code> argument to access members of the object <code>rendering</code>. Why direct calls (commented out in the code sample) won't work? In JavaScript, <code>this</code> argument passed to an inner function would be the outer function object, draw <code>instead</code> of <code>rendering</code>. The work-around is to use the function's <code>call</code> function, which simply passes <code>this</code> explicitly: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call</a></p>
+
+<p>Of course, it would be possible to add an <i>explicit</i> argument and pass <code>rendering</code>, but using already-always-passing implicit <code>this</code> argument is a natural and economic solution. After all, I wanted to explain a very general technique for dealing with inner functions.</p>
+
+<h2>9. Future Development?</h2>
+
+<p>I have no plan on adding mouse/touch support to the game. I actually implemented experimental version with mouse control and decided to remove it: it basically worked in different variants, but playing with mouse is really awkward, inconvenient.</p>
+
+<p>It would be really more practical to add the support for the accelerometer and gyroscope for client computers having this equipment. But this rather would be the job for native Windows, Linux or Android. As to the use of any Web technologies, I find it important to… wait. I strongly believe that the use of any devices should be incorporated in the public applications only when they become standardized with W3 Consortium, even so widespread devices as Web cameras or fingerprint readers. In my opinion, all such devices can be used when appropriate W3 drafts or just proposals evolve into standards and get implemented in the major browsers. Please see, for example:</p>
+
+<ul>
+	<li><a href="http://www.w3.org/TR/orientation-event">http://www.w3.org/TR/orientation-event</a></li>	<li><a href="http://www.w3.org/TR/html-media-capture">http://www.w3.org/TR/html-media-capture</a>.</li></ul>
+
+<p>I don't want to break JavaScript isolation and interact with file system for the sake of storing the setting. By some very good reasons, this is considered unsafe. As I designed the application rather for "home use", not for playing online, it would quite possible and pretty easy to generate a setting file from UI on the fly and make it downloadable, so the user could replace it manually.</p>
+
+<p>I think the only legitimate way would be using <a href="http://en.wikipedia.org/wiki/Web_storage">Web local storage</a> for the game setting. Apparently, this is would be one additional feature to implement. Another one would be the option to populate the game with blocks when it starts, with chosen average density and up to certain height. This is the popular feature of the original game which I would love to implement, as I think this is the most interesting way to play it. By a number of reasons, it is less trivial than the rest, so I'm only thinking about it.</p>
+
+<h3>[Update]</h3>
+
+<p>Interactive on-line editor of game settings and using <a href="http://en.wikipedia.org/wiki/Web_storage">Web local storage</a> for permanent data storage is implemented in v. 7.0.</p>
+
+<p>I invite anyone to send any suggestions or spin-off any kind of derived work.</p>
+
+<h2>10. Versions</h2>
+
+<p><b><big>1.0:</big></b> February 15, 2015: First fully-functional version, as described in the article.</p>
+
+<p><b><big>1.1:</big></b> February 19, 2015: Functionally the same version, with version information, links to the information on the game, license, contributors and original publication, added to the help box. This is done for the possibility to publish the product on a stand-along Web page, apart from this article, still showing this legally sensitive information.</p>
+
+<p><b><big>2.0:</big></b> February 19, 2015: Known browser compatibility issues fixed.</p>
+
+<p><b><big>3.0:</big></b> September 20, 2015: Modernized JavaScript code, text-based help show/close button replaced with SVG image, added a note for incompatible browsers.</p>
+
+<p><b><big>4.0:</big></b> January 20, 2019: Fixed behavior after a tetromino is dropped down (with blank space key): now its location freezes, so it cannot be moved anymore; move keys affect next tetromino element.</p>
+
+<p><b><big>4.1:</big></b> January 23, 2019: Implemented more advanced handling of Space character.<br>
+Now it drops down current tetromino only if the key is not auto-repeat space or if Ctrl+Space is pressed.<br>
+<code>KeyboardEvent.repeat</code> may be not implemented in all browsers, so this property is simulated using <code>game.repeatedKeyDropDown</code> property. Help is updated accordingly.</p>
+
+<p><b><big>7.0:</big></b> February 1, 2019: Many new features.</p>
+
+<ul>
+	<li>Added "Download source code" and "Settings" commands.</li>	<li>New "Settings" page provides interactive and convenient way to customize game size in blocks, timing (speed and speed growth), tetromino colors and key assignments, as well as "clutter". Custom data is saved in a browser's local storage and can be removed at any time.</li>	<li>"Clutter" is the feature typical for best old implementations of classical Tetris which adds interest to the game. The game field is cluttered with random tetrominoes up to certain height (specified by the user in percents via settings or immediately before the game). Then the user can try to clean up the clutter.</li>	<li>Many convenience feature and better help. In particular, custom key assignments are reflected in help.</li></ul>
+
+<p><b><big>7.1:</big></b> February 5, 2019: Fixed the problem with browsers not allowing <code>localStorage</code> (DOM Storage) — implemented the fallback: playing works, but not storing of custom data in local storage.<br>
+The problem was revealed by testing on: Microsoft Edge 42.17134.1.0, EdgeHTML 17.17134, 2018.</p>
+
+<h2>11. Live Play</h2>
+
+<p>The game can be played live <a href="https://sakryukov.github.io/software/Tetris-on-Canvas">here</a>.</p>
+
+<h2>12. Conclusions</h2>
+
+<p>For some good reasons, JavaScript is sometimes claimed to be the world's most misunderstood language:<br>
+<a href="http://javascript.crockford.com/javascript.html">http://javascript.crockford.com/javascript.html</a><br>
+<a href="https://yow.eventer.com/yow-2013-1080/the-world-s-most-misunderstood-programming-language-by-douglas-crockford-1377">https://yow.eventer.com/yow-2013-1080/the-world-s-most-misunderstood-programming-language-by-douglas-crockford-1377</a>.</p>
+
+<p>One important lesson I learned from this exercise is: It's very important to derive the right practices by looking into the very fundamental features and stay away from the illusions which are too easy to overcome the mind which is not properly cleared. It is very important not to fall into the distractions created by hypes and plainly incompetent but pretty convincing people. What kind of distractions? Some of those described here: <a href="http://davidwalsh.name/javascript-objects-distractions">http://davidwalsh.name/javascript-objects-distractions</a>.</p>
+
+<p>I think all that myth busting if very useful, but this is… a whole different story.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/876475/Falling-Blocks-on-Canvas">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2015 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

@@ -1,0 +1,858 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0094)https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>WPF Bug with a Workaround: Double Invocation of Button.Click- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A button click event is invoked twice through an access character if an exception is thrown, caught and handled">
+<meta name="Keywords" content="">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="1/20/2014 2:51:00 AM">
+<meta property="article:modified_time" content="1/20/2014 2:51:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta property="og:url" content="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But">
+<meta property="og:title" content="WPF Bug with a Workaround: Double Invocation of Button.Click">
+<meta property="og:description" content="A button click event is invoked twice through an access character if an exception is thrown, caught and handled">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But"
+   },
+  "name": "WPF Bug with a Workaround: Double Invocation of Button.Click",
+  "headline": "WPF Bug with a Workaround: Double Invocation of Button.Click",
+  "url": "https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But",
+  "discussionUrl": "https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=3866010"
+  },
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "A button click event is invoked twice through an access character if an exception is thrown, caught and handled",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2014-01-20",
+  "dateCreated": "2014-01-20",
+  "dateModified": "2014-01-20"
+}</script>
+
+
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/712714/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="AuytM272GSICAhG4Ay+klsYhhfjEPEk2fqxtPi9uwYHnXrcFiygrqhbUfUdlMLy6ER2hRFvgfCscunScSErVCOV6u3/0WXOKtPirghWWqVs4p4OFLWcAa76umvKAFB6MFGsNX2tWDLUOouD+jfuYm2RW+iLOhlZDHZOySoU1xO3C4/cZzRq1LCkJKb6afFvhLfEs9Fb620YGw4peQ2+ovDo/bLc6ag9VtB4aUP2pt6ketk/Xjr9WKvuYk557SA/EWNKS+OQv0kRIymWF1qsnw4PfWyvCWEdI2xWgQN1JU+R7YTWNQHCqQk12FxAQ9wNvD7bhEDRo4J3BxzaLvpsRGPjM7Ll/tWBWQ2tTngnPaC2fj/WJ6YuvE5cHmKRTOGXX3R1GF/YXoCgWq+Fsi1wWquocl7Oh7rxUgv34qDbwY9YQL2F7p7NGP15TlNSRD20/5KTj8cI8K1ayko3skoU0oATSOreYhkyc7TnzxbaIUaU/A/X4MTYsA+PvoIOCU74iwlEQNAkiTqqn9PTpMEu5HO0GQQYBbGNXkzC0Sd+72icc+VUOIickjiKY9WQqLzD3nIABqaOhgap6xeqvlZ0QpALcPrtFQbU7ee6G29Ki47m5InU0ZjJ4UMjFDw7968gcFnA5VD1vegWXx/tgFb+EEuG/fOqFnMuiNrqSNJi1lPr6smPyfnh7Q3FclCwclk+DwjYJOnV7oKu0oNiMGHZu9pCG+g1JkCmrTi1vBys6ei90pbe4k1DICKUfT+nUF87OLDlQILP5ZS1OJCT6aK4YNZKmFlgvvJRWulEzi/+VWaCatLa95Opzw1zp2Y8vo1HcWMybkCpMdhjWt6BaEl5F2wgZyJYpxYmvhqYvYFxtGGwerZ09kHLtbQZiutsiga4iJBjGseNpmbrfLdI4Yq5MccjyVpXKYg8P4oojyUV6G2JWTv5tbqitPHhurZL2jFYnoy+WdUJKNC/KXsSRK9/wIKjZ7iM2SFEdfbGYadlPgY80Yq2oUsovpgDwRA8NRljC3Hj0Mfjb8BUMZEGWAfz6I31YmTa1dXmufFqKSlwVrZfZHcpuM/KLczaaf6g9hkjJYhF6BOd+qYow02DHAlT9mx5hQ+JEGCOydflfKX6q3dZaCy3d+nXzYusDoftSKTRP3XEcBLDTb1W+lk0iVyxDBe3Ul2jonTkY55QbsTn/f1J3tnRsBVO1qpcSAuRMGqn+knc8KeML67VRROJvWKTXuBmgf4is0dCCn4cA3sgTNW43iHsyoZFhBUvf6TbY3VBSJgO9Sc6sjz8kjKYx74YkghEwSkLXn99DYG51DrOdixHUaWJ8ge0OhH0CU6euA1fWOGtsJdeBqIvjz2W+yL7vebxl54KtktG0F2npBMpKPKl63o1JEudLEujLex8wzU+qNnys7sgHtZ9rCuOVIfm37KWCoU+Fdqcw32EQ3nJhIoVCA9QdAvSukIKPhS8+neg0PctWOWt99vkE55XBbJ63Aefwr4Mr12MJeMc4MDSKmQijMMevNb2cP0pGdeSfozIjuJb4zmj+Kte/uFOr8NIC2N2O7GWxoSMkyESbLHIUCbMfMHCNPGudN+NpqEq9R1s7bgrpBFeT18jE+amLlPjU6QAnJAOPmgQOUdG4miEN4RrRkWYgOndR8L6O0ALgWV/qo87iwJ7Oll+qpNdHdQWQQYuao8dmP+Yy2T6hcXwhXZpldTuHcVENtVNN/pz8DK99PC9esQ0jeLeYIPwKIb7c0TssQVs1heQVGrFe+rHH6kyfsygFIlo5VScY9U1PJhoOqI+rWY+PwRHcoNI9EIyfjTgflLNMBvzjJ7KhJ8k+/R+qwcQN8rA2f2kkVFQWHpXpuXLu/A==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">WPF Bug with a Workaround: Double Invocation of Button.Click</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_712714">
+
+	<meta itemprop="upvoteCount" content="0">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">19 Jan 2014</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 1</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A button click event is invoked twice through an access character if an exception is thrown, caught and handled</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+
+<ul class="download">
+
+<li><a href="WPF-Bug-with-a-Workaround-Double-Invocation-of-Button.Click.ToReproduce.zip">Source code: steps to reproduce the problem, ToReproduce.zip</a></li>
+<li><a href="WPF-Bug-with-a-Workaround-Double-Invocation-of-Button.Click.Workaround.zip">Source code: the workaround, Workaround.zip</a></li>
+
+</ul>
+
+<h2>Table of Contents</h2>
+<ol><a href="https://www.codeproject.com/Articles/712714/712714/Workaround.zip"></a><li><a href="https://www.codeproject.com/Articles/712714/712714/Workaround.zip"></a><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a1">Introduction</a></li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a2">The Problem</a> </li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a3">Steps to Reproduce</a> </li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a4">The Workaround</a> </li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a5">Testing and Compatibility</a></li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a6">Some Conclusions. Are we Fine?</a></li>
+<li><a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#a7">Credits</a></li></ol>
+<h2><a name="a1">1. Introduction</a></h2>
+<p>It is really wonderful that I spotted this bug this late. It is also really wonderful that I failed to find the description of this problem on the Web so far. It is quite likely that such description exists somewhere, because the problem is quite apparent, so I'll be much grateful if someone points one out.</p>
+<p>It seems even more wonderful considering the practical importance of the situation when a bug is manifested. Indeed, it is really important to handle all the exceptions when there is a last chance to catch them: at the very top stack frame of the stack of each thread, and also at the outermost event cycle of the UI; in WPF, this is done by handling all the unhandled exceptions using the event <code>Application.DispatcherUnhandledException</code>. In this case, every unhandled exception will be caught inside the event cycle, handled, and then the cycle can be continued, if it makes sense under the given exceptional condition.</p>
+<p>It is also important to use access characters on controls, which allows the user to activate or focus each control with one keyboard key combination (Alt+Key). Actually all well-designed applications are expected to allow really quick access to all controls using just the keyboard, so access characters are extremely helpful. </p>
+<p>Unfortunately, the combination of these most basic techniques creates a problem with WPF, when the <code>Button</code> control is used and the exception is actually thrown and caught.</p>
+<p>As a matter of fact, all programming communities have some members who tend to give "this is a feature, not a bug" arguments, insisting that "if you do everything correctly, the system will behave correctly". Specially for such people, I want to emphasize that the control's <code>Click</code> event is designed so they are supposed to show exact same behavior, regardless of the way they are activated, via the mouse or the keyboard, no matter how the application uses the event. This is not the case with WPF, under certain conditions I will describe in the next section. </p>
+<p>Anyway, the topic of this article is discussible. The workaround I suggest helps to guarantee desired behavior in case of exception in every particular application, but it hardly can be done in a totally universal way, so the bug can sneak everywhere, due to its very nature. That's why I decided to write on this matter in the form of the article, which allows me to show the exact code to reproduce the problem. Also, I think it is really important to bring the problem to the attention of as many WPF developers as possible.</p>
+<p>I will be very grateful if some readers point out better approach workarounds for this problem. All kinds of correct criticism will be very welcome.</p>
+<h2><a name="a2">2. The Problem</a></h2>
+<p>It's good to start with the notes showing the cases when the problem does not appear.</p>
+<p>Notably, I found the problem only with WPF buttons, nothing else. I could not possibly try out all available controls, but my test of other most widely used controls did not show any abnormalities; I tried check boxes and radio buttons (which are the closest relatives of the class <code>Button</code>) and also menu items.</p>
+<p>The problem only appears when the button is "clicked" using the access key present in its text. Such text is defined in XAML by the underscore ('_') character; if it prefixes some character of the button's text, this character serves as the access key which invokes the <code>Click</code> event when the user hits Ctrl+Key keyboard key combination. If the Click event is triggered with the mouse or keyboard in any other way, nothing wrong happens. </p>
+<p>The problem appears only if some exception is thrown in the <code>Click</code> event handler, and only if it is handled using the event <code>Application.DispatcherUnhandledException</code>. In this case, the <code>Click</code> event is handled, exception is thrown and handled, and then the <code>Click</code> event is invoked again, and it leads to the second-time handling of the exception. </p>
+<p>For further details, please see the exact steps used to reproduce the problem shown in the next section.</p>
+<h2><a name="a3">3. Steps to Reproduce</a></h2>
+<p>The easiest way to reproduce the problem would be loading the project referenced by the first code download link at the top of this article.</p>
+<p>I'll also show the shortest way to reproduce it from scratch, starting from the Visual Studio template "WPF Application":  </p>
+<ol><li>With Visual Studio, create such application from scratch. </li>
+<li>Add some button to the main window XAML and give it a name. The button text should have an underscore character, to denote some access key, so the <code>Click</code> event would be invoked by Alt+Key click on the keyboard. </li>
+<li>Add constructor to the <code>Application </code>class; in this constructor, add an event handler to the invocation list of the event <code>System.Windows.Application.DispatcherUnhandledException</code> (using the '+=' operator). This event handler should assign the value of the <code>System.Windows.Threading.DispatcherUnhandledExceptionEventArgs.Cancel</code> to <code>true </code>and show some exception information on screen.</li>
+<li>Add some event handler to the even <code>Click</code> of the button. This handler should throw some exception.</li></ol>
+<p>Note that the "show some exception information" step mentioned above is not required and can be missing, it won't affect the manifestation of the bug. The double invocation of the <code>Click</code> event will happen anyway. And this is really the double invocation of the event, not double handling of the same exceptions or something like that. It can easily be checked up by adding some code line to the <code>Click</code> event handler, setting a breakpoint on this line and using the debugger. However, having some exception thrown at the end of the execution of the handler code is essential: without it, the effect of double event invocation won't be observed.</p>
+<p>I use, for example, the following XAML for the demo window:</p>
+<div class="pre-lang" id="premain872711"><div>HTML</div><div class="pre-action-link"><span class="copy-code" data-index="872711" id="copycode872711" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="html" data-codeblock-processed="true" id="pre872711" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Window</span> <span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">HowToReproduce.ReproduceProblemWindow"</span>
+    <span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+    <span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span>
+    <span class="code-attribute">WindowStartupLocation</span><span class="code-keyword">="</span><span class="code-keyword">CenterScreen"</span>
+    <span class="code-attribute">Title</span><span class="code-keyword">="</span><span class="code-keyword">To Reproduce the Problem..."</span> <span class="code-attribute">SizeToContent</span><span class="code-keyword">="</span><span class="code-keyword">WidthAndHeight"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">StackPanel</span> <span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">8"</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">TextBlock</span><span class="code-keyword">&gt;</span>Activate the button using Alt+B or blank space or mouse
+        and see the difference<span class="code-keyword">&lt;</span><span class="code-leadattribute">LineBreak</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">TextBlock</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Button</span> <span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">button"</span> <span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">200"</span><span class="code-keyword">&gt;</span>
+            Test _Button Click<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">Button</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">StackPanel</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">Window</span><span class="code-keyword">&gt;</span> </pre>
+<p>This is how I throw the exception:</p>
+<a name="throw"><div class="pre-lang" id="premain909922"><div>C#</div><div class="pre-action-link"><span class="copy-code" data-index="909922" id="copycode909922" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre909922" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Windows;
+
+<span class="code-comment">//</span><span class="code-comment">...
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> ReproduceProblemWindow : Window {
+
+    <span class="code-keyword">public</span> ReproduceProblemWindow() {
+        InitializeComponent();
+        <span class="code-keyword">this</span>.button.Focus();
+        <span class="code-keyword">this</span>.button.Click += (sender, evenArgs) =&gt; {
+            <span class="code-keyword">throw</span> <span class="code-keyword">new</span> ApplicationException(<span class="code-string">"</span><span class="code-string">Button click"</span>);
+        };
+    } <span class="code-comment">//</span><span class="code-comment">ReproduceProblemWindow
+</span>
+} <span class="code-comment">//</span><span class="code-comment">class ReproduceProblemWindow</span></pre>
+<p>And this is how I handle the exception in my <code>Application </code>class:</p>
+<div class="pre-lang" id="premain262034"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="262034" id="preShrink262034">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="262034" id="copycode262034" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre262034" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> System.Windows;
+
+<span class="code-comment">//</span><span class="code-comment">...
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> App : Application {
+
+    <span class="code-keyword">static</span> <span class="code-keyword">class</span> DefinitionSet {
+        <span class="code-keyword">internal</span> <span class="code-keyword">const</span> <span class="code-keyword">string</span> FormatException = <span class="code-string">"</span><span class="code-string">{0}:\n\n{1}"</span>;
+        <span class="code-keyword">internal</span> <span class="code-keyword">const</span> <span class="code-keyword">string</span> FormatTitle = <span class="code-string">"</span><span class="code-string">{0} Exception"</span>;
+    } <span class="code-comment">//</span><span class="code-comment">class DefinitionSet
+</span>
+    <span class="code-keyword">internal</span> App() {
+        DispatcherUnhandledException += (sender, eventArgs) =&gt; {
+            eventArgs.Handled = <span class="code-keyword">true</span>;
+            MessageBox.Show(
+                <span class="code-keyword">string</span>.Format(
+                    DefinitionSet.FormatException,
+                    eventArgs.Exception.GetType().FullName,
+                    eventArgs.Exception.Message),
+                <span class="code-keyword">string</span>.Format(
+                    DefinitionSet.FormatTitle,
+                    App.Current.MainWindow.Title),
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }; <span class="code-comment">//</span><span class="code-comment">DispatcherUnhandledException
+</span>    } <span class="code-comment">//</span><span class="code-comment">App
+</span>
+} <span class="code-comment">//</span><span class="code-comment">class App</span></pre>
+<p>To see the problem, click Alt+C. The exception dialog box will show the exception <code>ApplicationException</code> with the message "Button click". After closing the dialog box, the exception will be shown one more time; and debugging shows that the event is invoked again, only one more time. There are at least two other ways to make the event invoked: to click a button by a mouse, or to select it and hit the space character — they won't show any abnormal behavior.</p>
+<p>Actually, different behavior depending on the way the button click is performed is the main evidence that this is the WPF bug. Apparently, the controls and the activation of the controls using the access key is designed.</p>
+</a><h2><a name="throw"></a><a name="a4">4. The Workaround</a></h2>
+<p>One workaround is quite apparent: we can serialize the event invocation through the <code>Dispatcher.Invoke</code> method. This puts the call, with the parameters and local variables needed for the call, to the event queue of the UI thread of the application; this way the delegate instance will be taken from the queue and invoked only once.</p>
+<p>Some background on this and related techniques is given in my past answers in the CodeProject Questions &amp; Answers forum:<br>
+</p><ul><li><a href="http://www.codeproject.com/Answers/159125/Control-Invoke-vs-Control-BeginInvoke#answer1">Control.Invoke vs Control.BeginInvoke</a>,</li><li><a href="http://www.codeproject.com/Answers/159938/Problem-with-Treeview-Scanner-And-MD5#answer2">Problem with Treeview Scanner And MD5</a>.</li></ul>
+<p>Also, my article explains the inter-thread delegation idea and how it works under the hood: </p><ul><li><a href="http://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">Simple Blocking Queue for Thread Communication and Inter-thread Invocation</a>.</li></ul>
+<p>Now, I wanted the workaround which would require no changes in already written code and would require only the change in XAML, just for the cases when all buttons controls are declared only in XAML. For this reason, the new control I called <code>FixedButton</code> declares the event with the same exact name:</p>
+<div class="pre-lang" id="premain135869"><div>C#</div><div class="pre-action-link"><span class="copy-code" data-index="135869" id="copycode135869" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre135869" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">namespace</span> WpfFix {
+    <span class="code-keyword">using</span> System;
+    <span class="code-keyword">using</span> System.Windows.Controls;
+
+    <span class="code-keyword">internal</span> <span class="code-keyword">class</span> FixedButton : Button {
+
+        <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnClick() {
+            <span class="code-keyword">if</span> (Click != <span class="code-keyword">null</span>)
+                Dispatcher.Invoke(<span class="code-keyword">new</span> Action(() =&gt; {
+                    Click.Invoke(<span class="code-keyword">this</span>, <span class="code-keyword">new</span> EventArgs());
+                }));
+        } <span class="code-comment">//</span><span class="code-comment">OnClick
+</span>
+        <span class="code-keyword">new</span> <span class="code-keyword">internal</span> <span class="code-keyword">event</span> EventHandler Click;
+
+    } <span class="code-comment">//</span><span class="code-comment">class FixedButton
+</span>
+} <span class="code-comment">//</span><span class="code-comment">namespace WpfFix</span></pre>
+<p>Note the keyword <code>new</code>; it allows to avoid the compilation warning about having the member <code>Button.Click</code> <em>hidden</em> in the derived class. Generally, such hiding is bad, but it helps me to minimize the changes in the code formerly using the class <code>System.Windows.Controls.Button</code>.</p><p>Now, the problem is to replace all of the buttons in all XAML files with the new class. For this purpose, an XML <em>namespace</em> corresponding to <code>WpfFix</code> should be added; Visual Studio Intellisense would help to find the appropriate namespace declaration:</p>
+<div class="pre-lang" id="premain236250"><div>HTML</div><div class="pre-action-link"><span class="copy-code" data-index="236250" id="copycode236250" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="html" data-codeblock-processed="true" id="pre236250" style="margin-top: 0px;" class="notranslate">xmlns:Fix="clr-namespace:WpfFix"</pre>
+<p>Accordingly, the tag <code>Button</code> should be replaced with the tag <code>Fix:FixedButton</code>, and the attribute <code>Name</code> — with the attribute <code>x:Name</code>. This is the complete XAML for my <code>Workaround Demo window</code>:</p>
+<div class="pre-lang" id="premain137904"><div>HTML</div><div class="pre-action-link"><span class="copy-code" data-index="137904" id="copycode137904" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="html" data-codeblock-processed="true" id="pre137904" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Window</span> <span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">Workaround.WorkaroundDemoWindow"</span>
+    <span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+    <span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span>
+    <span class="code-attribute">xmlns:Fix</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:WpfFix"</span>
+    <span class="code-attribute">WindowStartupLocation</span><span class="code-keyword">="</span><span class="code-keyword">CenterScreen"</span>
+    <span class="code-attribute">Title</span><span class="code-keyword">="</span><span class="code-keyword">Workaround Demo"</span> <span class="code-attribute">SizeToContent</span><span class="code-keyword">="</span><span class="code-keyword">WidthAndHeight"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">StackPanel</span> <span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">8"</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">TextBlock</span><span class="code-keyword">&gt;</span>
+            Activate the button using Alt+B or blank space or mouse and see the difference:
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">LineBreak</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            the click should be invoked only once,
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">LineBreak</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            and the exception should be thrown and handled only once.
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">LineBreak</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">TextBlock</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Fix:FixedButton</span> <span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">button"</span> <span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">200"</span><span class="code-keyword">&gt;</span>
+            Test _Button Click<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">Fix:FixedButton</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">StackPanel</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">Window</span><span class="code-keyword">&gt;</span></pre>
+<p>There is one remaining problem: the simple <code>MessageBox</code> text in the exception handling method shown above won't be very useful: it would only show the exception <code>TargetInvocationException</code> with the message "Exception has been thrown by the target of an invocation", thus hiding the root cause of the exception.</p>
+<p>But this is quite a general problem which should be solved somehow anyway, because such exception is the usual problem of the beginners debugging the code using any kind of invocations. The key here is: the original exception object is still preserved in the property <code>System.Exception.InnerException</code>. One approach is to use this property and show all inner exceptions recursively. This can be implemented in different ways. Here is, for example, my improved exception handling code:</p>
+<div class="pre-lang" id="premain608507"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="608507" id="preShrink608507">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="608507" id="copycode608507" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre608507" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.Windows;
+<span class="code-keyword">using</span> StringBuilder = System.Text.StringBuilder;
+<span class="code-keyword">using</span> StringList = System.Collections.Generic.List&lt;<span class="code-keyword">string</span>&gt;;
+<span class="code-keyword">using</span> IStringList = System.Collections.Generic.IList&lt;<span class="code-keyword">string</span>&gt;;
+
+<span class="code-comment">//</span><span class="code-comment">...
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> App : Application {
+
+    <span class="code-keyword">static</span> <span class="code-keyword">class</span> DefinitionSet {
+        <span class="code-keyword">internal</span> <span class="code-keyword">const</span> <span class="code-keyword">string</span> FormatException = <span class="code-string">"</span><span class="code-string">{0}:\n{1}"</span>;
+        <span class="code-keyword">internal</span> <span class="code-keyword">const</span> <span class="code-keyword">string</span> FormatTitle = <span class="code-string">"</span><span class="code-string">{0} Exception"</span>;
+        <span class="code-keyword">internal</span> <span class="code-keyword">const</span> <span class="code-keyword">string</span> ExceptionDelimiter = <span class="code-string">"</span><span class="code-string">\n\n"</span>;
+    } <span class="code-comment">//</span><span class="code-comment">class DefinitionSet
+</span>
+    <span class="code-keyword">internal</span> App() {
+        DispatcherUnhandledException += (sender, eventArgs) =&gt; {
+            Func&lt;Exception, <span class="code-keyword">string</span>&gt; exceptionTextFinder = (ex) =&gt; {
+                Action&lt;Exception, IStringList&gt; exceptionTextCollector
+                    = <span class="code-keyword">null</span>; <span class="code-comment">//</span><span class="code-comment"> for recursiveness
+</span>                exceptionTextCollector = (exc, aList) =&gt; {
+                    aList.Add(<span class="code-keyword">string</span>.Format(
+                        DefinitionSet.FormatException,
+                        exc.GetType().Name,
+                        exc.Message));
+                    <span class="code-keyword">if</span> (exc.InnerException != <span class="code-keyword">null</span>)
+                        exceptionTextCollector(exc.InnerException, aList);
+                }; <span class="code-comment">//</span><span class="code-comment">exceptionTextCollector
+</span>                IStringList list = <span class="code-keyword">new</span> StringList();
+                exceptionTextCollector(ex, list);
+                StringBuilder sb = <span class="code-keyword">new</span> StringBuilder();
+                <span class="code-keyword">bool</span> first = <span class="code-keyword">true</span>;
+                <span class="code-keyword">foreach</span> (<span class="code-keyword">string</span> item <span class="code-keyword">in</span> list)
+                    <span class="code-keyword">if</span> (first) {
+                        sb.Append(item);
+                        first = <span class="code-keyword">false</span>;
+                    } <span class="code-keyword">else</span>
+                        sb.Append(DefinitionSet.ExceptionDelimiter + item);
+                <span class="code-keyword">return</span> sb.ToString();
+            };
+            MessageBox.Show(
+                exceptionTextFinder(eventArgs.Exception),
+                <span class="code-keyword">string</span>.Format(
+                    DefinitionSet.FormatTitle,
+                    App.Current.MainWindow.Title),
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            eventArgs.Handled = <span class="code-keyword">true</span>;
+        }; <span class="code-comment">//</span><span class="code-comment">DispatcherUnhandledException
+</span>    } <span class="code-comment">//</span><span class="code-comment">App
+</span>
+} <span class="code-comment">//</span><span class="code-comment">class App </span></pre>
+<p>That's all. The problem is very unpleasant, but the workaround is not too hard to apply.</p>
+<h2><a name="a5">5. Testing and Compatibility</a></h2>
+<p>The problem was tested only on .NET Framework v. 3.5 and v. 4.0, on Windows 7. I will be much grateful for testing the problem demo for other versions, platforms and the combinations</p>
+<h2><a name="a6">6. Some Conclusions. Are We Fine?</a></h2>
+<p>Of course not. This is just the workaround, it does not eliminate and cannot eliminate the problem. The developers should be aware of the problem and be careful. There are a number of ways in which the problem can still sneak in the code. One apparent way is the access to the <code>Button.Click</code> event — it is hidden by <code>FixedButton.Click</code> but cannot be made inaccessible. Here is the way to access it:</p>
+<div class="pre-lang" id="premain234976"><div>C#</div><div class="pre-action-link"><span class="copy-code" data-index="234976" id="copycode234976" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre234976" style="margin-top: 0px;" class="notranslate">FixedButton button = <span class="code-keyword">new</span> FixedButton();
+<span class="code-comment">//</span><span class="code-comment">...
+</span>Button btn = button;
+btn.Click += (sender, eventArgs) =&gt; {
+    <span class="code-comment">//</span><span class="code-comment"> will handle System.Windows.Controls.Button.Click
+</span>    <span class="code-comment">//</span><span class="code-comment"> reproducing the same problem
+</span>}; </pre>
+<p>Besides, the developer can accidentally always create and use the instance of <code>System.Windows.Controls.Button</code> directly.</p><p>So, the problem still remains and needs developer's attention. The problem can only be totally eliminated by fixing WPF itself. </p>
+<p>I will be much grateful if someone could share some better idea, as well as for some criticism. </p>
+<h2><a name="a7">7. Credits</a></h2>
+<p>When this article was first published, CodeProject member <a href="http://www.codeproject.com/Members/nseveno">Nicolas Séveno</a> provided a link to Microsoft Connect Feedback: <a href="https://connect.microsoft.com/VisualStudio/feedback/details/710127/the-click-event-of-a-button-is-raised-twice">The Click event of a button is raised twice</a>.
+</p><p>Thank you very much, Nicolas!</p>
+<p>This issue is quite different, but probably somehow related. On 12/1/2011, the Microsoft representative acknowledged this bug but closed it with "Won't Fix" status and motivated this decision. I don't think this motivation provides enough excuse for having this bug, because there is no a perfect workaround, but this message provides a clue on what's going on:</p>
+<blockquote class="FQ"><div class="FQA">Microsoft <a href="https://connect.microsoft.com/VisualStudio/feedback/details/710127/the-click-event-of-a-button-is-raised-twice">wrote</a>:</div>The reason is that there are 2 ways to invoke the button: AccessKeyManager.OnKeyDown and AccessKeyManager.OnText. One is raised in response to a KeyDown(Key.Return) event, the other is raised on a TextInput("\r") event. The KeyDown event comes from WM_KEYDOWN and is normally marked as handled. But when throwing an exception from Click, the event is not marked as handled. Since you catch the exception we return out to the message pump which thinks WM_KEYDOWN was not handled and so calls TranslateMessage which generates a WM_CHAR. This is turned into the TextInput event which is routed back to the button, and the AccessKeyManager invokes the click again.
+<p>
+The only "fix" is to consider events as handled if their handlers raise exceptions. Unfortunately this is a policy change that would be hard to do at this point. So resolving this bug as Won't Fix.</p></blockquote>
+<p>Unfortunately, this explanation from Microsoft does not provide a way for a workaround. The attempt to mark the event as handled using, in case of my "steps to reproduce" code, <code>eventArgs.Handled = true;</code> (please see my <a href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But#throw">second code fragment here</a>), won't help. I did not yet check up the bug reported by Nicolas, but it looks like it also needs some different workaround, please see his comments to this article.</p>
+
+
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/712714/WPF-Bug-with-a-Workaround-Double-Invocation-of-But?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2014 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

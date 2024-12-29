@@ -1,0 +1,1213 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0062)https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>XAML Data to Code- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="How to generate C# code from XAML? But why? Anyway, this question is answered, but this is not the main part…">
+<meta name="Keywords" content="C#, .NET, XAML">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="9/23/2023 10:51:00 PM">
+<meta property="article:modified_time" content="9/27/2023 2:31:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="27 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code">
+<meta property="og:title" content="XAML Data to Code">
+<meta property="og:description" content="How to generate C# code from XAML? But why? Anyway, this question is answered, but this is not the main part…">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code"
+   },
+  "name": "XAML Data to Code",
+  "headline": "XAML Data to Code",
+  "url": "https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code",
+  "discussionUrl": "https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C#,.NET,XAML",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Many people asked this question about the generation of code out of XAML. And there are many unsatisfactory answers. At the same time, the problem is pretty easy to solve. And code generation is not the only approach. Another approach would be XAML markup created specially for the population of predefined data objects from XAML. Both approaches have their benefits, are easy to use, and are covered in detail in the present article, as well as XAML-based Globalization and Localization of arbitrary data, not necessarily related to UI.",
+  "articleSection": "XAML",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2023-09-23",
+  "dateCreated": "2023-09-23",
+  "dateModified": "2023-09-27"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=desktop",
+      "name" : "desktop"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=XAML",
+      "name" : "XAML"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=desktop">desktop</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=XAML">XAML</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5368892/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="ImhTaaYAnUsiLqpKEa2Graoqvi735emBS+ZH085TX/EmaxZGZ/xINeRuvcWcMUsxfKBdgVqh5FgUCkkIUnVjU3ur2cFxAjM+Qt3/Zm/lyIGBvuKiZkwb8uRXwAoVDaKo+AY1QQQNE6w5SrVSjxGL1WnHTfklQtq1hOQYOZNQPRTjajK2u4TcTt3jMefaoccvDORVQ0ppLWikSqO74Llz3qU+ErjDZdVeq2X7lU/1ay+cBAFE2VmznUQ+BOHffxfnjfd2BoSPbM1BrWAO9Npv22yA9Yx25Sp5jnSjEj6jRC7sYrz//ILb8YfCsokKjxNbAkSdMw4yoRkPVS2atmdqiaqCJYd9rN3cMwntMH7qAEuduvSnAmBClKnaxoyNtKwW1NcZPYDZRZPtio38MTfBfgJe5ifhJM0OUwv3GOJHlisUYKefWmi5V54Q5/Nal3guNt5Tz2GPMRkLbEEIlQTNpVAb71DbLV1QF9FJ74OenP2iOhmaRUsbSvQatIepXe/NRSCH7qGrBsFWLcuLrUZ1geJKa/kXaSqXmQ/QiV5OJ0hrpTrvkA9/dTsTeesx5uxpgqGAqqwDf3hEMlAyKM2z5J99nXZyAJpB4S5MBSHsdTnzVMmma66F3KwSwW0qgggIWMcavwfOvF0Oo20LvnKUclpZdjs1ljkzSGLsWfZzqceUzGbhKztkboRGI1VAcoPrM8fu0DK995C7OMp7FVlrxuJjcvmE6JDHcJ12ecg/xCM4lXMqAdhon4gx66hIKYwpkpOutCe4rYr/0EQbwk3CBn7do9MK1GhAZySHOlJionSei5KFIWgtX0dTv/Ho9e0XMe92xLlbtaRdUQn4Es2gGEIfOPx8B8sYzTY15jFEVl/e7Dj6LrGYxwRrM6MFFEwGbAvvWAF3aYPaTIpDV09tvo2xxabquRFCo8Ao0Ly3N+P7FRmbj26EEBJ0geYBvJN2EiJPWHq04HzyZbCdn04PktGy84n5VwYj+8glnOUFPFe0jyyHxwxryOSzT9uizCeYE8eoKTfKrEHDWDeAJT+4/epMh7zLcd+9MNlDzWW/jxJCdimeB2xaqLyZLVWidILq4+toxEdCr13yiEFYFz8xxjqjvuyuYcA3b6i8MDdJ3x3tVt5f/yTwWKFcfXCBKyyU3sT1tK3K5xVXzN7MLeNbBUIp1kl1nzL38idF9lymSmlS3BduSSHBZ6jaG6wwPK62eMNbRSfcO757YfxsH2obEzhfkR88HXqG0Zr4dnVPP+5IGZOoOBCPCgk8/X3+SNTLqda78LKjceVkyl0zF+ZagoNo8NiMBs93298ZzfDIfOPDau3wiQP9Dgksn0qXD2eXIbtKGqb4FJ0JbOa9F/IhPi5xCzcftzuq9QKpHsgYpCBJCwC13M3+5isQOK0CoA2bIs/Sc6thwFsaxtx89wEOrSlHEheUkSKRHhEK7NxCcyVzwT4MMO0pYND3sUMw2TUDvcm0zuogvkSoaixrp6Bqy2CfBRj4ReeMhlNMmVJcA/ktEtbTOU7TwFlKpzq8ktk63JgiZCPralsfeiEx3cOsOKgYRaj1y+g7qe53tHaWNnALzAmL28BdFVHoT8lM/a0SDt0kAStkTQxd1F0kRfewI04vJO5Ruhx5y+akTYwGclKbu/1oSutudU8GbkgbIhOsyS3nCwXskom4xSevfS9faLK3sVTmel+L/jYVDSTMz6GFSMihowg4pQVUm8LEivsyhRAINAgD/hTvZk2MEMIU5AsKp1X9sebpdMRfgxeLmjsaFDwsgCx07XYNVMhx5ZQ2aKNIEmD2M4n+hQyMCol4OlkYOIjUdniq73dG7vSaTpWK9OgmpfDhlE3z6GOKfbbXmaityRI8Xs6e8cdei8+6Z7jca3GDCUZilpgVoO+OwJ8skUKGR9jjBaf0PpxF+Fcl0qTnoY1UbOMOSc1HlDGtuVKqbCGc3IK5Njl3yU42f3LMQ5C+l4QSTOyOU9de4a3iOjTj1nFXqVfEfp0at/VpwyNeZyIBVoaM12M1SNO3NFqo3ex11NmrFGR+N5fWWFmvqyX+ezMrTzNiZuUYRRs2DcVajrBo6xzYh1mCX3jiz9BpRBNpg7B3CxqdDhO1Gb2IGhjtxvCmn5Ze+/eAi9A7cNlpWXlbDnXaEnJBzFHBF42w3863qknrflZ59d9hzkM7yDHlNFIxdZ+XMyI2fuo417L/eQAjsL0Rd0JUV5sGo/PIlWdSCecL/vP0iZOsTAxMix5WlBm0lju50TlqWmYIm5YJHOHgT21bEPhWh1XIx2HO7ozR5OspoW3RJxEpn1vwWoI6vLWUmfd9ygszEPFjujHxNYOaf/oZe3l2u7jbSxKAZuW/QxnTAvQoplFJN1XNBsLGE8dapARQC8Dy7dAOiRmFoz4bmTQDqgT1juwtRTwCq4BB2IpWKBPd2yQ1qVIW1hk5W9eHK/SPcIcwkDP9HIolfoBykrCkNtN67WUesVJVn37a+dRUFJ/l/qQV8nkZdBJtwCUgapZfM8M9ORtR+96spD/B8bUbTWeGTifhVnWrHIYlvJAogAx/ikNGAohc6uwghKAyW0vEj6jLf/gIjQzB+UYNHfdiZ/bCnfq/SjwpQkHz014lid6NoG10AEAprjrn5bb35UPd08KdppgFLXchTHV1l4vLE12RCH0B7WT56fx992hqGqj4a6ogmGzejavu6GoVE31a2h8oZVuK5AMbRPVVYJFKYgSnDU5zNyXBCD5KYaxxzYgzOrJYTwXLC74I7g==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/XAML" data-id="139">XAML</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">XAML Data to Code</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5368892">
+
+	<meta itemprop="upvoteCount" content="9">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (9 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">27 Sep 2023</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">27 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 8.5K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 133</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">How to generate C# code from XAML? But why? Anyway, this question is answered, but this is not the main part…</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">Many people asked this question about the generation of code out of XAML. And there are many unsatisfactory answers. At the same time, the problem is pretty easy to solve. And code generation is not the only approach. Another approach would be XAML markup created specially for the population of predefined data objects from XAML. Both approaches have their benefits, are easy to use, and are covered in detail in the present article, as well as XAML-based Globalization and Localization of arbitrary data, not necessarily related to UI.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+    <li><a href="https://github.com/SAKryukov/dotnet-solution-structure">Download or clone source code from GitHub,<br/></a> <a style="margin-left:5em" href="https://github.com/SAKryukov/dotnet-solution-structure/tree/master/code/1-Agnostic/Ui/XamlToData">see: XamlToData</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/Articles/5368892/dotnet-solution-structure.v.1.1.zip">Download source code — 139.2 KB</a></li>-->
+</ul>
+
+<p id="image-title"><img alt="Gantry" src="./Resources-articles/2023-09-23.XAML-Data-to-Code.title-gantry.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<dl>
+	<dt><i>Facts are not science — as the dictionary is not literature.</i></dt>	<dd><a href="https://en.wikiquote.org/wiki/Martin_H._Fischer">Martin H. Fischer</a></dd></dl>
+</blockquote>
+
+<p><a> </a></p>
+
+<h2><a>Contents</a></h2>
+
+<p class="toc"><a> </a><a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-introduction" style="margin-left: 0">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-what-do-they-advise3f" style="margin-left: 3em">What do they Advise?</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-why3f" style="margin-left: 3em">Why?</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-how-to-obtain-resource-dictionary3f" style="margin-left: 0">How to Obtain Resource Dictionary?</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-different-approaches" style="margin-left: 0">Different Approaches</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-custom-xaml-markup" style="margin-left: 0">Custom XAML Markup</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2313a-a-very-simple-one" style="margin-left: 3em">Approach #1: A Very Simple One</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-multiple-objects" style="margin-left: 3em">Multiple Objects</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-dictionary-normalization" style="margin-left: 3em">Dictionary Normalization</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing" style="margin-left: 3em">Approach #2: Duck Typing</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-mergeddictionaries-and-combination-of-approaches" style="margin-left: 3em">MergedDictionaries and Combination of Approaches</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-two-approaches3a-pro-and-contra" style="margin-left: 3em">Two Approaches: Pro and Contra</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-globalization" style="margin-left: 3em">Globalization</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-limitations" style="margin-left: 3em">Limitations</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-code-generation" style="margin-left: 0">Code Generation</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-implementation" style="margin-left: 3em">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-msbuild" style="margin-left: 3em">MSBuild</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-generated-code-and-development-cycle" style="margin-left: 3em">Generated Code and Development Cycle</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-why-not-msbuilt-custom-task3f" style="margin-left: 3em">Why not MSBuilt Custom Task?</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-custom-markup-vs.-code-generation" style="margin-left: 0">Custom Markup vs. Code Generation</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-code-generation-benefits" style="margin-left: 3em">Code Generation Benefits</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-code-generation-issues" style="margin-left: 3em">Code Generation Issues</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-custom-markup-benefits" style="margin-left: 3em">Custom Markup Benefits</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-custom-markup-issues" style="margin-left: 3em">Custom Markup Issues</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-solution-structure-preview" style="margin-left: 0">Solution Structure Preview</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-compatibility-and-testing" style="margin-left: 0">Compatibility and Testing</a><br>
+<a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-introduction">Introduction</h2>
+
+<p>XAML is a pretty sophisticated technology designed to provide data of virtually any nature and structure. (Some may say — bloated :-) In common practice, it is used to provide data defining the look and behavior of some UI, and, more rarely, vector graphics roughly equivalent to 2D SVG or 3D OpenGL, or WebGL. It does not mean that XAML is designed just for that. If we already use XAML, why not use it as a data source for arbitrary data? There are many <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-why3f">good reasons for that</a>.</p>
+
+<p>So, the questions about the generation of some code are quite understandable. It was my idea, too. However, after some thinking, it becomes clear that this is not necessarily the best approach. It depends on the purpose and requirements.</p>
+
+<p>The goal of code generation is not having the code. The goal is to use what code gives us. It is used for some action. For example, we need a place to define some default options and some data that may change from time to time, and so on.</p>
+
+<p>The answers to those questions I found so far were <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-how-to-obtain-resource-dictionary3f">really frustrating</a>. I don’t quite understand why. The problem is important enough and is not so hard to solve with a good quality. It did not take me too much time to figure out the approaches I’m offering in this article. The major thing here is to understand the real purpose of all this activity.</p>
+
+<h3 id="heading-what-do-they-advise3f">What do they Advise?</h3>
+
+<p>What if you need to get a resource dictionary value from a XAML file?</p>
+
+<p>This is a <a href="https://learn.microsoft.com/en-us/answers/questions/18296/wpf-how-to-load-dictionaries-as-application-does">Microsoft answer</a>:</p>
+
+<div class="pre-lang" id="premain186352"><div>C#</div><div class="pre-action-link"><span id="copycode186352" class="copy-code" data-index="186352" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre186352" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">List&lt;Uri&gt; uris = <span class="code-keyword">new</span> List&lt;Uri&gt;();
+uris.Add(<span class="code-keyword">new</span> Uri(
+    <span class="code-string">"</span><span class="code-string">pack://application:,,,/WGUI;component/Themes/Dictionary1.xaml"</span>));
+<span class="code-comment">//</span><span class="code-comment">...</span></pre>
+
+<p>Here is what <a href="https://stackoverflow.com/a/3553781">one Stackoverflow answer</a> recommends:</p>
+
+<div class="pre-lang" id="premain158937"><div>C#</div><div class="pre-action-link"><span id="copycode158937" class="copy-code" data-index="158937" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre158937" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> resource = <span class="code-keyword">new</span> ResourceDictionary
+{
+    Source = <span class="code-keyword">new</span> Uri(<span class="code-string">"</span><span class="code-string">/myAssemblyName;component/Themes/generic.xaml"</span>,
+                     UriKind.RelativeOrAbsolute)
+};</pre>
+
+<p>Then, given a <code>ResourceDictionary</code>, how to get a required piece of data out out? <a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-and-code?view=netdesktop-7.0#accessing-resources-from-code">Microsoft documentation suggested way</a> is this:</p>
+
+<div class="pre-lang" id="premain730747"><div>C#</div><div class="pre-action-link"><span id="copycode730747" class="copy-code" data-index="730747" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre730747" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Button b = sender <span class="code-keyword">as</span> Button;
+b.Background = (Brush)<span class="code-keyword">this</span>.FindResource(<span class="code-string">"</span><span class="code-string">RainbowBrush"</span>);</pre>
+
+<p>Really?!</p>
+
+<p>Needless to say, both techniques demonstrate the well-known <a href="https://en.wikipedia.org/wiki/Magic_string">magic string</a> anti-pattern. Not only in the above code samples an innocent typo won’t be detected by the build process, but the code will be broken if the developer moves some files around.</p>
+
+<p>Fortunately, we can do a lot better than that.</p>
+
+<p>But first, let’s think about the basics. Why do we need the data in code?</p>
+
+<h3 id="heading-why3f">Why?</h3>
+
+<p>Why would anyone need the generation of code out of <code>ResourceDictinary</code> data? My guess is that could be the inertia of thinking based on the code already generated for .res resource files and XAML files. Well, this is a pretty good working approach, and it was the first thing I was thinking of. Why XAML resources are only compiled into the intermediate output path and not built in the same project to give usable names for accessing resource data directly?</p>
+
+<p>However, this is a typical situation when the intermediate goal is mistakenly taken for an ultimate goal. What is the ultimate goal though?</p>
+
+<p>We need to keep data separate from the code and globalized, with the potential of using the data in the localization satellite assemblies <a href="https://en.wikipedia.org/wiki/Loose_coupling">without strong coupling</a> with the main code. We need to enter data in the XAML form and make it reusable. One of the uses would be using the data in code, and accessing it through the native programming language entities: variables and type members. We need it for several important reasons:</p>
+
+<ul>
+	<li>Separation of data and code</li>	<li>Data-agnostic programming</li>	<li>Maintainability</li>	<li>Globalization</li></ul>
+
+<p>We just need the usable code, access to it in the code text, Intellisence support, compiler support, build-time error handling, and all that stuff.</p>
+
+<h2 id="heading-how-to-obtain-resource-dictionary3f">How to Obtain Resource Dictionary?</h2>
+
+<p>If we are developing a UI application, we already have immediate access to resource dictionaries related to the application. For example, we have the access to instance members <code>System.Windows.Application.Resources</code> and <code>Window.Resources</code> for every loaded window. The same goes for <code>Page</code>, all types of <code>Control</code>, and many more classes. We can access data from these resources immediately, without loading any files.</p>
+
+<p>But what about the cases when we really need an independent way to put data in a <code>ResourceDictionary</code> and access this data in code at any time? In such cases, we may not even have an application. Moreover, we can even develop a WPF application without any UI; it could take data from the command line and produce some results, put data in files or databases without user interaction, and it still can use XAML data as resources.</p>
+
+<p>No, loading a file via <code>Uri</code> is not an acceptable option. We should not use any <em>magic strings</em>, ever. Instead, we can embed a resource dictionary in some framework element with the <code>Resources</code> property. If we do so, we can use the luxury of the XAML editor. To see how to do it, let’s start with the example below. The steps are <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#paragraph-create-resources">described in more detail below</a>.</p>
+
+<p>That was the common part. And now when we have access to a <code>ResourceDictionary</code>, the approaches can be different.</p>
+
+<h2 id="heading-different-approaches">Different Approaches</h2>
+
+<p>In addition to code generation, we can go the other way around. Instead of adopting code to arbitrary XAML data, we can apply the idea of <a href="https://en.wikipedia.org/wiki/Inversion_of_control">inversion of control</a> and adapt XAML to the required data structure we need to represent. Instead of pulling all data from XAML, we can make XAML behave as an editor for the data structure we need and populate it immediately when XAML is loaded.</p>
+
+<p>So, here is the idea: we simply need programmable objects which are not necessarily generated. They can be created by the developer, but the data should be populated from XAML.</p>
+
+<p>This second approach could be called “custom XAML markup”. Let’s consider it first.</p>
+
+<h2 id="heading-custom-xaml-markup">Custom XAML Markup</h2>
+
+<p>So, let’s start with the approaches based on XAML markup. It should be based on developer-defined data types and enforce entering data in XAML in a safe manner, backed by Intellisense.</p>
+
+<p>Basically, we need to support the usual data types defined by the developer using already available XAML markup. Some useful custom markup is predefined by three custom classes defined in “Markup.cs”. The access to data objects is obtained by the method of the utility class <code>ResourseDictionaryUtility</code>, “Utility.cs”.</p>
+
+<h3 id="heading-approach-2313a-a-very-simple-one">Approach #1: A Very Simple One</h3>
+
+<p id="paragraph-create-resources">So, let’s start with the simplest approach: write a simple data class to be represented in XAML. To start with, we need some project node to embed a <code>ResourceDictionary</code> in an editable way. For example, we can add a <code>Window</code> and rename the class name and a top XAML element. The simplest element would probably be a <code>FrameworkContentElement</code>, but it can be anything else known to the XAML editor and having a <code>ResourceDictionary</code> property.</p>
+
+<p>The element containing a <code>ResourceDictionary</code> doesn’t have to take up memory though. After it is loaded, we only need an instance of <code>ResourceDictonary</code>. Then we pass this instance for further processing and exit the stack frame where the element was constructed. Then the garbage collector will dispose this inaccessible object, leaving the instance of <code>ResourceDictonary</code> to the developer.</p>
+
+<p>This is a very simple example:</p>
+
+<div class="pre-lang" id="premain416771"><div>XML</div><div class="pre-action-link"><span id="copycode416771" class="copy-code" data-index="416771" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre416771" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.SingleObjectDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:my</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:My;assembly=Test.Markup.DataTypes"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Main</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Main}"</span><span class="code-attribute">
+                 </span><span class="code-attribute">Country</span><span class="code-keyword">="</span><span class="code-keyword">Italy"</span><span class="code-attribute">
+                 </span><span class="code-attribute">Language</span><span class="code-keyword">="</span><span class="code-keyword">Italian"</span><span class="code-attribute">
+                 </span><span class="code-attribute">Capital</span><span class="code-keyword">="</span><span class="code-keyword">Rome"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>Can anything be simpler than that?</p>
+
+<p>As we have only one <code>Main</code> object in the entire XAML, it does not matter what the key is. Nevertheless, I want to suggest a key of the type <code>System.Type</code>. We will consider the role of it <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-multiple-objects">below</a>.</p>
+
+<p>Naturally, it is based on <code>My.Main</code>, a class with at least those three properties, <code>Country</code>, <code>Language</code>, and <code>Capital</code>. It can have any number of other members. We can add them to XAML any time later when we need them:</p>
+
+<div class="pre-lang" id="premain411435"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="411435" id="preShrink411435">Shrink ▲</span> &nbsp; <span id="copycode411435" class="copy-code" data-index="411435" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre411435" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">namespace</span> My {
+    <span class="code-keyword">using</span> Color = System.Windows.Media.Color;
+    <span class="code-keyword">using</span> ColorList =
+        System.Collections.Generic.List&lt;System.Windows.Media.Color&gt;
+    <span class="code-keyword">using</span> ContentPropertyAttribute =
+        System.Windows.Markup.ContentPropertyAttribute;
+
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> DimensionalQuantity {
+        <span class="code-keyword">public</span> <span class="code-keyword">double</span> Value { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Units { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+    } <span class="code-comment">//</span><span class="code-comment">DimensionalQuantity</span>
+
+    [ContentProperty(<span class="code-keyword">nameof</span>(Description))]
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> Main {
+        <span class="code-keyword">public</span> Main() { Flag = <span class="code-keyword">new</span>();  }
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Description { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> ColorList Flag { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Country { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Language { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Capital { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> DimensionalQuantity PopulationDensity { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> DimensionalQuantity Area { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        <span class="code-keyword">public</span> <span class="code-keyword">override</span> <span class="code-keyword">string</span> ToString() 
+            <span class="code-comment">//</span><span class="code-comment">... just for debugging and demo</span>
+        } <span class="code-comment">//</span><span class="code-comment">ToString</span>
+    } <span class="code-comment">//</span><span class="code-comment">class Main</span>
+
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+
+}</pre>
+
+<p>The properties should be <code>public</code> and read/write. The first reason for that is globalization: it should be the type known to the host assembly and its corresponding <em>satellite assemblies</em> used for potential localization. Therefore, we have to assume that the class <code>My.Main</code> is defined in some separate assembly referenced by the host assembly and any satellite assemblies. And it required public members.</p>
+
+<p>Let’s take a step further. We have added two properties of the class <code>DimensionalQuantity</code>, to make our type compound, and also the property <code>Flag</code> of a list type, and the list types are already supported by XAML. To make it even more interesting, we applied the attribute <code>[ContentProperty]</code>, to support <em>direct content</em>. Let’s see how we can use <code>Color</code>, <code>DimensionalQuantity</code>, and list:</p>
+
+<div class="pre-lang" id="premain397229"><div>XML</div><div class="pre-action-link"><span id="copycode397229" class="copy-code" data-index="397229" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre397229" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.SingleObjectDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:my</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:My;assembly=Test.Markup.DataTypes"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Main</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Main}"</span><span class="code-attribute">
+                 </span><span class="code-attribute">Country</span><span class="code-keyword">="</span><span class="code-keyword">Italy"</span><span class="code-attribute"> </span><span class="code-attribute">Language</span><span class="code-keyword">="</span><span class="code-keyword">Italian"</span><span class="code-attribute"> </span><span class="code-attribute">Capital</span><span class="code-keyword">="</span><span class="code-keyword">Rome"</span><span class="code-keyword">&gt;</span>
+            Simple
+            demonstration
+            of compound types
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Main.PopulationDensity</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:DimensionalQuantity</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">201.3"</span><span class="code-attribute"> </span><span class="code-attribute">Units</span><span class="code-keyword">="</span><span class="code-keyword">/km²"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/my:Main.PopulationDensity</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Main.Area</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:DimensionalQuantity</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">301230.11"</span><span class="code-attribute"> </span><span class="code-attribute">Units</span><span class="code-keyword">="</span><span class="code-keyword"> km²"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/my:Main.Area</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Main.Flag</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Color</span><span class="code-keyword">&gt;</span>Green<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Color</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Color</span><span class="code-keyword">&gt;</span>White<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Color</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Color</span><span class="code-keyword">&gt;</span>Red<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Color</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/my:Main.Flag</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/my:Main</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>There are pretty complicated options and rules for representing lists and arrays in XAML and also the rules for using <em>direct content</em>. It depends both on the collection/array types and the element types. In other cases, the <em>markup extension</em> <code>x:Array</code> is required, and we have such examples in our XAML samples. Please refer to Microsoft documentation for further details.</p>
+
+<p>Besides, the property specified by the attribute <code>[ContentProperty]</code> defines the direct content of the type <code>Main</code> markup. So, our string “Simple demonstration of compound types” goes to the value of <code>Description</code>. Interestingly, before the property is assigned, XAML processing removes all the extra <em>whitespace</em>, but this is a usual result of <a href="https://www.w3.org/2008/xmlsec/Drafts/xml-norm/Overview.html">XML normalization</a>. As we already have three child elements under the XAML <code>&lt;my:Main&gt;</code> element, our <code>Description</code> can go in any slot in between, but only once, otherwise XAML will fail to compile.</p>
+
+<p>Now, let’s see what happens if we add more objects to the same XAML.</p>
+
+<h3 id="heading-multiple-objects">Multiple Objects</h3>
+
+<p>The only issue with multiple objects is how to identify them. We could use any arbitrary string keys but that will raise a problem of magic strings again. The keys should be unique, and a key can be only of two types: a string or <code>System.Type</code>. Most keys are strings, but the <code>System.Type</code> are also widely used. We can simply use the type <code>System.Type</code> for a key. So, I would suggest limiting our dictionary to having only one object per data object type. This way, all the keys will be unique, and we can access the required object very quickly, no matter how many objects our XAML contains.</p>
+
+<p>Let’s look at the entire XAML sample:</p>
+
+<div class="pre-lang" id="premain256218"><div>XML</div><div class="pre-action-link"><span id="copycode256218" class="copy-code" data-index="256218" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre256218" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.MultiObjectDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:my</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:My;assembly=Test.Markup.DataTypes"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Detail</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Detail}"</span><span class="code-attribute">
+                </span><span class="code-attribute">City</span><span class="code-keyword">="</span><span class="code-keyword">Milan"</span><span class="code-attribute"> </span><span class="code-attribute">Provinces</span><span class="code-keyword">="</span><span class="code-keyword">107"</span><span class="code-attribute"> </span><span class="code-attribute">MetropolitanCities</span><span class="code-keyword">="</span><span class="code-keyword">14"</span><span class="code-attribute">
+                </span><span class="code-attribute">Mountains</span><span class="code-keyword">="</span><span class="code-keyword">Alps"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Fun</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Fun}"</span><span class="code-attribute">
+                </span><span class="code-attribute">Animal</span><span class="code-keyword">="</span><span class="code-keyword">Italiano Mediterranean buffalo"</span><span class="code-attribute"> </span><span class="code-attribute">Dish</span><span class="code-keyword">="</span><span class="code-keyword">Lasagna"</span><span class="code-attribute">
+                </span><span class="code-attribute">RacingColorName</span><span class="code-keyword">="</span><span class="code-keyword">Red "</span><span class="code-attribute"> </span><span class="code-attribute">RacingColor</span><span class="code-keyword">="</span><span class="code-keyword">Red"</span><span class="code-attribute">
+                </span><span class="code-attribute">Festival</span><span class="code-keyword">="</span><span class="code-keyword">Venice Film Festival"</span><span class="code-attribute">
+                </span><span class="code-attribute">Tragedy</span><span class="code-keyword">="</span><span class="code-keyword">Romeo and Juliet"</span><span class="code-attribute">
+                </span><span class="code-attribute">Comedy</span><span class="code-keyword">="</span><span class="code-keyword">The Servant of Two Masters"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>But what can happen if one messes up the one-to-one mapping between the keys and actual data element types? One can have an absurd markup like this:</p>
+
+<div class="pre-lang" id="premain206207"><div>XML</div><div class="pre-action-link"><span id="copycode206207" class="copy-code" data-index="206207" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre206207" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.MultiObjectDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:my</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:My;assembly=Test.Markup.DataTypes"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+        ...
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Detail</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Fun}"</span><span class="code-attribute"> </span><span class="code-attribute">.../</span><span class="code-keyword">&gt;</span>
+        ...
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">my:Fun</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type my:Detail}"</span><span class="code-attribute"> </span><span class="code-attribute">.../</span><span class="code-keyword">&gt;</span>
+        ...
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>It looks like nothing can enforce the requirement: the data type mentioned in the XAML tag and the corresponding <code>x:Key</code> value defined through the extension should be the same. XAML processing will only enforce the uniqueness of the keys — at the build time. To see what happens, let’s look at the <code>ResourseDictionaryUtility</code> method used to obtain access to a particular data type:</p>
+
+<div class="pre-lang" id="premain442798"><div>C#</div><div class="pre-action-link"><span id="copycode442798" class="copy-code" data-index="442798" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre442798" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">static</span> T_REQUIRED GetObject&lt;T_REQUIRED&gt;(ResourceDictionary dictionary)
+    <span class="code-sdkkeyword">where</span> T_REQUIRED : <span class="code-keyword">new</span>() =&gt;
+        (T_REQUIRED)dictionary?[typeof(T_REQUIRED)];</pre>
+
+<p>Of course, it works very quickly. But if the keys are messed up, you will get the instance of one data type and will try to type-cast it to the wrong type. Isn’t that bad?</p>
+
+<p>Nevertheless, everything will still work. One can even use unrelated type names, such as <code>String</code>, provided the uniqueness of the keys is preserved. How? To achieve that, I developed this <code>ResourseDictionaryUtility.NormalizeDictionary</code> method. Let’s look at it closely.</p>
+
+<h3 id="heading-dictionary-normalization">Dictionary Normalization</h3>
+
+<p>The situation described above is one of the possible developer’s mistakes. Unfortunately, I cannot see a way to bind anything in a key value with anything at all — binding does not work inside a key. So, I developed the normalization procedure:</p>
+
+<div class="pre-lang" id="premain556618"><div>C#</div><div class="pre-action-link"><span id="copycode556618" class="copy-code" data-index="556618" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre556618" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">void</span> NormalizeDictionary(ResourceDictionary dictionary) {
+    PatologicalList list = <span class="code-keyword">new</span>();
+    <span class="code-keyword">static</span> <span class="code-keyword">void</span> GetAllKeys(ResourceDictionary top, PatologicalList list) {
+        <span class="code-keyword">foreach</span> (<span class="code-keyword">object</span> key <span class="code-keyword">in</span> top.Keys) {
+            <span class="code-keyword">if</span> (key <span class="code-keyword">is</span> not Type) <span class="code-keyword">continue</span>;
+            <span class="code-keyword">object</span> <span class="code-sdkkeyword">value</span> = top[key];
+            <span class="code-keyword">if</span> (<span class="code-sdkkeyword">value</span> == <span class="code-keyword">null</span>) <span class="code-keyword">continue</span>;
+            Type valueType = <span class="code-sdkkeyword">value</span>.GetType();
+            <span class="code-keyword">if</span> ((Type)key == valueType) <span class="code-keyword">continue</span>;
+            list.Add((key, <span class="code-sdkkeyword">value</span>, top));
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        <span class="code-keyword">foreach</span> (ResourceDictionary child <span class="code-keyword">in</span> top.MergedDictionaries)
+            GetAllKeys(child, list);
+    } <span class="code-comment">//</span><span class="code-comment">GetAllKeys</span>
+    GetAllKeys(dictionary, list);
+    <span class="code-keyword">foreach</span> ((<span class="code-keyword">object</span> key, <span class="code-keyword">object</span> _, ResourceDictionary container) <span class="code-keyword">in</span> list)
+        container.Remove(key);
+    <span class="code-keyword">foreach</span> ((<span class="code-keyword">object</span> _, <span class="code-keyword">object</span> <span class="code-sdkkeyword">value</span>, ResourceDictionary container) <span class="code-keyword">in</span> list)
+            container.Add(<span class="code-sdkkeyword">value</span>.GetType(), <span class="code-sdkkeyword">value</span>);
+}</pre>
+
+<p>Here, <code>PatologicalList</code> is a list of <em>tuples</em> <code>((object, object, System.Windows.ResourceDictionary))</code>. It is used to collect all the pathological cases when an object type <code>valueType</code> and the type returned by the key of the type <code>System.Type</code> don’t match. Interestingly, the corrected keys cannot be replaced only in two passes showing at the end: all are removed first and only added at the second pass. An attempt to add a key immediately after removal may lead to an exception because this new key can match an existing key.</p>
+
+<p>The the test application “Test.Markup” the normalization is performed as a part of <em>localization</em> even when the data is not actually localized.</p>
+
+<p>Taking this precaution makes the reliability of the approach match the reliability of usual XAML content: not all the mistakes are revealed at the build time, but loading the data using XAML at runtime is the first guard revealing all remaining problems.</p>
+
+<p>I would use <code>NormalizeDictionary</code> during certain development stages and remove it when the functionality is tested. Removing this call is a simple test that gives clear diagnostics on this problem and makes it clear how to fix it.</p>
+
+<h3 id="heading-approach-2323a-duck-typing">Approach #2: Duck Typing</h3>
+
+<p>And now, one more approach, <a href="https://en.wikipedia.org/wiki/Duck_typing">duck typing</a> style. As everyone knows, “If it walks like a duck and it quacks like a duck, then…” oh no, then it is not necessarily a duck, but there are cases when we don’t care. We are going to develop the approach where some object is populated with XAML data when there is a match between the data members declared in XAML and the properties and fields of the object being populated.</p>
+
+<p>This approach is the most sophisticated, the most powerful but not as reliable as the approaches described above. It has one powerful benefit though: it can work with the localization satellite assemblies having no access to the data types of the host. As we don’t use any type identity, we don’t need shared data types.</p>
+
+<p>Duck typing overcomes several limitations of the approaches described above:</p>
+
+<ul>
+	<li>The data is collected using type-agnostic approach, based on <code>System.Reflection</code>.</li>	<li>Therefore, data types defined in a separate assembly are not required.</li>	<li>Therefore, satellite applications don’t need access to any semantic types, so their development is the most independent of their applications’ specifics.</li>	<li>Therefore, non-public members are also supported.</li>	<li>Not only properties but fields are also supported.</li>	<li>Not only instance properties and fields, but also static properties and fields are supported.</li></ul>
+
+<p>Let’s look at a complete XAML sample:</p>
+
+<div class="pre-lang" id="premain330373"><div>XML</div><div class="pre-action-link"><span class="code-collapse" data-index="330373" id="preShrink330373">Shrink ▲</span> &nbsp; <span id="copycode330373" class="copy-code" data-index="330373" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre330373" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.DuckTypedDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:e</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:SA.Agnostic.UI.Markup;assembly=Agnostic.UI"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:System</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:System;assembly=netstandard"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalBird"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Italian Sparrow"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalTree"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Arbutus unedo"</span><span class="code-attribute">
+                  </span><span class="code-attribute">Static</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">MemberKind</span><span class="code-keyword">="</span><span class="code-keyword">Field"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalAnimal"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Italian wolf"</span><span class="code-attribute">
+                  </span><span class="code-attribute">MemberKind</span><span class="code-keyword">="</span><span class="code-keyword">Field"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Аnthem"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">The Song of the Italians"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">WordHeritageSites"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">58"</span><span class="code-attribute"> </span><span class="code-attribute">Type</span><span class="code-keyword">="</span><span class="code-keyword">System:Int32"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">CarMakes"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member.Value</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">x:Array</span><span class="code-attribute"> </span><span class="code-attribute">Type</span><span class="code-keyword">="</span><span class="code-keyword">System:String"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Alfa Romeo<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Ferrari<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Fiat<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Lancia<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Maserati<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/x:Array</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/e:Member.Value</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/e:Member</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>Isn’t that clear? Instead of specifying the attributes corresponding to the data type’s properties, we specify each property in a separate element, and it may or may not match a specific property or a field. The corresponding utility method <code>ResourseDictionaryUtility.CollectForDuckTypedInstance</code> tried to find a match between the declared XAML <code>Member</code> elements and the actual object member and use <code>System.Reflection</code> to populate the members with XAML-provided data:</p>
+
+<div class="pre-lang" id="premain231556"><div>C#</div><div class="pre-action-link"><span id="copycode231556" class="copy-code" data-index="231556" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre231556" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">void</span> CollectForDuckTypedInstance(
+    ResourceDictionary dictionary,
+    <span class="code-keyword">object</span> instance,
+    <span class="code-keyword">bool</span> ignoreMissingMembers = <span class="code-keyword">false</span>) {
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+}</pre>
+
+<p>Importantly, there are two modes of assigning data to an instance of some object. The following situation is possible: an instance of <code>Member</code> is found in a dictionary, but the type of <code>instance</code> does not have a property or a field of the name corresponding to a member key. If the parameter <code>ignoreMissingMembers</code> is <code>true</code> it means ignoring the situation: a property or a field is not assigned, and the population of data continues. If <code>ignoreMissingMembers</code> is <code>false</code>, a default case. such a mismatch will though an exception. At the same time, if <code>ignoreMissingMembers</code> is <code>true</code> but there is any mismatch in profile between the member described by the <code>Member</code> instance and a field or property of the <code>instance</code> type, an appropriate exception is thrown.</p>
+
+<p>It can be used to populate different instances from the data found in the same dictionary: an instance simply picks up “its own” members, and another instance will pick up other members. A duck typing in all its strength.</p>
+
+<p>For each member, we can specify if we’re looking for a static member using the <code>Static</code> Boolean attribute (default: <code>False</code>). Also, we can specify that a property is a field using the <code>MemberKind</code> attribute — by default, a member is a property.</p>
+
+<p>We also need to specify the member type with the attribute <code>Type</code>. The type <code>System.String</code> is the default, but it should be specified in other cases. The type doesn’t need to be specified for arrays, collections, and custom compound types, because these types are not converted from string, but XAML has special markup for these cases. To store some custom structural types in XAML, the user needs to provide string converters for them, using the attribute <code>[System.ComponentModel.TypeConverter]</code>. The code of <code>ResourseDictionaryUtility</code> automatically finds those attributes and does the proper conversion.</p>
+
+<h3 id="heading-mergeddictionaries-and-combination-of-approaches">MergedDictionaries and Combination of Approaches</h3>
+
+<p>Let’s make our duck typing sample more complicated:</p>
+
+<div class="pre-lang" id="premain731673"><div>XML</div><div class="pre-action-link"><span class="code-collapse" data-index="731673" id="preShrink731673">Shrink ▲</span> &nbsp; <span id="copycode731673" class="copy-code" data-index="731673" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre731673" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement</span><span class="code-attribute"> </span><span class="code-attribute">x:Class</span><span class="code-keyword">="</span><span class="code-keyword">My.DuckTypedDataSource"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:e</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:SA.Agnostic.UI.Markup;assembly=Agnostic.UI"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:System</span><span class="code-keyword">="</span><span class="code-keyword">clr-namespace:System;assembly=netstandard"</span><span class="code-attribute">
+        </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary.MergedDictionaries</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">?nthem"</span><span class="code-attribute">
+                              </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">The Song of the Italians"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">WordHeritageSites"</span><span class="code-attribute">
+                              </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">58"</span><span class="code-attribute"> </span><span class="code-attribute">Type</span><span class="code-keyword">="</span><span class="code-keyword">System:Int32"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">CarMakes"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member.Value</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">x:Array</span><span class="code-attribute"> </span><span class="code-attribute">Type</span><span class="code-keyword">="</span><span class="code-keyword">System:String"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Alfa Romeo<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Ferrari<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Fiat<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Lamborghini<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Lancia<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">System:String</span><span class="code-keyword">&gt;</span>Maserati<span class="code-keyword">&lt;</span><span class="code-leadattribute">/System:String</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/x:Array</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/e:Member.Value</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/e:Member</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalBird"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Italian Sparrow"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalTree"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Arbutus unedo"</span><span class="code-attribute">
+                  </span><span class="code-attribute">Static</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">MemberKind</span><span class="code-keyword">="</span><span class="code-keyword">Field"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">e:Member</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">NationalAnimal"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Italian wolf"</span><span class="code-attribute">
+                  </span><span class="code-attribute">MemberKind</span><span class="code-keyword">="</span><span class="code-keyword">Field"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary.MergedDictionaries</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement.Resources</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FrameworkContentElement</span><span class="code-keyword">&gt;</span></pre>
+
+<p>This XAML provides the exact same structure <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#code-duck-typing-data-source">as before</a>, but in some overly complicated form: the same set of members is split between two different <code>ResourceDictionary</code> instances. Anyway, it works, because the data from merged dictionaries is, well… merged. Unlimited nesting of merged dictionaries is supported. For more details, see <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#paragraph-knowledge-resource-dictionary">the explanation below</a>.</p>
+
+<p>All the approaches described above can be combined in the same XAML in a pretty free matter. It makes little sense to describe all options, instead, a common logic should work. In particular, nothing prevents you from adding an additional <code>ResourceDictionary</code> under one or another <code>MergedDictionaries</code> container and using a different approach inside it.</p>
+
+<p>Another technique could be using dictionary keys of the type <code>System.Type</code> even where it does not carry any semantics related to underlying data objects.</p>
+
+<p>Does it make any sense, to use multiple resource dictionaries in one XAML? It may. Some may want to visually segregate different parts of the resources if there are multiple objects in a XAML.</p>
+
+<p>In this case, it is important not to use each key more than once. Unfortunately, it is possible because having identical keys in different dictionaries will not trigger key uniqueness conflict. As a result <code>ResourseDictionaryUtility.GetObject</code> can get an object of the right type, but the wrong instance. At the same time, as the instances are found by their type, having multiple dictionaries does not compromise performance.</p>
+
+<p>What about the duck-typing <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing">approach #2</a>? Having multiple resource dictionaries in one XAML may have some merits: one can support multiple target types under the same XAML. How? Again, in this approach XAML code is agnostic to the target type, it does not “know” which members belong to which type. One can visually isolate them using different instances of <code>ResourceDictionary</code> or <code>DataSetter</code> as containers. However, in contrast to <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2313a-a-very-simple-one">approach #1</a>, processing time directly depends on the total number of elements in a XAML, and not specifically on the number of dictionaries. It is slow simply because every time the target instance is populated, the system has to traverse the entire dictionary of a XAML and visit each and every <code>Member</code> element.</p>
+
+<p>Why use the duck-typing approach anyway, if it is the slowest in performance? Well, it has its benefits. Besides, this topic is not the place where most developers would worry too much about performance because the total amount of XAML data is never too high. Anyway, let’s summarize the pros and contras of all the approaches.</p>
+
+<h3 id="heading-two-approaches3a-pro-and-contra">Two Approaches: Pro and Contra</h3>
+
+<ol>
+	<li>	<p><a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2313a-a-very-simple-one">Simple approach</a><br>
+	It is so simple that it does not require a single line of code from my solution. Just the idea would be quite enough.<br>
+	This approach also does not require a single line of code from my solution. It is designed to have one or several data types and create only one instance per type per XAML. It does not seem to be a limitation, because the application of the feature does not imply several instances.<br>
+	Getting objects from XAML is the fastest, and it does not depend on the number of types and the total volume of a <code>ResourceDictionary</code>.</p>
+	</li>	<li>	<p><a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing">Duck-typing approach</a> This approach is the slowest, it requires complicated processing code, but offers additional flexibility: It can work with both public and non-public members.<br>
+	It can work with both properties and fields.<br>
+	It can work with both static and instance properties and fields.<br>
+	The type safety is low and generally corresponds to a typical duck-typing approach. It is totally type-agnostic. It can process multiple objects of multiple types simply because it does not “know” what members belong to what data type.<br>
+	It does not require using data types accessible by both satellite and host assemblies.</p>
+
+	<p>Both approaches can work with the same set of data member types, not only with strings and primitive types but with a wide range of structured types. In the case of custom data types, some of them require custom type converters, but in many cases, there are no conversions from string, and markup for these cases is already correctly represented in XAML.</p>
+	</li></ol>
+
+<h3 id="heading-globalization">Globalization</h3>
+
+<p>One main reason for keeping arbitrary data in a resource dictionary is <em>globalization</em>. The demo project “Test.Markup.csproj” demonstrates localization of the data in “DocumentaionSamples” directory of this project.</p>
+
+<p>This kind of localization has little to do with standard localization based on satellite assemblies, but it is compatible with it and can be embedded in standard satellite assemblies. The source code provided with the present article is part of a <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-solution-structure-preview">bigger solution “dotnet-solution-structure”</a>. This repository provides a comprehensive XAML-based localization with satellite assemblies, and that deserves a separate article.</p>
+
+<p>For further details, please see the projects “Test.Markup.csproj” and “Test.Markup.Localization”. The second project implements a localized version of data and makes an assembly located and named according to the the general rules for the localization satellite assemblies. It implements the interface <code>IApplicationSatelliteAssembly</code> and applies the assembly-level attribute <code>[PluginManifest]</code> used by the agnostic localization facility to locate and load satellite assembly. The properties of <code>IApplicationSatelliteAssembly</code> provide access to localized versions of all resource dictionaries found by the full names of the container classes of these resources.</p>
+
+<p>The localization of the arbitrary data on the host application side is reduced to the direct assignment of the <code>Resources</code> properties for each container to the <code>ResourceDictionary</code> objects automatically obtained from a satellite assembly chosen based on the required culture, including possible fallback cultures.</p>
+
+<p>These “Test.Markup.*.csproj” projects make just the basic demonstration of a globalized applicaton with localization. Anyone can take this code and embed it into a fully-fledged system with the localization of all resources. The present demonstration shows how to localize arbitrary data types, not necessarily related to UI.</p>
+
+<h3 id="heading-limitations">Limitations</h3>
+
+<p>Quite naturally, the approaches based on custom XAML markup have some limitations.</p>
+
+<p>First and foremost, the extension <code>{DynamicResource}</code> is not supported. The extension <code>{StaticResource}</code> is supported but is pretty much useless in this case. Indeed, when a XAML-based parent object is already loaded and the data is transferred to the underlying data objects, it is too late to inject the extension’s source static data. For the same reason, it is useless for localization.</p>
+
+<p>If someone has a better idea on the support of <code>{DynamicResource}</code> I would greatly appreciate it.</p>
+
+<p>Even though many data types of the data object members are supported not all types are supported automatically. To use some more sophisticated data types the developer would need to develop special facilities, such as type converters, and the like.</p>
+
+<p>At the same time, most of the data types are supported automatically. It includes most UI-related types, major collections, and more.</p>
+
+<p>This is already beyond the expectations of those who asked those questions about code generation. By the way, let’s discuss also code generation. The generation itself is way too simple, but the development cycle using it needs <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-generated-code-and-development-cycle">more thorough consideration</a>.</p>
+
+<h2 id="heading-code-generation">Code Generation</h2>
+
+<p>Code generation itself is fairly simple. Please see the class <code>DictionaryCodeGenerator</code> in a source file “DictionaryCodeGenerator.cs”.</p>
+
+<p>This is all what it does:</p>
+
+<div class="pre-lang" id="premain446044"><div>C#</div><div class="pre-action-link"><span id="copycode446044" class="copy-code" data-index="446044" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre446044" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">class</span> DictionaryCodeGenerator {
+
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Generate(
+        ResourceDictionary dictionary,
+        <span class="code-keyword">string</span> filename,
+        <span class="code-keyword">string</span> namespaceName,
+        <span class="code-keyword">string</span> typeName) {
+        <span class="code-comment">//</span><span class="code-comment">...</span>
+    }
+
+}</pre>
+
+<p>There a just a few delicate details though.</p>
+
+<h3 id="heading-implementation">Implementation</h3>
+
+<p id="paragraph-knowledge-resource-dictionary">This is a little piece of knowledge on <code>ResourceDictionary</code>. This is a normal hash dictionary but with an additional member <code>MergedDictionary</code>. If you simply try to access the value by a known key using its indexer <code>[]</code>, it can find a value not of its own key set, but in any of the merged resource dictionaries on any level of nesting. A key can have a duplicate in some merged dictionary. This kind of duplication can be a developer’s mistake, but it also can be intentional: “I’ll decide later which one to use”, no matter if it is a good or a bad habit. To find all the keys, we need to traverse the dictionary recursively and find all keys, including duplicates. But when the key entry is accessed, only one instance of the duplicate will work. So, which of the duplicate keys should be used for code generation? Taking the wrong one may create a mess. I confirmed it experimentally: when the dictionary’s indexer <code>[]</code> is called, it returns the entry at the key as if the keys were found using width-first order. To use the right key, we need to traverse the dictionary in the same order and record only the first occurrence of each key. This is how:</p>
+
+<div class="pre-lang" id="premain203114"><div>C#</div><div class="pre-action-link"><span id="copycode203114" class="copy-code" data-index="203114" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre203114" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> KeySet = System.Collections.Generic.HashSet&lt;string&gt;;
+<span class="code-comment">//</span><span class="code-comment">...</span>
+<span class="code-keyword">void</span> FindAllKeys(ResourceDictionary dictionary) {
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">object</span> key <span class="code-keyword">in</span> dictionary.Keys) {
+        <span class="code-keyword">if</span> (key <span class="code-keyword">is</span> not <span class="code-keyword">string</span>) <span class="code-keyword">continue</span>;
+        <span class="code-keyword">string</span> stringKey = key.ToString();
+        <span class="code-keyword">if</span> (keySet.Contains(stringKey)) <span class="code-keyword">continue</span>;
+        keySet.Add(stringKey);
+    }; <span class="code-comment">//</span><span class="code-comment">loop</span>
+    <span class="code-keyword">foreach</span> (ResourceDictionary mergedDictionary <span class="code-keyword">in</span> dictionary.MergedDictionaries)
+        FindAllKeys(mergedDictionary);
+}</pre>
+
+<p>Here, non-string keys are not taken into consideration. Using the traversal method shown above, we don’t get duplicate keys. However, a key is not necessarily a valid language identifier (I support only C# at this moment). If we modify the key string to get a valid identifier, we can create name clashes. So, we also need to modify some resulting identifiers to avoid duplicates:</p>
+
+<div class="pre-lang" id="premain726305"><div>C#</div><div class="pre-action-link"><span id="copycode726305" class="copy-code" data-index="726305" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre726305" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">string</span> MakeValidIdentifier(<span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) {
+    stringBuilder.Clear();
+        <span class="code-keyword">foreach</span> (<span class="code-keyword">char</span> letter <span class="code-keyword">in</span> <span class="code-sdkkeyword">value</span>)
+            stringBuilder.Append(<span class="code-keyword">char</span>.IsLetter(letter)
+            ? letter
+            : DefinitionSet.ValidIdentifier.nonLetterPlaceholder);
+        <span class="code-keyword">string</span> newValue = stringBuilder.ToString();
+        <span class="code-keyword">if</span> (newValue != <span class="code-sdkkeyword">value</span>) {
+            <span class="code-keyword">long</span> index = <span class="code-digit">1</span>;
+            <span class="code-keyword">string</span> uniqueValue = newValue;
+            <span class="code-keyword">while</span> (identifierSet.Contains(uniqueValue))
+                uniqueValue =
+                    DefinitionSet.ValidIdentifier.UniqueName(
+                        newValue,
+                        index++);
+            newValue = uniqueValue;
+        } <span class="code-comment">//</span><span class="code-comment">if</span>
+    <span class="code-keyword">return</span> newValue;
+}</pre>
+
+<p>Note that all keys in the entire dictionary hierarchy are presented in flat content because this is what corresponds to the purpose of the generated code. Indeed, any key entry of the generated code should return a value.</p>
+
+<h3 id="heading-msbuild">MSBuild</h3>
+
+<p>For the demonstration of code generation, please see the project “Test.CodeGeneration.csproj”. It makes just a console application (yes, a WPF project can make a console application) producing an output C# file, and its command-line parameters specify the name and location of an output file and some naming options. To see the output with command-line documentation, please remove the last command-line parameter “-Q” (quiet) in the element “Test.CodeGeneration.csproj” <code>&lt;Exec Command="..."&gt;</code>.</p>
+
+<p>There is nothing fancy here. However, the command-line facility and its use is pretty interesting. Basically, it is explained in my article <em><a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">Enumeration-based Command Line Utility</a></em>. In turn, this article is a part of a series of articles on enumerations. However, the code for the enumeration facility and command line is now seriously improved, so it deserves a separate article. A complete code with new demo applications can be found in a separate GitHub repository <a href="https://github.com/SAKryukov/dotnet-enumerations-command-line">dotnet-enumerations-command-line</a>. It also contains fully-fledged XAML-based XAML-based localization with satellite assemblies, and the localization also comes with a demo application.</p>
+
+<p>The article format does not allow for convenient presentation of those long lines of project files, so please look at the element <code>Target</code> named <code>GenerateCode</code> in the same file “Test.CodeGeneration.csproj”. It creates a directory, calculates its relative path, and executes this console application when it is fully built. I tested that the generated file can compile in any WPF project content, even if placed as a source file in the same project, if the naming is chosen correctly, to avoid naming conflicts.</p>
+
+<p>It all gives food for thought: how this feature could be utilized in a solution development cycle.</p>
+
+<h3 id="heading-generated-code-and-development-cycle">Generated Code and Development Cycle</h3>
+
+<p>This is an example of generated C# code:</p>
+
+<div class="pre-lang" id="premain284787"><div>C#</div><div class="pre-action-link"><span id="copycode284787" class="copy-code" data-index="284787" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre284787" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> This is auto-generated code, generator:</span>
+<span class="code-comment">//</span><span class="code-comment"> ...\Test.CodeGeneration.dll</span>
+<span class="code-comment">//</span><span class="code-comment"> Source: null</span>
+
+<span class="code-keyword">namespace</span> SA.Test.CodeGeneration.Generated {
+
+    <span class="code-keyword">static</span> <span class="code-keyword">class</span> DefinitionSet {
+        <span class="code-keyword">internal</span> <span class="code-keyword">static</span> System.Windows.Thickness ListBoxItemPadding(
+            System.Windows.ResourceDictionary d) =&gt;
+            (System.Windows.Thickness)d[<span class="code-string">"</span><span class="code-string">ListBoxItemPadding"</span>]; <span class="code-comment">//</span><span class="code-comment"> 8,0,8,0</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">static</span> System.Windows.Thickness LeftRightMargin(
+	    System.Windows.ResourceDictionary d) =&gt;
+            (System.Windows.Thickness)d[<span class="code-string">"</span><span class="code-string">LeftRightMargin"</span>]; <span class="code-comment">//</span><span class="code-comment"> 8,0,8,0</span>
+        <span class="code-comment">//</span><span class="code-comment">...</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">static</span> System.<span class="code-sdkkeyword">Int64</span> outer_Ind(
+            System.Windows.ResourceDictionary d) =&gt;
+                (System.<span class="code-sdkkeyword">Int64</span>)dictionary[<span class="code-string">"</span><span class="code-string">outer.Ind"</span>]; <span class="code-comment">//</span><span class="code-comment"> 1313</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">static</span> System.<span class="code-sdkkeyword">Int64</span> outer_Ind1(
+                System.Windows.ResourceDictionary d) =&gt;
+                    (System.<span class="code-sdkkeyword">Int64</span>)dictionary[<span class="code-string">"</span><span class="code-string">outer!Ind"</span>]; <span class="code-comment">//</span><span class="code-comment"> 1314</span>
+    } <span class="code-comment">//</span><span class="code-comment">class DefinitionSet</span>
+
+}</pre>
+
+<p>In particular, it illustrates the generation of valid C# identifiers out of arbitrary string keys and the resolution of possible name clashes. Note that the dictionary entry values at the moment of generation are generated as comments. The types of entry values don’t matter: data of any type can be accessed, and this is one benefit of code generation.</p>
+
+<p>Now, what to do with this generated code? There can be different scenarios, but we have one obvious limitation: we cannot use the generated codes in any reasonable way in the project that generates it. I think it is obvious and don’t want to discuss it.</p>
+
+<p>Therefore, we need to have separate projects and separate assemblies placed in different dependency layers. Let’s say, the generated code represents a part of the API created in a lower layer. The projects in a higher layer can take the generated code file into compilation and get access to the proper keywords and declaration they need to use that API. The generated identifiers, static members of the generated class, play the role of these keywords, and the usage is controlled by the compiler, making the runtime errors impossible.</p>
+
+<p>Here, we face the peculiarity of the development cycle. What happens if the API changes? The generated code can change so some identifiers may be removed or renamed. It leads to compilation errors in the layer using the API, and it will require fixes in the using code.</p>
+
+<p>All this activity constitutes the usual development chores, but it all should be taken into account before deciding to use the code generation feature.</p>
+
+<h3 id="heading-why-not-msbuilt-custom-task3f">Why not MSBuilt Custom Task?</h3>
+
+<p>MSBuild tasks is quite a powerful development tool. Development of custom tasks <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-api?view=vs-2022">is easy</a>. At the same time, in contrast to the .NET framework, .NET does not include required “Microsoft.Build.*” assemblies, so development requires downloading additional NuGet packages, and I don’t want to add any dependencies in my public open-source code.</p>
+
+<p>On the other hand, code generation is such a simple thing that a simple UI-free application is more than enough, as it can be invoked via the available <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/exec-task?view=vs-2022">MSBuild task Exec</a>, and console output is optional, and can be used only during the debugging of the development cycle.</p>
+
+<p>Anyone is more than welcome to take my code and embed it in some MSBuild Task if it seems to be appropriate for some reason. This is easy.</p>
+
+<h2 id="heading-custom-markup-vs.-code-generation">Custom Markup vs. Code Generation</h2>
+
+<p>When it comes to representing any custom structural data in XAML, all the approaches carry the same potential burden: custom structural data types may require custom type converters, to parse data from XAML strings. In other aspects, different approaches have different peculiarities:</p>
+
+<h3 id="heading-code-generation-benefits">Code Generation Benefits</h3>
+
+<ul>
+	<li>It is very simple.</li>	<li>It is fast.</li></ul>
+
+<h3 id="heading-code-generation-issues">Code Generation Issues</h3>
+
+<ul>
+	<li>The development cycle requires good understanding and thorough consideration.</li>	<li>It requires a better understanding of MSBuild operation.</li></ul>
+
+<h3 id="heading-custom-markup-benefits">Custom Markup Benefits</h3>
+
+<ul>
+	<li>It is simple.</li>	<li>It does not affect the development cycle in any way: the data is available here and now.</li>	<li>It does not affect the dependencies between assemblies, which are still defined solely by references.</li></ul>
+
+<h3 id="heading-custom-markup-issues">Custom Markup Issues</h3>
+
+<ul>
+	<li>It is possible to mess up things, but no more than with any other XAML technique.</li>	<li>Some of the approaches can take some performance toll, but this is not at all critical to the applications using resources reasonably.</li></ul>
+
+<h2 id="heading-solution-structure-preview">Solution Structure Preview</h2>
+
+<p>The code provided with this article is a part of a bigger solution “SolutionStructure” under the title “Improved .NET Solution Structure”. This is a collection of units and illustrative materials used to share several ideas on the improvement of the .NET solution structure. The code is nearly ready for publication but I may upgrade it during the preparation of other articles related to this work. It can also be found in a GitHub repository <a href="https://github.com/SAKryukov/dotnet-solution-structure">dotnet-solution-structure</a> where I also keep the sources for the CodeProject articles. Please see the repository title page — it shows the topic covered.</p>
+
+<h2 id="heading-compatibility-and-testing">Compatibility and Testing</h2>
+
+<p>The solution requires .NET version 5 or later. The build is based on .NET and batch build, it does not require Visual Studio or any other IDE.</p>
+
+<p>Tested on .NET 5 and 7.</p>
+
+<p>To change a target framework, edit the file “Directory.Build.props”, and modify the property <code>&lt;TargetFramework&gt;</code>. It will change target frameworks in all projects automatically, taking into account the suffix “-windows” where it is required.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>The <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#image-title">title image on top of the present article</a> symbolizes the merging of dictionaries, the help provided to the readers, and different ways to take. Also, the mess of characters of various writing systems suggests the importance of globalization and localization.</p>
+
+<p>All the approaches presented here are productive, if the right way is taken, and the right way is the one most suitable to the development goals of a particular project.</p>
+
+<p>In the solution, there are many techniques I’ve developed recently and using them for the very first time, and I would greatly appreciate any suggestions, advice, and criticism.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2023 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

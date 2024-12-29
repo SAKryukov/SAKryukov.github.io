@@ -1,0 +1,813 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0073)https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Alternative Analog SVG Clock- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A pure Web browser application, an alternative to the article “An SVG Analog Clock”">
+<meta name="Keywords" content="Javascript, CSS, HTML, Beginner">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="3/14/2023 3:15:00 PM">
+<meta property="article:modified_time" content="3/25/2023 4:38:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="7 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock">
+<meta property="og:title" content="Alternative Analog SVG Clock">
+<meta property="og:description" content="A pure Web browser application, an alternative to the article “An SVG Analog Clock”">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock"
+   },
+  "name": "Alternative Analog SVG Clock",
+  "headline": "Alternative Analog SVG Clock",
+  "url": "https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock",
+  "discussionUrl": "https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,CSS,HTML,Beginner",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "The application has no server side and is based on HTML + SVG + CSS + JavaScript only",
+  "articleSection": "HTML",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2023-03-14",
+  "dateCreated": "2023-03-14",
+  "dateModified": "2023-03-25"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML",
+      "name" : "HTML"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML">HTML</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5356856/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/CSS" data-id="90">CSS</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML" data-id="104">HTML</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Alternative Analog SVG Clock</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5356856">
+
+	<meta itemprop="upvoteCount" content="9">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (11 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">14 Mar 2023, last revision: 25 Mar 2023</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">7 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 16.2K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 443</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A pure Web browser application, an alternative to the article “An SVG Analog Clock”</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">The application has no server side and is based on HTML + SVG + CSS + JavaScript only</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Alternative-Analog-SVG-Clock.zip">Download source code — 3.8 KB</a></li></ul>
+
+<p id="image.title">&nbsp;</p>
+
+<p><img alt="Application" src="./Resources-articles/2023-03-14.Alternative-Analog-SVG-Clock.main.webp"/></p>
+
+<p>&nbsp;</p>
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-introduction" style="margin-left: 0">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-what27s-so-interesting3f" style="margin-left: 3em">What's so Interesting?</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-svg" style="margin-left: 3em">SVG</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-clock" style="margin-left: 3em">Clock</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-comparison-of-object-types" style="margin-left: 3em">Comparison of Object Types</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-arrow-rotation" style="margin-left: 3em">Arrow Rotation</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-performance-optimization" style="margin-left: 3em">Performance Optimization</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-main-difference-between-analog-and-digital-clocks" style="margin-left: 3em">Main Difference Between Analog and Digital Clocks</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-how-to-add-decorations3f" style="margin-left: 3em">How to Add Decorations?</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-css3a-docking-layout" style="margin-left: 3em">CSS: Docking Layout</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-css3a-fitting-svg" style="margin-left: 3em">CSS: Fitting SVG</a><br>
+<a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#heading-what-about-server-part3f" style="margin-left: 0">What About Server Part?</a></p>
+
+<h2 id="heading-introduction">Introduction</h2>
+
+<h3 id="heading-what27s-so-interesting3f">What’s so Interesting?</h3>
+
+<p>What’s so Interesting? Virtually nothing! This is the application alternative to the one shown in the article <a href="https://www.codeproject.com/Articles/5356426/An-SVG-Analog-Clock">An SVG Analog Clock</a>. I was surprised by the fact of how a clock could be over-engineered and decided to provide a lean and near-optimal solution which I think is way more adequate.</p>
+
+<p>An on-screen clock has near-zero practical value, maybe even negative. This is just a traditional programming exercise, on par with editors, Tetris implementations, fractal image rendering, and the like.</p>
+
+<p>However, this article explains several subtle points that could be useful for beginners.</p>
+
+<h2 id="heading-implementation">Implementation</h2>
+
+<h3 id="heading-svg">SVG</h3>
+
+<p>First, let’s see how SVG can be built dynamically. Everything is implemented as the class <code>SVG</code>:</p>
+
+<div class="pre-lang" id="premain419916"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="419916" id="preShrink419916">Shrink ▲</span> &nbsp; <span id="copycode419916" class="copy-code" data-index="419916" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre419916" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> SVG {
+
+    #implementation = {};
+
+    <span class="code-sdkkeyword">constructor</span>(viewBox, existingSvg) {
+        <span class="code-keyword">const</span> ns = <span class="code-string">"</span><span class="code-string">http://www.w3.org/2000/svg"</span>;
+        <span class="code-keyword">this</span>.#implementation.createNS = (name) =&gt;
+            <span class="code-sdkkeyword">document</span>.createElementNS(ns, name);
+        <span class="code-keyword">this</span>.#implementation.attribute = (element, values) =&gt; {
+            <span class="code-keyword">for</span> (<span class="code-keyword">let</span> attribute <span class="code-keyword">in</span> values)
+                element.setAttribute(attribute, values[attribute]);
+            <span class="code-keyword">return</span> element;
+        }; <span class="code-comment">//</span><span class="code-comment">this.#implementation.attribute</span>
+        <span class="code-comment">//</span><span class="code-comment"> defaults...</span>
+        <span class="code-keyword">this</span>.#implementation.svg = existingSvg == <span class="code-keyword">null</span> ?
+            <span class="code-keyword">this</span>.#implementation.createNS(<span class="code-string">"</span><span class="code-string">svg"</span>) : existingSvg;
+        <span class="code-keyword">if</span> (viewBox != <span class="code-keyword">null</span>) <span class="code-comment">//</span><span class="code-comment"> it also covers undefined</span>
+            <span class="code-keyword">this</span>.#implementation.svg.setAttribute(<span class="code-string">"</span><span class="code-string">viewBox"</span>,
+                <span class="code-string">`</span><span class="code-string">${viewBox.x.from} ${viewBox.y.from}
+                 ${viewBox.x.to - viewBox.x.from}
+                 ${viewBox.y.to - viewBox.y.from}`</span>);
+    } <span class="code-comment">//</span><span class="code-comment">constructor</span>
+
+    get element() { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.#implementation.svg; }
+
+    <span class="code-comment">//</span><span class="code-comment"> ... get/set attributes, primitives: line, circle, ets.</span>
+
+    appendElement(element, group) {
+        <span class="code-keyword">if</span> (group)
+            group.appendChild(element);
+        <span class="code-keyword">else</span>
+            <span class="code-keyword">this</span>.#implementation.svg.appendChild(element);
+        <span class="code-keyword">return</span> element;
+    } <span class="code-comment">//</span><span class="code-comment">appendElement</span>
+
+    group() { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.appendElement(<span class="code-keyword">this</span>.#implementation.createNS(<span class="code-string">"</span><span class="code-string">g"</span>)); }
+
+} <span class="code-comment">//</span><span class="code-comment">class SVG</span></pre>
+
+<p>First, note that all the <em>private</em> code is hidden in the constructor and the private member <code>this.#implementation</code>.</p>
+
+<p>An SVG element can be created using the <code>document</code> object in a bit different way than HTML elements because SVG uses a different namespace. This is implemented in a local method <code>this.#implementation.createNS</code>.</p>
+
+<p>The class <code>SVG</code> can be used in two different ways. If <code>existingSvg</code> is specified, the class can be used to populate an existing <code>&lt;svg&gt;</code> element, and new content can be added to existing content. It can be used to add content to an <code>&lt;svg&gt;</code> element embedded in HTML.</p>
+
+<h3 id="heading-clock">Clock</h3>
+
+<p>The function <code>createClock</code> creates an instance of the clock. It can also be created in two different ways. If the parameter <code>parent</code> is of the class <code>SVG</code> (described above), the clock can be rendered on top of some existing <code>&lt;svg&gt;</code> element. Otherwise, it is created from scratch. As the instance of <code>SVG.element</code> is appended to some existing HTML element, the entire clock created from scratch will be appended to it. The function returns the function <code>set</code> used to set and render the current clock time.</p>
+
+<p>For the rendering of the clock face and arrows, <a href="https://en.wikipedia.org/wiki/Z-order">Z-order</a> is important. If an SVG element is created later, it is placed in the foreground. For example, the red second arrow should be created at the very end, to make it well visible in all locations.</p>
+
+<p>To choose the way to use, the code needs to compare objects by type. Let’s look at this.</p>
+
+<p>In the application, the clock instance is initialized and used in “main.js”, in the handler of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event"><code>window.onload</code></a>. The clock is set once at initialization and then periodically in the function passed to <a href="https://developer.mozilla.org/en-US/docs/Web/API/setInterval"><code>setInterval()</code></a>.</p>
+
+<h3 id="heading-comparison-of-object-types">Comparison of Object Types</h3>
+
+<p>In the function <code>createClock</code>, we have:</p>
+
+<div class="pre-lang" id="premain452812"><div>JavaScript</div><div class="pre-action-link"><span id="copycode452812" class="copy-code" data-index="452812" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre452812" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">if</span> (parent.<span class="code-sdkkeyword">constructor</span> != SVG)
+    parent.appendChild(svg.element);</pre>
+
+<p>Naturally, at this point, we assume that the object <code>parent</code> is not <code>undefined</code> and not <code>null</code>. When needed, it can be checked up with <code>if (parent != null)</code>, as this comparison also covers the case of <code>undefined</code>.</p>
+
+<p>This is the way to compare types directly, not using magic strings. We can find many examples of JavaScript code where the types are compared using type names. This is dirty, less maintainable, and should be avoided.</p>
+
+<h3 id="heading-arrow-rotation">Arrow Rotation</h3>
+
+<p id="code-arrow-rotation">The central part of the clock is the method <code>set</code>. It rotates the arrows:</p>
+
+<div class="pre-lang" id="premain860791"><div>JavaScript</div><div class="pre-action-link"><span id="copycode860791" class="copy-code" data-index="860791" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre860791" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">createClock = parent =&gt; {
+
+    <span class="code-keyword">let</span> currentTime = <span class="code-keyword">null</span>;
+
+    <span class="code-keyword">const</span> set = time =&gt; {
+        <span class="code-keyword">if</span> (currentTime == time) <span class="code-keyword">return</span>;
+        currentTime = time;
+        <span class="code-keyword">const</span> date = <span class="code-keyword">new</span> Date(time);
+        <span class="code-keyword">let</span> hour = date.getHours() % <span class="code-digit">12</span>;
+        <span class="code-keyword">let</span> minute = date.getMinutes();
+        <span class="code-keyword">let</span> second = date.getSeconds();
+        hour = (hour + minute / <span class="code-digit">60</span> + second / <span class="code-digit">3600</span>) / <span class="code-digit">12</span>;
+        minute = (minute + second / <span class="code-digit">60</span>) / <span class="code-digit">60</span>;
+        second = second / <span class="code-digit">60</span>;
+        arrowHour.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${hour}turn)`</span>;
+        arrowMinute.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${minute}turn)`</span>;
+        arrowSecond.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${second}turn)`</span>;
+    }; <span class="code-comment">//</span><span class="code-comment">set</span>
+
+    <span class="code-keyword">return</span> set;
+
+}; <span class="code-comment">//</span><span class="code-comment">createClock</span></pre>
+
+<p>Here, <code>arrowHour</code>, <code>arrowMinute</code>, <code>arrowSecond</code> are SVG <em>groups</em>. Why? It is done to generalize the code and make it maintainable in case one needs to render some complicated arrow shapes composed of several SVG elements.</p>
+
+<p>The other role of <code>style.transform</code> is to avoid trigonometric calculations and make the code more maintainable. Note that the transform assumes that the coordinate point (0, 0) is the center of rotation.</p>
+
+<h3 id="heading-performance-optimization">Performance Optimization</h3>
+
+<p>In our case, the clock state is updated every second. However, if we call the clock’s function <code>set</code> from the handler passed to <code>setInterval</code> every second, the system cloak events will be <a href="https://en.wikipedia.org/wiki/Beat_(acoustics)">beating</a> with this cycle, so part of the second clock updates will be lost. Therefore, to see all second updates, <code>set</code> should be called a few times per second. In the code, it is done approximately three times per second on average, and it looks good. But then some updates of the graphics will be redundant.</p>
+
+<p>This problem can be resolved by storing <code>currentTime</code> locally and checking that the argument <code>time</code> passed to <code>set</code> has a new value, as it is shown in the <code>set</code> <a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#code-arrow-rotation">code</a>:</p>
+
+<div class="pre-lang" id="premain367108"><div>JavaScript</div><div class="pre-action-link"><span id="copycode367108" class="copy-code" data-index="367108" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre367108" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">if</span> (currentTime == time) <span class="code-keyword">return</span>;
+    currentTime = time;</pre>
+
+<p>It works because the value for the argument <code>time</code> is obtained as <code>Date.now()</code>. The return value type is integer, and this operation is very fast because it is based on the kernel OS functionality, and the <a href="https://www.codeproject.com/Articles/5356856/code-set-optimization">comparison</a> is also very fast. On the other hand, the rest of the <code>set</code> function has expensive string operations and even more expensive graphical updates. Therefore, avoiding redundant updates of the clock states is important.</p>
+
+<h3 id="heading-main-difference-between-analog-and-digital-clocks">Main Difference Between Analog and Digital Clocks</h3>
+
+<p>The first idea of the calculation of the arrow angles would be using just hours, minutes, and seconds. This is what a digital clock does. These values are integers. And yes, it would be suitable for a digital clock.</p>
+
+<p>An analog clock is different. It would be incorrect to say that an hour arrow shows just hours. A single hour arrow should show seconds, minutes, and hours. Likewise, a minute arrow should show both minutes and seconds. Only the accuracy is different.</p>
+
+<p>This is <strong>wrong</strong>:</p>
+
+<div class="pre-lang" id="premain216629"><div>JavaScript</div><div class="pre-action-link"><span id="copycode216629" class="copy-code" data-index="216629" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre216629" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">createClock = parent =&gt; {
+
+    <span class="code-keyword">const</span> set = time =&gt; {
+        <span class="code-keyword">if</span> (currentTime == time) <span class="code-keyword">return</span>;
+        currentTime = time;
+        <span class="code-keyword">const</span> date = <span class="code-keyword">new</span> Date(time);
+        <span class="code-keyword">let</span> hour = date.getHours() % <span class="code-digit">12</span>;
+        <span class="code-keyword">let</span> minute = date.getMinutes();
+        <span class="code-keyword">let</span> second = date.getSeconds();
+        hour = hour  / <span class="code-digit">12</span>; <span class="code-comment">//</span><span class="code-comment"> wrong!</span>
+        minute = minute / <span class="code-digit">60</span>; <span class="code-comment">//</span><span class="code-comment"> wrong!</span>
+        second = second / <span class="code-digit">60</span>;
+        arrowHour.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${hour}turn)`</span>;
+        arrowMinute.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${minute}turn)`</span>;
+        arrowSecond.style.transform = <span class="code-string">`</span><span class="code-string">rotate(${second}turn)`</span>;
+    }; <span class="code-comment">//</span><span class="code-comment">set</span>
+
+    <span class="code-keyword">return</span> set;
+
+}; <span class="code-comment">//</span><span class="code-comment">createClock</span></pre>
+
+<p>If this calculation was the same as for a digital clock, the minute arrow would stay at some minute label and jump to a new position every minute. And the hour arrow would jump by an hour every hour. Instead, all the arrows should move by seconds. This is done by the <a href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock#code-arrow-rotation">correct calculation shown above</a>.</p>
+
+<h3 id="heading-how-to-add-decorations3f">How to Add Decorations?</h3>
+
+<p>The demo application is very simple. How to add all those Arabic or Roman numeric labels, fancy arrows, or fancy backgrounds?</p>
+
+<p>The way to go would be using an existing <code>&lt;svg&gt;</code> element embedded in HTML. The SVG elements to be controlled by the script could be added on top of it. When I need to do such a thing, I draw appropriate vector graphics with some vector graphic editor and save it as an SVG file. I would recommend <a href="https://inkscape.org/">Inkscape</a>. The file can be embedded into HTML. Usually, the file should be cleaned of comments, redundant metadata, and unused <code>id</code> attributes. Numeric colors should better be replaced with CSS color names.</p>
+
+<p>Typically, adding some vector graphics to existing SVG requires some <em>group</em>. The reference to it can be obtained via its <code>id</code> attribute or some other way using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector"><code>Document.querySelector()</code></a>.</p>
+
+<p>Here, most important thing is to match the coordinate system and a <em>viewport</em>.</p>
+
+<h3 id="heading-css3a-docking-layout">CSS: Docking Layout</h3>
+
+<p>Note that the application behaves pretty much like a “desktop application”: when a browser window is resized, the <code>&lt;header&gt;</code> and <code>&lt;footer&gt;</code> elements always stay on top and at bottom of the browser client area. The central <code>&lt;main&gt;</code> area, where SVG is rendered, is scaled appropriately. At least, it happens if the brower window is not too small.</p>
+
+<p>This is the behavior most adequate for a <a href="https://en.wikipedia.org/wiki/Single-page_application">single-page application</a>, but not only for this purpose.</p>
+
+<p>This is achieved using the CSS <a href="https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox">Flexbox layout method</a>.</p>
+
+<p>The application of <em>flex</em> has many subtle points. In the application, the relevant part of CSS is commented on to show the right technique:</p>
+
+<div class="pre-lang" id="premain830867"><div>CSS</div><div class="pre-action-link"><span id="copycode830867" class="copy-code" data-index="830867" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre830867" style="margin-top:0;" class="lang-css notranslate" data-language="CSS" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">/*</span><span class="code-comment"> flex: */</span>
+<span class="code-leadattribute">html</span><span class="code-leadattribute">,</span> <span class="code-leadattribute">body</span> { <span class="code-attribute">height</span><span class="code-keyword">:</span><span class="code-keyword"> 100%</span>; }
+<span class="code-leadattribute">body</span> { <span class="code-attribute">display</span><span class="code-keyword">:</span><span class="code-keyword"> flex</span>; <span class="code-attribute">flex-flow</span><span class="code-keyword">:</span><span class="code-keyword"> column</span>; }
+<span class="code-leadattribute">main</span> { <span class="code-attribute">flex</span><span class="code-keyword">:</span><span class="code-keyword"> auto</span>; <span class="code-attribute">overflow</span><span class="code-keyword">:</span><span class="code-keyword"> auto</span>; }
+<span class="code-comment">/*</span><span class="code-comment"> end flex */</span></pre>
+
+<h3 id="heading-css3a-fitting-svg">CSS: Fitting SVG</h3>
+
+<p>Another tricky part of the application CSS is fitting the SVG part in its container and its centering. It is used by using relative units:</p>
+
+<div class="pre-lang" id="premain966123"><div>CSS</div><div class="pre-action-link"><span id="copycode966123" class="copy-code" data-index="966123" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre966123" style="margin-top:0;" class="lang-css notranslate" data-language="CSS" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-leadattribute">section</span> { <span class="code-attribute">text-align</span><span class="code-keyword">:</span><span class="code-keyword"> center</span>; }
+<span class="code-leadattribute">svg</span> { <span class="code-attribute">height</span><span class="code-keyword">:</span><span class="code-keyword"> 80vmin</span>; <span class="code-attribute">width</span><span class="code-keyword">:</span><span class="code-keyword"> 80vmin</span>; }</pre>
+
+<p>This way, the actual size of the vector graphics part is defined by either width or height of the client size of the browser window, depending on the current aspect ratio.</p>
+
+<p>In this case, the image ratio is 1:1. If it is not so, one of the <code>width</code> or <code>height</code> attribute values can be <code>auto</code>. In some cases, the attribute <code>max-content</code> or <code>min-content</code> <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/width">can be used</a>.</p>
+
+<h2 id="heading-what-about-server-part3f">What About Server Part?</h2>
+
+<p>The question is: why? Maybe this question could be addressed to the author of the <a href="https://www.codeproject.com/Articles/5356426/An-SVG-Analog-Clock">original article</a> who presented a much bigger 2-tier application. I think the Web application using some server part is one thing, and a clock component is a totally different thing and should be considered separately.</p>
+
+<p>At best, the application can request the server part to change the time zone, or perhaps some reference point to count time from. It can be easily achieved with <a href="https://en.wikipedia.org/wiki/Ajax_(programming)">Ajax</a>. Even in this case, <em>separation of concerns</em> should be used.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5356856/Alternative-Analog-SVG-Clock?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2023 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

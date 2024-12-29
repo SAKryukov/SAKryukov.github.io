@@ -1,0 +1,1036 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0058)https://www.codeproject.com/Articles/5268512/Sound-Builder -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Sound Builder, Web Audio Synthesizer- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="In-browser synthesizer creates instruments to be used in musical applications, offers advanced additive and subtractive synthesis techniques">
+<meta name="Keywords" content="Javascript, HTML5">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="5/19/2020 3:18:00 AM">
+<meta property="article:modified_time" content="7/24/2023 3:03:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="25 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer">
+<meta property="og:title" content="Sound Builder, Web Audio Synthesizer">
+<meta property="og:description" content="In-browser synthesizer creates instruments to be used in musical applications, offers advanced additive and subtractive synthesis techniques">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer"
+   },
+  "name": "Sound Builder, Web Audio Synthesizer",
+  "headline": "Sound Builder, Web Audio Synthesizer",
+  "url": "https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer",
+  "discussionUrl": "https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,HTML5",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "This in-browser synthesizer creates instruments to be used in musical applications, offers advanced additive and subtractive synthesis techniques. It is based on Web Audio API and relies only on the browser, does not require any server-side part. It creates the synthesizers of the musical instruments. The synthesizers can be exported and embedded in a Web application.",
+  "articleSection": "HTML5",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2020-05-19",
+  "dateCreated": "2020-05-19",
+  "dateModified": "2023-07-24"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML5",
+      "name" : "HTML5"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5268512/Sound-Builder#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML5">HTML5</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5268512/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="k4t0tsaZ+3aJR1Dw3sd0Iis2WlA/EQOUxmcffNZ60XFJN9ppwxxLTB66l5CL/kBuG1AaMHcDzOssULKkXFZWcqGjpsFZQW+iUMzD2l+yLSI8pKYhTW5cN7xsMDuDv1LDDIjQzOLllNpOyOaCEA29G4q7YFgjJjGfeIpSZehHhzpo65npMmVcCn3829TAbnpB+ueeto1qhh8g8UDmmor/yNTZoIC/FDO3OGt/ZtUlimXqQyIZYUdsPX2z19ZgTx6hDWLJ4WbQz8QOTMNd1bRHKyqF26iAAm4RuJbXWxgNwczkb5fcMHwTdoBc4BxqhmPCbY8oCGgMBR+VE3kKt3gPHVXXdp+dw0P0eVWh+1oYSy/JdpJLfyFmVwSwjgmHZLEeKufEL+V2I/S0izfrTJiM4B+oGEl037infJxjpEJDVg/jaMc3pleHPD08f/6BZtb6zx8+aCLl+unC6s5lnyiYMKYSQ10uGbV/1gD7SAj81MNZZ46EQof8myXwecMRTWDs9ItT14+iZxnpnBi1jvcPckw0s87EV4qaWrDeyxn+VBlh4TPcYEUgepFYQBScf3CVx8w0brYb9Ld0IawXwsdkwrL7LVJxsUYmte5WO8dVImICNVt9xYQzofOh0uP33n794QP+E7A991Bgxu/d8r8XlLlLSLZ9SFxurI7osHlHu7fCwQV2yPCF9IlOe7yeS0qFg6Tv1t+jUQPTyAr6kH99kLZEMRUC72TrOuLeX2Jcw7qO6MN/zb84bW7cZ5QnZ0ejuuWY/8yoPUrTrkViqd67LflGsT0gqAwAG7OMNvTlJfUplsLLeIwUEqwBsF3Thgzm9nuGd5qr/1LRUiUxa4PzSL9xSRegZFneA5B2wkdX9e+7tnMO911L3pJMyoLR9K1sUjieZQVB1Y4Uods90SY2gUn0yb6F4ZD2HvjcDGfbrzuOz6LlD4QQtEFH4OILKcQBMR25LA4dw3BMjPWmBJYX328j9TDgc7Oi6gYdzcMR4qIUhGfMgJgaJ1yQoACIex2eeysbb7PEHkZ/jKGEH76CQKj7Y4+9KXdb8TH8gbfbS+mj3x2T0EgxXcP7xNXAVoTIXjFZI5xom5GqBQMwPA2ICzeK4fnG06fIKvaNGsKa+SEErgYHH/NePQBjb/HX8muAVkLIkJE9X/qWR4JfDI68wLnpQiMCLtljcmhS3tPUazKDPaSTYkfNHYd3p4rjKmFdptjuGfgUusMr27EFR8AfleEFCpmGeiSVAMAngjwfnQ8U2c2mLIJhcRZJi98ah6wnQbUJ8KLXqvejISLH7XXm8LM4R7mArGHXsQK79ZsklcDs96D0vTsdnqCH2I6C9k3XnSI10t8w1Q+WLDt6UegTuWUiN4ZlmnoaZNZ8zaX8iE5ntxazNUZerlhh1YoTSxvkDYjabQhz1VyLRDcrvS04mcwC4UgDsPNmzFxhbScfiJQwGKq8AkWvAIAzUaGA+0gML64SP0PSV7pt/MF0giEiLfKKejo8GD3k/JktMABoP1+VmCGEdYKiNiEG3y2rMAHM5j+n0oojhss9nrxG3qfxqyJLsYvmUHOY5CPd2Cjup8Up0ZbXqlg+D/f9oZX5aNdnoDMdMfAeSxLxuhj4IM61QJWxepwWl6EltCskWyphXOra2x/lI2kgwVJvMnb626r2TNCJ7xD48Ku5RUzmBQ/JsXOkQo6rZ03pSI95uZGlqylML+N++liYHbPiHhQVBrgz2bVwIwioCmKK6+MJ3s63yD+ag5jhR1zC4pqC52LAm5IB4R+1dknARJ48Jn/sPiZ6H7qXUIKG52AFd3orH1IXlQ+qNGAbWunPOwF+My51Jd2EforifFfjwcOVga+IBm11By5SA1ekqAn+MUupelVQl5jRxXcSfuFo3fTZ+iG1pbLTmtYZe2M5RCy+BIE8XgmIKooN9NOVTMN389vSjMBRI7wH1STu/PRNjZinmd+zVz7KWDIMTjmXlwyC94Vluwe85npl7m7Kl6UXAmzc6HY9wP/lqvunG4Xe0IVgYy5cBA1YBPuNTO0/3bZUr+EYvmj37KHrqlj0g++kNa+WKDgqiLvVWqiDoJr/+K8ysUhpQ75kTfkIyyFsAu+waoS8RzY47/aGXWFhYAYNB01J57mz8fs68uXfIKSU/uvwO1rov08a67mw/NWeWH7EK7zZ1etPDMZkY52u+IvPMqjS0zIZ/ugQGzpjNj8ktJfJVwqAc3cA/fKT7tym+6WKTaco9tcwcgJkcK9P7CCyrQFdjnnxM28TWXUH4Gqn+XQjzqqSp6soYKl7XpXVVqLyWa0tiaSqDlUAz25h7sutYsYgOXL6oqkLVlDM+SE6QA03CCWOaNAjogKP6kUHz6U0oufAA23mkLhYjf/3K/s+let1gbJJ/RUiJoxrg7jfBGM2FrQyfLNSqa3v83N3eLvo6cjEp6DSdR+9enBECfBp5Jjsw9nqamELLXdu4NjVf9GafEpdP5KnYd/SkMM1YlvOjlG7F0kr5PvwfPXLhOhT29FMWK2kDYd599n+fId8ob+rNRrroQ7J0eTBVloeM+AgtvaTBxZ67uwGrfxg5j7sFy/W4lA5yiYfqgHaBjdreQOOUMAp3+ophEST">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML5" data-id="1241">HTML5</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Sound Builder, Web Audio Synthesizer</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5268512">
+
+	<meta itemprop="upvoteCount" content="26">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (26 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">19 May 2020, last revision: 24 Jul 2023</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">25 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 51.9K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 1.3K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">In-browser synthesizer creates instruments to be used in musical applications, offers advanced additive and subtractive synthesis techniques</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">This in-browser synthesizer creates instruments to be used in musical applications, offers advanced additive and subtractive synthesis techniques. It is based on Web Audio API and relies only on the browser, does not require any server-side part. It creates the synthesizers of the musical instruments. The synthesizers can be exported and embedded in a Web application.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+    <li><a href="https://www.github.com/SAKryukov/microtonal-fabric.git">Download or clone source code from GitHub</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/Articles/5268512/Microtonal-Fabric.zip">Download Microtonal Fabric source code — 294.9 KB</a></li>-->
+</ul>
+
+<p id="picture-main"><img alt="Sound Builder" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.main.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>If something is prohibited but you badly want it, it is… permitted</i></p>
+
+<dl>
+	<dd>Folk wisdom</dd></dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-introduction" style="margin-left: 0">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-motivation" style="margin-left: 0">Motivation</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-advanced-features" style="margin-left: 0">Advanced features</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-a-word-of-warning-and-a-disclaimer" style="margin-left: 0">A Word of Warning and a Disclaimer</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-audio-graph" style="margin-left: 0">Audio Graph</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-main-oscillator" style="margin-left: 0">Main Oscillator</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-wave-fft" style="margin-left: 3em">Wave FFT</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-oscillator-control" style="margin-left: 0">Oscillator Control</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-modulation" style="margin-left: 0">Modulation</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-envelopes" style="margin-left: 0">Envelopes</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-volume-envelope" style="margin-left: 3em">Volume Envelope</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-detune-envelope" style="margin-left: 3em">Detune Envelope</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-modulation-envelopes" style="margin-left: 3em">Modulation Envelopes</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-filters" style="margin-left: 0">Filters</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-gain-compensation" style="margin-left: 0">Gain Compensation</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-using-api-and-generated-instruments-in-applications" style="margin-left: 0">Using API and Generated Instruments In Applications</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-api" style="margin-left: 3em">API</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-interesting-implementation-detail" style="margin-left: 0">Interesting Implementation Detail</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-classes-with-private-members" style="margin-left: 3em">Classes with Private Members</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-initialization" style="margin-left: 3em">Initialization</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-compatibility" style="margin-left: 0">Compatibility</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-live-play" style="margin-left: 0">Live Play</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-credits" style="margin-left: 0">Credits</a><br>
+<a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-introduction">Introduction</h2>
+
+<p>This is the third article of the series dedicated to musical study with on-screen keyboards, including microtonal ones:</p>
+
+<ol>
+<li><em><a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard">Musical Study with Isomorphic Computer Keyboard</a></em></li><li><em><a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard">Microtonal Music Study with Chromatic Lattice Keyboard</a></em></li><li><em>Present article</em></li><li><em><a href="https://www.codeproject.com/Articles/5362252/Multitouch-Support">Multitouch Support for Ten-Finger Playing</a></em></li></ol>
+
+<p>The present and the previous article describe different applications of a single project <a href="https://github.com/SAKryukov/microtonal-fabric">Microtonal Fabric</a>. The present article describes the sound synthesis engine used by all Microtonal Fabric applications. The Sound Bilder application provides a method used to synthesize the sounds of different musical instruments and to create a library of sounds.</p>
+
+<p>See also <a href="https://en.xen.wiki/w/Sergey_A_Kryukov">my page</a> at the microtonal community Web site <a href="https://en.xen.wiki/">Xenharmonic Wiki</a>. In addition to the Microtonal Fabric links, there are some useful links on different microtonal topics and personalities.</p>
+
+<h2 id="heading-motivation">Motivation</h2>
+
+<p>The main driving force of this present work is a severe need.</p>
+
+<p>Two articles related to this topic are published as <a href="https://www.codeproject.com/Articles/1201737/Musical-Study-with-Isomorphic-Computer-Keyboard">Musical Study with Isomorphic Computer Keyboard</a> and <a href="https://www.codeproject.com/Articles/1204180/Microtonal-Music-Study-Chromatic-Lattice-Keyboard">Microtonal Music Study with Chromatic Lattice Keyboard</a>. Even though the first article has nothing to do with microtonal systems, it describes some basic theoretical explanations of the topic.</p>
+
+<p>The second keyboard is <em>microchromatic</em>, very innovative, and works in a Web browser with the use of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>. Recently, it used my heavily modified fork a third-party open-source library with very serious defects which I’m not going to discuss here. Anyway, it already played its role when the proof of concept goal was more important. These days, I continue the research and development and cannot tolerate those defects and insufficient maintainability. Later, I decided to develop my own sound synthesis engine and a tool. In other words, I started the work just because I <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#epigraph">badly wanted</a> to get the result. I introduced my results to some prominent musicians, specialists in microtonal music, theorists and educators, and got very positive feedback. I think the tool is advanced, accurate, and interesting enough to share it.</p>
+
+<h2 id="heading-advanced-features">Advanced features</h2>
+
+<p>The tool is a synthesizer synthesizer, or a generator of the instrument instances which can be <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#api-export">exported</a> in a form of a single JSON file, <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#api-embed">embedded</a> in some other JavaScript code, and <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#api-use">used</a> for the implementation of an in-browser musical instrument based on Web Audio API, or some other tool for the generation of music on a Web page. The tool is oriented to both common-practice and <a href="https://en.wikipedia.org/wiki/Microtonal_music">microtonal</a> or <a href="https://en.xen.wiki/">xenharmonic</a> musical applications.</p>
+
+<p>No part of the code uses any server-site operation, so any part of the code can be played locally on a wide range of devices, even without a connection to the Internet.</p>
+
+<p>Some features of the tool are somewhat innovative. Overall, it helps to generate near-realistic instrument sound, defining advanced effects in a graphical manner using a convenient UI. The user is not required to be able to work with audio nodes, draw any graphics, or understand Web Audio API. Instead, the procedure of the design of an instrument is based on filling data in several tables, possibly some trial-and-error approach with listening to intermediate results of the synthesis.</p>
+
+<p>The procedure of instrument authoring is started with a single oscillator defined by a Fourier spectrum. Such a spectrum can be imported from a spectral analyzer of an available code sample, but an additional edition is usually required. Alternatively, traditional signal waveforms, such as sawtooth or triangle, are also available, but more realistic sounds require the Fourier-based approach.</p>
+
+<p>On top of this, the user can define an unlimited number of modulators. A modulator can be used for frequency or amplitude modulation, and each of them can be either an absolute-frequency or a relative-frequency modulator. For absolute modulations, the user can define a fixed frequency for each one, but for relative-frequency modulations, the frequency of the modulation signal depends on the fundamental frequency of each tone.</p>
+
+<p>On top of this, the result of synthesis can be shaped using an envelope. Unlike conventional synthesis systems, in addition to a usual volume enveloped, there are three additional kinds of envelope: one for temporary detune, and two for modulations, separately for frequency and amplitude modulation.</p>
+
+<p>On top of this, there is a set of filters with user-defined parameters. Any subset of filters can be included in use or excluded.</p>
+
+<p>Finally, on top of this, there is a gain compensation system.</p>
+
+<p>During the work, the author of an instrument uses a set of interactive tools used to listen to intermediate results. There is a test Jankó-style keyboard, corresponding to the standard 88-key piano without one highest tone. The keyboard can be played with a mouse or by all 10 fingers using a touch screen. For both methods of playing, glissando is also possible, which is the somewhat not very trivial technical aspect. Another important feature is this: during trial playing, any of the classes of the effects can be temporarily turned on, which is important for comparisons. Also, trial playing can be done with the control of volume, (additional) sustain, and transposition. These controls are not parts of the resulting instruments and are designed specifically for trial playing.</p>
+
+<h2 id="heading-a-word-of-warning-and-a-disclaimer">A Word of Warning and a Disclaimer</h2>
+
+<p>Synthesis is such a thing… If you use this tool, please make sure you proceed carefully to protect your musical hearing from considerable shock. In some cases, accidental mistakes in parameters can produce awful almost traumatizing sound. I can see no chance to filter out bad things automatically, besides, it would be unfair.</p>
+
+<p>I cannot assume any responsibility for the production of bad or unpleasant sounds; this is the sole responsibility of the user. I only can assure the production of reasonably nice sounds is quite possible. Anyway, I provide a library of some instrument samples.</p>
+
+<h2 id="heading-audio-graph">Audio Graph</h2>
+
+<p>First of all, the most important design feature is this: all keys of the on-screen keyboard should be able to generate sound at the same time. One may ask: why would we need all of them? — if we play with only 10 fingers? Simple: this is because of the <em>sustain</em> value of an instrument. For example, if we press a sustain pedal of a piano and keep it down, we can, in principle, quickly hit all 88 strings, so at some moment all of them can generate sound, no matter how insane it may sound.</p>
+
+<p>To achieve that, we have to dedicate a considerable number of nodes to each instrument key. These parts of the graph are implemented by an object of a type <code>Tone</code>. However, we also minimize the number of those per-key nodes. It can be done by sharing some of our audio effects in another object of the type <code>Instrument</code>.</p>
+
+<p>First, let’s see what we can share. The set of filters can be shared. Some modulations can be shared, but some should be per key. I developed four kinds of modulation. We can apply an unlimited number of frequency modulators (FM) and amplitude modulators (AM). Each of those modulators can be either absolute frequency or relative frequency. All absolute-frequency modulators can be placed in the single-instance <code>Instrument</code> and <code>Tone</code> instances can share them. But relative-frequency modulators modulate at some frequencies which are different for each of the tones. In the tool, the actual frequency is the fundamental frequency of each tone, simply multiplied by some factor, with fixed modulation depths, individual for each modulator.</p>
+
+<p>Therefore, both <code>Instrument</code> and <code>Tone</code> are based on the same type named <code>ModulatorSet</code>. For the implementation of a set of modulators, it does not matter which role it plays, absolute frequency or relative frequency, implementation is the same.</p>
+
+<p>Another per-tone part of the graph is a set of gain nodes used as targets for <em>envelopes</em>. An envelope is a mechanism used to program the dynamic behavior of a tone in its attack and damping. Customary synthesis technology usually implements only the envelope controlling volume, with a fixed number of stages. The usual envelope is called <a href="https://en.wikipedia.org/wiki/Envelope_(music)">ADSR</a> (Attack, Decay, Sustain, and Release), but I don’t even want to discuss it here, because it cannot satisfy me. Sound Builder has a unified system of authoring envelopes of several types which makes it possible to create an envelope with an unlimited number of stages. Each stage is characterized by its time, gain, and choice of one of three functions. There are four characteristics of a node, and each of them can be envelope-programmed: volume, detune, AM, and FM.</p>
+
+<p>Now, we are ready to present a graph, starting with the tone part of it. First, let’s introduce some graphical conventions.</p>
+
+<p><img alt="Oscillator node" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.oscillator.webp"/> Oscillator node</p>
+
+<p><img alt="Gain node" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.gain.webp"/"> Gain node</p>
+
+<p><img alt="Envelope" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.envelope.webp"/> Envelope, gain node with gain controlled by envelope functions</p>
+
+<p><img alt="Modulator set" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.modulatorSet.webp"/> Modulator set</p>
+
+<p><img alt="Node chain" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.nodeChain.webp"/> Chain of nodes</p>
+
+<p><img alt="Output mode" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.output.webp"/> Output node</p>
+
+<p>The graph is shown schematically in two parts, left and right. On left, there is a singleton instance of <code>Instrument</code> connected with a set of <code>Tone</code> instances shown as only one on left. Let’s remember that there is an entire set of <code>Tone</code> instances, all having different fundamental frequencies. Every <code>Tone</code> instance is connected to the instance of the instrument in three ways. An <code>Instrument</code> instance supplies two signals from the sets of FM and AM modulators, which are common to all tones, and receives a fully-shaped sound signal from each tone, modulated and controlled by the functions of the envelopes.</p>
+
+<p id="picture-graph"><img alt="Graph" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.graph.v.4.6.webp"/></p>
+
+<p>There are four kinds of oscillators. The first one provides a signal of a fundamental frequency for each tone. Two sets of oscillators in each tone graph supply FM and AM signals of frequencies depending on the fundamental frequency, and two more sets of oscillators supply FM and AM signals of fixed frequencies to all tone graphs.</p>
+
+<p>At the very beginning of the operation, as soon as the entire graph is populated and connected, all oscillators start and provide their signals permanently, even when no sounds are emitted. The sound signals from the tone graphs are blocked by their gain envelopes. The oscillators stop only when the graph needs to be re-populated according to new instrument data.</p>
+
+<p>Let’s first consider the main kind of oscillator, the one supplying the base of the sound. Naturally, in absolutely all cases, it provides an entire spectrum of frequencies based on its fundamental frequency.</p>
+
+<h2 id="heading-main-oscillator">Main Oscillator</h2>
+
+<p>This node is created by the Web Audio <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/OscillatorNode">constructor</a> <code>OscillatorNode</code>.</p>
+
+<p>The user selects the spectrum of the node by assigning a value to the property <code>type</code>, this is either a string value, “sawtooth”, “triangle”, or custom. In the case of “custom”, this string should not be assigned. Instead, the method <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/setPeriodicWave">setPeriodicWave</a> is called. In the Sound Builder UI, <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#picture-main">it corresponds to the choice “Fourier”</a>.</p>
+
+<p>This call is a working horse of synthesis. The data for the wave is supplied by the instance of <code>Instrument</code> and is shared by all tones. This is because the components of the Fourier spectrum are relative to the fundamental frequency.</p>
+
+<p>In the Sound Builder UI, the spectrum is represented not by an array or complex number, but by an equivalent array of amplitudes and phases, which the user can “draw” with a mouse on a table of sliders. Each slider is an input element with <code>type="range"</code> with modified behavior which allowed drawing-like mouse action.</p>
+
+<h3 id="heading-wave-fft">Wave FFT</h3>
+
+<p>An alternative way of entering data is using a separate application “WaveFFT.exe” (WAV file to Fast Fourier Transform). It can load a WAV file, observe its waveform, select a fragment of the sample sequence (FFT supports a number of samples equal to the natural power of 2, this is supported by the U), perform FFT, observe resulting spectrum and save this data in the format of Sound Builder instrument data file.</p>
+
+<p>Typically, the data file created with WaveFFT serves as a starting point. Another way to start creating some instrument data is using sample files downloadable with this article.</p>
+
+<p>This application could be a matter of a separate article. In brief, this is a .NET WPF application, so it can be executed on different platforms without the rebuild. The appropriate <a href="https://en.wikipedia.org/wiki/.NET">framework</a> needs to be installed.</p>
+
+<p>The build is set to .NET v. 5.0. It should build and work for later .NET versions. To change the target .NET version, one would need to change only one line in “WaveFFT/Directory.Build.props”.</p>
+
+<p><img alt="Wave FFT" src="./Resources-articles/2020-05-19.Sound-Builder-Web-Audio-Synthesizer.WaveFFT.webp"/></p>
+
+<h2 id="heading-oscillator-control">Oscillator Control</h2>
+
+<p id="in-text-how-to-modulate">With Web Audio API, a node can be connected to another node or an object which is a property of a node, if this object supports the interface <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a>. This is a way to modulate the value corresponding to one or another audio parameter.</p>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/OscillatorNode">OscillatorNode</a> has two <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam#a-rate">a-rate</a> properties, supporting the interface <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a>: <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/frequency">frequency</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/detune">detune</a>.</p>
+
+<p>Frequency <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a> input can be used for FM, which, optionally, can be enveloped. The same can be done to detune, but modulation of the detune parameter would make little sense. Instead, it can be modified through an envelope.</p>
+
+<h2 id="heading-modulation">Modulation</h2>
+
+<p>Two kinds of modulation are implemented in different ways: FM signal connects to the frequency input of some oscillator, while AF needs to be done on output, to modulate the gain of a signal, which is already generated and frequency-modulated.</p>
+
+<p>Therefore, the FM signal is connected to an oscillator node frequency <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a>, as explained <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#in-text-how-to-modulate">above</a>, and the AM signal is connected to some gain node.</p>
+
+<p>In both cases, FM and AM signals are connected to some gain node, shown on the <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#picture-graph">graph</a> as “FM Envelope” and “AM Envelope”, correspondingly.</p>
+
+<p>Each of those gain modes receives FM and AM signals from two sources, absolute-frequency modulation signals from the <code>Instrument</code> instance and relative-frequency modulation signals from within the same <code>Tone</code> instance.</p>
+
+<p>On top of that, let’s remember that “FM Envelope” and “AM Envelope” gain nodes are also envelopes. It means that the gain value of these nodes is kept at zero until a performer press down a key. When it happens, an envelope function is applied to the gain, to open signals to output. Let’s see how it works.</p>
+
+<h2 id="heading-envelopes">Envelopes</h2>
+
+<p>The operation of envelopes relies on the functionality of <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a>. Each instance of <code>AudioParam</code> can be programmed to change the value automatically at a future time. When a performer presses a key on some instrument keyboard, the gain and some other audio parameters are programmed to implement some dynamics.</p>
+
+<p>An envelope defines a function of time, controlling the value of an <code>AudioParam</code> instance. This is a piecewise-smooth function, composed of the function of 3 types: exponential, linear, and, with some degree of conventionality, less usable <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">Heaviside function</a>. For each piece, the user adds a line to an envelope table and defines the duration of each step and a target value.</p>
+
+<p>This is the core of the implementation of the envelope from “sound/envelope.js”:</p>
+
+<div class="pre-lang" id="premain239422"><div>JavaScript</div><div class="pre-action-link"><span id="copycode239422" class="copy-code" data-index="239422" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre239422" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">for</span> (<span class="code-keyword">let</span> element of <span class="code-keyword">this</span>.#implementation.<span class="code-sdkkeyword">data</span>) {
+    <span class="code-keyword">switch</span> (element.type) {
+        <span class="code-keyword">case</span> <span class="code-keyword">this</span>.#implementation.typeHeaviside:
+            audioParameter.setValueAtTime(element.gain, currentTime + element.time);
+            <span class="code-keyword">break</span>;
+        <span class="code-keyword">case</span> <span class="code-keyword">this</span>.#implementation.typeExponential:
+            <span class="code-keyword">if</span> (element.gain == <span class="code-digit">0</span> || element.isLast)
+                audioParameter.setTargetAtTime(element.gain, currentTime,  element.time);
+            <span class="code-keyword">else</span>
+                audioParameter.exponentialRampToValueAtTime(
+                    element.gain,
+                    currentTime + element.time);
+            <span class="code-keyword">break</span>;
+        <span class="code-keyword">case</span> <span class="code-keyword">this</span>.#implementation.typeLinear:
+            audioParameter.linearRampToValueAtTime(element.gain, currentTime + element.time);
+            <span class="code-keyword">break</span>;
+    } <span class="code-comment">//</span><span class="code-comment">switch</span>
+    currentTime += element.time;
+}</pre>
+
+<p>It’s important to note, that the exponential function is implemented in two different ways: via <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/setTargetAtTime">setTargetAtTime</a> or <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam/linearRampToValueAtTime">exponentialRampToValueAtTime</a>. The first case is used when a target value is zero, and the stage is the very last one. It is done so, because, for obvious mathematical reasons, the target value cannot be zero for the exponent. Then the function represents the “infinite” approach of an <code>AudioParam</code> value to the target value. Naturally, for the last stage, such behavior represents the natural damping of an instrument sound or growing of the parameter to the values corresponding to the stabilized sound, zero or not. In both cases, “infinite” exponential behavior is the most suitable.</p>
+
+<p>With Sound Builder, the envelopes can optionally be applied to three characteristics of a sound: volume, detune, FM, and AM.</p>
+
+<p>Let’s discuss the application of these techniques.</p>
+
+<h3 id="heading-volume-envelope">Volume Envelope</h3>
+
+<p>This is the most traditional kind of envelope, which is used, for example, in ADSR. The difference is not only the unlimited number of stages. An additional volume envelope characteristic is its dumping sustain. There is no such thing as a sound stopping instantly. If we try to produce such instantaneous stop, electronics not instantaneously, but very quickly, which, naturally, produces so wide spectrum, that is perceived as a very unpleasant crackling noise. The same thing can happen if an attack is too fast. I don’t think any timing faster than some 10 ms can be practically used, so the envelope stage times are limited by this maximum duration. Dumping sustain happens when we play, for example, a piano and release a key. But what happens when we keep a key down or use a <em>sustain</em> key?</p>
+
+<p>In this case, the behavior is defined by the last stage of an envelope. We can define essentially two different types of instruments. The first type is suitable for an instrument with natural damping behavior, such as pianos or bells. For these instruments, the target value of the gain of the last stage should be zero, but the stage itself can be prolonged, say, up to several seconds. If we make this time about 10 milliseconds or perhaps a few times greater, we can achieve the effect closer to some melodic percussion. The second type can model the instrument of “infinite” sound, such as in wind or bowed string instruments. The target gain of the last envelope stage should be of maximum value, or about it. In this case, the sound is damped only when a performer releases a key.</p>
+
+<h3 id="heading-detune-envelope">Detune Envelope</h3>
+
+<p>It is not unusual, that an instrument plays a tone, which is, during some limited time, detuned, especially during the attack phase. For example, it happens in loud fingerstyle guitar playing. At the first phase of plucking the string, it is considerably elongated and hence sounds sharper than the tone it is tuned to. Besides, at first, a string can be pressed against the fret with a greater force. This effect can be achieved by controlling some detune value of the oscillator. Naturally, unlike the case of the volume, the detune value of the last stage should be zero.</p>
+
+<p>Detune envelope is the only envelope not represented on the <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#picture-graph">audio graph</a> as an envelope-controlled gain mode. Its target is the <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/detune">detune</a> <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioParam">AudioParam</a> of each main oscillator of a tone. No gain node is required for this functionality. The master gain of the effect is simply a numerical factor; all target values for all envelope stages are multiplied by this factor.</p>
+
+<h3 id="heading-modulation-envelopes">Modulation Envelopes</h3>
+
+<p>The two remaining envelopes are those separately controlling AM and FM, but I don’t make any distinction between absolute-frequency FM/AM and relative-frequency FM/AM. Instead, one envelope controls all AM and one — all FM. Let’s consider a typical case of such an envelope. A tuba or a saxophone, as well as many other wind instruments, show extremely strong vibration when a performer starts to blow a sound, but the vibration becomes barely perceivable as the sound stabilizes. This can be achieved with these two kinds of envelope.</p>
+
+<h2 id="heading-filters">Filters</h2>
+
+<p>The subtractive part of the synthesis is represented by a set of biquadratic low-order filters. Some filtering is required in most cases.</p>
+
+<p>Filter parameters are filled in in a table with the help of sliders. Each of the provided filter types can be included in the instrument graph, or it can be excluded. In most cases, only one low-pass filter is sufficient.</p>
+
+<p>To learn filter tuning, a good starting point could be <a href="https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode">BiquadFilterNode documentation</a>.</p>
+
+<h2 id="heading-gain-compensation">Gain Compensation</h2>
+
+<p>Both kinds of design features of the instrument synthesis, additive synthesis based on the Fourier spectrum, and subtractive synthesis based on filters, make the final volume of each tone hard to predict. The worst thing is: all tones produce very different subjective levels of volume, depending on the frequency. The overall volume of an instrument also can differ dramatically. Hence, some frequency-dependent gain compensation is badly needed. I’ve tried a good deal of research using different “clever” functions but finally ended up with the simplest approach: quadratic spline defined by three points: some low frequency and compensation level for this frequency, some high frequency, and compensation level for this frequency and some medium frequency point where the compensation is considered to be equal to 1. Naturally, two quadratic functions are stitched at this point. This simple function has the following benefit: one can compensate for part of the spectrum on the right of this point, then, separately, on the left part of the spectrum. When the left or right part is done, compensation for another part won’t spoil previous work.</p>
+
+<p>This procedure requires a table of three parameters: low-frequency and high-frequency compensation and the position of the middle frequency, plus the value for the overall compensation factor. Two values for low and high frequencies themselves are not presented in the table, because they rarely, if ever, need to be modified; they correspond to the highest or lowest frequencies of a standard 88-key piano. However, they are prescribed in the data files (where they are written based on the code’s definition set) and can be modified by some overly smart users. :-)</p>
+
+<p>This is the implementation of this simple spline function:</p>
+
+<div class="pre-lang" id="premain727410"><div>JavaScript</div><div class="pre-action-link"><span id="copycode727410" class="copy-code" data-index="727410" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre727410" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> compensation = (() =&gt; {
+    <span class="code-keyword">const</span> compensation = (f) =&gt; {
+        <span class="code-keyword">const</span> shift = f - <span class="code-keyword">this</span>.#implementation.gainCompensation.middleFrequency;
+        <span class="code-keyword">const</span> g0 = <span class="code-keyword">this</span>.#implementation.gainCompensation.lowFrequencyCompensationGain;
+        <span class="code-keyword">const</span> g1 = <span class="code-keyword">this</span>.#implementation.gainCompensation.highFrequencyCompensationGain;
+        <span class="code-keyword">const</span> f0 = <span class="code-keyword">this</span>.#implementation.gainCompensation.lowFrequency;
+        <span class="code-keyword">const</span> f1 = <span class="code-keyword">this</span>.#implementation.gainCompensation.lowFrequency;
+        <span class="code-keyword">const</span> factor0 = (g0 - <span class="code-digit">1</span>) / Math.pow(
+            f0 - <span class="code-keyword">this</span>.#implementation.gainCompensation.middleFrequency, <span class="code-digit">2</span>);
+        <span class="code-keyword">const</span> factor1 = (g1 - <span class="code-digit">1</span>) /
+            Math.pow(f1 - <span class="code-keyword">this</span>.#implementation.gainCompensation.middleFrequency, <span class="code-digit">2</span>);
+        <span class="code-keyword">if</span> (shift &lt; <span class="code-digit">0</span>)
+            <span class="code-keyword">return</span> <span class="code-digit">1</span> + factor0 * Math.pow(shift, <span class="code-digit">2</span>);
+        <span class="code-keyword">else</span>                
+            <span class="code-keyword">return</span> <span class="code-digit">1</span> + factor1 * Math.pow(shift, <span class="code-digit">2</span>);
+    } <span class="code-comment">//</span><span class="code-comment">compensation</span>
+    <span class="code-keyword">return</span> compensation;
+})(); <span class="code-comment">//</span><span class="code-comment">setupGain</span></pre>
+
+<p>The stitching happens at the medium frequency point, at the point of zero derivative, but with a step in second derivative. This imperfect <em>smoothness</em> may sound questionable, but, after some experiments, seems to produce a smooth sound, pun unintended ;-).</p>
+
+<p>The compensation function depends on the fundamental frequency of each of the main oscillators, the value of gain compensation is combined as a result of the operation of many gain nodes, gain nodes “Compensation”, one per <code>Tone</code> instance, plus one node of the <code>Instrument</code> instance, “Gain compensation”, as shown on the <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#picture-graph">graph</a>.</p>
+
+<h2 id="heading-using-api-and-generated-instruments-in-applications">Using API and Generated Instruments In Applications</h2>
+
+<p>Naturally, Sound Builder doesn’t do much if it is not used in other applications. See the instructions at <a href="https://sakryukov.github.io/microtonal-chromatic-lattice-keyboard/SoundBuilder/API.html">https://SAKryukov.github.io/microtonal-chromatic-lattice-keyboard/SoundBuilder/API.html</a>.</p>
+
+<p>Basically, the user needs to produce a set of desired instruments and test them.</p>
+
+<ul>
+	<li>Produce some set of instruments, test and save them, each instrument is a separate JSON - file;</li>	<li id="api-export">Use the element “Instrument List”, button “Load” to load created instruments, “Save” all of them in a single .js file;</li>	<li>Include the API, all sound/*.js files in the application;</li>	<li id="api-embed">Also, include .js file generated before;</li>	<li>In the application, create an instance of <code>Instrument</code>;</li>	<li>To apply instrument data, assign <code>instrumentInstance.data = instrumentList[someIndex]</code>;</li>	<li id="api-use">To play a single sound, call <code>instrumentInstance.play</code>;</li>	<li>Enjoy :-).</li></ul>
+
+<p>Now, let’s see how the API looks in detail.</p>
+
+<h3 id="heading-api">API</h3>
+
+<p>The <code>Instrument</code> constructor expects 2 arguments: <code>constructor(frequencySet, tonalSystem)</code>.</p>
+
+<p>First of all, one needs to define a set of fundamental frequencies for the generated sounds. This is either an array of frequencies in Hertz units, or an object <code>{first, last, startingFrequency}</code>, where <code>first</code> is always zero (reserved for advanced features), <code>last</code> is the last index of the frequency array, and <code>startingFrequency</code> is the lowest absolute frequency in Hertz units (27.5 for standard 88-key piano). The second parameter should specify a tonal system, which is the number of tones in octave. In this case, the tone set will be automatically populated with the <a href="https://en.wikipedia.org/wiki/Equal_temperament">Equal Division of the Octave (EDO)</a> frequencies.</p>
+
+<p>For example:</p>
+
+<p><code>const piano = new Instrument({ first: 0, last: 87, 25.7 }, 12)</code> will create a standard 88-key piano tuning, and typical microtonal systems could use 19, 29, 31, 41, etc., for the second argument.</p>
+
+<p><code>const perfect = new Instrument([100, 133.333, 150])</code> will create an instrument with only 3 tones, 100 Hz, and two more tones, perfect fourth and perfect fifth in <a href="https://en.wikipedia.org/wiki/Just_intonation">just intonation</a>.</p>
+
+<p>The second parameter, <code>tonalSystem</code>, is used even when an array of fixed frequency values is used — this is important for the implementation of the property <code>transposition</code>. If this argument is not specified, it is assumed to be the length of this array.</p>
+
+<p>Method <code>play(on, index)</code> starts (if <code>on==true</code>) or stops (if <code>on==false</code>) the damps of a tone of the specified <code>index</code>. The dumping start is never instantaneous, it is defined by the gain envelope and damping sustain parameter. The timing is limited by some minimal values.</p>
+
+<p>Properties: <code>volume</code> (0 to 1), <code>sustain</code> (time in seconds), and <code>transposition</code> (in the units of logarithmic equal divisions of octave, depending on the <code>tonalSystem</code> argument of the <code>Instrument</code> constructor). The property <code>frequencies</code> is read-only, it returns the array representing the current frequency set.</p>
+
+<p>To include the API, use this code sample:</p>
+
+<div class="pre-lang" id="premain190480"><div></div><div class="pre-action-link"><span id="copycode190480" class="copy-code" data-index="190480" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre190480" style="margin-top:0;" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="code-string">"</span><span class="code-string">en"</span>&gt;
+&lt;head&gt;
+    &lt;meta charset=<span class="code-string">"</span><span class="code-string">utf-8"</span>/&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/definition-set.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/chain-node.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/envelope.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/modulator.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/modulator-set.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/tone.js"</span>&gt;&lt;/script&gt;
+    &lt;script src=<span class="code-string">"</span><span class="code-string">../sound/instrument.js"</span>&gt;&lt;/script&gt;
+    &lt;!-- ... ---&gt;
+<span class="code-keyword">&lt;/</span><span class="code-leadattribute">head</span><span class="code-keyword">&gt;</span>
+
+&lt;body&gt;
+
+    &lt;!-- ... ---&gt;
+
+<span class="code-keyword">&lt;/</span><span class="code-leadattribute">body</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;/</span><span class="code-leadattribute">html</span><span class="code-keyword">&gt;</span></pre>
+
+<h2 id="heading-interesting-implementation-detail">Interesting Implementation Detail</h2>
+
+<p>There is not much code needed to explain the principles of operation — anyway, the <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#picture-graph">graph</a> explains the essence of this technology in the best way, but some technical peculiarities are also good to share.</p>
+
+<h3 id="heading-classes-with-private-members">Classes with Private Members</h3>
+
+<p>After some experiments and thinking, I developed a convenient discipline of using JavaScript classes, only for the cases when it seems to be convenient, with the separation of public and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Class_fields">private members</a>. To reduce some possible clutter, I decided to concentrate all private members of a single object uniformly named <code>#implementation</code>.</p>
+
+<p>To demonstrate it, I’m showing the simplest of the sound classes, <code>Modulator</code>. It is a pretty trivial thing, a connected pair of instances of <a href="https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode">OscillatorNode</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode">GainNode</a>:</p>
+
+<div class="pre-lang" id="premain298941"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="298941" id="preShrink298941">Shrink ▲</span> &nbsp; <span id="copycode298941" class="copy-code" data-index="298941" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre298941" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">class</span> Modulator {
+
+    #implementation = { isEnabled: <span class="code-keyword">true</span> };
+
+    <span class="code-sdkkeyword">constructor</span>(audioContext) {
+        <span class="code-keyword">this</span>.#implementation.oscillator = <span class="code-keyword">new</span> OscillatorNode(audioContext);
+        <span class="code-keyword">this</span>.#implementation.depthNode = <span class="code-keyword">new</span> GainNode(audioContext);
+        <span class="code-keyword">this</span>.#implementation.depthNode.gain.value = <span class="code-digit">100</span>;
+        <span class="code-keyword">this</span>.#implementation.oscillator.connect(<span class="code-keyword">this</span>.#implementation.depthNode);
+        <span class="code-keyword">this</span>.#implementation.oscillator.start();
+        <span class="code-keyword">this</span>.#implementation.output = <span class="code-keyword">this</span>.#implementation.depthNode;
+        <span class="code-keyword">this</span>.#implementation.deactivate = _ =&gt; {
+            <span class="code-keyword">this</span>.#implementation.oscillator.stop();
+            <span class="code-keyword">this</span>.#implementation.oscillator.disconnect();
+            <span class="code-keyword">this</span>.#implementation.depthNode.disconnect();
+        }; <span class="code-comment">//</span><span class="code-comment">this.#implementation.deactivate</span>
+    } <span class="code-comment">//</span><span class="code-comment">constructor</span>
+
+    get frequency() { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.#implementation.oscillator.frequency.value; }
+    set frequency(value) { <span class="code-keyword">this</span>.#implementation.oscillator.frequency.value = value; }
+
+    get depth() { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.#implementation.depthNode.gain.value; }
+    set depth(value) { <span class="code-keyword">this</span>.#implementation.depthNode.gain.value = value; }
+
+    connect(audioParameter) {
+        <span class="code-keyword">this</span>.#implementation.output.connect(audioParameter);
+        <span class="code-keyword">return</span> <span class="code-keyword">this</span>;
+    } <span class="code-comment">//</span><span class="code-comment">connect</span>
+    disconnect() { <span class="code-keyword">this</span>.#implementation.output.disconnect(); <span class="code-keyword">return</span> <span class="code-keyword">this</span>; }
+
+    deactivate() { <span class="code-keyword">this</span>.#implementation.deactivate(); }
+
+}</pre>
+
+<p>Hopefully, this code is self-explaining. The sets of oscillators are used to implement <code>ModulatorSet</code>, a base class for <code>Instrument</code> and <code>Tone</code> classes.</p>
+
+<h3 id="heading-initialization">Initialization</h3>
+
+<p>One may wonder, why all the applications of the <a href="https://sakryukov.github.io/microtonal-chromatic-lattice-keyboard">Microtonal Music Study project</a> start with the on-screen “Start” key or a power button.</p>
+
+<p>If one tries to initialize the Web Audio subsystem when the page is loaded, it will fail. Depending on the browser, producing sound may still be possible, or it will require <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/resume">resuming</a> the <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext">AudioContext</a>. In both cases, the very first sound will be lost, and it may be delayed if the initialization is <a href="https://en.wikipedia.org/wiki/Lazy_evaluation">lazily</a> performed on the first press on a musical instrument key. Therefore, both practices would be dirty.</p>
+
+<p>Web Audio starts to function in full only after the user of a Web page provides any input on this page. Why Web Audio behaves in such a strange way. I think this is very good. It tries to protect the users of a Web page. The users reasonably expect nice behavior. Even though many sites violate nice practices, people generally don’t expect a nice site to produce any sound without the explicit consent of the user. Imagine what a user sometimes working in the middle of the night can feel if this person accidentally loads a Web page, which could wake up an entire household! Web browser tries to protect users from such accidents.</p>
+
+<p>Therefore, Web Audio should be initialized early, but only on some user’s input.</p>
+
+<p>To solve this problem, the object <code>initializationController</code> is used:</p>
+
+<div class="pre-lang" id="premain141628"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="141628" id="preShrink141628">Shrink ▲</span> &nbsp; <span id="copycode141628" class="copy-code" data-index="141628" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre141628" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> initializationController = {
+    badJavaScriptEngine: () =&gt; {
+        <span class="code-keyword">if</span> (!goodJavaScriptEngine) {
+            <span class="code-keyword">const</span> title = <span class="code-string">`</span><span class="code-string">This application requires JavaScript engine better conforming to the standard`</span>;
+            <span class="code-keyword">const</span> advice =
+                <span class="code-string">`</span><span class="code-string">Browsers based on V8 engine are recommended, such as `</span> +
+                <span class="code-string">`</span><span class="code-string">Chromium, Chrome, Opera, Vivaldi, Microsoft Edge v. 80.0.361.111 or later, and more`</span>;
+            <span class="code-sdkkeyword">document</span>.body.style.padding = <span class="code-string">"</span><span class="code-string">1em"</span>;
+            <span class="code-sdkkeyword">document</span>.body.innerHTML = <span class="code-comment">//</span><span class="code-comment">...</span>
+            <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+        } <span class="code-comment">//</span><span class="code-comment">goodJavaScriptEngine                    </span>
+    }, <span class="code-comment">//</span><span class="code-comment">badJavaScriptEngine</span>
+    initialize: <span class="code-keyword">function</span> (hiddenControls, startControl, startControlParent, startHandler) {
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> control of hiddenControls) {
+            <span class="code-keyword">const</span> style = <span class="code-sdkkeyword">window</span>.getComputedStyle(control);
+            <span class="code-keyword">const</span> display = style.getPropertyValue(<span class="code-string">"</span><span class="code-string">display"</span>);
+            <span class="code-keyword">this</span>.hiddenControlMap.set(control, display);
+            control.style.display = <span class="code-string">"</span><span class="code-string">none"</span>;
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        startControl.focus();
+        <span class="code-keyword">const</span> restore = () =&gt; {
+            startControlParent.style.display = <span class="code-string">"</span><span class="code-string">none"</span>;
+            <span class="code-keyword">for</span> (<span class="code-keyword">let</span> control of hiddenControls) {
+                control.style.visibility = <span class="code-string">"</span><span class="code-string">visible"</span>;
+                control.style.display = <span class="code-keyword">this</span>.hiddenControlMap.get(control);
+            } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        }; <span class="code-comment">//</span><span class="code-comment">restore</span>
+        startControl.onclick = event =&gt; {
+            <span class="code-sdkkeyword">document</span>.body.style.cursor = <span class="code-string">"</span><span class="code-string">wait"</span>;
+            startHandler();
+            restore();
+            <span class="code-sdkkeyword">document</span>.body.style.cursor = <span class="code-string">"</span><span class="code-string">auto"</span>;
+        } <span class="code-comment">//</span><span class="code-comment">startControl.onclick</span>
+    }, <span class="code-comment">//</span><span class="code-comment">initialize</span>
+    hiddenControlMap: <span class="code-keyword">new</span> Map()
+}; <span class="code-comment">//</span><span class="code-comment">initializationController</span></pre>
+
+<p>This object pretty delicately works with page controls. Its <code>initialize</code> method accepts an array of elements to be hidden, an element used as the input for the initialization command, its parent element, and the initialization method named <code>startHandler</code>. During the initial phase, elements to be hidden get hidden, but their <code>style.display</code> property values are remembered to be restored after initialization is complete. Everything else is self-explaining.</p>
+
+<p>Note <code>goodJavaScriptEngine</code> part. This is done to filter out obsolete JavaScript engines, those which don’t support private class members. Unfortunately, Mozilla doesn’t support it, but this is only useful for this application, because of the problems of Mozilla <a href="https://en.wikipedia.org/wiki/Gecko_(software)">Gecko</a> sound rendition. See also <a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-compatibility">the compatibility section</a>.</p>
+
+<h2 id="heading-compatibility">Compatibility</h2>
+
+<p>The tool is tested on a good number of browsers and some different systems.</p>
+
+<p>I found that at the time of writing, there is only one type of browser with sufficient support of Web Audio API: those based on the <a href="https://en.wikipedia.org/wiki/V8_engine">V8</a> + <a href="https://en.wikipedia.org/wiki/Blink_(browser_engine)">Blink</a> combination of engines. Fortunately, the set of such browsers is pretty wide.</p>
+
+<p>Unfortunately, Mozilla browsers, formally implementing full Web Audio API, produce pretty bad crackling noise which cannot be eliminated, in the situation when the operation of the V8 + Blink combination is just fine. For the time being, the application prevents the use of these and some other browsers.</p>
+
+<p>Here is the text of the recommendations which a page shows when a browser cannot cope with the task:</p>
+
+<blockquote class="FQ" id="epigraph">
+<p>This application requires a JavaScript engine better conforming to the standard.</p>
+
+<p>Browsers based on the V8 engine are recommended, such as Chromium, Chrome, Opera, Vivaldi, Microsoft Edge v. 80.0.361.111 or later, and more…</p>
+</blockquote>
+
+<p>By the way, my congratulations to Microsoft people for their virtue of giving up majorly defunct <a href="https://en.wikipedia.org/wiki/EdgeHTML">EdgeHTML</a> used for <a href="https://en.wikipedia.org/wiki/Microsoft_Edge">Edge</a> until 2020. :-)</p>
+
+<h2 id="heading-live-play">Live Play</h2>
+
+<p>The application can play <a href="https://sakryukov.github.io/microtonal-fabric/code/SoundBuilder/">on this page</a> of the <a href="https://sakryukov.github.io/microtonal-fabric/">Microtonal Fabric site</a>. On this site, one can find several musical keyboard applications based on Sound Builder and some synthesized instruments created with Sound Builder. All of them can also be played live on their Web pages.</p>
+
+<p>Also, it is possible to play different (microtonal) musical instruments based on data created with Sound Builder. Please see the section “Live-Play Applications” on the <a href="https://sakryukov.github.io/microtonal-fabric">Microtonal Fabric main documentation page</a>.</p>
+
+<p>Again, no server part and no network are used, so the application can be downloaded and used on a local system.</p>
+
+<p>Most likely, to get started, one may need a set of sample data files, which can be downloaded from this article page.</p>
+
+<h2 id="heading-credits">Credits</h2>
+
+<p><a href="https://www.codeproject.com/Articles/5268512/Sound-Builder#heading-wave-fft">Wave FFT</a> uses C# <a href="http://lomont.org/software/misc/fft/LomontFFT.html">implementation</a> of Fast Fourier Transform by <a href="http://lomont.org/">Chris Lomont</a>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Valeri_Brainin">Valeri Brainin</a>, a prominent musicologist, music manager, composer, and poet, the author of the famous pedagogical system called <a href="http://brainin.org/Method/method_pro_de/publications_en1.html">Brainin Method</a>, participated in the <a href="https://sakryukov.github.io/microtonal-chromatic-lattice-keyboard">Microtonal Music Study project</a> as the early author of conception, inventor or co-author of some microtonal keyboard designs, recently implemented based on Sound Builder. He started to use those keyboards in his pedagogical practice and reported very promising results. He also has done a good deal of testing of the performance of the instruments and evaluation of the sound during development, providing feedback that helped me to solve some of the problems, and some ideas which have been implemented or will be implemented in future versions.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>It works now, and I think that this experiment with musical sound synthesis can be dubbed successful.</p>
+
+<p>I’ll highly appreciate it if anyone tries out the operation and gives me some feedback; I’ll also be much grateful for any questions, comments, suggestions, and especially for criticism.</p>
+
+<p>Enjoy! :-)</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5268512/Sound-Builder-Web-Audio-Synthesizer">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5268512/Sound-Builder?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5268512/Sound-Builder?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2020 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

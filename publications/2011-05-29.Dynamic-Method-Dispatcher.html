@@ -1,0 +1,1423 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0069)https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Dynamic Method Dispatcher- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="No more long switch statements!">
+<meta name="Keywords" content="Mono, C#, .NET, Dev, Advanced">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="5/29/2011 10:38:00 PM">
+<meta property="article:modified_time" content="4/17/2012 2:00:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="23 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher">
+<meta property="og:title" content="Dynamic Method Dispatcher">
+<meta property="og:description" content="No more long switch statements!">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher"
+   },
+  "name": "Dynamic Method Dispatcher",
+  "headline": "Dynamic Method Dispatcher",
+  "url": "https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher",
+  "discussionUrl": "https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Mono,C#,.NET,Dev,Advanced",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "No more long switch statements!",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2011-05-29",
+  "dateCreated": "2011-05-29",
+  "dateModified": "2012-04-17"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.98,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/203453/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="T1ZF3tmEO3oKWPHfwfIo9u9o0tRIIJlMp+sIW4Gjoi22m7erzMk0fl5aeK8MqesG0IZZVdZHTK1Zu26R5ZgHd3a/qyW4hfkZSgBgGBSDMJ33e2gP8zVuM8fzPka9iEasCZBZmD5WLF9UpbXbRxBHJHXdmI3KjOxQl8wD817DFUSz2OdEEzgvEBjWrk+io2fjOGQirWEQ33MjIcHljfgxldmTQqgrTKUdRYOibkcE7QLNfTRWx3vA/mtp9TZpb/ryj8NLYlAyQjcyiqRHFMJnGU0IRQcYRXrrnILZ8oZPfGXSZVAytE1ahsQOn59mf0Nb26k//hSjmv13+k0HuTxPeGdiT5DcAF2fu9OBRKfPbI/z0XcU5FnQG2V13zQhr5EoH0cU/NDikWxOCYlWbifEzXO4FyXSu7nz3cN5vKrDxpvocpeh0Tjoo302KFU54bQ74ke66SNcEaFys3XjnNlSSTFnqSi1vQccT7RLvjlyaUacrtoXT6i/neUXDSJPZ8icrgytYFKb4b+k6vih+IOGFdfjMDE9MB86NNg783f9LMU3YF4JYmoqORR6tynJ7Za6reCJTENWuelxwi2NAnOBo9fXSe3XUs3PYMie7pMkxGEB7D6LzINOpLCsCnBDfev3BLG9KVrpgCp1QuLmN6ivfaYwzyx1Q49yPdVpDnLNDRGC4Ep+DncELFcAKT/sgozmlIxUfeqsY7zj/j2Xg5WJITJ7mL5tMt14mBfbAe8gXw7YsgT27rEH7mZG5HvitQ/LntTvONLTGrclM3qk+M/gy2vgpixNCzN82MK9zWKlRnnNhSIX84t4/7T5Xeq8CkegKxE3veE/sDcrlUjWDZhOARC/+rt8nHi0d0JHtlhqsDWYm4y2EbCFtLQLMo/FGMVncyyK3ZsicXoMWev96reojcWC39OuD2jFb5Joj+KScFtKhQDQfwlqWKY8sxZMrU4laXfO1qcheyMa+BQl3jTceC5iZ9tah5gzAnpW28gPER/8GHTdBG6NpCc1zVnicmpNSZ2T4koGKEKK4GpXDucKNSxzWqcCacQ+HMH45qiGx0iw/JSW8wLaAmDN+kty5ZI2y0JSECYgQgpsVQpLkKBEHPRhFAJM80APvNavixFbmyTk7tOncBSHNBN0OdnBjrYg/iq6XRjjks0T57qOHzZEL7WMzYWIMv9p68xVM2C1qoGb0tr+wkVqqlT5iv7YSaarMmlZYHZ2fQAuVIbAodFGt63mGR4Kfk9Q1tYMr6vNQ2jm92s1zzCowDgEKLIDpm1mZoroQazqdoSIHTsvpa1yMusbS922Cmr01uPRKOpDhb9216EiHPzTjuW6IJRMRgY9iHUeOV2U6YFtLY4ohjHeCXSIuY0XEuv88f3gdy9VHMhvfWBU1OLWO1EPH8a2zf57YFmjoyaUPQN1Lz2eiCskV/pcO3le4tSGtLlh+RfS/I/7aEiNvM3a0EPdwkaOcg5LFSVmPhRZqpQmaqRoUaSgBTHUzkGUXeQWIQSC49a8IW3wy1F9S07j7zW/3vEOMcM1Sb2X8LC2SOI9pYGtOK8GwjMwRyTFpDXEYnAxi7kmUtGgivOhYJikGxUX+feSJlhXtBeXPpNsD0mBcq2zvzRsHeWe6QKfM7oJ/t/2o8TBf8BjSGsLJZoQPUdP4L+9Q4WJO3zzwut9XWPt3Kyml4FfU7eZQvOZw2AhZnZdes6Xq0R0zVRWUxpe9T28AE9+0+cEAq3f5O81BQoLfTXk2Vvbw4DmCSQ/aY6LWWREwkr4KAqoIbrad6+XJK48PHm0nPHQ4qYUA1n8iL3f4BDFEdcV1on8oSn7Rego9R21c5+AAwrg4yoE+T32xjuaBEUKJnm4rt/5Uv+rNes5XThBXL3I4fVrFGY3typrpYdfWIz0uVu7GHjCl338p7SNxMmPXJb4lDHZiR5hqFzqdlwYJYNH4eOh4BY6Z3qNFoNcezqwk6lqAN/WdI5PiR6pNl7j4KX/Gjw0dhY3vSNV8UEkBE9oSBzD3szkNQpzT6odkfpOXfK04sb9umLbbBBRUdmCtyLAJB+XaaPn423kuzgWUhEpyFxGmEj3QISG/+EkJQdZ4v8orWdt">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Mono" data-id="62">Mono</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Dynamic Method Dispatcher</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_203453">
+
+	<meta itemprop="upvoteCount" content="69">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:23px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:1px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.98/5  (74 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">29 May 2011</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">23 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 143K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 1.4K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">No more long switch statements!</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+
+<li><a href="Dynamic-Method-Dispatcher.zip">Download source code — 28.8 KB</a></li></ul>
+
+<p><img title="Demo application" alt="2011-05-29.Dynamic-Method-Dispatcher.png" src="./Resources-articles/2011-05-29.Dynamic-Method-Dispatcher.png"/></p>
+<!--<p><img alt="2011-05-29.Dynamic-Method-Dispatcher.png" src="./Resources/2011-05-29.Dynamic-Method-Dispatcher.png" class="lazyautosizes ls-is-cached lazyloaded" data-sizes="auto" data-srcset="/KB/dotnet/DynamicMethodDispatcher/DynamicMethodDispatcher-r-400.png 400w, /KB/dotnet/DynamicMethodDispatcher/DynamicMethodDispatcher.png 600w" sizes="600px" srcset="/KB/dotnet/DynamicMethodDispatcher/DynamicMethodDispatcher-r-400.png 400w, /KB/dotnet/DynamicMethodDispatcher/DynamicMethodDispatcher.png 600w"></p>-->
+
+
+
+<h2>Table of Contents</h2>
+
+
+
+<ul style="list-style-type: none">
+
+<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a1">1. Motivation</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a2">2. Dynamic Method Dispatcher: Full Implementation First</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a3">3. DynamicMethodDispatcher Class by Usage</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4">4. MultipleInvocationDynamicMethodDispatcher</a> 
+
+<ul style="list-style-type: none">
+
+<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4.1">4.1. On the Nature of Delegate Instance</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4.2">4.2. Return Values</a></li></ul>
+
+</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a5">5. What if a Key is not Found in the Dictionary?</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6">6. Complement OOP or Abuse it?</a> 
+
+<ul style="list-style-type: none">
+
+<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.1">6.1. Use-case: Parallel Hierarchy Problem</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.2">6.2. Dynamic Method Dispatcher as Virtual Method Table</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.3">6.3. On the History of the Idea</a></li></ul>
+
+</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7">7. Building the Code and Compatibility</a> 
+
+<ul style="list-style-type: none">
+
+<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7.1">7.1. Compatibility: Microsoft .NET</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7.2">7.2. Compatibility: Mono</a></li></ul>
+
+</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a8">8. Conclusions</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a9">9. Credits</a></li></ul>
+
+
+
+<h2><a name="a1"></a>1. Motivation</h2>
+
+
+
+<p>A long switch statement is an ugly thing. Not only does the tree levels of indentation and non-informative break statements look ugly and don't help readability, but using them can also be a considerable performance hit, because the case conditions should be checked one-by-one from top to button. Changing from "<code>switch</code>" to "<code>if</code>" statements does not help either. When a long <code>if-then-else</code> block is needed, the problems are the same. Unfortunately, there are many cases when long switch statements seem unavoidable. A typical example is writing a Windows message function from scratch. The number of cases can be about couple of hundreds; and many of them should be given their own specific processing.</p>
+
+
+
+<p>At the same time, the problem can be easily resolved. Here is the idea. The linear brute-force running over the list of cases can be replaced with some advanced and effective search method. Such a method is readily available in the form of <code>Dictionary</code>. The values of the switch should be replaced with the (unique) dictionary keys, and the branches of the code — with delegate instances. The only problem is using this mechanism in a universal way.</p>
+
+
+
+<p>This approach addresses both readability and performance. The method will segregate the population of the delegate invocation list with code from the invocation. The population of the dictionary with delegate instances and their invocation lists should be done only once (ideally — only once per Application Domain lifetime), but the invocation can be called many times, presented by only one line code, and will be very effective during run-time, especially for a long set of cases, each represented by a unique key. Let's see how it looks.</p>
+
+
+
+<p>In this work I offer two generic classes which implement the idea in two different forms: a single-cast and multi-cast.</p>
+
+
+
+<p>Before I explain how it works and can be used, let's look at the complete implementation.</p>
+
+
+
+<h2><a name="a2"></a>2. Dynamic Method Dispatcher: Full Implementation First</h2>
+
+
+
+<p>Let's take a look at the class <code>DynamicMethodDispatcher</code> used to dispatch a delegate based on a key. This is a generic class, fully implemented: </p>
+
+
+
+<div class="pre-lang" id="premain157829"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="157829" id="preShrink157829">Shrink ▲</span> &nbsp; <span id="copycode157829" class="copy-code" data-index="157829" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre157829" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> System.Collections.Generic;
+
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> DynamicMethodNotFoundException&lt;KEY, MESSAGE&gt; : System.Exception {
+    <span class="code-keyword">internal</span> DynamicMethodNotFoundException(KEY key, MESSAGE message)
+             { <span class="code-keyword">this</span>.FKey = key; <span class="code-keyword">this</span>.FMessage = message; }
+    <span class="code-keyword">public</span> KEY KeyValue { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.FKey; } }
+    <span class="code-keyword">public</span> MESSAGE MessageValue { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> <span class="code-keyword">this</span>.FMessage; } }
+    KEY FKey; MESSAGE FMessage;
+} <span class="code-comment">//</span><span class="code-comment">class DynamicMethodNotFoundException</span>
+
+<span class="code-keyword">public</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> DynamicMethodDispatcherBase&lt;KEY, MESSAGE, RETURN&gt; {
+    <span class="code-keyword">public</span> <span class="code-keyword">delegate</span> RETURN DynamicMethod(KEY key, MESSAGE message);
+    <span class="code-keyword">public</span> <span class="code-keyword">int</span> this[KEY key] {
+        <span class="code-keyword">get</span> {
+            DynamicMethod method;
+            <span class="code-keyword">if</span> (Dictionary.TryGetValue(key, <span class="code-keyword">out</span> method))
+                <span class="code-keyword">return</span> method.GetInvocationList().Length;
+            <span class="code-keyword">return</span> <span class="code-digit">0</span>;
+        } <span class="code-comment">//</span><span class="code-comment">get this</span>
+    } <span class="code-comment">//</span><span class="code-comment">this</span>
+    KEY[] Keys {
+        <span class="code-keyword">get</span> {
+            KEY[] result = <span class="code-keyword">new</span> KEY[Dictionary.Keys.Count];
+            <span class="code-keyword">int</span> current = <span class="code-digit">0</span>;
+            <span class="code-keyword">foreach</span> (KEY key <span class="code-keyword">in</span> Dictionary.Keys) {
+                result[current] = key;
+                ++current;
+            } <span class="code-comment">//</span><span class="code-comment">loop</span>
+            <span class="code-keyword">return</span> result;
+        } <span class="code-comment">//</span><span class="code-comment">get Keys</span>
+    } <span class="code-comment">//</span><span class="code-comment">Keys</span>
+    <span class="code-region">#region implementation
+</span>    <span class="code-keyword">internal</span> <span class="code-keyword">protected</span> RETURN SingleCastInvoke(KEY key, MESSAGE message) {
+        DynamicMethod method;
+        <span class="code-keyword">if</span> (Dictionary.TryGetValue(key, <span class="code-keyword">out</span> method))
+            <span class="code-keyword">return</span> method.Invoke(key, message);
+        <span class="code-keyword">throw</span> <span class="code-keyword">new</span> DynamicMethodNotFoundException&lt;KEY, MESSAGE&gt;(key, message);
+    } <span class="code-comment">//</span><span class="code-comment">SingleCastInvoke</span>
+    <span class="code-keyword">internal</span> <span class="code-keyword">protected</span> <span class="code-keyword">bool</span> SingleCastTryInvoke(KEY key, 
+                       MESSAGE message, <span class="code-keyword">out</span> RETURN returnValue) {
+        DynamicMethod method;
+        <span class="code-keyword">bool</span> success = Dictionary.TryGetValue(key, <span class="code-keyword">out</span> method);
+        <span class="code-keyword">if</span> (success)
+            returnValue = method.Invoke(key, message);
+        <span class="code-keyword">else</span>
+            returnValue = <span class="code-keyword">default</span>(RETURN);
+        <span class="code-keyword">return</span> success;
+    } <span class="code-comment">//</span><span class="code-comment">SingleCastTryInvoke</span>
+    <span class="code-keyword">internal</span> <span class="code-keyword">protected</span> Dictionary&lt;KEY, DynamicMethod&gt; Dictionary = 
+                       <span class="code-keyword">new</span> Dictionary&lt;KEY, DynamicMethod&gt;();
+    <span class="code-region">#endregion implementation
+</span>} <span class="code-comment">//</span><span class="code-comment">DynamicMethodDispatcherBase</span>
+
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> DynamicMethodDispatcher&lt;KEY, MESSAGE, RETURN&gt; : 
+             DynamicMethodDispatcherBase&lt;KEY, MESSAGE, RETURN&gt; {
+    <span class="code-keyword">public</span> <span class="code-keyword">bool</span> Add(KEY key, DynamicMethod method) {
+        <span class="code-keyword">if</span> (Dictionary.ContainsKey(key)) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        Dictionary.Add(key, method);
+        <span class="code-keyword">return</span> <span class="code-keyword">true</span>;
+    } <span class="code-comment">//</span><span class="code-comment">AddReplace</span>
+    <span class="code-keyword">public</span> RETURN Invoke(KEY key, MESSAGE message)
+           { <span class="code-keyword">return</span> SingleCastInvoke(key, message); }
+    <span class="code-keyword">public</span> <span class="code-keyword">bool</span> TryInvoke(KEY key, MESSAGE message, <span class="code-keyword">out</span> RETURN returnValue) 
+           { <span class="code-keyword">return</span> SingleCastTryInvoke(key, message, <span class="code-keyword">out</span> returnValue); }
+} <span class="code-comment">//</span><span class="code-comment">class DynamicMethodDispatcher</span></pre>
+
+
+
+<p>A multi-cast variety of the same thing is the class <code>MultipleInvocationDynamicMethodDispatcher</code>. Unlike its single-cast counterpart, it supports a queue of delegates bound to the same key and returns an array of results, one element of array per delegate instance: </p>
+
+
+
+<div class="pre-lang" id="premain532278"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="532278" id="preShrink532278">Shrink ▲</span> &nbsp; <span id="copycode532278" class="copy-code" data-index="532278" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre532278" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">class</span> MuticastDynamicMethodDispatcher&lt;KEY, MESSAGE, RETURN&gt; : 
+             DynamicMethodDispatcherBase&lt;KEY, MESSAGE, RETURN&gt; {
+    <span class="code-keyword">public</span> <span class="code-keyword">delegate</span> RETURN AccumulationMethod(
+        <span class="code-keyword">int</span> index,
+        KEY key, MESSAGE message,
+        <span class="code-keyword">bool</span> lastResultAvailable, RETURN lastResult, RETURN currentResult);
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> Add(KEY key, DynamicMethod method) {
+        DynamicMethod delegateInstance;
+        <span class="code-keyword">if</span> (Dictionary.TryGetValue(key, <span class="code-keyword">out</span> delegateInstance)) {
+            <span class="code-comment">//</span><span class="code-comment">adding method to invokation list will</span>
+            <span class="code-comment">//</span><span class="code-comment">change delegate's identity (wow!):</span>
+            Dictionary.Remove(key);
+            delegateInstance += method;
+        } <span class="code-keyword">else</span>
+            delegateInstance = method;
+        Dictionary.Add(key, delegateInstance);
+    } <span class="code-comment">//</span><span class="code-comment">AddReplace</span>
+    <span class="code-keyword">public</span> RETURN[] Invoke(KEY key, MESSAGE message) {
+        DynamicMethod delegateInstance;
+        <span class="code-keyword">if</span> (Dictionary.TryGetValue(key, <span class="code-keyword">out</span> delegateInstance)) {
+            System.Delegate[] invocationList = delegateInstance.GetInvocationList();
+            <span class="code-keyword">int</span> index = <span class="code-digit">0</span>;
+            RETURN[] returnValue = <span class="code-keyword">new</span> RETURN[invocationList.Length];
+            <span class="code-keyword">foreach</span> (System.Delegate method <span class="code-keyword">in</span> invocationList) {
+                returnValue[index] = ((DynamicMethod)method)(key, message);
+                index++;
+            } <span class="code-comment">//</span><span class="code-comment">loop invocationList</span>
+            <span class="code-keyword">return</span> returnValue;
+        } <span class="code-keyword">else</span>
+            <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+    } <span class="code-comment">//</span><span class="code-comment">Invoke</span>
+    <span class="code-keyword">public</span> RETURN Invoke(KEY key, MESSAGE message, AccumulationMethod accumulation) {
+        <span class="code-keyword">bool</span> dummyFound;
+        <span class="code-keyword">return</span> AccumulatedInvoke(key, message, accumulation, <span class="code-keyword">true</span>, <span class="code-keyword">out</span> dummyFound);
+    } <span class="code-comment">//</span><span class="code-comment">Invoke</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">bool</span> TryInvoke(KEY key, MESSAGE message, 
+           AccumulationMethod accumulation, <span class="code-keyword">out</span> RETURN returnValue) {
+        <span class="code-keyword">bool</span> found;
+        returnValue = AccumulatedInvoke(key, message, accumulation, <span class="code-keyword">false</span>, <span class="code-keyword">out</span> found);
+        <span class="code-keyword">return</span> found;
+    } <span class="code-comment">//</span><span class="code-comment">Invoke</span>
+    <span class="code-keyword">void</span> InvokeNoReturn(KEY key, MESSAGE message) {
+        SingleCastInvoke(key, message);
+    } <span class="code-comment">//</span><span class="code-comment">InvokeNoReturn</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">bool</span> TryInvokeNoReturn(KEY key, MESSAGE message) {
+        RETURN dummyReturnValue;
+        <span class="code-keyword">return</span> SingleCastTryInvoke(key, message, <span class="code-keyword">out</span> dummyReturnValue);
+    } <span class="code-comment">//</span><span class="code-comment">TryInvokeNoReturn</span>
+    <span class="code-region">#region implementation
+</span>    <span class="code-keyword">public</span> RETURN AccumulatedInvoke(KEY key, MESSAGE message, 
+           AccumulationMethod accumulation, <span class="code-keyword">bool</span> throwException, <span class="code-keyword">out</span> <span class="code-keyword">bool</span> found) {
+        <span class="code-keyword">if</span> (accumulation == <span class="code-keyword">null</span>) { <span class="code-comment">//</span><span class="code-comment">fallback:</span>
+            <span class="code-keyword">if</span> (throwException) {
+                found = <span class="code-keyword">true</span>;
+                InvokeNoReturn(key, message);
+            } <span class="code-keyword">else</span>
+                found = TryInvokeNoReturn(key, message);
+            <span class="code-keyword">return</span> <span class="code-keyword">default</span>(RETURN);
+        } <span class="code-comment">//</span><span class="code-comment">if no accumulation method</span>
+        DynamicMethod delegateInstance;
+        found = Dictionary.TryGetValue(key, <span class="code-keyword">out</span> delegateInstance);
+        <span class="code-keyword">if</span> (found) {
+            System.Delegate[] invocationList = delegateInstance.GetInvocationList();
+            <span class="code-keyword">int</span> index = <span class="code-digit">0</span>;
+            RETURN lastResult = <span class="code-keyword">default</span>(RETURN);
+            <span class="code-keyword">foreach</span> (System.Delegate method <span class="code-keyword">in</span> invocationList) {
+                <span class="code-keyword">bool</span> lastResultAvailable = index &gt; <span class="code-digit">0</span>;
+                RETURN currentResult = ((DynamicMethod)method)(key, message);
+                lastResult = accumulation(index, key, message, 
+                                  lastResultAvailable, lastResult, currentResult);
+                index++;
+            } <span class="code-comment">//</span><span class="code-comment">loop invocationList</span>
+            <span class="code-keyword">return</span> lastResult;
+        } <span class="code-keyword">else</span>
+            <span class="code-keyword">if</span> (throwException)
+                <span class="code-keyword">throw</span> <span class="code-keyword">new</span> DynamicMethodNotFoundException&lt;KEY, MESSAGE&gt;(key, message);
+            <span class="code-keyword">else</span>
+                <span class="code-keyword">return</span> <span class="code-keyword">default</span>(RETURN);
+    } <span class="code-comment">//</span><span class="code-comment">AccumulatedInvoke</span>
+    <span class="code-region">#endregion implementation
+</span>} <span class="code-comment">//</span><span class="code-comment">class MuticastDynamicMethodDispatcher</span></pre>
+
+
+
+<p>First of all, I want to discuss my design of the generic method being dispatched: <code>DynamicMethod</code>. Why exactly two input parameters and a return value? Why not just one parameter? Why not more? Well, this is because it enables the most universal approach. The key parameter should be isolated from any other input data, because it is distinctly special: this is a unique key used to store the delegate instances in the dictionary. This parameter along is not enough, because the application may require some data input which is not necessarily related with the <code>key</code>. This "free" parameter called <code>message</code> can carry any amount of data as its type can be an array of other data elements or any other collection of data. One interesting application of the technique can be employed when the type <code>MESSAGE</code> is <code>System.Type</code>, see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6">6</a>.</p>
+
+
+
+<h2><a name="a3"></a>3. DynamicMethodDispatcher Class by Usage</h2>
+
+
+
+<p>Now I would like to explain how the simpler one of the two Dispatcher classes works, starting from its usage. Please see the source code of the demo project <em>TestMessageDispatching.exe</em>. This is a Windows .NET application using <code>System.Windows.Forms</code> and demonstrates raw Windows message processing.</p>
+
+
+
+<p>To demonstrate how the Dynamic dispatcher replaces the long (really long in this case) <code>switch</code> statement, many different Windows messages are processed in different ways: some send message data in different message-specific forms to the UI to be logged in different list views (depending on the message IDs) with different comments, some cause sounds, some do both. For some status messages, events are counted and displayed in the list view: counted are the number of application activations and deactivations (by Alt-TAB, for example) and also the events got from losing keyboard focus in the message-handling Form; event counters are the fields of this form.</p>
+
+
+
+<p>First, here is how the Dispatcher is defined and initialized:</p>
+
+
+
+<div class="pre-lang" id="premain638735"><div>C#</div><div class="pre-action-link"><span id="copycode638735" class="copy-code" data-index="638735" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre638735" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> MessageDispatcher = 
+  SA.Universal.Technology.DynamicMethodDispatcher&lt;WindowsMessage, MessageInfo, bool&gt;;
+
+<span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> FormMessageHandler {
+
+   <span class="code-comment">//</span><span class="code-comment">...</span>
+
+   <span class="code-keyword">static</span> <span class="code-keyword">int</span> activateCount = <span class="code-digit">0</span>;
+   <span class="code-keyword">static</span> <span class="code-keyword">int</span> focusCount = <span class="code-digit">0</span>;
+   <span class="code-keyword">static</span> <span class="code-keyword">int</span> nonClientActivateCount = <span class="code-digit">0</span>;
+   MessageDispatcher MessageDispatcher = <span class="code-keyword">new</span> MessageDispatcher();
+
+} <span class="code-comment">//</span><span class="code-comment"> class FormMessageHandler</span></pre>
+
+
+
+<p>As the <code>using</code> clause instantiates generic type parameters, it defines the signature of the Dynamic Method. The type <code>WindowsMessage</code> is the enumeration type containing Windows message IDs, and <code>MessageInfo</code> is a class representing the structure of Windows messages in a .NET way, with union of different semantic parameters through the use of the attributes <code>System.Runtime.InteropServices.StructLayoutAttribute</code> and <code>System.Runtime.InteropServices.FieldOffsetAttribute</code>. Download and see the full source code for more information.</p>
+
+
+
+<p>This is how messages are captured and the Dispatcher is invoked:</p>
+
+
+
+<div class="pre-lang" id="premain59163"><div>C#</div><div class="pre-action-link"><span id="copycode59163" class="copy-code" data-index="59163" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre59163" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> FormMessageHandler {
+    
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+
+    <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> DefWndProc(<span class="code-keyword">ref</span> Message m) {
+        <span class="code-keyword">bool</span> ignore;
+        <span class="code-keyword">if</span> (MessageDispatcher.TryInvoke((WindowsMessage)m.Msg, 
+                    MessageInfo.FromMessage(m), <span class="code-keyword">out</span> ignore)) {
+            <span class="code-keyword">if</span> (!ignore)
+                <span class="code-keyword">base</span>.DefWndProc(<span class="code-keyword">ref</span> m);
+        } <span class="code-keyword">else</span>
+            <span class="code-keyword">base</span>.DefWndProc(<span class="code-keyword">ref</span> m);
+    } <span class="code-comment">//</span><span class="code-comment">DefWndProc</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class FormMessageHandler</span></pre>
+
+
+
+<p>The return value of Boolean type is used to indicate if the default Windows procedure (inherited from the base class) should be called, or ignored, effectively cancelling the processing of a message. There are two forms of invocation method of the class <code>DynamicMethodDispatcher</code>, depending on the handling of the situation when a key (<code>WindowsMessage</code> in this example) is not found in the method dictionary. The method <code>Invoke</code> returns a return result of the dynamic method if one is found in the dictionary, and otherwise throws an exception of the generic type <code>DynamicMethodNotFoundException</code>.</p>
+
+
+
+<p>The message processing is invoked in one line and completely replaces the long <code>switch</code> statement. Now, the long sequence still needs to be somewhere else. Right, the Dynamic methods should be created and added to the dictionary. What's most important about it? It is done only once during the lifetime of the application. Invocation is done many times and is more efficient compared to the <code>switch</code> statement. If the number of cases is significant, it can be much more effective: <code>switch</code> statement works linearly, while the dictionary search time is of the order of O(0) (see <a href="http://en.wikipedia.org/wiki/Big_O_notation">"Big O Notation"</a>), that is, the calculation time does not depend on the size of the dictionary (asymptotically, for large number of elements).</p>
+
+
+
+<p>Here is the short fragment of this long code:</p>
+
+
+
+<div class="pre-lang" id="premain602903"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="602903" id="preShrink602903">Shrink ▲</span> &nbsp; <span id="copycode602903" class="copy-code" data-index="602903" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre602903" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">MessageDispatcher.Add(WindowsMessage.NCACTIVATE, (key, msg) =&gt; {
+    ShowStatusMessage(Time.Now, msg, 
+        GetActivationMessage(msg, <span class="code-keyword">ref</span> nonClientActivateCount), 
+        <span class="code-string">"</span><span class="code-string">Non-client activation"</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.ACTIVATEAPP, (key, msg) =&gt; {
+    ShowStatusMessage(Time.Now, msg, GetActivationMessage(msg, <span class="code-keyword">ref</span> activateCount), 
+                      <span class="code-string">"</span><span class="code-string">Application activation"</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.SETFOCUS, (key, msg) =&gt; {
+    focusCount++;
+    ShowStatusMessage(Time.Now, msg, <span class="code-keyword">string</span>.Empty, 
+                      <span class="code-keyword">string</span>.Format(<span class="code-string">"</span><span class="code-string">Focused: {0}"</span>, focusCount));
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.KILLFOCUS, (key, msg) =&gt; {
+    ShowStatusMessage(Time.Now, msg, <span class="code-keyword">string</span>.Empty, <span class="code-string">"</span><span class="code-string">Focus lost"</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.KEYUP, (key, msg) =&gt; {
+    ShowKeyboardMessage(Time.Now, msg, <span class="code-string">"</span><span class="code-string">Key up"</span>);
+    Console.Beep(<span class="code-digit">360</span>, <span class="code-digit">30</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.KEYDOWN, (key, msg) =&gt; {
+    Console.Beep(<span class="code-digit">400</span>, <span class="code-digit">30</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.CHAR, (key, msg) =&gt; {
+    ShowKeyboardMessage(Time.Now, msg, <span class="code-string">"</span><span class="code-string">Character"</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});
+MessageDispatcher.Add(WindowsMessage.SYSKEYUP, (key, msg) =&gt; {
+    ShowKeyboardMessage(Time.Now, msg, <span class="code-string">"</span><span class="code-string">System key up"</span>);
+    Console.Beep(<span class="code-digit">200</span>, <span class="code-digit">20</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});</pre>
+
+
+
+<p>The important thing is using the anonymous method here. Moreover, its lambda form is used. I have two notes about it. First, if you needed to make an instance of the anonymous delegate before passing it to <code>MessageDispatcher.Add</code>, you would require the types of the parameters:</p>
+
+
+
+<div class="pre-lang" id="premain595906"><div>C#</div><div class="pre-action-link"><span id="copycode595906" class="copy-code" data-index="595906" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre595906" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">SA.Universal.Technology.DynamicMethodDispatcher&lt;WindowsMessage, 
+                        MessageInfo, bool&gt;.DynamicMethod method =
+    (key, msg) =&gt; {
+        ShowStatusMessage(Time.Now, msg, 
+          GetActivationMessage(msg, <span class="code-keyword">ref</span> nonClientActivateCount), 
+          <span class="code-string">"</span><span class="code-string">Non-client activation"</span>);
+        <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    };</pre>
+
+
+
+<p>The lambda form of the delegate uses <em>type inference</em> here, but the type of the target delegate still has to be defined. It is not required in the case of <code>MessageDispatcher.Add</code>, because the delegate type is inferred from the parameter type of this method, hence the argument types of the delegate method (<code>WindowsMessage</code> and <code>MessageInfo</code>) are also inferred.</p>
+
+
+
+<p>The lambda forms cannot be found in the source code I provide, because I support compatibility with C# v.2.0 as well (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7">7</a>) which could not use lambda expressions. In this case, adding a dynamic method look just a bit wordier:</p>
+
+
+
+<div class="pre-lang" id="premain682227"><div>C#</div><div class="pre-action-link"><span id="copycode682227" class="copy-code" data-index="682227" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre682227" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">MessageDispatcher.Add(WindowsMessage.NCACTIVATE, 
+                 <span class="code-keyword">delegate</span>(WindowsMessage key, MessageInfo msg) {
+    ShowStatusMessage(Time.Now, msg, 
+       GetActivationMessage(msg, <span class="code-keyword">ref</span> nonClientActivateCount), 
+       <span class="code-string">"</span><span class="code-string">Non-client activation"</span>);
+    <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+});</pre>
+
+
+
+<p>Even if the same delegate method should be used for multiple messages, the anonymous delegate can still provide the reuse:</p>
+
+
+
+<div class="pre-lang" id="premain745457"><div>C#</div><div class="pre-action-link"><span id="copycode745457" class="copy-code" data-index="745457" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre745457" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">WindowsMessage[] mouseMessages = <span class="code-keyword">new</span> WindowsMessage[] {
+    WindowsMessage.LBUTTONDBLCLK,
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-comment">//</span><span class="code-comment">all other mouse-related messages...</span>
+    WindowsMessage.NCRBUTTONDOWN,
+    WindowsMessage.NCRBUTTONUP,
+};
+<span class="code-keyword">foreach</span> (WindowsMessage wm <span class="code-keyword">in</span> mouseMessages)
+    MessageDispatcher.Add(wm, , (key, msg) =&gt; {
+        ShowMouseMessage(Time.Now, msg, <span class="code-keyword">string</span>.Empty);
+        <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    });</pre>
+
+
+
+<h2><a name="a4"></a>4. MultipleInvocationDynamicMethodDispatcher</h2>
+
+
+
+<p>The full source code of the multiple-invocation version of <code>DynamicMethodDispatcher</code> is already shown above (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a2">2</a>).</p>
+
+
+
+<p>The difference between <code>DynamicMethodDispatcher</code> and its multiple-invocation version is the ability to add several handlers to a delegate instance found by the same key. If a new handler is added by an existing key, the operation is always successful. All handlers are accumulated on the invocation list of the same delegate instance found by a key.</p>
+
+
+
+<p>A special concern of the multiple-invocation version is processing the method result called by the different handles of the same invocation list. They can be different, so we may need to do something to avoid losing them.</p>
+
+
+
+<p>Before we examine how it works, we need a bit of some advanced knowledge on the nature of delegates.</p>
+
+
+
+<h3><a name="a4.1"></a>4.1 On the Nature of Delegate Instance</h3>
+
+
+
+<p>Let's look at an instance of the delegate. When you get its type via <code>GetType</code> and examine it using <em>Reflection</em>, it will show that the type of the instance is... a class — its <code>Type</code> returns the <code>IsClass</code> property value of <code>true</code>. It supports a lot of stuff and, in particular, it returns the invocation list of the handlers via the method <code>GetInvocationList</code>. What happens when we use the "=" or "+=" operators to add a handler to the invocation list?</p>
+
+
+
+<p>If we assign a delegate instance to another delegate instance, then they become the same object, we can test it (see the code below). But what happens if we "assign" a handler to the delegate instance which was not yet initialized (<code>null</code>) using "="? No wonder, it is created and initialized, its invocation list length becomes 1. Can we add another handler to the same delegate instance using "+=". Surprisingly, no!</p>
+
+
+
+<p>Let's examine identity and referential identity and referential identity of the delegate instance using the "==" operator and <code>object.ReferenceEquals</code>:</p>
+
+
+
+<div class="pre-lang" id="premain259814"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="259814" id="preShrink259814">Shrink ▲</span> &nbsp; <span id="copycode259814" class="copy-code" data-index="259814" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre259814" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">delegate</span> <span class="code-keyword">int</span> TestDelegate(<span class="code-keyword">string</span> name);
+<span class="code-keyword">delegate</span> <span class="code-keyword">string</span> FormatEqual(<span class="code-keyword">bool</span> <span class="code-sdkkeyword">value</span>);
+
+<span class="code-keyword">static</span> <span class="code-keyword">void</span> ReportDelegateEquivalence(Delegate left, Delegate right) {
+    FormatEqual formatEqual = 
+      <span class="code-keyword">delegate</span>(<span class="code-keyword">bool</span> <span class="code-sdkkeyword">value</span>) { <span class="code-keyword">if</span> (<span class="code-sdkkeyword">value</span>) <span class="code-keyword">return</span> <span class="code-keyword">string</span>.Empty; <span class="code-keyword">else</span> <span class="code-keyword">return</span> <span class="code-string">"</span><span class="code-string">NOT"</span>; };
+    System.Console.WriteLine(
+        <span class="code-string">"</span><span class="code-string">Delegates are {0} equal, they are referentually {1} equal"</span>,
+        formatEqual(left == right),
+        formatEqual(<span class="code-keyword">object</span>.ReferenceEquals(left, right)));
+} <span class="code-comment">//</span><span class="code-comment">ReportDelegateEquivalence</span>
+
+<span class="code-keyword">static</span> <span class="code-keyword">void</span> TestDelegateEquivalence() {
+    TestDelegate delegate1 = <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> name) { <span class="code-keyword">return</span> <span class="code-digit">1</span>; };
+    TestDelegate delegate2 = <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> name) { <span class="code-keyword">return</span> <span class="code-digit">1</span>; };
+    <span class="code-comment">//</span><span class="code-comment">output: "Delegates are NOT equal, they are referentually NOT equal":</span>
+    ReportDelegateEquivalence(delegate1, delegate2);
+    
+    delegate1 = delegate2;
+    <span class="code-comment">//</span><span class="code-comment">output: "Delegates are equal, they are referentually equal":</span>
+    ReportDelegateEquivalence(delegate1, delegate2);
+  
+    delegate2 += <span class="code-keyword">delegate</span>(<span class="code-keyword">string</span> name) { <span class="code-keyword">return</span> <span class="code-digit">2</span>; };
+    <span class="code-comment">//</span><span class="code-comment">output: "Delegates are NOT equal, they are referentually NOT equal":            </span>
+    ReportDelegateEquivalence(delegate1, delegate2);
+} <span class="code-comment">//</span><span class="code-comment">TestDelegateEquivalence</span></pre>
+
+
+
+<p>We can see that a delegate instance changes its referential identity as a result of the "+=" operator! This happens because the delegate instances are <em>immutable</em>, pretty much like strings. You cannot add a handler to a delegate instance. Instead, a brand-new delegate instance is created with the invocation list copied from the delegate instance stored in the same variable with added (or removed) handler; then the resulting delegate instance is assigned to the same variable. The purpose of such behavior is threading. What happens is one thread is adding a handler to a delegate instance while some other thread is performing the invocation of the same delegate? To avoid a potentially fatal clash, both procedures would have to be inter-locked until either of the procedures is complete. Having delegate instances immutable improves parallelism.</p>
+
+
+
+<p>I'm very grateful to <a name="Nishant"></a><a href="http://www.codeproject.com/Members/Nishant-Sivakumar">Nishant Sivakumar</a> who explained to me the purpose of the immutable nature of delegate instances.</p>
+
+
+
+<p>Now, this feature would defeat the obvious strategy working with the registry if we tried to "update" the delegate instance stored in the registry. It would not actually change anything, as the change would have been done on another, new instance of the delegate. Instead, the code of <code>MultipleInvocationDynamicMethodDispatcher</code> removes a delegate instance from the dictionary, "adds" a new handler (a brand new delegate instance is actually created), and adds this new instance to the dictionary again. See the implementation of <code>MultipleInvocationDynamicMethodDispatcher.Add</code>.</p>
+
+
+
+<p>Interesting (and quite natural) that the type of the delegate instance is created on the fly, as you can see by its full name <code>delegate1.GetType().FullName</code>. What is also interesting is, the base class of the run-type of the delegate instance is <code>System.MulticastDelegate</code>. A delegate instance becomes multicast as soon as it is initialized after adding the very first handler using the operator "=". Before it happens, the delegate instance is not initialized; and its value is <code>null</code>. C# syntax will not allow applying the operator "+=" before the instance is initialized; the only way to initialize it is the operator "=". All the handlers can be accessed via the instance method <code>GetInvocationList</code>. It's easy to checkup that the run-time types of the elements of the invocation list are also based on the type <code>System.MulticastDelegate</code>.</p>
+
+
+
+<p>That raises an interesting question. It means that we can add a multi-cast delegate instance to the invocation list of another multi-cast delegate instance using the operator "+=". Will we obtain a tree of delegate instances? No!</p>
+
+
+
+<p>This is easy to check up. Let's note that by the end of the method body <code>TestDelegateEquivalence</code> the length of the invocation list of <code>delegate1</code> is 1 and the length of the invocation list of <code>delegate2</code> is 2. Let's add another line at the end:</p>
+
+
+
+<div class="pre-lang" id="premain579995"><div>C#</div><div class="pre-action-link"><span id="copycode579995" class="copy-code" data-index="579995" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre579995" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">delegate1 += delegate2;</pre>
+
+
+
+<p>When we examine the delegate list of <code>delegate1</code> after this operation, we will find that it has still got the flat invocation list consisting 3 elements each of length 1. The procedure of re-creation of the new (immutable) delegate instance re-creates the invocation list in the flat form; you cannot create a tree or other "pathological" structures. For example, it is not possible to create an invocation list of length 0. It is also not possible to have a member of the invocation list which is <code>null</code> or has a length other than 1.</p>
+
+
+
+<p>It looks like operations on the delegate instances use much more cunning algorithms than one could think of based on the usual documentation!</p>
+
+
+
+<h3><a name="a4.2"></a>4.2 Return Values</h3>
+
+
+
+<p>Let's consider how we can return values of the generic type <code>RETURN</code> as a result of an invocation. The simplest method is discarding the return values of all the handlers using the method <code>InvokeNoReturn</code> or <code>TryInvokeNoReturn</code>. The difference between these two methods is that the second one does not throw an exception when a key is not found in the dictionary, see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a5">5</a>. Note that this method uses exactly the same implementation as the method <code>DynamicMethodDispatcher.Invoke</code>.</p>
+
+
+
+<p>The opposite approach is the method <code>Invoke(KEY key, MESSAGE)</code> which returns all the values returned by each handler in an array of type <code>RETURN[]</code>. The convenience of this method is that there no need for a special <code>TryInvoke</code> method which does not throw exceptions. When a key is not found in the dictionary, the method returns <code>null</code>. The implementation of this method cannot use a predefined delegate invocation method which discards all the return values returned by each handler. Instead, to get every value returned by each handler, the implementation invokes each individual element of the invocation list returned by the delegate instance method <code>GetInvocationList</code>. See the source code for more details.</p>
+
+
+
+<p>The most sophisticated method of returning only one return value is the accumulation of the return results of all of the elements of the invocation list. See the delegate type <code>AccumulationMethod</code> and the method <code>Invoke(KEY, MESSAGE, AccumulationMethod)</code>. For example, let's see how to return the product of all return values of type <code>double</code> returned by the elements of the invocation list:</p>
+
+
+
+<div class="pre-lang" id="premain863708"><div>C#</div><div class="pre-action-link"><span id="copycode863708" class="copy-code" data-index="863708" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre863708" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> dispatcher = <span class="code-keyword">new</span> MuticastDynamicMethodDispatcher&lt;int, <span class="code-keyword">string</span>, double&gt;();
+dispatcher.Add(<span class="code-digit">3</span>, (key, <span class="code-sdkkeyword">value</span>) =&gt; { <span class="code-keyword">return</span> key; });
+dispatcher.Add(<span class="code-digit">3</span>, (key, <span class="code-sdkkeyword">value</span>) =&gt; { <span class="code-keyword">return</span> System.Math.Pow(key, System.Math.PI); });
+dispatcher.Add(<span class="code-digit">3</span>, (key, <span class="code-sdkkeyword">value</span>) =&gt; { <span class="code-keyword">return</span> <span class="code-keyword">double</span>.Parse(<span class="code-sdkkeyword">value</span>); });
+dispatcher.Add(<span class="code-digit">5</span>, (key, <span class="code-sdkkeyword">value</span>) =&gt; { <span class="code-keyword">return</span> 1d; });
+dispatcher.Add(<span class="code-digit">5</span>, (key, <span class="code-sdkkeyword">value</span>) =&gt; { System.Console.WriteLine(key); <span class="code-keyword">return</span> key; });
+dispatcher.Invoke(
+    <span class="code-digit">3</span>, <span class="code-string">"</span><span class="code-string">11.2"</span>,
+    <span class="code-keyword">delegate</span>(
+        <span class="code-keyword">int</span> index,
+        <span class="code-keyword">int</span> key, <span class="code-keyword">string</span> message,
+        <span class="code-keyword">bool</span> lastResultAvailable, <span class="code-keyword">double</span> lastResult, <span class="code-keyword">double</span> currentResult) {
+            <span class="code-keyword">if</span> (lastResultAvailable) <span class="code-keyword">return</span> currentResult;
+            <span class="code-keyword">else</span> <span class="code-keyword">return</span> lastResult * currentResult;
+    });</pre>
+
+
+
+<p>Again, for C# v.2.0, it will be a bit wordier:</p>
+
+
+
+<div class="pre-lang" id="premain416044"><div>C#</div><div class="pre-action-link"><span id="copycode416044" class="copy-code" data-index="416044" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre416044" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">MuticastDynamicMethodDispatcher&lt;int, <span class="code-keyword">string</span>, double&gt; dispatcher =
+    <span class="code-keyword">new</span> MuticastDynamicMethodDispatcher&lt;int, <span class="code-keyword">string</span>, double&gt;();
+dispatcher.Add(<span class="code-digit">3</span>, <span class="code-keyword">delegate</span> (<span class="code-keyword">int</span> key, <span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) { <span class="code-keyword">return</span> key; });
+dispatcher.Add(<span class="code-digit">3</span>, <span class="code-keyword">delegate</span>(<span class="code-keyword">int</span> key, <span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>) 
+           { <span class="code-keyword">return</span> System.Math.Pow(key, System.Math.PI); });
+<span class="code-comment">//</span><span class="code-comment">...</span>
+dispatcher.Invoke(
+    <span class="code-digit">3</span>, <span class="code-string">"</span><span class="code-string">11.2"</span>,
+    <span class="code-keyword">delegate</span>(
+        <span class="code-keyword">int</span> index,
+        <span class="code-keyword">int</span> key, <span class="code-keyword">string</span> message,
+        <span class="code-keyword">bool</span> lastResultAvailable, <span class="code-keyword">double</span> lastResult, <span class="code-keyword">double</span> currentResult) {
+        <span class="code-keyword">if</span> (lastResultAvailable) <span class="code-keyword">return</span> currentResult;
+        <span class="code-keyword">else</span> <span class="code-keyword">return</span> lastResult * currentResult;
+    });</pre>
+
+
+
+<h2><a name="a5"></a>5. What if a Key is not Found in the Dictionary?</h2>
+
+
+
+<p>Let's classify all the methods of both classes by their behavior depending on the presence of some key in the dictionary of dynamic methods.</p>
+
+
+
+<p>First of all, the implementations of the methods <code>DynamicMethodDispatcher.Add(KEY, DynamicMethod)</code> and <code>MuticastDynamicMethodDispatcher.Add(KEY, DynamicMethod)</code> are different. If a key is already present in the dictionary, the first method has no effect and returns false. The second method is always successful. Please see the implementations of both.</p>
+
+
+
+<p>Now, let's classify all the <em>invocation methods</em> of both classes.</p>
+
+
+
+<p>These methods will throw the exception <code>DynamicMethodNotFoundException</code> when a key is not found in the dictionary of dynamic methods:</p>
+
+
+
+<ul>
+
+<li><code>DynamicMethodDispatcher.Invoke(KEY, MESSAGE)</code>;</li><li><code>MuticastDynamicMethodDispatcher.Invoke(KEY, MESSAGE, AccumulationMethod)</code>;</li><li><code>MuticastDynamicMethodDispatcher.InvokeNoReturn(KEY, MESSAGE)</code>.</li></ul>
+
+
+
+<p>These methods will not throw an exception when a key is not found in the dictionary of dynamic methods; please read the comments on how this situation is recognized by a caller:</p>
+
+
+
+<ul>
+
+<li><code>DynamicMethodDispatcher.TryInvoke(KEY, MESSAGE, out RETURN)</code>; if key is not found, this method will return <code>false</code>, our <code>RETURN</code> value should be ignored.</li><li><code>MuticastDynamicMethodDispatcher.Invoke(KEY, MESSAGE)</code>; if key is not found, this method will return <code>null</code>, otherwise it will return the array with return values from all elements of the invocation list.</li><li><code>MuticastDynamicMethodDispatcher.TryInvoke(KEY, MESSAGE, AccumulationMethod, out RETURN)</code>; if key is not found, this method will return <code>false</code>, our <code>RETURN</code> value should be ignored.</li><li><code>MuticastDynamicMethodDispatcher.TryInvokeNoReturn(KEY, MESSAGE)</code>; if key is not found, this method will return <code>false</code>.</li></ul>
+
+
+
+<p>If you look at the downloadable source code you will find comprehensive XML comments on each public method.</p>
+
+
+
+<h2><a name="a6"></a>6. Complement OOP or Abuse it?</h2>
+
+
+
+<p>Can the keys of the Dynamic Method Dispatcher be types? Yes of course, but.. everyone who understands Object-Oriented technology well would immediately recognize a bad <a href="http://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a> which would defeat the purpose of OOP. In this anti-pattern, the tagging of the type replaces the use of inheritance of the class hierarchy based on a common abstract interface implemented using <a href="http://en.wikipedia.org/wiki/Late_binding">late binding</a>. In the case of .NET, instances of the type <code>System.Type</code> can play the role of such tags.</p>
+
+
+
+<p>This matter is not so simple though. First, Object-Oriented Programming technology is not free from limitations and <a href="http://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">methodological problems</a>. For example, consider the <a href="http://en.wikipedia.org/wiki/Circle-ellipse_problem">Circle-Ellipse Problem</a>. This is just one case when object-oriented development can run into a dead end, which actually could be seen from the very beginning.</p>
+
+
+
+<p>I want to illustrate the technique leading to such a tagging approach on some real-life examples. One of the problems when traditional OOP does not provide a natural solution is parallel hierarchy. Let's consider some real-life situations.</p>
+
+
+
+<h3><a name="a6.1"></a>6.1. Use-case: Parallel Hierarchy Problem</h3>
+
+
+
+<p>When we create a CAD model which is used for CAM and SCADA applications, we're trying to create a comprehensive model so its instances would cover the full range of all thinkable designs possible in the application field. It also should be used as an internal data representation of all designs which we can <em>import</em> from many third-party models. Modeling of such data schema is not a big problem: all legacy systems have their limitations which we can overcome, as our new model can be designed as a superset of all known features. We only face a problem when we do the translation of the legacy or third-party models required by the functionality of our import plug-in. The problem is that the set of legacy graphic primitives is built as a separate object hierarchy. We don't want to create a permanent dependency on the legacy data model. The root of the problem is that classical single-parent inheritance has the structure of a tree. In the case of parallel hierarchies, we need to build a mapping between the two. From the stand point of classical OOP, it can be considered as some ad-hoc mapping code. With Dynamic Method Dispatcher, it does not have to be ad-hoc though.</p>
+
+
+
+<p>Let's consider the two parallel hierarchies: one representing our comprehensive CAD model (shown partially) and the hierarchy of the graphical primitives presented by the AutoDesk DWG files:</p>
+
+
+
+<div class="pre-lang" id="premain737528"><div>C#</div><div class="pre-action-link"><span id="copycode737528" class="copy-code" data-index="737528" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre737528" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment">our CAD model:</span>
+<span class="code-keyword">public</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> PolyLine2D : Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> PolyLine3D : Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> Ellipse : Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> EllipticArc : Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> Text : Shape { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-comment">//</span><span class="code-comment">hierarchy of the AutoCAD DWG file:</span>
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadPolyLine2D : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadPolyLine3D : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadCircle : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadArc : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadText : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> AcadMultilineText : AcadPrimitive { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+
+<span class="code-comment">//</span><span class="code-comment">...</span></pre>
+
+
+
+<p>Now, the mapping code should implement some interface used to translate any third-party model to our internal representation:</p>
+
+
+
+<div class="pre-lang" id="premain486333"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="486333" id="preShrink486333">Shrink ▲</span> &nbsp; <span id="copycode486333" class="copy-code" data-index="486333" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre486333" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">interface</span> IModelTranslator { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> DwgModelTranslator :
+    DynamicMethodDispatcher&lt;System.Type&gt;,
+    IModelTranslator {
+
+    <span class="code-keyword">public</span> DwgModelTranslator() {
+        Add(<span class="code-keyword">typeof</span>(AcadPolyLine2D), PolyLine2D);
+        Add(<span class="code-keyword">typeof</span>(AcadPolyLine3D), PolyLine3D);
+        Add(<span class="code-keyword">typeof</span>(AcadCircle), PolyLine3D);
+        Add(<span class="code-keyword">typeof</span>(AcadArc), PolyLine3D);
+        Add(<span class="code-keyword">typeof</span>(AcadText), Text);
+        Add(<span class="code-keyword">typeof</span>(AcadMultilineText), Text);
+        <span class="code-comment">//</span><span class="code-comment">...</span>
+    } <span class="code-comment">//</span><span class="code-comment">DwgModelTranslator</span>
+
+    Shape PolyLine2D(System.Type acadType, AcadPrimitive acadPrimitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">new</span> PolyLine2D(<span class="code-comment">/*</span><span class="code-comment"> ... */</span>);
+    } <span class="code-comment">//</span><span class="code-comment">PolyLine2D</span>
+
+    <span class="code-comment">//</span><span class="code-comment">demonstrates covariance:</span>
+    PolyLine3D PolyLine3D(System.Type acadType, AcadPrimitive acadPrimitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">new</span> PolyLine3D(<span class="code-comment">/*</span><span class="code-comment"> ... */</span>);
+    } <span class="code-comment">//</span><span class="code-comment">PolyLine3D</span>
+    Shape Circle(System.Type acadType, AcadPrimitive acadPrimitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">new</span> Ellipse(<span class="code-comment">/*</span><span class="code-comment"> ... */</span>);
+    } <span class="code-comment">//</span><span class="code-comment">Circle</span>
+    EllipticArc Arc(System.Type acadType, AcadPrimitive acadPrimitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">new</span> EllipticArc(<span class="code-comment">/*</span><span class="code-comment"> ... */</span>);
+    } <span class="code-comment">//</span><span class="code-comment">Arc</span>
+    Shape Text(System.Type acadType, AcadPrimitive acadPrimitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">new</span> Text(<span class="code-comment">/*</span><span class="code-comment"> ... */</span>);
+    } <span class="code-comment">//</span><span class="code-comment">Text</span>
+
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+
+    <span class="code-comment">//</span><span class="code-comment">to be used to implement IModelTranslator.Translate (not shown)</span>
+    Shape TranslatePrimitive(AcadPrimitive primitive) {
+        <span class="code-keyword">return</span> <span class="code-keyword">this</span>.Invoke(primitive.GetType(), primitive);
+    } <span class="code-comment">//</span><span class="code-comment">TranslatePrimitive</span>
+
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class DwgModelTranslator</span></pre>
+
+
+
+<p>Pay attention to the fact that we handle the situation when there is no one-to-one correspondence between the hierarchies. Also, the same method can be re-used to translate different AutoDesk primitives to a single CAD Shape which is more universal.</p>
+
+
+
+<p>Using the legacy and importing are not the only ares where parallel hierarchies can present a problem for classical OOP design. There are different classes of problems when mapping between hierarchies is required. It happens when different aspects of the same application fields need to be <em>separated</em>. For example, a pure data model deals with just data transformation and persistence; the graphical presentation of the same model deals with such <em>aspects</em> as mapping the graphical presentation system (example: WPF), scaling, panning, showing separate layers, etc. When all of the above represents a CAD model, it should be separated from the CAM aspects of the same model, and so on.</p>
+
+
+
+<p>The structure based on Dynamic Method Dispatcher provides mapping between the parallel models thus complementing the structures based on pure tree inheritance relationship.</p>
+
+
+
+<h3><a name="a6.2"></a>6.2. Dynamic Method Dispatcher as Virtual Method Table</h3>
+
+
+
+<p>Let's return back to the concerns of using the tagging approach which is considered by some as abuse of OOP.</p>
+
+
+
+<p>The universal character of Dynamic Method Dispatcher functionality makes such tagging-based techniques not completely <em>ad-hoc</em>. If you look at how the Dynamic Method dictionary works in the Dynamic Method Dispatcher, you will notice that this mechanism resembles the <a href="http://en.wikipedia.org/wiki/Virtual_method_table">Virtual Method Table (VMT)</a> of traditional OOP. More exactly, it can be considered as the variant of a technology for <a href="http://en.wikipedia.org/wiki/Dynamic_dispatch">Dynamic Dispatch</a> in a wider sense understood in the theory of <a href="http://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>. As in classical OOP based on the Virtual Message Table, the delegate call is done indirectly. In classical VMT, the call is dispatched using the address offset in the table. With the dictionary of Dynamic Method Dispatcher, a delegate is accessed by the dictionary key, which consumes more CPU time, but both mechanisms still deliver the speed of <code>O(0)</code> (see <a href="http://en.wikipedia.org/wiki/Big_O_notation">"Big O Notation"</a>). In both mechanisms, dispatching selects a method implementation during run-time; the set of methods to be selected includes the method of the same signature, but Dynamic Method Dispatcher also allows for <em>covariance and contravariance</em> in the sense explained <a href="http://msdn.microsoft.com/en-us/library/ms173174(v=VS.100).aspx">here</a>.</p>
+
+
+
+<p>The use of the data structure (a table in the case of VMT, a dictionary in the case of Dynamic Method Dispatcher) is very different. In the case of VMT, there is one table per class. The selection is performed at the moment of call among the set of identical methods of the same signature and the same class hierarchy. The content of all tables is fully defined during compile time. In the case of Dynamic Method Dispatcher, the set of methods of the same signature is totally arbitrary. It is populated explicitly during run time and may be absolutely unknown during run-time. (For example, imagine that it is done with the use of a random number generator.)</p>
+
+
+
+<p>The mechanism of Dynamic Method Dispatcher can be considered as another mechanism of dynamic dispatch, generalizing and complementing the classical OOP mechanism based on VMT.</p>
+
+
+
+<p>The major reason for these differences is that the classical OOP mechanism based on VMT is always embedded in object-oriented languages. Such embedded implementations do exist. I want to dedicate a separate section to the explanation of the cultural and technological roots of my design of Dynamic Method Dispatcher. In fact, I did not just "invent" it all from scratch. Not at all.</p>
+
+
+
+<h3><a name="a6.3"></a>6.3. On the History of the Idea</h3>
+
+
+
+<p>A mechanism is very close to the mechanism of Dynamic Method Dispatcher was created in <a href="http://en.wikipedia.org/wiki/Embarcadero_Delphi">Borland Delphi</a> and <a href="http://en.wikipedia.org/wiki/Visual_Component_Library">VCL</a> library. Presently, this is used in <a href="http://en.wikipedia.org/wiki/Embarcadero_Delphi">Embarcadero Delphi</a>. Please see this <a>manual</a>.</p>
+
+
+
+<p>Let's consider a short sample from this document:</p>
+
+
+
+<div class="pre-lang" id="premain14822"><div>pas</div><div class="pre-action-link"><span id="copycode14822" class="copy-code" data-index="14822" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre14822" style="margin-top:0;" class="lang-pas notranslate" data-language="pas" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">TFoo = <span class="code-keyword">class</span>
+   procedure IAmAStatic;
+   procedure IAmAVirtual; <span class="code-keyword">virtual</span>;
+   procedure IAmADynamic; <span class="code-keyword">dynamic</span>;
+   procedure IAmAMessage(<span class="code-keyword">var</span> M: TMessage); message wm_SomeMessage;
+end;</pre>
+
+
+
+<p>In this Delphi Pascal class, two methods provide exactly the same functionality using different mechanisms: <code>IAmAVirtual</code> uses virtual mechanism based on VMT while <code>IAmADynamic</code> uses an alternative mechanism based on <em>Dynamic Method Table</em> (DMT), where the methods are dispatched using auto-generated unique identifiers of the 32-bit integer type as keys. When a dynamic method is overridden in a derived class, the new class uses a different instance of DMT where the overridden method is associated with the same key. According to Borland and Embarcadero documentation, DMT is less memory consuming but the dispatching is slower. I think it can be understood based on the explanation of the operation of the very similar Dynamic Method Dispatcher.</p>
+
+
+
+<p>The third method <code>IAmAMessage</code> is very different. It also uses DMT for dispatching, but the key value is hard-coded by the developer of the class. In this sample, it can be one of the Windows message IDs. The type <code>TMessage</code> is not the only type which would work with this mechanism. This form of method only requires a by-reference parameter of any structure which is started from the key of the 32-bit integer type which will be passed to the called method as a result of dispatching. Also, this class does not have to dispatch Windows messages. You can use it for any purpose using a special predefined method <code>Dispatch</code>. Using this method specifically for Windows messages is just one of the applications of the dispatching mechanism used in some UI-related classes like <code>Form</code>.</p>
+
+
+
+<p>I would like to note that the Delphi DMT mechanism is not very flexible for dispatching by the key because there is only one predefined key type. Also, using message directives is not completely safe because correctness of the method parameter is based on the assumption that the user provides the correct parameter type. The implementation of Dynamic Method Dispatcher for .NET I provide is completely safe and is much more flexible and robust.</p>
+
+
+
+<h2><a name="a7"></a>7. Building the Code and Compatibility</h2>
+
+
+
+<p>The code is provided for Microsoft .NET versions 2.0 to 4.0. The solutions <em>DynamicMethodDispatcher.2005.sln</em>, <em>DynamicMethodDispatcher.2008.sln</em>, and <em>DynamicMethodDispatcher.2010.sln</em> allow for building the code using the corresponding version of Microsoft Visual Studio.</p>
+
+
+
+<p>The code can be built in batch mode using the batch files <em>build.2005.bat</em>, <em>build.2008.bat</em>, and <em>build.2010.bat</em> (build using <em>MSBuild.exe</em> of the respective formats of the Visual Studio solution file). The batch build does not require an installed copy of Visual Studio or any other development environment — it only uses the .NET redistributable package.</p>
+
+
+
+<p>The build creates two executables for two configurations (Debug and Release are separate output directories: <em>.\bin.Debug</em> and <em>.\bin.Release)</em>:</p>
+
+
+
+<ul>
+
+<li><em>SA.Universal.Technology.dll</em>: contains classes <code>MuticastDynamicMethod</code> and <code>MuticastDynamicMethodDispatcher</code>.</li><li><em>TestMessageDispatching.exe</em>: demo/test application described in <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a3">3</a>. This application can only run on Windows as it demonstrates processing of raw Windows messages.</li></ul>
+
+
+
+<h3><a name="a7.1"></a>7.1. Compatibility: Microsoft .NET</h3>
+
+
+
+<p>Both library and demo/test application code is backward-compatible with Windows versions starting from Windows 2000 (with .NET Framework v.2.0) and versions of the .NET Framework starting from v.2.0.</p>
+
+
+
+<h3><a name="a7.2"></a>7.2. Compatibility: Mono</h3>
+
+
+
+<p>The library should be compatible with Mono on all platforms (tested on Mono v. 1.2.6 and v. 2.4.4 on Linux), but the demo/test application can work only on Windows, as I explained above.</p>
+
+
+
+<h2><a name="a8"></a>8. Conclusions</h2>
+
+
+
+<p>The concept of Dynamic Method Dispatcher introduced in the present article is very powerful and can be used to considerably improve performance and maintainability of the code in a number of situations. It could be used to complement traditional OOP design in situations where the requirements push the limitations of OOP.</p>
+
+
+
+<p>However, this approach should no way be considered as a method superior to more traditional techniques. Instead, it should be considered as a useful addition to the developer's palette of expressive capabilities.</p>
+
+
+
+<h2><a name="a9"></a>9. Credits</h2>
+
+
+
+<p>I created the code of the first variant of Dynamic Method Dispatcher several years ago, and used its preliminary single-invocation version for different applications. The idea of writing this article came from a question at the CodeProject <a href="http://www.codeproject.com/Questions/ask.aspx">Questions and Answers forum</a>. I put forward the idea in response to the question by <a href="http://www.codeproject.com/Members/Dalek-Dave">Dalek Dave</a> on January 18, 2010. Dalek is a prominent CodeProject expert himself. Later on, several other experts encouraged me to write an article based on my idea. The first person who gave me the idea of writing this article was <a href="http://www.codeproject.com/Members/MarcusKramer">Marcus Kramer</a>.</p>
+
+
+
+<p>During my work on the article, I added many important features, including the brand new class <code>MuticastDynamicMethodDispatcher</code>, and essentially improved my understanding of the internals of .NET delegates. When I detected the read-only nature of delegate instance, <a href="http://www.codeproject.com/Members/Nishant-Sivakumar">Nishant Sivakumar</a> was the one who explained to me the importance of it (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#Nishant">4.1</a>). Thank you very much, Nish!</p>
+
+
+
+<p>I'm grateful to everyone who expressed interest in this work. Hope my work can match the expectations. :-)</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2011 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

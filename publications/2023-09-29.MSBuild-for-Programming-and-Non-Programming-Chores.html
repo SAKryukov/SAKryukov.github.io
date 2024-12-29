@@ -1,0 +1,844 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0074)https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>MSBuild for Programming and Non‑Programming Chores- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="MSBuild is a flexible tool, it can be used not only for Microsoft toolchains, and it can even be used for non-programming chores">
+<meta name="Keywords" content="XML, MSBuild, BUILD">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="9/29/2023 3:51:00 AM">
+<meta property="article:modified_time" content="9/29/2023 3:51:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="8 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores">
+<meta property="og:title" content="MSBuild for Programming and Non‑Programming Chores">
+<meta property="og:description" content="MSBuild is a flexible tool, it can be used not only for Microsoft toolchains, and it can even be used for non-programming chores">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores"
+   },
+  "name": "MSBuild for Programming and Non‑Programming Chores",
+  "headline": "MSBuild for Programming and Non‑Programming Chores",
+  "url": "https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores",
+  "discussionUrl": "https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "XML,MSBuild,BUILD",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "The flexibility of MSBuild, as well as its power, is demonstrated on the non-programming task: transcoding any set of media files of different nature using FFmpeg — graphics, audio, media, captions, virtually anything. The solution is highly generalized, so it can be used for many other programming and non-programming tasks. The present article offers the reasons why such an unusual use of MSBuild is recommended.",
+  "articleSection": "XML",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2023-09-29",
+  "dateCreated": "2023-09-29",
+  "dateModified": "2023-09-29"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 3.80,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=XML",
+      "name" : "XML"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '7772cb89-4209-4022-b936-a5c9b5a2ad02'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=XML">XML</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5369187/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/XML" data-id="88">XML</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/MSBuild" data-id="1385">MSBuild</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/BUILD" data-id="1604">BUILD</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">MSBuild for Programming and Non‑Programming Chores</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5369187">
+
+	<meta itemprop="upvoteCount" content="3">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:19px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:5px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">3.80/5  (4 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">28 Sep 2023</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">8 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 8.9K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 36</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">MSBuild is a flexible tool, it can be used not only for Microsoft toolchains, and it can even be used for non-programming chores</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">The flexibility of MSBuild, as well as its power, is demonstrated on the non-programming task: transcoding any set of media files of different nature using FFmpeg — graphics, audio, media, captions, virtually anything. The solution is highly generalized, so it can be used for many other programming and non-programming tasks. The present article offers the reasons why such an unusual use of MSBuild is recommended.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="MSBuild-for-Programming-and-Non-Programming-Chores.zip">Download source — 2.9 KB</a></li></ul>
+<p><img src="./Resources-articles/2023-09-29.MSBuild-for-Programming-and-Non-Programming-Chores.title.webp"/></p>
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-msbuild3f" style="margin-left: 0">Why MSBuild?</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-cross-platform" style="margin-left: 3em">Cross-Platform</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-.net3f" style="margin-left: 0">Why .NET?</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-code-sample" style="margin-left: 0">Code Sample</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-ffmpeg3f" style="margin-left: 3em">Why FFmpeg?</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-project" style="margin-left: 3em">Project</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-properties" style="margin-left: 3em">Properties</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-targets-and-parallel-execution" style="margin-left: 3em">Targets and Parallel Execution</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-custom-properties" style="margin-left: 3em">Custom Properties</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-using-visual-studio-code" style="margin-left: 0">Using Visual Studio Code</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-compatibility-and-testing" style="margin-left: 0">Compatibility and Testing</a><br>
+<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-why-msbuild3f">Why MSBuild?</h2>
+
+<p>Doesn’t the use of MSBuild for non-programming work look way too <em>esoteric</em>? Well, let’s look closer.</p>
+
+<p>I have used different scripting systems for development using some exotic languages or software development toolchains: Microsoft “CMD” batch, Python, JavaScript with <a href="https://en.wikipedia.org/wiki/Node.js">node.js</a> or even badly outdated but still operational <a href="https://en.wikipedia.org/wiki/Windows_Script_File">WSF</a>, PowerShell, bash, and I’ve never been convinced to prefer one system over another one.</p>
+
+<p>I also use scripting for many non-programming chores. One of my permanent activities requiring considerable scripting effort is handling different media files on different platforms: video, audio, video captions, photographs, and graphics. Recently, I decided to try out MSBuild. One of the reasons for that is that recently I took a chance to delve into BSBuild more than I usually do. Notably, it is related to my recent development found in a GitHub repository <a href="https://github.com/SAKryukov/dotnet-solution-structure">dotnet-solution-structure</a>.</p>
+
+<p>I quickly realized that MSBuild provides serious benefits in several ways. Ultimately, they are mostly reduced to the fact that MSBuild offers <a href="https://en.wikipedia.org/wiki/Declarative_programming">declarative programming</a>, nothing like <a href="https://en.wikipedia.org/wiki/Imperative_programming">imperative programming</a> offered by the usual scripting systems.</p>
+
+<p>It is very beneficial when you have to handle sets of files located in different directories without any guaranteed directory structure. Its extended syntax for file masks is very helpful. Another powerful feature is <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/incremental-builds">incremental build</a>. For software development toolchains, incremental build is usual and even mandatory. But usual scripting does not offer anything like that. At the same time, a lot of non-programming development is incremental. And some processing takes a lot more time than typical software build. One notorious example is transcoding using modern video codecs. These days, the better the latency of a technology, the slower the encoding process is.</p>
+
+<p>But probably the most important benefit of using MSBuild is the possibility to use it in a cross-platform way.</p>
+
+<h3 id="heading-cross-platform">Cross-Platform</h3>
+
+<p>The sample project provided here is cross-platform. Please see <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#paragraph-cross-platform">the explanation of why it is so below</a>.</p>
+
+<p>One note on that: every time the OS “Linux” is mentioned, it actually means “non-Windows”. All the elements of the solution designed to work for Linux should also work for any other platform except Windows. For this reason, all the platform-dependent conditions are calculated as <code>$(OS.StartsWith('Windows')</code> — I hope it is self-explanatory.</p>
+
+<h2 id="heading-why-.net3f">Why .NET?</h2>
+
+<p>MSBuild can be invoked in several ways. First of all, the command is “MSBuild”. MSBuild is also used for .NET projects and solutions, and then it is “dotnet build”.</p>
+
+<p>But I recommend using “dotnet msbuild”. It is clear why “dotnet build” is not suitable for non-.NET solutions, this command does not even have the “target” option. But why “dotnet msbuild” and not “MSBuild”?</p>
+
+<p>The first reason is the deployment: I don’t know where your MSBuild instance is located. Developers often have several MSBuild instances installed at the same time, different versions of them. As to .NET, it is usually installed to have the application path “dotnet” accessible everywhere, and it knows the version of MSBuild supplied with it, and will launch the most appropriate version.</p>
+
+<p>There is another, more subtle reason: with “dotnet msbuild”, you can use very convenient .NET API functions in MSBuild property definitions. For a detailed description of this possibility, please see Microsoft documentation on <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/property-functions">property functions</a>.</p>
+
+<p id="paragraph-cross-platform">And of course, one major benefit of executing MSBuild via .NET is that this method is <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-cross-platform">cross-platform</a>. It works on any platform where .NET is installed.</p>
+
+<p id="code-run-cmd">“run.cmd”:</p>
+
+<div class="pre-lang" id="premain830848"><div></div><div class="pre-action-link"><span id="copycode830848" class="copy-code" data-index="830848" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre830848" style="margin-top:0;" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">dotnet msbuild a.project -t:Transcode</pre>
+
+<p>This simple command line is designed to be usable for Windows and other systems. For Linux, it should also be made executable before using it:</p>
+
+<div class="pre-lang" id="premain917630"><div></div><div class="pre-action-link"><span id="copycode917630" class="copy-code" data-index="917630" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre917630" style="margin-top:0;" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">chmod -x run.cmd</pre>
+
+<h2 id="heading-code-sample">Code Sample</h2>
+
+<p>To evaluate the value of MSBuild, I create the code sample used to transcode any media supported by FFmpeg. The goal is to have an arbitrary set of media files located randomly under some directory, uniformly transcode them all, and place them in a single directory. It is done in a customizable manner: the inputs, file types, and transcoding options are placed in one “Custom” file and can be modified by the final user.</p>
+
+<p>It covers most of the basic features of FFmpeg, where we need one-to-one transcoding. It does not support very tricky situations with sophisticated mapping between input and output elements, multi-pass processes where each pass should use intermediate files obtained on a previous pass, and so on. However, my code sample can be upgraded with additional project files solving those advanced problems, using the same codebase I provided with the present article.</p>
+
+<h3 id="heading-why-ffmpeg3f">Why FFmpeg?</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/FFmpeg">FFmpeg</a> is probably the most universal and powerful suite used for the processing of a very wide range of media files. For video, it is probably the most fundamental tool. Many people who think that they don’t use FFmpeg actually use it, because it lies in the base of most media editors, generators, and other media software.</p>
+
+<p>It is much less true for photography and other visual arts, and a lot more for everything else, especially video.</p>
+
+<h2 id="heading-implementation">Implementation</h2>
+
+<h3 id="heading-project">Project</h3>
+
+<p>In this particular project, there is only one project file. Moreover, it is never changed:</p>
+
+<p>“a.project”:</p>
+
+<div class="pre-lang" id="premain462686"><div>XML</div><div class="pre-action-link"><span id="copycode462686" class="copy-code" data-index="462686" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre462686" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Project</span><span class="code-attribute"> </span><span class="code-attribute">Sdk</span><span class="code-keyword">="</span><span class="code-keyword">Microsoft.NET.Sdk"</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ItemGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">InputFiles</span><span class="code-attribute"> </span><span class="code-attribute">Include</span><span class="code-keyword">="</span><span class="code-keyword">$(InputMask)"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ItemGroup</span><span class="code-keyword">&gt;</span>
+
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Project</span><span class="code-keyword">&gt;</span></pre>
+
+<p>This is the most generic project. It does not have to be changed, because it simply transparently passes input mask defined elsewhere and generates a set of items.</p>
+
+<p>MSBuild concept of <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-items">items</a> is very powerful. It replaces all those silly iteration loops required by other scripting systems, as well as traversing any directories, recursive or not.</p>
+
+<p>The real set of definitions comes from three common files. One of them, “Custom.props”, is specific to the project and type of processing. The other two are applied to all projects in all downstream subdirectories: <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-props">“Directory.Build.props”</a> and <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-targets">“Directory.Build.targets”</a>.</p>
+
+<p>This use of the shared properties and targets is analogous to the definitions for Microsoft toolchains: the common predefined sets of properties and targets come with MSBuild, Visual Studio, and other products. This way, more project files using common definitions, can be added.</p>
+
+<h3 id="heading-properties">Properties</h3>
+
+<p id="code-directory-build-props">“Directory.Build.props”:</p>
+
+<div class="pre-lang" id="premain407490"><div>XML</div><div class="pre-action-link"><span id="copycode407490" class="copy-code" data-index="407490" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre407490" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Project</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Import</span><span class="code-attribute"> </span><span class="code-attribute">Project</span><span class="code-keyword">="</span><span class="code-keyword">Custom.props"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputPath</span><span class="code-keyword">&gt;</span>$(ProjectDir)output<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputPath</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Tool</span><span class="code-keyword">&gt;</span>ffmpeg<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Tool</span><span class="code-keyword">&gt;</span> <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> Linux </span><span class="code-comment">--&gt;</span></span>
+        <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> For Windows: modify the path to access ffmpeg: </span><span class="code-comment">--&gt;</span></span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Tool</span><span class="code-attribute">
+            </span><span class="code-attribute">Condition</span><span class="code-keyword">="</span><span class="code-keyword">$(OS.StartsWith('Windows'))"</span><span class="code-attribute">
+            </span><span class="code-keyword">&gt;</span>C:/app/Media/ffmpeg/bin/ffmpeg.exe<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Tool</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Multitasking</span><span class="code-attribute">
+            </span><span class="code-attribute">Condition</span><span class="code-keyword">="</span><span class="code-keyword">$(OS.StartsWith('Windows'))"</span><span class="code-attribute">
+            </span><span class="code-keyword">&gt;</span>start<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Multitasking</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Continue</span><span class="code-keyword">&gt;</span>%5C<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Continue</span><span class="code-keyword">&gt;</span> <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> backslash for Linux </span><span class="code-comment">--&gt;</span></span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Continue</span><span class="code-attribute"> </span><span class="code-attribute">Condition</span><span class="code-keyword">="</span><span class="code-keyword">$(OS.StartsWith('Windows'))"</span><span class="code-keyword">&gt;</span>^<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Continue</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Project</span><span class="code-keyword">&gt;</span></pre>
+
+<h3 id="heading-targets-and-parallel-execution">Targets and Parallel Execution</h3>
+
+<p id="code-directory-build-targets">“Directory.Build.targets”:</p>
+
+<div class="pre-lang" id="premain324112"><div>XML</div><div class="pre-action-link"><span id="copycode324112" class="copy-code" data-index="324112" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre324112" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Project</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Target</span><span class="code-attribute"> </span><span class="code-attribute">Name</span><span class="code-keyword">="</span><span class="code-keyword">Transcode"</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+            <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> MBSBuild item transform: </span><span class="code-comment">--&gt;</span></span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Commands</span><span class="code-keyword">&gt;</span>@(InputFiles -&gt;
+                    '$(Multitasking) $(Tool) -y $(Continue)
+                    $(InputOptions) $(Continue)
+                    -i %(Identity) $(Scale) $(Continue)
+                    $(OutputOptions) $(Continue)
+                    $(OutputPath)%(Filename).$(OutputFileType)',
+                ' %26 ')
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Commands</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">MakeDir</span><span class="code-attribute"> </span><span class="code-attribute">Directories</span><span class="code-keyword">="</span><span class="code-keyword">$(OutputPath)"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Exec</span><span class="code-attribute"> </span><span class="code-attribute">Command</span><span class="code-keyword">="</span><span class="code-keyword">$(Commands)"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Target</span><span class="code-keyword">&gt;</span>
+
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Project</span><span class="code-keyword">&gt;</span></pre>
+
+<p>The clause using “@” and “%” is a very interesting and powerful thing, MSBUilt items <em>transform</em>. Please see the Microsoft documentation on <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-transforms">MSBuild Transforms</a> for more information. In this clause, we transform the list of items into a list of commands executing FFmpeg.</p>
+
+<p>The list of commands is concatenated using different ways of executing FFmpeg in parallel. It works differently in different systems. What is “%26”? This is the character “&amp;”. MSBuild does not allow direct use of this character, so it should be <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/special-characters-to-escape">escaped</a> with a hexadecimal escape notation. For Linux, “&amp;” between commands means the execution of them in parallel. For Windows, this character is also used, but it means consecutive execution of the commands. For execution in parallel on Windows, each command should be prepended with the command “start”, which is defined as the property <code>Multitasking</code>.</p>
+
+<p>If parallel execution should be turned into a consecutive, for whatever reason, how to do it? For Windows, the value of <code>$(Multitasking)</code>, “start”, should become an empty string. For Linux, the command delimiter “&amp;” (“%26”) should become double, “&amp;”. In this case, it can be double for Windows, too.</p>
+
+<p>There is another weird property <code>Continue</code>. It is defined to show the command in several lines, mostly for clarity and especially for the publication of the present article. It is a different character for Linux and Windows, “\” and “^” correspondently, and “\” is also the character to be escaped. Please see <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-props">“Directory.Build.props”</a>.</p>
+
+<p>The other input information is custom and is defined in a separate file “Custom.props”, specific to a particular transcoding task. It supply the items and properties <code>@(InputFiles)</code>, $(Options), $(OutputPath) and, $(OutputFileType). So, finally, let’s take a look at this file.</p>
+
+<h3 id="heading-custom-properties">Custom Properties</h3>
+
+<p>First of all, note the use of “**” wildcard. It extends the set of input files to the paths on all levels of nesting.</p>
+
+<p id="code-custom-props">“Custom.props”:</p>
+
+<div class="pre-lang" id="premain758748"><div>XML</div><div class="pre-action-link"><span class="code-collapse" data-index="758748" id="preShrink758748">Shrink ▲</span> &nbsp; <span id="copycode758748" class="copy-code" data-index="758748" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre758748" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Project</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">InputMask</span><span class="code-keyword">&gt;</span>../**/*.png<span class="code-keyword">&lt;</span><span class="code-leadattribute">/InputMask</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputFileType</span><span class="code-keyword">&gt;</span>webp<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputFileType</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Scale</span><span class="code-keyword">&gt;</span>-vf scale=256:-1<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Scale</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Scale</span><span class="code-keyword">&gt;</span>-vf scale=-1:128<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Scale</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Scale</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;</span><span class="code-leadattribute">/Scale</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">InputOptions</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;</span><span class="code-leadattribute">/InputOptions</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-lossless 0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-lossless 1<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-quality 0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-quality 100<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset none<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset default<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset picture<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset photo<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset drawing<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset icon<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span>-preset text<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputOptions</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputOptions</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Project</span><span class="code-keyword">&gt;</span></pre>
+
+<p>In these definitions, many different options are shown. As always, the property defined lower overwrites the properties defined above, so many definitions are redundant. They are placed here for convenience and self-documenting purposes. In this example, the properties <code>Scale</code> and <code>Options</code> are empty, but they can be changed by placing another property definition below the last line.</p>
+
+<p>In the definition of <code>Scale</code>, the format <code>-vf scale=&lt;width&gt;:&lt;height&gt;</code> is used, and -1 means that width or height is calculated automatically, to make sure the <em>aspect ratio</em> remains the same.</p>
+
+<h2 id="heading-using-visual-studio-code">Using Visual Studio Code</h2>
+
+<p>This section is more important for software development use, especially with the use of marginal and not very popular programming systems. Some of them don’t have any IDE, debugger, or build toolchain, and simply offer a few command-line tools like compiler, linker, and the like. How to work with them, even without a Visual Studio Code extension?</p>
+
+<p>This is pretty simple. First, add a member <code>preLaunchTask</code> to some configuration in “launch.json”. This is an example:</p>
+
+<p>“launch.json”:</p>
+
+<div class="pre-lang" id="premain293621"><div>JSON</div><div class="pre-action-link"><span id="copycode293621" class="copy-code" data-index="293621" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre293621" style="margin-top:0;" class="lang-json notranslate" data-language="Json" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">{
+    <span class="code-string">"</span><span class="code-string">version"</span>: <span class="code-string">"</span><span class="code-string">0.2.0"</span>,
+    <span class="code-string">"</span><span class="code-string">configurations"</span>: [
+        {
+            <span class="code-string">"</span><span class="code-string">type"</span>: <span class="code-string">"</span><span class="code-string">pwa-chrome"</span>,
+            <span class="code-string">"</span><span class="code-string">request"</span>: <span class="code-string">"</span><span class="code-string">launch"</span>,
+            <span class="code-string">"</span><span class="code-string">name"</span>: <span class="code-string">"</span><span class="code-string">Transcode"</span>,
+            <span class="code-string">"</span><span class="code-string">preLaunchTask"</span>: <span class="code-string">"</span><span class="code-string">Build"</span>,
+            <span class="code-string">"</span><span class="code-string">runtimeArgs"</span>: [<span class="code-string">"</span><span class="code-string">--incognito"</span>],
+            <span class="code-string">"</span><span class="code-string">file"</span>: <span class="code-string">"</span><span class="code-string">${workspaceFolder}/.vscode/index.html"</span>,
+            <span class="code-string">"</span><span class="code-string">webRoot"</span>: <span class="code-string">"</span><span class="code-string">${workspaceFolder}"</span>
+        }
+    ]
+}</pre>
+
+<p>Here, “Build” is a task in the file “tasks.json”:</p>
+
+<p>“tasks.json”:</p>
+
+<div class="pre-lang" id="premain653722"><div>JSON</div><div class="pre-action-link"><span id="copycode653722" class="copy-code" data-index="653722" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre653722" style="margin-top:0;" class="lang-json notranslate" data-language="Json" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">{
+    <span class="code-string">"</span><span class="code-string">version"</span>: <span class="code-string">"</span><span class="code-string">2.0.0"</span>,
+    <span class="code-string">"</span><span class="code-string">tasks"</span>: [{
+        <span class="code-string">"</span><span class="code-string">label"</span>: <span class="code-string">"</span><span class="code-string">Build"</span>,
+        <span class="code-string">"</span><span class="code-string">command"</span>: <span class="code-string">"</span><span class="code-string">${workspaceFolder}/run.cmd"</span>,
+        <span class="code-string">"</span><span class="code-string">type"</span>: <span class="code-string">"</span><span class="code-string">shell"</span>
+    }]
+}</pre>
+
+<p>This way, the launch configuration “Transcode” will execute our “run.cmd” and then report “MSBuild work is complete”. Please see sample “.vscode/*” files for further information.</p>
+
+<h2 id="heading-compatibility-and-testing">Compatibility and Testing</h2>
+
+<p>The solution is supposed to be compatible with all platforms where .NET is installed.</p>
+
+<p>Tested thoroughly on Linux and Windows.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>The solution works smoothly on different platforms. It is very easy to upgrade to a more complicated solution. It shows the most ins and outs important for the development of a wide range of systems working with different input and output files without a rigid directory structure.</p>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5369187/MSBuild-for-Programming-and-Non-Programming-Chores">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2023 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

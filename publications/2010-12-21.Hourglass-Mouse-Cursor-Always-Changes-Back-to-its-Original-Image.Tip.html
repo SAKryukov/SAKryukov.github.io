@@ -1,0 +1,641 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0089)https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Hourglass Mouse Cursor Always Changes Back to its Original Image. How?- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="IDisposable with “using” block helps in all cases">
+<meta name="Keywords" content="C#">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="12/20/2010 7:11:00 AM">
+<meta property="article:modified_time" content="12/21/2010 6:30:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="1 min read">
+<meta property="og:url" content="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its">
+<meta property="og:title" content="Hourglass Mouse Cursor Always Changes Back to its Original Image. How?">
+<meta property="og:description" content="IDisposable with “using” block helps in all cases">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its"
+   },
+  "name": "Hourglass Mouse Cursor Always Changes Back to its Original Image. How?",
+  "headline": "Hourglass Mouse Cursor Always Changes Back to its Original Image. How?",
+  "url": "https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its",
+  "discussionUrl": "https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C#",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=3866010"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "IDisposable with “using” block helps in all cases",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2010-12-20",
+  "dateCreated": "2010-12-20",
+  "dateModified": "2010-12-21"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.85,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+<a class="access-link" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<div class="page-background">
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+       
+
+<div class="container memberbar clearfix flex-container flex-extend">
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+	<div class="flex-item">
+	</div>
+	<div class="flex-item align-right">
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Tips/137802/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Hourglass Mouse Cursor Always Changes Back to its Original Image. How?</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_137802">
+
+	<meta itemprop="upvoteCount" content="10">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:20px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:4px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.85/5  (11 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">21 Dec 2010</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">1 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 29.5K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">IDisposable with “using” block helps in all cases</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/tip100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+Testing and debugging UI code, I am often faced with such a situation, when the mouse cursor is changed to Hourglass, but not changed back.<br>
+Sometimes, it happened to my own code as well.<br>
+<br>
+The mouse cursor is supposed to be changed back to its original or default image after the procedure which could cause a delay if UI response is already completed (or failed). Sometimes it is not changed back because this procedure fails due to exception or some other reason. Sometimes the code used to set mouse cursor to its original image is simply forgotten.<br>
+<br>
+As a result, I came to a simple pattern which helps to avoid such situation in all cases. I used it in several different UI systems. Now I'll show how it is implemented with .NET. The idea is using helper class implementing <code>IDisposable</code>.<br>
+<br>
+This is a <code>WPF</code> implementation written in C#:<br>
+<br>
+<div class="pre-lang" id="premain788385"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="788385" id="preShrink788385">Shrink ▲</span> &nbsp; <span id="copycode788385" class="copy-code" data-index="788385" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre788385" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">namespace</span> SA.Universal.UI {
+    <span class="code-keyword">using</span> IDisposable = System.IDisposable;
+    <span class="code-keyword">using</span> FrameworkElement = System.Windows.FrameworkElement;
+    <span class="code-keyword">using</span> Cursor = System.Windows.Input.Cursor;
+    <span class="code-keyword">using</span> Cursors = System.Windows.Input.Cursors;
+    <span class="code-keyword">using</span> Debug = System.Diagnostics.Debug;
+
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> WaitCursorIndicator : IDisposable {
+
+        <span class="code-keyword">public</span> WaitCursorIndicator(FrameworkElement owner) {
+            <span class="code-keyword">this</span>.Onwer = owner;
+            Debug.Assert(
+                owner != <span class="code-keyword">null</span>,
+                <span class="code-string">"</span><span class="code-string">WaitCursorIndicator expects non-null argument"</span>);
+            <span class="code-keyword">if</span> (owner == <span class="code-keyword">null</span>) <span class="code-keyword">return</span>;
+            Previous = owner.Cursor;
+            owner.Cursor = Cursors.Wait;
+        } <span class="code-comment">//</span><span class="code-comment">WaitCursorIndicator</span>
+
+        <span class="code-keyword">void</span> IDisposable.Dispose() {
+            <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.Onwer == <span class="code-keyword">null</span>) <span class="code-keyword">return</span>;
+            <span class="code-keyword">this</span>.Onwer.Cursor = Previous;
+        } <span class="code-comment">//</span><span class="code-comment">IDisposable.Dispose</span>
+
+        FrameworkElement Onwer;
+        Cursor Previous;
+
+    } <span class="code-comment">//</span><span class="code-comment">class WaitCursorIndicator</span>
+
+} <span class="code-comment">//</span><span class="code-comment">namespace SA.Universal.UI</span></pre><br>
+<br>
+With <code>System.Windows.Forms</code>, it is implemented in a very similar way:<br>
+<br>
+<div class="pre-lang" id="premain271793"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="271793" id="preShrink271793">Shrink ▲</span> &nbsp; <span id="copycode271793" class="copy-code" data-index="271793" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre271793" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">namespace</span> SA.Universal.UI {
+    <span class="code-keyword">using</span> System.Windows.Forms;
+    <span class="code-keyword">using</span> IDisposable = System.IDisposable;
+    <span class="code-keyword">using</span> Debug = System.Diagnostics.Debug;
+
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> WaitCursorIndicator : System.IDisposable {
+
+        <span class="code-keyword">public</span> WaitCursorIndicator(Control owner) {
+            <span class="code-keyword">this</span>.Owner = owner;
+            Debug.Assert(
+                owner != <span class="code-keyword">null</span>,
+                <span class="code-string">"</span><span class="code-string">WaitCursorIndicator expects non-null argument"</span>);
+            <span class="code-keyword">if</span> (owner == <span class="code-keyword">null</span>) <span class="code-keyword">return</span>;
+            Previous = <span class="code-keyword">this</span>.Owner.Cursor;
+            owner.Cursor = Cursors.WaitCursor;
+        } <span class="code-comment">//</span><span class="code-comment">WaitCursorIndicator</span>
+
+        <span class="code-keyword">void</span> IDisposable.Dispose() {
+            <span class="code-keyword">if</span> (Owner == <span class="code-keyword">null</span>) <span class="code-keyword">return</span>;
+            Owner.Cursor = Previous;
+        } <span class="code-comment">//</span><span class="code-comment">IDisposable.Dispose</span>
+
+        Control Owner;
+        Cursor Previous;
+
+    } <span class="code-comment">//</span><span class="code-comment">class WaitCursorIndicator</span>
+
+} <span class="code-comment">//</span><span class="code-comment">namespace SA.Universal.UI</span></pre><br>
+<br>
+The usage looks identical for <code>WPF</code> and <code>System.Windows.Forms</code>:<br>
+<br>
+<div class="pre-lang" id="premain491733"><div>C#</div><div class="pre-action-link"><span id="copycode491733" class="copy-code" data-index="491733" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre491733" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span>(<span class="code-keyword">new</span> WaitCursorIndicator(owner)) {
+   <span class="code-comment">//</span><span class="code-comment">... some long-running code here</span>
+} <span class="code-comment">//</span><span class="code-comment">end using</span></pre><br>
+<br>
+In this code snippet, <code>owner</code> is most typically a form or a window.<br>
+<br>
+This way, mouse cursor is changed back no matter what, even if an exception is thrown.<br>
+On exit from the "<code>using</code>" block, <code>WaitCursorIndicator.Dispose</code> is always called. In fact, using this "<code>using</code>" block is just <a href="http://en.wikipedia.org/wiki/Syntax_sugar">syntactic sugar</a> functionally strictly equivalent to the try-finally block with <code>Dispose</code> called in the <code>finally</code> section.
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Tips/137802/Hourglass-Mouse-Cursor-Always-Changes-Back-to-its?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2010 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

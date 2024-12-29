@@ -1,0 +1,1240 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0093)https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Enumeration Types do not Enumerate! Working around .NET and Language Limitations- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Generic classes for enumeration-based iteration and array indexing">
+<meta name="Keywords" content="VS2005, Mono, VS2008, C#, Windows, .NET, Visual-Studio, Dev, Linux, Intermediate, VS2010">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="11/22/2010 12:25:00 PM">
+<meta property="article:modified_time" content="3/11/2017 1:18:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="31 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">
+<meta property="og:title" content="Enumeration Types do not Enumerate! Working around .NET and Language Limitations">
+<meta property="og:description" content="Generic classes for enumeration-based iteration and array indexing">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around"
+   },
+  "name": "Enumeration Types do not Enumerate! Working around .NET and Language Limitations",
+  "headline": "Enumeration Types do not Enumerate! Working around .NET and Language Limitations",
+  "url": "https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around",
+  "discussionUrl": "https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "VS2005,Mono,VS2008,C#,Windows,.NET,Visual-Studio,Dev,Linux,Intermediate,VS2010",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Generic classes for enumeration-based iteration and array indexing",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2010-11-22",
+  "dateCreated": "2010-11-22",
+  "dateModified": "2017-03-11"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.95,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/129830/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="YBAA0lCJ8qPs/qpv6SvgaFTjY4NSI7AQjMaiuekkuKziJ8hUdtpgj2WW9W1AvFjb/efR3DWVpYWhUNNIX8OVnu/K2SAqOGtMbO15/ay0cjAg2JnN8jCeWS4rzg0J26JrDpUA5iJ70C1ZipNGPfIPBPcppZ/E5UOpEGLRO1vGPRjUjoRUz6SgCTr3a8GJLATYSRjmwGwsIPBh/NNg9n3naNOM5i4D6H5DRA4nl9kLR8/yDeRXBwoQjlCkotyLDB5ukvsBd2nvnVLPRP4UPf//ZwTKgwojf/URpIoMyc4nS/gR0h3v++ie236Ckp7i+ByNVTMFvPgx9sdNBtkdDBFU+4I877+vf/gg2bLssEsI6dqzGiKmpmiUcOKMYIBoipQNs1A0BiJGBdUnDtqxICjSi+2p8ZBHj5PP12dyPL9O46ec9pAF3pLAuWk/OTyDrVHmX3uCY5/SlOz/wMkXF/X9aHYuDPHOftBrIgWnURZRiZQ4Qe5E9tRuQVO3TRKZ6hDUyd5izPZaj+Pls1nuO1NvFkqfXkFJvKaSBPEanmiCLyQXj6qgiZD7OxQdHEr68Ls8/lwvnCnfPUSlc1fA+cNyW0Meo4WoECznGBkO2sN4hWCHcEAD2DPhP7dvbMY4s6nR6vXCDU537wh0pnnlUP85fLvn2VuNLKkjPjhKa/Kgkw0kfqJvdKBtcHPmVhw70aDrC5KgELtznbre9EejIUZGRQPRyNg2iOisP1khafXMN+wm77FOONnRGyNtVoOiAOV6Injp80AK6I2GCzApqIE5O1pXkrDlYZ0WpySbtGuYjEcYf6BlNSn2n5xcYPBWiMKTW6Gc2heBRFr7VIzJQu1FgQ4wmR2h6Umw8muEbhtG6ZwmiLRzwloQCZX9rUlgCB2pNPOgDK6g55P9CfeQ2rV5F1adPrb6prMtZgF+ihboN1bxqXkwI7X02Q6kZnNOpFBXPr34A5TJW8iNmm6x1SfV8jXwZmZ3b1vXbajanpGlMwfS0Q49DRwVKKQTx7THe9vGJDqAkx3XKkpS8xYPc0aT2w0+FdeCgT0n39dyHt+GJhXgiZPo019aV8KX3R8EFyEmGhma/+P2rrfzsVFxPNtWLqj15TELcBKRCZLMPBFQ+eMDNo/PaQJCrvNBh9xALmUu7QM3nuH/Blhsic5TZceEbRWouE9svyjkNO2ne5BFFVeNOW2wFV0Wk14GSTldixiDf1PQoZsp7zn5AmDNelktb4F/zjfKbJPI5eNKrT5MzszO42OBnX1MXM9N4/FuB7Fx07/e1jJmSDBEjcKczKsRR6PZditF4PajqEjxVBBYit/Zg+bVeP4FJaU15IC3l/evtW1yY4G2jlp0W/l1G90UtBbX4R54lIAZdH1jd4gri7uV3B1mUZckMMOivjl8M+ij2etpmB5y+HboRk5pzVSRuOkzaL6XlBJmrDakjO1QqzS0im5lUPC6E4BsANFeXpHVrYb8terBnRNhWzeZxn6gHVb//0UHuXJdyX70g+PQnFIj/3cCKhZUh+JO7U9lGmckjIjp1epc0olz7i6bC+9Pyo/gHbsvK8a59DXSxH8h0mNEv9PKPB4tJA/syHcXEuzZs5RK1RKYFrPIJBvG7+fMl0Z+9Ptvwriww2WT0C18MO7wMjRbVC6AHVmmnJLMcERpQAmrBxXAVSXLSwvXMFJT2NBSDXTDjSGDLy/ZuzH1um9hp2jVlVbrnrWDrpGn5iXa27Fbl7Hm6PJE75GFnp8DLwHrp+HOzSmtmf1h4W8gLflxnsUtCJf8hH10DTdZoMHyUYDQUs5wu6QKbNFpSaKgcRGXUx0pTeMIWyOAMRhBaZXuJg2Dk0wcCIbl7gZazM72lzXidAThbFvNpPzR49i3zvz+iolo37AbIBQq/sy5699Yka45Z3WAMScQBzGiwKfhJuyEKSy9X/Ob+zV/WFzJk+SqUYahiuEEK4S4mR9yVbnpWz1spOJ8WdW7KPFbPJpqVfAbMRhm4LX0TVQCgCp8kErmAwloKfD+3rvlwwRNdPcFF1kynifCC8xB4UqU4N+80FzSo6t/xYFJuBR7RUmMX7yAz14sTzKatAUK5RwRNMius8rPQJ1aMaWfJLBc+MsQdyJ8Z7EB9e/R+tCRBLSyUbFbAx5LquWc/cUMTWjNR5pG0TmO9PTb2SPgZgH1udnSaiF6sPbSBgfbSTIO3TUaAeDWNBAx6korKbCV3QuhQjJgtnK/WASYQSg5DxpqqLKVm32GsmAxuCWRBow0aOQr9LmQh8Q=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2005" data-id="39">VS2005</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Mono" data-id="62">Mono</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2008" data-id="77">VS2008</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Windows" data-id="94">Windows</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Visual-Studio" data-id="103">Visual-Studio</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Linux" data-id="120">Linux</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2010" data-id="314">VS2010</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Enumeration Types do not Enumerate! Working around .NET and Language Limitations</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_129830">
+
+	<meta itemprop="upvoteCount" content="69">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:22px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:2px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.95/5  (74 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">22 Nov 2010</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">31 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 269.4K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 641</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Generic classes for enumeration-based iteration and array indexing</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Enumeration-Types-do-not-Enumerate.zip">Download source code — 38.69 KB</a></li></ul>
+
+<p><img alt="2010-11-22.Enumeration-Types-do-not-Enumerate.webp" title="Demo" src="./Resources-articles/2010-11-22.Enumeration-Types-do-not-Enumerate.webp"/></p>
+<!--<p><img alt="EnumTypesDoNotEnumerate/Enumerations.png" id="epigraph" height="466" src="./Resources/Enumerations.png" style="width: 459px; height: 466px" width="459" class="lazyautosizes ls-is-cached lazyloaded" data-sizes="auto" data-srcset="/KB/dotnet/EnumTypesDoNotEnumerate/Enumerations-r-400.png 400w, /KB/dotnet/EnumTypesDoNotEnumerate/Enumerations.png 459w" sizes="459px" srcset="/KB/dotnet/EnumTypesDoNotEnumerate/Enumerations-r-400.png 400w, /KB/dotnet/EnumTypesDoNotEnumerate/Enumerations.png 459w"></p>-->
+
+<p align="right">Epigraph:</p>
+
+<p align="right">The science represented by myself gives us strict and unambiguous answer: <em>may be</em>.</p>
+
+<p align="right"><a href="http://en.wikipedia.org/wiki/Strugatsky_brothers">A &amp; B Strugatsky</a>, <em><a href="http://en.wikipedia.org/wiki/Tale_of_the_Troika">Tale of the Troika</a></em></p>
+
+<h2>Contents</h2>
+
+<ul style="list-style-type: none; list-style-image: initial">
+	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a1">1 Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2">2 Background: Life before <code>Enumeration</code> Class</a>
+	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.1">2.1 Simplest Iteration Loop</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.2">2.2 Using Length Descriptor</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.3">2.3 Using Suprema Descriptors</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.4">2.4 Iterating Bit Sets</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.5">2.5 Mocking Programming by Extension</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.6">2.6 Iteration Problems</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.7">2.7 Problem with Enumeration Member Names</a></li>	</ul>
+	</li>	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3">3 Foreground: Using <code>Enumeration</code> Class and Enumeration-indexed Arrays</a>
+	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.1">3.1 What to Enumerate?</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.2">3.2 <code>Enumeration</code> Usage</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.3">3.3 What if <code>ENUM</code> is not an Enumeration Type?</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.4">3.4 A Note on Flags and Bitwise Operations</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.5">3.5 Array Indexing</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.6">3.6 Cartesian Square</a></li>	</ul>
+	</li>	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4">4 How it Works</a>
+	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.1">4.1 Collecting Static Member Data</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.2">4.2 Enumerator</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.3">4.3 Thread Safety and Performance</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.4">4.4 Array Indexing</a></li>	</ul>
+	</li>	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a5">5 Building the Code and Compatibility</a>
+	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a5.1">5.1 Compatibility: Microsoft .NET</a></li>		<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a5.2">5.2 Compatibility: Mono for Linux</a></li>	</ul>
+	</li>	<li><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a6">6 Conclusions</a></li></ul>
+
+<h2 id="a1">1 Introduction</h2>
+
+<p>This article is the first article of the small series of articles on enumeration types I'm presenting to CodeProject members:</p>
+
+<ol>
+	<li>The present article;</li>	<li><a href="http://www.codeproject.com/Articles/136181/Human-readable-Enumeration-Meta-data">Human-readable Enumeration Meta-data, <i>Display Names and Descriptions for Enumeration Members: a Non-intrusive Reliable Localizable Method</i></a>;</li>	<li><a href="http://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">Enumeration-based Command Line Utility</a>;</li>	<li><a href="http://www.codeproject.com/Articles/809357/Bitwise-Enumeration-Editor-for-PropertyGrid-and-Vi">Bitwise Enumeration Editor for PropertyGrid and Visual Studio</a>.</li></ol>
+
+<p>The limitations of enumeration types are rooted in .NET platform architecture rather than in <a href="http://en.wikipedia.org/wiki/CSharp">C#</a> (the language I use in my code samples and implementation of my solution). Nevertheless, I prefer calling them language limitations, by two related reasons. First and foremost, the limitations of the platform could be compensated by language features; in all cases, this is ultimately the language to be blamed for insufficient expressive power, even though unmatched expressive power of one language would cause compatibility problems with others (compare <a href="http://en.wikipedia.org/wiki/FSharp">F#</a> with other .NET languages, for example). Secondly, every API like the one representing .NET class library can be considered as a language in the broader sense of this word.</p>
+
+<p>The purpose of this work is to compensate the lack of desired features by offering three generic types: one will allow for iteration through <code>static </code>members of its type argument effectively converting any enumeration type into enumerable container supporting complete enumeration semantics; the other two will allow for indexing of arrays. Both features are implemented with small footprint and reasonable performance.</p>
+
+<p>Consider simple <code>enum</code> declaration (borrowed from Wikipedia article on <a href="http://en.wikipedia.org/wiki/Enumerated_type">enumerated type</a>):</p>
+
+<div class="pre-lang" id="premain623858"><div>C#</div><div class="pre-action-link"><span id="copycode623858" class="copy-code" data-index="623858" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre623858" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CardSuit { Clubs, Diamonds, Spades, Hearts, }</pre>
+
+<p>Wouldn’t the following look like a much anticipated feature?</p>
+
+<div class="pre-lang" id="premain568524"><div>C#</div><div class="pre-action-link"><span id="copycode568524" class="copy-code" data-index="568524" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre568524" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> will not compile:</span>
+<span class="code-keyword">foreach</span>(CardSuit item <span class="code-keyword">in</span> CardSuit) {
+    <span class="code-comment">//</span><span class="code-comment"> use item...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop</span></pre>
+
+<p>When we try to understand why <a href="http://en.wikipedia.org/wiki/Foreach"><code>foreach</code></a> construct cannot work with our enumeration, we will find that it requires working set to implement <code>IEnumerable</code>. This is quite a shocking fact that <code>enum</code> types do not implement <code>IEnumerable</code>.</p>
+
+<p><em>Enumeration types are not enumerable!</em></p>
+
+<p>This fact is hard to understand, because the ability to enumerate can be considered as an inherent trait of enumeration types, as suggested by the term itself. This trait is well supported in some other languages like <a href="http://en.wikipedia.org/wiki/Ada_(programming_language)">Ada</a>, <a href="http://en.wikipedia.org/wiki/Comparison_of_Pascal_and_Delphi">Delphi Pascal</a> (most direct predecessor of C# and .NET; <a href="http://en.wikipedia.org/wiki/Foreach#Delphi"><code>foreach</code> support introduced with Delphi 2005</a>), <a href="http://en.wikipedia.org/wiki/Ada_(programming_language)">Java</a>, etc.</p>
+
+<p>More than that, using enumeration type as an array index is also very natural. Consider the following Pascal declaration:</p>
+
+<div class="pre-lang" id="premain43315"><div>C#</div><div class="pre-action-link"><span id="copycode43315" class="copy-code" data-index="43315" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre43315" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">suitCount: array[CardSuit] of integer;</pre>
+
+<p>Introduction of enumeration in ANSI C has generated a whole line of syntactically similar languages lacking fully-fledged enumeration semantics that would be natural to this construct due to its properties and set of operations. In essence, what is called enumeration or <code>enum</code> in these languages does not present real enumeration types. This fact still could be understood when <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a> or <a href="http://en.wikipedia.org/wiki/C%2B%2B">C++</a> are considered: in these languages with their archaic linkage and <code>include</code> construct enumeration types played the role of mere set of integer constants to be used through a single-place declaration, eliminating a need in separate value definition. For more modern languages like C# the lack of enumeration semantics looks like just yet another historical casus of C ancestry.</p>
+
+<h2 id="a2">2 Background: Life Before Enumeration Class</h2>
+
+<p>The new enumeration and indexing features are based on generic class <code>Enumeration</code> designed to serve as enumerable container based on enumeration types. Two more generic classes are based on <code>Enumeration</code> functionality and used for enumeration-based array indexing: <code>EnumerationIndexedArray</code> and <code>CartesianSquareIndexedArray</code>.</p>
+
+<p>Before offering my solution, I need to provide some background on .NET enumeration types. I don’t want go to as far as making it comprehensive though. Instead, I am going to illustrate enumeration work on code snippets mostly related to iterating through some set of enumeration values and discuss related problems.</p>
+
+<p>I do understand that not everyone needs to use my solution, because, after all, having extra code is an extra hassle. I also don’t want to exaggerate the importance of my comprehensive solution, but I want my readers to compare it with some simpler ad-hoc techniques, to be able to make a right choice. That’s why I’ll start from explanation of those simpler techniques under the title “Life before <code>Enumeration</code> Class”.</p>
+
+<h3 id="a2.1">2.1 Simplest Iteration Loop</h3>
+
+<p>Given the above declaration of <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#CardSuit"><code>CardSuit</code></a>, the iteration loop can be written quite simply:</p>
+
+<div class="pre-lang" id="premain370661"><div>C#</div><div class="pre-action-link"><span id="copycode370661" class="copy-code" data-index="370661" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre370661" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">for</span> (CardSuit loopVariable = CardSuit.Clubs;
+    loopVariable &lt;= CardSuit.Hearts;
+    loopVariable++) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span>
+<span class="code-keyword">for</span> (CardSuit loopVariable = CardSuit.Hearts;
+    loopVariable &gt;= CardSuit.Clubs;
+    loopVariable--) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit in reverse</span></pre>
+
+<p>This code snippet shows that comparison, increment and decrement operators are applicable to enumeration, so there is no need in type casting of enumeration values to their integer representations and back.</p>
+
+<p>The main problem of this code is supportability. If the purpose of this code is the iteration through full set of enumeration members, it will be broken when a new <code>CardSuit</code> member is added at the end of previous declaration or inserted at the beginning. If either <code>Hearts</code> or <code>Clubs</code> member is deleted, the code will not compile, which is easier because it makes the problem immediately detectable. In all cases, any modification of enumeration type declaration will require review of all its uses, which is enough to call it a support nightmare.</p>
+
+<h3 id="a2.2">2.2 Using Length Descriptor</h3>
+
+<p>There is a simple technique used to alleviate the supportability problem illustrated above. This technique is well known among C/C++ developers. Let us add one auxiliary member to <code>CardSuit</code> declaration:</p>
+
+<div class="pre-lang" id="premain157139"><div>C#</div><div class="pre-action-link"><span id="copycode157139" class="copy-code" data-index="157139" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre157139" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CardSuit {
+    <span class="code-comment">//</span><span class="code-comment">semantic members:</span>
+    Clubs = <span class="code-digit">0</span>, Diamonds, Spades, Hearts,
+    <span class="code-comment">//</span><span class="code-comment">auxiliary member: length descriptor</span>
+    Length,
+} <span class="code-comment">//</span><span class="code-comment">enum CardSuit</span></pre>
+
+<p>Assuming that the underlying integer value of a first member is always zero, it solves the problem of adding and removing “semantic” members:</p>
+
+<div class="pre-lang" id="premain945700"><div>C#</div><div class="pre-action-link"><span id="copycode945700" class="copy-code" data-index="945700" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre945700" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">for</span> (CardSuit loopVariable = <span class="code-digit">0</span>;
+    loopVariable &lt; CardSuit.Length;
+    loopVariable++) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span></pre>
+
+<p>However, it makes reverse iteration a bit more complex:</p>
+
+<div class="pre-lang" id="premain491763"><div>C#</div><div class="pre-action-link"><span id="copycode491763" class="copy-code" data-index="491763" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre491763" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">CardSuit length = CardSuit.Length;
+<span class="code-keyword">for</span> (CardsuitWithLengthDescriptor loopVariable = length--;
+    loopVariable &gt;= <span class="code-digit">0</span>;
+    loopVariable--) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit in reverse</span></pre>
+
+<p>The first statement used to calculate initial value for loop variable is needed because the decrement operator can be applied to a variable but not to a <code>static </code>field.</p>
+
+<p>Of course, another way to iterate would be using an integer loop variable instead of enumeration combined with appropriate type casting. It can be used for all kinds of iterations and makes inverse iteration a little simpler:</p>
+
+<div class="pre-lang" id="premain501982"><div>C#</div><div class="pre-action-link"><span id="copycode501982" class="copy-code" data-index="501982" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre501982" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">for</span> (<span class="code-keyword">int</span> loopVariable = (<span class="code-keyword">int</span>)CardSuit.Length - <span class="code-digit">1</span>;
+    loopVariable &gt;= <span class="code-digit">0</span>;
+    loopVariable--) {
+    CardSuit loopItem =
+        (CardSuit)loopVariable;
+    <span class="code-comment">//</span><span class="code-comment"> use loopItem...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop with int</span></pre>
+
+<p>Is it any better? I don’t think so. Even though it simplifies the look of inverse iterations but makes supportability problem worse. One reason is the particular integer type: the enumeration declaration syntax allows for specification of underlying integer type. This type should be kept in sync with the type of loop variable. Who would volunteer to take care about that?</p>
+
+<h3 id="a2.3">2.3 Using Suprema Descriptors</h3>
+
+<p>The iteration technique described above could be a bit generalized to allow minimum value of the iterated members other than zero. It also makes reverse iteration simpler, making forward and reverse iterations look symmetric. To achieve this, let’s add two more auxiliary members:</p>
+
+<div class="pre-lang" id="premain123622"><div>C#</div><div class="pre-action-link"><span id="copycode123622" class="copy-code" data-index="123622" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre123622" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CardSuit {
+    <span class="code-comment">//</span><span class="code-comment">semantic members:</span>
+    Clubs, Diamonds, Spades, Hearts,
+    <span class="code-comment">//</span><span class="code-comment">auxiliary members:</span>
+    Length, <span class="code-comment">//</span><span class="code-comment">inconvenient for reverse iteration, optional</span>
+    First = <span class="code-digit">0</span>, <span class="code-comment">//</span><span class="code-comment">or First = Clubs, less supportable way</span>
+    Last = Length - <span class="code-digit">1</span>, <span class="code-comment">//</span><span class="code-comment">or Last = Hearts, less supportable way</span>
+} <span class="code-comment">//</span><span class="code-comment">enum CardsuitDomain</span>
+
+<span class="code-keyword">for</span> (CardSuit loopVariable = CardSuit.First;
+    loopVariable &lt;= CardSuit.Last;
+    loopVariable++) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span>
+<span class="code-keyword">for</span> (CardSuit loopVariable = CardSuit.Last;
+    loopVariable &gt;= CardSuit.First;
+    loopVariable--) {
+    <span class="code-comment">//</span><span class="code-comment"> use loopVariable...</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit in reverse</span></pre>
+
+<p>The above code snippets for iteration loops will allow certain class of modifications of <code>CardSuit </code>declaration without looking at the code where it is used: any “semantic” members can be added or removed, first member of the declaration can be assigned integer value other then zero (the value of <code>First </code>must be modified in sync). Also, it is easy to further generalize the declaration to have extra “semantic” enumeration members not involved in the iterations.</p>
+
+<p>In all cases, however, iteration will work as expected only if iteration is performed over the set of consecutive integer values.</p>
+
+<h3 id="a2.4">2.4 Iterating Bit Sets</h3>
+
+<p>Bitwise operators on enumeration types are very convenient and often used for implementation of set algebra and more complex calculations. For these purposes, Enumeration types basically use underlying integer values of the power of 2 for their members, sometimes combined with other members.</p>
+
+<p>For some applications, it is desirable to iterate through the bits of a bit set (for example, to generate documentation on each bit flag automatically). The iteration techniques demonstrated above require underlying integer values to be consecutive, so they cannot use such enumeration types directly.</p>
+
+<p>An auxiliary “bit position” enumeration type helps to work around this limitation. Let’s consider (very simplified) example of text Search Options:</p>
+
+<div class="pre-lang" id="premain987299"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="987299" id="preShrink987299">Shrink ▲</span> &nbsp; <span id="copycode987299" class="copy-code" data-index="987299" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre987299" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> SearchOptionBitPosition {
+    MatchCase, <span class="code-comment">//</span><span class="code-comment">otherwise case-insensitive</span>
+    SearchBackward, <span class="code-comment">//</span><span class="code-comment">otherwise search forward</span>
+    UseRegularExpressions,
+    WholeText, <span class="code-comment">//</span><span class="code-comment">otherwise start from cursor</span>
+    <span class="code-comment">//</span><span class="code-comment"> auxiliary member: length descriptor</span>
+    Length,
+} <span class="code-comment">//</span><span class="code-comment">enum SearchOptionBitPosition</span>
+
+[System.Flags] <span class="code-keyword">enum</span> SearchOptions {
+    Default = <span class="code-digit">0</span>,
+    MatchCase =
+      <span class="code-digit">1</span> &lt;&lt; SearchOptionBitPosition.MatchCase,
+    SearchBackward =
+      <span class="code-digit">1</span> &lt;&lt; SearchOptionBitPosition.SearchBackward,
+    UseRegularExpressions =
+      <span class="code-digit">1</span> &lt;&lt; SearchOptionBitPosition.UseRegularExpressions,
+    WholeText =
+      <span class="code-digit">1</span> &lt;&lt; SearchOptionBitPosition.WholeText,
+} <span class="code-comment">//</span><span class="code-comment">enum SearchOptions</span>
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+SearchOptions options =
+    SearchOptions.MatchCase | SearchOptions.UseRegularExpressions;
+<span class="code-keyword">bool</span> caseSensitive = (options &amp; SearchOptions.MatchCase) &gt; <span class="code-digit">0</span>;
+<span class="code-keyword">bool</span> ignoreCase = (options &amp; SearchOptions.MatchCase) == <span class="code-digit">0</span>;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-keyword">for</span> (SearchOptionBitPosition loopVariable = <span class="code-digit">0</span>;
+     loopVariable &lt;= SearchOptionBitPosition.Length;
+     loopVariable++) {
+    SearchOptions option = (SearchOptions)(<span class="code-digit">1</span> &lt;&lt; (<span class="code-keyword">int</span>)loopVariable);
+    <span class="code-comment">//</span><span class="code-comment"> use option and loopVarible</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span></pre>
+
+<p>Of course, things like double type cast can invite errors. However, the biggest problem of this approach is that bit positions must be consecutive values. In many cases, these values are also not consecutive; sometimes they cannot be modified because they come from a third-party library. This is typical enough for unmanaged enumeration types used via <a href="http://en.wikipedia.org/wiki/P/Invoke">P/Invoke</a>.</p>
+
+<h3 id="a2.5">2.5 Mocking Programming by Extension</h3>
+
+<p>So far, my presentation of C#/.NET enumeration background was limited by the following scope: I promise to solve each and every problem described so far through the generic classes I developed.</p>
+
+<p>In this section, I want to discuss yet another enumeration problem not related to iterations. Unfortunately, I cannot see any solution good enough to be worth bothering about it. I simply want to use the occasion to show and discuss most simple technique to close the topic. Of course, I would greatly appreciate if someone could give me a better idea.</p>
+
+<p>The problem in question is the lack of extension mechanism (like inheritance) or any mechanism for creation of derived types based on value types. They are many well-known scenarios where derived value types are used (notably in <a href="http://en.wikipedia.org/wiki/Ada_(programming_language)">Ada</a>), but for enumeration types the extension looks especially tempting. Imagine the following declarations:</p>
+
+<div class="pre-lang" id="premain847015"><div>C#</div><div class="pre-action-link"><span id="copycode847015" class="copy-code" data-index="847015" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre847015" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CommandSet { New, Open, Save, SaveAs, }
+<span class="code-comment">//</span><span class="code-comment"> will not compile:</span>
+<span class="code-keyword">enum</span> ExtendedCommandSet : CommandSet { Import, Export, }</pre>
+
+<p>Ideally, a variable of <code>ExtendedCommandSet</code> should be assignment-compatible with any <code>CommandSet</code> value, but not visa versa.</p>
+
+<p>All I can advise is the following technique:</p>
+
+<div class="pre-lang" id="premain667540"><div>C#</div><div class="pre-action-link"><span id="copycode667540" class="copy-code" data-index="667540" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre667540" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> ExtendedCommandSet {
+    <span class="code-comment">//</span><span class="code-comment"> "inherited" members:</span>
+    New = CommandSet.New,
+    Open = CommandSet.Open,
+    Save = CommandSet.Save,
+    SaveAs = CommandSet.SaveAs,
+    <span class="code-comment">//</span><span class="code-comment"> "new" members:</span>
+    Import, Export,
+} <span class="code-comment">//</span><span class="code-comment">enum ExtendedCommandSet</span></pre>
+
+<p>Note that assignments inside <code>ExtendedCommandSet</code> declaration using values from the scope of different enumeration type are allowed without type cast, in contrast to assignment operators. Come to think about, this is a very convenient yet safe design feature of the language.</p>
+
+<p>Unfortunately, assignment between the two types should always use type cast, but this technique guarantees expected values. The declaration mimicking extension is still a bit tedious, but keeping it in sync with its “<code>base</code>” type is easy enough if those types are placed one next to another.</p>
+
+<p>Another problem could be incompatible underlying integer types. For example, the following declaration will not compile:</p>
+
+<div class="pre-lang" id="premain611920"><div>C#</div><div class="pre-action-link"><span id="copycode611920" class="copy-code" data-index="611920" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre611920" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CommandSet { <span class="code-comment">//</span><span class="code-comment">will compile:</span>
+    New = -1,
+    Open = <span class="code-keyword">int</span>.MinValue,
+    Save = <span class="code-keyword">int</span>.MaxValue,
+    SaveAs = <span class="code-keyword">byte</span>.MaxValue + <span class="code-digit">1</span>,
+} <span class="code-comment">//</span><span class="code-comment">enum CommandSet</span>
+<span class="code-keyword">enum</span> ExtendedCommandSet : <span class="code-keyword">byte</span> {
+    <span class="code-comment">//</span><span class="code-comment"> next 4 members will not compile;</span>
+    <span class="code-comment">//</span><span class="code-comment"> "cannot be converted to a byte":</span>
+    New = CommandSet.New,
+    Open = CommandSet.Open,
+    Save = CommandSet.Save,
+    SaveAs = CommandSet.SaveAs,
+    Import, Export,
+} <span class="code-comment">//</span><span class="code-comment">enum ExtendedCommandSet</span></pre>
+
+<p>This problem cannot occur if the underlying integer type for “derived” type is the same or a wider type than that of the “base” enumeration type.</p>
+
+<p><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=2514552">Nick Polak</a> put forward an interesting approach for support of imitation of enumeration type "inheritance" based on his Visual Studio add-on in his article <a href="http://www.codeproject.com/Articles/879129/Implementing-Enumeration-Inheritance-using-Roslyn">Implementing Enumeration Inheritance using Roslyn based VS Extension</a>.</p>
+
+<h3 id="a2.6">2.6 Iteration Problems</h3>
+
+<p>Even though all the techniques shown above do work, the code looks ugly. Also, the approach needs special care in order to avoid <a href="http://en.wikipedia.org/wiki/Off-by-one_error">off-by-one</a> errors.</p>
+
+<p>Working with a set of consecutive values only is a serious limitation. In essence, it limits the techniques to the enumeration types where the integer values of members are not specified and do not matter. Again, sometime it is not even possible to use consecutive values (see <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.4">2.4</a>).</p>
+
+<p>Using the iterations requires considerable discipline of coding, to keep “semantic” and “auxiliary” members apart and in sync. One possible way to do that is to make sure that the names of those “auxiliary” members are reserved for their purpose throughout the project (or even the developer’s team). Apparently, the supportability of such code remains less than perfect.</p>
+
+<p>By some reason, C# enumerations also lack the usual must-have attributes like <code>MinValue</code> and <code>MaxValue</code> members found in all numeric types. Again, this is hard to explain, because these values always exist for every non-empty enumeration type; anyone could obtain those using a call to <code>System.Enum.GetValues</code> method. (The non-empty assumption is important here: there is no way to define <code>MinValue</code> or <code>MaxValue</code> value for types like “<code>enum Empty {}</code>”, but these members could be implemented as <code>static </code>properties raising an exception in case of empty enumeration.) Needless to say, <code>MinValue</code> and <code>MaxValue</code> members would greatly facilitate iterations.</p>
+
+<p>There is yet another more fundamental problem not directly related to iterations. What happens if we try to obtain the name of the enumeration member using something like <code>CardSuit.First.ToString()</code>? See below…</p>
+
+<h3 id="a2.7">2.7 Problem with Enumeration Member Names</h3>
+
+<p>The declaration of <code>CardSuit </code>in the form presented in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.3">2.3</a> can be used to illustrate the problem with obtaining a name of the enumeration member by its value. Physically, the enumeration values are represented by their underlying integer values. One way to retrieve the name is a call to the method <code>object.ToString</code>, for example:</p>
+
+<div class="pre-lang" id="premain454703"><div>C#</div><div class="pre-action-link"><span id="copycode454703" class="copy-code" data-index="454703" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre454703" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">string</span> first = CardSuit.First.ToString();</pre>
+
+<p>Another way to obtain the name is a call to the method <code>enum.GetName</code>; an array of names for an enumeration type can be returned by a call to the method <code>enum.GetNames</code>.</p>
+
+<p>As we know, <code>CardSuit.First == CardSuit.Clubs</code>; that is, this is the case of multiple enumeration members having the same underlying value; so what will be the value of the string <code>first</code>?</p>
+
+<p>I experimented for a while compiling for the target of .NET Platform v. 3.5 and 4. I found that in all cases I tried this method returned the name of the enumeration member declared earlier; in the present case, this is <code>"Clubs"</code>. However, I vaguely remembered that with .NET Platform v.2.0 I sometimes observed the opposite situation: <code>CardSuit.Clubs.ToString() == "First"</code>. I observed similar results of calling <code>enum.GetName</code> or <code>enum.GetNames</code>. Does it mean that this API does not guarantee certain result of this call? (That is why I’ve chosen that <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#epigraph">epigraph</a> for this article.)</p>
+
+<p>The confirmation of this guess can be found in MSDN <a href="http://msdn.microsoft.com/en-us/library/system.enum.getname.aspx">documentation on .NET 4</a> for the method <code>enum.GetName</code>:</p>
+
+<blockquote>“If multiple enumeration members have the same underlying value, the <code>GetName</code> method guarantees that it will return the name of one of those enumeration members. However, it does not guarantee that it will always return the name of the same enumeration member. As a result, when multiple enumeration members have the same value, your application code should never depend on the method returning a particular member's name.”</blockquote>
+
+<p>The documentation on <code>ToString</code> conducts the same idea using sample code. As to the method <code>GetNames</code>, it looks <a href="http://msdn.microsoft.com/en-us/library/system.enum.getnames.aspx">a little more complex</a>:</p>
+
+<blockquote>“The elements of the return value array are sorted by the values of the enumerated constants. If there are enumerated constants with same value, the order of their corresponding names is unspecified.”</blockquote>
+
+<p>It is not clearly stated how many names this method should return and if repeated <code>string </code>values can be expected. My recent experiment with <code>CardSuit</code> shows that all 7 <code>string</code>s are returned; and all of them are different. Anyway, I would not rely on that.</p>
+
+<p>Effectively, all three methods returns results which in general case could not be considered reliable for many applications.</p>
+
+<p>This is a problem. Simply saying “avoid using identical underlying integer values of different members of the same enumeration type — this is bad practice” is not a valid resolution. In certain cases, using such members is unavoidable. The typical case is using some external API, especially non-managed. In this case,</p>
+
+<ol>
+	<li>underlying integer values really matter and</li>	<li>identical values are often used.</li></ol>
+
+<p>Why, for example, <code>System.Windows.Forms.MessageBoxIcon.Error</code> and <code>System.Windows.Forms.MessageBoxIcon.Hand</code> have the same underlying integer values? Because, by historical reasons, so was defined in unmanaged Windows API and because <code>System.Windows.Forms.MessageBox</code> functionality rely on this API. Another example is using “auxiliary” members for the purpose explained in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.3">2.3</a>.</p>
+
+<p>Note that my solution based on my class <code>Enumeration </code>does not rely on any of these three methods. Instead, enumeration member information is <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#howtoobtain">obtained through Reflection</a> and stored in detailed form (see <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.1">3.1</a>, <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#EnumerationItem"><code>EnumerationItem</code></a>). This approach is totally free from any kind of ambiguity (see <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.1">3.1</a>, <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4">4</a>).</p>
+
+<h2 id="a3">3 Foreground: Using Enumeration Class and Enumeration-indexed Arrays</h2>
+
+<p>The previous section is devoted to the techniques we have to use if we do not use the class <code>Enumeration</code> I offer. As I already called that section <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2">“Background”</a>, I’m just bound to call next section “Foreground” and finally explain the solution I propose. I’m going to start explanation through the usage and later give an idea of how it works (<a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4">4</a>). The problems outlined in the <em><a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2">Background</a></em> section should provide enough justification for addressing them in a comprehensive way.</p>
+
+<p>First to describe is the generic class <code>Enumeration&lt;ENUM&gt;</code> and its usage pattern.</p>
+
+<h3 id="a3.1">3.1 What to Enumerate?</h3>
+
+<p>First of all, we need to understand what we really want. This is, essentially, a set of enumerated items and the order of enumeration. It may seem not so trivial if we consider enumeration members assuming any arbitrary integer values. We should not assume that the ordering of those integer values follows the order of the declarations of the enumeration members, not even mentioning limitation to the consecutive values. Moreover, we should not assume one-to-one correspondence between enumeration member names and their respective integer values. The function mapping enumeration members to their integer values is always <a href="http://en.wikipedia.org/wiki/Bijection,_injection_and_surjection">surjective</a> but not always <a href="http://en.wikipedia.org/wiki/Bijection,_injection_and_surjection">injective</a>: for every enumeration member, it returns one and only one respective integer value, but the same integer value can be returned for more than one enumeration member.</p>
+
+<p>As there is no way to enforce any rules concerning the underlying integer values corresponding to enumeration members, any assumption on those values would break the functionality of the class <code>Enumeration</code>.</p>
+
+<p>De facto, there are two different integer values associated with every enumeration member (but not with a variable of enumeration type): the first one is zero-base ordering number of the member as it appears in the source code in the declaration of its type; I will call it <em>“natural order”</em>; the second one is the underlying integer value of the member. These two numbers are not always equal. Full run-time information on the enumeration member (indirectly including its natural ordering number) is preserved in the assembly meta-data and represented by the instance of the type <code>FieldInfo</code>. As to the variable of enumeration type, during run-time it is represented only by its underlying integer value; the size of the variable in its <a href="http://msdn.microsoft.com/en-us/library/yz2be5wk.aspx">unboxed</a> form is exactly the same as the size of its type’s underlying integer type. In this way, it is not always possible to find enumeration member by the value stored in the variable of the enumeration type. This is the root cause of the enumeration member ambiguity problem described in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.7">2.7</a>.</p>
+
+<p>Considering all this, only one conclusion follows: the iteration should be performed in <em>natural order</em> (optionally in reverse order). The underlying integer values should not affect the set of objects obtained via iteration, nor should it affect the order of iteration. Instead, the type of the loop variable should provide all useful information on the enumerated item.</p>
+
+<p>Here is the type declaration:</p>
+
+<div class="pre-lang" id="premain204247"><div>C#</div><div class="pre-action-link"><span id="copycode204247" class="copy-code" data-index="204247" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre204247" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">sealed</span> <span class="code-keyword">class</span> EnumerationItem&lt;ENUM&gt; {
+    <span class="code-keyword">private</span> EnumerationItem() { }
+    <span class="code-comment">//</span><span class="code-comment"> ...internal constructor</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">string</span> Name { <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> } }
+    <span class="code-keyword">public</span> Cardinal Index { <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> } }
+    <span class="code-keyword">public</span> ENUM EnumValue { <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> } }
+    <span class="code-keyword">public</span> <span class="code-keyword">object</span> Value { <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> } }
+    <span class="code-comment">//</span><span class="code-comment"> ...implementation</span>
+} <span class="code-comment">//</span><span class="code-comment">struct EnumerationItem</span></pre>
+
+<p>Note that the instance of this class cannot be constructed directly (not without using <a href="http://en.wikipedia.org/wiki/Reflection_(computer_science)">Reflection-based</a> tricks, anyway). It is only constructed internally in the <code>Enumeration</code> class.</p>
+
+<p>The type <code>Cardinal</code> is defined by an alias <code>using</code> directive as <code>System.UInt32</code>. The property <code>Index</code> provides an index of the enumeration item generated in <em>natural order</em> (excluding those marked with the attribute <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#NonEnumerable"><code>NonEnumerable</code></a>, see below). This property has nothing to do with the integer value assigned to the corresponding enumeration member; if such integer value is needed, it can be obtained as type-casted value from the property <code>EnumValue</code>.</p>
+
+<p>The property <code>Name</code> provides the name of the corresponding enumeration member. This name is defined by exact member name as it appears in the enumeration declaration and is free from the name ambiguity problem described in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.7">2.7</a>, so it is not always the same string as the one returned by <code>EnumValue.ToString()</code>.</p>
+
+<p>The purpose of two separate properties <code>EnumValue</code> and <code>Value</code> will be explained in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.3">3.3</a>.</p>
+
+<p>Some enumeration members can be excluded from the set of objects enumerated though iteration. To achieve that, the following attribute can be used:</p>
+
+<div class="pre-lang" id="premain929133"><div>C#</div><div class="pre-action-link"><span id="copycode929133" class="copy-code" data-index="929133" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre929133" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-bracket">[</span><span class="code-sdkkeyword">AttributeUsage</span>(
+    AttributeTargets.Field,
+    AllowMultiple = false,
+    Inherited = false)]
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> NonEnumerableAttribute : Attribute { }</pre>
+
+<h3 id="a3.2">3.2 Enumeration Usage</h3>
+
+<p>Considering one of the <code>CardSuit</code> declarations, the set can be iterated like this:</p>
+
+<div class="pre-lang" id="premain212745"><div>C#</div><div class="pre-action-link"><span id="copycode212745" class="copy-code" data-index="212745" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre212745" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Enumeration&lt;CardSuit&gt; cardSuiteEnumeration
+    = <span class="code-keyword">new</span> Enumeration&lt;CardSuit&gt;();
+<span class="code-keyword">foreach</span> (EnumerationItem&lt;CardSuit&gt; item <span class="code-keyword">in</span> cardSuiteEnumeration) {
+    <span class="code-comment">//</span><span class="code-comment"> use item</span>
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span></pre>
+
+<p>To get a deeper understanding of the relationship between <code>EnumerationItem</code>, its underlying enumeration type and its members, you can experiment with them like this:</p>
+
+<div class="pre-lang" id="premain702435"><div>C#</div><div class="pre-action-link"><span id="copycode702435" class="copy-code" data-index="702435" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre702435" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Type underlyingIntegerType =
+    Enum.GetUnderlyingType(<span class="code-keyword">typeof</span>(CardSuit));
+<span class="code-keyword">foreach</span> (EnumerationItem&lt;CardSuit&gt; item <span class="code-keyword">in</span> cardSuiteEnumeration) {
+    <span class="code-keyword">object</span> intValue = Convert.ChangeType(
+        item.EnumValue,
+        underlyingIntegerType);
+    WriteLine(
+        <span class="code-string">"</span><span class="code-string">{0}={1}={2}"</span>,
+        item.Name,
+        item.EnumValue,
+        intValue);
+} <span class="code-comment">//</span><span class="code-comment">loop CardSuit</span></pre>
+
+<p>This is a pretty advanced code snippet showing how to obtain all essential information on the enumeration item including its underlying integer value without prior knowledge of exact integer type.</p>
+
+<p>If by some reason the enumeration declaration used some auxiliary members (for example, <code>Length</code> descriptor defined in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.2">2.2</a> was not removed for the sake of backward compatibility with the code created earlier), the declaration should be modified to exclude them from the iteration sequence:</p>
+
+<div class="pre-lang" id="premain413560"><div>C#</div><div class="pre-action-link"><span id="copycode413560" class="copy-code" data-index="413560" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre413560" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">enum</span> CardSuit {
+    <span class="code-comment">//</span><span class="code-comment"> semantic members:</span>
+    Clubs, Diamonds, Spades, Hearts,
+    <span class="code-comment">//</span><span class="code-comment"> auxiliary member: length descriptor</span>
+    [NonEnumerable] Length,
+} <span class="code-comment">//</span><span class="code-comment">enum CardSuit</span></pre>
+
+<p>To get reverse order of iteration, the property <code>IsReverse</code> can be used:</p>
+
+<div class="pre-lang" id="premain400337"><div>C#</div><div class="pre-action-link"><span id="copycode400337" class="copy-code" data-index="400337" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre400337" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">cardSuiteEnumeration.IsReverse = <span class="code-keyword">true</span>;</pre>
+
+<h3 id="a3.3">3.3 What if ENUM is not an Enumeration Type?</h3>
+
+<p>Now, it’s the time to look at the declaration of the class <code>Enumeration</code>:</p>
+
+<div class="pre-lang" id="premain974247"><div>C#</div><div class="pre-action-link"><span id="copycode974247" class="copy-code" data-index="974247" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre974247" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">class</span> Enumeration&lt;ENUM&gt; :
+        IEnumerable&lt;EnumerationItem&lt;ENUM&gt;&gt; {
+    <span class="code-keyword">public</span> Enumeration() { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> Cardinal CollectionLength {
+        <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    } <span class="code-comment">//</span><span class="code-comment"> CollectionLength</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> ENUM First {
+        <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    } <span class="code-comment">//</span><span class="code-comment">First</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> ENUM Last {
+        <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    } <span class="code-comment">//</span><span class="code-comment">Last</span>
+    <span class="code-keyword">public</span> EnumerationItem&lt;ENUM&gt; this[Cardinal index] {
+        <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    <span class="code-keyword">public</span> <span class="code-keyword">bool</span> IsReverse {
+        <span class="code-keyword">get</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+        <span class="code-keyword">set</span> { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+    } <span class="code-comment">//</span><span class="code-comment"> IsReverse</span>
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+ } <span class="code-comment">//</span><span class="code-comment">class Enumeration</span></pre>
+
+<p>Everything looks clear… Wait a minute! How can we make sure that the type argument is always of the enumeration type, that is, derived from <code>System.Enum</code>? The problem is, the special type <code>System.Enum</code> is not allowed as a generic argument type constraint.</p>
+
+<p>When this problem started bothering me, I suddenly realized that… there is absolutely nothing wrong with using <code>Enumeration</code> class based on any other type, either value or reference one, primitive or not.</p>
+
+<p>For example, let’s apply the same kind of iteration loop to the type <code>double</code>:</p>
+
+<div class="pre-lang" id="premain182747"><div>C#</div><div class="pre-action-link"><span id="copycode182747" class="copy-code" data-index="182747" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre182747" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">static</span> Enumeration&lt;double&gt; doubleEnum
+    = <span class="code-keyword">new</span> Enumeration&lt;double&gt;();
+<span class="code-keyword">foreach</span> (EnumerationItem&lt;double&gt; item <span class="code-keyword">in</span> doubleEnum)
+    WriteLine(
+    <span class="code-string">"</span><span class="code-string">{0}={1}"</span>,
+    item.Name, item.Value);</pre>
+
+<p>Here is the output:</p>
+
+<div class="pre-lang" id="premain63000"><div> </div><div class="pre-action-link"><span id="copycode63000" class="copy-code" data-index="63000" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre63000" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">MinValue=-1.79769313486232E+308
+MaxValue=1.79769313486232E+308
+Epsilon=4.94065645841247E-324
+NegativeInfinity=-Infinity
+PositiveInfinity=Infinity 
+NaN=NaN</pre>
+
+<p>Here is why: the <code>Enumeration</code> functionality does not use any knowledge of the nature of the type <code>ENUM</code>, is it an enumeration type or not. Basically, it collects information about all <code>public static</code> fields of the <code>ENUM </code>type (<a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.1">4.1</a>). For example, the each floating-point numeric type defines five <code>public static </code>fields of the same type shown above for the type <code>double</code>.</p>
+
+<p>There only one special feature of the enumeration type taken into account in the code: for every enumeration type, all its <code>public static </code>fields are of the same type, guaranteed. This also holds for some other types, such as all numeric types, but is not guaranteed in general case. This difference is used for different assignment of the values used by the properties <code>EnumerationItem.EnumValue</code> (of the type <code>ENUM</code>) and <code>EnumerationItem.Value</code> (of the type <code>object</code>).</p>
+
+<p>If <code>ENUM</code> is enumeration type, both properties for all enumeration members are of the same type. If <code>ENUM</code> is not an enumeration type, it really depends on each separate <code>public static </code>field of the type: if a field is of the same type as <code>ENUM</code>, the <code>EnumerationItem</code> instance is created exactly in the same way as for enumeration type, otherwise only the value of <code>EnumerationItem.Value</code> contains the real value of the field; in this case the value of <code>EnumerationItem.EnumValue</code> is not informative (assigned using <code>default</code> operator).</p>
+
+<h3 id="a3.4">3.4 A Note on Flags and Bitwise Operations</h3>
+
+<p>The values obtained through bitwise operations on enumeration members (see <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a2.4">2.4</a>) have no special meaning for enumerable functionality or array indexing. If such a value happens to be equal to a declared underlying value of one or more enumeration members of the enumeration type, it will appear in some iteration or can be used to index an array element.</p>
+
+<p><code>System.FlagsAttribute</code> can be uses with enumeration types. It can only affect the name of the enumeration value returned by the method <code>ToString</code> or <code>System.Enum.GetName</code> and is intended to be used with bitwise operators. As none of those methods is used in the present code, this flag has no effect on the result of iterations or array indexing.</p>
+
+<p>All this is a simple consequence of the general behavior described above. These aspects of enumeration types usually cause a lot of questions and controversies, so I tried to anticipate them.</p>
+
+<h3 id="a3.5">3.5 Array Indexing</h3>
+
+<p>Array indexing usage looks very similar to regular arrays:</p>
+
+<div class="pre-lang" id="premain3337"><div>C#</div><div class="pre-action-link"><span id="copycode3337" class="copy-code" data-index="3337" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre3337" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">EnumerationIndexedArray&lt;CardSuit, double&gt; rating
+    = <span class="code-keyword">new</span> EnumerationIndexedArray&lt;CardSuit, double&gt;();
+EnumerationIndexedArray&lt;CardSuit, double&gt; defaultRating
+    = <span class="code-keyword">new</span> EnumerationIndexedArray&lt;CardSuit, double&gt;(<span class="code-digit">1</span>.0d);
+rating[CardSuit.Clubs] = <span class="code-digit">3</span> / <span class="code-digit">4</span>;
+<span class="code-keyword">double</span> defaultValue =
+   defaultRating[CardSuit.Diamonds]; <span class="code-comment">//</span><span class="code-comment"> returns 1.0;</span>
+rating[CardSuit.Length] = <span class="code-digit">3</span>.<span class="code-digit">1</span>; <span class="code-comment">//</span><span class="code-comment"> throws out-of-range exception</span>
+<span class="code-keyword">double</span> oor = rating[(CardSuit)7]; <span class="code-comment">//</span><span class="code-comment"> throws out-of-range exception</span></pre>
+
+<p>First generic type argument defines the type of array index; second one defines the array element type. Parameter-less constructor creates an array with all elements set to default value of its element type; the constructor with a parameter assigns all elements to the same value.</p>
+
+<p>The code snippet shown above assumes that it is compiled with the declaration of <code>CardSuit</code> shown in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.2">3.2</a>, the one applying <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#NonEnumerable"><code>NonEnumerable</code></a> attribute to its member <code>CardSuit.Length</code>. Internally, the class <code>EnumerationIndexedArray</code> uses <code>Enumeration</code>, so the attribute <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#NonEnumerable"><code>NonEnumerable</code></a> applies to the array as well; therefore, the array element indexed by the value <code>CardSuit.Length</code> does not exist. For this case, the most natural behavior is implemented: the exception <code>IndexOutOfRangeException</code> is thrown. If the index is obtained through type-casted integer value, the result of attempt of accessing the array element depends on the value of index: if this value does not belong to any of the declared enumerated members (not marked with the <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#NonEnumerable"><code>NonEnumerable</code></a> attribute), the same exception is thrown.</p>
+
+<p>Importantly, the exact underlying integer values attributed to the enumeration members do not matter much. This class works even if two or more different enumeration members are given the same underlying integer values. In this case, the same array element can be accessed through either one of the two (or more) enumeration indices, no matter which one.</p>
+
+<h3 id="a3.6">3.6 Cartesian Square</h3>
+
+<p>Next to the arrays indexed with a single enumeration type index, I want to consider arrays of rank two indexed by two indices of the same enumeration type, which represents a function of a <a href="http://en.wikipedia.org/wiki/Cartesian_square">Cartesian Square</a> build on a finite set represented by a set of enumeration values.</p>
+
+<p>One could ask: why taking care of Cartesian Square indexing specifically, why not consider arrays of different ranks with different combination of the types of indices? The answer is: this is because Cartesian Squares are very important in computational practice. Even though the enumeration indexing approach could be further generalized to cover more complex combinations of ranks and index types, it’s hard to imagine the complexity of this task can be well paid off. At the same time, there is no problem to implement any particular type of array structures based on Enumeration functionality along.</p>
+
+<p>As to Cartesian Square, it is fundamentally important because it can be used to represent a <a href="http://en.wikipedia.org/wiki/Binary_relation">binary relation</a> defined as a <a href="http://en.wikipedia.org/wiki/Subset">subset</a> of a Cartesian Square: a <code>Boolean</code> array on a Cartesian Square represents a relation between elements of a set represented by enumeration members.</p>
+
+<p>Functions of Cartesian Square of different types allows to define <a href="http://en.wikipedia.org/wiki/Multiset">multisets</a> and all kinds of finite <a href="http://en.wikipedia.org/wiki/Graph_theory%20http://en.wikipedia.org/wiki/Graph_theory">graphs</a> which have many fundamental uses in mathematics, computer science and common computation tasks. Perhaps, one of the most important applications would be the implementation of Finite-State Machines (<a href="http://en.wikipedia.org/wiki/Finite_State_Machine">FSM</a>). In our case, a Finite-State Machine can be built on a set of states represented by an enumeration type.</p>
+
+<p>Class <code>CartesianSquareIndexedArray</code> works in a way very similar to <code>EnumerationIndexedArray</code>: first generic type argument defines array index type (presumably of enumeration type), with the same type used for both indices; second argument defines the type of function over Cartesian Square. The Cartesian Square itself is defined by the Cartesian product of the set defined by the enumeration and the same set. Note, that if the second argument is <code>Boolean</code>, such <code>CartesianSquareIndexedArray</code> can be interpreted as relationship, which is defined as a subset of Cartesian Square, or as an oriented graph defined over the set of nodes, each node corresponding to separate enumeration member, and each graph edge corresponding to those ordered pairs of indices where the array value is equal to <code>True</code>.</p>
+
+<p>Now, let me illustrate this construct by example of very simple Finite-State Machine, representing, for example, states of some thread and the diagram of Transitions between the states. Strictly speaking, pure mathematical Finite-State Machine should use <code>Boolean</code> array element type, exactly as in the Cartesian representation of relationship explained above, with <code>True</code> value representing allowed Transitions and <code>False</code> value representing prohibited (empty) Transition. However, in practice it is useful to use much more advanced array element type to carry essential technical detail on each Transition. In my example, this is a delegate which could define some action to be performed on each Transition. For example, an instance of such delegate could invoke hardware control of some physical machine or provide graphical animated presentation of the Transition.</p>
+
+<div class="pre-lang" id="premain46415"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="46415" id="preShrink46415">Shrink ▲</span> &nbsp; <span id="copycode46415" class="copy-code" data-index="46415" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre46415" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">enum</span> State { Initial, Running, Paused, Aborted, Finished, }
+
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> EmptyTransitionException : System.ApplicationException {
+    <span class="code-keyword">internal</span> EmptyTransitionException(State <span class="code-sdkkeyword">from</span>, State to)
+        : <span class="code-keyword">base</span>(FormatException(<span class="code-sdkkeyword">from</span>, to)) {
+        <span class="code-keyword">this</span>.fFrom = <span class="code-sdkkeyword">from</span>;
+        <span class="code-keyword">this</span>.fTo = to;
+    } <span class="code-comment">//</span><span class="code-comment">EmptyTransitionException</span>
+    <span class="code-keyword">static</span> <span class="code-keyword">string</span> FormatException(State <span class="code-sdkkeyword">from</span>, State to) {
+        <span class="code-keyword">return</span> <span class="code-keyword">string</span>.Format(
+            <span class="code-string">"</span><span class="code-string">State transition from {0} to {1} is not allowed"</span>,
+            <span class="code-sdkkeyword">from</span>, to); }
+    <span class="code-keyword">public</span> State From { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> fFrom; } }
+    <span class="code-keyword">public</span> State To { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> fTo; } }
+    State fFrom, fTo;
+} <span class="code-comment">//</span><span class="code-comment">class EmptyTransitionException</span>
+
+<span class="code-keyword">public</span> <span class="code-keyword">delegate</span> <span class="code-keyword">void</span> StateTransition(State <span class="code-sdkkeyword">from</span>, State to);
+
+<span class="code-keyword">public</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> StateMachine {
+
+    <span class="code-keyword">public</span> StateMachine() {
+        StateGraph[State.Initial, State.Running] = Start;
+        StateGraph[State.Running, State.Paused] = Pause;
+        StateGraph[State.Paused, State.Running] = Resume;
+        StateGraph[State.Running, State.Aborted] = Abort;
+        StateGraph[State.Paused, State.Aborted] = Abort;
+    } <span class="code-comment">//</span><span class="code-comment">StateMachine</span>
+
+    <span class="code-keyword">public</span> <span class="code-keyword">void</span> FireTransition(State <span class="code-sdkkeyword">from</span>, State to) {
+        StateTransition action = StateGraph[from, to];
+        <span class="code-keyword">if</span> (action == <span class="code-keyword">null</span>)
+            <span class="code-keyword">throw</span> <span class="code-keyword">new</span> EmptyTransitionException(<span class="code-sdkkeyword">from</span>, to);
+        <span class="code-keyword">else</span>
+            action(<span class="code-sdkkeyword">from</span>, to);
+    } <span class="code-comment">//</span><span class="code-comment">FireTransition</span>
+
+    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> Start(State <span class="code-sdkkeyword">from</span>, State to);
+    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> Stop(State <span class="code-sdkkeyword">from</span>, State to);
+    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> Pause(State <span class="code-sdkkeyword">from</span>, State to);
+    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> Resume(State <span class="code-sdkkeyword">from</span>, State to);
+    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> Abort(State <span class="code-sdkkeyword">from</span>, State to);
+
+    CartesianSquareIndexedArray&lt;State, StateTransition&gt;
+        StateGraph =
+            <span class="code-keyword">new</span> CartesianSquareIndexedArray&lt;State, StateTransition&gt;();
+
+} <span class="code-comment">//</span><span class="code-comment">class StateMachine</span></pre>
+
+<p>In this example, <code>StateGraph</code> is defined on a Cartesian Square of the set of nodes defined by enumeration type <code>State</code>. <code>CartesianSquareIndexedArray</code> is build over this Cartesian Square with array elements of the delegate type. This array represents a graph of Transitions between nodes, each node represented by a separate <code>State</code> member. The purpose of the <code>abstract </code>class <code>StateMachine</code> is to build the instance of the State Transition Graph (just for example this is hard-coded in constructor) and provide a level of indirection calling of the Transition actions (a set of <code>abstract </code>methods in the above example): each action is called via <code>FireTransition</code> expecting two <code>State</code> arguments. This way, implementation of the action can be agnostic to Transition graph, and <code>StateMachine</code> agnostic to Transition actions. Again, this example is highly simplified.</p>
+
+<h2 id="a4">4 How It Works</h2>
+
+<p>All the delicate aspects of working with enumeration types and ideas useful for implementation of enumerable behavior are already described above. There is almost nothing special about the implementation itself. Please look at the source code for all the details.</p>
+
+<p>In this section, I’ll try to outline the key techniques of the solution.</p>
+
+<h3 id="a4.1">4.1 Collecting Static Member Data</h3>
+
+<p>The enumerable behavior is based on the meta-data on the <code>public static </code>fields of the <code>ENUM</code> type collected and digested into an array of the <code>EnumerationItem&lt;ENUM&gt;</code> instances (see <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.1">3.1</a>) using <a href="http://en.wikipedia.org/wiki/Reflection_(computer_science)">Reflection</a>. This relatively slow process is not repeated every time <code>Enumeration</code> is constructed. Instead, it happens when the generic class <code>Enumeration&lt;ENUM&gt;</code> is instantiated with new <code>ENUM</code> type. In this way, there is only one <code>static </code>portion of digested <code>ENUM</code> meta-data per type. Different instances of <code>Enumeration</code> share this <a href="http://en.wikipedia.org/wiki/Singleton">singleton</a> of meta-data, which consist of the array of the <code>EnumerationItem&lt;ENUM&gt;</code> instances plus few additional <code>static </code>members, in particular, those used for thread safety (<a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.3">4.3</a>) and array indexing (<a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.4">4.4</a>).</p>
+
+<p id="howtoobtain">The enumeration members we need are the <code>public static </code>fields. This is how to obtain them:</p>
+
+<div class="pre-lang" id="premain523168"><div>C#</div><div class="pre-action-link"><span id="copycode523168" class="copy-code" data-index="523168" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre523168" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">static</span> FieldInfo[] GetStaticFields(Type type) {
+    <span class="code-keyword">return</span> type.GetFields(BindingFlags.Static | BindingFlags.Public);
+} <span class="code-comment">//</span><span class="code-comment">GetStaticFields</span></pre>
+
+<p>Remember, it works for any type, whether it is enumeration or not. These two cases are distinguished by two different properties <code>EnumerationItem.EnumValue</code> and <code>EnumerationItem.Value</code>, as described in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.1">3.1</a> and <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.3">3.3</a>. Here is how:</p>
+
+<div class="pre-lang" id="premain616270"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="616270" id="preShrink616270">Shrink ▲</span> &nbsp; <span id="copycode616270" class="copy-code" data-index="616270" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre616270" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">static</span> <span class="code-keyword">void</span> BuildEnumerationCollectionCore() {
+    Type type = <span class="code-keyword">typeof</span>(ENUM);
+    Bool isEnum = type.IsEnum;
+    FieldInfo[] fields = GetStaticFields(type);
+    List&lt;EnumerationItem&lt;ENUM&gt;&gt; list = <span class="code-keyword">new</span> List&lt;EnumerationItem&lt;ENUM&gt;&gt;();
+    Cardinal currentIndex = <span class="code-digit">0</span>;
+    <span class="code-keyword">for</span> (Cardinal jj = <span class="code-digit">0</span>; jj &lt; (Cardinal)fields.Length; jj++) {
+        FieldInfo field = fields[jj];
+        object[] attributes =
+            field.GetCustomAttributes(<span class="code-keyword">typeof</span>(NonEnumerableAttribute), <span class="code-keyword">false</span>);
+        <span class="code-keyword">if</span> (attributes.Length &gt; <span class="code-digit">0</span>) <span class="code-keyword">continue</span>;
+        <span class="code-keyword">object</span> objValue = field.GetValue(<span class="code-keyword">null</span>); <span class="code-comment">//</span><span class="code-comment">boxed if ENUM is primitive</span>
+        <span class="code-keyword">if</span> (objValue == <span class="code-keyword">null</span>) <span class="code-keyword">continue</span>;
+        ENUM enumValue = <span class="code-keyword">default</span>(ENUM);
+        <span class="code-keyword">if</span> (isEnum)
+            enumValue = (ENUM)objValue;
+        <span class="code-keyword">else</span> {
+            <span class="code-keyword">if</span> (objValue <span class="code-keyword">is</span> ENUM)
+                enumValue = (ENUM)objValue;
+        } <span class="code-comment">//</span><span class="code-comment">if not enum</span>
+        <span class="code-keyword">string</span> name = field.Name;
+        list.Add(<span class="code-keyword">new</span> EnumerationItem&lt;ENUM&gt;(name, currentIndex, objValue, enumValue));
+        currentIndex++;
+    } <span class="code-comment">//</span><span class="code-comment">loop</span>
+    EnumerationCollection = list.ToArray();
+    FCollectionLength = (Cardinal)EnumerationCollection.Length;
+} <span class="code-comment">//</span><span class="code-comment">BuildEnumerationCollectionCore</span></pre>
+
+<p>Note that <code>isEnum</code> is calculated before the loop and when it is <code>true</code>, the current member type checked up (relatively slow method) is not done in the loop, because an enumeration type guarantees that all its fields are of the same type.</p>
+
+<p>The meta-data <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> is initialized based on <a href="http://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>. The initialization shown above is performed when any operation is requested for the first time for a given <code>ENUM</code> type. As some operations of the <code>Enumeration</code> are static (like <code>CollectionLength</code>), this may happen even before the call to the constructor.</p>
+
+<h3 id="a4.2">4.2 Enumerator</h3>
+
+<p>The <code>Enumeration</code> instance supports <code>foreach</code> construct and behaves as an enumerable container through implementation of the interface <code>IEnumerable</code> with only method to be implemented: <code>IEnumerable.GetEnumerator</code>.</p>
+
+<p>The implementation of the method <code>IEnumerable.GetEnumerator</code> returns an instance of the inner class <code>Enumerator</code>. It implements the interface <code>IEnumerator</code> using digested meta-data <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>. There is one important thing to note: the enumerator current position should be reset to initial position (depending also on the current value of the predicate <code>IsReverse</code>) every time new foreach loop starts again. The only place to trigger this reset is the method <code>IEnumerable.GetEnumerator</code>.</p>
+
+<h3 id="a4.3">4.3 Thread Safety and Performance</h3>
+
+<p>Thread safety is optional, defined by the conditional compilation symbol <code>THREAD_SAFE_ENUMERATIONS</code>.</p>
+
+<p>There is nothing wrong in using non-thread-safe version of the code even in the multi-threaded application.</p>
+
+<p>Even though the <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> static meta-data is shared between different instances of <code>Enumeration</code> which may belong to different threads, the access to this <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> is read-only. The only target of the locking is guarding the initialization of this <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a>, which is rarely done concurrently. In other words, if the application is multi-threaded and using non-thread-safe version of the code, it should prevent concurrent initialization in the <code>Enumeration</code> meta-data <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singletons</a>. One simple way to make sure this rule is observed is to perform initializations of meta-data <a href="http://en.wikipedia.org/wiki/Singleton_pattern">singleton</a> at least once per each <code>ENUM</code> type in main thread before any other threads are started. To secure such initialization, it is enough to call <code>Enumeration</code> constructor or read any of its <code>static </code>properties, at least once per each <code>ENUM</code> type to be used.</p>
+
+<p>May be the above thorough considerations are redundant: my performance tests did not show any measurable time loss due to thread safety when only the iteration time is measured. However, thread safety makes repeated <code>Enumeration</code> constructor call more than twice as slow. (In all tests, the first call of the constructor was made before the loop, to measure the meta-data singleton initialization separately; initialization time per enumeration member was 300-350 times slower than one iteration (40 ns), but locking time virtually does not contribute to initialization time due to slow Reflection-based code: initialization for one enumeration type with 1024 members took 15-50 ms, which is also good enough, because the total number of enumeration members in the application is usually much smaller.) For nearly all practical purposes, using thread-safe compilation of the code will not compromise performance.</p>
+
+<p>Anyway, for multi-threaded applications compiled with thread-safe or non-thread-safe version of the code, instances of <code>Enumeration</code> should not be shared between different threads; otherwise the application itself should take responsibility for synchronization. In other words, there is no locking used to safeguard concurrent use of <code>Enumeration</code> instances regardless of the compilation condition.</p>
+
+<h3 id="a4.4">4.4 Array Indexing</h3>
+
+<p>As it is demonstrated on the sample in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a3.5">3.5</a>, the array indexing is based on the generic class <code>EnumerationIndexedArray&lt;INDEX, ELEMENT&gt;</code>. Internally, this class uses the <code>static </code>part of the class <code>Enumeration&lt;INDEX&gt;</code>, which provides a dictionary used for quick search of the index of the instance of the class <code>EnumerationItem</code> in the digested meta-data by the value of the type <code>INDEX</code>. This dictionary is created and populated based on <a href="http://en.wikipedia.org/wiki/Lazy_evaluation">lazy evaluation</a>: even when the digested meta-data stored statically by the correspondent <code>Enumeration&lt;INDEX&gt;</code> type is already initialized, the dictionary is not created until the first time the access to an array element is attempted.</p>
+
+<p>The same exact technique is used for indexing of the Cartesian Square based arrays; only the underlying array is of rank 2. Both array classes share the same method of finding of integer array index based on enumeration value. This method <code>GetIntegerIndexFromEnumValue(ENUM index)</code> is implemented internally in the class <code>Enumeration</code>.</p>
+
+<h2 id="a5">5 Building the Code and Compatibility</h2>
+
+<p>The code is provided for Microsoft .NET versions 2.0 to 4.0. The solutions <em>Enumerations.2005.sln</em>, <em>Enumerations.2008.sln</em> and <em>Enumerations.2010.sln</em> allow building the code using the corresponding version of Microsoft Visual Studio.</p>
+
+<p>The code can be built in batch mode using batch files <em>build.2005.bat</em> (build using <em>MSBuild.exe</em> of Microsoft .NET versions 2.0 targets the same version), <em>build.2008.bat </em>and <em>build.2010.bat</em> (build using <em>MSBuild.exe</em> of Microsoft .NET versions 3.5 and 4.0, targets version 3.5). Batch build does not require installed copy of Visual Studio or any other development environment — it uses .NET redistributable package only.</p>
+
+<h3 id="a5.1">5.1 Compatibility: Microsoft .NET</h3>
+
+<p>Project versions for Visual Studio 2008 and 2010 are mutually compatible, that is, <em>MSBuild.exe</em> of Microsoft .NET versions 3.5 can build <em>Enumerations.2008.sln</em> and, the other way around, <em>MSBuild.exe</em> of Microsoft .NET versions 4.0 can build <em>Enumerations.2010.sln</em>. Please edit path to <em>MSBuild.exe</em> in your batch file to use available version of .NET.</p>
+
+<p>The solutions <em>Enumerations.2008.sln</em> and <em>Enumerations.2010.sln</em> use exactly the same set of source files, including project files. The solution <em>Enumerations.2005.sln</em>, however, needs special project files (suffixed with “<em>.2005.csproj</em>”). The structure of the project <em>Enumerations.2005.csproj</em> is slightly different, because it uses special version of main source file, linked from <em>Enumerations.CLI2.0-compatible\Enumeration.cs</em>. I had to create a special version of this file, because v. 2.0 has to use <code>System.Threading.ReaderWriterLock</code> class instead of more efficient <code>ReaderWriterLockSlim</code> supported in v. 3.5 and 4; and these classes have different interfaces. Anyway, thread safety and the difference in performance of thread-safe versions between v. 2.0 and v. 3.5 and later are not so important by the reasons explained in <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around#a4.3">4.3</a>.</p>
+
+<h3 id="a5.2">5.2 Compatibility: Mono for Linux</h3>
+
+<p>All the software built for .NET v.2.0 target was successfully tested for binary compatibility with Mono v. 1.2.6 and v. 2.4.4; and testing of software built for .NET v.3.5 target confirmed binary compatibility with Mono v. 2.4.4. I’ve done all tests on Ubuntu Linux v. 8.04.</p>
+
+<h2 id="a6">6 Conclusions</h2>
+
+<p>Lack of support of enumeration for enumeration types — in the form of interface <code>IEnumerable</code> support of some other — is quite an archaic feature of .NET and C#, so it even does not provide justification of the term “enumeration”. There are at least three ways of overcoming this problem: extension of .NET CLI, extension of one or more CLI languages or encapsulation of predefined data types in classes implementing the desired functionality.</p>
+
+<p>Practically, only the third approach was in my reach; so the present work is a successful attempt to achieve the desired effect.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2010 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

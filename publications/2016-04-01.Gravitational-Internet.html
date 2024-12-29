@@ -1,0 +1,747 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0067)https://www.codeproject.com/Articles/1089400/Gravitational-Internet -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Gravitational Internet- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Now when the gravitation waves have been reliably detected, Gravitational Internet is behind the corner">
+<meta name="Keywords" content="web, quantum-computing">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="4/1/2016 2:00:00 AM">
+<meta property="article:modified_time" content="4/1/2023 5:11:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="19 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1089400/Gravitational-Internet">
+<meta property="og:title" content="Gravitational Internet">
+<meta property="og:description" content="Now when the gravitation waves have been reliably detected, Gravitational Internet is behind the corner">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1089400/Gravitational-Internet"
+   },
+  "name": "Gravitational Internet",
+  "headline": "Gravitational Internet",
+  "url": "https://www.codeproject.com/Articles/1089400/Gravitational-Internet",
+  "discussionUrl": "https://www.codeproject.com/Articles/1089400/Gravitational-Internet#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "web,quantum-computing",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=3873871"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Now when the gravitation waves have been reliably detected, Gravitational Internet is behind the corner",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2016-04-01",
+  "dateCreated": "2016-04-01",
+  "dateModified": "2023-04-01"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1089400/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="H9QQjh7tUrbiL70HN3/uPwHfJb1OCQ9/pJafrBo/MEzz2vIjyP5ZRAyiDQ53cF0g9ggxItoBlC2MLXEjfwE8LU07I8NPltEKUZlzSrmVdhqP0PeV1/cRksPjbUA7TdM1CirvKKhJXOkJmjgTOwTZ5yqrJwrV8ednNal21l0PqJbzTMuJ6LCgKI9iS+R7A87cnIitp5DiAbR4Sujb8g8QGOeLgpEymGp0nwZhmVKV1IwCDQKX03CQnfJNs7CGE2g9xpCZheLz4Cx6gpl/g5/gLAP+JfH2pDTMzgiF9Ms/baxAQ2I8wV6z8Rlypx9jQ2vwja3Ycl1y4ebwsd4q69fFf5hxm9EndEavQI7t038HrKnXoKtFv049S+qBR3KmmlFrm4eGboTW5+O/YLw5CUMY0jyD/58T9RLQvbuUOX/vdUF9g3RA2Hpi+ZxpoDY2fNKgo9LJ5Ji8CXXeHC4Q8WgSWBKfr6vPtBJcq7GX7ZHQczkegYWgUXAvv3bufCVFc9fKsC8d+AjZVcxSoZmqFXaitGQ9VH7a7/wvOZ7i5jiW8RTWGi6hnCDe91YwH1NCM2tQRieYne0F/IyMjfV0udwlKk+wNt4LhY81p7eWZq1mCfbYOA19P1JGcRqzwgHZbX/3U0/4JRBn0FgLpv97OJFIk2DY5mYTaxz02PpXxeJD7KzIWtQRPsKAeH4e738ql4MkjeVi8v/1zM46G8V4cmRpZuVp/mrUo8tPRiH1mpRkI8hYbW1bWN1M4NQHOxJtbQKJ+WuNtmxDGZPk/NLGI0deoqwnrrE3NM81HYlnuzPnu8h7Lko9Z/AwztsTUDN+UFa8s6/X6TuPZNTsU5iADEbyqVEOS19RMrkw2zMQ5+XjNAVbivTXvtenxX819q2bG+4b5VlBzxChReI717kPwsp29fCnX60SjaqbW7+lOa/Q6pngWbdaEpLSmydYpq//OaO3m1JU+FzJP5iMVjcHQM4b1UZkHFwjl89cL+T4c50E133AORkDJnewh4lnsHOIx/h3ewh82ugkZwrxqTD5qHihv9WOyd1d2DCOivO+EhIDwChMIIjp2v6MwnqbGzzHEM+4JcYWzeVy4l/FcoTATx+M5oscdX4vraGNFXrSYdI9UeYpqnZwQQpndxuZQQTrQabWwsN43KO5EDPVzC7MihaaahtEepD/CforP+Rtwal4iGCBGwta03112fGqApqy3tth9J28OekHHZNZ6aNtw8TcR1VAnEbvQPImXhdJOcf3ph4EpVOhqG5H3V8kzqSyu6hVvb6qO9EUHMdFxmgF+B4dkvXX8jBbqAKB8HvFpLsGtsnSlGowvTFKDs7igdujPSxMKgTXv28ng6JS3NVRGr2gIst0/ubs9VdFyuaqx9b/KrUo50o18IPRCib1RQw6I3U1k0BrXWwAKeb5U3AGjhzYI2X1IayI7sh58ZvC2yLkJDzc1sb1df8Pt/V0ZqglIyCCYjGRyA/DwJ8JmqWw/bOCYcgM55OPAcfx4/s57SWf5XTn41zoevdWSs0wlmfoWFcwA7Lce1yOS52ZqGfXmZWg+QxkKz0EN2oBjdALMad948341ljA+2q6WwLRIXN8vMErEjNtTwGwiDFx2okc618uDNPByZ/UVXa5aPeieDBo3PY2TRPbeBpOPo9hXAfJa0XFYsUqFb+qGYhXMjVTpjyvr39naK/JvAbwbgZyU4gu2dgutIBCtiAEOZaDk/8qPLZwbCWfYbhhch85eANSZFxJj/KIZcFWRWje5p0e9D+EGUkjNMBn320zHEKmC+hXWmi1X39Rkj8RCV93gi2trtMUgSXCPsxgIC+JNDRWCveCtf6M3k+dQaLFs8ShsuGa9GftbMLofyWraWvA0dyB/S6k3jZiUcRuQAE8VtFWSJCp+spJAAhEid7KCMheCTVVKJCigzegZblNxC4zYYLjBTVntjvynkHYxt3fhn9fxUSg1Lfsc5Aa">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/web" data-id="1147">web</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/quantum-computing" data-id="4414">quantum-computing</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Gravitational Internet</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1089400">
+
+	<meta itemprop="upvoteCount" content="31">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (32 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">1 Apr 2016, last revision: 1 Apr 2023</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">19 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 51K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Now when the gravitation waves have been reliably detected, Gravitational Internet is behind the corner</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<blockquote class="FQ">
+<div class="FQA"><span id="ArticleContent">Epigraph:</span></div>
+
+<p><span id="ArticleContent">…April, 1686</span></p>
+
+<p><span id="ArticleContent">Sir Isaac Newton, Warden and Master of the Royal Mint, a Member of the Royal Society, has been given two <a href="https://en.wikipedia.org/wiki/Ton"><u>tons</u></a> of gravel, to perform <a href="https://en.wikipedia.org/wiki/Gravitational_field"><u>gravitation of the field</u></a>.</span></p>
+
+<p><span id="ArticleContent">Instead of completing this task, Sir Isaac sat under the apple tree and inspired the fall of the so-called "Newton's apple" on his own head. This deplorable incident has resulted in Sir Isaac's science fiction writing under the title "<a href="https://en.wikipedia.org/wiki/Philosophi%C3%A6_Naturalis_Principia_Mathematica"><u>Philosophiæ Naturalis Principia Mathematica</u></a>", followed by the irresponsible act of submission of this writing to the Royal Society.</span></p>
+
+<p><span id="ArticleContent">The deadline for the Royal Plan of the gravitation of the field has been missed.</span></p>
+
+<p><span id="ArticleContent">I hereby request a hearing on this case and demand Sir Isaac Newton appear in front of the Royal Disciplinary Commission.</span></p>
+
+<p><span id="ArticleContent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sir Charles Roseblood, Head of the Royal Administration</span></p>
+
+<p><span id="ArticleContent"><i>RF-Gazette, <a href="https://mipt.ru/english"><u>M.I.P.T.</u></a>, Department of <a href="https://mipt.ru/english/edu/departments#n-1"><u>General and Applied Physics</u></a></i></span></p>
+</blockquote>
+
+<h2><span id="ArticleContent">Contents:</span></h2>
+
+<ul style="list-style-type: none">
+	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a01"><u><u>Introduction</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a02"><u><u>Benefits of Gravitational Telecommunications</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a03"><u><u>Feasibility</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a04"><u><u>Gravitational Antenna: General Considerations</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a05"><u><u>Gravitational Antenna: Chip Level</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a06"><u><u>Gravitational Antenna: Molecular Level</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a07"><u><u>Gravitational Antenna: Atomic Level</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a08"><u><u>Gravitational Antenna: Nuclear Level</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a09"><u><u>Air or Cable?</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a10"><u><u>Gravitational Internet Protocol</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a11"><u><u>Gravitational Global Positional System</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a12"><u><u>The Benefits of GNFID, a Gravitational Analog of RFID</u></u></a></span></li>	<li><span id="ArticleContent"><a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a13"><u><u>Conclusion</u></u></a></span></li></ul>
+
+<h2 id="a01"><span id="ArticleContent">Introduction</span></h2>
+
+<p><span id="ArticleContent">I hope no one missed the most important event of the century which took place this year: on February 8, 2016, it was officially announced that the gravitational wave has been <a href="https://en.wikipedia.org/wiki/First_observation_of_gravitational_waves"><u>successfully detected</u></a> on September 14, 2015, accurately matching <a href="https://en.wikipedia.org/wiki/Gravitational_wave#History"><u>Einstein's prediction of 1916</u></a>, yet another brilliant confirmation of the theory of General Relativity. The official information can be found here: <a href="http://www.ligo.org/magazine/LIGO-magazine-issue-8.pdf"><u>http://www.ligo.org/magazine/LIGO-magazine-issue-8.pdf</u></a>.</span></p>
+
+<p><span id="ArticleContent">Not that any considerable number of people expressed doubts about General Relativity, but the lack of experimental evidence certainly holds the long-awaited applications of the theory. In the present article, we discuss the possibilities and major components related to the most expected application, the Gravitational Internet. The experimental discovery paves the way for this most exciting turn in present-day technology.</span></p>
+
+<p><span id="ArticleContent">First, let's discuss what Gravitational Internet can offer us, and then we can discuss its implementation.</span></p>
+
+<h2 id="a02"><span id="ArticleContent">Benefits of Gravitational Telecommunications</span></h2>
+
+<p><span id="ArticleContent">First of all, all cable and ratio channels used in the present-day world are already clogged with a high volume of data streams. Modern infrastructure is cluttered with a lot of different cables, and adding new cables becomes increasingly expensive. A lot of telecommunication media uses obsolete technologies with extremely low efficiency, but they cannot be eliminated, because they are tightly bound to the existing infrastructure. The radio bands are, too, extremely badly cluttered with existing channels. Successful transition from obsolete analog TV to newer standard <a href="https://en.wikipedia.org/wiki/Digital_television"><u>digital television</u></a> channels in many countries (actually covering most of the surface of the Earth, albeit based on different incompatible standards) clearly demonstrated that obsolete radio bands can be removed from use, but the bandwidth allocation between countries and organizations still becomes <a href="https://en.wikipedia.org/wiki/International_Telecommunication_Union"><u>increasingly difficult</u></a>.</span></p>
+
+<p><span id="ArticleContent">In this respect, the gravitational-wave arena presents an empty communication field, which can highly extend the capacity of the world's supply of communication bands which will allow for the implementation of the division of wavebands in a rational manner, taking into account all the numerous mistakes made during the development of electromagnetic communications.</span></p>
+
+<p><span id="ArticleContent">The major benefit specific to gravitational fields is their <i>penetrability</i>. Indeed, in contrast to electromagnetic fields, no media found in the world and nearby space can shield or even reduce the speed of a gravitational wave. There is no such thing as a <a href="https://en.wikipedia.org/wiki/Tin_foil_hat"><u>tin foil hat</u></a> against gravitation. With gravitational Internet, we will be able to keep our Internet connection no matter where we are: in the subway, under water, or <a href="https://en.wikipedia.org/wiki/Mark_Shuttleworth"><u>even</u></a> in the <a href="http://www.africaninspace.com/home/mission/logs/1/index.shtml"><u>orbital space station</u></a>. And Google will have unlimited possibilities <strike>to spy on us</strike> to take into account our preferences regardless of the location of the users.</span></p>
+
+<p><span id="ArticleContent">By the way, speaking of the Google network and collecting customer data:</span></p>
+
+<p><span id="ArticleContent">There is a widespread rumor that the name of this company, "Google", originated from the misspelled word "Googol" (the value of 10<sup>100</sup>), "<a href="https://en.wikipedia.org/wiki/Googol"><u>which was picked to signify that the search engine was intended to provide large quantities of information</u></a>". The idea is quite ridiculous, to say the least, taking into account the amount of money spent on big company brands. Not many know that Google secretly targeted key gravitational telecommunication technologies and financed, also secretly, the <a href="https://en.wikipedia.org/wiki/LIGO#Advanced_LIGO"><u>Advanced LIGO project</u></a>, so the name "GOOGLE" was designed as the acronym of "Gravitational Observation-Oriented Global Link Environment".</span></p>
+
+<h2 id="a03"><span id="ArticleContent">Feasibility</span></h2>
+
+<p><span id="ArticleContent">The feasibility of gravitational telecommunications was always considered with a lot of skepticism, but the major reason for that was the lack of definitive experimental results and extremely expensive experimental research, with little prospects for return of investment. Therefore, only the powerful governments were able to provide some financing. Now when we have major groundbreaking results, the situation should quickly change, as such factors as gravitational Internet and the high attractiveness of investment in new Internet technologies come into play.</span></p>
+
+<p><span id="ArticleContent">Another hassle in the development of gravitational telecommunications was the scale of the gravitational phenomena. So far, all the effort was concentrated on low-frequency (of the order of 10 Hz magnitude, <a href="https://en.wikipedia.org/wiki/First_observation_of_gravitational_waves"><u>actually observed 35-150 Hz</u></a>) produced by the high-mass motion. It was important to make sure the gravitational waves are really detected and, even more importantly, to present convincing evidence to the public; and concentrating on low-scale high-frequency waves required for telecommunications was perceived as a highly risky investment. At the same time, higher frequency in combination with vibration/rotation of minuscule mass will give us higher energy of a graviton, which makes it easily detectable with the same kind of device, which can be called a "gravitational-wave antenna".</span></p>
+
+<p><span id="ArticleContent">According to the LIGO Magazine report, the source of the detected gravitational wave, a pair of merged black holes, released its energy at a distance of about 1.3 billion light-years from us, or about 0.4∙10<sup>9</sup> parsecs. For the purpose of gravitational telecommunications on Earth, it would be enough to have a working range of only 1 nanoparsec (about 30.1 km). Therefore, according to the <a href="https://en.wikipedia.org/wiki/Inverse-square_law"><u>inverse square law</u></a> for the dilution of energy depending on the distance from the receiver, we need the power of radiation 1.59∙10<sup>41</sup> times less than that. It opens quite realistic prospects for miniaturized gravitational antennas utilizing high wave frequencies. High frequency helps to gain graviton energy. At 35-150 Hz, the frequency observed with the help of the <a href="https://en.wikipedia.org/wiki/LIGO#Advanced_LIGO"><u>Advanced LEGO facility</u></a> gives the graviton energy from 1.35∙10<sup>−13</sup> to 6.2∙10<sup>−13</sup> eV, but with the frequency of the nuclear-level oscillator (several 10<sup>10</sup> gHz, <a href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet#a08"><u>see the section on this type of antenna</u></a>) it can be made of the order of some hundreds of keV, with the gain of the order of 10<sup>19</sup> times.</span></p>
+
+<p><span id="ArticleContent">So the question is: why, with the gain of 10<sup>41</sup> and 10<sup>19</sup> times, should we use an exotic source of gravitational waves when we can generate and detect them here on Earth? But another question is: can we create such devices and implement all the necessary features needed for real gravitational communications?</span></p>
+
+<p><span id="ArticleContent">To answer these questions and to make some conclusions on feasibility, we first have to consider the key element of any telecommunication device, the antenna.</span></p>
+
+<h2 id="a04"><span id="ArticleContent">Gravitational Antenna: General Considerations</span></h2>
+
+<p><span id="ArticleContent"><a>To generate a gravitational wave, we need to shake a considerable mass or rotate a properly configured massive object, such as a dumbbell-shaped one. As nearly all matter on the Earth is concentrated in the atoms' nuclei, only the motion of nuclei or particles including the nuclei can produce a desirable effect. For microscopic particles, a major part of the particles of a mass of material should be involved in synchronized motion. These simple principles define the characteristics of the system considered a candidate for a gravitational antenna prototype.</a></span></p>
+
+<h2 id="a05"><span id="ArticleContent"><a>Gravitational Antenna: Chip Level</a></span></h2>
+
+<p><span id="ArticleContent">The first implemented gravitational antenna was based on the <a href="https://en.wikipedia.org/wiki/Crystal_oscillator"><u>quartz oscillator</u></a>, which is based on the phenomenon of the <a href="https://en.wikipedia.org/wiki/Piezoelectricity"><u>piezoelectric effect</u></a>. This kind of antenna can be considered as an antenna on a crystal or chip level, as it can be easily mounted on a <i>circuit board</i> as any electronic component or formed as a part of an electronic <i>chip</i>.</span></p>
+
+<p><span id="ArticleContent">This kind of antenna is implemented as a mechanical oscillator based on a quartz crystal sandwiched between two heavy counter-balances made of heavy metal. Look at the picture below. Doesn't it resemble something?</span></p>
+
+<center>
+<p><img title="Chip level" alt="2016-04-01.Gravitational-Internet.ChipLevel.png" src="./Resources-articles/2016-04-01.Gravitational-Internet.ChipLevel.webp"/></p>
+<!--<p><span id="ArticleContent"><img src="./Resources/ChipLevel.png" alt="Image 1" style="max-width: 700px; height: auto"></span></p>-->
+</center>
+
+<p><span id="ArticleContent">That's right! This is very similar to the classical <a href="http://arxivblog.com/?p=1271"><u>Weber's bar</u></a>. <a href="https://en.wikipedia.org/wiki/Joseph_Weber"><u>Joseph Weber</u></a>, despite of his claims, <a href="https://en.wikipedia.org/wiki/Joseph_Weber#Claims_of_gravitational_wave_detection_discredited"><u>never achieved</u></a> gravitational wave detection with <a href="https://en.wikipedia.org/wiki/Weber_bar"><u>his detector</u></a>, but his failure is explained by the wrong choice of scale and the level of technology at the time of his experiments, around 1968.</span></p>
+
+<p><span id="ArticleContent">Another variant of a crystal-level antenna can be based on <a href="https://en.wikipedia.org/wiki/Magnetostriction"><u>magnetostriction</u></a>. This principle resembling piezoelectric operation has one special benefit: ferromagnetic materials used for the oscillators are usually more massive than piezoelectric crystals. Also, the requirements of the crystal structure are easier to meet. At the same time, the major problem of such devices is their low natural frequency, not exceeding several thousand kHz (see <a href="http://lab.fs.uni-lj.si/ladisk/data/pdf/javorski_article_transmag.pdf"><u>http://lab.fs.uni-lj.si/ladisk/data/pdf/javorski_article_transmag.pdf</u></a>).</span></p>
+
+<p><span id="ArticleContent">The same conclusion can be made on a similar mechanism called <a href="https://en.wikipedia.org/wiki/Piezomagnetism"><u>piezomagnetism</u></a> manifested by <a href="https://en.wikipedia.org/wiki/Antiferromagnetic"><u>antiferromagnetic crystals</u></a>.</span></p>
+
+<p><span id="ArticleContent">It's interesting to note that the size of the body of the chip-level antenna is the biggest among all the possible types of gravitational antenna we are discussing in this article. At the same time, despite the low maximum radiation intensity, the whole communication device appears to be the smallest of all, which should make it an indispensable element of home and small office Gravitational Internet, an analog of a client Wi-Fi unit, which can be mounted directly into a laptop, notebook or a tablet computer. According to our calculation, the effective range of the device can reach up to 0.5 femtoparsec (about 15 m).</span></p>
+
+<p><span id="ArticleContent">However, full-scale gravitational communications require considerably longer ranges of operation. Even the analog of a cellular network would require at least 3 orders of magnitude longer range, about one picoparsec (about 30 km). Let's consider other possible types of antennae and see if we can meet this requirement.</span></p>
+
+<h2 id="a06"><span id="ArticleContent">Gravitational Antenna: Molecular Level</span></h2>
+
+<p><span id="ArticleContent">Can the gravitational-way effect on a molecular level be considered? Apparently, the simplest molecule structure acts like a miniature gravitational antenna, due to its rotational and vibration degrees of freedom:</span></p>
+
+<center>
+<p><img alt="2016-04-01.Gravitational-Internet.Degrees.webp" title="Molecular level" src="./Resources-articles/2016-04-01.Gravitational-Internet.Degrees.webp"/></p>
+<!--<p><span id="ArticleContent"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Image 2" data-src="/KB/Articles/1089400/Degrees.png" class="lazyload" style="max-width: 700px; height: auto"></span></p>-->
+</center>
+
+<p><span id="ArticleContent">The problem with the molecular level is its efficiency. The first problem is the need of using condensed matter, to provide a detectable gravitational response, so the use of gas would not be an option. Only the liquid or solid-state active media can be considered, but with liquid, the real problem would be synchronization of the quantum transition between states, or, in classical analogy, the synchronization of rotational and/or vibration motion and keeping it in phase, which seems to be extremely difficult, due to low coherence times typical for liquid. This problem can be eliminated by using crystalline solid-state media, but it boils down to the device on a crystal, which we already discussed in the section about the chip-level antenna.</span></p>
+
+<h2 id="a07"><span id="ArticleContent">Gravitational Antenna: Atomic Level</span></h2>
+
+<p><span id="ArticleContent">We would not even mention atomic level as totally unpromising, because all the atom evolutions are based on interactions between baryons (nucleons) and leptons (electrons), later carrying very small mass, <a href="https://en.wikipedia.org/wiki/Proton-to-electron_mass_ratio"><u>about 1/1836 of the nucleon's mass</u></a>. Therefore, gravitational energy plays a negligible role in the atom's life, and all the possible atomic transformations.</span></p>
+
+<p><span id="ArticleContent">However, this is a characteristic of only the “usual” atoms. There is a remote possibility of using <a href="https://en.wikipedia.org/wiki/Exotic_atom"><u>exotic atoms</u></a>, in, particular, <a href="https://en.wikipedia.org/wiki/Protonium"><u>protonium</u></a>. With protonium, the situation is radically different: two nucleons, baryons of equal mass, are rotating around the common center. They have the same mechanical degrees of freedom as a two-atom molecule and a similar spectrum of quantum transitions:</span></p>
+
+<center>
+<p><img title="Atomic level" alt="2016-04-01.Gravitational-Internet.Protonium.webp" src="./Resources-articles/2016-04-01.Gravitational-Internet.Protonium.webp"</p>
+<!--<p><span id="ArticleContent"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Image 3" data-src="/KB/Articles/1089400/Protonium.png" class="lazyload" style="max-width: 700px; height: auto"></span></p>-->
+</center>
+
+<p><span id="ArticleContent">The major problem, however, is the instability of an exotic atom. Protonium, in particular, decays through <a href="https://en.wikipedia.org/wiki/Annihilation#Proton-antiproton_annihilation"><u>annihilation</u></a> between its components, proton, and <a href="https://en.wikipedia.org/wiki/Antiproton"><u>antiproton</u></a>. Certainly, the annihilation of any macroscopic amount of matter filled with protonium atoms will result in a considerable pulse of gravitational waves. The trouble is: <a href="http://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once"><u>only once</u></a>.</span></p>
+
+<h2 id="a08"><span id="ArticleContent">Gravitational Antenna: Nuclear Level</span></h2>
+
+<p><span id="ArticleContent">The nuclear level is perhaps the most promising. The nuclei of heavy atoms provide the vibration of big masses, as part of the evolution of the nuclear, bound by the strong interaction. For our purposed, the old classical nuclear liquid drop mode describes this kind of motion with sufficient accuracy. The figure below shows schematically the evolution of a heavy atom nucleus, such as <sup>235</sup>U, after the collision with a cold neutron:</span></p>
+
+<center>
+<p><img title="Nuclear level" alt="2016-04-01.Gravitational-Internet.NuclearLiquidDropModel.webp" src="./Resources-articles/2016-04-01.Gravitational-Internet.NuclearLiquidDropModel.webp"</p>
+<!--<p><span id="ArticleContent"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Image 4" data-src="/KB/Articles/1089400/NuclearLiquidDropModel.png" class="lazyload" style="max-width: 700px; height: auto"></span></p>-->
+</center>
+
+<p><span id="ArticleContent">Usually, a similar picture is shown to illustrate <a href="https://en.wikipedia.org/wiki/Nuclear_fission"><u>nuclear fission</u></a>. However, we are rather interested in the evolution of the nuclei which don't undergo <a href="https://en.wikipedia.org/wiki/Radioactive_decay"><u>radioactive decay</u></a>. They keep vibrating, releasing energy in the form of radiating gravitons. The degrees of freedom of the vibrations of the deformed surface of the nucleus form the system of quantum state with typical energy of emitted graviton ranging from tens to hundreds keV, which is equivalent to the classical frequencies of vibration of several 10<sup>10</sup> gHz.</span></p>
+
+<p><span id="ArticleContent">To serve as a gravitational antenna, a number of the nuclei in the active media should 1) get energy input other than from colliding elementary particles, 2) synchronized to vibrate in phase, in the whole body of the antenna. Both problems can be solved through <a href="https://en.wikipedia.org/wiki/Nuclear_magnetic_resonance"><u>nuclear magnetic resonance</u></a>. This is one of the rare phenomena which causes synchronization of the wave functions of the particle on large scale. The use of this method of synchronization limits the choice of the material for the antenna to the nuclei with non-compensated (non-zero) spin. The first really massive element of this kind is platinum <sup>195</sup>Pt, which is already suitable for the device's design, and the cost of this material is not considerable, due to the minuscule size of the <i>active body</i> of the antenna.</span></p>
+
+<p><span id="ArticleContent">Our calculations show that the whole Gravitational Internet connection unit based on a nuclear-level antenna can be packed in an assembly of a size similar to the size of a big desktop computer, or, at worst, a refrigerator. The estimated minimal range of the device is about 5 nanoparsecs, which already exceeds our expectations for the cell Gravitational Network; and the size and energy consumption of the device perfectly suits the format of a gravitational signal repeater. Interestingly, the minimal-size device is relatively easy scales up by an increase in mass, size, and energy consumption, so we can plan for the long-range <i>Active Gravitational Antenna</i> (AGA) device. We will discuss the possibilities offered by such equipment below, in the discussion of the applications.</span></p>
+
+<p><span id="ArticleContent">At this point, we can give a verdict on gravitational antennas: the only two efficient antenna types are 1) piezoelectric chip-level antenna with a low range suitable for miniature devices, home, and small office settings, 2) nuclear-level nuclear-magnetic resonance wide-range antenna scaling from a desktop computer unit and up.</span></p>
+
+<p><span id="ArticleContent">Before we settle with the utilization of antenna types, we need to answer one difficult question: is the use of gravitational waves freely propagating in space the only possibility?</span></p>
+
+<h2 id="a09"><span id="ArticleContent">Air or Cable?</span></h2>
+
+<p><span id="ArticleContent">It seems obvious that we are only bound to the use of air communications with gravitational signals, but it is not so simple.</span></p>
+
+<p><span id="ArticleContent">With those cables, it was an interesting story about electromagnetic telecommunications. In the electromagnetic domain, everything started with a wired connection, and, after the radio was invented, the radio and wired communication developed in parallel. Not many people remember that, in the past, even the single-wire <a href="https://en.wikipedia.org/wiki/Single-wire_earth_return"><u>Earth return</u></a> transmission was used, that is, the signal was passed by only one single wire, mostly for power supply, but mainstream development (different versions of telegraph, and the telephone) was based on two-wire circuits.</span></p>
+
+<p><span id="ArticleContent">The funny story started when American companies pulled telephone cables with enormously thick copper wires, which became a national standard. They used the principle of that time, "in America everything is big", not too much concerned with the cost of copper. Later on, when they tried to increase frequency to separate two or more channels by frequency bands, it paid off. People noticed that higher-frequency currents concentrated in the <a href="http://www.codeproject.com/search.aspx?q=Skin&amp;doctypeid=1"><u>skin layer</u></a>, so a greater wire radius was highly beneficial because the surface of the effective conductive grows as a square of the radius. Later on, it gave us DCL, which helped telecommunication companies to collect good money on ridiculously slow Internet.</span></p>
+
+<p><span id="ArticleContent">However, the middle of the wire remains nearly useless. Nobody paid attention to that for a long time, despite the practice of using coaxial cables created for completely different reasons, for shielding the signal from electromagnetic noise, until <a href="https://en.wikipedia.org/wiki/Richard_Feynman"><u>Richard Feynman</u></a> argued that the signal can propagate even if the central wire of the coaxial cable is missing. In his "Feynman's Lectures on Physics", he proved that by pointing out that if you look into the cylindrical pipe, you can see through. (Many mistakenly took this explanation as a joke.) At that time, engineers had some good forgotten habits, such as reading books, not just clicking on a mouse button, and Feynman's lectures were one of the books read everywhere in the world. So, the engineers got excited about this possibility and started to drill holes in the wires, to save some copper. It led to microwave technology and, ultimately, to optical-fiber network cables.</span></p>
+
+<p><span id="ArticleContent">In the gravitational domain, everything goes in a different way. Everything started from gravitational waves freely propagating in space, according to Einstein's General Relativity theory. The apparent problem of using it in technology is exactly the same as in the electromagnetic domain: the power delivered to a unit of volume decreases as a square root of the distance. To deliver a fixed amount of power at an arbitrary distance with lower losses, there are two possibilities: a highly directed beam of energy, as with lasers, or a cable. In electromagnetic technology, laser-based communication through the air, without any cables, was quickly achieved but was never commercialized, remaining in the student/hobby field. In contrast, with the use of gravitational waves, it can become a major or one of the major technologies. The reason is: <a href="https://en.wikipedia.org/wiki/Graviton"><u>gravitons</u></a>, as well as photons, are bosons, more exactly, spin-2 <a href="https://en.wikipedia.org/wiki/Boson"><u>bosons</u></a> (photon is spin-1), so their stimulated emission is possible.</span></p>
+
+<p><span id="ArticleContent">In sync with the name "LASER" ("light amplification by stimulated emission of radiation"), the corresponding gravitational device can be called <i>"GASER"</i>. The problem of its implementation lies in the major benefit of gravitational telecommunication, the penetrability of gravitational waves: it will be hard to organize wave reflection; however, we have <a href="https://msdn.microsoft.com/en-us/library/system.reflection%28v=vs.110%29.aspx"><u>a good research reserve in this area</u></a>.</span></p>
+
+<p><span id="ArticleContent">As to the cables, the situation is much more complicated. Some researchers suggested splicing gravitational cables from <a href="https://en.wikipedia.org/wiki/Superstring_theory"><u>superstrings</u></a>. Interestingly, such splicing should lead to essential <a href="https://en.wikipedia.org/wiki/Quantum_entanglement"><u>quantum entanglement</u></a>, which is considered, and the major effect to be utilized for <a href="https://en.wikipedia.org/wiki/Quantum_computing"><u>quantum computing</u></a>, in particular, <a href="https://en.wikipedia.org/wiki/Quantum_computing#Potential"><u>revolutionary cryptography</u></a>.</span></p>
+
+<h2 id="a10"><span id="ArticleContent">Gravitational Internet Protocol</span></h2>
+
+<p><span id="ArticleContent">It is fairly obvious that the gravitational Internet will have to co-exist with electromagnetic Internet for some indefinite period of time, and hence has to cooperate with it transparently. The design of the electromagnetic-gravitational gateway seems to be pretty obvious, too. It's also unlikely that all the existing consumer-grade devices will be equipped with gravitational network adapters soon enough. So, the major requirement for the gravitation Internet would be compatibility with electromagnetic Internet at the level of IP packages.</span></p>
+
+<p><span id="ArticleContent">We suggest using the existing IPv6 protocol with an additional gravitational marker, which can be added to the first field of the IP frame format, protocol version, which currently will take one of three possible version values: IPv4 (electromagnetic), electromagnetic IPv6 and gravitational IPv6. The most convenient marker could be the Unicode code point U+0300, "Grave Accent" diacritical mark. This is one of the combined diacritical marks which is used after a character, to add an <i>accent</i> glyph to a character. This suggestion has a number of benefits. First, due to its name, is easy to remember. More important, let's see how the added marked changes the way the IPv6 frame header looks. For example, look at the two hexadecimal dump samples of two IP headers and "find ten differences":</span></p>
+
+<center>
+<p><img title="Gravitational Internet Protocol: Sample" alt="2016-04-01.Gravitational-Internet.GraveIP6Protocol.webp" src="./Resources-articles/2016-04-01.Gravitational-Internet.GraveIP6Protocol.webp"/></p>
+<!--<p><span id="ArticleContent"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Image 5" data-src="/KB/Articles/1089400/GraveIP6Protocol.png" class="lazyload" style="max-width: 700px; height: auto"></span></p>-->
+</center>
+
+<p><span id="ArticleContent">No, there is only one difference: the second sample is marked as gravitational. Note the important thing: the width of the IP headers is exactly the same. It means that the gravitational marker is added at the expense of data redundancy, without modifying the size of the packages.</span></p>
+
+<p><span id="ArticleContent">At the end, let's consider the application of gravitational signals and data transmission other than those traditionally referred to as “Internet“ or “Web”.</span></p>
+
+<h2 id="a11"><span id="ArticleContent">Gravitational Global Positional System</span></h2>
+
+<p><span id="ArticleContent">The unique penetrability of the gravitational waves makes it a perfect complement to the <a href="https://en.wikipedia.org/wiki/Global_Positioning_System"><u>existing Global Positioning Systems</u></a>. The receiver, similar to the GPS receiver, can take gravitational readings even from the GSP transmitter even through the body of the Earth.</span></p>
+
+<p><span id="ArticleContent">The new system can be called the “Gravitational Global Positioning System”, <i>GGPS</i>. The introduction of such a system will call for the development of a united international system, breaking through national boundaries.</span></p>
+
+<p><span id="ArticleContent">The type of GGPS transmitter device can be called <i>GOPNIK</i>: "Global Orbiting Positioning Network Interchange Keystation". But do such devices really need to orbit? Due to the gravitational wave penetrability, such a device can be simply mounted on the surface of the Earth, as the close Earth cannot shield or otherwise interfere with its operation. However, the orbiting systems have one essential benefit: they will be less vulnerable to <i>vandalism</i>.</span></p>
+
+<h2 id="a12"><span id="ArticleContent">The Benefits of GNFID, a Gravitational Analog of RFID</span></h2>
+
+<p><span id="ArticleContent"><a href="https://en.wikipedia.org/wiki/Radio-frequency_identification"><u>RFID</u></a> gradually takes more and more place in modern technology. One of their applications is <i>security</i>, and this is the field where RFID utilization faces <a href="https://en.wikipedia.org/wiki/Radio-frequency_identification#Security_concerns"><u>serious limitations</u></a>: the devices can be shielded by simple electromagnetic <a href="https://en.wikipedia.org/wiki/Tin_foil_hat"><u>shielding material</u></a>. The new technology promises highly increased reliability of <a href="https://en.wikipedia.org/wiki/Surveillance"><u>inventory and asset management</u></a>.</span></p>
+
+<p><span id="ArticleContent">The devices based on gravitational antennas are free from this problem; they cannot be shielded. One unsolved problem with such ID devices, which can be called "Gravitational Nuclear Frequency ID", <i>GFNID</i>, is the need for a power source. The possibility of passive GNFID tags is a matter of ongoing research. The problem is reduced to the problem of efficient power harvesting from the GNFID reader, to harvest energy sufficient for powering up both the electric circuits performing basic ID operation and the gravitational antenna. The use of the hybrid electromagnetic-gravitational radiation would make the problem immediately solvable, but it would defeat the purpose of the gravitational approach because electromagnetic shielding would still destroy the operation: if the harvested energy is electromagnetic, shielding the GFNID from radio wave used for powering up the device can render it non-responsive to the gravitational signal. That's why the major direction of the research is the harvesting of pure gravitational radiation.</span></p>
+
+<h2 id="a13"><span id="ArticleContent">Conclusion</span></h2>
+
+<p><span id="ArticleContent">On this beautiful April day, we all should realize: there is a lot of work ahead of us.</span></p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1089400/Gravitational-Internet?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2016 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

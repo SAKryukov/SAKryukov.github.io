@@ -1,0 +1,793 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0071)https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Wish You Were Here… Only Once- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="A description of techniques based on context-sensitive conditions">
+<meta name="Keywords" content="VS2005, .NET3.5, VS2008, C#, Windows, .NET, Dev, WPF, Advanced, VS2013, VS2015, .NET4.6">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="10/24/2009 6:42:00 PM">
+<meta property="article:modified_time" content="3/10/2017 9:25:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="10 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once">
+<meta property="og:title" content="Wish You Were Here… Only Once">
+<meta property="og:description" content="A description of techniques based on context-sensitive conditions">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once"
+   },
+  "name": "Wish You Were Here… Only Once",
+  "headline": "Wish You Were Here… Only Once",
+  "url": "https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once",
+  "discussionUrl": "https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "VS2005,.NET3.5,VS2008,C#,Windows,.NET,Dev,WPF,Advanced,VS2013,VS2015,.NET4.6",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "A description of techniques based on context-sensitive conditions",
+  "articleSection": "WPF",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2009-10-24",
+  "dateCreated": "2009-10-24",
+  "dateModified": "2017-03-10"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.89,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=desktop",
+      "name" : "desktop"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=WPF",
+      "name" : "WPF"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=desktop">desktop</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=WPF">WPF</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/43267/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="7a6fU6E78TZjUAHX90ui4gCOlScKRTZZQT7Yc6mUY4Bi26+osyNAwqQzhdMFQCUmn2tPLxiAEAcMVeRrnvaFDou6PAGs2fU1C40yuCA5IRSX3kcSHjNbVzpCxelJVzXDXr8nL6zq+n9sCJpeiOZ7uq7k0lIrY8PUoXvwXgt5aZU36kfXtgN9yqTL+aCP7OBZK18qpdnTL4yPkmRLM9iENYHS9Ll+NKdvMMxzh7CCtwXbfH3LRZQ8avcWrIpzwuzgPfkpQL/1N/ahowi3Dm9Cap5YKP2/+PoI4xnWSANGpcK8dmJMhqgWxTb0Kc2Na8KXoEsYVzvaOfQvPAF0AJKT8dPbRmj/Td3CZaAtVLSZV5J+FKVzLwxToB68O+0YRTCJlKSb5NW36P09BYA5aau4yXWt26VlhM3o5phRLrIR3TfMAVcd3qthDlaUJt7V0Y3IV4WFFOfg0hoA/s1WxHOKnvh/l+ZrjE1sZ23ymBov2K1cEAqPrRwNcu+q5sgxmXQ+LIdQRj8VuYbOGgXnR4Iq4/vvr+A/mQXRnYle3mvCOklpT4V7I/bbAckmB2q/dI04NOxuDL/rUu/42U2I8oFhMo3bNQ6FG2FL9UbtED7y0BVgXwHgKk06AuPvIsX1gJg03SAKeO5vehZnNOJbAUBJawc2VZZjUKaqaX9O5fHZ+MEYNWiNwYGqUHSFUd4WNci00KX+YweOAGYil4L0fW4LcVOVA/fvjjjCo3O13zIicZd1pxo8eznG1dYtY87m4t8m0fgHOytGAmloC4q/tV7epM1b+tMYwTSWu82XkW8U61Xf6CKIE2jwah+n9cZeWy3IdtHpwrv5KXQCLDWKUlm5nVBbyUTDY8IKORMtDmcnacc3yohz2gn555zSY1UG6gOyrpd0TWYqD+XYqXVj5XYYpzdqtqzGBBP7dPGEOuSWrag8nMLlXLcOx0wqVsUz4xfj+2nXE+gzI0JOn6BHkhfh7CqZWZlq1khgl9VPIaPX9oas5xiffOG2WNYARE74fLp8YgFMsn+JKzNzWLWXkgD3WORKecKuy/2/QRggOssVnUThS75xV5j96glPajkzeWRdQtLylvZqgBFgYY4mULsFTXzdLtz9HlZPRKq4KlLT30wvDSpWV/bmbA//eHJd3385PYDGR9qjCJYbTIhS2W9xV7egT53Bk7V0ZlYCT13tHZo3tsSMSdPqM/08Qvy+6yih/7f3b/Vnrkkv2k3rUwF/P3TCWAeP/cJDx4PfU9hZWOYe863GJaiQ+Y/ICB6T6jshl38cJ2RHPSM931xPH1B8H1OKsJk0YV+p0/R1ExA1orqvrfo73K3mtWJOJnAffeKVxwGO3F7tGD2Fc7HyTqQG1miHlMDSUmVKmKX/LePTZNnfdJpZPF+7kFpJmplUqotFgh1HUeXeJJlK7n6SJt1iuW85mF7RT3VuGRmZxiFK8l4DkqEStAYBIf8wtGUfPkEE+op4bT0Gvfoi2uxl6SZS9AQr89UJp6iiGjfTwxPmkZbJk4T/yOYVdjLlw5TY8CN9jhggB3WKJZk47MSXQHUt79JCILt4dmbloBIPIB5mXe4127yhk+NexwWA3rOBCmtjsuiym7euyhjaAFZPYf4OYezBS5/G5bXJMYSSJJlaGPgBPvGS+AOnxNLRkx5OvAc7RbqvRzB8QrusH1jpnP5G4G324fgjRrntmLWztxpTlHTDvSQwGkF+QfxkoSjDEfcrHvQHQeZDCVi+x34zIaTDB2L22EZN7RJ6qW5PpK1VYQitxFJ1BhzJ7yBaV9hfGFVCa+GMURg/Dj2t0ThsEiH7pKKOLbMzzTEYWOM0oFKOv/tbd6trS7NyMwDoHk089IpvuLnYuy+7MxbfMvQ5Yyth8lgQPEE3Z+wKVBK/XoAkYWSuYUn8mB434tow0KY/wW5eo87VfOS4wpc3r48bD5GisScMOMAoMAZGmxn4ttOTHZdFfOx7zm20w6UjbbMbnA+pRDIvxS/ij1lpd8C6FmMtqnOnR9J4hPCgQ5R+MSkPsqyfqwnxIigtUPV1jluDqaGSSZKW/AmbsoC6mX/IURx5Vpm6+Bw6ft3iXIbZ3WmataMuhYDy">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2005" data-id="39">VS2005</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET3.5" data-id="76">.NET3.5</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2008" data-id="77">VS2008</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Windows" data-id="94">Windows</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/WPF" data-id="140">WPF</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2013" data-id="2768">VS2013</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/VS2015" data-id="4007">VS2015</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET4.6" data-id="4370">.NET4.6</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Wish You Were Here… Only Once</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_43267">
+
+	<meta itemprop="upvoteCount" content="68">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:21px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:3px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.89/5  (71 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">24 Oct 2009</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">10 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 121.2K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 350</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">A description of techniques based on context-sensitive conditions</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Wish-You-Were-Here-Only Once.zip">Download source code — 27.1 KB</a></li>
+</ul>
+
+<p><img title="Wish you were here demo" alt="Wish you were here" src="./Resources-articles/2009-10-24.Wish-You-Were-Here-Only-Once.webp"/></p>
+<!-- <p><img alt="WishYouWereHere-code" height="487" src="./Resources-articles/2009-10-24.Wish-You-Were-Here-Only-Once.webp" width="531" class="lazyautosizes ls-is-cached lazyloaded" data-sizes="auto" data-srcset="/KB/dotnet/WishYouWereHere/wishyouwerehere-r-400.png 400w, /KB/dotnet/WishYouWereHere/wishyouwerehere.png 531w" sizes="531px" srcset="/KB/dotnet/WishYouWereHere/wishyouwerehere-r-400.png 400w, /KB/dotnet/WishYouWereHere/wishyouwerehere.png 531w"></p>-->
+
+<h4>Epigraph</h4>
+
+<blockquote>
+<p><em>Don't think your </em><a href="http://en.wikipedia.org/wiki/D%C3%A9j%C3%A0_vu"><em>déjà vu</em></a><em> feeling will pass for software reuse!</em></p>
+
+<p align="left"><a href="http://en.wikipedia.org/wiki/Placeholder_names_in_different_languages#Russian"><em>V. Pupkin</em></a>, Engineer</p>
+</blockquote>
+
+<h2>Contents</h2>
+
+<ol>
+	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section1">Motivation</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section2">Solution: Stack Trace Comes to Help</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section3">What to do with the Instances?</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section4">What if You Want to Know More?</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section5">Solution Cost</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section6">Building Code and Samples</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section7">Conclusion</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section8">Credits</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section9">History</a></li></ol>
+
+<h2 id="section1">1. Motivation</h2>
+
+<p>Think about how many times you wanted to write something like this:</p>
+
+<div class="pre-lang" id="premain14554"><div> </div><div class="pre-action-link"><span id="copycode14554" class="copy-code" data-index="14554" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre14554" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">if (First Time Here)
+    ThisWillHappenButOnlyOnce();</pre>
+
+<p>The only problem is that the condition should work separately for every call of the predicate of the “<code>if</code>” block; ideally, it must be sensitive to the location of the code line.</p>
+
+<p>I would probably agree in advance with those saying that such usage would be a sign of some design flaw. There is one “but”, though: this is not always your fault; very often you are dealing with someone else’s code. Typically, you have to supply an event handler, but the point where the event is raised and conditions for the event are often beyond your control.</p>
+
+<p>I mostly face similar situations in using UI libraries. For example, if you’re really careful about focusing of the controls, Z-order, etc., and if the initialization of the window is more complicated, you know that certain adjustments are only possible when a window is shown on screen, activated or receives keyboard focus for the very first time during application life time. In practice, dealing with a concrete event handler will look something like this:</p>
+
+<div class="pre-lang" id="premain524157"><div>C#</div><div class="pre-action-link"><span id="copycode524157" class="copy-code" data-index="524157" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre524157" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">if</span> (!AlreadyActivated) {
+    AlreadyActivated = <span class="code-keyword">true</span>;
+    ThisWillHappenButOnlyOnce();
+} <span class="code-comment">//</span><span class="code-comment">if</span>
+<span class="code-comment">//</span><span class="code-comment">...</span>
+<span class="code-keyword">bool</span> AlreadyActivated;</pre>
+
+<p>This is as trivial as shown in this example; yet, this is a common and familiar annoyance. First, the code is not local: you need to add the Boolean (or bit-mapped enumeration) slot to the set of the class instance variables every time you need once-in-a-lifetime behavior — for the sole purpose of using it in the code practically identical to the one in the sample below. Secondly, you should not mess up the sign of the predicate and Boolean value in three places in the code. Finally, you will better rename the variable when you decide to move the behavior from one event handler to another. This is quite enough to cause unpleasant <a href="http://en.wikipedia.org/wiki/D%C3%A9j%C3%A0_vu">déjà vu</a> feeling even though this repetitive boring work is done in reality.</p>
+
+<h2 id="section2">2. Solution: Stack Trace Comes to Help</h2>
+
+<p>The universal solution is based on <code>System.Diagnostics.StackTrace</code>. To start with, this is how the usage looks like:</p>
+
+<div class="pre-lang" id="premain546992"><div>C#</div><div class="pre-action-link"><span id="copycode546992" class="copy-code" data-index="546992" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre546992" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">if</span> (FirstTime.Here)
+    ThisWillHappenButOnlyOnce();</pre>
+
+<p>Whenever the <code>static </code>property “<code>FirstTime.Here</code>” is read, it returns “<code>true</code>” if called for the very first time during the application life time and “<code>false</code>” otherwise. This holds for every distinct code location: the same code placed anywhere else in the code will return “<code>true</code>” again, but only once — even if this location is in the same method body. It also holds regardless of the build configuration; it does not depend on the availability of the debug information.</p>
+
+<p>The <code>FirstTime </code>code below explains how it can be possible:</p>
+
+<div class="pre-lang" id="premain207244"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="207244" id="preShrink207244">Shrink ▲</span> &nbsp; <span id="copycode207244" class="copy-code" data-index="207244" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre207244" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">class</span> FirstTime {
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">bool</span> Here {
+		<span class="code-keyword">get</span> { <span class="code-keyword">return</span> GetCodeLocationData(CodeLocationDictionary, Lock); } }
+    <span class="code-keyword">static</span> <span class="code-keyword">bool</span> GetCodeLocationData(
+		CodeLocationDictionary dictionary,
+		ReaderWriterLockSlim dictionaryLock) {
+        StackTrace stackTrace = <span class="code-keyword">new</span> StackTrace();
+        <span class="code-keyword">int</span> count = stackTrace.FrameCount;
+        <span class="code-keyword">for</span> (<span class="code-keyword">int</span> level = <span class="code-digit">0</span>; level &lt; count; level++) {
+            StackFrame frame = stackTrace.GetFrame(level);
+            MethodBase method = frame.GetMethod();
+            Type declaringType = method.DeclaringType;
+            <span class="code-keyword">if</span> (ThisType == <span class="code-keyword">null</span>) <span class="code-comment">//</span><span class="code-comment">lazy</span>
+                ThisType = declaringType;
+            <span class="code-keyword">if</span> (declaringType == ThisType) <span class="code-keyword">continue</span>;
+            CodeLocationKey key = <span class="code-keyword">new</span> CodeLocationKey(
+                method.MethodHandle.Value,
+                frame.GetNativeOffset());
+            dictionaryLock.EnterUpgradeableReadLock();
+            <span class="code-keyword">try</span> {
+                <span class="code-keyword">bool</span> alreadyVisited = dictionary.ContainsKey(key);
+                <span class="code-keyword">if</span> (!alreadyVisited) {
+                    dictionaryLock.EnterWriteLock();
+                    <span class="code-keyword">try</span> {
+                        CodeLocationDictionary.Add(key, <span class="code-digit">0</span>);
+                    } <span class="code-keyword">finally</span> {
+                        dictionaryLock.ExitWriteLock();
+                    } <span class="code-comment">//</span><span class="code-comment">try write lock</span>
+                } <span class="code-comment">//</span><span class="code-comment">if</span>
+                <span class="code-keyword">return</span> !alreadyVisited;
+            } <span class="code-keyword">finally</span> {
+                dictionaryLock.ExitUpgradeableReadLock();
+            } <span class="code-comment">//</span><span class="code-comment">try upgradeable read lock</span>
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        Debug.Assert(<span class="code-string">"</span><span class="code-string">FirstTime.Here method should
+			always find stack frame of the caller"</span> == <span class="code-keyword">null</span>);
+        <span class="code-keyword">return</span> <span class="code-keyword">false</span>; <span class="code-comment">//</span><span class="code-comment">ha-ha! will never get here anyway</span>
+    } <span class="code-comment">//</span><span class="code-comment">GetCodeLocationData</span>
+    <span class="code-keyword">static</span> Type ThisType = <span class="code-keyword">null</span>;	<span class="code-comment">//</span><span class="code-comment">obtained from lazy evaluation;</span>
+				<span class="code-comment">//</span><span class="code-comment">simple typeof(FirstTime) would work but not used</span>
+				<span class="code-comment">//</span><span class="code-comment">to make it all rename-safe and obfuscation-safe</span>
+    <span class="code-keyword">static</span> CodeLocationDictionary CodeLocationDictionary = <span class="code-keyword">new</span> CodeLocationDictionary();
+    <span class="code-keyword">static</span> ReaderWriterLockSlim Lock =
+        <span class="code-keyword">new</span> ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+} <span class="code-comment">//</span><span class="code-comment">class FirstTime</span></pre>
+
+<p>As this code fragment depends on few other declarations, I'll explain what they mean (please look at the full source code for details).</p>
+
+<p>First of all, we need to uniquely identify code locations where the “<code>Here</code>” method is called. Looking at the stack frame data shows that such identification can be based on the combination of the calling method’s handle and the “native offset” of the method call within its nesting method body. Secondly, these two values are combined in the structure “<code>CodeLocationKey</code>”. As this structure is used as a dictionary key, its identity rules are built accordingly using the usual technique based on overridden “<code>object.Equals</code>” and “<code>object.GetHashCode</code>” methods. In this way, two instances of “<code>CodeLocationKey</code>” are considered as equal if both methods' handle and offset are equal. The <code>static </code>dictionary “<code>CodeLocationDictionary</code>” is defined as “<code>System.Collections.Generic.Dictionary&lt;CodeLocationKey&gt;</code>”. Why 64-bit unsigned integer is used for dictionary values, while simple Boolean could do the trick? I'll explain this in the next section.</p>
+
+<p>For thread safety, “<code>ReaderWriterLockSlim</code>” is used in upgradeable mode. There is a particular reason to do so: the same location of the code calling “<code>Here</code>” causes accessing the dictionary for reading during every call, but write access will be required only for the very first time. In this way, multiple threads can get read-only access to the dictionary most of the time, when they get the lock in upgradeable read mode and no thread gets it in write mode.</p>
+
+<p>The code in the loop also shows how to find the right stack frame to be used for identification of the calling method, based on the type of “<code>FirstTime</code>” class. Note that the calculation of the type does not depend on the coded type name, neither is it repeated during the&nbsp;life time of the application; instead, this is optimized based on lazy evaluation.</p>
+
+<h2 id="section3">3. What to do with the Instances?</h2>
+
+<p>The solution presented above is quite good for static code or for use in the object instances unique in the application, such as main application form or any kind of <a href="http://en.wikipedia.org/wiki/Singleton">singleton</a>. What can be done if the once-in-a-lifetime behavior is needed per object instance, be it an instance representing one of the many child windows, controls, menu items and the like?</p>
+
+<p>My original solution was a separate <code>static </code>class which would calculate the dictionary key of different type, with an additional field representing the user's instance. After reading the first version of this article, <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=6102753">Paulo Zemek</a> pointed out that this would prevent the instance from being collected by the Garbage Collector. Thank to his note, I immediately saw it could potentially cause a memory leak. For example, if the application creates statically unknown number of instances of, say, a control representing text document, every time a document is deleted and new document is created the memory allocated by the instance of the old document will not be reclaimed, because it is held by a <code>static </code>dictionary whose life time is about the life time of the whole process. In this way, repeated deleting and creating new documents would claim more and more memory. Even though this problem could be resolved, the whole idea of keeping extra data in the dictionary key does not provide enough flexibility. The user might also want to use the “<code>FirstTime.Here</code>” predicate per thread, per combination of thread and instance, or anything else.</p>
+
+<p>Instead, all needs for this functionality can be covered by having a non-static version of the class “<code>FirstTime</code>”. For this purpose, I've added a new non-static nested class “<code>FirstTime.Instance</code>” to the “<code>FirstTime</code>”; this new class has to be nested in “<code>FirstTime</code>” to allow code reuse between the two:</p>
+
+<div class="pre-lang" id="premain878127"><div>C#</div><div class="pre-action-link"><span id="copycode878127" class="copy-code" data-index="878127" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre878127" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">class</span> FirstTime {
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> Instance {
+        <span class="code-keyword">public</span> <span class="code-keyword">bool</span> Here {
+            <span class="code-keyword">get</span> { <span class="code-keyword">return</span> GetCodeLocationData(CodeLocationDictionary, Lock); } }
+        CodeLocationDictionary CodeLocationDictionary = <span class="code-keyword">new</span> CodeLocationDictionary();
+        ReaderWriterLockSlim Lock =
+            <span class="code-keyword">new</span> ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
+    } <span class="code-comment">//</span><span class="code-comment">class Instance</span>
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+} <span class="code-comment">//</span><span class="code-comment">class FirstTime</span></pre>
+
+<p>To use this class, the user is supposed to obtain and own as many separate instances of the class “<code>FirstTime.Instance</code>” as needed:</p>
+
+<div class="pre-lang" id="premain690234"><div>C#</div><div class="pre-action-link"><span id="copycode690234" class="copy-code" data-index="690234" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre690234" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">if</span> (FirstTime.Here)
+    ThisWillHappenButOnlyOnce();
+<span class="code-comment">//</span><span class="code-comment">...</span>
+<span class="code-comment">//</span><span class="code-comment"> This works for Diagnostics.FirstTime only:</span>
+<span class="code-keyword">ulong</span> activationNumber = FirstTime.Here;
+<span class="code-comment">//</span><span class="code-comment">...</span>
+FirstTime.Instance FirstTime = <span class="code-keyword">new</span> FirstTime.Instance();</pre>
+
+<p>For each instance of the “<code>FirstTime.Instance</code>” class, the counting of the calls to the property “<code>Here</code>” will be performed separately, using the separate instances of the dictionary. In case of multi-threading access to dictionaries, two or more threads will be inter-locked only while accessing the same instance of the dictionary.</p>
+
+<h2 id="section4">4. What if You Want to Know More?</h2>
+
+<p>I made the solution above as slick as I could. However, there is some redundancy in storing of the 64-bit value unsigned integer in the dictionary key. This value represents the number of calls to the “<code>Here</code>” property. I assume this information could help for debug and diagnostic purposes.</p>
+
+<p>Instead of exposing the number of calls through one universal class, I created a separate class with the same name and compatible interface under different name space. Original “<code>FirstTime</code>” comes under name space “<code>SA.Univeral.Utilities</code>” while the diagnostic version of it comes under name space “<code>SA.Univeral.Utilities. Diagnostics</code>”, so one could finish the debugging and then switch to more economic non-diagnostic version and squeeze an extra bit of performance.</p>
+
+<p>How the diagnostic version can possibly have compatible interface and yet expose the additional information on number of calls? The trick is that the types of “<code>Here</code>” are different, yet one-way assignment-compatible: “<code>SA.Univeral.Utilities.Diagnostics.FirstTime.Here</code>” can be used whenever “<code>SA.Univeral.Utilities.FirstTime.Here</code>” is used, but not visa versa.</p>
+
+<p>The assignment compatibility between the two return types of “<code>Here</code>” is based on implicit operator declarations. For diagnostic version, the type “<code>CodeLocationData</code>” is used instead of Boolean:</p>
+
+<div class="pre-lang" id="premain363045"><div>C#</div><div class="pre-action-link"><span id="copycode363045" class="copy-code" data-index="363045" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre363045" style="margin-top:0;" class="lang-csharp notranslate" data-language="cs" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">struct</span> CodeLocationData {
+    <span class="code-keyword">internal</span> CodeLocationData(Cardinal visitNumber)
+    	{ <span class="code-keyword">this</span>.visitNumber = visitNumber; }
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">implicit</span> <span class="code-keyword">operator</span> <span class="code-keyword">bool</span>(CodeLocationData data)
+    	{ <span class="code-keyword">return</span> data.visitNumber &lt; <span class="code-digit">1</span>; } <span class="code-comment">//</span><span class="code-comment">true if this is a first visit</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">static</span> <span class="code-keyword">implicit</span> <span class="code-keyword">operator</span> Cardinal(CodeLocationData data)
+    	{ <span class="code-keyword">return</span> data.visitNumber; } <span class="code-comment">//</span><span class="code-comment">visit number</span>
+    Cardinal visitNumber;
+} <span class="code-comment">//</span><span class="code-comment">struct CodeLocationData</span></pre>
+
+<p>Beyond this, the difference between basic and diagnostic versions of “<code>FirstTime</code>” class is trivial; please find more details in the full source code.</p>
+
+<p>My motivation for the use of 64-bit unsigned value for the call count looks funny enough to explain it here.</p>
+
+<p>Imagine all of your code is only busy with calling “<code>FirstTime.Here</code>”, and also imagine you have such fantastic CPU speed that each whole cycle takes only 1 µsec. If you used 32-bit unsigned integer for your call counter, it would overflow in just 1.19 hours. For 64-bit, this would take almost… 584 thousand years.</p>
+
+<p>I really hope even if your code lives long enough and computers get way faster, you hardly will face a deadline much closer than just a half million of your development years. This time should be enough to port your code to, say, 128 bit.</p>
+
+<h2 id="section5">5. Solution Cost</h2>
+
+<p>On my system a call to “<code>FirstTime.Here</code>” takes about 40 µsec, with thread locking contributing less than 2% of this time. Is this fast enough?</p>
+
+<p>If the technique is rightfully used for UI purposes, only one or just few calls to “<code>Here</code>” can happen per&nbsp;single click of the mouse of keyboard event. In such situations, even a millisecond or few would not count.</p>
+
+<p>As to the memory consumption, there can be no more than two dictionaries per Application Domain (if both regular and diagnostics versions of “<code>FirstTime</code>” class are used at the same time), and the number of keys cannot exceed total number of code lines where a call to “<code>Here</code>” or “<code>VisitNumber</code>” is written; with each key taking 16 bytes. For the non-static class “<code>FirstTime.Instance</code>”, there will be a separate dictionary per instance.</p>
+
+<h2 id="section6">6. Building Code and Samples</h2>
+
+<p>The code is designed to support Microsoft.NET v.3.5 and above.</p>
+
+<p>I developed two UI samples, one for Windows Forms, another one — targeted for Microsoft.NET v.3.5 — for WPF.</p>
+
+<p>The original code was created using Microsoft Visual Studio 2008 and targeted for Microsoft.NET 3.5. and 4.6. Any of two different solutions, “<em>FirstTime.2008.sln</em>” or “<em>FirstTime.2015.sln</em>” can be used to build the code using respective versions of Visual Studio.</p>
+
+<p>In fact, Visual Studio is not required for the build, as the code can be built as batch through running the batch file “<em>build.2008.bat</em>” or “<em>build.2015.bat</em>”. One will need to edit the batch file to support another version of the platform. Another option is to use <a href="http://www.sharpdevelop.com/OpenSource/SD/">SharpDevelop</a>.</p>
+
+<h2 id="section7">7. Conclusions</h2>
+
+<p>Thank you for your interest. I hope you find the techniques useful or just interesting enough; if not, I hope you have had some fun: elimination of the boring work was my primary goal.</p>
+
+<p>I would love to get your feedback.</p>
+
+<h2 id="section8">8. Credits</h2>
+
+<p><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=1709907">Paul B.</a> kindly provided me with his results on performance measurements.</p>
+
+<p>Based on the previous version of my code, <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=6102753">Paulo Zemek</a> pointed out the problem with garbage collection (see <a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section3">above</a>) as well as the potential problems with thread safety. His notes helped me to re-think parts of implementation related to threading and per instance behavior.</p>
+
+<p><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=3605">Roberto Guerzoni</a> found a critical bug which I fixed in v.2.1 of September 5, 2014. That was the regression bug in the code of non-diagnostic version of <code>FirstTime</code>; when the per-instance “first time“ behavior was implemented, I forgot to replace one reference to the dictionary, which led to the dictionary key exception. Roberto provided the exact offending code fragment where the bug was clearly noticeable by an unarmed eye. Thank you very much, Roberto!</p>
+
+<h2 id="section9">9. History</h2>
+
+<ul>
+	<li>October 23, 2009: Initial version</li>	<li>October 24, 2009: Article updated</li>	<li>October 29, 2009: Version 1.1</li>	<li>September 5, 2014: Version 1.2</li>	<li>March 10, 2017: Version 1.3: project structure clean-up, dropped .NET v.2.0 support</li></ul>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2009 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

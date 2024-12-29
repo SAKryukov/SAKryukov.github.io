@@ -1,0 +1,840 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0066)https://www.codeproject.com/Articles/5291705/JavaScript-Playground -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>JavaScript Playground- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="JavaScript Playground, JavaScript calculator, development, and demo tool">
+<meta name="Keywords" content="Javascript, CSS, HTML5">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="1/9/2021 2:31:00 AM">
+<meta property="article:modified_time" content="2/3/2021 12:30:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="14 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5291705/JavaScript-Playground">
+<meta property="og:title" content="JavaScript Playground">
+<meta property="og:description" content="JavaScript Playground, JavaScript calculator, development, and demo tool">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5291705/JavaScript-Playground"
+   },
+  "name": "JavaScript Playground",
+  "headline": "JavaScript Playground",
+  "url": "https://www.codeproject.com/Articles/5291705/JavaScript-Playground",
+  "discussionUrl": "https://www.codeproject.com/Articles/5291705/JavaScript-Playground#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,CSS,HTML5",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.opensource.org/licenses/mit-license.php",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "JavaScript Playground can be used as an advanced calculator. The result of the script execution can be viewed immediately; additionally, the console object can be used; structured console results can be browsed as it is done in the JavaScript IDE and debuggers. With playgroundAPI, it can be used as a tool for demonstration and teaching of JavaScript techniques.",
+  "articleSection": "HTML5",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2021-01-09",
+  "dateCreated": "2021-01-09",
+  "dateModified": "2021-02-03"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 4.93,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=HTML5",
+      "name" : "HTML5"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' );
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=HTML5">HTML5</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5291705/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="gmerOxRBeloDANB9CxUA2wJWcrdtPhRFgmNKwLyiuiT+Slt9fHHujhEJmI6uchDOsAEOvMeaxNId8eWrHEESkcRw4TFc94HI4aRE5u1nd+uCHxFSt/9utQ9Gcmsm/sYrlDzEpvstOw/yrVzcRbB0VhDX427Mb9zjQpZNGNvLmmGKyAr7zqKmY9EzAGUiR7880WAdktYsebvdPyWyqHmZyx7SRlf9mshqjkOnlXJFjJsY/ABetYf8tolNyL5ErrQDwz9/7g23BiFtszbv/Nx6LqtGf5dmZSyHIRwNN36nBgFl1oALjaF2p8IksuUyr6lYATr9va6Jdpf51J088H7ktdRE0vLcN4uCqWaOfkw4o0BaL51gTMwlKNyd4S3wIpyYq6pg+m47PSICgOcGvHnx7fZldqcQxzJXmn3SnbnjavGrSXGuzIGM7O8jDZRJQIg6R12yLWYoj+o10lj/DGG+Em8zL3DPdCE3Y4ja5O7E763sxs2sw47GI4SZuS4lZ5TJyrFwi94jrU5o7KeXNJw3/n+M0V7faWgEIlatRCE4Qu4dNKcgzaUwWzRMhaUFhdlgaNtxjhEko0IJaDEILhNZVA8p2qIUNubWYnN0y0dyVO9tVlclY1FDpOEuVduAjvoBVm3fzJyvB5SN2Y7mYeZeCeGCU0GGAJWGVqM2QdcIpbCqZZA32O7007fHuCEYp1e0hJtc/aeP1McYqIWcn42laGqcH12li4XMYyRSMNWNVHZy2zlP6JtBTTic5JVHXV0q2HxVJO/aamFmne97BwvbPDjb/AT2bx/+aLPIEpXP5+B8MVmn66JYO+LvZa3ZUazVXZyuYp3Fj4B2NINTrRrfmetQUfIUBIwwYb8S92I5SvXcWQwZfazNbMw2/H5p/AIkaf4NRbsH3J29iU6EWjhm+0COcSVav7ZqXbcFWX8qOBCx4wx3Hzfz0IEiXc4HEPBdqDgn27HVmyxaL/wdSGcNTIG6vO78b5+Ow+NRWpbR1hODA9tpS/OGcGZ8UqC1XF3+DQfmVsbNwHzthel6pIJXuJag4bYYWStNMVE7F+8LjJfcWJEjEaB9K/EuwT0nyymVhdOkxDQYk1YkCdahx+8i2uXrNpEVM6+xgNTKbNiVxAMgDHgvE4ydJHvrH6UE91SFAZ96kRsfjW367owWVIKYi/LqbHYsrRKdyMBjCtAOJGXSJ+YGIp0y9gGbTfjN4QiLrSLFZX5xcRQAYpEC2VEFd33y9egAw2Gn0NyO0AHD0WhnREBegK+bU2uD8Go1AcVbRrgTtlhPt63x2PCGOI7QwZ/WpNQ2KkBOrXYkhNIfDTDd73QzYrWpAlRw80Kats08MSkNXMN5ML5ECCmonjERXZijvT3FqAMd/ljdqB0lvfuAY+DAJWxgnhWqb7gHNuuee9ffdXAHL7bn3XkEEndUxQxS5udG5hI5wSulseqIFvprCs2Nufrj7Jv4HLJA87wL/BvzafHZBQqrZT8U0AtjLlMKq90W11KnLOjM8b0NdJ3focCn4YQU0LMepHKXv+4aMOF/1Of+K2lH3VkVkyjaY5gHpse3ftk0AZI3yheJinGCl4YFJIJPWSu6NF68/RjQuUm/pgY9cmXmHDr7cPQhc9cmidQP+oRR5AYe3OoJyuTevSF/F2uOczkEP1X0EEJzlWPl/jG3rBdrzMukfSDiDXZZ5aa8xaEO8ObarhOmnCuRD3W28PpU40VCPz8G5Oy2Pq0hvBtNwf7TjgGNm1f/oh4rSZXOytU/zk2fC36UvlOmUt17EyUBFDoaTIaO0Lxt0sRXQz3200gaCuaTeXCDmheZVlkv347Jz9cb8/Qe7aW3A8pRptNwn6WJCtgzSCh2wjuxteGXSL25IXt6R7iuCCzVytuUuOYcI+UK6bMvflpJ26SelXRKSlNFKxnTFREUZsU3/apVMDe4hWPo2bjv/3StMzNmrA9nvns3/UfZ2Uz+7Bkhs5GrXuS+26N42umeKY4fBpexiIrzPN9IW1Qz9ivWnEhgIpbRnAzE0awabioccrGE2+X25DJWHvqbfNB/LGc2+pe8zpkuXHW+JjCmI/iw+Hbm6t21GCtkT//nUflgSlJCwn9XZ8lUROSxd/7PkIUVVZLXScQHVh40+FzXxEGr5RVC2tcF5DL0xj6NAebB65njC651x9dTRKyjmEtvNMNrKK/It0eZT/P3sjwpbsEf6gduSJViTAxRTsAp68ZPRgpSojkVwzGqiiX8ZcldO05yqtzEWAsdpVRSs7k05taWD3y37hXLKorr9N0+WMfRdXbNgdnUgMh73cp6kurYbAVAilKHU/aETqmDFi3iAn08eQ/gI6kOBQfF3RHpfd0lh5UCkzf70Lwl33LQiL3iZ8qeZBKS/Bpv5BPFG9HGk0Nn15zHoE8OUnf1h59w6rWcf3uBHQpUtGlEeCZCrS3hwo3YC43jdVisF9N30kLspU97upDsmmsGhQJo6JSG3/VMHTifNhcQSu1bzK0JTM28y7uNyJYE0G+//xwzG/WiiMfMvqtzYpUFYFG8lgKDTYoLtZuc">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/CSS" data-id="90">CSS</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/HTML5" data-id="1241">HTML5</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">JavaScript Playground</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5291705">
+
+	<meta itemprop="upvoteCount" content="10">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:22px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:2px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">4.93/5  (10 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">3 Feb 2021</span><a id="ctl00_LicenseLink" title="The MIT License" class="license flex-item-tight" href="http://www.opensource.org/licenses/mit-license.php">MIT</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">14 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 21.3K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 408</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">JavaScript Playground, JavaScript calculator, development, and demo tool</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">JavaScript Playground can be used as an advanced calculator. The result of the script execution can be viewed immediately; additionally, the console object can be used; structured console results can be browsed as it is done in the JavaScript IDE and debuggers. With playgroundAPI, it can be used as a tool for demonstration and teaching of JavaScript techniques.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+    <li><a href="https://github.com/SAKryukov/javascript-playground">Download or clone source code from GitHub</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/applications/5291705/JavaScript-Playground.zip">Download source code — 26.8 KB</a></li></ul>-->
+
+<p><img alt="presentation.h" class="loading" id="image-hash--1184459563" src="./Resources-articles/2021-01-09-JavaScript-Playground.webp"></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>It is the child in man that is the source of his uniqueness and creativeness, and the playground is the optimal milieu for the unfolding of his capacities and talents.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Eric_Hoffer">Eric Hoffer</a></dd></dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<p class="toc">
+<a style="margin-left: 0" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-sentiments">Sentiments</a><br>
+<a style="margin-left: 0" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-javascript-playground-as-a-calculator">JavaScript Playground as a Calculator</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-core">Core</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-user-script-context-protection">User Script Context Protection</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-host-context-protection">Host Context Protection</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-console">Console</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-file-i2fo">File I/O</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-exception-handling">Exception Handling</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-handling-lexical-errors">Handling Lexical Errors</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-protection-from-losing-data">Protection from Losing Data</a><br>
+<a style="margin-left: 0" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-playground-api">Playground API</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-usage">Usage</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-implementation">Implementation</a><br>
+<a style="margin-left: 3em" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-limitations">Limitations</a><br>
+<a style="margin-left: 0" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-live-demo">Live Demo</a><br>
+<a style="margin-left: 0" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-releases">Releases</a><br>
+</p><h2 id="heading-sentiments">Sentiments</h2>
+<p>JavaScript Playground is a fork of my very old tool, “JavaScript Calculator”. I’ve used it well before we got node.js and modern in-browser development tools, so I used it a bit for the development, but mostly as a calculator. My main drive was to get rid of any kinds of software calculators mimicking any historical devices, and any kinds of home-baked script parsers. It had to be based on an easy to use well-defined and standard language.</p><p>JavaScript Calculator became JavaScript Playground when I started to publish articles with JavaScript code samples and components. I decided that I can turn it into the compact self-containing tool used to demonstrate JavaScript code.</p><p>Later I added several useful things, such as file I/O and a fully-fledged console used to browse objects with complex structure.</p><h2 id="heading-javascript-playground-as-a-calculator">JavaScript Playground as a Calculator</h2>
+<h3 id="heading-core">Core</h3>
+<p>This is the skeleton of the main script explaining the core functionality:</p><div class="pre-lang" id="premain708928"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="708928" id="preShrink708928">Shrink ▲</span> &nbsp; <span id="copycode708928" class="copy-code" data-index="708928" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre708928" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> consoleInstance = <span class="code-comment">//</span><span class="code-comment">...</span>
+<span class="code-keyword">const</span> consoleApi = <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+<span class="code-keyword">const</span> evaluate = () =&gt; {
+    <span class="code-keyword">const</span> isStrictMode = strictModeSwitch.checked;
+    consoleInstance.reset();
+    <span class="code-keyword">try</span> {
+        <span class="code-keyword">const</span> api = {
+            write: (...objects) =&gt; consoleInstance.write(objects),
+            writeLine: (...objects) =&gt; consoleInstance.writeLine(objects),
+            consoleApi: consoleApi,
+        }; <span class="code-comment">//</span><span class="code-comment">api</span>
+        evaluateResult.value = evaluateWith(
+            editor.value,
+            api,
+            isStrictMode);
+    } <span class="code-keyword">catch</span> (exception) {
+        consoleInstance.showException(exception);
+    } <span class="code-keyword">finally</span> { 
+        <span class="code-keyword">if</span> (!isStrictMode)
+            hostApplicationContextCleanup();
+    } <span class="code-comment">//</span><span class="code-comment">exception</span>
+};
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+<span class="code-keyword">const</span> evaluateWith = (text, api, isStrict) =&gt; {
+    <span class="code-keyword">return</span> <span class="code-keyword">new</span> Function(<span class="code-string">"</span><span class="code-string">api"</span>, safeInput(text, isStrict))(api);
+};
+
+<span class="code-keyword">const</span> safeInput = (text, isStrict) =&gt; {
+    <span class="code-keyword">const</span> safeGlobals =
+        <span class="code-string">"</span><span class="code-string">const write = api.write, writeLine = api.writeLine,"</span> +
+        <span class="code-string">"</span><span class="code-string">console = api.consoleApi, document = null,"</span> +
+        <span class="code-string">"</span><span class="code-string">window = null, navigator = null, globalThis = "</span> +
+        <span class="code-string">"</span><span class="code-string">setReadonly({console: console, write: write, writeLine: writeLine})"</span>;
+    <span class="code-keyword">return</span> isStrict ?
+        <span class="code-string">`</span><span class="code-string">"use strict"; ${safeGlobals}; ${text}`</span>
+        :
+        <span class="code-string">`</span><span class="code-string">${safeGlobals}; with (Math) \{${text}\n\}`</span>;
+};</pre><p>On the very top stack frame of the script, the string with the user JavaScript code is obtained via <code>editor.value</code> and passed to <code>evaluateWith</code> with the <code>api</code> object used in the context of this code, and the flag, defining if this is a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode">strict mode</a> or not.</p><p>Note that the text of the user script is not passed to the instance of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function">Function</a> and executed directly. Some <em>hidden</em> part of code is added to the user script text. This part of the code is required to pass some API to the script. Additionally, the <a href="https://developer.mozilla.org/en-US/search?q=strict+mode">strict mode</a> option and the shortcut feature <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with"><code>with (Math) {}</code></a> (only for non-strict mode) are passed.</p><p>The context of the code is defined in the function <code>saveInput</code>, and the first argument passed to the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function"><code>Function</code> constructor</a> matches the word “api” in the text of the code added by <code>safeInput</code>.</p><p>The result of the function call is returned and its value used to populate the control below the editor control <code>evaluateResult</code>;</p><p>The functions <code>write</code> and <code>writeLine</code> are implemented via <code>consoleInstance</code>, which is also used to implement <code>consoleApi</code>. They are added to keep backward compatibility with the predecessor project, JavaScript Calculator. The number of arguments they support is arbitrary. This is implemented using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax">spread syntax</a>.</p><p>The object <code>console</code> re-implements the standard <a href="https://developer.mozilla.org/en-US/docs/Web/API/console">JavaScript <code>console</code> object</a>. The actual argument passed as <code>console</code> by <code>evaluate</code> is the object with the console methods <code>consoleApi</code>.</p><p>In addition to passing the API to the user code, the code text added to the user script by <code>safeInput</code> protects the browser environment from unsafe calls and the user script from the modification of the API objects.</p><h3 id="heading-user-script-context-protection">User Script Context Protection</h3>
+<p>Why <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>safeInput</code></a> is safe?</p><p>First of all, the text added by <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>safeInput</code></a> redefines global objects <code>document</code>, <code>window</code>, <code>navigator</code> as constants equal to <code>null</code>. This way, access to the sensitive environment properties is blocked. Also, <code>globalWith</code> needs some protection, and it takes some more effort.</p><p>It is important to protect the API provided to the user code from modification. Let’s consider possible troublesome pieces of the user code:</p><div class="pre-lang" id="premain317101"><div>JavaScript</div><div class="pre-action-link"><span id="copycode317101" class="copy-code" data-index="317101" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre317101" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-sdkkeyword">console</span>.log(<span class="code-digit">1</span>);
+<span class="code-sdkkeyword">console</span>.log = <span class="code-keyword">null</span>;
+<span class="code-sdkkeyword">console</span>.log(<span class="code-digit">2</span>);
+<span class="code-sdkkeyword">console</span> = <span class="code-keyword">null</span>;
+<span class="code-sdkkeyword">console</span>.log(<span class="code-digit">3</span>);</pre><p>or</p><div class="pre-lang" id="premain878873"><div>JavaScript</div><div class="pre-action-link"><span id="copycode878873" class="copy-code" data-index="878873" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre878873" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">globalThis.<span class="code-sdkkeyword">console</span>.log(<span class="code-digit">1</span>);
+globalThis.<span class="code-sdkkeyword">console</span>.log = <span class="code-keyword">null</span>;
+globalThis.<span class="code-sdkkeyword">console</span>.log(<span class="code-digit">2</span>);
+globalThis.<span class="code-sdkkeyword">console</span> = <span class="code-keyword">null</span>;
+globalThis.<span class="code-sdkkeyword">console</span>.log(<span class="code-digit">3</span>);</pre><p>What lines with the assignment to <code>null</code> can break the execution of <code>console.log</code>? What lines can cause trouble not only to the current execution of the user script but also to the entire JavaScript Playground session? Both kinds of trouble are possible if proper precautions are not taken. The same goes for <code>write</code> and <code>writeLine</code>. Any attempts to assign anything an API object should cause one of the two: the assignment should be ignored or throw an exception.</p><p>The first layer of protection is not using the functions of the <code>api</code> object directly, but via the separate constant objects <code>write</code>, <code>writeLine</code> and <code>console</code>. This way, a user’s attempt to assign a value to any of these objects will throw an exception. Note that JavaScript arguments are always <em>mutable</em>, but, thanks to this technique, the assignment like <code>api = null</code> cannot break anything, because it can only happen after the initialization of the API objects.</p><p>However, this alone won’t protect accessing these objects as <code>globalThis.write</code>, <code>globalThis.writeLine</code> or <code>globalThis.console</code>. It also won’t protect the <code>console</code> object from the modification of its function members, such as <code>console.log</code> or the same methods via, for example, <code>globalThis.console.log</code>. To prevent it, it is enough to make all the member functions of <code>console</code> and <code>globalThis</code> <em>immutable</em>.</p><p>This is the simplest method of making the properties of the object read-only based on <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy">Proxy</a>:</p><div class="pre-lang" id="premain805652"><div>JavaScript</div><div class="pre-action-link"><span id="copycode805652" class="copy-code" data-index="805652" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre805652" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> setReadonly = target =&gt; {
+    <span class="code-keyword">const</span> readonlyHandler = { set(obj, prop, value) { <span class="code-keyword">return</span> <span class="code-keyword">false</span>; } };
+    <span class="code-keyword">return</span> <span class="code-keyword">new</span> Proxy(target, readonlyHandler);
+};</pre><p>In this case, it is not recursive, only affects the properties of the object <code>target</code>. In JavaScript Playground, it is called with two objects: <code>consoleApi</code> and <code>globalThis</code>, prescribed in the form of the text of the user script, see <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>evaluate</code> and <code>safeInput</code></a>.</p><h3 id="heading-host-context-protection">Host Context Protection</h3>
+<p>Having the <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-user-script-context-protection">user script context problem</a> solved, we still have a problem presented by the non-strict mode. This mode is really nasty: when we create a top-level object, it is created in the global scope as a property of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/globalThis">globalThis</a>.</p><p>It contaminates the global scope of the host application. Yes, it happens even if the user script is executed by the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function"><code>Function</code> constructor</a>. To realize how bad it is, let’s consider the following simple example:</p><div class="pre-lang" id="premain228058"><div>JavaScript</div><div class="pre-action-link"><span id="copycode228058" class="copy-code" data-index="228058" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre228058" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> strict mode:</span>
+x = <span class="code-digit">10</span></pre><p>Due to the strict mode, it is supposed to throw an exception “ReferenceError: x is not defined”. Will it happen? Not always. The answer depends on the prehistory of the entire JavaScript Playground session. Let’s do the following exercise: switch to the non-strict mode and execute:</p><div class="pre-lang" id="premain520992"><div>JavaScript</div><div class="pre-action-link"><span id="copycode520992" class="copy-code" data-index="520992" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre520992" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> non-strict mode:</span>
+x = <span class="code-digit">11</span></pre><p>Then switch to the strict mode and execute</p><div class="pre-lang" id="premain458222"><div>JavaScript</div><div class="pre-action-link"><span id="copycode458222" class="copy-code" data-index="458222" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre458222" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> strict mode again:</span>
+x = <span class="code-digit">12</span> <span class="code-comment">//</span><span class="code-comment"> fine!</span>
+y = <span class="code-digit">13</span> <span class="code-comment">//</span><span class="code-comment"> ReferenceError: y is not defined</span></pre><p>The assignment to <code>x</code> will work because in the strict mode the code will modify <code>globalThis.x</code>, defined in the global scope of the host application by the prior run of the user script in the non-strict mode.</p><p>Prior to version v. 4.2.0, the problem was solved by re-loading of the host application page via <a href="https://developer.mozilla.org/en-US/docs/Web/API/Location/reload"><code>window.location.reload</code></a> every time the “Strict Mode” control value was modified. It complicated things and became a big problem for the <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-protection-from-losing-data">protection from losing data</a> feature.</p><p>Since v. 4.2.0, the host application context is protected by registering the properties of <code>globalThis</code> before and after the execution of a user script in the non-strict mode. After the execution, the properties created by the user script are removed:</p><div class="pre-lang" id="premain750165"><div>JavaScript</div><div class="pre-action-link"><span id="copycode750165" class="copy-code" data-index="750165" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre750165" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> hostApplicationContextCleanup = (() =&gt; {
+    <span class="code-keyword">const</span> globalSet = <span class="code-keyword">new</span> Set();
+    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> property <span class="code-keyword">in</span> globalThis)
+        globalSet.add(property);
+    <span class="code-keyword">return</span> () =&gt; {
+        <span class="code-keyword">const</span> currectSet = [];
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> property <span class="code-keyword">in</span> globalThis)
+            currectSet.push(property);
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> property of currectSet)
+            <span class="code-keyword">if</span> (!globalSet.has(property))
+                <span class="code-keyword">delete</span> globalThis[property];
+        currectSet.splice(<span class="code-digit">0</span>);
+    };
+})();</pre><p>Please see the use of <code>hostApplicationContextCleanup</code> in <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>evaluate</code></a>.</p><h3 id="heading-console">Console</h3>
+<p>The actual implementation of the object <code>console</code> passed to the <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#codecore"><code>safeInput</code> function</a> is <code>consoleApi</code>.</p><p>When an appropriate <code>console</code> method is called for the first time, a console element is created on the right of the editor control, taking some of its horizontal space of the window. The objects passed to this <code>console</code> method are visualized in the console. If the objects are structured, the appropriate tree structure is created. The nodes of the tree are created on the fly. It resolves the problem of circular references in the object.</p><p>Implemented <code>console</code> methods are <a href="https://developer.mozilla.org/en-US/docs/Web/API/console/assert">console.assert</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/clear">console.clear</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">console.count</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">console.debug</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dir">console.dir</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">console.error</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/info">console.info</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log">console.log</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">console.time</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">console.timeEnd</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeLog">console.timeLog</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warn">console.warn</a>.</p><p>The only difference between <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/count">console.debug</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/dir">console.dir</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/error">console.error</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/info">console.info</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log">console.log</a>, and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/warn">console.warn</a> is the CSS style of a console message. For the objects derived from <code>Object</code>, these methods show interactive content in the console, representing a hierarchy of the object structure in the form of a tree. The nested levels of the hierarchy are shown when a tree node is open and removed when it is closed. This way, circular references in objects are allowed and represented safely. The second form of these functions, with the first argument representing a format string with substitution represented by the rest of the arguments, is not implemented, as it makes little sense. Instead, using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/template_literals">template literals</a>, introduced by <a href="https://en.wikipedia.org/wiki/ECMAScript#6th_Edition_-_ECMAScript_2015">ECMAScript 2015</a>, is recommended.</p><p>The method <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/assert"><code>console.assert(assertion, ...objects)</code></a> also behaves like <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/log">console.log</a> and other similar methods, with the following exception: the first argument is boolean, reserved for the assert condition. If the first argument <code>assertion</code> evaluates to <code>true</code>, nothing happens, otherwise, the assertion failure message is displayed, followed by the rest of the arguments <code>...objects</code>.</p><p>&lt;uNote:<br>
+In some browsers, the timing methods <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/time">console.time</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeEnd">console.timeEnd</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/Console/timeLog">console.timeLog</a> may present accuracy problems. The time reading can be rounded or slightly randomized by a particular browser. At the moment of writing, correct timing was observed in Blink+V8-based browsers, such as Chromium, Chrome, Opera, and Vivaldi. Rounding was observed in the browsers using <a href="https://en.wikipedia.org/wiki/SpiderMonkey">SpiderMonkey</a>. For further information, please see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now">this documentation page</a>.</p><p>For the console implementation, see the function object <code>consoleInstance.showException(exception)</code> in the source code.</p><h3 id="heading-file-i2fo">File I/O</h3>
+<p>File I/O is the newest feature. It is not very usual for a Web page, but there is nothing too difficult in it. File I/O is used in three points: 1) a JavaScript text can be loaden into the editor control, 2) the content of the editor control can be saved in a file, 3) the content of the console can be converted to text (possibly with some loss of information) and saved in a text file. This is the implementation:</p><div class="pre-lang" id="premain450061"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="450061" id="preShrink450061">Shrink ▲</span> &nbsp; <span id="copycode450061" class="copy-code" data-index="450061" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre450061" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> fileIO = {
+
+    storeFile: (fileName, content) &gt; {
+        <span class="code-keyword">const</span> link = <span class="code-sdkkeyword">document</span>.createElement(<span class="code-string">'</span><span class="code-string">a'</span>);
+        link.href = <span class="code-string">`</span><span class="code-string">data:text/plain;charset=utf-8,${content}`</span>; <span class="code-comment">//</span><span class="code-comment">sic!</span>
+        link.download = fileName;
+        link.click();
+    },
+    
+    <span class="code-comment">//</span><span class="code-comment"> loadTextFile arguments:</span>
+    <span class="code-comment">//</span><span class="code-comment"> fileHandler(fileName, text),</span>
+    <span class="code-comment">//</span><span class="code-comment"> acceptFileTypes: comma-separated, in the form: ".js,.json"</span>
+    loadTextFile: (fileHandler, acceptFileTypes) &gt; { 
+        <span class="code-keyword">const</span> input = <span class="code-sdkkeyword">document</span>.createElement(<span class="code-string">"</span><span class="code-string">input"</span>);
+        input.type = <span class="code-string">"</span><span class="code-string">file"</span>;
+        input.accept = acceptFileTypes;
+        input.value = <span class="code-keyword">null</span>;
+        <span class="code-keyword">if</span> (fileHandler)
+            input.onchange = event &gt; {
+                <span class="code-keyword">const</span> file = event.target.files[<span class="code-digit">0</span>];
+                <span class="code-keyword">if</span> (!file) <span class="code-keyword">return</span>;
+                <span class="code-keyword">const</span> reader = <span class="code-keyword">new</span> FileReader();
+                reader.readAsText(file);
+                reader.onload = readEvent &gt;
+                    fileHandler(file.name, readEvent.target.result);
+            }; <span class="code-comment">//</span><span class="code-comment">input.onchange</span>
+        input.click();
+    },
+
+};</pre><p>Note that the modern <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API">File System Access API</a> is not used here, even though it was used in the prototype project. The implementation based on the temporarily created elements and <code>click</code> call is simpler and sufficient for the purpose.</p><h3 id="heading-exception-handling">Exception Handling</h3>
+<p>In the code of <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>evaluate</code></a>, all exceptions are caught and handled by <code>consoleInstance.showException(exception)</code>. If an exception is caught, the element corresponding to <code>consoleInstance</code> is shown with the yellow background and the exception information. At this point, there can be two cases: some browsers will locate the line and the column in the input script, the point where the error is detected, and report it. In some other browsers, this information is considered unsafe and is not available.</p><p>If this information is available, the text caret is also put in the reported position in the <code>edit</code> control. This is the skeleton of the <code>consoleInstance</code> member functions setting the caret and showing exception information:</p><div class="pre-lang" id="premain469827"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="469827" id="preShrink469827">Shrink ▲</span> &nbsp; <span id="copycode469827" class="copy-code" data-index="469827" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre469827" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> consoleInstance = {
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+    setCaret: (line, column) =&gt; {
+        <span class="code-keyword">const</span> lines = editor.value.split(definitionSet.textFeatures.newLine);
+        <span class="code-keyword">let</span> position = <span class="code-digit">0</span>;
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> index = <span class="code-digit">0</span>; index &lt; line &amp;&amp; index &lt; lines.length; ++index)
+            position += lines[index].length + <span class="code-digit">1</span>;
+        editor.setSelectionRange(position + column - <span class="code-digit">1</span>, position + column);
+    },
+
+    showException: <span class="code-keyword">function</span> (exceptionInstance) {
+        <span class="code-comment">//</span><span class="code-comment"> ...</span>
+        <span class="code-keyword">this</span>.writeLine(<span class="code-comment">/*</span><span class="code-comment"> exceptionInstance.name, message, formatting... */</span>);
+        <span class="code-keyword">const</span> knownPosition = isKnown(exceptionInstance.lineNumber)
+            &amp;&amp; isKnown(exceptionInstance.columnNumber);
+        <span class="code-keyword">if</span> (knownPosition) {
+            <span class="code-keyword">this</span>.writeLine(
+                [<span class="code-string">`</span><span class="code-string">Line: ${exceptionInstance.lineNumber - 2},`</span> +
+                 <span class="code-string">`</span><span class="code-string"> column: ${exceptionInstance.columnNumber + 1}`</span>]);
+            <span class="code-keyword">this</span>.setCaret(
+                exceptionInstance.lineNumber - <span class="code-digit">3</span>,
+                exceptionInstance.columnNumber + <span class="code-digit">1</span>);
+        }
+    },
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+};</pre><p>Offsets in line and column numbers are explained by the fact, that not all script code is shown in the <code>edit</code> control. Some code is not visible, added by <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-core"><code>safeInput</code></a>.</p><h3 id="heading-handling-lexical-errors">Handling Lexical Errors</h3>
+<p>It’s very typical that the script does not execute in the browser at all, silently, even if you use <code>try</code> to catch all exceptions. It happens when some errors are of the lexical level.</p><p>When you write regular JavaScript code without <code>new Function</code>, you cannot catch some errors on the lexical level.</p><p>You can catch:</p><div class="pre-lang" id="premain356311"><div>JavaScript</div><div class="pre-action-link"><span id="copycode356311" class="copy-code" data-index="356311" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre356311" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">try</span> {
+    <span class="code-keyword">const</span> x = <span class="code-digit">3</span>;
+    x = x/y;
+} <span class="code-keyword">catch</span> (e) {
+    alert(e); <span class="code-comment">//</span><span class="code-comment"> Reference error: y is not defined</span>
+}</pre><p>but it would not work with</p><div class="pre-lang" id="premain781900"><div>JavaScript</div><div class="pre-action-link"><span id="copycode781900" class="copy-code" data-index="781900" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre781900" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">try</span> {
+    <span class="code-keyword">const</span> a = [<span class="code-digit">1</span>, <span class="code-digit">2</span>, <span class="code-digit">3</span>;] <span class="code-comment">//</span><span class="code-comment"> ';' is the lexical-level bug</span>
+} <span class="code-keyword">catch</span> (e) { <span class="code-comment">//</span><span class="code-comment"> won't be caught! </span>
+    alert(e);
+}</pre><p>However, if you enter the second code fragment in the <code>editor</code> element, text area, pass its value to <code>evaluate</code>, and sandwich it a try-catch block, the lexical-level problem will be processed as an exception!</p><p>The <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#code-lexical-error-capture">code sample shown above</a> will show the alert <code>"SyntaxError: missing ] after element list"</code>.</p><p>You can consider this as a method of “converting all errors into exceptions”. All errors will be covered by common <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-excepton-handling">exception handling</a>.</p><h3 id="heading-protection-from-losing-data">Protection from Losing Data</h3>
+<p>This feature is trivial, but I want to describe it, due to the abundance of recipes working or not working for different browsers. To the best of my knowledge, I put together the techniques to cover most browser peculiarities.</p><p>The user can easily unintentionally reload the page or remove it by closing its tab or window. If a user has some potentially valuable code in the code editor control, user confirmation is required. This is how to achieve it:</p><div class="pre-lang" id="premain366323"><div>JavaScript</div><div class="pre-action-link"><span id="copycode366323" class="copy-code" data-index="366323" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre366323" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-sdkkeyword">window</span>.addEventListener(<span class="code-string">'</span><span class="code-string">beforeunload'</span>, event =&gt; { <span class="code-comment">//</span><span class="code-comment"> sic!</span>
+    <span class="code-keyword">const</span> requiresConfirmation = isCodeModified
+        &amp;&amp; editor.value.trim().length &gt; <span class="code-digit">0</span>;
+    <span class="code-keyword">if</span> (requiresConfirmation) {
+        event.preventDefault(); <span class="code-comment">//</span><span class="code-comment"> guarantees showing confirmation dialog</span>
+        event.returnValue = <span class="code-keyword">true</span>; <span class="code-comment">//</span><span class="code-comment"> show confirmation dialog</span>
+    } <span class="code-keyword">else</span> <span class="code-comment">//</span><span class="code-comment"> to guarantee unconditional unload</span>
+        <span class="code-keyword">delete</span>(event.returnValue);</pre><p>The status <code>isCodeModified</code> is updated by the <code>input</code> event of the code editor control:</p><div class="pre-lang" id="premain866998"><div>JavaScript</div><div class="pre-action-link"><span id="copycode866998" class="copy-code" data-index="866998" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre866998" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">editor.oninput = () =&gt; isCodeModified = <span class="code-keyword">true</span>;</pre><p>This status is cleared when the code is loaded from the file or supplied via the <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-playground-api">Playground API</a>.</p><p>Not all lines of this code are absolutely required: deletion of <code>event.returnValue</code> could be replaced with the assignment to <code>undefined</code>, and <code>event.preventDefault()</code> might be redundant. However, there can be chances that in certain situations for certain browsers these lines will be essential. See <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onbeforeunload">this documentation page</a> for more detail.</p><h2 id="heading-playground-api">Playground API</h2>
+<p>The idea behind <code>playgroundAPI</code> is to pass some script to the main JavaScript Playground application “index.html”, populate the value of the <code>editor</code> control with the script text, and optionally execute it in the main application, optionally in strict mode. In this kind of usage, let’s consider the main JavaScript Playground application as a “host”, used by the “client” part written by the user.</p><p>This way, the user can run the client script in the context service application and do everything the application can do <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-javascript-playground-as-a-calculator">as a calculator</a>. It can be done for the demonstration of the JavaScript code and technique, life demo illustrating publications, and so on. To see how it may look, please try out the <a href="https://sakryukov.github.io/javascript-playground/demo.playgroundAPI">Playground API Demo</a>.</p><p>The user of <code>playgroundAPI</code> supplies the client script and instructs the host to populate <code>edit</code> control with the script text and define what to do with it. Naturally, it should be done in a very simple way. Let’s look at a simple code sample.</p><h3 id="heading-usage">Usage</h3>
+<p>This is the simplest example of the client code using <code>playgroundAPI</code>:</p><div class="pre-lang" id="premain621793"><div>HTML</div><div class="pre-action-link"><span id="copycode621793" class="copy-code" data-index="621793" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre621793" style="margin-top:0;" class="lang-html notranslate" data-language="HTML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">!DOCTYPE</span><span class="code-attribute"> </span><span class="code-attribute">html</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span><span class="code-attribute"> </span><span class="code-attribute">src</span><span class="code-keyword">="</span><span class="code-keyword">../JavaScript.Playground/playgroundAPI.js"</span><span class="code-keyword">&gt;</span><span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+
+<span class="code-keyword">return</span> <span class="code-string">"</span><span class="code-string">Write some code and press Ctrl+Enter"</span>
+
+<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span>showSample(<span class="code-string">"</span><span class="code-string">Just Calculator"</span>);<span class="code-keyword">&lt;</span><span class="code-keyword">/</span><span class="code-leadattribute">script</span><span class="code-keyword">&gt;</span></pre><p>The host populates the <code>editor</code> control with the script text shown in the second <code>scrip</code> element and sets the Web page title to “Just Calculator”. By default, the host should execute the code and use non-strict mode. To change this behavior, the script should call <code>showSample</code> with one or two additional Boolean arguments. This call redirects to the how Web page, the host application, which does the rest.</p><h3 id="heading-implementation">Implementation</h3>
+<p>The core implementation object <code>JavaScriptPlaygroundAPI</code> implements functionality for both client and host parts. It also explains the idea:</p><div class="pre-lang" id="premain518540"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="518540" id="preShrink518540">Shrink ▲</span> &nbsp; <span id="copycode518540" class="copy-code" data-index="518540" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre518540" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> JavaScriptPlaygroundAPI = {
+   
+   APIDataKey: <span class="code-string">"</span><span class="code-string">S. A. Kryukov JavaScript Playground API"</span>,
+   
+   storage: sessionStorage,
+   
+   userCall: <span class="code-keyword">function</span> (path, code, title, doNotEvaluate, strict) {
+      <span class="code-keyword">this</span>.storage.setItem(<span class="code-keyword">this</span>.APIDataKey,
+        JSON.stringify({
+            code: code,
+            doNotEvaluate: doNotEvaluate,
+            strict: strict,
+            title: title }));
+      <span class="code-sdkkeyword">document</span>.<span class="code-sdkkeyword">location</span> = path;
+   },
+   
+   <span class="code-comment">//</span><span class="code-comment"> host's internal:</span>
+   
+   onLoad: <span class="code-keyword">function</span> (handler) {
+      <span class="code-keyword">const</span> item = <span class="code-keyword">this</span>.storage.getItem(<span class="code-keyword">this</span>.APIDataKey);
+      <span class="code-keyword">this</span>.storage.removeItem(<span class="code-keyword">this</span>.APIDataKey);
+      <span class="code-keyword">if</span> (!item) <span class="code-keyword">return</span>;
+      <span class="code-keyword">const</span> script = JSON.parse(item);
+      <span class="code-keyword">if</span> (!script) <span class="code-keyword">return</span>;
+      <span class="code-keyword">if</span> (handler)
+         handler(script.title,
+            script.code,
+            script.doNotEvaluate,
+            script.strict);
+   },
+
+};</pre><p>The method <code>userCall</code> provides the basic functionality of the client part. It initializes the operation. The function <code>showSample</code> should calculate the URL for the host Web page, the content of the second <code>script</code> element containing the text of the user script, define the options, and pass this data to <code>userCall</code>. This data is stored in the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage"><code>sessionStorage</code></a> in the form of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON"><code>JSON</code></a>.</p><p>To see how the data is collected from the user-supplied HTML by <code>showSample</code>, see its implementation in <code>playgroundAPI.js</code>.</p><p>After the user HTML to the host Web page, it is loaded and calls <code>JavaScriptPlaygroundAPI.onLoad</code>. If the content of <code>sessionStorage</code> is found by the key <code>APIDataKey</code> and evaluates to <code>true</code>, and the script text is not empty, <code>JavaScriptPlaygroundAPI.onLoad</code> calls the <code>handler</code> supplied by the host JavaScript Playground application. Depending on the options passed via JSON content, the host changes the page title, populates the <code>editor</code> element, optionally switched to the strict or non-strict mode, and optionally executes the user script code.</p><p>To find out the detail of the implementation of the host Web page behavior, please the fragments of the code by <code>JavaScriptPlaygroundAPI.</code> in “index.js”.</p><h3 id="heading-limitations">Limitations</h3>
+<p>Not all browsers can use <code>sessionStorage</code> after the relocation. It works with the modern browsers based on the <a href="https://en.wikipedia.org/wiki/Blink_(browser_engine)">Blink</a>+<a href="https://en.wikipedia.org/wiki/V8_(JavaScript_engine)">V8</a> engines, but it could be a problem with some other browsers. In particular, Mozilla can do it only if the host application and the user HTML are located in the same directories.</p><p>To handle such situations, I decided to test some JavaScript features, to detect the browsers potentially not capable of supporting the use of <code>playgroundAPI</code> as it is presented in the <a href="https://sakryukov.github.io/javascript-playground/demo.playgroundAPI">demo code</a>. At the time being, it can be detected by the support of the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Private_class_fields">private class fields</a>:</p><div class="pre-lang" id="premain229473"><div>JavaScript</div><div class="pre-action-link"><span id="copycode229473" class="copy-code" data-index="229473" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre229473" style="margin-top:0;" class="lang-javascript notranslate" data-language="JavaScript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> goodJavaScriptEngine = (() =&gt; {
+    <span class="code-keyword">try</span> {
+        <span class="code-keyword">const</span> advanced = !!Function(<span class="code-string">"</span><span class="code-string">class a{ #b; }"</span>);
+        <span class="code-keyword">return</span> advanced;
+    } <span class="code-keyword">catch</span> {
+        <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+    }
+})();</pre><p>This solution is not perfect. What’s going to happen if some JavaScript engine like <a href="https://en.wikipedia.org/wiki/SpiderMonkey">SpiderMonkey</a> is upgraded with the support of the private class fields? Well, if the peculiarity with the Web page locations related to <code>sessionStorage</code> remains the same, something like <a href="https://en.wikipedia.org/wiki/Firefox">Firefox</a> will be able to use <code>playgroundAPI</code> and load the host JavaScript Playground Web page, but won’t populate the element <code>editor</code> with the script text.</p><p>Well, at least I warned and suggest what can be used in my error message. In the hide-and-seek game, the person who is “it” should call at the end of the time dedicated for hiding, before opening the eyes: “Ready or not, here I come!”. In its Russian form, the call is “If somebody is not yet hidden, this isn’t my fault”. Same thing here. :-)</p><h2 id="heading-live-demo">Live Demo</h2>
+<p><a href="https://sakryukov.github.io/javascript-playground/JavaScript.Playground">JavaScript Playground application</a></p><p><a href="https://sakryukov.github.io/javascript-playground/demo.playgroundAPI">Playground API Demo</a></p><h2 id="heading-releases">Releases</h2>
+<p><strong>4.0.0</strong>: Initial release after the fork from JavaScript Calculator</p><p><strong>4.1.0</strong>: Introduced comprehensive <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-user-script-context-protection">user script context protection</a> and <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-protection-from-losing-data">protection from losing data</a>.</p><p><strong>4.2.0</strong>: Introduced <a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground#heading-host-context-protection">host context protection</a>, eliminated reloading of the host application on the modification of the “Strict Mode” control value.</p><p><strong>4.3.0</strong>: Many fixes and improvements.</p>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.opensource.org/licenses/mit-license.php" rel="license">The MIT License</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2021 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

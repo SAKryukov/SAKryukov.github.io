@@ -1,0 +1,1162 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0090)https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Handwriting Recognition with WPF and Microsoft.Ink- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="What works with Microsoft pen computing and what not? How to handle and recognize ink input for any supported language?">
+<meta name="Keywords" content="C#, .NET, WPF, Beginner, Intermediate, Advanced">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="10/17/2020 5:02:00 PM">
+<meta property="article:modified_time" content="10/21/2020 3:06:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="26 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink">
+<meta property="og:title" content="Handwriting Recognition with WPF and Microsoft.Ink">
+<meta property="og:description" content="What works with Microsoft pen computing and what not? How to handle and recognize ink input for any supported language?">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink"
+   },
+  "name": "Handwriting Recognition with WPF and Microsoft.Ink",
+  "headline": "Handwriting Recognition with WPF and Microsoft.Ink",
+  "url": "https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink",
+  "discussionUrl": "https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C#,.NET,WPF,Beginner,Intermediate,Advanced",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "It seems that since the introduction of Microsoft Windows XP PC Edition of 2005 its handwriting recognition has been abandoned. The functionality which comes with one of the software keyboards suggests that the feature is rendered defunct. This is not entirely true. All you need is to know how properly expose handwritten API and embed it in your application.",
+  "articleSection": "WPF",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2020-10-17",
+  "dateCreated": "2020-10-17",
+  "dateModified": "2020-10-21"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=desktop",
+      "name" : "desktop"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=WPF",
+      "name" : "WPF"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=desktop">desktop</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=WPF">WPF</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5282936/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="Q6o6xsrDnw18oLyv+3EAupjVKMxSeJGh1EvcYtkAIv5pUxJVac04oF8ift5Oz8xYxlT4H0O7VfcUSXS/6QfjCLivUuXsKVdqQKtg+CiDzjDz6snEQ7y+TL6T/sNkRZdMOJ1cy0eQOMXnETvFiwxDMQIVUGIFwF19WkNA8scWJJQf+1VLu0sMB2yIlqJzMdDMuGIunf49KTBh8s3Ii0m9vzIrqB7BZ13lAB/E7xhUiXTOln2zvzbpIKzlwlWAwA0ydbsUf96YHPiV2CAPwWwMujvYGar4zf6f5gW5MsSD+jynC4GkIatbhtf2Q4N+kSDFg9Hntl/IDTG+BTO5DEz0JXBTuhB/CWvsXwoHSdSv7A6EOtuxlEQsLaIQJmfmcBUpkLndBsx+9ebeWCsSHrTVam+gUYf/4WSUxjPQb1rL6XCOw/q7qESP5Yat08JNayEcMP2OhaqC5CBXJMdDyho81ogpZC0WK6J2qeVlLpUTVvBgwjzpXlVe5lYTgPNntFEwn1CfpfUmzfTYxW4BWminXUQyKYenWXk11Iozch/JXaqBR42ZdLomAVovDYKzPT/B65TTyCwoKPMFiMtdpBVlIu2BK/Ud6XKtDJjT0yD96rmSbxs4q4IWu4OlzG5pIbex4PWQxQ10n60uW56wnmaO2FyDxBK4mcaoB9ldPJh0QNt/mnSnb5TaSf0yqxY3VM0xyRM7LhVYfmsxf52HwLFLWfwEdBf0p2ve3vv3Lwlp8xBaqIzpbvcRwX7/s4E647U4sZKMGDgJAMKMsn1Yhl01OEk3QgDXnXSZm/2R4i+/uDW0TfSVbobsQYz6T4ZCen0fvoLlr1FHQHvqMQx5Cw/+MYFCFn0mCUykKb6Wd74rMnsuiZkRIIDM+JU2IpH4tunhZOD5EeDmDh45v4PjMDLOsaR3014zrRFyrOiz8eBRilXk5sLt22iVkknqBLZj/LIO/P4Z/S3HATM1kLJjdKc/OoP4n/qfUBqDhda9F25Oowd5krWNrNLm9mu5MYEMk3LNcVux0xcRJ5PyLJbzxsc4dTcYHHxgYXkJgsOFettcJsqO9Ay38pCfgmSvFVSNqE8tVnZPJU1nGdvtE5udAG5/rYszrIJYDO/VJiir5NJsKIuHzFgcIBxdCny/YK8Xu5LyH4fCmw6fjYVKIYBuRUEVDYKaiH74hGS74ENRF1pfL5Vw3VZXJC/wDqefjLWQJFZPu1RUuTPd4tGwXUejJRL3BbbkR+1qrpoBt2QPPMNnt9LKWb5HZQZka2xHZwk7EpOBy8X+ajesQ385W7qQr+prGdHrSZeGvIIXPrCspWu7V1na3eMBHlg4/8gs2FNYHdkVkejxBMHVyefN/Eb5yrB9WeCezlheQLnZk3xxR0KbHPptiQBaR29qunuwRgD2aGjV6Ib0/XnmPnLuMiLzfugUXhhRwScpQUVLF/ph4vRA/MgEzE3VvxAvHgVHB4IUe9VFfxF8OmAWbvGpPwSuQi9K1ry4ga3UdP51Mx5cTf3o06dzuCcNlLJOpTcUBsoC+Bez75zAFr2aS1EGPl3zWXMFiDnyfOiobUWgXXatxURJ5woDff4dr1v4GZ0GM639MrbFfz9ZzG5+hilUcFbTqyG9pJRj5/N50H3Jpn2tlr3Sdcj1fmH4c20sMYT0IFRh8N2PQLMLmt4oz+hw3ssYraqoTxd5ixSS1L1Qg4xphb0bWG3AXdFioD8+itskDA2PjKjG1YNUpkC4UwYbDK2DwSd36zQ9txJHdocj8bVx0lenfcjzIW/Yi85fjTT9yy8wIhe0EH5a/tX6tbU7luD4teIpKX0mqS4z1LEA+VoetxXBdVXc500681zgxGEBDTd4QL+Aj3zRmBhjpL/AeqkXRJZ5W5HizsKN2qpQ/sazZnsBgqzY+UFpYHJATm3YuLtI/Le5EZ5sYbxLgO3saIrrU3/iVLjCJX3MSZARqeybi4w8x6TWqO95qE8vjiBghj9o+vfQf813taujzKw+cP//6lpPuoZ6xyWQGerdF00ccbsn89IGdGWownbpD+ePs0SWHq35kfcYH+bHe6XBCo9wbY9wodQQfV1Lj42cTFEV+brxOVdFdyaTnAzw2Uwi5Z9TMGXOaCU2N1lBm33qeQhxx+yfUizoB6MU1o7mVUSqFIZ01P+qEh4/+I06fv0PGhkPTdRnMhy2WPsYZ+cQ4DKSH2xQ7DrL/PjdQKm8amlZi/5fBdxF52VBu8t8gqHpO480jnMCnZpomf8higroyvJuuQ3JLUL4RpOoL3/YcncjAqUF8OBTQxcjq/lesicZkJ3ejk70KlFYCRZtLr8m01FZg8Qaf0ZsOPZS0+/DWn8BCKaKYUPXX9Kjfan8nfiAvh1BPTx3+4v48uoDMQ7Rpy7VyIeL3bQN0ej0wA/T1wka4F+Lljeq/NwD/n9Et9Nk0GnwOkDrru5xE9JRZL2+SJLCKv0v3VkjDGoVvA6lzhm6iPZ4QO7xEA10bEItkU5F07+mI1dYSnBqER0NqJZpxW+dakgDSqb+QeVT5F4i3S4lnWMihYTfDFfrVO0uQOpAJJOG19CnBV/r1T5NrHmgfn+/YtFxfu5R3B3+gOxt1jJwae+8d4r8SDi60LnIyls1r1owvH9t999itixaEmWVobjQOYHeEbLxLDJuj0AUdl7L4G3oEEQ+5zGOqE/EvwrAGuklWCgB2pHaYFD0uI1nBH2C46ilfjpOQ0w=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/WPF" data-id="140">WPF</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Handwriting Recognition with WPF and Microsoft.Ink</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5282936">
+
+	<meta itemprop="upvoteCount" content="3">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (3 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">17 Oct 2020, last revision: 20 Oct 2020</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">26 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 11.3K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 517</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">What works with Microsoft pen computing and what not? How to handle and recognize ink input for any supported language?</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">It seems that since the introduction of Microsoft Windows XP PC Edition of 2005 its handwriting recognition has been abandoned. The functionality which comes with one of the software keyboards suggests that the feature is rendered defunct. This is not entirely true. All you need is to know how properly expose handwritten API and embed it in your application.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Handwriting-Recognition-with-WPF-and-Microsoft.Ink.zip">Download source code: HandwritingRecognition.zip — 30.6 KB</a></li></ul>
+
+<p id="picture.main"><img alt="Hello, Microsoft Ink!" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.main.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>A skeptic is a person who, when he sees the handwriting on the wall, claims it is a forgery.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Morris_Bender">Morris Bender</a></dd></dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-motivation" style="margin-left: 0">Motivation</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-microsoft-handwriting-recognition-problems" style="margin-left: 0">Microsoft Handwriting Recognition Problems</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-windows-10-on-screen-keyboard-usability" style="margin-left: 3em">Windows 10 On-Screen Keyboard Usability</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-prerequisites" style="margin-left: 0">Prerequisites</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-collecting-ink-data" style="margin-left: 0">Collecting Ink Data</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-simplest-recognition" style="margin-left: 0">Simplest Recognition</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-collecting-ink-data3a-closer-look" style="margin-left: 0">Collecting Ink Data: Closer Look</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-adjusting-strokes" style="margin-left: 3em">Adjusting Strokes</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-recognizing-selected-strokes" style="margin-left: 3em">Recognizing Selected Strokes</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-recognizing-in-different-languages" style="margin-left: 0">Recognizing in Different Languages</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-recognizing-with-alternates" style="margin-left: 0">Recognizing with Alternates</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-the-interface-for-selection-of-the-alternates" style="margin-left: 3em">The Interface for Selection of the Alternates</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-testing-supported-properties" style="margin-left: 3em">Testing Supported Properties</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-background-recognition-and-synchronization" style="margin-left: 3em">Background Recognition and Synchronization</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-where-the-alternates-come-from3f" style="margin-left: 3em">Where the Alternates Come From?</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-putting-all-together" style="margin-left: 3em">Putting All Together</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-what-about-microsoft.ink.analysis3f" style="margin-left: 3em">What About Microsoft.Ink.Analysis?</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-what-else3f" style="margin-left: 0">What Else?</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-build-and-compatibility" style="margin-left: 0">Build and Compatibility</a><br>
+<a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-motivation">Motivation</h2>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>There is nothing more stimulating than a case where everything goes against you.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Sherlock_Holmes">Sherlock Holmes</a>, <i><a href="https://en.wikipedia.org/wiki/The_Hound_of_the_Baskervilles">The Hound of the Baskervilles</a></i> by Sir <a href="https://en.wikipedia.org/wiki/Arthur_Conan_Doyle">Arthur Conan Doyle</a></dd></dl>
+</blockquote>
+
+<p>About 2005, I was pleasantly surprised by the quality of the handwriting recognition available with <a href="https://en.wikipedia.org/wiki/Microsoft_Tablet_PC">Microsoft Tablet PC</a>. I didn’t have a Tablet PC, I only had a drawing tablet and done a good deal of drawing, only wanted to get better use of it. It turns out that one doesn’t really need a Tablet PC, as it was quite enough to install a separate product, an SDK for this product, and that it could be used on a non-specialized Windows version. It’s hard to understand why Microsoft could not supply something equivalent to the other users, not software developers. The demo software supplied with SDK was already fairly good to serve as a user-level software. I could not say it was perfect, but even to me. it was almost practical to enter texts using a pen. If I had to work without a physical keyboard, I would even use it in my practice.</p>
+
+<p>Now I have a touch screen nearly anywhere, and a nice fine-line stylus, moreover, all the computers are a lot more powerful, but… where is that nice demo application? I’m not sure I can find the Tablet PC SDK anymore. And what is bundled with Windows 10 is by far not good enough. In principle, the recognition quality is just the same as in 2005, but the applications themselves cannot give me a fraction of the convenience of the handwritten input of 2005.</p>
+
+<p>So, I wondered if can we get the achievements of 2005 back and use handwriting recognition in more practical ways. This is what I found: oh, yes, we can, and even more! It just needs some extra effort.</p>
+
+<h2 id="heading-microsoft-handwriting-recognition-problems">Microsoft Handwriting Recognition Problems</h2>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>You may not be able to read a doctor's handwriting and prescription, but you'll notice his bills are neatly typewritten.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Earl_Wilson_%28columnist%29">Earl Wilson</a></dd></dl>
+</blockquote>
+
+<p>Microsoft Windows pen computer components really offer very good performance and quality of recognition.</p>
+
+<p>But… only if you know what to use. It may take a fair amount of time spent on boring research and testing of different ways of recognition, facing unexpected failures that happen only in some special cases. Let me overview several problems and the cases of inconsistent API or behavior I faced:</p>
+
+<ul>
+	<li>The choice of SDK is a problem, because of…</li>	<li>Poor or misleading documentation, which is a problem by itself,</li>	<li>Not all features are really implemented,</li>	<li>It looks like SDK is totally oriented to <code>System.Windows.Forms</code>, which is not exactly so, but requires some work-around,</li>	<li>User-level handwriting support is hidden and barely usable, but let’s take a close look at it:</li></ul>
+
+<h3 id="heading-windows-10-on-screen-keyboard-usability">Windows 10 On-Screen Keyboard Usability</h3>
+
+<p>First, click main many, Ctrl+Esc, and type “Keyboard”. It will lead you to “On-Screen Keyboard”. Start it and try to find handwriting recognition mode. No, there is no such thing! Okay, try to check up if a handwriting recognition engine is installed. To do so, start main Settings menu <code>=&gt;</code> “Time &amp; Language” <code>=&gt;</code> “Region &amp; Language”. You can see one or more languages with the handwriting icon shown. And still, it isn’t shown on your On-Screen Keyboard.</p>
+
+<p>However, the feature is there. You will see it if you use another way. Right-click on a toolbar to see a toolbar’s context menu and select “Show touch keyboard button”. When the button is added to a toolbar, click on it. Bingo! It shows handwriting recognition mode, speech recognition mode (may require a separate article) and other features. But… How so?! How it’s possible to confuse the final users so much? Again, that said that Microsoft pays very little attention to integrating the otherwise high-quality handwriting recognition into the OS’s UI.</p>
+
+<p>Another thing which renders the application virtually unusable is the gesture recognition. In addition to the handwriting recognition, the application uses gestures to fix some already written text. We may need to scratch out badly recognized or incorrectly written text, separate or join some fragment. But how the application can tell the gesture strokes from the strokes used to form characters? The answer is: hardly. In fact, the application cannot reliably tell one thing from another and makes a lot of mistakes, so fixing the wrong text is so much pain, that starting over is usually much easier. This is just a big misconception.</p>
+
+<p>There are many other major and minor problems that make using this application difficult to use, but I would specifically blame the idea of asynchronous recognition. The strokes are recognized concurrently with the user input, removed, and converted to text as they are recognized. The user cannot control those events, which looks like unpredictable behavior, causes a lot of mistakes.</p>
+
+<p>Okay, we got a handwriting recognition keyboard, but does it worth the effort? Try it out and judge by yourself, but I personally doubt it. No, I think it is simply unusable.</p>
+
+<p>But does it mean that the handwriting recognition in Windows is that bad? Not at all! I think it is very good, but not presented to the final user in any reasonable way.</p>
+
+<p>Below, I’ll try to show how to really all this recognition excellence readily available in the engine.</p>
+
+<h2 id="heading-prerequisites">Prerequisites</h2>
+
+<p>Basically, .NET 3.5 or later is required, as well as one or more language packs supporting handwriting.</p>
+
+<p>The demo software can be built <em>as-is</em> on Windows 7 or later, including Windows 10. The installation will include at least one language pack.</p>
+
+<p>However, it would be better to locate the file “Microsoft.Ink.dll” and change the references: remove “Microsoft.Ink.dll” I provide in the directory “Assemblies” and replace it with the file found in the existing installation. The file can be located in “c:\Program Files\Common Files\microsoft shared\ink” or “c:\Program Files\Reference Assemblies\Microsoft\Tablet PC\v1.7”. If this file is not found, the installation of the latest Platform SDK will help. Presently, Windows 7 Platform SDK should suffice.</p>
+
+<p>It is possible, that, for some cultures, the default language pack does not support handwriting recognition. The demo application will reveal this situation, showing appropriate status. In this case, an additional language pack can be installed.</p>
+
+<p>It can also be used for older versions of OS, starting with:</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Windows_2000">Windows 2000 Service Pack 4</a> <a href="https://en.wikipedia.org/wiki/Windows_Server_2003">Windows Server 2003</a> <a href="https://en.wikipedia.org/wiki/Windows_XP_editions#Home_and_Professional">Windows XP Professional Edition</a> <a href="https://en.wikipedia.org/wiki/Windows_XP_editions#Tablet_PC_Edition">Windows XP Tablet PC Edition 2005</a></p>
+
+<p>In these cases, the old Microsoft Tablet PC SDK needs to be installed. I don’t know where to find the Tablet PC SDK installation. Starting from Windows Vista, Tablet PC SDK is supplied with the Platform SDK.</p>
+
+<p>Visual Studio is not required; the software can be built using supplied file “build.batch”. In this case, it will use the compiler bundled with .NET.</p>
+
+<p>SDK Help can be found here:<br>
+<a href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms571346%28v%3dvs.90%29">https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms571346%28v%3dvs.90%29</a>,<br>
+<a href="https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms581553%28v=vs.90%29">https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms581553%28v=vs.90%29</a></p>
+
+<p>The path to find help from <a href="https://docs.microsoft.com/en-us/">Microsoft help page</a>: Previous Versions Docs (bottom of the page) =&gt; .NET =&gt; .NET Framework 3.5 =&gt; General Reference for the .NET Framework =&gt; Additional Managed Reference Topics =&gt; Microsoft.Ink Name space =&gt; …</p>
+
+<h2 id="heading-collecting-ink-data">Collecting Ink Data</h2>
+
+<div class="pre-lang" id="premain781056"><div>XML</div><div class="pre-action-link"><span id="copycode781056" class="copy-code" data-index="781056" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre781056" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary</span><span class="code-keyword">&gt;</span>
+    <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> ... </span><span class="code-comment">--&gt;</span></span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">grip"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">ui:LocationGrip"</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Cursor"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">SizeAll"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Width"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource locationGripSelectionSize}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Height"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource locationGripSelectionSize}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style.Triggers</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Style</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary</span><span class="code-keyword">&gt;</span></pre>
+
+<h2 id="heading-simplest-recognition">Simplest Recognition</h2>
+
+<p>Let’s say, ink strokes data is collected as a collection <code>System.Windows.Ink.StrokeCollection</code>. This is how it can be recognized as a text string in the simplest way:</p>
+
+<div class="pre-lang" id="premain567240"><div>C#</div><div class="pre-action-link"><span id="copycode567240" class="copy-code" data-index="567240" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre567240" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> StrokeCollection = System.Windows.Ink.StrokeCollection;
+<span class="code-keyword">using</span> MemoryStream = System.IO.MemoryStream;
+<span class="code-keyword">using</span> Microsoft.Ink;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-keyword">static</span> <span class="code-keyword">class</span> TextRecognizer {
+
+    <span class="code-keyword">internal</span> <span class="code-keyword">static</span> <span class="code-keyword">string</span> Recognize(StrokeCollection strokes) {
+        <span class="code-keyword">using</span> (<span class="code-keyword">var</span> ink = <span class="code-keyword">new</span> Ink()) {
+            PopulateInk(ink, strokes);
+            <span class="code-keyword">return</span> ink.Strokes.ToString(); <span class="code-comment">//</span><span class="code-comment"> here!</span>
+        }
+    }
+
+    <span class="code-keyword">private</span> <span class="code-keyword">static</span> <span class="code-keyword">void</span> PopulateInk(Ink ink, StrokeCollection strokes) {
+        <span class="code-keyword">using</span> (<span class="code-keyword">var</span> ms = <span class="code-keyword">new</span> MemoryStream()) {
+            strokes.Save(ms);
+            ink.Load(ms.ToArray());
+        }
+    }
+
+}</pre>
+
+<p>Note that <code>System.Windows.Ink.StrokeCollection</code> and <code>Microsoft.Ink.Strokes</code> are unrelated types, as well as corresponding <code>Stroke</code> types. They are assignment-incompatible but have identical stream representations. This way, <code>Microsoft.Ink.Ink</code> objects can be populated with strokes borrowed from a WPF <code>System.Windows.Ink.StrokeCollection</code> collection through a memory stream, as <code>PopulateInk</code> does.</p>
+
+<p>The recognition itself is performed in the overridden <code>Microsoft.Ink.Ink.Strokes.ToString</code> method. This simplest recognition method works only for the default input language configured for the system and current user.</p>
+
+<p>Before going in for more advanced handwriting recognition, let’s get back to ink collection and discuss some more advanced detail.</p>
+
+<h2 id="heading-collecting-ink-data3a-closer-look">Collecting Ink Data: Closer Look</h2>
+
+<h3 id="heading-adjusting-strokes">Adjusting Strokes</h3>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>It was decided to make it totally error-free. They produced twenty proofreading prints and nevertheless on the title page it was printed: "<a href="https://en.wikipedia.org/wiki/Cyclopidae">Encyclopidae</a> Britannica"</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Ilya_Ilf">Ilya Ilf</a></dd></dl>
+</blockquote>
+
+<p>The control class <code>System.Windows.Controls.InkCanvas</code> already has everything needed to manipulate already entered strokes.</p>
+
+<p>Separation of ink input into separate lexemes is not trivial at all. What is a separate word? This is not a single stroke, because a user can touch the screen with a stylus several times while writing a single work; even a single letter (“i”, “j” and the like) make require two or more touches. The separation is judged by relative sizes of blank spaces, stroke sizes, and other features. A space between strokes can be considered a blank space or just a gap between characters in a single word, depending on several factors, including sizes of other spaces in the same collection of strokes. To fill it, let’s look at the following funny example. Let’s try to enter “CodeProject” as one word. Let’s start with “Code” using wide letter spacing, try to recognize it, and then will add “Project” on right. Note that fist stroke collection is recognized as “Code”, not as “C o d e”:</p>
+
+<p id="picture.CodeProject"><img alt="Recognized as Code" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.Code.webp"></p>
+
+<p><img alt="Recognized as Co! Project" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.CodeProject.webp"/></p>
+
+<p>We can see that adding strokes for “Project” changes recognition of “Code”. Not only the gap between “d” and “e” turned the blank space, but our intended “d e” was recognized as "! ". It happened because condensed letter spacing in “eProject” compared to wide spacing in “Code” confuses the recognizer. Try, for example, to move “Project” a bit to write, and you will get “Code Project”.</p>
+
+<p>That said, it’s important to have a tool to adjust the positions of some subsets of strokes. We also need a way to delete some strokes and re-enter them without removing the entire image.</p>
+
+<p>In my demo application, one can see three radio buttons styled as three image toggle buttons (selected one is more contrast and darker): “Ink mode (Ctrl or Shift up)”, “Eraser mode (Ctrl down)” and “Select/Move/Scale/Erase mode (Shift down)”:</p>
+
+<p id="picture.editing-modes"><img alt="Three editing modes" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.modes.webp"/></p>
+
+<p>These three strings are shown in the controls’ hints and also in the status line located at the bottom. The modes can be switches by the clicks, the way normal radio buttons act, and also as the hints in brackets suggest, these modes can be chosen temporarily using the keyboard status keys Ctrl and Shift. To do so, the strokes can be manipulated while holding Ctrl or Shift; when a key is released, the status gets back to default <em>Ink mode</em>.</p>
+
+<p>In the <em>Eraser mode</em>, a stroke is removed when crossed by a strike-our gesture. (There is another <code>System.Windows.Controls.InkCanvas</code> input mode when a stroke is deleted by clicking in a line, but this is utterly inconvenient as it requires too fine gesture accuracy.)</p>
+
+<p>In the <em>Select/Move/Scale/Erase mode</em>, a set of strokes can be selected with a lasso and then either moved around, scaled, or deleted. There is no need to close a lasso; just the opposite: an incomplete lasso curve actually helps to isolate subsets of strokes with highly overlapping regions.</p>
+
+<p>This feature is very important, as it helps to join two sets of strokes to be recognized as a single word, or move them apart, to make them recognized as two separate words.</p>
+
+<p>Finally, I added the function to remove the last stroke entered using Ctrl-Z. Please don’t expect full undo/redo functionality from my demo: the implementation is pretty obvious, but I don’t see a good reason to bother about it. It would be much easier to simply enter a stroke again.</p>
+
+<p>Let’s start with this Ctrl+Z feature, which turned out to be not as trivial as it may seem. This is because there is no such function in the API. (There is a method of erasing ink in a rectangular region, which is totally inadequate, as the regions of different strokes often overlap). Instead, <code>Strokes.Replace</code> should be used:</p>
+
+<div class="pre-lang" id="premain999771"><div>C#</div><div class="pre-action-link"><span id="copycode999771" class="copy-code" data-index="999771" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre999771" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> emptyStrokeCollection = <span class="code-keyword">new</span> StrokeCollection();
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="code-comment">//</span><span class="code-comment"> in the keyboard handler:</span>
+inkCanvas.Strokes.Replace(inkCanvas.Strokes[inkCanvas.Strokes.Count - 1], emptyStrokeCollection);</pre>
+
+<p>Setting any of the three <code>System.Windows.Ink.StrokeCollection</code> editing modes is trivial:</p>
+
+<div class="pre-lang" id="premain317156"><div>C#</div><div class="pre-action-link"><span id="copycode317156" class="copy-code" data-index="317156" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre317156" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-comment">//</span><span class="code-comment"> Ink mode:</span>
+inkCanvas.EditingMode = InkCanvasEditingMode.Ink;
+<span class="code-comment">//</span><span class="code-comment"> Eraser mode: </span>
+inkCanvas.EditingMode = InkCanvasEditingMode.EraseByStroke;
+<span class="code-comment">//</span><span class="code-comment"> Select/Move/Scale/Erase mode:</span>
+inkCanvas.EditingMode = InkCanvasEditingMode.Select;</pre>
+
+<p>Also, I would like to warn against using <code>InkCanvasEditingMode.InkAndGesture</code>. Yes, this mode allows for recognition of gestures and separate them from ink strokes representing text input. However, the confidence of such separation is not so good, even though if only few gestures are enabled using <code>System.Windows.Controls.InkCanvas.SetEnabledGestures</code>. Indeed, many of the gestures enumerated as <code>System.Windows.Ink.ApplicationGesture</code> can be easily confused with characters. Here and there, the recognizer fails to recognize a stroke as text accepting it as a gesture, and visa versa. This is what happens with Windows 10 On-Screen Keyboard behavior, which makes handwriting quite difficult, especially if some correction of strokes is required.</p>
+
+<p>By all counts, the <code>InkCanvas</code> behavior utilizing different editing modes described above is much more convenient than the <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#headingwindows-10-on-screen-keyboard-usability">behavior of Windows 10 On-Screen Keyboard application</a>.</p>
+
+<h3 id="heading-recognizing-selected-strokes">Recognizing Selected Strokes</h3>
+
+<p>Once we can select some subset of the entered strokes, we can pass those selected strokes to recognition when the <code>System.Windows.Controls.InkCanvas</code> is in the <code>Select</code> mode. In this case, only the selected strokes will be recognized. When nothing is selected, we need to pass all the strokes. Let’s add this to the handler of the “Recognize” button:</p>
+
+<div class="pre-lang" id="premain699760"><div>C#</div><div class="pre-action-link"><span id="copycode699760" class="copy-code" data-index="699760" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre699760" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> strokes = inkCanvas.Strokes; <span class="code-comment">//</span><span class="code-comment"> all strokes on the canvas</span>
+<span class="code-keyword">if</span> (inkCanvas.EditingMode == InkCanvasEditingMode.Select) {
+    <span class="code-keyword">var</span> selectedStrokes = inkCanvas.GetSelectedStrokes();
+    <span class="code-keyword">if</span> (selectedStrokes.Count &gt; <span class="code-digit">0</span>)
+        strokes = selectedStrokes;
+}
+<span class="code-comment">//</span><span class="code-comment"> pass strokes to the recognizer</span>
+<span class="code-comment">//</span><span class="code-comment"> as a System.Windows.Ink.StrokeCollection argument</span></pre>
+
+<h2 id="heading-recognizing-in-different-languages">Recognizing in Different Languages</h2>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>A family of mice was surprised by a big cat. Father Mouse jumped and said, "Bow-wow!"<br>
+The cat ran away.<br>
+"What was that, Father?" asked Baby Mouse.<br>
+"Well, son, that's why it's important to learn a second language."</i></p>
+</blockquote>
+
+<p>Well, let’s add a second language to the system and see if we can achieve handwriting recognition for each language. If the system has only one handwriting recognition language pack, an additional language pack can be downloaded and installed. In particular, with Windows 10 it can be done using main Settings menu <code>=&gt;</code> “Time &amp; Language” <code>=&gt;</code> “Region &amp; Language” <code>=&gt;</code> “Add Language”. It pops up a dialog showing supported languages with a small legend at the button helping to see if handwriting recognition is supported for a required language.</p>
+
+<p>When the language packs are set up, the software can poll the set using the class <code>Microsoft.Ink.Recognizers</code>. The constructor of this class creates an object serving as a container of the set of <code>Microsoft.Ink.Recognizer</code> object. Each <code>Recognizer</code> instance actually represents a handwriting recognition language pack. Typically, this is not a single language, but a set of <em>sub-languages</em> represented as <code>Microsoft.Ink.Recognizer.Languages</code>, and array of <code>short</code> integer values each representing a <em>language ID</em>. Low byte of this word represents a <em>primary language</em> and the high byte represents a <em>sub-language</em>. See <a href="https://docs.microsoft.com/en-us/windows/win32/intl/language-identifier-constants-and-strings">https://docs.microsoft.com/en-us/windows/win32/intl/language-identifier-constants-and-strings</a> for more detail.</p>
+
+<p>To provide the selection of desired language pack to use, we can put all <code>Recognizer</code> instances in a combo box:</p>
+
+<div class="pre-lang" id="premain922413"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="922413" id="preShrink922413">Shrink ▲</span> &nbsp; <span id="copycode922413" class="copy-code" data-index="922413" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre922413" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> Microsoft.Ink;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> MainWindow {
+
+    <span class="code-keyword">private</span> <span class="code-keyword">int</span> SetupRecognizerSet() {
+        <span class="code-keyword">var</span> defaultRecognizer = recognizerSet.GetDefaultRecognizer();
+        <span class="code-keyword">int</span> defaultRecognizerIndex = <span class="code-digit">0</span>;
+        <span class="code-keyword">for</span> (<span class="code-keyword">int</span> index = <span class="code-digit">0</span>; index &lt; recognizerSet.Count; ++index) {
+            <span class="code-keyword">var</span> recognizer = recognizerSet[index];
+            <span class="code-comment">//</span><span class="code-comment"> listLanguages is a combo box defined in the window's XAML:</span>
+            <span class="code-keyword">if</span> (recognizer.Languages.Length &gt; <span class="code-digit">0</span>)
+                <span class="code-keyword">this</span>.listLanguages.Items.Add(recognizer);
+            <span class="code-comment">//</span><span class="code-comment"> Recognizer class has identity problem, so only this way:</span>
+            <span class="code-keyword">if</span> (recognizer.Name == defaultRecognizer.Name) 
+                defaultRecognizerIndex = index;
+        } <span class="code-comment">//</span><span class="code-comment">loop</span>
+        <span class="code-keyword">var</span> count = listLanguages.Items.Count;
+        <span class="code-keyword">if</span> (count &lt; <span class="code-digit">1</span>) <span class="code-keyword">return</span> count;
+        listLanguages.SelectedIndex = defaultRecognizerIndex;
+        listLanguages.Focus();
+        <span class="code-keyword">return</span> count;
+    }
+        
+    <span class="code-keyword">private</span> Recognizers recognizerSet = <span class="code-keyword">new</span> Microsoft.Ink.Recognizers();
+    
+}</pre>
+
+<p>Note that I place this part of a main form class in a separate file and a separate class part using <code>partial</code>. Among other things, it helps me to isolate the namespaces having similarly or identically named but different declarations, <code>Microsoft.Ink</code> and <code>System.Windows.Ink</code>, which makes the code more readable without redundant fully-qualified names.</p>
+
+<p>Also note the identity problem mentioned above in the code sample. This is a little defect of the <code>Microsoft.Ink.Recognizer</code> class which can be explained in the following way:</p>
+
+<div class="pre-lang" id="premain67721"><div>C#</div><div class="pre-action-link"><span id="copycode67721" class="copy-code" data-index="67721" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre67721" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">var</span> recognizerSet = <span class="code-keyword">new</span> Microsoft.Ink.Recognizers();
+<span class="code-keyword">var</span> recognizer1 = recognizerSet[0]; 
+<span class="code-keyword">var</span> recognizer2 = recognizerSet[0];
+<span class="code-comment">//</span><span class="code-comment"> at this point, recognizer1 == recognizer2 returns false </span>
+<span class="code-comment">//</span><span class="code-comment"> which looks illogical</span></pre>
+
+<p>That’s why I compare recognizers by name. Just be careful.</p>
+
+<p>Now when all <code>Recognizer</code> instances are collected, we can extract an instance from the combo box <code>Items</code> in the handler of the “Recognize” button:</p>
+
+<div class="pre-lang" id="premain857495"><div>C#</div><div class="pre-action-link"><span id="copycode857495" class="copy-code" data-index="857495" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre857495" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Main.IRecognitionResultSelector selectorToUse = <span class="code-keyword">this</span>.checkBoxAdvanced.IsChecked == <span class="code-keyword">true</span> ? selector : <span class="code-keyword">null</span>;
+<span class="code-keyword">string</span> text = Main.TextRecognizer.Recognize(
+    strokes,
+    (Microsoft.Ink.Recognizer)(<span class="code-keyword">this</span>.listLanguages.SelectedItem),
+    selectorToUse);</pre>
+
+<p>I will explain the last function argument <code>selectorToUse</code> <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#headingrecognizing-with-alternates">later</a>. It works if the check box <code>checkBoxAdvanced</code> “Advanced Recognition” is checked. For now, let’s assume it is not checked; then this argument is <code>null</code>.</p>
+
+<p>Now let’s see how the function <code>Main.TextRecognizer.Recognize</code> works. With several languages, using just <code>Microsoft.Ink.Ink</code> won’t be enough, but can be used as default when an instance of <code>Microsoft.Ink.Recognizer</code> is not determined (<code>null</code> in our case). For recognition, we need another object, an instance of <code>Microsoft.Ink.CreateRecognizerContext</code> which needs disposal automatically performed at the exit from the scope of the <code>using</code> construct:</p>
+
+<div class="pre-lang" id="premain404590"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="404590" id="preShrink404590">Shrink ▲</span> &nbsp; <span id="copycode404590" class="copy-code" data-index="404590" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre404590" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> StrokeCollection = System.Windows.Ink.StrokeCollection;
+<span class="code-keyword">using</span> MemoryStream = System.IO.MemoryStream;
+<span class="code-keyword">using</span> ManualResetEvent = System.Threading.ManualResetEvent;
+<span class="code-keyword">using</span> Microsoft.Ink;
+
+<span class="code-keyword">static</span> <span class="code-keyword">class</span> TextRecognizer {
+
+    <span class="code-keyword">internal</span> <span class="code-keyword">static</span> <span class="code-keyword">string</span> Recognize(
+        StrokeCollection strokes,
+        Recognizer recognizer,
+        Main.IRecognitionResultSelector selector <span class="code-comment">//</span><span class="code-comment"> will it explain later</span>
+        ) {
+        <span class="code-keyword">using</span> (<span class="code-keyword">var</span> ink = <span class="code-keyword">new</span> Ink()) {
+            PopulateInk(ink, strokes);
+            <span class="code-keyword">if</span> (recognizer == <span class="code-keyword">null</span>)
+                <span class="code-comment">//</span><span class="code-comment"> default recognizer and language:</span>
+                <span class="code-keyword">return</span> ink.Strokes.ToString(); 
+            <span class="code-keyword">using</span> (<span class="code-keyword">var</span> context = recognizer.CreateRecognizerContext()) {
+                <span class="code-keyword">if</span> (ink.Strokes.Count &lt; <span class="code-digit">1</span>) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+                context.Strokes = ink.Strokes;
+                <span class="code-keyword">if</span> (selector == <span class="code-keyword">null</span>) {
+                    RecognitionStatus status;
+                    <span class="code-keyword">var</span> result = context.Recognize(<span class="code-keyword">out</span> status);
+                    <span class="code-keyword">if</span> (status == RecognitionStatus.NoError)
+                        <span class="code-keyword">return</span> result.TopString;
+                    <span class="code-keyword">else</span>
+                        <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+                } <span class="code-keyword">else</span> <span class="code-comment">//</span><span class="code-comment"> will explain it later:</span>
+                    <span class="code-keyword">return</span> RecognizeWithAlternates(context, selector);
+            } <span class="code-comment">//</span><span class="code-comment">using context</span>
+        } <span class="code-comment">//</span><span class="code-comment">using ink</span>
+    } <span class="code-comment">//</span><span class="code-comment">Recognize</span>
+
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+
+}</pre>
+
+<p>I think the recognition itself is self-explaining.</p>
+
+<p>Now I have to explain those parts marked with the comments “will explain it later”. It is related to an even more advanced method of recognition (I enable optionally in my demo application, via the check box “Advanced Recognition”). This is the recognition with the <em>alternates</em>. To show how it works, it will be enough to show the type of the argument <code>selector</code> and its use in the method <code>RecognizeWithAlternates</code>.</p>
+
+<h2 id="heading-recognizing-with-alternates">Recognizing with Alternates</h2>
+
+<p>If you excessively concentrate on a closed door, you may miss the alternative easy entries! Mehmet Murat Ildan</p>
+
+<p>One should always look for a possible alternative, and provide against it. -Sherlock Holmes Sir Arthur Conan Doyle</p>
+
+<p>When you have two alternatives, the first thing you have to do is to look for the third that you didn’t think about, that doesn’t exist. Shimon Peres</p>
+
+<p>Who would you rather be with: someone with more alternatives or someone with fewer? Andy Dunn</p>
+
+<h3 id="heading-the-interface-for-selection-of-the-alternates">The Interface for Selection of the Alternates</h3>
+
+<p>First of all, let’s define the interface type for some object responsible for the representation of the alternates in the UI and selection of the desired combination of the alternates:</p>
+
+<div class="pre-lang" id="premain544126"><div>C#</div><div class="pre-action-link"><span id="copycode544126" class="copy-code" data-index="544126" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre544126" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> Microsoft.Ink;
+    
+<span class="code-keyword">interface</span> IRecognitionResultSelector {
+    <span class="code-keyword">string</span> Select(Recognizer recognizer, RecognitionResult result);
+}</pre>
+
+<p>The implementation of this interface should take an instance of <code>Microsoft.Ink.RecognitionResult</code>, present all the alternates to the user and give a user the choice. Depending on the user selection, the implementation returns the resulting string, one of the many possible combinations of the recognized words:</p>
+
+<p id="picture.selector"><img alt="Selector of alternates" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.selector.webp"/></p>
+
+<p>Note that only some of the words are shown without the choice. This is the implementation behavior option I just found practical: if the <em>recognition confidence</em> for some word is <code>Microsoft.Ink.RecognitionConfidence.Strong</code> (which is top confidence), it is shown as a text block, not as a selection combo box. Moreover, if the entire ink input passed to the recognizer is recognized with top confidence, this window is not shown at all; the <code>IRecognitionResultSelector.Selector</code> implementation simply returns the recognized top-confidence string.</p>
+
+<p>The implementation of this behavior is another problem. Let’s address it.</p>
+
+<h3 id="heading-testing-supported-properties">Testing Supported Properties</h3>
+
+<p>Here is the problem: when we try to examine an instance of <code>Microsoft.Ink.RecognitionResult</code> for the recognition confidence, it may work for one language pack (<code>Recognizer</code>) and throw the exception “The specified property identifier was invalid” for another one.</p>
+
+<div class="pre-lang" id="premain209487"><div>C#</div><div class="pre-action-link"><span id="copycode209487" class="copy-code" data-index="209487" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre209487" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> Microsoft.Ink;
+
+<span class="code-keyword">string</span> Main.IRecognitionResultSelector.Select(Recognizer recognizer, RecognitionResult result) {
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-comment">//</span><span class="code-comment"> can throw "The specified property identifier was invalid" exception:</span>
+    <span class="code-keyword">var</span> confidence = result.TopConfidence;
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+    <span class="code-keyword">var</span> alts = result.GetAlternatesFromSelection(positions[index], words[index].Length);
+    <span class="code-comment">//</span><span class="code-comment"> can throw "The specified property identifier was invalid" exception:</span>
+    <span class="code-keyword">var</span> topAlternateConfidence = alts[0].Confidence;    
+    <span class="code-comment">//</span><span class="code-comment">...</span>
+}</pre>
+
+<p>That said, before we read those <code>TopConfidence</code> or <code>Confidence</code> properties, we have to check up if their implementations are really supported for a given instance of <code>Microsoft.Ink.Recognizer</code>. That’s why the interface method <code>IRecognitionResultSelector.Select</code> uses the <code>recognizer</code> argument. This is how it can be found:</p>
+
+<div class="pre-lang" id="premain462186"><div>C#</div><div class="pre-action-link"><span id="copycode462186" class="copy-code" data-index="462186" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre462186" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">private</span> <span class="code-keyword">static</span> <span class="code-keyword">bool</span> IsConfidenceLevelPropertySupported(Recognizer recognizer) {
+    <span class="code-keyword">bool</span> result = <span class="code-keyword">false</span>;
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> guid <span class="code-keyword">in</span> recognizer.SupportedProperties)
+        <span class="code-keyword">if</span> (guid == RecognitionProperty.ConfidenceLevel) {
+            result = <span class="code-keyword">true</span>;
+            <span class="code-keyword">break</span>;
+        } 
+    <span class="code-keyword">return</span> result;
+}</pre>
+
+<p>Then we can use the properties to determine the level of confidence carefully. If the property implementation corresponding to <code>RecognitionProperty.ConfidenceLevel</code> is supported, we can call <code>TopConfidence</code> or <code>Confidence</code>. If it is not supported, we simply assume that the confidence is always poor, that’s it, the selector UI windows is always shown and the alternates for every word are presented to the user.</p>
+
+<h3 id="heading-background-recognition-and-synchronization">Background Recognition and Synchronization</h3>
+
+<p>Now it’s time to show how <code>RecognizeWithAlternates</code> works. There is one little problem to be solved. In <code>Microsoft.Ink</code>, there is only one method of recognition with alternates, and this method is asynchronous: <code>Microsoft.Ink.RecognizerContext.BackgroundRecognizeWithAlternates</code>. This is a void method working through the event <code>Microsoft.Ink.RecognizerContext.RecognitionWithAlternates</code>. But my <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#coderecognize-with-language-pack">calling code</a> is designed for synchronous behavior. First of all, the instance of <code>System.Ink.RecognizerContext</code> is synchronously disposed of in each recognition event. If <code>BackgroundRecognizeWithAlternates</code> is called withing the <code>using</code> statement block, the event handler of the <code>RecognitionWithAlternates</code> event will never be invoked.</p>
+
+<p>So, in my demo application, I maintain synchronous recognition, and I mean it. I hate the idea implemented in the 10 Windows 10 On-Screen Keyboard, when recognition is performed while I write with a stylus, converting my strokes with text objects at some unpredictable moments, no matter if I consider my input complete or not. I really want recognition performed on my command. This is not a problem to implement asynchronous behavior, but I want to make it synchronous. This problem is simply solved using the <a href="https://en.wikipedia.org/wiki/Closure_%28computer_programming%29">closure</a> functionality and <code>System.Threading.ManualResetEvent</code>:</p>
+
+<div class="pre-lang" id="premain465205"><div>C#</div><div class="pre-action-link"><span id="copycode465205" class="copy-code" data-index="465205" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre465205" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">using</span> ManualResetEvent = System.Threading.ManualResetEvent;
+<span class="code-keyword">using</span> Microsoft.Ink;
+
+<span class="code-comment">//</span><span class="code-comment">...</span>
+
+<span class="code-keyword">private</span> <span class="code-keyword">static</span> <span class="code-keyword">string</span> RecognizeWithAlternates(
+        RecognizerContext context,
+        Main.IRecognitionResultSelector selector)
+{
+    RecognitionResult result = <span class="code-keyword">null</span>;
+    ManualResetEvent completionEvent = <span class="code-keyword">new</span> ManualResetEvent(<span class="code-keyword">false</span>);
+    context.RecognitionWithAlternates += (
+        <span class="code-keyword">object</span> sender,
+        RecognizerContextRecognitionWithAlternatesEventArgs e) =&gt; {
+            result = e.Result;
+            completionEvent.Set();
+    }; <span class="code-comment">//</span><span class="code-comment">context.RecognitionWithAlternates</span>
+    context.BackgroundRecognizeWithAlternates();
+    completionEvent.WaitOne();
+    <span class="code-keyword">return</span> selector.Select(context.Recognizer, result);
+}</pre>
+
+<p>However, there is no a need to use this simple synchronization. Even if we want the recognition to be triggered by a user command, we can keep it asynchronous, because the strokes are fed to the <code>RecognizerContext</code> synchronously. The asynchronous processing of stroke will recognize all available strokes and enter a <em>wait state</em>.</p>
+
+<p>I implemented the synchronization-based mechanism be the following reason, 1) it is fully sufficient, 2) it is more suitable for my didactic purposes, and this is because I wanted to demonstrate three different recognition methods inside a single method <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#coderecognize-with-language-pack"><code>static string Recognize</code></a>, 3) this is probably the simplest approach.</p>
+
+<p>Let’s see how the asynchronous recognition may look and how complicated it can be. Not a big problem, actually. First of all, we need to start <code>BackgroundRecognizeWithAlternates</code> each time the language pack is selected by the user, immediately after the instance of <code>RecognizerContext</code> is instantiated. Previously instantiated <code>RecognizerContext</code> object, if one was previously instantiated, needs to be disposed of. Before the termination of the application, the instantiated instance of this class should stop recognition and then be disposed of.</p>
+
+<p>It’s a good idea to use the method with additional argument <code>customData</code>: <code>System.Ink.RecognizerContext.BackgroundRecognizeWithAlternates(object customData)</code>. I would use this argument for passing some UI object, best of all, the implementation of some interface implemented by some window class. This object will be passed as a part of the event arguments object in the <code>System.Ink.RecognizerContext.RecognizerContextRecognitionWithAlternatesEventHandler</code> event when this event is invoked. The implementation of this interface should take the instance of <code>RecognitionResult</code> and use it to populate the UI. One ugly aspect will be the need to type-cast <code>object customData</code> to required runtime type instance.</p>
+
+<p>Quite obviously, expect that the event handler is invoked in a separate thread. That said, the UI should be manipulated only via <code>System.Windows.Threading.Dispatcher.Invoke</code>.</p>
+
+<p>I don’t see a point in this minor complication, so I’ll leave it for a home exercise of the interested readers.</p>
+
+<h3 id="heading-where-the-alternates-come-from3f">Where the Alternates Come From?</h3>
+
+<p>So, far, I haven’t explained how alternates work, and this is not so obvious thing. This will be the last missing piece related to recognition with alternates. Let’s see.</p>
+
+<p>Let’s say we already obtained the instance of <code>Microsoft.Ink.RecognitionResult</code>. This is the simplest way to get a set of alternates:</p>
+
+<div class="pre-lang" id="premain611143"><div>C#</div><div class="pre-action-link"><span id="copycode611143" class="copy-code" data-index="611143" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre611143" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">string</span> Main.IRecognitionResultSelector.Select(Recognizer recognizer, RecognitionResult result) {
+    <span class="code-keyword">int</span> maximumNumberOfAlternates = <span class="code-digit">0x100</span>; <span class="code-comment">//</span><span class="code-comment"> why not?</span>
+    <span class="code-keyword">string</span> text = result.TopString;
+    <span class="code-keyword">var</span> alternates = result.GetAlternatesFromSelection(<span class="code-digit">0</span>, text.Length, maximumNumberOfAlternates);
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> alt <span class="code-keyword">in</span> alts)
+        <span class="code-comment">//</span><span class="code-comment"> someComboBox defined in XAML</span>
+        someComboBox.Items.Add(alt.ToString());
+    <span class="code-comment">//</span><span class="code-comment"> ShowDialog, for example</span>
+    <span class="code-keyword">return</span> someComboBox.SelectedItem.ToString();
+}</pre>
+
+<p>It will work and will gives us as many variants as we want (the limiting number can be specified as <code>maximumNumberOfAlternates</code>). But this is totally impractical. Moreover, it is redundant and insufficient at the same time. If, say, the recognition creates partitioning of the recognized text into 9 lexemes, and each lexeme has 10 alternates (the default for this API), it gives 10⁹ = 1,000,000,000 variants, while only 10 alternates per lexeme, 90 total, are needed to fully describe the result of recognition. Most of these variants will make no sense, and still, the expected variant could be missing. The call to <code>result.GetAlternatesFromSelection()</code> (without parameters) will return only 10 combined alternates, so in our example, each lexeme cannot show more than two alternates.</p>
+
+<p>The real intent of this rather weird API is different. It can represent separate alternates per lexeme, as it is <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#pictureselector">shown above</a>. The thing is, the partitioning of the recognized text is the same for all alternates. It is assumed that we have to parse <code>result.TopString</code> into lexemes by the blank space character and, for each lexeme, pass its location in this string to <code>result.GetAlternatesFromSelection</code> separately for each lexeme:</p>
+
+<div class="pre-lang" id="premain319350"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="319350" id="preShrink319350">Shrink ▲</span> &nbsp; <span id="copycode319350" class="copy-code" data-index="319350" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre319350" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> RecognitionResultSelectorWindow : 
+    Window, Main.IRecognitionResultSelector {
+
+    <span class="code-keyword">string</span> Main.IRecognitionResultSelector.Select(
+        Recognizer recognizer,
+        RecognitionResult result) {
+
+        <span class="code-keyword">string</span> topResult = result.TopString;
+        <span class="code-keyword">var</span> confidenceLevelPropertySupported =
+            IsConfidenceLevelPropertySupported(recognizer);
+        <span class="code-comment">//</span><span class="code-comment">...</span>
+        <span class="code-keyword">var</span> words = topResult.Split(Main.DefinitionSet.WordSeparator);
+        <span class="code-keyword">int</span> currentPosition = <span class="code-digit">0</span>;
+        int[] positions = <span class="code-keyword">new</span> int[words.Length];
+        <span class="code-comment">//</span><span class="code-comment">...</span>
+        <span class="code-keyword">for</span> (<span class="code-keyword">var</span> index = <span class="code-digit">0</span>; index &lt; words.Length; ++index) {
+            positions[index] = currentPosition;
+            currentPosition += words[index].Length + <span class="code-digit">1</span>;
+            <span class="code-keyword">var</span> alts = result.GetAlternatesFromSelection(
+                positions[index],
+                words[index].Length);
+            <span class="code-comment">//</span><span class="code-comment"> create a UI element to represent a lexeme</span>
+            <span class="code-comment">//</span><span class="code-comment"> populate UI the element with alternates:</span>
+            <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> alt <span class="code-keyword">in</span> alts) { <span class="code-comment">/*</span><span class="code-comment"> ... */</span> }
+            <span class="code-keyword">if</span> (ShowDialog() != <span class="code-keyword">true</span>) <span class="code-keyword">return</span> <span class="code-keyword">null</span>;
+            <span class="code-keyword">return</span> <span class="code-comment">//</span><span class="code-comment"> a string composed from the user choice of alternates</span>
+        }
+    }
+
+}</pre>
+
+<p>For complete implementation, see “Ui/RecognitionResultSelectorWindow.xaml.cs”.</p>
+
+<h3 id="heading-putting-all-together">Putting All Together</h3>
+
+<p>For complete implementation of the recognition, please see original source code, “Main/IRecognitionResultSelector.cs”, “Main/TextRecognizer.cs”, “Ui/RecognitionResultSelectorWindow.xaml” and “Ui/RecognitionResultSelectorWindow.xaml.cs”.</p>
+
+<p>Let’s summarize it.</p>
+
+<p>The UI “Recognize” button handler calls the method <a href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink#coderecognize-with-language-pack"><code>Main.TextRecognizer.Recognize</code></a>. It creates an instance of <code>Microsoft.Ink.Ink</code> and populates it with the strokes passed as the first argument <code>System.Windows.Ink.StrokeCollection</code>. The second argument is of the type <code>Microsoft.Ink.Recognizer</code>. If it is <code>null</code>, the simplest recognition is performed as <code>ink.ToString()</code>, for default language pack. If not (in my demo application this is always the case), the recognition is performed with for a selected language pack using the method <code>Microsoft.Ink.RecognizerContext.Recognize</code>, where the instance of <code>Microsoft.Ink.RecognizerContext</code> is obtained from the <code>Recognizer</code> instance selected by the user. Finally, if the third argument <code>Main.IRecognitionResultSelector selector</code> is not null, the recognition with alternates is performed.</p>
+
+<p>The method <code>Main.TextRecognizer.RecognizeWithAlternates</code> accepts the instances of <code>Microsoft.Ink.RecognizerContext</code> and <code>Main.IRecognitionResultSelector selector</code> to call the method <code>Microsoft.Ink.RecognizerContext.BackgroundRecognizeWithAlternates</code> to obtain recognition result passed through an event argument of the type <code>Microsoft.Ink.RecognizerContextRecognitionWithAlternatesEventArg</code> passed to the handler of the event <code>Microsoft.Ink.RecognizerContext.RecognitionWithAlternates</code>.</p>
+
+<p>Obtained instance of <code>Microsoft.Ink.RecognitionResult</code> is passed to the implementation of the interface <code>Main.IRecognitionResultSelector</code> which parses recognized <code>TopString</code> of the recognition result to obtain the sets of alternates for each lexem of this string. After the user confirms selection of alternates, resulting string is returned to the UI.</p>
+
+<h3 id="heading-what-about-microsoft.ink.analysis3f">What About Microsoft.Ink.Analysis?</h3>
+
+<p>“Microsoft.Ink.Analysis.dll” is another main assembly module found in Microsoft Tablet PC SDK. Unlike “Microsoft.Ink”, I could not find it in my Windows 10 installation. It comes along with “Microsoft.Ink.dll” when Microsoft Tablet PC SDK is additionally installed as a part of the platform SDK. In my case, it appears in “c:\Program Files\Reference Assemblies\Microsoft\Tablet PC\v1.7”.</p>
+
+<p>According to Tablet PC SDK documentation, <code>Microsoft.Ink.Analysis</code> presents the alternative way of ink data recognition, including handwriting recognition, several advanced features. In particular, handwriting can be recognized using <code>Microsoft.Ink.InkInkAnalyzer.Analyze</code>, and the class <code>Microsoft.Ink.InkRecognizer</code> plays roughly the same role in <code>Microsoft.Ink.InkInkAnalyzer</code> as the class <code>Microsoft.Ink.Recognizer</code> in <code>Microsoft.Ink</code>.</p>
+
+<p>However, the attempt to use this API makes the usage of this assembly somewhat questionable. First of all, the attempt to call <code>Microsoft.Ink.InkInkAnalyzer.Analyze</code> on a properly setup analyzer instance throws the exception <code>FileNotFoundException</code>: <code>{"Could not load file or assembly 'IALoader, Version=1.7.6223.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' or one of its dependencies. The system cannot find the file specified.":"IALoader, Version=1.7.6223.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"}</code>. Apparently, the file is not found. The file in question, “IALoader.dll” can be found under “Program Files” and added.</p>
+
+<p>Very well, now the call throws the <code>BadImageFormatException</code> for the “AnyCPU” architecture, which is a nearly sure sign of the module built specifically for the x86 platform. And yes, re-targeting the entire application to x86 makes the application working. My question to Microsoft would be: if this module is built for x86, how come it was deployed to “Program Files” for the x86-64 Windows 10 installation, why not to “c:\Program Files (x86)”? I would call it a mess.</p>
+
+<p>Some unofficial documentation also suggests that “IALoader.dll” existed only for the x86 platform. It’s pretty difficult to find out the original Tablet PC Platform SDK these days. When this file is added, handwriting recognition and recognition of geometric shapes work.</p>
+
+<p>Anyway, in terms of handwriting recognition of plain text, this assembly adds nothing new, compared to “Microsoft.Ink.dll”. Recognition quality? Not any better, if not worse.</p>
+
+<p>I did not present any artifacts of my experiments as I don’t see any considerable value in it, but I’ll answer if anyone asks me questions on this topic in comments. I just concluded that the development of this assembly was never properly complete.</p>
+
+<h2 id="heading-what-else3f">What Else?</h2>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>Nobody will embrace the unembraceable.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></dd></dl>
+</blockquote>
+
+<p>WPF has a lot more features related to ink support, even without Microsoft.Ink. First of all, it includes recognition of <em>gestures</em>, which can be used to invoke various input events, typically, interpreted as commands. This functionality partially overlaps with Microsoft.Ink, which also has its own gesture recognition.</p>
+
+<p>In addition to gesture and handwriting recognition, Microsoft.Ink covers a few recognition topics. Notably, it contains the recognition of basic geometric shapes and classification of the stroke sets into graphics and text areas, which can be achieved with the class <code>Microsoft.Ink.Divider</code>. The technology provides a basic framework for custom the recognition of custom objects, which may include musical notation, geometrical shapes, mathematical expressions, charts and the like: <a href="https://docs.microsoft.com/en-us/windows/win32/tablet/object-recognizers">https://docs.microsoft.com/en-us/windows/win32/tablet/object-recognizers</a>.</p>
+
+<p>The overview of the Microsoft.Ink recognition topics can be found here: <a href="https://docs.microsoft.com/en-us/windows/win32/tablet/about-handwriting-recognition">https://docs.microsoft.com/en-us/windows/win32/tablet/about-handwriting-recognition</a>.</p>
+
+<p>The combined set of features of WPF and Microsoft.Ink is quite enough for the development of a fully-featured pixel or vector editor utilizing tablet digitizers. This is possible because ink input can be fully abstracted from UI, and graphic rendering can be fully customized. Ink input can be attached to any window using the class <code>Microsoft.Ink.InkCollector</code>.</p>
+
+<p>I did not even try Universal Windows Platform (UWP). In contrast to WPF, it is self-contained and does not require Microsoft.Ink assembly. It has its own support for the basic shape and handwriting recognition: <a href="https://docs.microsoft.com/en-us/windows/uwp/design/input/ink-walkthrough">https://docs.microsoft.com/en-us/windows/uwp/design/input/ink-walkthrough</a>. I don’t think it is interesting enough to bother, as UWP is not the future of .NET or Windows development anyway.</p>
+
+<p>And what about the latest .NET Core? I don’t know yet.</p>
+
+<h2 id="heading-build-and-compatibility">Build and Compatibility</h2>
+
+<p>As the code is based on WPF, I used the first platform version decently compatible with WPF — <a href="http://microsoft.net/">Microsoft.NET</a> v.3.5. Correspondingly, I provided a solution and a project for Visual Studio 2008. I’ve done it intentionally, to cover all the readers who could use WPF. Later .NET versions will be supported; later versions of Visual Studio can automatically upgrade solution and project files.</p>
+
+<p>In fact, Visual Studio is not required for the build. The code can be batch-built, by using the provided batch file “build.bat”. If your Windows installation directory is different from the default, the build will still work. If the .NET installation directory is different from the default one, please see the content of this batch file and the comment in its first line – the next line can be modified to get the build.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>If you have a fountain, shut it down. Let even a fountain have a rest.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></dd></dl>
+</blockquote>
+
+<p>Through this article, I paved a path to a fully-functional recognition of handwriting using Windows and Microsoft pen computing components, without covering all related topics. The description of the techniques can be used for the development of a wide range of application features based on WPF and Microsoft.Ink assemblies, but only for the features limited to recognition of handwriting as plain text.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-with-WPF-and-Microsoft-Ink">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5282936/Handwriting-Recognition-WPF-and-Microsoft-Ink?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2020 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

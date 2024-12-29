@@ -1,0 +1,816 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0064)https://www.codeproject.com/Articles/5297157/Markdown-Calculator -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Markdown Calculator- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="This is just a funny Visual Studio Code extension, but… what can happen if somebody will try to use it seriously?">
+<meta name="Keywords" content="Javascript, CSS, extension, execution, calculator, console, Markdown">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="4/1/2021 12:48:00 AM">
+<meta property="article:modified_time" content="4/1/2021 12:48:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="9 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5297157/Markdown-Calculator">
+<meta property="og:title" content="Markdown Calculator">
+<meta property="og:description" content="This is just a funny Visual Studio Code extension, but… what can happen if somebody will try to use it seriously?">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5297157/Markdown-Calculator"
+   },
+  "name": "Markdown Calculator",
+  "headline": "Markdown Calculator",
+  "url": "https://www.codeproject.com/Articles/5297157/Markdown-Calculator",
+  "discussionUrl": "https://www.codeproject.com/Articles/5297157/Markdown-Calculator#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "Javascript,CSS,extension,execution,calculator,console,Markdown",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Put the keyword (by default, “run”) on the same line as the opening fence indicator. It will force the fenced code to execute instead of rendering it. Put the keyword “return” at the beginning of the inline code sample, and the result of the calculation will be rendered as an inline element; for example, `return 10**6` will be rendered as 1000000.",
+  "articleSection": "CSS",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2021-04-01",
+  "dateCreated": "2021-04-01",
+  "dateModified": "2021-04-01"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 3.89,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=web",
+      "name" : "web"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=CSS",
+      "name" : "CSS"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=web">web</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=CSS">CSS</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5297157/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Javascript" data-id="87">Javascript</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/CSS" data-id="90">CSS</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/extension" data-id="1118">extension</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/execution" data-id="1326">execution</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/calculator" data-id="1471">calculator</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/console" data-id="1731">console</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Markdown" data-id="3875">Markdown</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Markdown Calculator</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5297157">
+
+	<meta itemprop="upvoteCount" content="4">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:21px;" class="clipped"><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div style="width:3px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">3.89/5  (6 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">1 April, 2021</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">9 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 9.7K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 79</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">This is just a funny Visual Studio Code extension, but… what can happen if somebody will try to use it seriously?</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">Put the keyword (by default, “run”) on the same line as the opening fence indicator. It will force the fenced code to execute instead of rendering it. Put the keyword “return” at the beginning of the inline code sample, and the result of the calculation will be rendered as an inline element; for example, `return 10**6` will be rendered as 1000000.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+    <li><a href="https://github.com/SAKryukov/vscode-markdown-calculator">Download or clone source code from GitHub</a></li>
+    <!--<li><a href="https://www.codeproject.com/KB/Articles/5297157/vscode-markdown-calculator.zip" style="">Download source — 264.2 KB</a></li></ul>-->
+
+<p><img alt="Sample" src="./Resources-articles/2021-04-01.Markdown-Calculator.main.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>If you want to create something totally useless or ridiculous, take it very seriously. Only then you'll have a chance to succeed.</i></p>
+
+<dl>
+	<dd><a href="https://www.codeproject.com/Members/SAKryukov?msg=5790846#xx5790846xx">Author</a></dd></dl>
+</blockquote>
+
+<h2>Content</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-motivation" style="margin-left: 0">Motivation</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-usage" style="margin-left: 0">Usage</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-insights" style="margin-left: 3em">Insights</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-settings" style="margin-left: 3em">Settings</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-console" style="margin-left: 3em">Console</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-console-with-an-inline-code" style="margin-left: 3em">Console with an Inline Code</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-how-to-try-it-out3f" style="margin-left: 3em">How to Try it Out?</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-execution-of-fenced-code-block" style="margin-left: 3em">Execution of Fenced Code Block</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-execution-of-inline-code" style="margin-left: 3em">Execution of Inline Code</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-calculations-and-console-api" style="margin-left: 3em">Calculations and Console API</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-what27s-next3f" style="margin-left: 0">What's Next?</a><br>
+<a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-motivation">Motivation</h2>
+
+<p>These days, we can photograph using a cell phone, browse the Web using a refrigerator, and talk to our vacuum cleaner. Having said that, what can we use as a calculator? Probably, something as natural, first of all, some text editor.</p>
+
+<p>Something else? Yes, <a href="https://github.com/SAKryukov/javascript-playground">another suitable tool would be a browser</a>. But now, let’s see what can we do with a text editor.</p>
+
+<p>Here, it would be a good time to say that people using computers usually don’t have something useful to do the calculations. Indeed, how can we call a calculator a usual Windows or Linux application called “Calculator”? Obviously, the main purpose of such an application was to demonstrate how difficult life before computers was: a user had only a few digits on a tiny low-contrast black-and-white screen and had to press buttons, not really seeing what’s going on. To make it even less convenient with the computer simulation, a user is forced to click on those buttons with a mouse.</p>
+
+<p>So, I present my extension to the very convenient feature-rich text editor, open-source cross-platform <a href="https://code.visualstudio.com/">Visual Studio Code</a>. This extension based on <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> is closer to the natural way of doing calculations we know from our elementary school: take a piece of paper or a notebook and write some steps of the calculations line by line. We need to write those lines with numbers and arithmetic operators between the lines of the normal text when we write what we do: what’s given, what steps we do, and what is are the final results.</p>
+
+<p>Let’s see how we can do it.</p>
+
+<h2 id="heading-usage">Usage</h2>
+
+<h3 id="heading-insights">Insights</h3>
+
+<p>Let’s say, on this sunny spring day, you are sending a love letter, and you want to send a million kisses at the end of it. Of course, you need a well-formatted and maintainable document, so you use <a href="https://code.visualstudio.com/">Visual Studio Code</a> with <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>.</p>
+
+<p>Naturally, as an advanced engineer, you are not supposed to remember constants and not supposed to do anything manually. You would strongly prefer writing something like <code>10 ** 6</code> kisses. Or, if you are even more romantic than that, you may want to send <code>1 &lt;&lt; 20</code> kisses, that is, one <em>megakiss</em>, or, speaking more accurately, one <em><a href="https://en.wikipedia.org/wiki/ISO/IEC_80000#Units_of_the_ISO_and_IEC_80000_series">mebikiss</a></em>.</p>
+
+<p>Suppose, however, that your beloved one is not so well-versed in computer languages, and even less accustomed to binary shifts. In this case, you want to write <code>10 ** 6</code> but render it in the output document as old good 1000000 kisses.</p>
+
+<p>You can do it by using the Markdown Calculator extension for VSCode and writing <code>return 10 ** 6</code> kisses instead of <code>1000000</code>.</p>
+
+<p>On the more mature stage of your relationship, you may need to check up your expenses and provide some proof of purchase. You can do in in VSCode using a <em>fenced code block</em> with a keyword “run” on first line:</p>
+
+<div class="pre-lang" id="premain860326"><div>JavaScript</div><div class="pre-action-link"><span id="copycode860326" class="copy-code" data-index="860326" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre860326" style="margin-top:0;" class="lang-javascript notranslate" data-language="Javascript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">~~~ run
+<span class="code-keyword">const</span> eggs = <span class="code-digit">3</span>.<span class="code-digit">49</span>, sourCream = <span class="code-digit">2</span>.<span class="code-digit">49</span>, milk = <span class="code-digit">4</span>.<span class="code-digit">99</span>
+<span class="code-keyword">const</span> gel = <span class="code-digit">19</span>.<span class="code-digit">99</span>, vitamines = <span class="code-digit">17</span>.<span class="code-digit">99</span>
+<span class="code-keyword">const</span> taxable = gel + vitamines
+<span class="code-keyword">const</span> tax = taxable * <span class="code-digit">6</span>.<span class="code-digit">25</span> / <span class="code-digit">100</span>
+<span class="code-keyword">const</span> total = eggs + sourCream + milk + taxable + tax
+<span class="code-sdkkeyword">console</span>.log(<span class="code-string">`</span><span class="code-string">Total: $${Math.round(total * 100) / 100}`</span>);
+~~~</pre>
+
+<p>The extension will render it as a result of calculations, shown as the content of the console, created via <code>console.log</code>. In this case, it will be <code>$51.32</code>. However, <code>return</code> also can be used; it will be shown at the end.</p>
+
+<p>You know that the lack of the <code>return</code> statement is the same as <code>return undefined</code>, and the object <code>undefined</code> is the only object rendered by this extension as an empty string, in contrast to <code>null</code>, which is rendered as “null”.</p>
+
+<p>In all cases, all the exceptions are caught and the exception message is rendered using a special CSS style.</p>
+
+<p>You can do all this using just the VSCode preview. For more serious work, you may want to convert your document into HTML; and you can do it by using the extension “<a href="https://github.com/SAKryukov/vscode-extensible-markdown">Extensible Markdown</a>” described in the article <em><a href="https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode">All in One Toolchain for Article Writing with Visual Studio Code</a></em>. It also exposes or provides many useful Markdown syntax extensions, and the possibility to add more available or new ones.</p>
+
+<h3 id="heading-settings">Settings</h3>
+
+<p>The installed extension can be turned on or off in the user or workspace settings. Also, two features, calculation performed on a fenced code block or inline code, can be turned on or off independently. Besides, the keyword “run” is configurable, as well as different CSS classes for the output of different <code>console</code> functions.</p>
+
+<ul>
+	<li>Markdown &gt; Calculator &gt; Enable: <em>Enable all extension features, including syntax decorators</em></li>	<li>Markdown &gt; Calculator &gt; Fenced Code Block &gt; Enable: <em>Enable modification of fenced code block behavior with Markdown Calculator</em></li>	<li>Markdown &gt; Calculator &gt; Fenced Code Block &gt; Enable: <em>Enable modification of fenced code block behavior with Markdown Calculator</em></li>	<li>Markdown &gt; Calculator &gt; Inline Code &gt; Enable: <em>Enable modification of inline code behavior with Markdown Calculator</em></li>	<li>Markdown &gt; Calculator &gt; Execution Indicator: <em>Fence markup used to indicate execution of code instead of regular rendering</em>; default: <code>"run"</code></li>	<li>Markdown &gt; Calculator &gt; Keyword Decorator &gt; Color: <em>Background color to highlight the Execution Endicator</em></li>	<li>Markdown &gt; Calculator &gt; Keyword Decorator &gt; Hover Text: <em>Hover text showing the purpose of the keyword Execution Indicator</em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Exception: <em>CSS class name for exception text rendering</em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Return: <em>CSS class name for the calculation return value</em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Assert: <em>CSS class name for <code>console.assert</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Debug: <em>CSS class name for <code>console.debug</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Dir: <em>CSS class name for <code>console.dir</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Error: <em>CSS class name for <code>console.error</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Info: <em>CSS class name for <code>console.info</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Log: <em>CSS class name for <code>console.log</code></em></li>	<li>Markdown &gt; Calculator &gt; CSS Class &gt; Console &gt; Warm: <em>CSS class name for <code>console.warn</code></em></li></ul>
+
+<h3 id="heading-console">Console</h3>
+
+<p>What is “console”, anyway? First of all, this is a <a href="https://developer.mozilla.org/en-US/docs/Web/API/console">JavaScript object with some API</a>. Normally, we use some JavaScript API (again, Visual Studio Code is highly recommended), and it has a console for the developers. But we need something different.</p>
+
+<p>With Visual Studio Code, the standard way of writing the documentation is using <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>, and the usual workflow is having the markdown code on left and a <em>preview</em> pane on left, where we can immediately see the rendered document — see the <a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#image-top">picture on top</a>. This is where we need to get the results of our calculations.</p>
+
+<p>Besides, Markdown can be rendered and saved in an HTML file; and it should render content in the same way. It can be done using the extension <a href="https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode">Extensible Markdown</a>. This is how this article was written.</p>
+
+<p>The example of using the function <code>console.log</code> is <a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#code-fenced-code-block">shown above</a>.</p>
+
+<h3 id="heading-console-with-an-inline-code">Console with an Inline Code</h3>
+
+<p>At a first glance, it looks like it is impossible to use a console output for the inline code fragment because the content starts with the keyword return followed by a single expression. This is not true; using the console is possible. It all depends on what is that single expression. For example, this expression does the trick:</p>
+
+<div class="pre-lang" id="premain482820"><div>Markdown</div><div class="pre-action-link"><span id="copycode482820" class="copy-code" data-index="482820" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre482820" style="margin-top:0;" class="lang-markdown notranslate" data-language="Markdown" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">To use the console,
+`return {
+    a: console.log(<span class="code-string">"</span><span class="code-string">return an undefined object property"</span>),
+    nothing: undefined}.
+    nothing`.</pre>
+
+<p>It will render: <code>To use the console, return an undefined object property</code>. Without <code>.nothing</code>, it would also render <code>[object Object]</code> at the end.</p>
+
+<p>It works because the extension renders the return value for all objects, including <code>null</code>, but it does not render <code>undefined</code>. I intentionally designed it this way, as a tool used to silence the return values. It is especially useful for the fenced code blocks because the function with missing <code>return</code> actually returns <code>undefined</code>.</p>
+
+<h3 id="heading-how-to-try-it-out3f">How to Try it Out?</h3>
+
+<p>You don’t need to install the extension to try it. You only need working Visual Studio Code.</p>
+
+<p>Open Visual Studio Code with the working directory of the root of the source code downloadable on this page and unpacked. It would be the directory where the main extension file “package.json” is located.</p>
+
+<p>Alternatively, you can start Visual Studio Code with the supplied <em>workspace</em> file “MarkdownCalculator.code-workspace”.</p>
+
+<p>It will load the extension project. This project comes with “launch.json” designed to start another Visual Studio Code process with the extension loaded. To launch it, press F5.</p>
+
+<p>Enjoy!</p>
+
+<h2 id="heading-implementation">Implementation</h2>
+
+<h3 id="heading-execution-of-fenced-code-block">Execution of Fenced Code Block</h3>
+
+<p>The application used one of the simplest <a href="https://github.com/markdown-it/markdown-it">markdown-it</a> techniques: modification of the behavior of the markdown-it renderer for the special case when a keyword is present, saving the previous rule function and calling it in all other cases:</p>
+
+<div class="pre-lang" id="premain245845"><div>JavaScript</div><div class="pre-action-link"><span id="copycode245845" class="copy-code" data-index="245845" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre245845" style="margin-top:0;" class="lang-javascript notranslate" data-language="Javascript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> previousFenceRenderer = md.renderer.rules.fence;
+md.renderer.rules.fence = (tokens, index, ruleOptions, object, renderer) =&gt; {
+    <span class="code-keyword">if</span> (settings.enable &amp;&amp; settings.fencedCodeBlock.enable &amp;&amp;
+    tokens[index].info.trim() == settings.executionIndicator)
+        <span class="code-keyword">return</span> <span class="code-string">`</span><span class="code-string">${renderFunction(tokens[index].content)}`</span>;
+    <span class="code-keyword">else</span>
+        <span class="code-keyword">return</span> renderDefault(
+            tokens, index, ruleOptions, object,
+            renderer, previousFenceRenderer);
+};</pre>
+
+<h3 id="heading-execution-of-inline-code">Execution of Inline Code</h3>
+
+<p>The case of inline code is very similar. The keyword is different: this is <code>return</code>, which is also a JavaScript keyword, so it cannot be modified via <a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-settings">settings</a>. Also, the second parameter in the call to <code>renderFunction</code> indicates that evaluation of an inline expression is required.</p>
+
+<div class="pre-lang" id="premain308737"><div>JavaScript</div><div class="pre-action-link"><span id="copycode308737" class="copy-code" data-index="308737" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre308737" style="margin-top:0;" class="lang-javascript notranslate" data-language="Javascript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> previousInlineCodeRenderer = md.renderer.rules.code_inline;
+md.renderer.rules.code_inline =
+    (tokens, index, ruleOptions, object, renderer) =&gt; {
+        <span class="code-keyword">let</span> expressionString = tokens[index].content.trim();
+        <span class="code-keyword">if</span> (settings.enable &amp;&amp; settings.inlineCode.enable
+        &amp;&amp; expressionString.startsWith(<span class="code-string">`</span><span class="code-string">${inlineKeyword} `</span>))
+            <span class="code-keyword">return</span> <span class="code-string">`</span><span class="code-string">${renderFunction(expressionString, true)}`</span>;
+        <span class="code-keyword">else</span>
+            <span class="code-keyword">return</span> renderDefault(
+                tokens, index, ruleOptions, object,
+                renderer, previousInlineCodeRenderer);
+    };
+</pre>
+
+<h3 id="heading-calculations-and-console-api">Calculations and Console API</h3>
+
+<p>The calculations are based on the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function"><code>Function</code> object</a>.</p>
+
+<p>This is a pretty delicate matter, mostly due to the fact, that the VSCode environment is protected from malicious or careless code placed in a fenced code block or an inline code. This is described in detail in another article, <em><a href="https://www.codeproject.com/Articles/5291705/JavaScript-Playground">JavaScript Playground</a></em>.</p>
+
+<p>One interesting feature is the simulation of <code>console</code> object. The object passed to the <code>console</code> functions are collected during execution and then rendered as HTML using the CSS names using <code>style</code> attributes obtained from <a href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator#heading-settings">settings</a>:</p>
+
+<div class="pre-lang" id="premain973139"><div>JavaScript</div><div class="pre-action-link"><span class="code-collapse" data-index="973139" id="preShrink973139">Shrink ▲</span> &nbsp; <span id="copycode973139" class="copy-code" data-index="973139" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre973139" style="margin-top:0;" class="lang-javascript notranslate" data-language="Javascript" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">const</span> consoleApi = {
+    lines: [],
+    initialize: <span class="code-keyword">function</span>() {
+        <span class="code-keyword">const</span> handleArguments = (elements, cssClass) =&gt; {
+            <span class="code-keyword">this</span>.lines.push({elements: elements, cssClass: cssClass});
+        }; <span class="code-comment">//</span><span class="code-comment"></span>
+        <span class="code-keyword">const</span> <span class="code-sdkkeyword">console</span> = {
+            assert: (assertion, ...args) =&gt; {
+                <span class="code-keyword">if</span> (!assertion)
+                    handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.assert);
+            },
+            debug: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.debug);
+            },
+            dir: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.dir);
+            },
+            error: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.error)
+            },
+            info: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.info);
+            },
+            log: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.log);
+            },
+            warn: (...args) =&gt; {
+                handleArguments(args, settings.cssClass.<span class="code-sdkkeyword">console</span>.warn);
+            },
+        };
+        <span class="code-keyword">return</span> setReadonly(<span class="code-sdkkeyword">console</span>);
+    },
+    <span class="code-sdkkeyword">render</span>: <span class="code-keyword">function</span>() {
+        <span class="code-keyword">let</span> result = <span class="code-string">"</span><span class="code-string">"</span>;
+        <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.lines.length &lt; <span class="code-digit">1</span>) <span class="code-keyword">return</span> result;
+        <span class="code-keyword">for</span> (<span class="code-keyword">let</span> line of <span class="code-keyword">this</span>.lines) {
+            <span class="code-keyword">let</span> renderedLine = <span class="code-string">"</span><span class="code-string">"</span>;
+            <span class="code-keyword">for</span> (<span class="code-keyword">let</span> element of line.elements)
+                renderedLine += <span class="code-string">`</span><span class="code-string">${element} `</span>;
+            renderedLine = renderedLine.trim();
+            result +=
+                <span class="code-string">`</span><span class="code-string">&lt;p class="${line.cssClass}"&gt;${renderedLine}&lt;/p&gt;`</span>;
+        }; <span class="code-comment">//</span><span class="code-comment">loop</span>
+        <span class="code-keyword">return</span> result;
+    },
+    clear: <span class="code-keyword">function</span>() {
+        <span class="code-keyword">this</span>.lines.splice(<span class="code-digit">0</span>);
+    },
+};
+<span class="code-keyword">const</span> <span class="code-sdkkeyword">console</span> = consoleApi.initialize();</pre>
+
+<p>Only a part of <code>console</code> functions is implemented. See also <a href="https://developer.mozilla.org/en-US/docs/Web/API/console"><code>console</code> object documentation</a>.</p>
+
+<h2 id="heading-what27s-next3f">What’s Next?</h2>
+
+<p>We have provided a natural way of doing calculations similar to the usual calculations on a piece of paper. What’s next? Of course, it would be the calculations everyone performs in one’s head, mental calculations.</p>
+
+<p>Here is the sketch of an appropriate algorithm:</p>
+
+<ul>
+	<li>Apply <a href="https://en.wikipedia.org/wiki/Brain-reading#Human-machine_interfaces">some brain reading technique</a>,</li>	<li>Parse a mental pattern read into a command,</li>	<li>Translate the command into JavaScript text,</li>	<li>Pass the text to the constructor <code>Function</code>,</li>	<li>Call the function,</li>	<li>If it throws an exception, catch it and send back the negative stimulus in the form of an electric shock.</li></ul>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>The inertia of thinking is a bad thing.</p>
+
+<p>Instead of mimicking outdated and limiting devices people used to use in the past, we need to look for rational and natural ways of doing simple things. Today this is the calculation in the document being edited, and the support of brain reading will come tomorrow. In any case, it will deserve a separate article — just subscribe to the Code Project newsletter.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5297157/Markdown-Calculator?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2021 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

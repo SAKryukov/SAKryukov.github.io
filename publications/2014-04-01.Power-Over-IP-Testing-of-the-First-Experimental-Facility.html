@@ -1,0 +1,826 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0094)https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Power Over IP: Testing of the First Experimental Facility- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Joint Power over IP project has started the phase of public testing. All testers can try it out and charge their laptop batteries, free of charge, for limited period of time.">
+<meta name="Keywords" content="">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="3/30/2014 8:04:00 PM">
+<meta property="article:modified_time" content="4/2/2014 4:14:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta property="og:url" content="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa">
+<meta property="og:title" content="Power Over IP: Testing of the First Experimental Facility">
+<meta property="og:description" content="Joint Power over IP project has started the phase of public testing. All testers can try it out and charge their laptop batteries, free of charge, for limited period of time.">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa"
+   },
+  "name": "Power Over IP: Testing of the First Experimental Facility",
+  "headline": "Power Over IP: Testing of the First Experimental Facility",
+  "url": "https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa",
+  "discussionUrl": "https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=8888914"
+  },
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Joint Power over IP project has started the phase of public testing. All testers can try it out and charge their laptop batteries, free of charge, for limited period of time.",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2014-03-30",
+  "dateCreated": "2014-03-30",
+  "dateModified": "2014-04-02"
+}</script>
+
+
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/752137/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="T1Rrgk0sX3NjIo82MKuxvuCeKvP4AL/vvGLl4oOtfAKOdIsWo63TjNIZYEpsOW476Lj+FIwGr4vHsI9Ba1y2CfZuB2T4+ZzJqgWWlxt6q7G3NNbPWSz2TOb+biuZMof0CxG3QvjaZvvQy3eEOs5x/+s5dsGqBvW5v8pJyo1O15d4FIUGsEJCpcAk1vhFihtc8q/gxMsAA+Nc4jP+K9FXVWH8Ugf5QuRv9k9CIN8/tNRJgHYiZnakjL4NqO2BM6DmdUpOXEpy6U8gk3h4ipTAxim8DFGPOzIXbicgIPC4JfBnBt/Jo1kHswEOh6G10LRfrxhg1TXa0jnUppjYUIlg+LbLuITr9fC2NRiv/BuTR1pAScQQMNblj6+OBzvL5o7PFjKf0j59JlDX4Es1XC4XdMytiKWpJzC0SPGrViG1lWAB2oGLej4KGgwXiNtr22HdUxy/tyuUv3wev9Iuvu7WDv297EgIJMHYQDAvz/6gYbcG2U/nX6PlqKZHJah1wLMwj9Y2fcvmDGdlRORXPv+twREZMucl3hrvZ78TIsKGqCmNKIEadFh28ublqRBhQXIT15dlczKf6X/9S1BP/8FVH7tKTTo2ticeGbk4DKtvDj+b8JOPKuibYosWQlwGAJhTnjNHLY1C6IIZhl6tefUcthzQQ/oEtSdrhhy8k40QX9N6sK9YLgt65whXsdih93lnEkeYvPEb9wcYidq0he2+3EgAvWhUF13vGC/WSzLjZzbgygcXF598oAnVsFg3boYA9kYgVl629F5pAhAwr6SjpcODry0+tL5Y7W4y9IGuzXRbCXSn2nMGD7tE+Gu8J8ltSbcBlxiX1gVM+71Znm1IyZ6BZCIXMP/QwmyQp2rBThqvh+ArCXNeq1dMFdMJJnsujTGME9EmNmBGwL1WcSYiCsuH64hozo4jBb0SMbP9+j+FQK/Iw4ma7TKy0QvjgisnmxalU3c6J2FFJG0H6SUSceo3s0m5wjuCMFP4agBTxKcDhuRLuQoz/pLraw1i8DSKo7VBV5Gr01N2rOYDvDeTgyEOw03nRnPZE/pN6CPHrUwF2W9StlcIqH8TrNKP8ErUxMvX6jQY2PAEsVfZNG812tY+X5164bxE0LqoUuBvKEAPJso5TJbltgtmpRYAcCbGxyOvCJ98xeIhWhZrytzqgAIPEoJ04zINQsyk1uNW0A1zJ1Z4SONaGLhI4OohlllNlD1G8GD5KUfe6fyKARWmvGPg5Y0abxaM2VSYWrB6ghsIAhgtdWOSE+7O1CJ59wnWc8StyiivP3rnFXgFqWlt9WBJpyMwCsqSiwln/ppsntBtwOfvOnR+zil/g6giQ+vltaRDV/twNWlRHgqkcRwn9iPozhTf9v04SDhMSBid5Pa8CxC6OBJMHxlwCjCoI/TqOZONdHuHcFXkM0LByuYEX63TreWgqN3d971VL1WnmMP1wdLtiSPS6QEIjpVekiZ7nUrOjnOrJucuhzwP/zATH+vuY2lRQzsdXOz69v1+pVoZYZgKIil8zTOchyr5LbYosaEJenu1HW2jpB/ozxtT40NKX8jzp5QFIru/SJfaFI1BvprXSn5GS2OIskqChC+8x/ZUywgWz4Hb5s0ZTOtSkAGIb66ymhBmlBFvmtOyc1aNClnjxjoWJJOEafoL/E0ayEVhDAczgOmxnPNOxkl8mexaDpTtvdTs52M20R60YO+cl0Zv0huDGZCsz87KxjzjuWQD4N/8uwIFS2SPkV9FqE/jh1zOxNHWcPy4cpka2WMLtNlmxm0hvZRd1BfrfhgUfe3yjkpjlpGQ3xbiTohfR9XLTYVZ/MYYgiSIPpXFjIiUnXgJ">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Power Over IP: Testing of the First Experimental Facility</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_752137">
+
+	<meta itemprop="upvoteCount" content="0">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">1 Apr 2014</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 12</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Joint Power over IP project has started the phase of public testing. All testers can try it out and charge their laptop batteries, free of charge, for limited period of time.</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+
+<ul class="download">
+    <li><a href="Power-Over-IP-Testing-of-the-First-Experimental-Facility.PoIP-client.zip">PoIP client source code</a></li>
+</ul>
+
+<p><img title="PoIP Hardware Architecture" alt="2014-04-01.Power-Over-IP-Testing-of-the-First-Experimental-Facility.webp" src="./Resources-articles/2014-04-01.Power-Over-IP-Testing-of-the-First-Experimental-Facility.webp"></p>
+
+<h2>Contents</h2>
+
+<ol>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s1">Introduction</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s2">Experimental Technology Test Facility</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s3">Disclaimer</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s4">Hardware Architecture</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s5">Power Over IP Interface</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s6">Testing Instructions</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s7">Safety</a></li>
+    <li><a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#s8">References</a></li>
+</ol>
+
+<h2>1. <a name="s1"></a>Introduction</h2>
+
+<p>These days, the concept of delivering different services through IP gradually take more and more of market share from the earlier technologies. Traditional telephony is being slowly replaced by Voice Over IP (VoIP <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r1">[1]</a>), radio and television both give a way to media streaming over TCP/IP <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r2">[2]</a>, and traditional monetary operations — to online transactions. Power delivery, due to serious technological and economical barriers, however, remained <em>terra incognita</em> for a long time. At the same time, smart mobile devices and their energy supply present the real bottleneck. Their users became as mobile as they can possibly be, but this mobility is limited by their access to the energy sources and the lifetime of the battery charge. While the periods of time when they lack wireless Internet access become shorter and less likely, the battery lifetime growth, being considerably fast, has stalled and became a more critical limiting factor than the Internet access.</p>
+
+<p>At the same time, there is nothing impossible in delivering energy on request. Such technology as Power over Ethernet has been standardized as early as 2003 <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r3">[3]</a>. Wireless charging is a well-established technology, too <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r4">[4]</a>. This technology is used even for recharging of the electric vehicles <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r5">[5]</a>; see also <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r6">[6]</a>. First experimental works on Power over IP have been started during late 199x, and first standard proposal was published by IETF as RFC 3251 under the name "Electricity over IP" <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r7">[7]</a>. The proposal refers to the pioneering work on "Discrete Voltage Encoding" of 1999 <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r8">[8]</a>. At that time, first experiments have demonstrated serious technological obstacles, but also some promising prospects of the technology which we welcomed <a href="http://rf.sakryukov.org/res/sa/pictures/smile-e.htm">with a lot of enthusiasm</a>.</p>
+
+<p>Over decade of research, development and fundamental innovation has clearly proven the prospects of technology presently known under the name of Power over IP (PoIP), so now we can talk about future commercialization of it. At this moment, public testing has been started. Every Internet user has a chance to participate in testing, free of charge, for limited period of time. The present article provides full source code of the client software, including comprehensive usage instructions. Alternatively, access through a single Internet gateway is also provided, but it may present heavier traffic limitations and may not be accessible 24 hours.</p>
+
+<p>Basically, under normal conditions, the power supply should be sufficient to power up a typical laptop or netbook of moderate energy consumption (the default power plan "Power Saver" of Microsoft Windows OS on a laptop is usually not a problem), and fully re-charge its battery.</p>
+
+<h2>2. <a name="s2"></a>Experimental Technology Test Facility</h2>
+
+<p>The first experimental facility is a result of a joint effort of <a href="http://www.ras.ru/">Russian Academy of Sciences</a>, <a href="http://en.wikipedia.org/wiki/Phystech">M.I.P.T.</a>, <a href="https://www.thermofisher.com/">Thermo Fisher Scientific</a>, and Multitasking Object-Oriented Distributed Laboratory (<a href="http://rf.sakryukov.org/MOODLab/PoIP">MOOD Lab</a>), with financial support of the <a href="http://www.whitehouse.gov/administration/eop">Council for Alternative Sources of Energy and Alternatively Talented Researches</a>, office of the Administration of the President of USA.</p>
+
+<p>The facility is based on a small power plant, independent from all the power networks. The power generator relies on the supply of limited amount of coal delivered from the abandoned coal mining area of the Donets Basin, Ukraine. The supply of the remaining coal is quite sufficient for the purpose of the testing facility. The power transmission server (so-called "power donor site"), fully powered by this independent power plant, is located at the following address: <a href="https://www.google.com/maps/place/ploshchad%27+Nezavisimosti,+6/@50.4508433,30.5235724,19z/data=!3m1!4b1!4m2!3m1!1s0x40d4ce505415b56b:0xfd137779352cc92">6 Maidan Nezalezhnosti, suite 13, Kiev, Kyiv city, Ukraine</a>.</p>
+
+<p>The public testing will be performed on <a href="http://en.wikipedia.org/wiki/FIFO">FIFO</a> basis and should be performed with certain care and understanding that, due to <a href="http://rf.sakryukov.org/res/sa/pictures/duel-e.htm">competitive</a> access to the facility, we cannot guarantee the service at any moment of time to all testers.</p>
+
+<h2>3. <a name="s3"></a>Disclaimer</h2>
+
+<p>Electric energy is delivered "AS IS" and without warranties of any kind, either express or implied, including warranties of merchantability, non-infringement of intellectual property, or fitness for any particular purpose. In no event shall we be liable for any direct, indirect, incidental, special, exemplary, or consequential damages, including, but not limited to, loss of profit, data or hardware components due to discontinued power supply or any particular changes in power supply.</p>
+
+<h2>4. <a name="s4"></a>Hardware Architecture</h2>
+
+<p>Main principles of the operation are based on the Discrete Voltage Encoding (DVE) scheme and are described in detail in <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r7">[7]</a>.</p>
+
+<p>The block diagram of the hardware we developed is shown on top of the article. The heart of our innovation is the RTP processor implementing the Real-Time Transport Protocol (RTP, in the terminology of the RFC 3251 <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r7">[7]</a>). It is based on the Radio-Frequency Modulator show on the block diagram as RFM. The values for the frequencies can be specified by the client part code (please see the interface specification in next section), but this is done solely for research purposes. Normally, they are not specified and their choice and optimization is left to the service part. You can send a request and see the values obtained from the response. Principles of the RFM technology are explained in detail on the <a href="http://rf.sakryukov.org/">RF site</a>. Those principles and the problem of the modulation optimization are extremely complicated but presently <a href="http://rf.sakryukov.org/res/sa/pictures/ground-e.htm">well-grounded</a>.</p>
+
+<p>All other elements on the diagram are named according to <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r7">[7]</a>.</p>
+
+<h2>5. <a name="s5"></a>Power Over IP Interface </h2>
+
+<p>The client interface to the power supply (power donor site) if based on WCF <em>service contract</em>. The service uses TCP transport. There are two different types of contract: one is primarily based on pull technology, and another one is solely based on push technology. In the case of pull interface, the power is requested by time slices. The thread of the client software can request for power of certain level for some slice of time, get a response informing it of the actually provided slice, and then it can sleep for the period of time before expiration of the slice. However, expiration may be not the only reason of stopping the power delivery (due to different exceptional situation). To take it into account, the client side can optionally receive notifications on possible stopping of the delivery and other events. For this purpose, <em>duplex services</em> <a href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa#r9">[9]</a> are implemented.</p>
+
+<p>In contrast to that, push interface is oriented for permanent energy consumption by the client, which starts with the request for energy delivery and stopped by disconnection from the service. This service is also duplex, and the client is notified through the client-implemented <em>callback contract</em> on all the power-related events.</p>
+
+<p>The request is based on the hierarchy of two classes, first describing the required power level and radio modulation frequency; and the derived class adding the time slice data to it:</p>
+
+<div class="pre-lang" id="premain425439"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="425439" id="preShrink425439">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="425439" id="copycode425439" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre425439" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> System;
+
+<span class="code-comment">//</span><span class="code-comment"> ...
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> PowerConsumptionSpecification {
+    <span class="code-keyword">public</span> PowerConsumptionSpecification(<span class="code-keyword">float</span> averageLevel, <span class="code-keyword">float</span> rf) {
+        <span class="code-keyword">this</span>.AverageLevel = averageLevel;
+        <span class="code-keyword">this</span>.DoubleAverageLevel = <span class="code-keyword">double</span>.NaN;
+        <span class="code-keyword">this</span>.RadioFrequency = rf;
+        <span class="code-keyword">this</span>.DoubleAverageLevel = <span class="code-keyword">double</span>.PositiveInfinity;
+    } <span class="code-comment">//</span><span class="code-comment">PowerConsumptionSpecification
+</span>    <span class="code-keyword">public</span> PowerConsumptionSpecification(<span class="code-keyword">double</span> averageLevel, <span class="code-keyword">double</span> rf) {
+        <span class="code-keyword">this</span>.DoubleAverageLevel = averageLevel;
+        <span class="code-keyword">this</span>.AverageLevel = <span class="code-keyword">float</span>.NegativeInfinity;
+        <span class="code-keyword">this</span>.DoubleRadioFrequency = rf;
+        <span class="code-keyword">this</span>.AverageLevel = <span class="code-keyword">float</span>.NaN;
+    } <span class="code-comment">//</span><span class="code-comment">PowerConsumptionSpecification
+</span>    <span class="code-keyword">public</span> PowerConsumptionSpecification(<span class="code-keyword">float</span> averageLevel) {
+        <span class="code-keyword">this</span>.AverageLevel = averageLevel;
+        <span class="code-keyword">this</span>.DoubleAverageLevel = <span class="code-keyword">double</span>.NaN;
+        <span class="code-keyword">this</span>.RadioFrequency = <span class="code-keyword">float</span>.NegativeInfinity;
+        <span class="code-keyword">this</span>.DoubleAverageLevel = <span class="code-keyword">double</span>.PositiveInfinity;
+    } <span class="code-comment">//</span><span class="code-comment">PowerConsumptionSpecification
+</span>    <span class="code-keyword">public</span> PowerConsumptionSpecification(<span class="code-keyword">double</span> averageLevel) {
+        <span class="code-keyword">this</span>.DoubleAverageLevel = averageLevel;
+        <span class="code-keyword">this</span>.AverageLevel = <span class="code-keyword">float</span>.NegativeInfinity;
+        <span class="code-keyword">this</span>.DoubleRadioFrequency = <span class="code-keyword">double</span>.NaN;
+        <span class="code-keyword">this</span>.AverageLevel = <span class="code-keyword">float</span>.NaN;
+    } <span class="code-comment">//</span><span class="code-comment">PowerConsumptionSpecification
+</span>    <span class="code-keyword">public</span> <span class="code-keyword">float</span> AverageLevel { <span class="code-keyword">get</span>; <span class="code-keyword">private</span> <span class="code-keyword">set</span>; }
+    <span class="code-keyword">public</span> <span class="code-keyword">double</span> DoubleAverageLevel { <span class="code-keyword">get</span>; <span class="code-keyword">private</span> <span class="code-keyword">set</span>; }
+    <span class="code-keyword">public</span> <span class="code-keyword">float</span> RadioFrequency { <span class="code-keyword">get</span>; <span class="code-keyword">private</span> <span class="code-keyword">set</span>; }
+    <span class="code-keyword">public</span> <span class="code-keyword">double</span> DoubleRadioFrequency { <span class="code-keyword">get</span>; <span class="code-keyword">private</span> <span class="code-keyword">set</span>; }
+} <span class="code-comment">//</span><span class="code-comment">PowerConsumptionSpecification
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">class</span> PowerSlice : PowerConsumptionSpecification {
+    <span class="code-keyword">public</span> PowerSlice(<span class="code-keyword">float</span> averageLevel, TimeSpan duration, <span class="code-keyword">float</span> rf) : <span class="code-keyword">base</span>(averageLevel, rf) { <span class="code-keyword">this</span>.Duration = duration; }
+    <span class="code-keyword">public</span> PowerSlice(<span class="code-keyword">double</span> averageLevel, TimeSpan duration, <span class="code-keyword">double</span> rf) : <span class="code-keyword">base</span>(averageLevel, rf) { <span class="code-keyword">this</span>.Duration = duration; }
+    <span class="code-keyword">public</span> PowerSlice(<span class="code-keyword">float</span> averageLevel, TimeSpan duration) : <span class="code-keyword">base</span>(averageLevel) { <span class="code-keyword">this</span>.Duration = duration; }
+    <span class="code-keyword">public</span> PowerSlice(<span class="code-keyword">double</span> averageLevel, TimeSpan duration) : <span class="code-keyword">base</span>(averageLevel) { <span class="code-keyword">this</span>.Duration = duration; }
+    <span class="code-keyword">public</span> TimeSpan Duration { <span class="code-keyword">get</span>; <span class="code-keyword">private</span> <span class="code-keyword">set</span>; }
+} <span class="code-comment">//</span><span class="code-comment">class PowerSlice
+</span></pre>
+
+<p>Note that the level and frequency are specified in a dual way: single and double precision. They have different default values and cause connection to different supply sockets. Generally, if you request double, the delivery is more responsive, allows for greater consumption levels, but less reliable, which should be taken into account for mission-critical applications.</p>
+
+<p>Two types of the interfaces, based on pull and push technology, are based on the common interface <code>IPowerRecipient</code>:</p>
+
+<div class="pre-lang" id="premain341682"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="341682" id="preShrink341682">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="341682" id="copycode341682" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre341682" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> System;
+<span class="code-keyword">using</span> System.ServiceModel;
+
+<span class="code-comment">//</span><span class="code-comment"> ...
+</span>
+<span class="code-keyword">public</span> <span class="code-keyword">enum</span> PowerStatus {
+    Listening, Powered, TerminationWarned, Expired,
+    PowerPlantMulfunction, PowerPlantDestruction, GovernmentShutdown,
+    Disconnected, }
+
+<span class="code-keyword">public</span> <span class="code-keyword">interface</span> IPowerRecipient {
+    DateTime? MostRecentRequest { <span class="code-keyword">get</span>; }
+    TimeSpan? MostRecentRequestDuration { <span class="code-keyword">get</span>; }
+} <span class="code-comment">//</span><span class="code-comment">interface IPowerRecipient
+</span>
+[ServiceContract(
+    Name = <span class="code-string">"</span><span class="code-string">Power Pull"</span>,
+    Namespace = <span class="code-string">"</span><span class="code-string">http://microsoft.WTF.PoIP"</span>,
+    CallbackContract = <span class="code-keyword">typeof</span>(IPowerDonor),
+    SessionMode = SessionMode.NotAllowed)]
+<span class="code-keyword">public</span> <span class="code-keyword">interface</span> IPowerPullRecepient : IPowerRecipient {
+    PowerSlice Request(PowerSlice request); <span class="code-comment">//</span><span class="code-comment"> returns actually provided slice
+</span>} <span class="code-comment">//</span><span class="code-comment">interface IPowerPullRecepient
+</span>
+[ServiceContract(
+    Name = <span class="code-string">"</span><span class="code-string">Power Push"</span>,
+    Namespace = <span class="code-string">"</span><span class="code-string">http://microsoft.WTF.PoIP"</span>,
+    CallbackContract = <span class="code-keyword">typeof</span>(IPowerDonor),
+    SessionMode = SessionMode.Required)]
+<span class="code-keyword">public</span> <span class="code-keyword">interface</span> IPowerPushRecepient : IPowerRecipient {
+    <span class="code-comment">//</span><span class="code-comment"> duration is not specified; power is supplied when it is possible; 
+</span>    <span class="code-comment">//</span><span class="code-comment"> the user gets event notifications through the callback interface IPowerDonor
+</span>    PowerConsumptionSpecification Request(PowerConsumptionSpecification request); <span class="code-comment">//</span><span class="code-comment"> returns actually provided power spec
+</span>} <span class="code-comment">//</span><span class="code-comment">interface IPowerPushRecepient
+</span></pre>
+
+<p>Note the <code>CallbackContract</code> parameter of the <code>ServiceContract</code>. These parameters allow the client to define the callback contract needed for utilization of the duplex services. This callback contract, if implemented, allows the client to respond to the events passed through the interface <code>IPowerDonor</code>. These events notifies of the stopping of the power delivery, inform the client of the reasons and provide the access to the instance of the recipient object which requested the power delivery; in turn, it provides access to the detail of most recent request, if any.</p>
+
+<p>Let's see how the duplex mechanism is used to handle the events send by the service to warn the client on the stopping of the energy supply and the actual stopping. In this simplified example, the functionality is implemented in the abstract class <code>PowerDonorHandler</code>. The derived class, <code>PullPowerDonorHandler</code>, is used to demonstrate how to send a request to more power on the warning notification in case of the use of the pull technology:</p>
+
+<div class="pre-lang" id="premain577119"><div>C#</div><div class="pre-action-link"><span class="copy-code" data-index="577119" id="copycode577119" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre577119" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> PowerDonorHandler : IPowerDonor {
+    <span class="code-keyword">internal</span> PowerDonorHandler() { }
+    <span class="code-keyword">void</span> IPowerDonor.PowerSupplyTerminationWarning(PowerStatus reason, IPowerRecipient recepient) {
+        <span class="code-keyword">if</span> (reason == PowerStatus.Expired) {
+            RequestMorePower();
+            System.Windows.MessageBox.Show(<span class="code-string">"</span><span class="code-string">No way! I want more power!"</span>);
+        } <span class="code-comment">//</span><span class="code-comment">if
+</span>        System.Windows.MessageBox.Show(<span class="code-string">"</span><span class="code-string">Save your work or find another energy source"</span>);
+    } <span class="code-comment">//</span><span class="code-comment">IPowerDonor.PowerSupplyTerminationWarning
+</span>    <span class="code-keyword">void</span> IPowerDonor.PowerSupplyEnded(PowerStatus reason, IPowerRecipient recepient) {
+        System.Windows.MessageBox.Show(<span class="code-string">"</span><span class="code-string">Too late..."</span>);
+    } <span class="code-comment">//</span><span class="code-comment">IPowerDonor.PowerSupplyEnded
+</span>    <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> RequestMorePower();
+} <span class="code-comment">//</span><span class="code-comment">class PowerDonorHandler
+</span>
+<span class="code-keyword">internal</span> <span class="code-keyword">class</span> PullPowerDonorHandler : PowerDonorHandler, IPowerDonor {
+    <span class="code-keyword">internal</span> PullPowerDonorHandler(IPowerPullRecepient puller) { <span class="code-keyword">this</span>.puller = puller; }
+    <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> RequestMorePower() {
+        puller.Request(<span class="code-keyword">new</span> PowerSlice(<span class="code-digit">3</span>.14d, <span class="code-keyword">new</span> TimeSpan(<span class="code-digit">3</span>, <span class="code-digit">610</span>, <span class="code-digit">0</span>))); <span class="code-comment">//</span><span class="code-comment"> just for example: power for 3 hours and 610 minutes
+</span>    } <span class="code-comment">//</span><span class="code-comment">RequestMorePower
+</span>    IPowerPullRecepient puller;
+} <span class="code-comment">//</span><span class="code-comment">class PullPowerDonorHandler
+</span></pre>
+
+<p>Now, let's put it all together and see how the application can start the power recipient client, connect it to some power donor site, request and then consume delivered power:</p>
+
+<div class="pre-lang" id="premain521634"><div>C#</div><div class="pre-action-link"><span class="copy-code" data-index="521634" id="copycode521634" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="cs" data-codeblock-processed="true" id="pre521634" style="margin-top: 0px;" class="notranslate"><span class="code-comment">//</span><span class="code-comment"> "PowerFactory" refers to the Factory Method Pattern,
+</span><span class="code-comment">//</span><span class="code-comment"> not factory producing power, which we call "power plant":
+</span>IPowerPullRecepient recepient = PullPowerFactory.GetProxy();
+PullPowerDonorHandler donorHandler = <span class="code-keyword">new</span> PullPowerDonorHandler(recepient);
+
+<span class="code-comment">//</span><span class="code-comment"> this is a blocking method; if the request cannot be satisfied at all, we get response immediately:
+</span>PowerSlice deliveredPower = recepient.Request(<span class="code-keyword">new</span> PowerSlice(<span class="code-digit">2</span>.71d, <span class="code-keyword">new</span> TimeSpan(<span class="code-digit">2</span>, <span class="code-digit">0</span>, <span class="code-digit">0</span>), <span class="code-digit">300</span>.<span class="code-digit">13</span>)); <span class="code-comment">//</span><span class="code-comment">for example
+</span>
+<span class="code-comment">//</span><span class="code-comment"> now we can assert that we are getting what we requested:
+</span><span class="code-keyword">if</span> (deliveredPower.Duration &lt;= <span class="code-keyword">new</span> TimeSpan(<span class="code-digit">0</span>))
+System.Windows.MessageBox.Show(<span class="code-string">"</span><span class="code-string">What kind of service is that?"</span>);
+<span class="code-comment">//</span><span class="code-comment"> we can also check actual power level and other parameters
+</span>
+<span class="code-comment">//</span><span class="code-comment"> otherwise we have started to consume power
+</span></pre>
+
+<p>Simple enough, isn't it?</p>
+
+<p>For really working, fully implemented power recipient client code, please download the source code referenced on the top of this page.</p>
+
+<p>In addition to the bare WCF service using TCP channels, we provide the HTTP interface wrapping this service on the server part. The access to the power donor site is also provided by our PoIP client you can download from this page.</p>
+
+<h2><a name="s6"></a>6. Testing Instructions</h2>
+
+<p>Testing procedure, in its basic capacity, is extremely simple. We recommend using only the client you can download from this page, or, as a less desirable alternative, the <a href="http://rf.sakryukov.org/MOODLab/PoIP">Internet PoIP gateway</a>. We do not recommend modifying the part of the source code responsible for creation and sending of the power requests to the server, which uses default values for the power level and modulation frequency (called "power consumption specification"; please see the interface code above). However, you can do it if you agree to take the minimal risk of damaging your hardware; in most cases, it will result in denial-of-service responses, if not successful power delivery.</p>
+
+<p>The procedure of testing through the WCF client and Internet gateway is nearly identical. First, you click the "Connect" button (without setting any address information, because we have only one testing facility at this time), which will bring you to the next page. In our client, it uses the pull interface. You simply choose the desired duration from a drop-down list and click the "Request" button. The page will show the response information with actual time slice and actual power consumption specification. Also, the current status message will remind you to unplug the computer from power grid, if you did not do it before.</p>
+
+<p>This is the important moment. To start consuming energy, you need to make sure that your computer is not plugged into the power grid. You need to remove the power plug, but not the battery. Without this step, you cannot consume energy through PoIP. If the computer does not have a battery (for example, in the case of desktop PC), you should remove the power cable anyway. Of course, in this case, you will need to assume some minor risk of losing power, due to possibility of different exceptional situation, such as the loss of Internet connection, by one or another reason.</p>
+
+<p>However, if the Internet connection is not disrupted, the risk of losing the power delivered through PoIP is very low. The client is programmed to repeat the power request automatically on the power warning received through the callback interface. This mechanism is demonstrated in the above in the simplified sample implementation of the callback service contract interface <code>IPowerDonor</code> by the class <code>PullPowerDonorHandler</code>.</p>
+
+<p>Permanent disconnection from the PoIP power consumption is performed on the disconnection from the TCP channel of the service contract interface. It happens when you close the application window. In the case of HTTP gateway interface, you will need to close the browser window. Also, disconnection from the PoIP power can be performed on the server side due to any of the exceptional situations, such as the case of total energy consumption exceeding the capacity of a power plant. In this case, priority is given to the clients who have consumed less power during the current TCP session.</p>
+
+<h2>7. <a name="s7"></a>Safety</h2>
+
+<p>The analytic study of the services revealed several distinct exploit possibilities specific to power delivery. Below, I'll describe most expected types of possible exploits.</p>
+
+<p><strong>Power Injection</strong>. The malicious software can potentially spoof real client requests and inject unrealistic or dangerous values for power and radio frequencies specified in the power requests. In worst case, such an attack can disrupt communications and prevent power consumption at the point of attack, which is relatively harmless, due to local nature of such attacks. A much more serious variant of exploit would be spoofing of the server-side address to substitute the address of the fake power donor site. Such malicious donor sites can generate and deliver energy themselves, possibly supplying a lot more power than it is claimed through the application protocol. Delivery of excess energy can cause overheating of the power sockets of the recipient devices and harm the client hardware. This exploit is mitigated by <a href="http://rf.sakryukov.org/res/sa/pictures/red_animal-e.htm">sanitation</a> of the request/response data passed through the interface.</p>
+
+<p><strong>Denial of Power Service Attack ("DOPS-attack")</strong>. Correct behavior of the client software assumes that the currently delivered slice of power supply is consumed almost completely, at least until the warning is received (please see the implementation of sample PowerDonorHandler). As time slices are always considerably long, it cannot overwhelm the traffic. The malicious clients can generate power requests not waiting for the expiration. Not only it can cause the same problem as <a href="http://en.wikipedia.org/wiki/DDOS">Denial-of-service attack (DDOS)</a>, but the lack of dissipation of energy in the client device can damage the routers and other network equipment. The mitigation of such exploits is quite possible but is a matter of ongoing research.</p>
+
+<p>Other methods of the attack are also a subject of intensive research and cannot be disclosed at this moment.</p>
+
+<p>We encourage anyone to record all cases when some sign of malicious activity is detected and <a href="http://rf.sakryukov.org/res/sa/pictures/why-e.htm">report them</a> through the problem reporting facility provided by the client code referenced in this article.</p>
+
+<h2><a name="s8"></a>References</h2>
+
+<p><a name="r1"></a>[1] <a href="http://en.wikipedia.org/wiki/VoIP">http://en.wikipedia.org/wiki/VoIP</a><br>
+<a name="r2"></a>[2] <a href="http://en.wikipedia.org/wiki/Media_streaming">http://en.wikipedia.org/wiki/Media_streaming</a><br>
+<a name="r3"></a>[3] <a href="http://en.wikipedia.org/wiki/Power_over_ethernet">http://en.wikipedia.org/wiki/Power_over_ethernet</a><br>
+<a name="r4"></a>[4] <a href="http://en.wikipedia.org/wiki/Inductive_charging">http://en.wikipedia.org/wiki/Inductive_charging</a><br>
+<a name="r5"></a>[5] <a href="http://en.wikipedia.org/wiki/Inductive_charging#Electric_vehicles">http://en.wikipedia.org/wiki/Inductive_charging#Electric_vehicles</a><br>
+<a name="r6"></a>[6] <a href="http://en.wikipedia.org/wiki/Plugless_Power">http://en.wikipedia.org/wiki/Plugless_Power</a><br>
+<a name="r7"></a>[7] <em>Electricity Over IP</em>, <a href="http://www.ietf.org/rfc/rfc3251.txt">http://www.ietf.org/rfc/rfc3251.txt</a><br>
+<a name="r8"></a>[8] International Tarriffed Utilities association draft standard, ITU, G.110/230V, "<em>Discrete Voltage Encoding</em>", March, 1999<br>
+<a name="r9"></a>[9] <em>Duplex Services</em>, <a href="http://msdn.microsoft.com/en-us/library/ms731064%28v=vs.110%29.aspx">http://msdn.microsoft.com/en-us/library/ms731064%28v=vs.110%29.aspx</a> </p>
+
+
+
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/752137/Power-Over-IP-Testing-of-the-First-Experimental-Fa?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2014 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

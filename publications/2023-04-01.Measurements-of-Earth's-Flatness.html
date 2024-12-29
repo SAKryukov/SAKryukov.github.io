@@ -1,0 +1,907 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0075)https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Measurements of Earth's Flatness- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="How to find out whether the Earth is flat or not? Just use the presented application and a digital camera.">
+<meta name="Keywords" content="C#, .NET, image-recognition">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="4/1/2023 5:00:00 PM">
+<meta property="article:modified_time" content="4/1/2023 5:00:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="17 min read">
+<meta property="og:url" content="https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness">
+<meta property="og:title" content="Measurements of Earth&#39;s Flatness">
+<meta property="og:description" content="How to find out whether the Earth is flat or not? Just use the presented application and a digital camera.">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness"
+   },
+  "name": "Measurements of Earth's Flatness",
+  "headline": "Measurements of Earth's Flatness",
+  "url": "https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness",
+  "discussionUrl": "https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": "C#,.NET,image-recognition",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "The Earth's flatness (curvature) measurements are performed using a digital camera based on statistical processing of the big set of photographed features, taking into account atmospheric refraction, lens distortion, geolocation, and accelerometer data. The result is calculated automatically. The image recognition methods can use the patterns of the surface ocean waves, sand dunes, clouds, and the color gradients of the clear blue sky.",
+  "articleSection": "C#",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2023-04-01",
+  "dateCreated": "2023-04-01",
+  "dateModified": "2023-04-01"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Languages",
+      "name" : "Languages"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=Csharp",
+      "name" : "C#"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Languages">Languages</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=Csharp">C#</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/5358102/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/Csharp" data-id="81">C#</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/image-recognition" data-id="1446">image-recognition</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Measurements of Earth's Flatness</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5358102">
+
+	<meta itemprop="upvoteCount" content="17">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (18 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">1 Apr 2023</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">17 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 12.1K</span> &nbsp; <span title="Downloads"><img src="./Resources/download32.png" style="width:16px"> 88</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">How to find out whether the Earth is flat or not? Just use the presented application and a digital camera.</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">The Earth's flatness (curvature) measurements are performed using a digital camera based on statistical processing of the big set of photographed features, taking into account atmospheric refraction, lens distortion, geolocation, and accelerometer data. The result is calculated automatically. The image recognition methods can use the patterns of the surface ocean waves, sand dunes, clouds, and the color gradients of the clear blue sky.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Measurements-of-Earth's-Flatness.zip">Download source code — 15.7 KB</a></li></ul>
+
+<h2>Contents</h2>
+
+<p><img alt="Do you still believe in spherical Earth?" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.title.webp"/></p>
+
+<p class="toc"><a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-introduction" style="margin-left: 0">Introduction</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-ocean-surface-waves-method" style="margin-left: 0">Ocean Surface Waves Method</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-the-idea" style="margin-left: 3em">The Idea</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-basic-calculations" style="margin-left: 3em">Basic Calculations</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-accounting-for-the-lens-distortion" style="margin-left: 3em">Accounting for the Lens Distortion</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-accounting-for-the-wave-spectrum" style="margin-left: 3em">Accounting for the Wave Spectrum</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-accounting-for-the-wave-shape" style="margin-left: 3em">Accounting for the Wave Shape</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-accounting-for-the-air-refraction" style="margin-left: 3em">Accounting for the Air Refraction</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-sand-dune-pattern-method" style="margin-left: 0">Sand Dune Pattern Method</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-recommendations" style="margin-left: 3em">Recommendations</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-cloud-pattern-method" style="margin-left: 0">Cloud Pattern Method</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-blue-sky-gradient-method" style="margin-left: 0">Blue Sky Gradient Method</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-the-idea." style="margin-left: 3em">The Idea</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-calculations" style="margin-left: 3em">Calculations</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-recommendations." style="margin-left: 3em">Recommendations</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-usage" style="margin-left: 0">Usage</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-general-photography-recommendations" style="margin-left: 3em">General Photography Recommendations</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-using-the-application" style="margin-left: 0">Using the Application</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-source-code-isolation" style="margin-left: 3em">Source Code Isolation</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-wpf-main" style="margin-left: 3em">WPF Main</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-software-compatibility-and-build" style="margin-left: 3em">Software Compatibility and Build</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-future-research" style="margin-left: 0">Future Research</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-literature" style="margin-left: 0">Literature</a><br>
+<a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-licensing-notes" style="margin-left: 0">Licensing Notes</a></p>
+
+<h2 id="heading-introduction">Introduction</h2>
+
+<p>The argument between the adept of flat Earth and those who believe in the spherical concave Earth shape becomes more and more actual.</p>
+
+<p>However, the arguments circulating between those groups don’t seem convincing. The adepts of the flat Earth do not believe in the evidence presented in the publications, because the governments, as everyone knows, always conceal the truth. On the other hand, the believers in the spherical Earth arguably don’t trust the immediate perception.</p>
+
+<p>Here, the catch is: both sides assume that there is no way to conduct immediate independent experiments, not relying on any external data, and make these experiments affordable and verifiable. Not only this assumption is incorrect — it is ridiculous. It was valid in the near past when modern-day computers were not available, and when photography was not advanced enough.</p>
+
+<p>This day, all we need is a reasonably good digital camera and a computer with reasonably high computing power. Using the application offered in the present article, we can get perspective images of some characteristic patterns of objects found on the face of the Earth and perform image recognition and statistical processing of the features seen at different distances and angles. In this article, I’m going to explain how it is made possible.</p>
+
+<p>We are going to discuss four essentially different methods. Two first methods are based on the patterns of the ocean surface waves or the patterns of the sand dunes. From the point of view of software, the ocean waves and the sand dunes methods are the same, only the photographing instructions are slightly different. The other two methods use the cloud pattern and the gradient of the clear blue sky. The first method is the most important, so let’s start with the ocean waves.</p>
+
+<h2 id="heading-ocean-surface-waves-method">Ocean Surface Waves Method</h2>
+
+<p>To use this method, we can photograph the sea surface with a digital camera. We need to photograph some surface <em>gravity waves</em> as shown in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig1">Fig. 1</a>:</p>
+
+<p id="fig1"><img alt="Angles" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.waves-angles.webp"/></p>
+
+<p><b>Fig. 1 — Photographing surface wave crests with a digital camera</b></p>
+
+<h3 id="heading-the-idea">The Idea</h3>
+
+<p>On fig. 1, we place a digital camera at the height <code>h</code> over sea level. The main optical axes of its lens should be strictly perpendicular to the Earth’s gravity vector <code>G</code>. The Earth’s radius is <code>R</code>. In the special case of flat Earth, we have a straight horizontal line, shown in red.</p>
+
+<p>Now, let’s photograph the sea with the gravitational waves on its surface. Let’s pay attention to the angle sizes of the waves as they are pictures on digital photographs. They are defined by three factors: 1) actual wavelength, 2) distance to the observed wave crests, 2) and <a href="https://en.wikipedia.org/wiki/Perspective_(graphical)#Foreshortening">foreshortening</a>, defined by the angle between the local vertical direction at the point of the crest and viewing line. The curvature of the Earth affects the two last factors in the same direction: the more the curvature, the faster the distance to the observed wave crests is diminished with the viewing angle <code>α</code>, and the foreshortening angle <code>β</code> grows faster, so the observed angular size of the pair of the crests diminishes faster with growing <code>α</code>.</p>
+
+<p>For comparison, look at two pairs of objects shown in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig1">Fig. 1</a> as a pair of green dots on the flat Earth (shown as a red line) and a pair of yellow dots on the curved Earth. On the curved Earth, the same angle size of the pair of objects corresponds to the greater actual distance between yellow dots for the curved Earth. Therefore, the more the curvature of the Earth, the smaller the observed size of the objects on the Earth’s surface. This effect is the basic factor helping the calculations of the Earth’s curvature.</p>
+
+<h3 id="heading-basic-calculations">Basic Calculations</h3>
+
+<p>To calculate the viewing distance and the <a href="https://en.wikipedia.org/wiki/Perspective_(graphical)#Foreshortening">foreshortening</a> angle, let’s exaggerate the Earth’s curvature even more as shown in Fig. 2:</p>
+
+<p id="fig2"><img alt="Angles" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.calculations.webp"/></p>
+
+<p><b>Fig. 2 — Calculation of the viewing distance and foreshortening angle</b></p>
+
+<p>In Fig. 2, point A is the location of the camera, B is the location of two neighboring wave crests, and C is the center of the Earth. In the triangle ABC, the angle <code>∠CAB</code> is known and equal to <code>π/2</code> − <code>α</code>, and two sides are known: <code>AC = R + h</code> and <code>CB = R</code>, where <code>R</code> is the Earth’s radius and <code>h</code> is the elevation of the camera under the sea level. The tangential line at the point of the location of the observed wave crests is shown in red.</p>
+
+<p>Two known sides and one known angle fully define the triangle <code>ABC</code>. From this triangle, we calculate the viewing distance <code>l = AB</code> and the <a href="https://en.wikipedia.org/wiki/Perspective_(graphical)#Foreshortening">foreshortening</a> angle <code>π/2</code> − <code>β</code>.</p>
+
+<p>Now we need to calculate the angular distance <code>γ</code> between the wave crest shown as yellow dots in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig1">Fig. 1</a>. We need to take into account <em>foreshortening</em>:</p>
+
+<p id="fig3"><img alt="Foreshortening" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.foreshortening.jpg"/></p>
+
+<p><b>Fig. 3 — Foreshortening</b></p>
+
+<p>If the distance between the wave crests (yellow dots in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig1">Fig. 1</a>) is <code>p</code>, given the viewing distance <code>d = AB</code> the observed angular size of the wave is <code>p/d cos β</code>. This size is proportional to the observed image of the two wave crests as it appears on the sensor of the camera.</p>
+
+<p>The software examines all observed angular distances between the wave crests through image recognition and collects the statistical distribution of these values depending on the viewing angle <code>α</code>. The Earch radius <code>R</code>, possibly an infinite value, is a parameter of this distribution. The software performs the modeling of the distribution and fits the observed distribution using <code>R</code> as a parameter. The best fit gives us the value of <code>R</code>, the Earth’s surface curvature.</p>
+
+<p>The described calculations are simplified, as they ignore some important factors. These factors can badly mangle the resulting value of <code>R</code>, so we need to take them into account.</p>
+
+<h3 id="heading-accounting-for-the-lens-distortion">Accounting for the Lens Distortion</h3>
+
+<p>There are no optical systems without <a href="https://en.wikipedia.org/wiki/Optical_aberration"><em>aberrations</em></a>. The class of aberration we have to care of is <a href="https://en.wikipedia.org/wiki/Distortion_(optics)">image <em>distortion</em></a>.</p>
+
+<p>The specific effect of the lens distortion is that its effect is similar to the Earth’s curvature. The <em>barrel distortion</em> creates the visual effect of the concave curved Earth when the surface is perfectly flat. The <em>pincushion distortion</em> diminishes the apparent curvature of the Earth. At the same time, a good lens with considerable distortion does not introduce much blurring of the images, and this is the most important thing.</p>
+
+<p>Fortunately, the distortion is easy to compensate to get a corrected calculation. Even though the long focal distance lens is recommended, it is never free of distortions. To take distortion into account, the lens model is required. The software obtains this data from <a href="https://en.wikipedia.org/wiki/Exif">EXIF information</a> found in the files produced by the camera.</p>
+
+<p>Having the camera specs, the software uses the database of the known lenses to get the optical system features. That’s why it is recommended to use well-known quality lenses.</p>
+
+<h3 id="heading-accounting-for-the-wave-spectrum">Accounting for the Wave Spectrum</h3>
+
+<p>In the explanation of <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-basic-calculations">basic calculations</a>, we assumed we know the wavelength. In reality, however, there is no fixed wavelength, there is an entire spectrum of different wavelengths. To take the spectrum into account, we first need to limit the considerations to the <a href="https://en.wikipedia.org/wiki/Gravity_wave"><em>gravity waves</em></a> only, not considering the <a href="https://en.wikipedia.org/wiki/Capillary_wave"><em>capillary waves</em></a> or <a href="https://en.wikipedia.org/wiki/Capillary_wave#Gravity%E2%80%93capillary_waves"><em>gravity-capillary waves</em></a>, and only the deep-water waves.</p>
+
+<p>The classification of ocean waves can be found in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-1">[1]</a>.</p>
+
+<p>For the modeling of the wave spectra, we’ve used the calculations explained in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-2">[2]</a>.</p>
+
+<h3 id="heading-accounting-for-the-wave-shape">Accounting for the Wave Shape</h3>
+
+<p>Does the wave shape matter? In <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig4">Fig. 4</a>, we can see a little difference between the actual distance between the wave crests and the distance observed at a viewing angle (angle <code>α</code> in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig1">Fig. 1</a> and <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig2">Fig. 2</a>).</p>
+
+<p>Even though the difference is subtle, it is obvious that the shape of the image makes some difference in the observation. To take it into account, the software uses the calculations of the wave profile explained in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-3">[3]</a>.</p>
+
+<p id="fig4"><img alt="Wave" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.wave.webp"/></p>
+
+<p><b>Fig. 4 — Gravitational surface wave profile</b></p>
+
+<h3 id="heading-accounting-for-the-air-refraction">Accounting for the Air Refraction</h3>
+
+<p>In the explanation of <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#heading-basic-calculations">basic calculations</a>, we assumed that the straight lines on the optical calculations are really straight. This is also a huge simplification. In reality, we need to take into account the air refraction in the atmosphere of the Earth.</p>
+
+<p>For the modeling of atmospheric refraction, the software uses the improved <a href="https://www.nasa.gov/">NASA</a> model described in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-4">[4]</a>. Presently, this model is used majorly for satellite laser tracing.</p>
+
+<p>This is a point where geolocation is extremely useful. If geolocation data is available in <a href="https://en.wikipedia.org/wiki/Exif">EXIF</a>, the software contacts the weather data centers close to the photographic location and extracts the weather information at the time of taking pictures for that location. The weather information is then used to correct the refraction parameters.</p>
+
+<h2 id="heading-sand-dune-pattern-method">Sand Dune Pattern Method</h2>
+
+<p>The sand dune pattern method is similar to the ocean surface waves method in all respects. The main difference is that the camera elevation should be calculated above the average surface level rather than the sea level, and it can be a problem.</p>
+
+<p>The problem if this method is that you need to use the flat land surface on average, or the surface repeating the hypothetical spherical shape of the Earth, for that matter. Such lands do exist due to natural reasons, but it makes the method not quite suitable for the arguments. The adepts of the flat Earth will argue that the believers in the spherical Earth may have <a href="https://en.wikipedia.org/wiki/Terraforming">terraformed</a> the land to support their concept, and the spherical Earth may suspect that their opponents have flattened it.</p>
+
+<p>However, the method is suitable for those who want to do the experiment for themselves and have no access to the proper conditions required for other methods.</p>
+
+<h3 id="heading-recommendations">Recommendations</h3>
+
+<ol>
+	<li>Avoid taking pictures during the activity of the <a href="https://en.wikipedia.org/wiki/Sandworm_(Dune)">Vĕrmis harēnōsus (giant sandworms)</a>. Those animals can cause the vibrations of the camera and disrupt the surface to be pictured.</li>	<li>Avoid <a href="https://en.wikipedia.org/wiki/Quicksand">quicksand</a> areas. Photography of this kind requires slow sands. Note that the <em>sinking</em> of a tripod with a camera makes the determination of the camera elevation <code>h</code> unreliable.</li>	<li>If you encounter <a href="https://en.wikipedia.org/wiki/Tusken_Raiders">Tusken Raiders</a>, remember that <a href="https://www.moviequotedb.com/movies/star-wars-episode-iv-a-new-hope/quote_29883.html">“<em>The Sand People are easily startled, but they’ll soon be back, and in greater numbers.</em>”</a></li></ol>
+
+<h2 id="heading-cloud-pattern-method">Cloud Pattern Method</h2>
+
+<p>The cloud pattern method is also similar to the ocean surface waves method, but the algorithm is different because we have to work with a concave rather than a convex surface. Instead of observing the ocean waves, we can observe similar regular patterns formed by the clouds:</p>
+
+<p id="fig5"><img alt="Clouds" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.clouds.webp"/></p>
+
+<p><b>Fig. 5 — Cloud pattern</b></p>
+
+<p>Examples of suitable cloud structures can be found in <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-5">[5]</a>. The proper condition typically comes with <a href="https://en.wikipedia.org/wiki/Cirrus_cloud">cirrus clouds</a> when they form a regular pattern.</p>
+
+<p>Another interesting possibility is using the clouds created by the <a href="https://en.wikipedia.org/wiki/Kelvin%E2%80%93Helmholtz_instability">Kelvin Helmholtz instability</a>. For the example, see also <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-6">[6]</a>.</p>
+
+<p>Also, due to the different scales, the camera is supposed to be turned up to π/4. However, all the reasonings and geometric constructions are majorly analogous. The reader can easily reproduce them based on the description of the ocean surface waves method.</p>
+
+<p>Unlike other methods, for this method, camera sensor quality and optical resolution are less critical. On the other hand, the method is sensitive to the tilt of the camera, that is, the rotation of the camera around the main optical axes of the lens.</p>
+
+<p>This method gives less precision and requires special weather conditions, which are pretty rare but it is much easier when it comes to photography.</p>
+
+<h2 id="heading-blue-sky-gradient-method">Blue Sky Gradient Method</h2>
+
+<p>This is by far the most elegant and simple method in terms of experimental conditions. At the same time, the calculations are the most sophisticated. To use this method, we simply have to photograph a blue sky on a clear sunny day.</p>
+
+<h3 id="heading-the-idea.">The Idea</h3>
+
+<p>The observed blue sky is attributed to <a href="https://en.wikipedia.org/wiki/Rayleigh_scattering">Rayleigh scattering</a>. The light wave is scattered on the fluctuations of the air density which, in turn, results in the fluctuation of the air <a href="https://en.wikipedia.org/wiki/Refractive_index">refractive index</a>.</p>
+
+<p>Everyone can observe the blue sky gradient. The sky color in the zenith is much deeper, and by the edges of the sky dome, it is much lighter. This gradient depends on the hypothetical Earth’s curvature and does exist for the model of the flat Earth.</p>
+
+<p>It is pretty obvious that the gradient depends on the Earth’s curvature. In <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#fig6">Fig. 6</a> we can consider the example of the sun in zenith. In this case, higher Earth curvature makes the gradient effect less pronounced, as the part of the scattered light is generated in a thinner mass of air near the horizon because some part of the sunlight passes the atmosphere below the horizon line:</p>
+
+<p id="fig6"><img alt="Sky" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.sky.webp"/></p>
+
+<p><b>Fig. 6 — Rayleigh scattering and blue sky gradient</b></p>
+
+<h3 id="heading-calculations">Calculations</h3>
+
+<p>When the sunlight passes the Earth’s atmosphere, it is scattered at every point of it, in all directions, but each camera pixel collects the light directed towards the camera. To calculate the pixel values, we need to integrate the amounts of scattered light with the weights according to the sensitivity of the R, G, and B pixels. The space used in integration is the area from the Earth’s surface to infinity, and the integral converges due to the distribution of the density of the molecules of air in the atmosphere.</p>
+
+<p>I’ve used the equations and reasonings described in the article on the simulation of the sky colors <a href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness#reference-7">[7]</a>. However, the software algorithm is different. Instead of calculating the sky colors, the software uses colors registered by the camera and uses dependency on the Earth radius (the value includes the possible infinite value) to find the radius which best fits the gradient pattern measured.</p>
+
+<h3 id="heading-recommendations.">Recommendations</h3>
+
+<ol>
+	<li>Use a sunny day.</li>	<li>Use only the midday sunny time after rain, to have as clean air as possible.</li>	<li>Use one of the standard lenses without any filters or any other on-lens gadgets.</li>	<li>Even more importantly, do not use any polarizing filters.</li>	<li>Stay away from the smog, erupting volcanos, and tornadoes.</li>	<li>Also, stay away from the areas of UFO flights. UFO locomotion is based on the warping of <em>ether</em>, and it causes additional light refraction called <em>ether refraction</em>, which disrupts the normal Rayleigh scattering pattern. The UFO mechanism is a matter of a separate article.</li>	<li>Set up a camera to make its lens’s main optical axes strictly perpendicular to the vector of Earth’s gravity. Whenever possible, use the camera’s embedded accelerometer.</li></ol>
+
+<h2 id="heading-usage">Usage</h2>
+
+<h3 id="heading-general-photography-recommendations">General Photography Recommendations</h3>
+
+<ol>
+	<li>Try to use the camera with an accelerometer/inclinometer, remote control, and geolocation.</li>	<li>Always use a tripod.</li>	<li>All methods require a lens with a long focal distance, of 100 mm and up. The exclusion is the cloud pattern method which works better with a lens with a shorter focal distance, 50 mm down to fish eye.</li>	<li>The quality of the lens is important. Avoid no-name lenses, because the lens model should be written in the <a href="https://en.wikipedia.org/wiki/Exif">EXIF</a> metadata. The software consults the lens database and uses the lens characteristics to take into account the distortion.</li>	<li>On the other hand, avoid using rectilinear “architecture” and other lenses with overly complicated designs. The distortion-free features of the lens are totally useless and produce a lesser quality of the measurements because distortions are compensated in the software. Software compensation of the distortion for an overly complicated lens is extremely difficult. After software processing, the accuracy of the results with a fisheye lens is better than with a rectilinear lens.</li>	<li>Use manual or aperture-priority mode.</li>	<li>It is possible to use just one photograph. Nevertheless, whenever possible, use time-lapse photography (<a href="https://en.wikipedia.org/wiki/Time-lapse_photography">https://en.wikipedia.org/wiki/Time-lapse_photography</a>) and provide at least 1-2 thousand images. The more statistics is collected, the better the accuracy of the results.</li></ol>
+
+<h2 id="heading-using-the-application">Using the Application</h2>
+
+<p>The usage is very simple: you load one or several image files and click Process/Run:</p>
+
+<p id="fig7"><img alt="Application" src="./Resources-articles/2023-04-01.Measurements-of-Earth's-Flatness.application.webp"/></p>
+
+<p><b>Fig. 7 — The application</b></p>
+
+<p>The application is very simple to use. It provides only 5 menu commands: File/Load Source Images… File/Exit, Process/Start, Process/Cancel, and Help/About. This is the typical workflow:</p>
+
+<ol>
+	<li>Download and install the current .NET, anything starting from .NET 5 will work.</li>	<li>Run Curvature.exe</li>	<li>Use File/Load Source Images… to download a single image or a set of time-lapse images. The set of about 1000 images would be near-optimal. The first image of the set will be shown.</li>	<li>Select a proper method using the set of radio buttons below the main menu</li>	<li>Use the menu command Process/Start to start the process</li>	<li>If something is going wrong, use Process/Cancel to start over. If the images should be reloaded, it can be done.</li>	<li>Observe the progress by looking at the graphical indication of the process phases shown over the image.</li>	<li>During the processing, the application remains responsive, you can resize the application window, cancel the processing, and so on.</li>	<li>Use Help/About if something seems to be unclear.</li></ol>
+
+<p>If you have enough patience to wait until the end of the process, you will see the results of the calculations. Enjoy!</p>
+
+<h2 id="heading-implementation">Implementation</h2>
+
+<p>In the Implementation section, let’s just overview some interesting and commonly useful techniques.</p>
+
+<h3 id="heading-source-code-isolation">Source Code Isolation</h3>
+
+<p>The .NET solutions and projects created from the standard templates produce a mix of the source code and the build artifacts. This is very inconvenient. The source code should be fully isolated. The problem can be solved by using the file “Directory.Build.props” placed at the level of the solution file. In this file, the directories for the intermediate and output files can be defined outside the source code directory, which is always left intact.</p>
+
+<p>The additional benefit of this approach is that the duplication of the executable files produced by the build is avoided.</p>
+
+<p>“Directory.Build.props”:</p>
+
+<div class="pre-lang" id="premain374103"><div>XML</div><div class="pre-action-link"><span class="code-collapse" data-index="374103" id="preShrink374103">Shrink ▲</span> &nbsp; <span id="copycode374103" class="copy-code" data-index="374103" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre374103" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">Project</span><span class="code-keyword">&gt;</span>
+ 
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">PropertyGroup</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">BaseIntermediateOutputPath</span><span class="code-keyword">&gt;</span>$(SolutionDir).intermediateOutput\$(MSBuildProjectName)\$(Configuration).$(Platform)<span class="code-keyword">&lt;</span><span class="code-leadattribute">/BaseIntermediateOutputPath</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">OutputPath</span><span class="code-keyword">&gt;</span>$(SolutionDir)\output.$(Configuration).$(Platform)<span class="code-keyword">&lt;</span><span class="code-leadattribute">/OutputPath</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">AppendTargetFrameworkToOutputPath</span><span class="code-keyword">&gt;</span>false<span class="code-keyword">&lt;</span><span class="code-leadattribute">/AppendTargetFrameworkToOutputPath</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ProduceReferenceAssembly</span><span class="code-keyword">&gt;</span>false<span class="code-keyword">&lt;</span><span class="code-leadattribute">/ProduceReferenceAssembly</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">TargetFramework</span><span class="code-keyword">&gt;</span>net5.0-windows<span class="code-keyword">&lt;</span><span class="code-leadattribute">/TargetFramework</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">TreatWarningsAsErrors</span><span class="code-keyword">&gt;</span>true<span class="code-keyword">&lt;</span><span class="code-leadattribute">/TreatWarningsAsErrors</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">WarningsAsErrors</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">RootNamespace</span><span class="code-keyword">&gt;</span>SA<span class="code-keyword">&lt;</span><span class="code-leadattribute">/RootNamespace</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Copyright</span><span class="code-keyword">&gt;</span>Copyright © 2023 Sergey A Kryukov<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Copyright</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Product</span><span class="code-keyword">&gt;</span>Measurements of Earth's Flattness<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Product</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Description</span><span class="code-keyword">&gt;</span>Measurements of Earth's Flattness, April 1st Article for Code Project<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Description</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Authors</span><span class="code-keyword">&gt;</span>Sergey A Kryukov<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Authors</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">AssemblyVersion</span><span class="code-keyword">&gt;</span>1.0.0.0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/AssemblyVersion</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">FileVersion</span><span class="code-keyword">&gt;</span>1.0.0.0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/FileVersion</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Version</span><span class="code-keyword">&gt;</span>1.0.0.0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Version</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">InformationalVersion</span><span class="code-keyword">&gt;</span>1.0.0.0<span class="code-keyword">&lt;</span><span class="code-leadattribute">/InformationalVersion</span><span class="code-keyword">&gt;</span>
+
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/PropertyGroup</span><span class="code-keyword">&gt;</span>
+<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Project</span><span class="code-keyword">&gt;</span></pre>
+
+<p>An additional benefit of this approach is that the common properties of all projects can be unified, such as product name, authors, copyright, and version information. When needed, some of the project properties can be overwritten at the level of some of the individual projects.</p>
+
+<h3 id="heading-wpf-main">WPF Main</h3>
+
+<p>A WPF project created from a standard template does not have <a href="https://en.wikipedia.org/wiki/Entry_point">an entry-point method, main</a>. Actually, it does have it, but it is not written explicitly by the author. Instead, it is generated from XAML data and later compiled. The required source file is “app.xml”.</p>
+
+<p>I cannot accept this feature. I know many situations where explicit access to <code>Main</code> is required. I cannot understand why rely on nearly useless “app.xml”. If it is needed to keep the project-wide resources, this is not a good reason to have it, because is always better to have separate resource XAML files and reuse them.</p>
+
+<p>This problem is resolved. The file with the entry-point <code>Main</code> is “Main/main.cs”:</p>
+
+<div class="pre-lang" id="premain519599"><div>C#</div><div class="pre-action-link"><span id="copycode519599" class="copy-code" data-index="519599" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre519599" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">namespace</span> SA.Main {
+
+    <span class="code-keyword">static</span> <span class="code-keyword">class</span> ApplicationStart {
+        [System.STAThread]
+        <span class="code-keyword">static</span> <span class="code-keyword">void</span> Main() {
+            View.WindowMain.AddKeyGestures(); <span class="code-comment">//</span><span class="code-comment"> trivial reason to use Main</span>
+            <span class="code-keyword">new</span> UI.AdvancedApplication&lt;View.WindowMain&gt;().Run();
+        } <span class="code-comment">//</span><span class="code-comment">Main</span>
+    } <span class="code-comment">//</span><span class="code-comment">class ApplicationStart</span>
+
+}</pre>
+
+<p>Here, we use the extension of the <code>Application</code> class found in “Main/AdvancedApplication.cs”. This is the generic class using the type of the application main window as a generic parameter <code>MAINVIEW</code>:</p>
+
+<div class="pre-lang" id="premain216183"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="216183" id="preShrink216183">Shrink ▲</span> &nbsp; <span id="copycode216183" class="copy-code" data-index="216183" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre216183" style="margin-top:0;" class="lang-csharp notranslate" data-language="C#" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">namespace</span> SA.UI {
+    <span class="code-keyword">using</span> System;
+    <span class="code-keyword">using</span> System.Windows;
+    <span class="code-keyword">using</span> System.Reflection;
+
+    <span class="code-keyword">public</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> AdvancedApplicationBase : Application {
+        <span class="code-keyword">private</span> <span class="code-keyword">protected</span> <span class="code-keyword">abstract</span> Window CreateMainWindow();
+        <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnStartup(StartupEventArgs e) {
+            <span class="code-keyword">this</span>.ShutdownMode = ShutdownMode.OnMainWindowClose;
+            <span class="code-keyword">var</span> mainWindow = CreateMainWindow();
+            MainWindow = mainWindow;
+            mainWindow.Title = DefinitionSet.formatTitle(ProductName);
+            mainWindow.Show();
+            <span class="code-keyword">base</span>.OnStartup(e);
+            startupComplete = <span class="code-keyword">true</span>;
+        } <span class="code-comment">//</span><span class="code-comment">OnStartup</span>
+        <span class="code-comment">//</span><span class="code-comment"> ...</span>
+    } <span class="code-comment">//</span><span class="code-comment">AdvancedApplicationBase</span>
+    
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+    
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> AdvancedApplication&lt;mainview&gt; :
+        AdvancedApplicationBase <span class="code-sdkkeyword">where</span> MAINVIEW : Window, <span class="code-keyword">new</span>() {
+        <span class="code-keyword">private</span> <span class="code-keyword">protected</span> <span class="code-keyword">override</span> Window CreateMainWindow() {
+            MAINVIEW mainWindow = <span class="code-keyword">new</span>();
+            <span class="code-keyword">if</span> (mainWindow <span class="code-keyword">is</span> IExceptionPresenter exceptionPresenter)
+                <span class="code-keyword">base</span>.exceptionPresenter = exceptionPresenter;
+            <span class="code-keyword">return</span> mainWindow;
+        }
+    } <span class="code-comment">//</span><span class="code-comment">class AdvancedApplication</span>
+
+}</pre>
+
+<p>The class <code>AdvancedApplicationBase</code> has many other advanced features. First of all, it is used to retrieve the application-level metadata, such as product name, description, authors, copyright, and version information. This information can be defined in “Directory.Build.props” or in any of the individual project files.</p>
+
+<h3 id="heading-software-compatibility-and-build">Software Compatibility and Build</h3>
+
+<p>The software is based on multiplatform .NET, version 5, or any later version. The target version can be modified by editing the file the property <code>&lt;TargetFramework&gt;</code> in the file “Directory.Build.props”. Due to the use of WPF, only the build for Windows is available. The UI frontend for other platforms is quite possible and can be considered in case it is required by the users.</p>
+
+<p>The use of the obsolete .NET Framework is also possible, but then the user would need to create a separate “.csproj” file for this purpose.</p>
+
+<p>The batch build and clear-up are available, please use the files “build.cmd” and “clear.cmd”. With the batch build, Visual Studio or any other IDE is not required.</p>
+
+<h2 id="heading-future-research">Future Research</h2>
+
+<p>The next research stage will include the measurement of the curvature of the turtle <a href="https://en.wikipedia.org/wiki/Turtle_shell">carapace</a> and the masses of the three elephants <a href="https://en.wikipedia.org/wiki/World_Turtle">supporting the Earth</a>.</p>
+
+<h2 id="heading-literature">Literature</h2>
+
+<ol>
+	<li id="reference-1"><a href="https://cuvillier.de/uploads/preview/public_file/2850/9783867277143.pdf">Hilmar Hofmann, <em>Characteristics and implications of surface gravity waves in the littoral zone of a large lake</em></a></li>	<li id="reference-2"><a href="https://faculty.washington.edu/jmt3rd/Publications/SchwendemanThomson2017_stereowavebreaking.pdf">Michael S. Schwendeman and Jim Thomson, <em>Sharp-Crested Breaking Surface Waves Observed from a Ship-Based Stereo Video System</em></a></li>	<li id="reference-3"><a href="https://www.atlantis-press.com/article/389.pdf">Mats Ehrnstrom, <em>A Note on Surface Profiles for Symmetric Gravity Waves with Vorticity</em></a></li>	<li id="reference-4"><a href="https://cddis.nasa.gov/lw15/docs/papers/Improvement%20of%20Current%20Refraction%20Modeling%20in%20Satellite%20Laser%20Ranging%20(SLR)%20by%20Ray%20Tracing%20through%20Meterological%20Data.pdf">G. Hulley and E. C. Pavlis, <em>Improvement of Current Refraction Modeling in Satellite Laser Ranging (SLR) by Ray Tracing through Meteorological Data</em></a></li>	<li id="reference-5"><a href="https://www.brockmann-consult.de/CloudStructures/gravity-waves-cloud-description.htm">M. Paperin, <em>Cloud Structures</em></a></li>	<li id="reference-6"><a href="https://earthsky.org/earth/kelvin-helmholtz-clouds"><em>Kelvin-Helmholtz clouds look like ocean waves</em>, Earth Sky</a></li>	<li id="reference-7"><a href="https://www.scratchapixel.com/lessons/procedural-generation-virtual-worlds/simulating-sky/simulating-colors-of-the-sky.html"><em>Simulating the Colors of the Sky</em></a>, <a href="https://www.scratchapixel.com/index.html">Scratchapixel</a>, see source code at <a href="https://github.com/scratchapixel/code/tree/main/simulating-sky">GitHub</a></li></ol>
+
+<h2 id="heading-licensing-notes">Licensing Notes</h2>
+
+<p>In addition to <a href="https://www.codeproject.com/info/cpol10.aspx">The Code Project Open License</a>:</p>
+
+<p>All the images are original and created from scratch by the author of the article.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earths-Flatness">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/5358102/Measurements-of-Earth-Flatness?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2023 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

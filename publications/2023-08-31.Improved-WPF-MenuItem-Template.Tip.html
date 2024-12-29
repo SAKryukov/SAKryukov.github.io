@@ -1,0 +1,958 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0071)https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Improved WPF MenuItem Template- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Improvements used to fix an annoying WPF MenuItem defect related to icons">
+<meta name="Keywords" content=".NET, XAML, WPF">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="8/31/2023 5:51:00 PM">
+<meta property="article:modified_time" content="8/31/2023 5:51:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta name="twitter:label2" content="Reading time">
+<meta name="twitter:data2" content="5 min read">
+<meta property="og:url" content="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template">
+<meta property="og:title" content="Improved WPF MenuItem Template">
+<meta property="og:description" content="Improvements used to fix an annoying WPF MenuItem defect related to icons">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template"
+   },
+  "name": "Improved WPF MenuItem Template",
+  "headline": "Improved WPF MenuItem Template",
+  "url": "https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template",
+  "discussionUrl": "https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "keywords": ".NET,XAML,WPF",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "license": "http://www.codeproject.com/info/cpol10.aspx",
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Menu items without icons look poorly because of extremely poor alignment and redundant separators, and those with icons cannot be properly rendered as the menu font increases. The issue is so bad that many people asked how to remove the icon area of all menu items completely. Not all solutions for removing the icon area are satisfactory but, more importantly, the real goal is to keep all the essential existing elements of the menu with correct alignment and scaling. This article is an attempt to solve this problem through a minimal set of changes to the default MenuItem Template.",
+  "articleSection": "WPF",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2023-08-31",
+  "dateCreated": "2023-08-31",
+  "dateModified": "2023-08-31"
+,
+  "contentRating" : {
+    "@type" : "Rating",
+    "ratingValue" : 5.00,
+    "bestRating" : 5,
+    "worstRating" : 1
+  }
+}</script>
+
+<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=desktop",
+      "name" : "desktop"
+    }
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "item" : {
+      "@id" : "/script/Content/Tag.aspx?tags=WPF",
+      "name" : "WPF"
+    }
+  }]
+}</script>
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=desktop">desktop</a> / <a rel="nofollow" href="https://www.codeproject.com/script/Content/Tag.aspx?tags=WPF">WPF</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Tips/5367587/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="SENSosumSkMBlDDc0rpZF26qTYVj2C7xYAqbBlv4WW3Gd2JEL6mAds/NtUAXPev9J+RCFatRP3C8WVhki8Z/OaA1G8SpC9PoKi1dYGwWtgPQ7x0xhoeRHoM2ebksY6FCNj769zdBQr0sOZ0KM0KuZ7d1iRm4r9hVWpTgCILqk7uAGfgUQGN/rXPM0rYwSddcK0TwtvQ7k/4I+7u0MX26Iadi6WicQ4zOCFTi6VGEvTzXHxaZy+nfxdWeM5H9Ei/4o5z8T+mr+v4eWcswZSvSVtPZr8RIuN6oFNh2KnJkStuw8NWw2Ook7qcqF3JhtWYOa4TxBunskutUJbQa4Peu/V9rx+QbZGIfDJAdT7r7flrmWaY1yvxnVgvGEn4BxaJJcy1ZDnS+TAanFcfdULhh2BA5kFQm+RZDIfnJDyhPPrkgcqXfsCeC3qXyWokD4YR+UEB0OUI3m3UktnJXCfTMXqeeAj926iyA5Jfkt12YA/JOB5DcEztLDXpJwjxBOW83O7wqe+hpb6rk1+jilTSf5LjazR8agHjZ/TkfjL8ztuP96P5pEIEmIxo+lDaHhAapEgqgeNocqk7CRJrcD6C44seOHe2vO+inog8nb4tK3/MDyHadB2RAaYODRTBm60HvYAbicE6QvnS58LtWTMZXVZA7pG6MYIFH92tcn9nTR6yHqDtYh1nvxWPDagjPpxbrdK7i8S55yjX8FThcYB86N0XKVGDDCI5/AAaHQOE1YdwzPGbh1hxKYa0n+MLq+1fgxS5rb+0tz23MVZwFR0nTOTL54m0vMVpHrwBu7rYlDPyRwwKvxZJzaWO2p3iN8bCwGgH88QjUYqn0txkuDx0MbyEBcokj0FOmoSFTCIH4rWFUN0eRaBfK7niUgXExbO1QPg3Gv6SwtIM/KYRjDEI4FEBOhyRy93nmCRDCVx8xAdRMS2IA7PsFnZL/HbJnZvm/emsXOjp0N2/s973BrxVh3qCAZkQMqRWCKt/COu1kWpggYFy2DR8A2tkaGeSAv3RFRLG2VD1yrf/+ZV++FMUPbUZ/UL4Na/Vs7ElTsriylVdZbQWuf/N6Y6vjqZmxNTXFNBB7ngkfhwHfGkb+jPBYYngiqiCpKt/J8wpHx5OXr1XLSqsYow4vaBGpduTXaF1+Z0iEhANJJs/+kR5Il//ZCfl+QiO/zHMtKbsPxdhytz36jo+cQtVLAzJPviR0dFSF4ZZ4K5ejVv+8Jrooyltzh6KAQiY17BrqliBnPbekm/9z+r2oAgGDe8qOLjvRvcz97DG7Z7vAgmR1AOFito4K/Y9GVyNmQTk9286IiwL4dBiDn9aSEpCIlVzhhhzE0WOO1BXHRGBTO33+H6RDmRSXcQzdDWo22SvzSfoSLgiZfGn8nGDfL7dBDxwy8tkXpRm7CtUF8vAxFYS/uy5Y9OVRof25IaUbB5+S1BWedNUYZ7DKn2okxDhZf7ueprwtI4nQyM49QUYLnDMagqm8fARwuOJo7UcoIHGrnG8234OJThJDTpwplW6AppGI1XHKNOjeoG8IA41oR/iAYLG6jvsacrYaasZWb+hUIX/P8n2no+TrVJkQm9R5cpa+9D3jos1UPJT1iclUAkrWsP5SHRge3cEzB6EYxhN8bQ69/Ek9aI9pN3jvThMtdEGHeLKt1GAacFVoufh6tKs3e5N6rlETNvy6Al14ywOiOFbZN//gu1+jztlzMCdKoZnaRNftarFpU8210CPEKZz53RHr7xekkOAQGGb+NQHBz7mb3kh9IrhFyQP9yaVLnT3IHScs4lVe0BdZxJbjZRYHGT1/vEyDZrgbmj3JUHo7/T+hBOjXkvVKTOJRWPlKiZCq1iIdjKBNE3bDUGAwGU4EJdN2mRHCcniCWmd0dkCy/BZ4BFkNmsuXy7AO0Xd37K+ThmTyJTHG+Ts0RoqXpVPgeZ1bwBAWfQ8WZvmHqUDZMViuASRG1bJW6Q08fLkzySZgihbczAlQGSXJLoFTmL85F43po++OOiOghY68w8oEnURqaq9bk552BTth2+C23Z1nYEumwNctmHGSMv96uUvRXHeufKg5VPSF3ZobS9+9FhUD9r8WkF0xmv2tiblvO5zDAsOzMoVhiriopwb7WJYIoB3dGwc2vi7TAeRsg5AO0Gh4snU8395SGAQjMhZ/SfxOiZ3Y0odP7pjd9SMVUOh1Nb5PdWBf9ac9m5gqffvngNBRBXM4F+pFkV+vaHlRgYI3oGfafJ32TIuHx3X+Uw2IHqvAcBxZ0n15wpDMj+IEU5NgCf/G+IG8KlIXCgfVm3hPE9+Tmaan0/OAthD+KT5W6Y8BIzM8tdJOBMZ5IfQkP7rZpV90ZmYCkYU2/8MaQUH5vOZPw/bZaGYCPZ2r4EikdHRHTh2qs5/Zp76Zs2IXg77n/pEXpgIi4Z6EO5sy80wHUnO2/q+CJ+lB3UAnmVmawP0WjhgwIC9zge3MvshLhnnGOEdz0iWLdNXlhLem5GKZDwJspgoCfskVfUbGyj8BAzzvH/5yYuRzKP+F2a/nLd7iZKsVKmz6HrQOTVsfZRSLilIBgP11K84h0xTd4ujuUPF3z4aK9fOTOmPKfhez/F7feoo8I0DjKdV4OV/lrG2dV9/Ddu8qJU9L1d7mBZ8DqMZ0tE3JJ8kQNdJFpmCFZLJbAdMryMoFrDqi8pSTfAM2vH2W+Qkm/O3AFG7E1cDaGz24dG2r5Rb/jZiYuT80VlsvHr6WMY+ex4cAjXb5Y7jyp/OyrNYd1MGHqDKbPt85SH+J7RV7v0h71+qKpRM2miTzRy8K3rkmCIOkqcyrdaLn5MX11Ffp8RY1tCHjX6++Dha1J+MLbIXxxb81s0r6yAuMtT5o+yMimLUhrMpexkTEm44mUKde66OIE+KSaFlq8KSNyOusozuTd/0=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp" class="tags horizontal">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags"><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/.NET" data-id="98">.NET</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/XAML" data-id="139">XAML</a></div><div class="t"><a rel="tag" href="https://www.codeproject.com/Tags/WPF" data-id="140">WPF</a></div></span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Improved WPF MenuItem Template</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_5367587">
+
+	<meta itemprop="upvoteCount" content="4">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-fill-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">5.00/5  (4 votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">31 Aug 2023</span><a id="ctl00_LicenseLink" title="The Code Project Open License (CPOL)" class="license flex-item-tight" href="http://www.codeproject.com/info/cpol10.aspx">CPOL</a><span id="ctl00_ReadingTime" class="stats flex-item-tight">5 min read</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 7.6K</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Improvements used to fix an annoying WPF MenuItem defect related to icons</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/tip100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					<div id="ctl00_Abstract" class="abstract">Menu items without icons look poorly because of extremely poor alignment and redundant separators, and those with icons cannot be properly rendered as the menu font increases. The issue is so bad that many people asked how to remove the icon area of all menu items completely. Not all solutions for removing the icon area are satisfactory but, more importantly, the real goal is to keep all the essential existing elements of the menu with correct alignment and scaling. This article is an attempt to solve this problem through a minimal set of changes to the default MenuItem Template.</div>
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<h2>Contents</h2>
+
+<p class="toc"><a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-why-are-they-so-ugly3f" style="margin-left: 0">Why are they so Ugly?</a><br>
+<a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-improved-look" style="margin-left: 0">Improved Look</a><br>
+<a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-analysis" style="margin-left: 0">Analysis</a><br>
+<a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-solution" style="margin-left: 0">Solution</a><br>
+<a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-testing" style="margin-left: 0">Testing</a><br>
+<a href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+
+<h2 id="heading-why-are-they-so-ugly3f">Why are they so Ugly?</h2>
+
+<p>Why do the menu items look so ugly? Let’s see. First, let’s create the menu without any icons:</p>
+
+<p><img alt="No icons" src="./Resources-articles/2023-08-31.Improved-WPF-MenuItem-Template.Tip.1-no-icons.webp"/></p>
+
+<p>This is what most people complained about: there is a visually empty cell on the left. It is designed to show an icon, but without an icon, it all looks disturbing, like <em>The Headless Horseman</em>. People asked, first of all, to remove this area and give up icons. There are many solutions, and I found them unsatisfactory. More importantly, why give up icons? It would be much nicer to have them at least optionally, but with proper rendering.</p>
+
+<p>It looks much better if all or most menu items in the popup area of a parent menu item have icons:</p>
+
+<p><img alt="Added icons" src="./Resources-articles/2023-08-31.Improved-WPF-MenuItem-Template.Tip.2-icons.webp"/></p>
+
+<p>Is it good enough? Not at all! To see the problem, let’s enlarge the menu font:</p>
+
+<p><img alt="Added icons and increased font" src="./Resources-articles/2023-08-31.Improved-WPF-MenuItem-Template.Tip.3-bad.webp"/></p>
+
+<p>Now, the icons are not rendered properly. Here I’m using characters for icons, for simplicity, and some other good reasons, and it does work. Note that with a non-default font size, the character, representing a glyph is not aligned with the characters of the menu headers. If I use a bitmap glyph with the size exactly 16x16, it always fits, but looks misaligned with text. With different image sizes, some other problems with rendering appear, but, generally, rendering of anything with larger sizes is never accurate. Needless to say, the attempt to match sizes for every required font would be quite a bad idea. Not only it is totally unreliable, but it means killing the maintenance.</p>
+
+<p>WPF <code>Menu</code> works with textual menu items of the type <code>MenuItem</code> and icons represented by data of arbitrary type.</p>
+
+<h2 id="heading-improved-look">Improved Look</h2>
+
+<p>Isn’t it better?</p>
+
+<p><img alt="Final result" src="./Resources-articles/2023-08-31.Improved-WPF-MenuItem-Template.Tip.4-good.webp"/></p>
+
+<p>The image above shows my final result. I intentionally made the font pretty large to show all the details. Before discussing the problem and the solution, let’s look at it. Is it perfect? No, it is not. First, I had to sacrifice the vertical separator between the icon and the header areas. Is it acceptable? You decide. I would say, this look is not perfectly fine, but still better than without a fix.</p>
+
+<p>And for those who chose not to use those horizontal menu separators, not having the vertical separator is even better by all counts. Moreover, the icons of different menu items became centered around the same vertical line.</p>
+
+<p>I tested many font sizes, even going to extremes, and different contents — everything works.</p>
+
+<p>Now, let’s discuss the solution.</p>
+
+<h2 id="heading-analysis">Analysis</h2>
+
+<p>When I looked at a default WPF <code>MenuItem</code> template from Microsoft, I found a bloody mess of many hard-coded values affecting the sizes and layout of the items. It seems obvious that the <code>Menu</code> control is designed to be used with a default fixed font and the icons of only one fixed size, 16x16. In other words, this is a typical example of <em>ad hoc</em> layout, from my point of view — one big design bug.</p>
+
+<p>However, the structure is a bit too complicated and can be broken easily. I’ve tried to modify it as conservatively as possible. First of all, I found that the size 16 found in several places is redundant and can be removed. I also found that there is a limitation to the height of the items, the limit is equal to 22. I decided to remove it not everywhere, but only from the <code>Grid</code> row sizes. I worked out.</p>
+
+<p>The most difficult problem is the vertical separator between the icon and the header areas. It can be found in XAM by my comments “SA!!!”. I decided to give it up and remove it because its correct placement would require a radical restructuring of everything. In the default XAML code, three <code>Grid</code> elements overlap in the same <code>Grid.Raw</code>, so the layout of the <code>Rectangle</code> representing the separator is defined by the hard-coded <code>Margins</code> attribute. I understand that this is a trick done to align all the separators of several stacked menu items, but this is a bad practice. Note that other WPF controls (<code>ListView</code>, <code>DataGrid</code>) don’t have this problem.</p>
+
+<h2 id="heading-solution">Solution</h2>
+
+<p>This code can be used as a separate <code>ResourceDictionary</code> file:</p>
+
+<div class="pre-lang" id="premain751209"><div>XML</div><div class="pre-action-link"><span class="code-collapse" data-index="751209" id="preShrink751209">Shrink ▲</span> &nbsp; <span id="copycode751209" class="copy-code" data-index="751209" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
+<pre id="pre751209" style="margin-top:0;" class="lang-xml notranslate" data-language="XML" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">&lt;</span><span class="code-leadattribute">ResourceDictionary</span><span class="code-attribute"> </span><span class="code-attribute">xmlns</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span><span class="code-attribute">
+                    </span><span class="code-attribute">xmlns:x</span><span class="code-keyword">="</span><span class="code-keyword">http://schemas.microsoft.com/winfx/2006/xaml"</span><span class="code-keyword">&gt;</span>
+
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Menu.Static.Background"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FFF0F0F0"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Menu.Static.Border"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FF999999"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Menu.Static.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FF212121"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> SA!!! removed because it is unused: the element using it cannot be positioned correctly as menu font size increases
+        &lt;SolidColorBrush x:Key="Menu.Static.Separator" Color="#FFD7D7D7"/&gt;
+        </span><span class="code-comment">--&gt;</span></span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Menu.Disabled.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FF707070"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Selected.Background"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#3D26A0DA"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Selected.Border"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FF26A0DA"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Highlight.Background"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#3D26A0DA"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Highlight.Border"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#FF26A0DA"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Highlight.Disabled.Background"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#0A000000"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">SolidColorBrush</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItem.Highlight.Disabled.Border"</span><span class="code-attribute"> </span><span class="code-attribute">Color</span><span class="code-keyword">="</span><span class="code-keyword">#21000000"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">MenuScrollingVisibilityConverter</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuScrollingVisibilityConverter"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Geometry</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">DownArrow"</span><span class="code-keyword">&gt;</span>M 0,0 L 3.5,4 L 7,0 Z<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Geometry</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Geometry</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">UpArrow"</span><span class="code-keyword">&gt;</span>M 0,4 L 3.5,0 L 7,4 Z<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Geometry</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Geometry</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">RightArrow"</span><span class="code-keyword">&gt;</span>M 0,0 L 4,3.5 L 0,7 Z<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Geometry</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Geometry</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">Checkmark"</span><span class="code-keyword">&gt;</span>F1 M 10.0,1.2 L 4.7,9.1 L 4.5,9.1 L 0,5.2 L 1.3,3.5 L 4.3,6.1L 8.3,0 L 10.0,1.2 Z<span class="code-keyword">&lt;</span><span class="code-leadattribute">/Geometry</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuScrollButton"</span><span class="code-attribute"> </span><span class="code-attribute">BasedOn</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type RepeatButton}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">ClickMode"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Hover"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter.Value</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type RepeatButton}"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">6"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Setter.Value</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Setter</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Style</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}"</span><span class="code-attribute"> </span><span class="code-attribute">BasedOn</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type ScrollViewer}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">HorizontalScrollBarVisibility"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Hidden"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">VerticalScrollBarVisibility"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter.Value</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type ScrollViewer}"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">*"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.RowDefinitions</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">RowDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">RowDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">*"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">RowDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.RowDefinitions</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Row</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">ScrollContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">CanContentScroll</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding CanContentScroll}"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">RepeatButton</span><span class="code-attribute"> </span><span class="code-attribute">Command</span><span class="code-keyword">="</span><span class="code-keyword">{x:Static ScrollBar.LineUpCommand}"</span><span class="code-attribute"> </span><span class="code-attribute">CommandTarget</span><span class="code-keyword">="</span><span class="code-keyword">{Binding RelativeSource={RelativeSource TemplatedParent}}"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">Focusable</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Row</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">Style</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuScrollButton}"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">RepeatButton.Visibility</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiBinding</span><span class="code-attribute"> </span><span class="code-attribute">ConverterParameter</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">Converter</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuScrollingVisibilityConverter}"</span><span class="code-attribute"> </span><span class="code-attribute">FallbackValue</span><span class="code-keyword">="</span><span class="code-keyword">Visibility.Collapsed"</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ComputedVerticalScrollBarVisibility"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">VerticalOffset"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ExtentHeight"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ViewportHeight"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiBinding</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/RepeatButton.Visibility</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource UpArrow}"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/RepeatButton</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">RepeatButton</span><span class="code-attribute"> </span><span class="code-attribute">Command</span><span class="code-keyword">="</span><span class="code-keyword">{x:Static ScrollBar.LineDownCommand}"</span><span class="code-attribute"> </span><span class="code-attribute">CommandTarget</span><span class="code-keyword">="</span><span class="code-keyword">{Binding RelativeSource={RelativeSource TemplatedParent}}"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">Focusable</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Row</span><span class="code-keyword">="</span><span class="code-keyword">2"</span><span class="code-attribute"> </span><span class="code-attribute">Style</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuScrollButton}"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">RepeatButton.Visibility</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiBinding</span><span class="code-attribute"> </span><span class="code-attribute">ConverterParameter</span><span class="code-keyword">="</span><span class="code-keyword">100"</span><span class="code-attribute"> </span><span class="code-attribute">Converter</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuScrollingVisibilityConverter}"</span><span class="code-attribute"> </span><span class="code-attribute">FallbackValue</span><span class="code-keyword">="</span><span class="code-keyword">Visibility.Collapsed"</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ComputedVerticalScrollBarVisibility"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">VerticalOffset"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ExtentHeight"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Binding</span><span class="code-attribute"> </span><span class="code-attribute">Path</span><span class="code-keyword">="</span><span class="code-keyword">ViewportHeight"</span><span class="code-attribute"> </span><span class="code-attribute">RelativeSource</span><span class="code-keyword">="</span><span class="code-keyword">{RelativeSource TemplatedParent}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiBinding</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/RepeatButton.Visibility</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource DownArrow}"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/RepeatButton</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Setter.Value</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Setter</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Style</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type MenuItem}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderBrush}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderThickness}"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Checkmark}"</span><span class="code-attribute"> </span><span class="code-attribute">FlowDirection</span><span class="code-keyword">="</span><span class="code-keyword">LeftToRight"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Visibility</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Header"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">RecognizesAccessKey</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsChecked"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Visible"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">TextElement.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Fill"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiTrigger</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiTrigger.Conditions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Condition</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Condition</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiTrigger.Conditions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Disabled.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Disabled.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiTrigger</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type MenuItem}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderBrush}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderThickness}"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Checkmark}"</span><span class="code-attribute"> </span><span class="code-attribute">FlowDirection</span><span class="code-keyword">="</span><span class="code-keyword">LeftToRight"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Foreground}"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Visibility</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Header"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">RecognizesAccessKey</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Popup</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">PART_Popup"</span><span class="code-attribute"> </span><span class="code-attribute">AllowsTransparency</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-attribute"> </span><span class="code-attribute">Focusable</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-attribute"> </span><span class="code-attribute">IsOpen</span><span class="code-keyword">="</span><span class="code-keyword">{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"</span><span class="code-attribute"> </span><span class="code-attribute">Placement</span><span class="code-keyword">="</span><span class="code-keyword">Bottom"</span><span class="code-attribute"> </span><span class="code-attribute">PopupAnimation</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"</span><span class="code-attribute"> </span><span class="code-attribute">PlacementTarget</span><span class="code-keyword">="</span><span class="code-keyword">{Binding ElementName=templateRoot}"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuBorder"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Border}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">Padding</span><span class="code-keyword">="</span><span class="code-keyword">2"</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ScrollViewer</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuScrollViewer"</span><span class="code-attribute"> </span><span class="code-attribute">Style</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">RenderOptions.ClearTypeHint</span><span class="code-keyword">="</span><span class="code-keyword">Enabled"</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Canvas</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Top"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Rectangle</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{Binding Background, ElementName=SubMenuBorder}"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">{Binding ActualHeight, ElementName=SubMenuBorder}"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">{Binding ActualWidth, ElementName=SubMenuBorder}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Canvas</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-comment">&lt;!--</span><span class="code-keyword"><span class="code-comment"> SA!!! removed because it cannot be positioned correctly as menu font size increases
+                                    &lt;Rectangle Fill="{StaticResource Menu.Static.Separator}" HorizontalAlignment="Left" Margin="29,2,0,2" Width="1"/&gt;
+                                    </span><span class="code-comment">--&gt;</span></span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ItemsPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">ItemsPresenter"</span><span class="code-attribute"> </span><span class="code-attribute">KeyboardNavigation.DirectionalNavigation</span><span class="code-keyword">="</span><span class="code-keyword">Cycle"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.IsSharedSizeScope</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">KeyboardNavigation.TabNavigation</span><span class="code-keyword">="</span><span class="code-keyword">Cycle"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ScrollViewer</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Popup</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsSuspendingPopupAnimation"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">PopupAnimation"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">PART_Popup"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">None"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsChecked"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Visible"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">TextElement.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Fill"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">ScrollViewer.CanContentScroll"</span><span class="code-attribute"> </span><span class="code-attribute">SourceName</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuScrollViewer"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Canvas.Top"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding VerticalOffset, ElementName=SubMenuScrollViewer}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Canvas.Left"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{ComponentResourceKey ResourceId=SubmenuItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type MenuItem}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderBrush}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderThickness}"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">-1"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">MinWidth</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-attribute"> </span><span class="code-attribute">SharedSizeGroup</span><span class="code-keyword">="</span><span class="code-keyword">MenuItemIconColumnGroup"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">13"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">*"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">30"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">SharedSizeGroup</span><span class="code-keyword">="</span><span class="code-keyword">MenuItemIGTColumnGroup"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">20"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Selected.Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Selected.Border}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">ClipToBounds</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">-1,0,0,0"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Visibility</span><span class="code-keyword">="</span><span class="code-keyword">Hidden"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Glyph"</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Checkmark}"</span><span class="code-attribute"> </span><span class="code-attribute">FlowDirection</span><span class="code-keyword">="</span><span class="code-keyword">LeftToRight"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">11"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">10"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">menuHeaderContainer"</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Header"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">2"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">RecognizesAccessKey</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">TextBlock</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">menuGestureText"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">4"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">Opacity</span><span class="code-keyword">="</span><span class="code-keyword">0.7"</span><span class="code-attribute"> </span><span class="code-attribute">Text</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding InputGestureText}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsChecked"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Visible"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">TextElement.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Fill"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Glyph"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiTrigger</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">MultiTrigger.Conditions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Condition</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Condition</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiTrigger.Conditions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Disabled.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Disabled.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/MultiTrigger</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">{ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type MenuItem}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderBrush}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding BorderThickness}"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">-1"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">MinWidth</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-attribute"> </span><span class="code-attribute">SharedSizeGroup</span><span class="code-keyword">="</span><span class="code-keyword">MenuItemIconColumnGroup"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">13"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">*"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">30"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">SharedSizeGroup</span><span class="code-keyword">="</span><span class="code-keyword">MenuItemIGTColumnGroup"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">Auto"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">ColumnDefinition</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">20"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid.ColumnDefinitions</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">3"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Border}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">-1,0,0,0"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-attribute"> </span><span class="code-attribute">Visibility</span><span class="code-keyword">="</span><span class="code-keyword">Hidden"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">22"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">Glyph"</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource Checkmark}"</span><span class="code-attribute"> </span><span class="code-attribute">FlowDirection</span><span class="code-keyword">="</span><span class="code-keyword">LeftToRight"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">11"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">9"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ContentPresenter</span><span class="code-attribute"> </span><span class="code-attribute">ContentSource</span><span class="code-keyword">="</span><span class="code-keyword">Header"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">2"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">RecognizesAccessKey</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">TextBlock</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">4"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding Padding}"</span><span class="code-attribute"> </span><span class="code-attribute">Opacity</span><span class="code-keyword">="</span><span class="code-keyword">0.7"</span><span class="code-attribute"> </span><span class="code-attribute">Text</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding InputGestureText}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Path</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">RightArrow"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.Column</span><span class="code-keyword">="</span><span class="code-keyword">5"</span><span class="code-attribute"> </span><span class="code-attribute">Data</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource RightArrow}"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">10,0,0,0"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Center"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Popup</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">PART_Popup"</span><span class="code-attribute"> </span><span class="code-attribute">AllowsTransparency</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-attribute"> </span><span class="code-attribute">Focusable</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalOffset</span><span class="code-keyword">="</span><span class="code-keyword">-2"</span><span class="code-attribute"> </span><span class="code-attribute">IsOpen</span><span class="code-keyword">="</span><span class="code-keyword">{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}"</span><span class="code-attribute"> </span><span class="code-attribute">Placement</span><span class="code-keyword">="</span><span class="code-keyword">Right"</span><span class="code-attribute"> </span><span class="code-attribute">PopupAnimation</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalOffset</span><span class="code-keyword">="</span><span class="code-keyword">-3"</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Border</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuBorder"</span><span class="code-attribute"> </span><span class="code-attribute">Background</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Background}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderBrush</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Border}"</span><span class="code-attribute"> </span><span class="code-attribute">BorderThickness</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-attribute"> </span><span class="code-attribute">Padding</span><span class="code-keyword">="</span><span class="code-keyword">2"</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ScrollViewer</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuScrollViewer"</span><span class="code-attribute"> </span><span class="code-attribute">Style</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}"</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Grid</span><span class="code-attribute"> </span><span class="code-attribute">RenderOptions.ClearTypeHint</span><span class="code-keyword">="</span><span class="code-keyword">Enabled"</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Canvas</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-attribute"> </span><span class="code-attribute">VerticalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Top"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">0"</span><span class="code-keyword">&gt;</span>
+                                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Rectangle</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{Binding Background, ElementName=SubMenuBorder}"</span><span class="code-attribute"> </span><span class="code-attribute">Height</span><span class="code-keyword">="</span><span class="code-keyword">{Binding ActualHeight, ElementName=SubMenuBorder}"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">{Binding ActualWidth, ElementName=SubMenuBorder}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Canvas</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Rectangle</span><span class="code-attribute"> </span><span class="code-attribute">Fill</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}"</span><span class="code-attribute"> </span><span class="code-attribute">HorizontalAlignment</span><span class="code-keyword">="</span><span class="code-keyword">Left"</span><span class="code-attribute"> </span><span class="code-attribute">Margin</span><span class="code-keyword">="</span><span class="code-keyword">29,2,0,2"</span><span class="code-attribute"> </span><span class="code-attribute">Width</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">ItemsPresenter</span><span class="code-attribute"> </span><span class="code-attribute">x:Name</span><span class="code-keyword">="</span><span class="code-keyword">ItemsPresenter"</span><span class="code-attribute"> </span><span class="code-attribute">KeyboardNavigation.DirectionalNavigation</span><span class="code-keyword">="</span><span class="code-keyword">Cycle"</span><span class="code-attribute"> </span><span class="code-attribute">Grid.IsSharedSizeScope</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-attribute"> </span><span class="code-attribute">SnapsToDevicePixels</span><span class="code-keyword">="</span><span class="code-keyword">{TemplateBinding SnapsToDevicePixels}"</span><span class="code-attribute"> </span><span class="code-attribute">KeyboardNavigation.TabNavigation</span><span class="code-keyword">="</span><span class="code-keyword">Cycle"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+                            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ScrollViewer</span><span class="code-keyword">&gt;</span>
+                        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Popup</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Grid</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Border</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsSuspendingPopupAnimation"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">true"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">PopupAnimation"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">PART_Popup"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">None"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{x:Null}"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsChecked"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">GlyphPanel"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Visible"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Visibility"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Icon"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Collapsed"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsHighlighted"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">True"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource MenuItem.Highlight.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">IsEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">TextElement.Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">templateRoot"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Fill"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">Glyph"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Fill"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">RightArrow"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Disabled.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">ScrollViewer.CanContentScroll"</span><span class="code-attribute"> </span><span class="code-attribute">SourceName</span><span class="code-keyword">="</span><span class="code-keyword">SubMenuScrollViewer"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">false"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Canvas.Top"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding VerticalOffset, ElementName=SubMenuScrollViewer}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Canvas.Left"</span><span class="code-attribute"> </span><span class="code-attribute">TargetName</span><span class="code-keyword">="</span><span class="code-keyword">OpaqueRect"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding HorizontalOffset, ElementName=SubMenuScrollViewer}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate.Triggers</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ControlTemplate</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style</span><span class="code-attribute"> </span><span class="code-attribute">x:Key</span><span class="code-keyword">="</span><span class="code-keyword">MenuItemStyle1"</span><span class="code-attribute"> </span><span class="code-attribute">TargetType</span><span class="code-keyword">="</span><span class="code-keyword">{x:Type MenuItem}"</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">HorizontalContentAlignment"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">VerticalContentAlignment"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderThickness"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">1"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">ScrollViewer.PanningMode"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Both"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Stylus.IsFlicksEnabled"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">False"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=SubmenuItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">Style.Triggers</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Role"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">TopLevelHeader"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">Transparent"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=TopLevelHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Padding"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">6,0"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Role"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">TopLevelItem"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Background"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Background}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">BorderBrush"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Border}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Foreground"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{StaticResource Menu.Static.Foreground}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=TopLevelItemTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Padding"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">6,0"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">Trigger</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Role"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">SubmenuHeader"</span><span class="code-keyword">&gt;</span>
+                    <span class="code-keyword">&lt;</span><span class="code-leadattribute">Setter</span><span class="code-attribute"> </span><span class="code-attribute">Property</span><span class="code-keyword">="</span><span class="code-keyword">Template"</span><span class="code-attribute"> </span><span class="code-attribute">Value</span><span class="code-keyword">="</span><span class="code-keyword">{DynamicResource {ComponentResourceKey ResourceId=SubmenuHeaderTemplateKey, TypeInTargetAssembly={x:Type MenuItem}}}"</span><span class="code-keyword">/</span><span class="code-keyword">&gt;</span>
+                <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Trigger</span><span class="code-keyword">&gt;</span>
+            <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Style.Triggers</span><span class="code-keyword">&gt;</span>
+        <span class="code-keyword">&lt;</span><span class="code-leadattribute">/Style</span><span class="code-keyword">&gt;</span>
+    <span class="code-keyword">&lt;</span><span class="code-leadattribute">/ResourceDictionary</span><span class="code-keyword">&gt;</span></pre>
+
+<p>There is no need to reference the style created in this resource dictionary. It is enough to include it in the XAML using menus. Then this resource dictionary will affect all the items of the application.</p>
+
+<p>Note that a resource dictionary can be included in an XAML using <code>ResourceDictionary.MergedDictionaries</code> — see the documentation article <a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/systems/xaml-resources-merged-dictionaries?view=netdesktop-7.0">Merged resource dictionaries (WPF .NET)</a>.</p>
+
+<p>A source resource dictionary can be merged into XAML not only as a file but also as a resource or a separately built assembly, using the reference to the assembly resource of a referenced assembly project. It can be achieved through using the Pack URI Scheme — see the documentation article <a href="https://learn.microsoft.com/en-us/dotnet/desktop/wpf/app-development/pack-uris-in-wpf?view=netframeworkdesktop-4.8">Pack URIs in WPF</a>.</p>
+
+<h2 id="heading-testing">Testing</h2>
+
+<p>This solution was tested on .NET 5 to .NET 7 with different contents and font sizes.</p>
+
+<h2 id="heading-conclusions">Conclusions</h2>
+
+<p>The solution does work. However, it is the fix aimed to be minimal, without the attempt to introduce a radically improved structure. I thoroughly tested it, and the solution gives much better results than the default <code>MenuItem</code> template. But potentially insufficient reliability may remain — the original Microsoft craft is way too dirty. ☹</p>
+
+<p>I would be very grateful if some readers informed me if something goes wrong. I would be even more grateful for any suggestions.</p>
+
+
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article, along with any associated source code and files, is licensed under <a href="http://www.codeproject.com/info/cpol10.aspx" rel="license">The Code Project Open License (CPOL)</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Tips/5367587/Improved-WPF-MenuItem-Template?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2023 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

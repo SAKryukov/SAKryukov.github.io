@@ -1,0 +1,915 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0066)https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Never Ever Add Strings to WPF Lists- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="The same advice applies to many other item types, and not just with lists. More exactly, such items can be used, but unexpected behavior may make it a nightmare.">
+<meta name="Keywords" content="">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="3/13/2017 4:56:00 PM">
+<meta property="article:modified_time" content="3/14/2017 4:16:00 AM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists">
+<meta property="og:title" content="Never Ever Add Strings to WPF Lists">
+<meta property="og:description" content="The same advice applies to many other item types, and not just with lists. More exactly, such items can be used, but unexpected behavior may make it a nightmare.">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists"
+   },
+  "name": "Never Ever Add Strings to WPF Lists",
+  "headline": "Never Ever Add Strings to WPF Lists",
+  "url": "https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists",
+  "discussionUrl": "https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "The same advice applies to many other item types, and not just with lists. More exactly, such items can be used, but unexpected behavior may make it a nightmare.",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2017-03-13",
+  "dateCreated": "2017-03-13",
+  "dateModified": "2017-03-14"
+}</script>
+
+
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1176230/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="AX+X8rS0PjhZqZYH1XFJ3BqrdIUhAp1H9dTq1gpHivGEyQniYuygNnIXzP1+IrNiBFkrrweQoI1/o5CTeSPGlACjrd1HNFJ1lyJFbz7L5IJuk5WsUsDZ0FAiT+lnkESBHjfLhMS1KCK1V//o0gJTLCEw2Fs1Z7ocwui5uw4zu1skTxcF3vQuEh3pg4JM1buKLuM9rC3mMbZJPr0Vv/AMMZZZyVouU8DWlTeRQViao9Y4dUpjuZrf5HxFQZr20tSURGWDLN6W9OpMWG1Jqv+jat1R62DgG3Y9fs32eOa9Zlo0wJZYmei+3Wh9mrfNCkaZXpXH21CTKKehfpWjXg59p4aC+Plke5CmA+CwGkLq4bUEW4Ux9sa/x8bmDu4jth3eUWsgQIxpthdXvL7CGOcgYTuwXLFSQdgNRnTj3kVun/gCPoanBdUsmCu/Cjh6yteTW5hFLy1w66Q2EA7FEEeUbCZ1pjLJYJcj4pAz41wULEWBS/PT4Xy9DBK25UB8pRQ9YDjRdjCC22mnrKsOcWOxWcok9x59KdWg34yca+Q1FdxZsypKN7ro8zsqT4E4FyA3Rxb7C9r3PiC9hbfdVciApSO2bgH1M7HXZ6PDtodRsUMjGfzW5BRIMlInFJMdNSulWxx6hleoGF9g+uH4mko//ff6+oQYRg/j5WS6sKQAt+ly7xS2dmYSybGAT18ry1FSbYK0+3T5ZDF7iTrADH3zXw05/l8ebbDW+tBflNAWqlW4JG02H12Ju4/Pjb4Ne96mDjDeZ4aoQ+3zr5so6kAC6BG7r/LUZmXmZBme06vAda+yyfu18fOKTSnE/49E3n04lpZbJiAfdTlsdGBL0sza84p00fRciguIWMvhvIUIQ7YnbH0pUZlmaiouiQkv16yDua6tnY9CeFPYqtMyaHiyU9S27w8bDkzlfbyK0g+HyZU0IbRtVvx/1mfBzTN0xQuLogaAZO9OYUjBRLctlS16VFboo5y4w9OZ5up2kbcE7z6Upx4ddQwv5bxTL7jJtPaWP0e8zMycwF/Zh2SwfsXRH5SmI8A/BSIng+lW09Bul1uH3KJ/C0wY6qMRZsaBPoyMZtbbcHfWNlZjzJ+DQnTWciVWm3jtaAsEVkPdf4+/MHpGuMZvhWtUvGKtX2mG/JRv56pek6C+f0JHUmLZCNkEPcWEKbRRcdaJ4R8kExsmsXDDt5BCbspwdudC5QXgzxT5udjFEAJHDadNRONWtQujUxjYBVRzq1ppiptPbsniddF2JRQor7daDGZRvqMUHDniBIJbYgRZOH7qn3w1ru9INlO5WPXbAQvXzXoufcvpw2iudCgrGhXtQyNFDKVPjG7U1CM4EfvgZwoWMqgKZhI3Sl4dHT2DptA5sJEyf4Zxg7r5yqihIzwuhuNGsGfirw0PJgr3lSfwXJ3Qg7uGTbVxKzQoqkn4+fOd0PCpsge3PpPs55jCiDpZ5y5MP2gcAFpNsnKz80w+AWTpXnfZ0bCi1dhtRWqH39lLx0do1c2ZKhBDzvD9IPAtvoqkAkw7vl/Deq3pGIgAzF//3DJ/qLX1YUz+C5Br6e8cKDg8lEHx8Kl/s3hjl4HTYQq8JEnfHPJEuxxAeSgyjzhIJUDmiHVqts//1tZWbepd/peH8G5kINQxAqlE3LqCa78ET8HofNP3T9Obi0uaqxK/yGo/6a43Kb+2Oja84vZX7DvV/PNteWIH8PKgF4Z3YZWvRZ9qy32NHeJWEnyjELA66D+YQQAeyZ7nPtk=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Never Ever Add Strings to WPF Lists</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1176230">
+
+	<meta itemprop="upvoteCount" content="0">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">13 Mar 2017</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 1</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">The same advice applies to many other item types, and not just with lists. More exactly, such items can be used, but unexpected behavior may make it a nightmare.</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Never-Ever-Add-Strings-to-WPF-Lists.zip">Download source code — 18 KB</a></li>
+</ul>
+
+<p><img title="Demo" id="image" alt="2017-03-13.Never-Ever-Add-Strings-to-WPF-Lists.webp" src="./Resources-articles/2017-03-13.Never-Ever-Add-Strings-to-WPF-Lists.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p><i>In reality, everything is not as in fact.</i></p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/Stanis%C5%82aw_Jerzy_Lec">Stanisław Jerzy Lec</a></dd>
+</dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<div id="TOC">
+<ul style="list-style: none">
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#introduction">Introduction</a></li>
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">Demo Application</a></li>
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">The Problem</a>
+	<ul style="list-style: none; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#string-list-items">String List Items</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#same-problem-with-integers">Same Problem with Integers</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#same-problem-with-data-binding">Same Problem with Data Binding</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem-per-.net-version">The Problem per .NET Version</a></li>
+	</ul>
+	</li>
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">Explanation</a></li>
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#solutions">Solutions</a>
+	<ul style="list-style: none; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#listboxitem-with-strings"><code>ListBoxItem</code> With Strings</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-data-binding">With Data Binding</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-custom-item-type">With Custom Item Type</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-custom-item-type-and-data-binding">With Custom Item Type and Data Binding</a></li>
+		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#how-to-reproduce-the-problem">How to Reproduce the Problem?</a></li>
+	</ul>
+	</li>
+	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#final-notes">Final Notes</a></li>
+</ul>
+</div>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Let’s define the scope of the problem a bit more accurately. The problem is not just the problem of some particular list control, such as <a href="https://msdn.microsoft.com/en-us/library/system.windows.controls.listbox%28v=vs.110%29.aspx"><code>System.Windows.Controls.ListBox</code></a>; this is a problem of all <a href="https://msdn.microsoft.com/en-us/library/system.windows.controls.itemscontrol%28v=vs.110%29.aspx"><code>System.Windows.Controls.ItemsControl</code></a> classes.</p>
+
+<p>Likewise, the problem appears not just with strings used as the control’s items type; it appears with a wide set of classes, first of all, primitive and <em>enumeration types</em>, most value types and some <em>reference types</em>.</p>
+
+<p>I’ll <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">explain this a bit later</a>, so now we can jump to the discussion of <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">the problem</a>, but first I need to explain how to observe the behavior on the test cases I prepared.</p>
+
+<h2 id="demo-application">Demo Application</h2>
+
+<p>Before discussing the problem itself, I want to introduce my testing facility. I will experiment with only one demo/test application I called “NeverEverAddStringsToWPFLists.exe”. Here is the idea: we can use the same instance of <code>System.Windows.Controls.ListBox</code>. This control, as well as any other <code>ItemsControl</code>, is agnostic to the types of its items. The application navigates to different test cases, on a tree view shown on the right of the <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">application’s main window</a>. Each test case initially populates the list box in different ways and provides different ways of adding new items and extracting string representation of an item to be shown as a selected item.</p>
+
+<p>To abstract out such behavior, let’s define an abstract base class for this purpose:</p>
+
+<div class="pre-lang" id="premain998810"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="998810" id="copycode998810" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre998810" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">abstract</span> <span class="code-keyword">class</span> ItemsControlHandlerBase {
+   <span class="code-keyword">internal</span> <span class="code-keyword">virtual</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+       listBox.ItemsSource = <span class="code-keyword">null</span>;
+       listBox.Items.Clear();
+   } <span class="code-comment">//</span><span class="code-comment">Populate</span>
+   <span class="code-keyword">internal</span> <span class="code-keyword">abstract</span> <span class="code-keyword">string</span> GetSelectedItem(ListBox listBox);
+   <span class="code-keyword">internal</span> <span class="code-keyword">abstract</span> <span class="code-keyword">void</span> AddNewItem(ListBox listBox, <span class="code-keyword">string</span> <span class="code-sdkkeyword">value</span>);
+   <span class="code-keyword">internal</span> <span class="code-keyword">virtual</span> <span class="code-keyword">bool</span> FilterTextBoxInput(<span class="code-keyword">string</span> badText) { <span class="code-keyword">return</span> <span class="code-keyword">false</span>; }
+   <span class="code-keyword">internal</span> <span class="code-keyword">abstract</span> <span class="code-keyword">string</span> Help { <span class="code-keyword">get</span>; }
+} <span class="code-comment">//</span><span class="code-comment">PreparationBase</span>
+</pre>
+
+<p>The classes representing different test cases (some of them representing the manifestation of the problem, other cases demonstrating the solution) are derived from this base class and override five virtual methods; two of these methods are <em>pseudo-abstract</em>, not <code>abstract</code>. Below, in the sections <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">The Problem</a> and <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#solutions">Solutions</a>, I’ll show only one overridden method <code>Populate</code>, which is enough to reveal the problem.</p>
+
+<p>The solution is provided for Visual Studio 2008 which targets .NET v. 3.5, and Visual Studio 2015 targeting .NET v. 3.5 to v. 4.6.1, to make sure it covers most of the frameworks and development tools supporting WPF. Later versions of Visual Studio provide automatic conversion to later solution and project types. It can be built in one click on the batch file “build.bat”.</p>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>To observe the abnormal behavior, run the <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">demo application</a>. It will navigate to the first test case and show some instructions on the bottom panel of <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">the main window</a>.</p>
+
+<p>First, clicking on the list items in certain order will eventually show the situation when more than one items are marked as <em>selected</em>, as shown <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">in the picture</a>. It’s important to understand that there is nothing like <em>multiple selection</em> here. It’s just that the major control behavior is badly broken.</p>
+
+<p>Another abnormality can be revealed in scrolling. The <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">demo application</a> code always scrolls to bring the newly added item into view. It always works if the newly added item is distinct. Let’s say, its string (or integer, in next test case) content is the same as of some other item already in view, no scrolling occurs.</p>
+
+<p>As we could reasonably expect, nothing wrong happens when all the items on the list view are distinct.</p>
+
+<h3 id="string-list-items">String List Items</h3>
+
+<p>The problem appears if at least two list items of string type have identical values. Let’s add two pair of identical strings:</p>
+
+<div class="pre-lang" id="premain312676"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="312676" id="copycode312676" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre312676" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    listBox.Items.Add(<span class="code-string">"</span><span class="code-string">one"</span>);
+    listBox.Items.Add(<span class="code-string">"</span><span class="code-string">two"</span>);
+    listBox.Items.Add(<span class="code-string">"</span><span class="code-string">one"</span>);
+    listBox.Items.Add(<span class="code-string">"</span><span class="code-string">two"</span>);
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<h3 id="same-problem-with-integers">Same Problem with Integers</h3>
+
+<p>It’s hard to expect that integer type could make the situation better. In fact, the abnormal behavior with types like primitive or enumeration types is <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">easier to explain</a> than with strings. Let’s try this:</p>
+
+<div class="pre-lang" id="premain5114"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="5114" id="copycode5114" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre5114" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    listBox.Items.Add(<span class="code-digit">1</span>);
+    listBox.Items.Add(<span class="code-digit">2</span>);
+    listBox.Items.Add(<span class="code-digit">1</span>);
+    listBox.Items.Add(<span class="code-digit">2</span>);
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<h3 id="same-problem-with-data-binding">Same Problem with Data Binding</h3>
+
+<p>Will <em>Data Binding</em> help to solve the problem? Let’s try:</p>
+
+<div class="pre-lang" id="premain697765"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="697765" id="copycode697765" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre697765" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate">StringObservableCollection list = <span class="code-keyword">new</span> StringObservableCollection();
+<span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    list.Clear();
+    list.Add(<span class="code-string">"</span><span class="code-string">one"</span>);
+    list.Add(<span class="code-string">"</span><span class="code-string">two"</span>);
+    list.Add(<span class="code-string">"</span><span class="code-string">one"</span>);
+    list.Add(<span class="code-string">"</span><span class="code-string">two"</span>);
+    listBox.ItemsSource = list;
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<p>Not really — same thing; and it’s not too hard to figure out why.</p>
+
+<h3 id="the-problem-per-.net-version">The Problem per .NET Version</h3>
+
+<p>I’ve tested the problem with different .NET versions. The testing shows that the second problems, the one with bringing an item into view by scrolling still persists in all .NET versions.</p>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>As the problem is manifested only if some of the items are identical, it should be obvious that the problem is related to the object <em>identity</em>.</p>
+
+<p>The problem starts when we add an item. What item, where? Apparently, this is the point where an item is added to any instance of any of the <code>ItemsControl</code> types, which happens in the <a href="https://msdn.microsoft.com/en-us/library/ms589116%28v=vs.110%29.aspx">method</a> <code>System.Windows.Controls. ItemCollection.Add(object)</code>.</p>
+
+<p>From this API, it looks apparent, that any objects can be added, as <code>System.Object</code> is the base type of all .NET types. Indeed, this is <em>almost</em> true, and we all should know that the devil of fine print is often hidden under the word “almost”. In fact™ :-), there should be one silent rule: <em><strong>all objects are assumed to be unique</strong></em>.</p>
+
+<p>Unfortunately, the parameter of the method <code>Add</code> is not generic, and if it was, we could not find a suitable <a href="https://msdn.microsoft.com/en-us/library/bb384067.aspx">generic parameter constraint</a> mechanism in present-day .NET. In my opinion (in agreement with the number of other software developers), this is one of the major <em>design defects</em> of WPF.</p>
+
+<p>What is “almost”, in this context? This is the uniqueness, in the scope of the set of items of an instance of some <code>ItemControl</code> object, in regards to the <a href="https://en.wikipedia.org/wiki/Equivalence_relation">equivalence relation</a>. In turn, this is the relation fully defined by the (possibly overridden) <a href="https://msdn.microsoft.com/en-us/library/bsc2ak47%28v=vs.110%29.aspx">method</a> <code>System.Object.Equals(object)</code>.</p>
+
+<p>If this rule is not observed, the behavior of the control can be extremely messy. It’s hard to explain all possible scenarios, so let’s just explain abnormal scrolling behavior. Let’s say, when we add an item to the end of the list and try to scroll to the newly added item. Let’s consider the moment of time when we set selection on the object “one”, and we have several objects “two” below; and the last of them is on the bottom of the list, beyond the visible portion if item. What happens if we add another “two” and try to scroll to it using the method <code>ScrollIntoView</code>? This function will try to find the identical object to scroll to (the one identical to the <code>object</code> parameter passed to this method), and, quite apparently, will stop at the very first “two” object. But this object is already in view, so nothing will happen.</p>
+
+<p>It’s quite obvious that the problem will be the same with wide set of types: all primitive and enumeration types, most value types. It’s also obvious enough that the problem won’t appear with reference types, but not all of them. Let’s see…</p>
+
+<p>For the <em>reference types</em>, by default, this method simply returns <a href="https://msdn.microsoft.com/en-us/library/system.object.referenceequals%28v=vs.110%29.aspx">ReferenceEquals</a>. This is what most of the reference types do, but <em><strong>the type <code>string</code> is one of the exclusions</strong></em>. <code>String</code> objects, even referentially different, return <code>true</code> from <code>Equals</code> if the contents of the two compared objects are identical. As if it wasn’t enough, identical <code>string</code> objects are quite rarely even referentially different. First of all, the strings are <em>immutable</em>. There is a special mechanism used to reuse identical string objects via the <a href="https://en.wikipedia.org/wiki/String_interning">string intern pool</a>.</p>
+
+<p>The explanation of this quite delicate mechanism would lead us too far from the topic of the present article, but this is something which is good to know. See also: <a href="https://msdn.microsoft.com/en-us/library/system.string.intern%28v=vs.110%29.aspx"><code>String.Intern</code></a>, <a href="https://msdn.microsoft.com/en-us/library/system.string.isinterned%28v=vs.110%29.aspx"><code>String.IsInterned</code></a>. Unfortunately, I could not find a review or technological articles in official MSDN documentation, only some unofficial article, for example, <a href="https://blogs.msdn.microsoft.com/ericlippert/2009/09/28/string-interning-and-string-empty">this one</a>.</p>
+
+<p>That said, to have the problem solved, we need to make sure that all the items are unique. But how to guarantee that, taking in consideration that the user can always add second “one” or second “two”. To make sure that two different “two” objects are unique, it’s enough to wrap them in some reference type with default equality method. And then, I’ll show how to <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#how-to-reproduce-the-problem">reproduce the problem by overriding <code>TObject.Equals</code></a>.</p>
+
+<p>Let’s do exactly that.</p>
+
+<h2 id="solutions">Solutions</h2>
+
+<p>To illustrate the solution, let’s deal with just the <code>string</code> type. As we make sure it works, it’s quite obvious that the mechanism will work with all other types. Let’s start with the simplest case.</p>
+
+<h3 id="listboxitem-with-strings"><code>ListBoxItem</code> With Strings</h3>
+
+<div class="pre-lang" id="premain282418"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="282418" id="copycode282418" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre282418" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    <span class="code-keyword">string</span>[] items = <span class="code-keyword">new</span> <span class="code-keyword">string</span>[] { <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, };
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> item <span class="code-keyword">in</span> items) {
+        ListBoxItem lbitem = <span class="code-keyword">new</span> ListBoxItem();
+        lbitem.Content = item;
+        listBox.Items.Add(lbitem);
+    } <span class="code-comment">//</span><span class="code-comment">loop</span>
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<h3 id="with-data-binding">With Data Binding</h3>
+
+<p>Data Binding won’t change anything:</p>
+
+<div class="pre-lang" id="premain598450"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="598450" id="copycode598450" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre598450" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    list.Clear();
+    <span class="code-keyword">string</span>[] items = <span class="code-keyword">new</span> <span class="code-keyword">string</span>[] { <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, };
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> item <span class="code-keyword">in</span> items) {
+        ListBoxItem lbitem = <span class="code-keyword">new</span> ListBoxItem();
+        lbitem.Content = item;
+        list.Add(lbitem);
+    } <span class="code-comment">//</span><span class="code-comment">loop</span>
+    listBox.ItemsSource = list;
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<h3 id="with-custom-item-type">With Custom Item Type</h3>
+
+<p>Actually, the WPF class <code>ListBoxItem</code> does not do any special, so there is absolutely no need to use it — well, not in the <em>logical tree</em>. Rather, it is the type of the objects automatically created when the <em>visual tree</em> is built. In two previous solutions, I simply reused already available type; also, this type will be suggested by the <em>Intellisense</em> during XAML programming.</p>
+
+<p>In fact, any custom type can play the same role. More exactly, it should be the type with a kind of unique identity: two objects created via two different constructor calls should be considered non-identical. That said, even a reference type could behave poorly and cause the same exact <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#string-list-items">problem</a>, if its identity rules are overridden in certain way; this is the problem we encountered with the <code>string</code> type. For any reference type, default identity rule uses just the <em>referential identity</em>, so such type, without redefined identity rules, will work as a perfect item type.</p>
+
+<p>The only problem is: how the instance of such item type will be shown in a list? The simplest solution is really very simple: the method <code>System.Object.ToString()</code> should be overridden to show desired string value. Here is the example of such solution:</p>
+
+<div class="pre-lang" id="premain450532"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="450532" id="copycode450532" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre450532" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">class</span> MyItem {
+    <span class="code-keyword">internal</span> MyItem(<span class="code-keyword">string</span> content) { <span class="code-keyword">this</span>.Content = content; }
+    <span class="code-keyword">internal</span> <span class="code-keyword">string</span> Content { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+    <span class="code-keyword">public</span> <span class="code-keyword">override</span> <span class="code-keyword">string</span> ToString() { <span class="code-keyword">return</span> Content; }
+} <span class="code-comment">//</span><span class="code-comment">class MyItem</span>
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+<span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    <span class="code-keyword">string</span>[] items = <span class="code-keyword">new</span> <span class="code-keyword">string</span>[] { <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, };
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> item <span class="code-keyword">in</span> items)
+        listBox.Items.Add(<span class="code-keyword">new</span> MyItem(item));
+} <span class="code-comment">//</span><span class="code-comment">Populate</span>
+</pre>
+
+<p>Note that such solution has a lot of benefits. First of all, the <code>Content</code> type does not have to be untyped (<code>System.Object</code> with <code>ListBoxItem</code>). It means that the data (content) can be read, assigned to, or manipulated without potentially unsafe <em>typecast</em>. This is a very important advantage.</p>
+
+<h3 id="with-custom-item-type-and-data-binding">With Custom Item Type and Data Binding</h3>
+
+<p>This is how the same custom item type <code>MyItem</code> will work with Data Binding:</p>
+
+<div class="pre-lang" id="premain781638"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="781638" id="copycode781638" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre781638" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> Populate(ListBox listBox) {
+    <span class="code-keyword">base</span>.Populate(listBox);
+    list.Clear();
+    <span class="code-keyword">string</span>[] items = <span class="code-keyword">new</span> <span class="code-keyword">string</span>[] { <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, <span class="code-string">"</span><span class="code-string">one"</span>, <span class="code-string">"</span><span class="code-string">two"</span>, };
+    <span class="code-keyword">foreach</span> (<span class="code-keyword">var</span> item <span class="code-keyword">in</span> items)
+        list.Add(<span class="code-keyword">new</span> MyItem(item));
+    listBox.ItemsSource = list;
+} <span class="code-comment">//</span><span class="code-comment">Populate} //Populate</span>
+</pre>
+
+<h3 id="how-to-reproduce-the-problem">How to Reproduce the Problem?</h3>
+
+<p>Armed with our knowledge, we can intentionally reproduce the problem, to pin-point it precisely and confirm <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">our understanding of its nature</a>. Let’s override <code>System.Object.Equals</code> this way:</p>
+
+<div class="pre-lang" id="premain696560"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="696560" id="copycode696560" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre id="pre696560" lang="c#" data-codeblock-processed="true" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">class</span> MyItem {
+    
+    <span class="code-keyword">internal</span> MyItem(<span class="code-keyword">string</span> content) { <span class="code-keyword">this</span>.Content = content; }
+    <span class="code-keyword">internal</span> <span class="code-keyword">string</span> Content { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+    <span class="code-keyword">public</span> <span class="code-keyword">override</span> <span class="code-keyword">string</span> ToString() { <span class="code-keyword">return</span> Content; }
+    
+    <span class="code-comment">//</span><span class="code-comment"> this is what can be used to reproduce the problem:</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">override</span> <span class="code-keyword">bool</span> Equals(<span class="code-keyword">object</span> obj) {
+        <span class="code-keyword">if</span> (obj == <span class="code-keyword">null</span>) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        MyItem myItem = obj <span class="code-keyword">as</span> MyItem; <span class="code-comment">//</span><span class="code-comment"> dynamic cast</span>
+        <span class="code-keyword">if</span> (myItem == <span class="code-keyword">null</span>) <span class="code-keyword">return</span> <span class="code-keyword">false</span>;
+        <span class="code-keyword">return</span> myItem.Content == Content;
+    } <span class="code-comment">//</span><span class="code-comment">Equals</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> when we override Equals, we also have to override GetHashCode:</span>
+    <span class="code-keyword">public</span> <span class="code-keyword">override</span> <span class="code-keyword">int</span> GetHashCode() {
+        <span class="code-keyword">return</span> Content.GetHashCode();
+    } <span class="code-comment">//</span><span class="code-comment">GetHashCode</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class MyItem</span>
+</pre>
+
+<p>This will immediately bring us to the same situation as with bare strings.</p>
+
+<h2 id="final-notes">Final Notes</h2>
+
+<p>Initially, I planned to make a Tip/Trick article, but during writing I clearly realized that it would not make a consistent and useful tip. In this case, the focus should be on the fundamental understanding of what’s going on in WPF in general. In other words, the real tip is not “Never Ever Add Strings to WPF Lists“. It could be used as a rule of thumb or just to make some article title.</p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">The real tip would be:</div>
+
+<p>Don't let WPF foolish you; read the fine print. Especially if the fine print is not available; in this case, read between lines.</p>
+</blockquote>
+
+<p>In essence, the present article is that kind of fine print written to fill the gap. Even more <em>serious</em> tip is formulated in the last paragraph of my <em>humorous</em> <a href="https://www.codeproject.com/Articles/891455/Some-Programming-Approaches-to-Neuro-Linguistic-Pr#a10">1st of April article</a>. :-)</p>
+
+<p>I’ll gladly try to answer any questions and consider all critical comments. Hope this matter can be useful.</p>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1176230/Never-Ever-Add-Strings-to-WPF-Lists">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2017 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

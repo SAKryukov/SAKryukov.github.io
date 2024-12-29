@@ -1,0 +1,1657 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0093)https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Many Questions Answered At Once: Interactive Animated Graphics with Forms- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Addresses questions on graphics, threading with UI, form development, printing and more">
+<meta name="Keywords" content="">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="3/11/2017 10:54:00 PM">
+<meta property="article:modified_time" content="3/22/2017 3:12:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta property="og:url" content="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat">
+<meta property="og:title" content="Many Questions Answered At Once: Interactive Animated Graphics with Forms">
+<meta property="og:description" content="Addresses questions on graphics, threading with UI, form development, printing and more">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat"
+   },
+  "name": "Many Questions Answered At Once: Interactive Animated Graphics with Forms",
+  "headline": "Many Questions Answered At Once: Interactive Animated Graphics with Forms",
+  "url": "https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat",
+  "discussionUrl": "https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Addresses questions on graphics, threading with UI, form development, printing and more",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2017-03-11",
+  "dateCreated": "2017-03-11",
+  "dateModified": "2017-03-22"
+}</script>
+
+
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/406123/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="Rc2tST573jtqcvI5zdW26kW6wQZWAR6WjaMXBDHqP4r3gdfIVsJdnzzqGdg1JrmdRfaHK1jcfN38V6ZFXwZcgJuO+QOK2GsHCTNkBlhKZx+mUQMYAPJ1o770J5ZZICZdLc7gT7XT/+HCLUwR4gznCNmJU34TY0db8m04xZWaWpFfB163ZBrEp4A4ie4NgB1teTnws4l4+E6Ai/SJroj5bmd6BW/x7OiLjyWGGgNeka3XjqMBD0MORt9PzHvNk95KgrzESNFS4/f3D4xGOQDpAXs9YpBAhdpMiLrR5iSckbbm9uT4UppKH7yj3qQexUPjq0NJ+Adh9/ELi6WDvY//dtBAppmYkKAKsilB/wHhzYQSxNZbtecvhgrkAZwsZIwjcq3Z+5D6jBJhest381ggW+lfWHlam3xDbA9kBZyvWTyLn+982YCuaElHNDHWVWB0U3D2dHFVE3NQsyDEgvUz0qLs+HIaEXmAk5QvG1H/v3vFY1m5ypSQDzd3OfFtMLddN7Z6e3oBLWe4bVSVtuSLrpx1ayqgpOMFBvuh8UFG1srnjeVkpJ36YIr3SF+jjd1XNYe5WsxEOV0+F3ceZ4PkTUDtxq+CQRibe1Gcb+BFUQu9uDgFpWki8RPnISerJpo6Ry6ecoP7cKlrFirSyRtFS6tUisHZVE/R7gEDPh53qDZjtzoLDmq6zvnn4HSkDy1jJYtZ2T5KMPG7yXvnv5tZQ4YSFTyRqnlPpWbeLAAqyD7+BcUhZOKT8AIHkSz7TmvRLadOwuh0vdJ8N7YtqlyHf7qwFzrOUuSpNdCysM/v/AFEAvghGUxI0iG8FIDsCKxuHX7akUQnHILolocadlUt9LekvOFeDfsLieJMmA5Vdc50Ik/v7tzL9pK3kAEXw/Hpl1MJyVtiXF/JiRMGZSwLdbAFthUWBruedoN3yiyB8w7mtxpGNgO7bT9p4HDnzGO9JuTL9z4hwdIeQWE2BGdPTM8Hd/CXsiwf+/YGClWaSlOefJoVjHIywSVRm9XDsKoBqE8Qu0TgRFnTuvI0Juddc+oWB9ZFdL74plowi3bzlCNXCzmqTCVrze1soqBfHW9ydxe8g7i9Bn//ul+YyAQC7R2t5L9izYK41czMmTY5RKMYFmmIq4rBowkd11e6UnECiKjqLNx+dsYuu2qpH1R720xlFbEwtI4hgt+R9y9oG/8Y2jXfbr04/ijUGD6+fqqIl3AEHhgnRR2TMfx4mKcLbrNx++ZpJ6EeC+7wUvbGrzLZgicUoPSECdNn4JHpVFMIfKqwTiXeSBrbsX/XSLdk5dzwN99K6aSaU0pJ9K6FDQco5y1cxE7HKbOFkto20WlZtCq3QMX16uLxeLVJ0omj5mVmVR/1HSY0PoRzZqXr5RYp9RopNcV8MHG3Sn7gssr6O/QYKx3AOsuhL0fd9AL8sQrKs5BSRoaRGWWKOfAuTWI7yhktV6QXNDdCtVmW472pC92mhyVVZ1QT/KkYNIm4A76g+CBcuth5NOKZ0cLcU65lnG74ORFAiLObuHAVVVbeGyPQH6K5LzKTq6cV9S1iL2yfAm9UqA5uZpiCfLmqQqT4WdY4hZ+2OqdvWDO6D0mI13Bf9zAdQF4M41o+uJuB2q9oeABxeOy70jI5IE1vLdz+11ZmKo+jPruk2MPKLwkW2IxFx3BC9fb79c5Pir9uWRMfnwQ2sGq4x83hrFQQQnmIu7QRuKAtFWAH8uglhvwcLyKqZPgJy96dbobf50c7PMbryLwITbgtJ1r5RQOL+BUZ6FJ7LeDb3EXED8Ldk3Fc8cRC0bhgsH4UECIMIlQqQ9u9P2vhf2seZsTxswiieOtrocYkK2DT24gmcSXEWPQQzMia+g==">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Many Questions Answered At Once: Interactive Animated Graphics with Forms</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_406123">
+
+	<meta itemprop="upvoteCount" content="0">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">11 Mar 2017, last revision: 22 Mar 2017</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 1</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Addresses questions on graphics, threading with UI, form development, printing and more</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Many-Questions-Answered-At-Once-Interactive-Animated-Graphics.Forms.zip">Download source code — 46.8 KB</a></li>
+</ul>
+
+<p><img id="image" title="Application" alt="2017-03-11.Many-Questions-Answered-At-Once-Interactive-Animated-Graphics.Forms.webp" src="./Resources-articles/2017-03-11.Many-Questions-Answered-At-Once-Interactive-Animated-Graphics.Forms.webp"/></p>
+
+<blockquote class="FQ" id="epigraph">
+<div class="FQA">Epigraph:</div>
+
+<p>There are three things in the world you could watch forever: flames flickering in a fire, water flowing in a brook and a blonde trying to park.</p>
+
+<dl>
+	<dd><a href="https://en.wikipedia.org/wiki/List_of_placeholder_names_by_language#People_6">V. Pupkin</a>, engineer</dd>
+</dl>
+</blockquote>
+
+<h2>Contents</h2>
+
+<div id="TOC">
+<ul style="list-style: none">
+	<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#motivation">Motivation</a></li>
+	<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#questions-addressed">Questions Addressed</a></li>
+	<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#illustrating-application-bouncing-ball">Illustrating Application: Bouncing Ball</a>
+	<ul style="list-style: none; margin-top: 0; margin-bottom: 0">
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#application-description">Application Description</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#rendering-graphics">Rendering Graphics</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#interactive-graphics">Interactive Graphics</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#animated-graphics">Animated Graphics</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#why-not-timer">Why Not Timer?</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#thread-wrapper">Thread Wrapper</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#real-time">“Real” Time</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#ui-thread-invocation">UI Thread Invocation</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#physics">Physics</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a-word-of-warning-thread-termination">A Word of Warning: Thread Termination</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#exceptions">Exceptions</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#the-ui-and-layout-dont-abuse-the-designer">The UI and Layout: Don’t Abuse the Designer</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#persistent-configuration-and-data-contract">Persistent Configuration and Data Contract</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#using-resources-and-assemblyinfo-attributes">Using Resources and <code>AssemblyInfo</code> Attributes</a></li>
+		<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</a></li>
+	</ul>
+	</li>
+	<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#questions-answered">Questions Answered</a></li>
+	<li><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#final-notes">Final Notes</a></li>
+</ul>
+</div>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>The disciplines related to the problem of the preservation of the Earth’s <em>biodiversity</em> operate the concept of <a href="https://en.wikipedia.org/wiki/Biodiversity_hotspot">hot spot</a>. If we could preserve all the living species in only 36 limited area spots in the world, it would preserve some 60% of the species on the whole Earth.</p>
+
+<p>My experience answering the questions of the CodeProject enquirers (19,614 answers at the moment of writing) shows that most of those questions can be answered by comprehensive explanation of the techniques in just 3-5 areas. This way, I came to the idea that I can answer roughly ⅕-⅓ beginners’ questions I ever faced here, in just one article. Moreover, I found that I can write just one application to illustrate the techniques and answers.</p>
+
+<p>This application called “Bouncing Ball” represents the simple animated 2D physical model: a ball in a uniform gravitation field bouncing off the four walls, with some energy losses, and <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#application-description">so on</a>.</p>
+
+<p>So, let’s start…</p>
+
+<h2 id="questions-addressed">Questions Addressed</h2>
+
+<ol>
+	<li id="q01">I use <code>Graphics</code> to draw on my form, but when I minimize the form and show it again, all graphics disappears. What do I do wrong? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a1">[★]</a></li>
+	<li id="q02">How to move image in the <code>PictureBox</code>? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a2">[★]</a></li>
+	<li id="q03">I need to print graphics shown in my form and save it as a bitmap. If not using <code>PictureBox</code>, how can I do it? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a3">[★]</a></li>
+	<li id="q04">I want to connect controls placed on my Form with lines representing a graph but have many problems with matching form coordinates with control coordinates. How can I do it? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a4">[★]</a></li>
+	<li id="q05">I'm suddenly getting a “To prevent possible data loss before loading the designer, the following errors must be resolved” error when trying to display a form. The project compiles and runs fine, but I cannot modify the form. I cannot find out and fix the problem using the debugger, because when I execute the application, I never have an exception. What can I do? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a5">[★]</a></li>
+	<li id="q06">I developed a custom control with graphics. When I click on it or try to navigate to it using Tab, it does not focus. What can be wrong? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a6">[★]</a></li>
+	<li id="q07">I am using thread for calculations and need to output the results of calculation in the text box on my form, but when I try to assign a value to its <code>Text</code> property, I get exception “Cross-thread operation not valid”. What's going wrong? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a7">[★]</a></li>
+	<li id="q08">When I run my application and close it, Visual Studio should the process status “Running” until I click the menu item “Stop Debugging”. If I run the application in the stand-along mode, Windows Task Manager shows that the process is still executing after I close the main window. If I start and close the same application several times, Task manager shows several application instances. How can I avoid it? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a8">[★]</a></li>
+	<li id="q09">I have an animated control used to mimic simple robot motion: rotation around one axis. The time of the whole motion is calculated based on the actual robot speed. This calculation computes the time interval between the timer tick, the amount of angular motion between ticks and the number of ticks needed to complete the motion. Not only the animated motion goes out of sync with the mechanical robot, it also does not look smooth. Sometimes the object gets frozen for some random period of time, sometimes it jumps suddenly. How to achieve smooth animation? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a9">[★]</a></li>
+	<li id="q10">How can I avoid termination of my application because of some unhandled exception? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a10">[★]</a></li>
+	<li id="q11">How to define application version? How can I use it? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a11">[★]</a></li>
+	<li id="q12">I'm trying to save my data in the folder “C:\Windows\MyApplication”, but it does not work. How to do it? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a12">[★]</a></li>
+	<li id="q13">How to locate my data file found in the directory where my application is located? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a13">[★]</a></li>
+	<li id="q14">How can I call my method in another thread? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a14">[★]</a></li>
+	<li id="q15">How can I print my form? <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a15">[★]</a></li>
+</ol>
+
+<p>The answers are placed separately, after the description of the illustrating application used to explain all the techniques. Click on <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#questions-answered">[★]</a> to see an answer to a corresponding question.</p>
+
+<h2 id="illustrating-application-bouncing-ball">Illustrating Application: Bouncing Ball</h2>
+
+<p>I’ve chosen a fairly simple mechanical motion model which covers nearly all aspects of computer animation and interactive graphics, in interaction. It produces realistic impression of the mechanical motion, which evokes the mood depicted by the joke taken as the <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#epigraph">epigraph</a>.</p>
+
+<p>At the same time, this is probably the most primitive example of realistic mechanical motion — the prolonged motion of a single object using just two <a href="https://en.wikipedia.org/wiki/Degrees_of_freedom_%28mechanics%29">degrees of freedom</a>. It allows me to demonstrate all programming aspects of the animation and interactive graphics and cover all potential problems in a very simple, well defined way.</p>
+
+<h3 id="application-description">Application Description</h3>
+
+<p>The typical look of the application is shown in the <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#image">picture on the top</a>. The <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#image">picture</a> is shown at the moment before starting the motion, which represents the concept of <a href="http://www.hongkiat.com/blog/high-speed-photography-frozen-in-time"><em>frozen time</em></a>.</p>
+
+<p>The application represents the ball moving in 2D space in some <em>uniform</em> <a href="https://en.wikipedia.org/wiki/Gravitational_field">gravitational field</a>, which can <em>collide</em> with the walls of a rectangular area; and the collisions are not <a href="https://en.wikipedia.org/wiki/Collision#Types_of_collisions">perfectly <em>elastic</em> or <em>inelastic</em></a>; instead, some part of the ball’s <a href="https://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a> is lost in each collision; in the present model, a fixed percentage of energy loss can be specified. This mechanism, expressed in the form of <em>dumping</em> percentage to be specified, is one of the motion <em>dumping</em> mechanisms.</p>
+
+<p>The second mechanism of dumping taken into account is in the present <em>motion model</em> is the surface friction, which comes into play when the ball stops bouncing and comes into the contact with the bottom surface. The moment of transition from bouncing to friction is the most delicate aspect of the model. In the simplest model, the ball would bounce infinitely. The advanced model should take into account deformation of the ball during collision and the characteristic scale of the microscopic imperfections of the surface of spatial range of molecular forces responsible for friction in the friction model. Also, the rotation of the ball should be taken into account. Yes, such as simple behavior as the transition of the bouncing ball to the motion in the contact with the surface really depends on such delicate factors. At the same time, the delicate detail of such transition is not really noticeable in the seemingly realistic motion, which can be shown in some simplified model. I’ll explain this detail in the section “<a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#physics">Physics</a>”.</p>
+
+<p>For our purpose, it’s more important that the animated motion depends on two factors: the laws of mechanics which fully dictate the lifetime behavior of any mechanical system, according to <a href="https://plato.stanford.edu/entries/determinism-causal">Laplacean determinism</a> and the intervention of the user. The user, in perfect accordance with the principle of “<a href="https://en.wikipedia.org/wiki/Deus_ex_machina">Deus ex machina</a>”, can stop and restart the motion, change the geometry/sizes of the room, velocity of the ball and physical parameters of the environment, and, after all, terminate the application or start it. So, the collaboration and interaction of these two <em>sources of causality</em> will be the main subject of our little study.</p>
+
+<h3 id="rendering-graphics">Rendering Graphics</h3>
+
+<p>The first natural step in the development should be the graphical rendering of the screen, depending on current state of the system, without any regards to the reason of getting into this state. Ultimately, the state will depend on the set of motion parameters entered by a user in a <em>form</em>, the sizes of the main form, and the full prehistory of the motion, starting from the initial coordinates and the vector speed of the ball.</p>
+
+<p>The main idea of the graphics rendering is directly expressed in the fragment of the application:</p>
+
+<div id="draw">
+<div class="pre-lang" id="premain863157"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="863157" id="copycode863157" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre863157" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">partial</span> <span class="code-keyword">class</span> BallScene : Control {
+
+    <span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnPaint(PaintEventArgs e) {
+        Draw(e.Graphics, <span class="code-keyword">null</span>);
+    } <span class="code-comment">//</span><span class="code-comment">OnPaint</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class BallScene</span>
+</pre>
+
+<p>Here, we created a custom control class <code>BallScene</code>, derived from <code>System.Windows.Forms.Control</code> and define how its graphics is rendered by overriding its virtual method <code>OnPaint</code>.</p>
+
+<p>I want to focus the reader’s attention for one little fact: <code>inherited OnPaint</code> <em>is not called</em>. Why? This is important enough to understand. The inherited <code>Control.Paint</code> method performs the invocation of the event <code>System.Windows.Forms.Control.OnPaint</code>. If <code>inherited OnPaint</code> is not called, the event handlers won’t be invoked. Alternatively, we might choose not to override <code>OnPaint</code>. Instead, we could handle the event <code>Paint</code> and do the same in the handler. In our case, it does not make much sense. We need to create a control class anyway (apparently, because it carries all the rendering logics), so overriding of the method <code>OnPaint</code> would be the easiest option. Moreover, in case we don’t need to call the inherited method, it is slightly better for the performance.</p>
+
+<p>What of the two mechanisms to choose? It depends, and it does not make a lot of difference. Dealing with the event <code>Paint</code> can be useful if we simply use existing class, instead of deriving any class and writing our own. In this case, we simply would not have any content for the overridden <code>OnPaint</code> method. From the other hand, supporting of the event <code>Paint</code> can be critically important if we had to supply a library of control classes for other users. In rare cases, we may want to block any custom rendering by the user of the class. In all the other cases, this is what the user expects.</p>
+
+<p>At this point, I omit the detail of the function <code>Draw</code>. It just uses the graphical <em>primitives</em> represented by the <code>System.Drawing.Graphics</code> method to draw the scene, depending on current state of the whole system. Abstracting out of this <code>Draw</code> method is extremely important; I’ll explain it in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</a>.</p>
+
+<h3 id="interactive-graphics">Interactive Graphics</h3>
+
+<p>As the first step, I’ve chosen to reflect the changes in the parameters of the scene entered by the user. Not only this is the most natural and the easiest next step, but this is the step I would recommend for the development of many similar applications. The thing is: this is the most convenient point for intermediate testing, to make sure the pure rendering part of the problem is done correctly. It will be much harder to validate when we introduce animation. At this step, I prototyped the motion of the ball by interactive mouse click and keyboard events. From this development phase, the ball position can be controlled by the user manually. Later on, when the animation was added, the manual control of the ball location allowed the user to momentarily intercept the ball motion, to change its location to an arbitrary location within the current room space.</p>
+
+<p>The essence of interactive behavior is extremely simple. We need to have the data layer of the physical model, fully abstracted from graphics or UI. The implementation of the method <code>Draw</code> (called in the code fragment shown <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#draw">above</a>) takes all the data and draws the scene accordingly. Now, what happens when the user, using the UI, changes some of those parameters? Apparently, the scene should be re-rendered, fully or partially. This is done, in response to any of such events, and then the call to the method <code>OnPaint</code> should be triggered somehow. This is done using <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.form.invalidate%28v=vs.110%29.aspx">one of the methods</a> <code>Control.Invalidate</code>. This way, the whole control can be invalidated, or the invalidation may touch only some area on the scene.</p>
+
+<p>Invalidation mechanism is exactly what we need. It is highly optimized in Windows. It is based on the Windows API <code>ON_PAINT</code> <a href="https://msdn.microsoft.com/en-us/library/windows/desktop/dd145213%28v=vs.85%29.aspx">message</a>. It’s good to understand that this particular message is handled differently by Windows, bypassing the usual message dispatching mechanism. In particular, if several invalidations occur before the first invalidation is reflected on rendering, Windows accumulate the invalidation requests in a single subset of the control’s client area <em>point set</em>, apparently, by performing set <a href="https://en.wikipedia.org/wiki/Logical_disjunction">disjunction</a> (OR) operation. This way, redundant calls to the method <code>OnPaint</code> are eliminated.</p>
+
+<p>In fact, we already covered the main techniques needed for animation and interactive graphics. With animation, everything goes in the same way. We simply need to change data and re-render the scene frame by frame. We only need to add the time dimension to the problem and figure out, how the state of the system should be modified in time.</p>
+
+<h3 id="animated-graphics">Animated Graphics</h3>
+
+<p>To overview the animation if its main part, it’s enough to put together the following parts: 1) we need to program the change in the system state depending on the previous state and time, taking into account the mechanical parameters of the system, possibly dynamically modified by the user; in computer games, for example, it is called “<a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#physics">Physics</a>”; 2) create the sequence of the events when a <em>frame</em> is changed (read: “Invalidate”); 3) for each frame, <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#real-time">pick up the current time</a> from the system clock and, depending on the time value, apply “physics” to the current state, to obtain the system state for the next frame to be rendered.</p>
+
+<p>At this point, a good next step would be getting to threading. By the way, why not timer? Let’s see…</p>
+
+<h3 id="why-not-timer">Why Not Timer?</h3>
+
+<p>Why not a timer, indeed? Well, just because timers are really bad for the purpose, dealing with them is extremely complicated and unreliable, despite of the ease of getting first <em>seemingly working</em> results. The discussion of timers would take us too far from the topics of the present article, but I have to explain the idea. The main misconception is the idea that the timers can deliver periodic events. Ideally, it would be good, but in reality this is not exactly so. First of all, there is a number of different timers in the .NET <a href="https://en.wikipedia.org/wiki/Standard_Libraries_%28CLI%29#Base_Class_Library">BCL</a>, and I just have to warn the readers about one particular one which never should be used: <code>System.Windows.Forms.Timer</code>. It simply should never be used for anything even remotely periodic, due to its prohibitively bad quality. Why having this type of timer at all; is it good for anything? Yes, its benefit is the ease of use: the handler of its <code>Tick</code> event is invoked in the <em>UI thread</em>, which eliminate the need of the cross-thread invocation needed with other threads. But how it can be used with so bad accuracy? One simple example is the delay in showing, for example, a splash window, where the exact timing is not critical at all.</p>
+
+<p>Another, perhaps even bigger problem, the one related to all the timers, is the complications related to the reliability of the code. Most likely, all the OS capable of running .NET applications are not real-time systems, as most of the OS in the world. In practice, the periodic sequence of events is a myth. Despite the accuracy of the timing, in all non-real-time multithreaded systems, the time latency between the hardware timer event and actual, for example, rendering, is a <em>non-deterministic</em> value. More importantly, the time of event handling is also non-deterministic. Did you ever try to deal with the situation, when next timer event is invoked before the event handler called by the previous event is still in progress? I think, this is enough to say, but the worst thing is the non-deterministic nature of this problem. The application may seem to work for a long time, failing eventually in the most embarrassing situation.</p>
+
+<p>The real question is: do we really need strictly periodic sequence of the events? The answer is: no, not for animation. It’s enough to know accurate current time at the moment of rendering of the frame. With a thread running in some loop, not only we can deliver better accuracy, but some time differences between loop iteration won’t be noticeable. <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#real-time">Below</a>, I’ll explain how a thread should deal with time.</p>
+
+<p>Having said that, we can move to the design of threading.</p>
+
+<h3 id="thread-wrapper">Thread Wrapper</h3>
+
+<p>First of all, the main idea of the threading design for this application and a wide class of application is this: we need just two threads: one is the main thread running the UI, or <em>UI thread</em>, and another one should represent the <em>scenario</em> of the motion and implement all the “<a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#physics">Physics</a>”, frame by frame. Let me call this second thread <em>animation thread</em>. The key aspect here is the lifetime of the animation thread. It should be created somewhere at the very beginning of the application lifetime (when the main form is already rendered though), only once, and terminated at the very end, only once. During the whole application the thread should be reused, even if the motion is aborted or otherwise stopped. Also, it can be <em>effectively</em> paused/resumed through the mechanism of <em>throttling</em>. This design presents a lot of benefits, first of all, reliability. And it is not over-simplified, for its purpose.</p>
+
+<p>The <em>thread wrapper</em> concept deserves a separate article. In the present implementation, we don’t need to develop the most universal form of such class, so it can be <em>animation-specific</em>. This class is so important, that it would be good to show its complete code:</p>
+
+<div id="threadWrapper">
+<div class="pre-lang" id="premain666833"><div>c#</div><div class="pre-action-link"><span class="code-collapse" data-index="666833" id="preShrink666833">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="666833" id="copycode666833" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre666833" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">namespace</span> BouncingBall.Thread {
+    <span class="code-keyword">using</span> System;
+    <span class="code-keyword">using</span> System.Drawing;
+    <span class="code-keyword">using</span> System.Threading;
+
+    <span class="code-keyword">partial</span> <span class="code-keyword">class</span> ThreadWrapper {
+
+        <span class="code-keyword">internal</span> <span class="code-keyword">class</span> MotionEventArgs : EventArgs {
+            <span class="code-keyword">internal</span> MotionEventArgs(PointF coordinates) { Coordinates = coordinates; }
+            <span class="code-keyword">internal</span> PointF Coordinates { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        } <span class="code-comment">//</span><span class="code-comment">class MotionEventArgs</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">class</span> ExceptionEventArgs : EventArgs {
+            <span class="code-keyword">internal</span> ExceptionEventArgs(Exception exception) { Exception = exception; }
+            <span class="code-keyword">internal</span> Exception Exception { <span class="code-keyword">get</span>; <span class="code-keyword">set</span>; }
+        } <span class="code-comment">//</span><span class="code-comment">class ExceptionEventArgs</span>
+
+        <span class="code-keyword">internal</span> ThreadWrapper() {
+            Thread = <span class="code-keyword">new</span> Thread(Body);
+        } <span class="code-comment">//</span><span class="code-comment">ThreadWrapper</span>
+
+        <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Start(<span class="code-keyword">bool</span> letGo) {
+            Thread.Start();
+            <span class="code-keyword">if</span> (!letGo) <span class="code-keyword">return</span>;
+            InnerLoopEvent.Set();
+            OuterLoopEvent.Set();
+        } <span class="code-comment">//</span><span class="code-comment">Start</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Abort() {
+            Thread.Abort();
+        } <span class="code-comment">//</span><span class="code-comment">Abort</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Pause() {
+            InnerLoopEvent.Reset();
+            OuterLoopEvent.Reset();
+        } <span class="code-comment">//</span><span class="code-comment">Pause</span>
+        <span class="code-keyword">internal</span> <span class="code-keyword">void</span> Resume() {
+            InnerLoopEvent.Set();
+            OuterLoopEvent.Set();
+        } <span class="code-comment">//</span><span class="code-comment">Resume</span>
+
+        <span class="code-keyword">internal</span> <span class="code-keyword">event</span> EventHandler&lt;MotionEventArgs&gt; CoordinatesChanged;
+        <span class="code-keyword">internal</span> <span class="code-keyword">event</span> EventHandler&lt;ExceptionEventArgs&gt; ExceptionThrown;
+        <span class="code-keyword">internal</span> <span class="code-keyword">event</span> EventHandler Paused;
+
+        <span class="code-keyword">void</span> Body() {
+            <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+                OuterLoopEvent.WaitOne();
+                <span class="code-keyword">try</span> {
+                    InnerLoop();
+                } <span class="code-keyword">catch</span> (ThreadAbortException) {
+                } <span class="code-keyword">catch</span> (Exception exception) {
+                    <span class="code-keyword">if</span> (ExceptionThrown != <span class="code-keyword">null</span>)
+                        ExceptionThrown.Invoke(<span class="code-keyword">this</span>, <span class="code-keyword">new</span> ExceptionEventArgs(exception));
+                } <span class="code-comment">//</span><span class="code-comment">exception</span>
+            } <span class="code-comment">//</span><span class="code-comment">do</span>
+        } <span class="code-comment">//</span><span class="code-comment">Body</span>
+
+        <span class="code-keyword">void</span> SelfPause() {
+            Pause();
+            <span class="code-keyword">if</span> (Paused != <span class="code-keyword">null</span>)
+                Paused.Invoke(<span class="code-keyword">this</span>, <span class="code-keyword">new</span> EventArgs());
+        } <span class="code-comment">//</span><span class="code-comment">SelfPause</span>
+
+        ThreadExchangeData exchangeData;
+        <span class="code-keyword">internal</span> ThreadExchangeData ExchangeData {
+            <span class="code-keyword">get</span> { <span class="code-keyword">lock</span> (SyncObject) <span class="code-keyword">return</span> exchangeData; }
+            <span class="code-keyword">set</span> { <span class="code-keyword">lock</span> (SyncObject) exchangeData = <span class="code-sdkkeyword">value</span>; }
+        } <span class="code-comment">//</span><span class="code-comment">ExchangeData</span>
+
+        PointF ballPosition;
+        <span class="code-keyword">internal</span> PointF BallPosition {
+            <span class="code-keyword">get</span> { <span class="code-keyword">lock</span> (PositionSyncObject) <span class="code-keyword">return</span> ballPosition; }
+            <span class="code-keyword">set</span> {
+                <span class="code-keyword">lock</span> (PositionSyncObject) {
+                    isBallPositionDirty = <span class="code-keyword">true</span>;
+                    ballPosition = <span class="code-sdkkeyword">value</span>;
+                } <span class="code-comment">//</span><span class="code-comment">lock</span>
+            } <span class="code-comment">//</span><span class="code-comment">set BallPosition</span>
+        } <span class="code-comment">//</span><span class="code-comment">BallPosition</span>
+
+        Thread Thread;
+        ManualResetEvent InnerLoopEvent = <span class="code-keyword">new</span> ManualResetEvent(<span class="code-keyword">false</span>);
+        ManualResetEvent OuterLoopEvent = <span class="code-keyword">new</span> ManualResetEvent(<span class="code-keyword">false</span>);
+        <span class="code-keyword">object</span> SyncObject = <span class="code-keyword">new</span> <span class="code-keyword">object</span>();
+        <span class="code-keyword">object</span> PositionSyncObject = <span class="code-keyword">new</span> <span class="code-keyword">object</span>();
+        <span class="code-keyword">bool</span> isBallPositionDirty;
+
+    } <span class="code-comment">//</span><span class="code-comment">class ThreadWrapper</span>
+
+} <span class="code-comment">//</span><span class="code-comment">namespace BouncingBall.Thread</span>
+</pre>
+
+<p>Note that the class is <em>partial</em>, so some members are not shown here (<code>CurrentState</code>, <code>State</code>, <code>InnerLoop</code>, and <code>InvertAndDampVelocity</code>; see the full source code provided, the file “ThreadWrapper.InnerLoop.cs”).</p>
+
+<p>The most important aspect of the thread wrapper is that it provides <em>encapsulation</em> of exchange of the data and event invocation and, hence, of the thread <em>synchronization</em>.</p>
+
+<p>One key concept is the use of the <code>System.Threading.Thread</code> constructor with the virtual method <code>Body</code>. Here is the idea: the method passed to the thread constructor can itself have a parameter. It can be done with the constructor using the parameters of the <a href="https://www.codeproject.com/Articles/406123/ParameterizedThreadStart">type</a> <code>ParameterizedThreadStart</code>. Is it good or bad? This is very bad! The problem is: this delegate type accepts a single <em>untyped</em> parameter, more exactly, of the type <code>System.Object</code>. This lack of typing, in practice, requires <em>type casting</em>, potentially dangerous, error-prone and not well maintainable thing. At the same time, it’s important to note that thread constructors accept <em>delegate instances</em>, which means both <em>static</em> and non-static (<em>instance</em>) methods. When we pass an instance method of the wrapper instance itself, all its members are passed to the delegate in a single (<em>implicit</em>) call parameter: <code>this</code>. It comprehensively solves all the problems of passing parameters during construction of a thread instance. <code>ParameterizedThreadStart</code> would be simply pointless.</p>
+
+<p>Another important aspect is the thread <em>throttling</em> using the event handler objects: <code>System.Threading.EventWaitHandle</code> or its two specialized forms, <code>System.Threading.AutoResetEvent</code> and <code>System.Threading.ManualResetEvent</code>. Note that the modern thread class does not have such methods as <code>Pause</code> or <code>Resume</code>; they have been deprecated and removed as extremely dangerous. Their danger is pretty obvious, but explanation of this would go beyond the topic of this article. In contrast to such methods, <code>EventWaitHandle</code> wait method put a calling thread in a <em>wait state</em> only in some accurately chosen points in code, where is it perfectly safe to do so. In a wait state, a calling thread does not spend any CPU time. When it calls a wait method on a non-signaled event handle object, the calling thread is <em>preempted</em> by other threads and not scheduled to execution until it is <em>awaken</em> by some events (<code>Abort</code>, <code>Interrupt</code> methods called by any other thread, timeout and, importantly, by the event of signaling of the corresponding <code>EventWaitHandle</code> instance).</p>
+
+<h3 id="real-time">“Real” Time</h3>
+
+<p>I <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#why-not-timer">already</a> explained the main idea: we don’t really need strictly periodic time frame between animation frames.</p>
+
+<p>The most suitable timing facility for the animation is the class <code>System.Diagnostics.Stopwatch</code>. It provides the best accuracy. Note that we only need <em>relative</em> time, not <em>absolute</em> calendar time.</p>
+
+<p>Now, I will put forward not very usual or even obvious idea which is applicable to our specific problem: the use of two separate instances of this class: one for X motion, and another one for Y motion. Yes, I have separate “X-time” and “Y-time”. The thing is: the mechanical motion in a uniform gravitation field (Y direction, in our case), and in many other simple situations, is fully independent for the two directions, so the whole motion is two independent tasks.</p>
+
+<p>This is the basic scenario of using the <code>Stopwatch</code>:</p>
+
+<div id="stopWatch">
+<div class="pre-lang" id="premain405814"><div>c#</div><div class="pre-action-link"><span class="code-collapse" data-index="405814" id="preShrink405814">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="405814" id="copycode405814" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre405814" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> Stopwatch = System.Diagnostics.Stopwatch;
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+<span class="code-keyword">partial</span> <span class="code-keyword">class</span> ThreadWrapper {
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+    <span class="code-keyword">void</span> InnerLoop() {
+        Stopwatch watchX = <span class="code-keyword">new</span> Stopwatch();
+        Stopwatch watchY = <span class="code-keyword">new</span> Stopwatch();
+        <span class="code-keyword">while</span> (<span class="code-keyword">true</span>) {
+            InnerLoopEvent.WaitOne();
+            ThreadExchangeData data = ExchangeData;
+            <span class="code-keyword">lock</span> (SyncObject) {
+                <span class="code-comment">//</span><span class="code-comment"> ...</span>
+                watchX.Stop(); watchY.Stop();
+                <span class="code-comment">//</span><span class="code-comment"> ...</span>
+            } 
+            <span class="code-keyword">lock</span> (PositionSyncObject)
+                <span class="code-comment">//</span><span class="code-comment"> ...</span>
+                        watchX.Reset(); watchY.Reset();
+                        watchX.Start(); watchY.Start();
+                <span class="code-comment">//</span><span class="code-comment"> ...</span>
+                <span class="code-keyword">double</span> timeX = watchX.Elapsed.TotalSeconds;
+                <span class="code-keyword">double</span> timeY = watchY.Elapsed.TotalSeconds;
+                <span class="code-comment">//</span><span class="code-comment"> ...</span>
+        <span class="code-comment">//</span><span class="code-comment"> use timeX to calculate new X coordinate</span>
+        <span class="code-comment">//</span><span class="code-comment"> use timeY to calculate new Y coordinate</span>
+                watchX.Reset(); watchX.Start();     
+    } <span class="code-comment">//</span><span class="code-comment">InnerLoop</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class ThreadWrapper</span>
+</pre>
+
+<p>This way, we use <em>actually elapsed time</em> from the previous animation frame and current coordinates in the <em>configuration space</em> of the system (coordinates and velocities, in the present problem) to calculate the coordinates for next frame.</p>
+
+<p>Some variations of the actual elapsed time don’t break the impression of the smooth motion; for the spectator, it’s important that a ball is rendered in right space for the present moment of time in each animation frame.</p>
+
+<h3 id="ui-thread-invocation">UI Thread Invocation</h3>
+
+<p>I <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#interactive-graphics">already described</a> the graphical rendering and the mechanism for showing the motion via the <code>System.Drawing.Graphics.Invalidate</code> mechanism. It would be quite enough for the interactive motion.</p>
+
+<p>For the animation, which is the motion controlled by a separate thread, not a UI thread but the animation thread, there is an additional problem: one cannot call anything related to UI from non-UI thread. Instead, one would need to use the method <code>Invoke</code> or <code>BeginInvoke</code> of <code>System.Windows.Threading.Dispatcher</code> (for both Forms and WPF) or <code>System.Windows.Forms.Control</code> (Forms only).</p>
+
+<p>But what defines the UI thread? See also <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a7">this answer</a>.</p>
+
+<p><code>Control.Invoke</code> and <code>Control.BeginInvoke</code> work in any thread. The functionality is completely insensitive to the origin of the thread: it can be UI thread, a thread created through <code>System.Threading.Thread</code> constructor, a thread from the thread pool or a thread created by <code>System.ComponentModel.BackgroundWorker</code>.</p>
+
+<p>The purpose of this API is to dispatch a call of the delegate instance on the UI thread. If the call to <code>Control.Invoke</code> or <code>Control.BeginInvoke</code> is done in UI thread, the delegate will be called immediately. As the invocation mechanism is redundant in this case, this can be avoided by checking the predicate property <code>Control.InvokeRequired</code>. If invocation mechanism is not required, regular call of control’s method or property is preferred. This predicate is only needed for some generalization of some call which can be done from different threads: sometimes in UI thread, sometimes not. In many cases the developer knows for sure that the delegate will be called on from non-UI thread only; in this case <code>Control.InvokeRequired</code> is not needed, as invocation should be used anyway.</p>
+
+<p>Now, UI libraries (both <code>System.Windows.Forms</code> and WPF) are designed in such a way that all calls to all UI controls and Application should never be done directly, but should be dispatched to the UI thread. There is another interface to this functionality common for Forms and FPW, with highly extended functionality: <code>System.Windows.Threading.Dispatcher</code>, it also has <code>Invoke</code> and <code>BeginInvoke</code> methods, several overloads. The instance of <code>Dispatcher</code> can be obtained using the static property <code>System.Windows.Threading.Dispatcher.CurrentDispatcher</code> (this property either instantiates new instance or use previously created instance of <code>Dispatcher</code>).</p>
+
+<p>Now, <code>Dispatcher</code> methods, <code>Control.Invoke</code> and <code>Control.BeginInvoke</code> use the same mechanism of dispatching a delegate to the UI thread: the delegate instance and instances of actual calling parameters are put to some queue, which is read by the WPF or <code>System.Windows.Forms</code> UI thread. In main UI cycle, this data is removed from the queue and used to make an actual call. Each thread instance has the invocation list; each element of invocation list encapsulates delegate entry point, <code>this</code> parameter used to access the instance of the declaring class of the method (if the method is non-static) and all instances of call parameters. All this data is used for the actual call.</p>
+
+<p>Now we came to the difference between <code>Invoke</code> and <code>BeginInvoke</code>. For <code>Invoke</code>, return value obtained from the call is returned to caller of <code>Invoke</code>. It means that the thread synchronization is blocking for the calling non-UI thread.</p>
+
+<p>In contrast, <code>BeginInvoke</code> returns immediately with the result of the type <code>System.IAsyncResult</code>, so this call itself in non-blocking. This invocation method should be used in most cases, especially when return result is not needed; a typical example: getting UI thread showing notification from non-UI thread status.</p>
+
+<p>If return result from <code>BeginInvoke</code> is needed, the situation is pretty complex, as result is not ready immediately, so some kind of wait is needed anyway. It is not well documented in standard help documentation. Basically, there are three ways of obtaining the result of invocation later; one of them is calling blocking <code>EndInvoke</code>.</p>
+
+<p>There is a very popular misconception that the invocation mechanism can be used with any thread through <code>Dispacher</code>. This is not true. The <code>Dispatcher</code> really works for non-UI applications as well, but is <code>Invoke</code> or <code>BeginInvoke</code> is used; it does not do anything useful if there is no active UI thread! The call to those methods is equivalent to regular call of the delegate on the same thread.</p>
+
+<p>Is it possible to use the similar mechanism on any thread? No, but it can be done on specially written custom thread using a blocking queue, when the elements of the queue are delegate instances. A complete code with usage samples can be found in my Tips/Tricks article: <a href="http://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and.aspx">Simple Blocking Queue for Thread Communication and Inter-thread Invocation</a>. The look at the source code can give a pretty good idea on how the UI thread invocation mechanism works.</p>
+
+<p>For the present bouncing ball application, I added the demonstration of the use of the WPF <code>System.Windows.Threading.Dispatcher</code>, with the sheer purpose of the demonstration of the technique, functionally equivalent to the use of <code>System.Windows.Forms.Control.Invoke</code> or <code>System.Windows.Forms.Control.BeginInvoke</code>, just because it is less obvious, as well as the whole possibility of using some WPF assemblies in a <code>System.Windows.Forms</code> application. Here is the chain of steps showing how it can be done. First of all, the application needs to reference the only WPF assembly, <code>WindowsBase</code>. Then, in the main application form, I use the class <code>System.Windows.Threading.Dispatcher</code>, add a reference to a current dispatcher instance and use it:</p>
+
+<div id="dispatcher">
+<div class="pre-lang" id="premain464766"><div>c#</div><div class="pre-action-link"><span class="code-collapse" data-index="464766" id="preShrink464766">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="464766" id="copycode464766" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre464766" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">using</span> Dispatcher = System.Windows.Threading.Dispatcher;
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+Dispatcher Dispatcher;
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+Dispatcher = Dispatcher.CurrentDispatcher;
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+Thread.ThreadWrapper Thread = <span class="code-keyword">new</span> Thread.ThreadWrapper();
+
+<span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="code-comment">//</span><span class="code-comment"> in some forms initialization method ImplementSetup,</span>
+<span class="code-comment">//</span><span class="code-comment"> which is called after the form's InitializeComponent() is called:</span>
+
+Thread.CoordinatesChanged += (sender, eventArgs) =&gt; {
+    System.Action action = () =&gt; {
+        Scene.Position =
+            <span class="code-keyword">new</span> System.Drawing.PointF(eventArgs.Coordinates.X, eventArgs.Coordinates.Y);
+    };
+    <span class="code-comment">//</span><span class="code-comment">with System.Windows.Forms.Control.Invoke:</span>
+    <span class="code-comment">//</span><span class="code-comment">Invoke(action);</span>
+    <span class="code-comment">//</span><span class="code-comment">with System.Windows.Threading.Dispatcher:</span>
+    Dispatcher.Invoke(action);
+}; <span class="code-comment">//</span><span class="code-comment">Thread.CoordinatesChanged</span>
+</pre>
+
+<p>Note the commented out <code>Invoke(action)</code>, which is a call to <code>System.Windows.Forms.Control.Invoke</code>, which could be used instead of <code>Dispatcher.Invoke(action)</code>.</p>
+
+<p>Now, in the body of the <code>ThreadWrapper</code> <code>Thread</code>, which is run by the animation thread, the ball location is recalculated frame by frame. In a loop, the event <code>CoordinatesChanged</code> is invoked (if there is at least one handler). This event is shown in a code sample <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#threadWrapper">above</a>. The handler is added to this event in the main form class, which plays the role of the application <em>singleton</em> which contains the single instance of the thread wrapper of the animation thread. This handler modifies the property <code>Scene.Position</code>. The <em>setter</em> of this property calls the method <code>Invalidate</code> of the instance <code>Scene</code> of the class <code>BallScene</code>:</p>
+
+<div id="ballSceneInvalidate">
+<div class="pre-lang" id="premain455087"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="455087" id="copycode455087" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre455087" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">partial</span> <span class="code-keyword">class</span> BallScene : Control {
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+    
+    <span class="code-keyword">public</span> PointF Position {
+        <span class="code-keyword">get</span> { <span class="code-keyword">return</span> position; }
+        <span class="code-keyword">set</span> {
+            <span class="code-keyword">if</span> (position == <span class="code-sdkkeyword">value</span>) <span class="code-keyword">return</span>;
+            position = FixPosition(<span class="code-sdkkeyword">value</span>);
+            Invalidate();
+        } <span class="code-comment">//</span><span class="code-comment">set Position</span>
+    } <span class="code-comment">//</span><span class="code-comment">Position</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class BallScene</span>
+</pre>
+
+<p>The <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#draw">very first code sample</a> shows the other fragment of the same class. This way, we have the full cycle of the frame update; it starts from changing of the model data in the animation thread; that change leads to the invocation of the graphic invalidation method through UI thread invocation mechanism.</p>
+
+<h3 id="physics">Physics</h3>
+
+<p>Again, by “physics” I mean the term used in the computer game development.</p>
+
+<p>As I explained <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#application-description">above</a>, the only difficulty of the physical model is the transition between bouncing and motion of the ball on the surface of the floor affected by the friction, which usually could be considered as a fixed force. In out user-edited data, it is expressed in the units of G (gravitational acceleration). If we tried to build a really detailed and accurate physical model, we would see that such transition is not a single point. For certain period of time, bouncing motion would combine with the friction between the floor and the ball, with different degree of slippage. Eventually, friction would come to zero slippage, and the bouncing could be considered fully dumped. Moreover, friction would cause the ball to roll, so the friction would be some combination of the rolling friction and sliding friction, so the friction could not be considered constant; and the moment of inertia of a ball would come to play.</p>
+
+<p>For a simple model, such complicated detail would look like some overkill. But the attempt to simplify model faces this difficulty: the criterion of the end of the bouncing mode and “friction mode”, which I called <code>frictionMode</code> in the code.</p>
+
+<p>To solve this problem, I first simplified the calculation of the collision with the wall. Let’s use the fact that the wall (first of all, the floor) simply inverts the vertical coordinate and velocity, if we consider floor coordinate to be zero. The problem of the calculation is that the state of the model in the configuration space is defined only by frames. In other words, the time of the collision with the floor can come at some time between animation frames, so an additional point in time should be introduced, the time of the collision. At this point, let’s cheat just a bit. Let’s simply calculate the state in the next frame, as if the floor did not exist. Naturally, eventually it will give us the ball coordinates below the floor. The same can happen with any of the walls, but we need to take a special care about the floor, where the <em>friction mode</em> may occur. If such below-the-floor location is detected, we can simply invert the vertical coordinate and velocity and show the ball symmetrically under the floor. It’s easy to see, that in case of fine tiny bouncing (some condition close to the transition to the friction mode), the inaccuracy of this approximation can formally give us negative kinetic energy. We can use this condition as a condition for the transition to the friction mode. In friction mode, we consider the ball motion as purely horizontal; it continues under the constant friction force until the velocity drops to zero or below in the direction of current motion (note that in friction mode the ball can still bounce off the vertical walls).</p>
+
+<p>Interestingly, this rather rough trick gives am impression of very smooth and realistic motion.</p>
+
+<p>Again, we consider vertical and horizontal motion separately, so we can have vertical kinetic and potential energy, and horizontal kinetic energy, separately. This is how the check for friction mode looks:</p>
+
+<div id="frictionMode">
+<div class="pre-lang" id="premain206285"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="206285" id="copycode206285" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre206285" style="margin-top: 0px;" class="notranslate">initialY = 2d * physicsMaxY - y;
+y = initialY;
+<span class="code-keyword">double</span> potential = localData.Gravity * (physicsMaxY - y);
+yEnergy *= 1d - localData.Damping;
+<span class="code-keyword">double</span> kinetic = (yEnergy - potential);
+<span class="code-keyword">if</span> (kinetic &lt; <span class="code-digit">0</span> &amp;&amp; localData.Friction &gt; <span class="code-digit">0</span>) {
+    kinetic = <span class="code-digit">0</span>;
+    frictionMode = <span class="code-keyword">true</span>;
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+} <span class="code-comment">//</span><span class="code-comment">if</span>
+</pre>
+
+<p>(See “ThreadWrapper.InnerLoop.cs”.)</p>
+
+<h3 id="a-word-of-warning-thread-termination">A Word of Warning: Thread Termination</h3>
+
+<p>Let’s look at the end of the life cycle of the process of the Bouncing Ball application. This is the overridden method <code>OnFormClosing</code> of its main form:</p>
+
+<div id="abort">
+<div class="pre-lang" id="premain532456"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="532456" id="copycode532456" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre532456" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">protected</span> <span class="code-keyword">override</span> <span class="code-keyword">void</span> OnFormClosing(FormClosingEventArgs e) {
+    Thread.Abort();
+    <span class="code-keyword">base</span>.OnFormClosing(e);
+} <span class="code-comment">//</span><span class="code-comment">OnFormClosing</span>
+</pre>
+
+<p>Here, <code>Thread.Abort()</code> is the call to the thread wrapper method shown <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#threadWrapper">above</a>. It simply calls the method <code>System.Threading.Thread.Abort</code> of the underlying thread, which is the animation thread in our application.</p>
+
+<p>Very often, such technique sparks some flame wars. Many people consider <code>Thread.Abort</code> as prohibitively dangerous. Unfortunately, such belief is often based on lack of understanding how it works; such people associate it with old bad Windows API <code>TerminateThread</code>. Actually, <code>Thread.Abort</code> is totally unrelated to <code>TerminateThread</code>. It uses very safe method of <em>exception seeding</em>. The <code>AbortException</code> is seeded into the thread state, so the execution jumps to the code throwing this exception, which can be caught and handled by the application user, alleviating all possible negative effects of asynchronous termination. After all, really dangerous <code>Pause</code> and <code>Resume</code> methods have been removed from .NET threads, but <code>Abort</code> was introduced. Basically, it is very safe, but only… for the developers who know well what happens.</p>
+
+<p>And yet, I agree that this method can be really dangerous. Most serious argument is related to the possibility to abort during construction and destruction chain: in principle, the process can end up in some half-constructed state, which hardly can be recovered. However, I developed fully safe solution for such problems, which is, roughly, is based on encapsulation of <code>Abort</code> in a thread wrapper used to safely postpone the abort. All this matter would deserve a separate article though.</p>
+
+<p>So, why using <code>Abort</code> is perfectly safe in this particular application? First of all, this is because it happens at the end of the application lifetime. In this particular case, the situation is just the opposite: not terminating the thread before closing the main window would be dangerous. Besides, this particular thread does nothing which could break anything. It merely access shared object in memory, representing the current state of the physical model and perform UI thread invocation used to update the picture.</p>
+
+<p>What would be the alternatives? One popular alternative is the use of <em>background threads</em>. I would recommend using a background thread only in some rare very special cases. The only difference of background thread is that it does not hold its parent process when it terminates; in other words, the background thread is terminated automatically. And this can be really dangerous, because (in contrast to <code>Abort</code>) the moment of the termination of the background thread is totally out of the control of the application developer. Imagine that the thread tries to update some form when it is already closed. The behavior of the background thread is explained <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.isbackground%28v=vs.110%29.aspx">here</a>.</p>
+
+<p>Another alternative is the <em>cooperative</em> (not <em>asynchronous</em>) termination of a thread. Indeed, this is the safest option. A thread is given the flag (shared with some other thread(s)) which is set by another thread and tells the thread: “now terminate yourself”. This is safe because the thread can check up this flag and take the steps for termination only in some safe point of its code. Many developers think that this is the only acceptable approach. Unfortunately, there is a number of problems where such approach cannot be used at all. The discussion of such cases would go far from the topic of the present article, but I would gladly discuss them with those readers who wish to open such discussion. Besides, this approach can bring inherent performance problem.</p>
+
+<h3 id="exceptions">Exceptions</h3>
+
+<p>Basically, all exception should be handled, ultimately, at least on the very top stack frame of each thread. The handling of all exceptions of the animation thread is shown in the code of the thread wrapper. Note that the <code>Abort</code> exception is also handled, but its handler does nothing. As I described <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a-word-of-warning-thread-termination">above</a>, it happens only at the end of the application lifetime.</p>
+
+<p>Apparently, exceptions should not be handled too locally. The worst mistakes of some beginners is catching exceptions in all methods. Instead, the exceptions should be caught only in very few strategically chosen points of code, which I call “competence points”; where it is known by the context how to handle some specific exception types. And the top frame is a special case agnostic to the exception type.</p>
+
+<p>But the exceptions in the UI is the special case. It would be good to catch and handle all the exception not on the top, but on the top level of the main even cycle of the application. Then all the exceptions could be handled in type-agnostic way, exception information is presented to the user, and then the application could continue. All non-nonsense UI frameworks have such kind of mechanism. This is how it can be done with forms:</p>
+
+<div id="entryPoint">
+<div class="pre-lang" id="premain464587"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="464587" id="copycode464587" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre464587" style="margin-top: 0px;" class="notranslate"><span class="code-comment">//</span><span class="code-comment"> first, entry point: </span>
+<span class="code-keyword">static</span> <span class="code-keyword">void</span> Main() {
+    Application.EnableVisualStyles();
+    <span class="code-comment">//</span><span class="code-comment"> this is how the mechanism is enabled:</span>
+    Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+    Application.SetCompatibleTextRenderingDefault(<span class="code-keyword">false</span>);
+    Application.Run(<span class="code-keyword">new</span> FormMain());
+} <span class="code-comment">//</span><span class="code-comment">Main</span>
+</pre>
+
+<p>When the mechanism is enabled, we need to supply the universal exception handler:</p>
+
+<div id="exceptionHandler">
+<div class="pre-lang" id="premain254090"><div>c#</div><div class="pre-action-link"><span class="code-collapse" data-index="254090" id="preShrink254090">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="254090" id="copycode254090" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre254090" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">public</span> <span class="code-keyword">partial</span> <span class="code-keyword">class</span> FormMain {
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+    <span class="code-keyword">void</span> ImplementSetup() {
+
+        <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+        Thread.ExceptionThrown += (sender, eventArgs) =&gt; {
+            Invoke(<span class="code-keyword">new</span> Action(() =&gt; {
+                Pause();
+                ShowException(Resources.UiText.FormatAnimationException, eventArgs.Exception);
+            }));
+        }; <span class="code-comment">//</span><span class="code-comment">Thread.ExceptionThrown</span>
+
+    } <span class="code-comment">//</span><span class="code-comment">ImplementSetup</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> very simplified type-agnostic exception handler: </span>
+    <span class="code-keyword">void</span> ShowException(<span class="code-keyword">string</span> titleFormat, Exception exception) {
+        <span class="code-keyword">if</span> (exception == <span class="code-keyword">null</span>) <span class="code-keyword">return</span>;
+        MessageBox.Show(
+            <span class="code-keyword">string</span>.Format(
+                Resources.UiText.FormatException,
+                exception.GetType().Name, exception.Message),
+            <span class="code-keyword">string</span>.Format(titleFormat, Application.ProductName),
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Error);
+     } <span class="code-comment">//</span><span class="code-comment">ShowException</span>
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+} <span class="code-comment">//</span><span class="code-comment">class FormMain</span>
+</pre>
+
+<p>We <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#draw">already discussed</a> the method <code>ImplementSetup</code>: this is some main form method called after the form’s <code>InitializeComponent()</code> is called.</p>
+
+<p>By the way, WPF offers a very similar mechanism.</p>
+
+<h3 id="the-ui-and-layout-dont-abuse-the-designer">The UI and Layout: Don’t Abuse the Designer</h3>
+
+<p>The abuse of the designer is a very big topic, too big to cover it here. For now, I want to cover only one aspect. Many my colleagues and CodeProject inquirers complained about one very typical situation: during development, even when everything works during runtime, they find themselves in the situation where they cannot open some form anymore in the form designer mode. They could easily fix the problem if the form could be shown in the designer, but the designer reports some exception and does not show the form. How to get out of this dead end?</p>
+
+<p>The solution is amazingly simple. It is possible to make the form loading again, without breaking any already achieved functionality. First of all, it’s important to realize that this condition was a result yet another designer abuse. The designer mode and runtime mode are different. It would be the best to run as little code in the designer mode as possible.</p>
+
+<p>The quick fix lies on the property <code>System.Windows.Forms.Component.DesignMode</code>, described <a href="https://msdn.microsoft.com/en-us/library/system.componentmodel.component.designmode%28v=vs.110%29.aspx">here</a>.</p>
+
+<p>The solution is to put most of the runtime code under the check of this property of the <code>System.Windows.Forms.Form</code> and/or <code>System.Windows.Forms.UserControl</code>:</p>
+
+<div id="designMode">
+<div class="pre-lang" id="premain311393"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="311393" id="copycode311393" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre311393" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">partial</span> <span class="code-keyword">class</span> MyForm : Form {
+
+    <span class="code-comment">//</span><span class="code-comment"> ...</span>
+
+    <span class="code-keyword">void</span> DoSomething() {
+        <span class="code-keyword">if</span> (DesignMode) <span class="code-keyword">return</span>;
+        <span class="code-comment">//</span><span class="code-comment"> now really do something :-)</span>
+    } <span class="code-comment">//</span><span class="code-comment"> DoSomething</span>
+
+} <span class="code-comment">//</span><span class="code-comment"> class MyForm</span>
+</pre>
+
+<p>Adding such checks would not change any runtime functionality but will fix the problem with loading the form in the designer.</p>
+
+<p>I would also strongly recommend avoiding creation of any event handlers using the designer and write all the handlers in the code, often in the form of <em>anonymous methods</em>, as it is shown in all my samples, but this is the whole different story, as well as many other aspects of the negative role of the overused designer.</p>
+
+<h3 id="persistent-configuration-and-data-contract">Persistent Configuration and Data Contract</h3>
+
+<p>First of all, the application does not come with the installer. It represents the concept of so-called <a href="https://en.wikipedia.org/wiki/Portable_application"><em>portable application</em></a>. I am very glad that Microsoft has started to encourage this deployment model. Indeed, too many applications present the hassle of running the installation, giving no benefits in return, and yet a big number of them leave merciless amount of garbage in Windows registry, already heavily contaminated, without apparent provisions for removing it.</p>
+
+<p>It does not mean that the present application don’t need installation and uninstallation. It actually “installs” itself when the user closes the application or changes some physical model parameters. It can remove all the traces (“uninstalls”) through the menu command “Clean up Persistent Configuration from the System and Exit”. I wish most software products did exactly that. Registry clean-up is really annoying.</p>
+
+<p>The persistence is implemented using the Microsoft <a href="https://msdn.microsoft.com/en-us/library/ms733127%28v=vs.110%29.aspx">Data Contract</a>.</p>
+
+<p>Another approach, the one which is must usually used is the .NET <a href="https://msdn.microsoft.com/en-us/library/k4s6c3a0%28v=vs.110%29.aspx">Application Settings</a>, but, to me, it looks too much obsolete and cumbersome to use.</p>
+
+<p>Data Contract is the best and the only robust persistence (<em>serialization</em>) technology available in .NET. Its main feature is that is it totally <em>non-intrusive</em>. If one has some set of data types which form any arbitrary <em>object graph</em> (for XML format, not necessarily a <em>tree</em>), turning it to a data contract cannot break its behavior, because the developer only adds attributes to types and their members. Nothing like inheriting from special classes or implementing special interfaces is required. The persistence is totally <em>type-agnostic</em>. The data contract is discovered on the fly through .NET <em>reflection</em>. Essentially, the object graph is stored in any stream without giving the facility any type-specific information. When the data is loaded, it restore logically identical object graph in memory. This way, the technology is not only most robust, it is also the easiest to use.</p>
+
+<p>Another benefit is the performance. Reflection is expensive, but it is used only once. As it is done with all .NET <em>serialization</em> technologies, on first run serialization creates <em>serialization</em> assembly on the fly, using <code>System.Reflection.Emit</code>, which is later re-used.</p>
+
+<p>In our application, the contract is described in the file “MetadataSchema.cs”. Now, we need to choose a file used for persistent storage. This is how it is done:</p>
+
+<div id="persistentFile">
+<div class="pre-lang" id="premain926289"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="926289" id="copycode926289" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre926289" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">static</span> <span class="code-keyword">string</span> PersistentConfigurationFileName {
+    <span class="code-keyword">get</span> {
+        <span class="code-keyword">string</span> applicationDataDirectory =
+            System.Environment.GetFolderPath(
+                System.Environment.SpecialFolder.LocalApplicationData);
+        <span class="code-keyword">return</span> <span class="code-keyword">string</span>.Format(Configuration.DefinitionSet.FmtUniqueFileName,
+            applicationDataDirectory,
+            System.IO.Path.DirectorySeparatorChar,
+            Configuration.DefinitionSet.UniqueFileNameGuid);
+    } <span class="code-comment">//</span><span class="code-comment">PersistentConfigurationFileName</span>
+} <span class="code-comment">//</span><span class="code-comment">PersistentConfigurationFileName</span>
+</pre>
+
+<p>The method <code>System.Environment.GetFolderPath</code>, in combination with the enumeration type <code>System.Environment.SpecialFolder</code>, calculates and return different <a href="https://msdn.microsoft.com/en-us/library/system.environment.specialfolder%28v=vs.110%29.aspx">special folders</a>, in particular, the folders for the per-user configuration data.</p>
+
+<p>This is how the metadata schema instance is loaded:</p>
+
+<div class="pre-lang" id="premain244885"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="244885" id="copycode244885" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre244885" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">static</span> MetadataSchema Load(<span class="code-keyword">string</span> fileName) {
+    DataContractSerializer serializer = <span class="code-keyword">new</span> DataContractSerializer(<span class="code-keyword">typeof</span>(MetadataSchema));
+    <span class="code-keyword">using</span> (XmlReader reader = XmlReader.Create(fileName, FastestXmlReaderSettings)) {
+        <span class="code-keyword">return</span> (MetadataSchema)serializer.ReadObject(reader);
+    } <span class="code-comment">//</span><span class="code-comment">using</span>
+} <span class="code-comment">//</span><span class="code-comment">Load</span>
+</pre>
+
+<p>And this is how it is stored:</p>
+
+<div class="pre-lang" id="premain637877"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="637877" id="copycode637877" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre637877" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">void</span> Store(<span class="code-keyword">string</span> fileName) {
+    DataContractSerializer serializer = <span class="code-keyword">new</span> DataContractSerializer(GetType());
+    <span class="code-keyword">using</span> (XmlWriter writer = XmlWriter.Create(fileName, HumanReadableXmlWriterSettings)) {
+        serializer.WriteObject(writer, <span class="code-keyword">this</span>);
+    } <span class="code-comment">//</span><span class="code-comment">using</span>
+} <span class="code-comment">//</span><span class="code-comment">Store</span>
+</pre>
+
+<p>Note the use of the <a href="https://msdn.microsoft.com/en-us/library/yh598w02.aspx">using statement</a> (not to be confused with <a href="https://msdn.microsoft.com/en-us/library/sf0df423.aspx">using directives</a>). This is how <code>ISerializable.Dispose</code> is automatically invoked, in this, case, for <code>XmlReader</code> or <code>XmlWriter</code>.</p>
+
+<h3 id="using-resources-and-assemblyinfo-attributes">Using Resources and <code>AssemblyInfo</code> Attributes</h3>
+
+<p>The application About box shows application logo, copyright, application name, version and other useful information, in particular, the URL of the present article, which serves as an application configuration which can be shown through the system-default Web browser. Where all this information comes from and how it can be collected?</p>
+
+<p>First, let’s look at the file “AssemblyInfo.cs”. Most if its content is very usual, but two lines are not found in a usual auto-generated “AssemblyInfo.cs” file:</p>
+
+<div id="assemblyInfo">
+<div class="pre-lang" id="premain318174"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="318174" id="copycode318174" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre318174" style="margin-top: 0px;" class="notranslate">[assembly: AssemblyDocumentation(
+    Uri = <span class="code-string">"</span><span class="code-string">https://www.codeproject... Many-Questions-Answered-At-Once-Graphics-WinForms"</span>)]
+[assembly: ApplicationDocumentation(
+    Uri = <span class="code-string">"</span><span class="code-string">https://www.codeproject... Many-Questions-Answered-At-Once-Graphics-WinForms"</span>)]
+</pre>
+
+<p>To introduce such additional attributes, some work should be done. The attributes should be targeted to the whole assembly. This is how:</p>
+
+<div id="assemblyAttributes">
+<div class="pre-lang" id="premain429568"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="429568" id="copycode429568" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre429568" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">namespace</span> System {
+
+    [AttributeUsage(AttributeTargets.Assembly)]
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> AssemblyDocumentationAttribute : System.Attribute {
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Uri { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> uri; } <span class="code-keyword">set</span> { <span class="code-keyword">this</span>.uri = <span class="code-sdkkeyword">value</span>; } }
+        <span class="code-keyword">internal</span> Uri Value { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> <span class="code-keyword">new</span> Uri(uri); } }
+        <span class="code-keyword">string</span> uri;
+    } <span class="code-comment">//</span><span class="code-comment">class AssemblyDocumentationAttribute</span>
+
+    [AttributeUsage(AttributeTargets.Assembly)]
+    <span class="code-keyword">public</span> <span class="code-keyword">class</span> ApplicationDocumentationAttribute : System.Attribute {
+        <span class="code-keyword">public</span> <span class="code-keyword">string</span> Uri { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> uri; } <span class="code-keyword">set</span> { <span class="code-keyword">this</span>.uri = <span class="code-sdkkeyword">value</span>; } }
+        <span class="code-keyword">internal</span> Uri Value { <span class="code-keyword">get</span> { <span class="code-keyword">return</span> <span class="code-keyword">new</span> Uri(uri); } }
+        <span class="code-keyword">string</span> uri;
+    } <span class="code-comment">//</span><span class="code-comment">class ApplicationDocumentationAttribute</span>
+
+} <span class="code-comment">//</span><span class="code-comment">System</span>
+</pre>
+
+<p>Now, we need to use .NET <em>reflection</em> to retrieve the <em>metadata</em> stored by the attributes.</p>
+
+<div id="extractAttribute">
+<div class="pre-lang" id="premain613968"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="613968" id="copycode613968" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre613968" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">static</span> Uri ApplicationDocumentationUri {
+    <span class="code-keyword">get</span> {
+        <span class="code-keyword">object</span>[] attributes = Assembly.GetExecutingAssembly()
+            .GetCustomAttributes(
+                <span class="code-keyword">typeof</span>(ApplicationDocumentationAttribute), <span class="code-keyword">false</span>);
+        <span class="code-keyword">if</span> (attributes.Length == <span class="code-digit">0</span>) {
+            <span class="code-keyword">return</span> <span class="code-keyword">default</span>(Uri);
+        }
+        <span class="code-keyword">return</span> ((ApplicationDocumentationAttribute)attributes[<span class="code-digit">0</span>]).Value;
+    }
+} <span class="code-comment">//</span><span class="code-comment">ApplicationDocumentationUri</span>
+</pre>
+
+<p>The extract of some of the metadata is already available in <a href="https://en.wikipedia.org/wiki/Framework_Class_Library">FCL</a>; some other can be extracted in the way shown above.</p>
+
+<p>Logo, string formats and other string information should be stored in the application resource and should not be hard-coded. This is the example of how all the data for the About box is extracted and the click on documentation URL works:</p>
+
+<div id="aboutBox">
+<div class="pre-lang" id="premain363106"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="363106" id="copycode363106" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre363106" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">void</span> Setup() {
+    <span class="code-keyword">this</span>.Text = <span class="code-sdkkeyword">String</span>.Format(
+        Resources.UiText.FormatTitleAbout, Application.ProductName);
+    pictureBox.Image = Resources.Files.Logo;
+    textBoxMainText.Text =
+        <span class="code-keyword">string</span>.Format(Resources.UiText.FormatAboutMain,
+                      Application.ProductName,
+                      AssemblyVersion.Major,
+                      AssemblyVersion.Minor,
+                      AssemblyCopyright);
+    textBoxDescription.Text = AssemblyDescription;
+    linkLabelArticle.Text = AssemblyDocumentationUri.ToString();
+    linkLabelArticle.Click += (sender, eventArgs) =&gt; {
+        System.Diagnostics.Process.Start(linkLabelArticle.Text);
+    }; <span class="code-comment">//</span><span class="code-comment">linkLabelArticle.Click</span>
+} <span class="code-comment">//</span><span class="code-comment">Setup</span>
+</pre>
+
+<h3 id="printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</h3>
+
+<p>Now, let’s take a closer look at the method <code>BallScene.Draw</code>; its call is shown <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#draw">in the first code sample</a>:</p>
+
+<div id="drawScene">
+<div class="pre-lang" id="premain647501"><div>c#</div><div class="pre-action-link"><span class="code-collapse" data-index="647501" id="preShrink647501">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="647501" id="copycode647501" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre647501" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">internal</span> <span class="code-keyword">void</span> Draw(Graphics graphics, PrintPageEventArgs printPage) {
+    <span class="code-keyword">int</span> radius = Radius;
+    graphics.SmoothingMode = SmoothingMode.HighQuality;
+    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+    graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+    <span class="code-keyword">bool</span> printing = printPage != <span class="code-keyword">null</span>;
+    Matrix textPrintTransform = <span class="code-keyword">default</span>(Matrix);
+    <span class="code-keyword">if</span> (printing) { <span class="code-comment">//</span><span class="code-comment">indicate printer</span>
+        SetPrintPageLayout(graphics, printPage.MarginBounds);
+        textPrintTransform = graphics.Transform;
+        PrintFrame(graphics);
+    } <span class="code-comment">//</span><span class="code-comment">if</span>
+    <span class="code-keyword">if</span> (printPreview)
+        PrintFrame(graphics);
+    graphics.TranslateTransform(position.X + radius, position.Y + radius);
+    BallRenderer.DrawBall(graphics, radius, ballColor);
+    <span class="code-keyword">if</span> (showVelocity) {
+        <span class="code-keyword">float</span> baseR = radius * <span class="code-digit">4</span>;
+        <span class="code-keyword">float</span> x = velocity.X * baseR;
+        <span class="code-keyword">float</span> y = velocity.Y * baseR;
+        <span class="code-keyword">float</span> length = (<span class="code-keyword">float</span>)Math.Sqrt(x * x + y * y);
+        <span class="code-keyword">float</span> angle;
+        <span class="code-keyword">if</span> (length &gt; <span class="code-digit">0</span>) {
+            angle = (<span class="code-keyword">float</span>)Math.Atan2(y, x);
+            angle = (<span class="code-keyword">float</span>)(angle * 180d / Math.PI);
+            graphics.RotateTransform(angle);
+            <span class="code-comment">//</span><span class="code-comment">graphics, vectorModule, arrowLength, arrowNotch, arrowRadius:</span>
+            BallRenderer.DrawVelocity(
+                graphics, length,
+                DefinitionSet.ArrowLength, DefinitionSet.ArrowNotch, DefinitionSet.ArrowRadius);
+        } <span class="code-comment">//</span><span class="code-comment">if</span>
+    } <span class="code-comment">//</span><span class="code-comment">if showVelocity</span>
+    <span class="code-keyword">if</span> (printing) {
+        graphics.Transform = textPrintTransform;
+        PrintText(graphics, <span class="code-keyword">false</span>);
+        <span class="code-keyword">return</span>;
+    } <span class="code-comment">//</span><span class="code-comment">if</span>
+    graphics.ResetTransform();
+    <span class="code-keyword">if</span> (PrintPreview)
+        PrintText(graphics, <span class="code-keyword">true</span>);
+    Pen penFrame = SystemPens.ControlDark;
+    <span class="code-keyword">if</span> (Focused)
+        penFrame = SystemPens.ControlText;
+    graphics.DrawRectangle(penFrame, <span class="code-keyword">new</span> Rectangle(
+        ClientRectangle.Left, ClientRectangle.Top,
+        ClientRectangle.Width - <span class="code-digit">1</span>, ClientRectangle.Height - <span class="code-digit">1</span>));
+} <span class="code-comment">//</span><span class="code-comment">Draw</span>
+</pre>
+
+<p>This method is abstracted from the nature of the particular instance of the <code>Graphics</code> object. In our case, it can be either screen (then the call is <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#draw">shown in the first code sample</a>), bitmap image or printer page. Second parameter of the method is <code>null</code> for the screen or image, is only used for printing. This way, the same method is used for rendering the scene in different media. Printing of to the image or to the printer is done in the methods of the main form, which has the <code>Scene</code> object as a member field.</p>
+
+<p>This is how the scene is printed to a bitmap image:</p>
+
+<div id="printToImage">
+<div class="pre-lang" id="premain427978"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="427978" id="copycode427978" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre427978" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">void</span> PrintToImage() {
+    <span class="code-keyword">this</span>.Scene.PrintPreview = <span class="code-keyword">true</span>;
+    <span class="code-keyword">try</span> {
+        <span class="code-keyword">if</span> (PrintToImageDialog.ShowDialog() != DialogResult.OK) <span class="code-keyword">return</span>;
+        <span class="code-keyword">using</span> (Bitmap bitmap =
+            <span class="code-keyword">new</span> Bitmap(Scene.ClientRectangle.Width, Scene.ClientRectangle.Height)) {
+            <span class="code-keyword">using</span> (Graphics graphics = Graphics.FromImage(bitmap))
+                Scene.Draw(graphics, <span class="code-keyword">null</span>);
+            bitmap.Save(PrintToImageDialog.FileName);
+        } <span class="code-comment">//</span><span class="code-comment">using bitmap</span>
+    } <span class="code-keyword">finally</span> {
+        <span class="code-keyword">this</span>.Scene.PrintPreview = <span class="code-keyword">false</span>;
+    } <span class="code-comment">//</span><span class="code-comment">exception</span>
+} <span class="code-comment">//</span><span class="code-comment">PrintToImage</span>
+</pre>
+
+<p>And this is how the print page is rendered:</p>
+
+<div id="printToPrinter">
+<div class="pre-lang" id="premain64634"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="64634" id="copycode64634" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre64634" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">void</span> Print() {
+    <span class="code-keyword">using</span> (PrintDocument pd = <span class="code-keyword">new</span> PrintDocument()) {
+        <span class="code-keyword">this</span>.Scene.PrintPreview = <span class="code-keyword">true</span>;
+        <span class="code-keyword">try</span> {
+            <span class="code-keyword">if</span> (PrinterSettings != <span class="code-keyword">null</span>) 
+                PrintDialog.PrinterSettings = PrinterSettings;
+            pd.PrintPage += (sender, eventArgs) =&gt; {
+                <span class="code-keyword">this</span>.Scene.Draw(eventArgs.Graphics, eventArgs);
+            }; <span class="code-comment">//</span><span class="code-comment"> pd.PrintPage</span>
+            DialogResult result = PrintDialog.ShowDialog();
+            <span class="code-keyword">if</span> (result != DialogResult.OK) <span class="code-keyword">return</span>;
+            PrinterSettings = PrintDialog.PrinterSettings;
+            PrintDialog.Document = pd;
+            pd.PrinterSettings = PrinterSettings;
+            pd.Print();
+        } <span class="code-keyword">finally</span> {
+            <span class="code-keyword">this</span>.Scene.PrintPreview = <span class="code-keyword">false</span>;
+        } <span class="code-comment">//</span><span class="code-comment">exception</span>
+    } <span class="code-comment">//</span><span class="code-comment">using</span>
+} <span class="code-comment">//</span><span class="code-comment">Print</span>
+</pre>
+
+<p>Note the flag <code>BallScene.PrintPreview</code>. This flag is passed to the method <code>BallScene.Draw</code> via the <code>this</code> parameter, to tell the method to put different content in rendering, as it is shown <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#drawScene">in the method implementation</a>. This way, the rendering can be identical for different media, but modify certain detail, depending on media. In case of a printer or a bitmap image, this is the text showing the model parameters.</p>
+
+<p>This is the result of printing:</p>
+
+<p><img id="print" src="./Resources/print-layout.png"></p>
+
+<h2 id="questions-answered">Questions Answered</h2>
+
+<h4 id="a1"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q01">A1</a></h4>
+
+<p>Chances are, the instance of graphics obtained from one of the <em>factory methods</em> of this class, <code>System.Drawing.Graphics.From*</code>; this is one of the most typical mistakes. This is not how rendering works; and the purpose of these factory methods is totally different (some of them are described in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</a>).</p>
+
+<p>Even when some graphics is written in the control <em>client area</em>, it will disappear on next <em>invalidation</em>.</p>
+
+<p>The basic use of graphic rendering is done by overriding the method <code>System.Windows.Forms.Control.OnPaint</code> or handling the event <code>System.Windows.Forms.Control.Paint</code>. See also: <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#rendering-graphics">Rendering Graphics</a>.</p>
+
+<h4 id="a2"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q02">A2</a></h4>
+
+<p>Don’t. The class <code>System.Windows.Forms.PictureBox</code> is (sigh), by far, not the most confusing, and yet, it confused more beginners than any other part of .NET. The use of this <em>control</em> (yes, a control class, not a “picture”) is very limited, and it could be easily implemented without having it in <a href="https://en.wikipedia.org/wiki/Framework_Class_Library">FCL</a>. So, it already gave people much more harm than use. It just presents a simplified a way to show a static image.</p>
+
+<p>Even though some dynamic or interactive or animated behavior in a <code>PictureBox</code> is possible, the class itself presents no help, but only a lot of extra hassles, will only eat up the development time and consume some extra memory and CPU time, no more.</p>
+
+<p>Right course of action is described in the sections <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#rendering-graphics">Rendering Graphics</a>, <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#interactive-graphics">Interactive Graphics</a> and <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#animated-graphics">Animated Graphics</a>; and the rest of the present articles explains all related techniques.</p>
+
+<h4 id="a3"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q03">A3</a></h4>
+
+<p>The appropriate technique is explained in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</a>.</p>
+
+<h4 id="a4"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q04">A4</a></h4>
+
+<p>I saw a good number of attempts of doing so. Even though doing such things is quite possible, I would not recommend this way, because it its poor maintainability and hard development. The mistake is thinking that if some components are already available, using them would solve development time. It would be true if they were designed for this kind of collaborations. But they are not designed this way.</p>
+
+<p>So, what to do? I would recommend using what is usually called <em>lightweight</em> approach. Yes, development of the components from scratch is easier. In the current application, the example of such components are the classes <code>BallScene</code> and <code>BallRenderer</code>.</p>
+
+<h4 id="a5"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q05">A5</a></h4>
+
+<p>The section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#the-ui-and-layout-dont-abuse-the-designer">The UI and Layout: Don’t Abuse the Designer</a> shows a very easy and reliable recipe. After the problem is fixed, it’s important to avoid over-using of the designer.</p>
+
+<h4 id="a6"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q06">A6</a></h4>
+
+<p>The most usual mistake is forgotten call to the method <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.control.setstyle%28v=vs.110%29.aspx">Conrol.SetStyle</a>, which is a protected method. The control should be <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.controlstyles%28v=vs.110%29.aspx">set <code>Selectable</code></a>.</p>
+
+<p>When the control inherits some already functional control class, this is usually not needed, but the base class of a custom graphic-rendering class is often <code>System.Windows.Forms.Control</code>. In this case, this is often forgotten.</p>
+
+<p>Another thing to remember is setting the properties <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.control.tabindex(v=vs.110).aspx">TabIndex</a> and <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.control.tabstop(v=vs.110).aspx">TabStop</a>.</p>
+
+<h4 id="a7"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q07">A7</a></h4>
+
+<p>Look at the <em>entry point</em> (the method <code>Main</code> of your application). It calls <a href="https://msdn.microsoft.com/en-us/library/ms157902(v=vs.110).aspx"><code>Application.Run(new SomeFormClass())</code></a>. When it happens, the instance of that class, <code>SomeFormClass</code> passed to <a href="https://msdn.microsoft.com/en-us/library/ms157902(v=vs.110).aspx"><code>Application.Run</code></a> becomes <em>bound</em> with the calling thread. This makes this thread the <em>UI thread</em>. Not only this form instance, but all UI component children later added to this instance as a parent, directly or indirectly, become bound with this thread. You won’t be able to call any instance methods or properties of all these objects in any other thread, except few methods related to <em>UI thread invocation</em> mechanism.</p>
+
+<p>Instead, UI thread invocation should be used, which is described in detail in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#ui-thread-invocation">UI Thread Invocation</a>.</p>
+
+<h4 id="a8"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q08">A8</a></h4>
+
+<p>It looks like some threads prevent termination of the process. The process can terminate only when all threads of these process are complete. It does not apply to <em>background threads</em>.</p>
+
+<p>Therefore, when a main form of an application is closing, the developer must guarantee that it causes termination of all the thread are complete/terminated. The main (UI) thread will terminate simply because closing of the main form should allow the method <a href="https://msdn.microsoft.com/en-us/library/ms157902(v=vs.110).aspx"><code>Application.Run</code></a> to return. Other threads should exit their thread methods or be aborted; this process should be complete before main form is closed. The adequate point to perform this operation would be the overridden method <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.form.onformclosing(v=vs.110).aspx"><code>System.Windows.Form.OnFormClosing</code></a>. Note that the same method can be used to ask the user’s permission to exit the application. Alternatively, it could be a handler of the event <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.form.formclosing(v=vs.110).aspx"><code>System.Windows.Forms.FormClosing</code></a>.</p>
+
+<p>Alternative approach is using <a href="https://msdn.microsoft.com/en-us/library/system.threading.thread.isbackground(v=vs.110).aspx"><em>background threads</em></a>. The problem of this approach is that the time of thread termination is out of control of the developer’s control. It such thread does something to the UI after the main form is closed, it may cause unpredictable trouble, even if some testing shows that everything works.</p>
+
+<p>For further consideration, see also <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a-word-of-warning-thread-termination">A Word of Warning: Thread Termination</a>.</p>
+
+<p>As to the problem of preventing multiple application instances running simultaneously, I provide a comprehensive solution in my article <a href="https://www.codeproject.com/Articles/1089841/SingleInstance-NET">All Three Features of Single-Instance Applications at One Shot, .NET</a>.</p>
+
+<h4 id="a9"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q09">A9</a></h4>
+
+<p>Indeed, human perception is extremely sensitive to any sudden moves and can easily detect slightest transitions from smooth motion to abrupt moves. This trait was developed as an important survival factor. At the same time, “smoothness” does not mean equal time intervals. The human vision only detects if the function of the coordinates depending on time is _smooth_; and it does it extremely well; but this is a <a href="https://en.wikipedia.org/wiki/Smoothness">completely different thing</a>. I explain how to achieve smoothness in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#real-time">“Real” Time</a>.</p>
+
+<p>Chances are, the component responsible for the problem is the class <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.timer%28v=vs.110%29.aspx"><code>System.Windows.Forms.Timer</code></a>. The accuracy of the timer is so bad that is can never be used for anything even remotely periodic or smooth. Perhaps, the only benefit of this type is that it is the easiest to use (generally, other time types need <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#ui-thread-invocation">UI thread invocation</a> to work with UI).</p>
+
+<p>But the timers are not quite suitable for the purpose anyway. I explain it in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#why-not-timer">Why not Timer?</a></p>
+
+<h4 id="a10"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q10">A10</a></h4>
+
+<p>Please see the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#exceptions">Exceptions</a>.</p>
+
+<h4 id="a11"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q11">A11</a></h4>
+
+<p>Please see the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#using-resources-and-assemblyinfo-attributes">Using Resources and <code>AssemblyInfo</code></a>.</p>
+
+<h4 id="a12"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q12">A12</a></h4>
+
+<p>This is not a legitimate location. Only recently, I owned a computer which did not have a <code>C:\</code> drive at all, as a result of a couple of upgrades. There is no such standards to dictate that it should be.</p>
+
+<p>Moreover, there are no situations when a hard-coded file or directory names could be useful (not counting some temporary experimental code). In all cases, such names should be calculated during runtime based on the user input, configuration files or system properties legitimately retrieved via the OS API. One of the ways to do so is presented by the type <code>System.Environment.GetFolderPath</code>, in combination with the enumeration type <code>System.Environment.SpecialFolder</code>.</p>
+
+<p>See also this <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#persistentFile">code fragment</a> in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#persistent-configuration-and-data-contract">Persistent Configuration and Data Contract</a>.</p>
+
+<h4 id="a13"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q13">A13</a></h4>
+
+<p>There are several ways of finding of the executable directory of a currently running application. First of all, it’s good to use the method which does not require any special assembly references (such as the method using <code>System.Windows.Forms.Application</code>) and always works correctly, no matter how application is hosted. This is what I would advise:</p>
+
+<div class="pre-lang" id="premain631551"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="631551" id="copycode631551" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="c#" data-codeblock-processed="true" id="pre631551" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">string</span> location = System.Reflection.Assembly.GetEntryAssembly().Location;
+<span class="code-keyword">string</span> executableDirectory = System.IO.Path.GetDirectoryName(location);
+</pre>
+
+<p>What it does is: it finds the location of the main <em>executable module</em> of the <em>entry assembly</em>, the one containing your application <em>entry point</em> (<code>Main</code>). Of course, you can find location of any other assembly, for example, the calling assembly.</p>
+
+<p>It’s important to understand that there are some different ways of finding this directory, but some of them depends on how application is hosted (my not return correct results in case of Windows service or when are executed under the debugger), but the method I show here always works correctly.</p>
+
+<h4 id="a14"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q14">A14</a></h4>
+
+<p>Generally, a method is not bound to any particular thread in any way. Any method can be called from any thread. However, this fact does not remove the problems of <em>thread synchronization</em>.</p>
+
+<p>In some special situations, not directly related to synchronization, certain methods or properties are made callable only from a particular thread, such as the <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#a7">UI thread</a>. In such cases, <em>UI thread invocation</em> mechanism should be used, which is described in detail in the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#ui-thread-invocation">UI Thread Invocation</a>.</p>
+
+<p>The principles of the operation of this mechanism can be understood from my article <a href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">Simple Blocking Queue for Thread Communication and Inter-thread Invocation</a>.</p>
+
+<h4 id="a15"><a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#q15">A15</a></h4>
+
+<p>First of all, think at this: Do you really need to print a form? Let’s say, you can print it. But why? Typically, it will show all those buttons, check boxes, radio buttons and other interactive stuff… on paper. Clicking on all such items on paper won’t be too efficient, and yet, this is not the worst potential problem. Some of the information in <em>scrollable</em> controls may disappear. The principles of rendering on screen are quite far from that designed for paper.</p>
+
+<p>So, the most reasonable approach would be creation of some data abstraction layer and rendering the same data on different media independently. Don’t forget the most important principle to be applied here: <a href="https://en.wikipedia.org/wiki/Single_source_of_truth">SPOT or SSOT</a>.</p>
+
+<p>From the other hand, you may need to represent some graphical data on different media and make sure it looks identically. In this case, again, look at the section <a href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms#printing-export-of-graphics-and-graphics-rendering-is-the-same-thing">Printing, Export of Graphics and Graphics Rendering is the Same Thing</a>.</p>
+
+<p>If you still think you need to print a form, for example, as a quick and dirty solution, <a href="https://www.codeproject.com/search.aspx?q=print+form&amp;doctypeid=1%3b2%3b3%3b13%3b14%3b5">search CodeProject</a> or other similar forums.</p>
+
+<h2 id="final-notes">Final Notes</h2>
+
+<p>The present application is designed to be quickly adapted to other similar tasks, so it can be used as a kind of application template for the beginners.</p>
+
+<p>I’ll try to update Questions and Answers sections as I face new questions or recall other questions on related topics.</p>
+
+<p>If the readers show considerable interest in this kind of articles, I’ll probably write similar work on WPF. It can cover another big portion of questions to be answered at once.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Interactive-Animat">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/406123/Many-Questions-Answered-At-Once-Graphics-WinForms?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2017 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>

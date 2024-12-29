@@ -1,0 +1,761 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0070)https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal -->
+<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	
+	<link rel="preconnect" href="https://www.google-analytics.com/">
+
+	<link rel="preconnect" href="https://www.codeproject.com/">
+
+
+	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
+
+
+	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
+	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
+
+
+	<title>Single-Instance Applications Behavior, now for Free Pascal- CodeProject</title> 
+    
+	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+
+
+    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
+<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
+
+	
+<meta http-equiv="content-language" content="en-US">
+
+<meta name="Description" content="Single-instance application behavior can be considered comprehensive only if all three features are implemented: detection of second instance, passing command line and activation of first instance">
+<meta name="Keywords" content="">
+<meta name="Author" content="Sergey Alexandrovich Kryukov">
+<meta name="Rating" content="General">
+<meta name="Revisit-After" content="1 days">
+<meta name="application-name" content="CodeProject">
+<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
+
+
+
+<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
+<link rel="canonical" href="https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@CodeProject">
+<meta name="og:site_name" content="CodeProject">
+<meta name="twitter:creator" content="@CodeProject">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="4/3/2016 9:46:00 PM">
+<meta property="article:modified_time" content="7/13/2017 10:34:00 PM">
+<meta name="twitter:label1" content="Written by">
+<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
+<meta property="og:url" content="https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free">
+<meta property="og:title" content="Single-Instance Applications Behavior, now for Free Pascal">
+<meta property="og:description" content="Single-instance application behavior can be considered comprehensive only if all three features are implemented: detection of second instance, passing command line and activation of first instance">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
+<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
+<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
+<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
+	<script type="application/ld+json">{
+  "@context": "http://schema.org",
+  "@type": "TechArticle",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free"
+   },
+  "name": "Single-Instance Applications Behavior, now for Free Pascal",
+  "headline": "Single-Instance Applications Behavior, now for Free Pascal",
+  "url": "https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free",
+  "discussionUrl": "https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free#_comments",
+  "isFamilyFriendly": "true",
+  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
+  "commentCount": "0",
+  "editor" : {
+    "@type" : "Person",
+    "name" : "Editor",
+    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+  },
+  "publisher" : {
+    "@type" : "Organization",
+    "name" : "CodeProject"
+  },
+  "description": "Single-instance application behavior can be considered comprehensive only if all three features are implemented: detection of second instance, passing command line and activation of first instance",
+  "author" : [{
+      "@type" : "Person",
+      "name" : "Sergey Alexandrovich Kryukov",
+      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
+    }],
+  "datePublished": "2016-04-03",
+  "dateCreated": "2016-04-03",
+  "dateModified": "2017-07-13"
+}</script>
+
+
+
+
+	<!--<base target="_top">--><base href="." target="_top">
+	
+    
+
+
+<script type="text/javascript">
+function defrm () { /* thanks twitter */
+    document.write = '';
+    window.top.location = window.self.location;
+    setTimeout(function() { document.body.innerHTML = ''; }, 0);
+    window.self.onload = function(evt) { document.body.innerHTML = ''; };
+}
+
+if (window.top !== window.self) {
+    try {
+        if (window.top.location.host) { /* will throw for all except chrome */ }
+        else { defrm(); /* chrome */ }
+    } catch (ex) { defrm(); /* everyone else */ }
+}
+
+// Specific case where a site is screwing with us.
+if (typeof(DemoUrl) !== 'undefined') {
+    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
+                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
+}
+</script>
+	
+
+
+
+
+
+    <script async="" type="text/javascript" src="./Resources/js"></script>
+    <script type="text/javascript">
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
+    </script>
+
+<style type="text/css"></style></head>	
+
+<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
+
+
+
+<a class="access-link" href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+
+
+
+
+<div class="page-background">
+
+	
+	
+
+	
+
+	
+    <div id="ctl00_STM" class="site-top-menu fixed narrow">
+        <div class="main-content">
+            
+
+<div class="container memberbar clearfix flex-container flex-extend">
+
+	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
+	
+	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
+	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
+
+	<div class="flex-item">
+		
+	</div>
+
+	<div class="flex-item align-right">
+
+		
+
+		
+
+		
+	</div>
+</div>
+        </div>
+    </div>
+
+	
+    <div id="ctl00_SH" class="site-header fixed narrow">
+        <div class="main-content">
+            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
+            <div class="promo"></div>
+        </div>
+    </div>
+
+	
+			
+	
+
+	<div id="A" class="container-content-wrap fixed narrow"> 
+
+	<div class="container-content">
+
+        
+		<div class="clearfix">
+			<div class="container-breadcrumb float-left ">
+				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
+			</div>
+
+            <div class="float-left">
+				
+			</div>
+
+			<div class="edit-links float-right">
+				
+
+
+
+ 
+&nbsp;
+
+
+
+
+
+
+
+
+
+
+			</div>
+
+			<div class="article-nav float-right">
+				
+
+
+<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
+    
+</div>
+
+
+
+ 
+
+<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free?display=Print" class="tooltip" title="">
+   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
+<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
+
+
+
+<span id="ctl00_ActionLinks_R">
+    
+    
+</span>
+			</div>
+		</div>
+
+        
+		<div class="extended article-container-parts">
+
+			
+		    
+            
+
+			
+			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
+
+				<div class="article">
+
+					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1089948/View.aspx" id="aspnetForm" style="margin:0;padding:0">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="t5YxKzLsTIOk/vjQyvB64OsWabZdXdthzbwDb0Cq0bjU+++avGe5ac6Yd/PAyAUJtsM4NARSVHlR1zjYZr3XYiZ13ctgL3eucWamqpmU8kIJMGJ8UzA6hVlxVVfhhm4SMmb2jzcpNfGatAqhi9b3Ie2o5oMcZ/kQLS1xJ+bCtVZam91yWm1+C2vMGO7QI6WUc4cxGpirEi7EFY1Vz4Nzi4vtKoocDinJ7j2Jmn1D+S8MWyf2z0iiSuSz4ly0OF7WobgTEMm7GJjrqKmuvVk2xdupVASl48JwdgKsnVYuq7UMCvRJ5rAwzlDzA8ZkBqeQgyeugxS2haRrPNe6rAazTv4iAgW1GxEk8I3EYw14kPY3HMPCSfm2F2sWmBBQ5cLiupbIxp1j3NLyGq77CMq4okLt24b6/OpRYZrJo19tO5jGkqNem9F2JdSsx1LZyoVURlR1Bh7ZLdiqVaNwHFgz/ooen9HqlhFHJ+9Z5YSvdBTIBLHFwAtoKYLhq89Sk/A4HGSqR3sSiwQVU0mLSquwQl5yJJ6XU/FqdZOPLbI7cL8ypl56ZNZfgllLu77mhMKG1f6+rMAiKdGqVSTXBUhAVrSNH0pLjlpttMYEOm7xW3fAZ9QkvWQ1sRYCjzm0i7/WLNpLq+7RBgwwNu0dcBCwV7AQJ38oIa0wQze+WsWAmy1FBYXS6ruGmt2EcxWsWsLv5qCSO6zr4JeUU3knQHrG8oJ/Sqdue7cxCV85qnC1KX82GzKdFPJWMofTra2ZmmQVFe83uDItChTkWfkHg7p2bfw0T9t+RBUXe5OIFtsBo8hKZ7FMiT8xYbyAEJNS7IwWHmQg+1feZd/OOJ7eoBBYN0JouAfedIB1O1VdQ7Bz1V4ElUcbKM7t5hAzNW527IMnmv9dp9QWReZ1K0F6l/xziXo+2dGP3DRBpoN2QPzoz6ODw3dCJBVqlL7lY7R7uwb1Ib3HQ4XVZR2pY6xJHiwHkuIXOsBEkddE5iJzJXhT5yGo3RA7VZTtMVE+evqxRpQr0DY6cH67faRwW9fWi6n5zDG+3FMf2l+Pvo72EnuXQ1xp3g0G+/Q6P8u8Lia5Zq1X0W7G9FojW1OOzUadcbV/zEPuqUPB4gQ6YCAHxAXVJ6VPYNZbtMR9tn71XjVhz1/rgh9E/4J6ftc5/rj+8Who3hsJK+ChqioKZJKA1CnMg71ouQtp6QwWF8xrsyZsHHcaCz6t3eec+pUmwJUlqt9pi+PmZPhLZrxQ7kA49dOQ3BYJ2bDTAh7pMaSloiF9dCMqeiNNpwyONog4H5BMKwoOrXPBo8gx+//36+PJDGGAOBzAfRVUuc2SqZDIYoHrSx0pdhNMgIHS8ptzVZOHhQ334kns10ZO9hsHSoEcJeEZ6nYxJ1oDA8ikcbIRs3RFV7NjSjQdMkC5gQ0Jx1FHdaMetBDnuTlLrQ+NRDuta8BtYETaJSAIExDxCH223N69g4ZYh2TEP3AOgLk+77fcb56z5G/3AyZLcgOBMJggWCK7GMjicvDQ96kvyNuKZNbayeNZM4HUJtRcrulgrnTwIDFHIJWeB09Zu0TpWqScBgJdgeZKaZ4srjDXEpO/x7viuuNyu1+D1rfvh0CrPc9A9slMNf58Gsr0ykdKOil9H71TZMzAfNIs9YRvZ4Qerxu/34pSEoCpoEKBjL3IPQ15AivKnFMRBUfnTyydfxf30yf1RBmydGd4G7Gp4OmOSlfNkChcgX3EECeQN618ONGnYUf6nNKsYG/c4rmI4FvygtRk0zeCeZjJ1sselRsd/c4UHapjLiXzmIJLCb1XgwhrY0Lufcrii6o=">
+</div>
+
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
+</div>
+
+					
+					 
+					<div class="header">
+					    <a name="Main"></a>
+					    <a name="_articleTop" id="_articleTop"></a>
+
+					    
+						<div>
+							<span id="ctl00_TagListHorz_TagWrp">
+
+	
+	
+
+	
+	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
+
+	
+	
+</span>
+
+
+						</div>
+					    <div class="title">
+					        <h1 id="ctl00_ArticleTitle">Single-Instance Applications Behavior, now for Free Pascal</h1>
+					    </div>
+
+                        <div>
+					        
+					        <div class="entry flex-container">
+
+								
+
+                                <div class="flex-item" style="flex:1 1 auto">
+                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
+                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
+
+                                        <div class="flex-item" style="margin-top:-4px;">
+                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1089948">
+
+	<meta itemprop="upvoteCount" content="0">
+
+
+	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
+
+					
+		
+
+		
+		<div class="nowrap tooltip">
+
+			
+			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
+			
+
+			
+			
+
+			
+            
+
+			
+                
+
+		</div>
+		
+	
+		
+		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
+
+		
+
+		
+		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
+
+		
+		
+	</div>
+
+	
+	
+
+</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="flex-container" style="color:#666;font-size:smaller">
+                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">2 Apr 2016, last revision: 13 Jul 2017</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 1</span> &nbsp; </span></span>
+                                    </div>
+                                </div>
+					        </div>
+
+                            
+
+                        </div>
+
+                        <div id="ctl00_DescriptionSpot" class="summary">Single-instance application behavior can be considered comprehensive only if all three features are implemented: detection of second instance, passing command line and activation of first instance</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+
+                    </div>
+                    
+					
+					
+
+					
+
+					
+					
+
+					
+					
+
+						
+					
+
+					
+
+						
+						<div id="contentdiv" class="text">
+						
+
+
+
+<!-- Article Starts -->
+
+<ul class="download">
+	<li><a href="Single-Instance-Applications-Behavior-now-for-Free-Pascal.zip">Download source code — 8.6 KB</a></li></ul>
+
+<p><img title="Demo" alt="2016-04-02.Single-Instance-Applications-Behavior-now-for-Free-Pascal.html.webp" src="./Resources-articles/2016-04-02.Single-Instance-Applications-Behavior-now-for-Free-Pascal.html.webp"/></p>
+
+<h2>Contents</h2>
+
+<p>&nbsp;</p>
+
+<div class="toc">
+<ul style="list-style-type: none">
+	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#back-to-pascal">Back to Pascal!</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#the-idea">The Idea</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#the-usage">The Usage</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#implementation">Implementation</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#my-bonus">My Bonus</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#demotest-application-build-and-platform-compatibility">Demo/Test Application, Build and Platform Compatibility</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#credits">Credits</a></li></ul>
+</div>
+
+<p>&nbsp;</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is a second article from the short two-article series on single-instance application behavior. The previous article was on the solution for .NET; it can be found here: <a href="https://www.codeproject.com/Articles/1089841/SingleInstance-NET">All Three Features of Single-Instance Applications at One Shot, .NET</a>.</p>
+
+<p>The present article is the result of coming back to my very old product written with Borland Delphi, which I wanted to port to Free Pascal with Lazarus LCL UI library and promote it from Windows-only to cross-platform code. As I mentioned in my recent article referenced above, some my solutions for single-instance application behavior was not satisfactory, including the solution for Pascal. By this time, I already had .NET solution described in the same article, so I developed new Free Pascal solution following the model set by my .NET solution. It came out extremely compact, so I want to share it.</p>
+
+<p>For motivation and explanation of the requirements to the single application instance facility, please see the article referenced above. I wrote the present article in assumption that the reader read this article and understand the ideas behind the .NET implementation.</p>
+
+<h2 id="back-to-pascal">Back to Pascal!</h2>
+
+<p>Why Pascal? And why Free Pascal? Because this is the best cross-platform technology of programming in native code I ever knew. Apparently, old good Delphi suffered dramatic decline. It was related to many events, first of all, creation of .NET and C# under the leadership of former Delphi chief architect Anders Hejlsberg, who moved to Microsoft, problems with Linux version Kylix, its CLX cross-platform library and lack of unification with VCL, severe bugs in some newer versions, acquisition of Delphi by Embarcadero… Most Delphi developers migrated to .NET with ease, because Delphi legacy and direct influence on .NET made .NET features quite predictable for people experienced in Delphi.</p>
+
+<p>At the same time, the history of Object Pascal and Delphi Pascal development created whole programming culture, highly cultural, “academic” language, safe and efficient, with expressive capacity superior to many modern languages, including, in a number of aspects, .NET languages. To name just a few: sets, enumeration type which <a href="https://www.codeproject.com/Articles/129830/Enumeration-Types-do-not-Enumerate-Working-around">really enumerate</a> and can be used for indexing arrays, and, importantly, fully-fledged meta-class system, which, sadly, was not inherited by .NET, replaced by much weaker, untyped <code>System.Type type</code>.</p>
+
+<p>And Free Pascal community picked up the fallen flag. I did not pay much attention for it for a number of years; and the product gave me impression of immaturity, but couple of latest versions really impressed me. First of all, they created a truly cross-platform tool, including cunning UI architecture called LCL.</p>
+
+<p>The list of supported platforms is <a href="http://wiki.freepascal.org/Platform_list">quite impressive</a>.</p>
+
+<h2 id="the-idea">The Idea</h2>
+
+<p>Exactly as in the previous article, the main idea is <a href="https://www.codeproject.com/Articles/1089841/SingleInstance-NET#a2">using some message-oriented IPC for passing command-line data</a>; and the same mechanism should be re-used for detection of the presence of absence of the first instance of the application.</p>
+
+<p>Free Pascal bundles an extremely light-weight and simplified IPC library; and its simplicity if very good for our purpose. This facility is implemented as a pair of classes: <code>SimpleIpc.TSimpleIPCServer</code> and <code>SimpleIpc.TSimpleIPCClient</code>. There is no a need to catch an exception on failure to connect; detection of the server part is already implemented as the Boolean function <code>SimpleIpc.TSimpleIPCClient.ServerRunning</code>. Please see <a href="http://www.freepascal.org/docs-html/fcl/simpleipc/tsimpleipc.html">http://www.freepascal.org/docs-html/fcl/simpleipc/tsimpleipc.html</a>.</p>
+
+<p>The primary message type these classes operate with is string; it can be sent and received without any additional preparation. However, the only data-intensive message we need is not string, but array of strings, which we need to serialize into a string and deserialize back into the array.</p>
+
+<h2 id="the-usage">The Usage</h2>
+
+<p>Here is how the usage looks in the entry point block: it is started with the single additional line calling this class function:</p>
+
+<div class="pre-lang" id="premain908693"><div>Delphi</div><div class="pre-action-link"><span class="copy-code" data-index="908693" id="copycode908693" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="Delphi" data-codeblock-processed="true" id="pre908693" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">if</span> TSingleInstanceUtility.IsSecondInstance <span class="code-keyword">then</span> exit;</pre>
+
+<p>However, this is not all. When the <code>TSingleInstanceUtility.IsSecondInstance</code> returns false, first instance continues to execute. It should prepare the server used to handle requests from the second instance later. This time, the application needs to create an instance of the <code>TSingleInstanceUtility class</code>. This instance needs a handler of the only instance public event, <code>OnCommandLineFromSecondInstance</code>. The event handler of this event accept a single string parameter used to pass command line from the first instance. This is not a simple string. This is a serialized array of already parsed command line parameters, serialized in a special way. So the server part needs to deserialize this string back to the array of strings. This is done by calling a class helper method <code>TSingleInstanceUtility.DeserializeCommandLine</code>. Then the server part (first instance) is supposed to handle all those command-line parameters at once, if applicable, and, optionally, activate itself, if applicable, which can be showing its main application window on top of other application windows, in Z order. At the end of application lifetime, the instance of <code>TSingleInstanceUtility</code> should be destroyed. This is how it may look, in a skeleton form:</p>
+
+<div class="pre-lang" id="premain701204"><div>Delphi</div><div class="pre-action-link"><span class="code-collapse" data-index="701204" id="preShrink701204">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="701204" id="copycode701204" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="Delphi" data-codeblock-processed="true" id="pre701204" style="margin-top: 0px;" class="notranslate">procedure TFormMain.AcceptCommandLineFromSecondInstance(commandLine: string);
+<span class="code-keyword">var</span>
+   files: <span class="code-keyword">array</span> of <span class="code-sdkkeyword">string</span>;
+   <span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="code-keyword">begin</span>
+   Application.Minimize; <span class="code-comment">//</span><span class="code-comment"> this is what really…</span>
+   Application.Restore;  <span class="code-comment">//</span><span class="code-comment"> brings a form to top</span>
+   Application.BringToFront; <span class="code-comment">//</span><span class="code-comment"> just in case, for other platforms</span>
+   files := TSingleInstanceUtility.DeserializeCommandLine(commandLine);
+   <span class="code-comment">//</span><span class="code-comment"> handle each file</span>
+   <span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="code-keyword">end</span>;
+
+constructor TFormMain.Create(TheOwner: TComponent);
+<span class="code-keyword">begin</span>
+   inherited Create(TheOwner);
+   SingleInstanceUtility := TSingleInstanceUtility.Create;
+   SingleInstanceUtility.OnCommandLineFromSecondInstance := @AcceptCommandLineFromSecondInstance;
+   <span class="code-comment">//</span><span class="code-comment"> uninitialize form</span>
+   <span class="code-comment">//</span><span class="code-comment">..</span>
+<span class="code-keyword">end</span>;
+
+<span class="code-keyword">destructor</span> TFormMain.Destroy;
+<span class="code-keyword">begin</span>
+   SingleInstanceUtility.Free;
+   inherited Destroy;
+<span class="code-keyword">end</span>;</pre>
+
+<p>The way the form is activated deserves special discussion. For Windows, ideal way of activating of the form is pretty complicated. In the original Delphi application I recently ported to Free Pascal in a cross-platform way, it was a pretty tricky solution based on native Windows API:</p>
+
+<div class="pre-lang" id="premain50641"><div>Delphi</div><div class="pre-action-link"><span class="copy-code" data-index="50641" id="copycode50641" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="Delphi" data-codeblock-processed="true" id="pre50641" style="margin-top: 0px;" class="notranslate">procedure BringToFront(AppHandle: THandle);
+<span class="code-comment">//</span><span class="code-comment">SA!!! July 2 2003: bugzilla#284 finally found solution:</span>
+<span class="code-keyword">var</span>
+   topWindow: HWnd;
+<span class="code-keyword">begin</span>
+   <span class="code-keyword">if</span> AppHandle = <span class="code-digit">0</span> <span class="code-keyword">then</span> exit;
+   topWindow := GetLastActivePopup(AppHandle);
+   <span class="code-keyword">if</span> (topWindow&lt;&gt;0) <span class="code-keyword">and</span> (TopWindow &lt;&gt; AppHandle) <span class="code-keyword">and</span>
+      IsWindowVisible(topWindow) <span class="code-keyword">and</span> IsWindowEnabled(topWindow) <span class="code-keyword">then</span>
+         SetForegroundWindow(topWindow);
+<span class="code-keyword">end</span>;</pre>
+
+<p>Here, <code>GetLastActivePopup</code> is needed to cover special case when the application is showing a dialog when the second instance starts. Too bad, in a cross-platform implementation of LCL <code>TForm</code> or <code>TApplication</code>, there is no a method which does something like that for Windows part of implementation. Of course, direct use of Windows API is still possible, under the precompiler directive isolating Windows part of implementation, but it still compromise the portability of the application and especially its maintenance. In pure cross-platform LCL calls, the <code>Application.BringToFront</code> call merely flashes the task bar icon, bringing attention to the application, exactly as its .NET analog, which is obviously not enough and not convenient for the users. Showing the form on top is possible by minimizing the application and then showing it normally, but it produces some barely noticeable flicker.</p>
+
+<p>Other methods supposed to be suitable, such as <code>TForm.ShowOnTop</code> or <code>TForm.EnsureVisible(AMoveToTop: Boolean = True)</code> have no effect. And it all doesn’t work on the application showing a dialog.</p>
+
+<p>This is not actually a Lazarus problem. Working with Windows-only version of the code (which can be done with <code>{$IFDEF MSWINDOWS}</code> compilation directive), the attempts to bring a window on the top shows that the behavior of Windows API has changed since XP. The problem is that setting a window as a foreground Window really works with <code>SetForegroundWindow</code>, but, on Windows 7, it requires a user’s click on the system tray, where the application tray icon starts blinking after the call; other functions such as <code>BringWindowToTop</code> are seemingly ignored. Of course, this is quite inconvenient for the purpose, so the “trick” with minimized and then restored window is still the best.</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The implementation is similar to the .NET implementation described in the <a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal">first article of these series</a>https://www.codeproject.com/Articles/1089841/SingleInstance-NET, but is notably more compact. Here, I’ll show just the core method of the utility, which tries to connect to the server and sends the command line data in case of successful connection:</p>
+
+<div class="pre-lang" id="premain768276"><div>Delphi</div><div class="pre-action-link"><span class="code-collapse" data-index="768276" id="preShrink768276">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="768276" id="copycode768276" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
+<g>
+<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
+    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
+    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
+<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
+    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
+    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
+    C291.206,428.715,289.92,430,288.341,430z"></path>	
+</g>
+</svg></span></div></div><pre lang="Delphi" data-codeblock-processed="true" id="pre768276" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">class</span> <span class="code-keyword">function</span> TSingleInstanceUtility.IsSecondInstance: <span class="code-sdkkeyword">boolean</span>;
+<span class="code-keyword">var</span>
+    client: TSimpleIPCClient;
+    commandLineMerged: <span class="code-sdkkeyword">string</span>;
+<span class="code-keyword">begin</span>
+   <span class="code-sdkkeyword">Result</span> := false;
+   client := TSimpleIPCClient.Create(nil);
+   client.ServerID := GetServerID;
+   <span class="code-keyword">try</span>
+      <span class="code-keyword">try</span>
+        <span class="code-keyword">if</span> not client.ServerRunning <span class="code-keyword">then</span> <span class="code-keyword">begin</span>
+             <span class="code-sdkkeyword">Result</span> := false; exit;
+         <span class="code-keyword">end</span> <span class="code-comment">{</span><span class="code-comment">if}</span>;
+         client.Connect;
+         <span class="code-sdkkeyword">Result</span> := true;
+         <span class="code-keyword">if</span> CommandLine.FileCount &gt; <span class="code-digit">0</span> <span class="code-keyword">then</span> <span class="code-keyword">begin</span>
+            commandLineMerged := SerializeCommandLine;
+            client.SendStringMessage(commandLineMerged);
+         <span class="code-keyword">end</span> <span class="code-keyword">else</span>
+            client.SendStringMessage(EmptyString);
+      <span class="code-keyword">except</span>
+         <span class="code-sdkkeyword">Result</span> := false;
+      <span class="code-keyword">end</span> <span class="code-comment">{</span><span class="code-comment">exception}</span>;
+   <span class="code-keyword">finally</span>
+      client.Free;
+   <span class="code-keyword">end</span> <span class="code-comment">{</span><span class="code-comment">exception}</span>;
+<span class="code-keyword">end</span> <span class="code-comment">{</span><span class="code-comment">TSingleInstanceUtility.IsSecondInstance}</span>;</pre>
+
+<p>Naturally, as in .NET remoting, IPC facility requires setting of the string property <code>ServerID</code>, which is supposed to be system-unique. In my previous article, I explained my decision to use the full path name of the <a href="https://www.codeproject.com/Articles/1089841/SingleInstance-NET#a5">application’s executable file</a>. With <code>SimpleIPC</code>, things are, well, simpler. As this string is not used as a part of URI with a path, a path name cannot interfere with URI syntax, so it is used in my solution as is: ServerID is assigned to the executable file path as is; and this is the value returned by <code>GetServerID</code>. On different platform, this path will look differently, but will still be unique on each system.</p>
+
+<h2 id="my-bonus">My Bonus</h2>
+
+<p>The operations related to my very old command line utility found in the file “CmdLinePlus.pas”. It’s usage is clear from the source code. For readable documentation on this unit, I would recommend to rename this file to .HTML and read with a Web browser (it was the documenting style I invented, but later I found out that other developers also used exact same technique).</p>
+
+<p>It is not as convenient for a developer and comprehensive as my more recent .NET work <a href="https://www.codeproject.com/Articles/144349/Enumeration-based-Command-Line-Utility">Enumeration-based Command Line Utility</a>, but it is fully functional. Good or bad, but the single-instance application facility described in the present article is based on the common file format defined by this command-line utility. Every command line parameter, as string item of the command line, as it is understood in Delphi, Free Pascal and .NET, is parsed and classified in two major kinds of parameters: a key with optional value and status, and a file name. Strictly speaking, file name is not required to be a file name; this is just the most common interpretation; this is a parameter which comes without a key. A key is the string started with ‘-’ or ‘/’, the key itself, followed by optional value, separated by ‘:’, as in a conventional .NET format.</p>
+
+<p>Now, the limitation is: single-instance facilities only uses a set of file name, which is presented as an array of string. Only this set of strings is sent to the first instance of the application.</p>
+
+<p>Of course, anyone is free to change that and use original command line.</p>
+
+<p>It’s interesting to mention that <code>TSingleInstanceUtility</code> serializes this array of string, to send it as one single message to send it to the first instance; and the first instance needs to deserialize it, <a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#deserialize">as it’s shown in the usage code sample</a>, with the use of the helper function. The serialization is reduced to joining all strings of an array into a single string, separated by a character which can never be entered in a command line; the character #1 is chosen.</p>
+
+<h2 id="demotest-application-build-and-platform-compatibility">Demo/Test Application, Build and Platform Compatibility</h2>
+
+<p>I provided the demo/test application “SingleInstanceUtilityDemo” which shows a tab control when a second instance starts; if some items of the command line are really existing files, they are shown as texts in each separate tab page.</p>
+
+<p>For Windows, single-click batch file “build.bat” is provided to build all the code. All output of the build is sent to the sub-directories of the same directory as the batch file: “bin.Debug”, “bin.Release” (obviously, I created two customary build modes) and intermediate directory “lib” where all intermediate (object/unit) files are merged. For quick and total clean-up, the batch file “clean.bat” is provided.</p>
+
+<p>The build is based on Lazarus application “lazbuild.exe”. To build code, it’s enough to install Lazarus for required platform. The path to “lazbuild.exe” in “build.exe” may need to be modified, depending on the installation directory. To load the project and build in IDE, click on “SingleInstanceUtilityDemo.lpi”.</p>
+
+<p>For cross compilation, you can use the specific Lazarus technique: rebuild of Lazarus, which can be done in the IDE itself: menu Tools =&gt; Configure “Build Lazarus” or Build Lazarus…</p>
+
+<p>The rebuild Lazarus can be sent in a separate directory and later used for cross build of the project.</p>
+
+<p>I did not yet test the solution on anything except Windows 7, but plan to text it on Linux and Android. I will be much grateful if anyone takes the labor of testing of this facility and report any problems.</p>
+
+<h2 id="credits">Credits</h2>
+
+<p>Free Pascal and Lazarus Team:<br>
+<a href="http://wiki.freepascal.org/">http://wiki.freepascal.org</a><br>
+<a href="http://www.freepascal.org/aboutus.var">http://www.freepascal.org/aboutus.var</a><br>
+<a href="http://www.lazarus-ide.org/">http://www.lazarus-ide.org</a><br>
+<a href="http://www.lazarus-ide.org/index.php?page=about">http://www.lazarus-ide.org/index.php?page=about</a></p>
+
+<p>Simple IPC: Copyright © 2005 by Michael Van Canneyt.</p>
+
+<!-- Article Ends -->
+
+
+						</div>
+						
+
+						
+						<h2>License</h2>
+						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
+						
+
+						
+						<br>
+						
+						    <br>
+						
+						
+
+						<div class="clearfix"></div>
+
+						<div style="padding-top:8px">
+							
+						</div>
+
+					
+
+				    
+					</form>
+
+				</div>
+
+				
+				<div class="bottom-promo"> 
+				    
+				</div>
+				
+                
+                
+
+				
+				
+				
+
+			</div>
+			
+
+            
+            
+            
+
+        </div>
+        
+
+		
+		<div class="site-footer">
+			<div class="align-left">
+				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1089948/Single-Instance-Applications-Behavior-now-for-Free">Permalink</a><br>
+				<br>
+				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
+    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
+                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
+			</div>
+
+            <div class="align-center">
+				
+
+
+<div class="page-width">
+    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal?PageFlow=FixedWidth">fixed</a>
+    |
+    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal?PageFlow=Fluid">fluid</a>
+</div>
+
+
+				
+
+				
+
+	            
+
+                <br>
+			</div>
+                
+			<div class="align-right">
+				Article Copyright 2016 by Sergey Alexandrovich Kryukov<br>Everything else
+				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
+                <br>
+				Web01 
+				2.8:2024-12-08:1<br>
+			</div>
+		</div>
+		
+
+		<br clear="all">
+		
+			
+
+	</div> 
+	</div> 
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript"> // DEFERRED script
+
+document.addEventListener('DOMContentLoaded', function() {
+
+	new CodeBlocks().initialise('#contentdiv');
+	
+	$('.author-wrapper .description').shorten({showChars: 400});
+	
+	anchorAnimate();
+	
+	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
+
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
