@@ -1,720 +1,253 @@
 ﻿<!DOCTYPE html>
-<!-- saved from url=(0082)https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode -->
-<html lang="en" data-lt-installed="true"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-	
-	<link rel="preconnect" href="https://www.google-analytics.com/">
-
-	<link rel="preconnect" href="https://www.codeproject.com/">
-
-
-	<link rel="preload" href="./Resources/logo250x135.gif" as="image">
-
-
-	<link rel="preload" href="https://www.codeproject.com/App_Themes/CodeProject/Img/logo135-bg.gif" as="image">
-	<link rel="preload" href="./Resources/jquery-3.4.1.min.js.download" as="script" type="text/javascript">
-
-
-	<title>All in One Toolchain for Article Writing with Visual Studio Code- CodeProject</title> 
-    
-	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
-
-
-    <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
-<script type="text/javascript" src="./Resources/article.min.js.download" defer=""></script>
-
-	
-<meta http-equiv="content-language" content="en-US">
-
-<meta name="Description" content="Now with auto-numbering! New Visual Studio Code extension “Extensible Markdown Converter” augments built-in Markdown extension to form all in one toolchain offering convenient editor, rendered document viewer, spell checker and converter to HTML, per CodeProject article submission requirements">
-<meta name="Keywords" content="">
-<meta name="Author" content="Sergey Alexandrovich Kryukov">
-<meta name="Rating" content="General">
-<meta name="Revisit-After" content="1 days">
-<meta name="application-name" content="CodeProject">
-<meta name="google-translate-customization" content="d908bb7ce7aff658-4c2f3a504525c916-g629383f736781a8a-13">
-
-
-
-<link rel="dns-prefetch" href="https://ajax.googleapis.com/"> 
-<link rel="canonical" href="https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@CodeProject">
-<meta name="og:site_name" content="CodeProject">
-<meta name="twitter:creator" content="@CodeProject">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="6/29/2017 1:32:00 PM">
-<meta property="article:modified_time" content="2/27/2021 1:43:00 PM">
-<meta name="twitter:label1" content="Written by">
-<meta name="twitter:data1" content="Sergey Alexandrovich Kryukov">
-<meta property="og:url" content="https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu">
-<meta property="og:title" content="All in One Toolchain for Article Writing with Visual Studio Code">
-<meta property="og:description" content="Now with auto-numbering! New Visual Studio Code extension “Extensible Markdown Converter” augments built-in Markdown extension to form all in one toolchain offering convenient editor, rendered document viewer, spell checker and converter to HTML, per CodeProject article submission requirements">
-
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<link rel="apple-touch-icon" sizes="144x144" href="https://www.codeproject.com/favicon/apple-touch-icon.png"> 
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.codeproject.com/favicon/favicon-32x32.png"> 
-<link rel="icon" type="image/png" sizes="16x16" href="https://www.codeproject.com/favicon/favicon-16x16.png"> 
-<link rel="manifest" href="https://www.codeproject.com/favicon/manifest.json"> 
-<link rel="mask-icon" href="https://www.codeproject.com/favicon/safari-pinned-tab.svg" color="#ff9900">
-	<script type="application/ld+json">{
-  "@context": "http://schema.org",
-  "@type": "TechArticle",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu"
-   },
-  "name": "All in One Toolchain for Article Writing with Visual Studio Code",
-  "headline": "All in One Toolchain for Article Writing with Visual Studio Code",
-  "url": "https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu",
-  "discussionUrl": "https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu#_comments",
-  "isFamilyFriendly": "true",
-  "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
-  "commentCount": "0",
-  "editor" : {
-    "@type" : "Person",
-    "name" : "Editor",
-    "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
-  },
-  "publisher" : {
-    "@type" : "Organization",
-    "name" : "CodeProject"
-  },
-  "description": "Now with auto-numbering! New Visual Studio Code extension “Extensible Markdown Converter” augments built-in Markdown extension to form all in one toolchain offering convenient editor, rendered document viewer, spell checker and converter to HTML, per CodeProject article submission requirements",
-  "author" : [{
-      "@type" : "Person",
-      "name" : "Sergey Alexandrovich Kryukov",
-      "url" : "https://www.codeproject.com/script/Membership/View.aspx?mid=2291164"
-    }],
-  "datePublished": "2017-06-29",
-  "dateCreated": "2017-06-29",
-  "dateModified": "2021-02-27"
-}</script>
-
-<script type="text/javascript">
-function defrm () { /* thanks twitter */
-    document.write = '';
-    window.top.location = window.self.location;
-    setTimeout(function() { document.body.innerHTML = ''; }, 0);
-    window.self.onload = function(evt) { document.body.innerHTML = ''; };
-}
-
-if (window.top !== window.self) {
-    try {
-        if (window.top.location.host) { /* will throw for all except chrome */ }
-        else { defrm(); /* chrome */ }
-    } catch (ex) { defrm(); /* everyone else */ }
-}
-
-// Specific case where a site is screwing with us.
-if (typeof(DemoUrl) !== 'undefined') {
-    document.write(unescape('%3Cme') + 'ta http' + '-equiv="re' + 'fresh con' +
-                           'tent="1;url=' + DemoUrl + unescape('"%3CE'));
-}
-</script>
-	
-
-
-
-
-
-    <script async="" type="text/javascript" src="./Resources/js"></script>
-    <script type="text/javascript">
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
-    </script>
-
-<style type="text/css"></style></head>	
-
-<body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
-
-
-
-<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
-
-
-
-
-<div class="page-background">
-
-	
-	
-
-	
-
-	
-    <div id="ctl00_STM" class="site-top-menu fixed narrow">
-        <div class="main-content">
-            
-
-<div class="container memberbar clearfix flex-container flex-extend">
-
-	<div id="ctl00_MemberBar_GenInfo" class="flex-item align-left">65,938 articles</div>
-	
-	<div id="ctl00_MemberBar_ChangeNotice" class="flex-item align-left">CodeProject
-	is changing. <a href="https://www.codeproject.com/info/Changes.aspx">Read more</a>.</div>
-
-	<div class="flex-item">
-		
-	</div>
-
-	<div class="flex-item align-right">
-
-		
-
-		
-
-		
-	</div>
-</div>
-        </div>
-    </div>
-
-	
-    <div id="ctl00_SH" class="site-header fixed narrow">
-        <div class="main-content">
-            <div class="logo"><a href="https://www.codeproject.com/"><img id="ctl00_Logo" tabindex="1" title="CodeProject" src="./Resources/logo250x135.gif" alt="Home" style="height:135px;width:250px;border-width:0px;"></a></div>
-            <div class="promo"></div>
-        </div>
-    </div>
-
-	
-			
-	
-
-	<div id="A" class="container-content-wrap fixed narrow"> 
-
-	<div class="container-content">
-
-        
-		<div class="clearfix">
-			<div class="container-breadcrumb float-left ">
-				<div><a rel="nofollow" href="https://www.codeproject.com/script/Content/SiteMap.aspx">Articles</a></div>
-			</div>
-
-            <div class="float-left">
-				
-			</div>
-
-			<div class="edit-links float-right">
-				
-
-
-
- 
-&nbsp;
-
-
-
-
-
-
-
-
-
-
-			</div>
-
-			<div class="article-nav float-right">
-				
-
-
-<div style="display:inline-block;position:relative;top:-6px;margin-right:20px">
-    
-</div>
-
-
-
- 
-
-<a id="ctl00_ActionLinks_PrintMd" data-tooltip="Print" data-enabletooltip="true" data-width="auto" href="https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu?display=Print" class="tooltip" title="">
-   <img src="./Resources/print48.png" width="24" height="24" style="border:0">
-<div class="speech-bubble-container-up" style="width:auto">  <div class="speech-bubble-up" style="text-align:center"> Print</div>  <div class="speech-bubble-pointer-up">    <div class="speech-bubble-pointer-up-inner"></div>  </div></div></a>
-
-
-
-<span id="ctl00_ActionLinks_R">
-    
-    
-</span>
-			</div>
-		</div>
-
-        
-		<div class="extended article-container-parts">
-
-			
-		    
-            
-
-			
-			<div id="AT" class="article-container  fixed narrow" style="max-width:inherit;"> 
-
-				<div class="article">
-
-					<form name="aspnetForm" method="post" action="https://www.codeproject.com/Articles/1194125/View.aspx" id="aspnetForm" style="margin:0;padding:0">
-<div>
-<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="MgQh2238oCY9cagN04Kbz0/0Juc3oAu7TEGaXNBDr8gJAUrYjGxd0S4E7zS4wKyvFMubWwWur8r1F+/ati270MZlpMZzQpiYsKhfHQ6T+IOO9TIu8GPmNnmqabLF8f5PiAfIOfCdqg0a/ZdOf4Joj1cIhKwInACwp/WUt+UGnXGU2AhT1bnTynVXHQTJatZAVU3FAzL5qz5frIBtKogV2gvml9f6VLgp7bsJloGZ0TktYsYd3VKeZ6/C+5XXt/RrCKTYzRXqNO5ruqMnberU1A4ojB6oeLwcpo4+PCWUvHFpDSk8AjV+caURxJ3Sw78JFw4vEyxbl1lZlPA4UY2pZqUsbdmAZoYjLQeUyIQ664O2fbJqkHs0bKannJ12IprMCZg185OiEw/U8ALO+XqQVtE7VbHRXnYs+Y4jouLCQuRMmLkH0gSpw+OfBGvHB+ILQv2kY/TK/0emuOor6Ym3HV5TpD7b0Ufg83AQ+G8x1KQB1AnCfz0mLn5D4f+n21S2RGmYd+RkYJMtLPmgjdlUgZZw9b2x3R8LOQETKnHGtSHKXWRrws15RIP7RUhDt0CQKM30Cg8iHsT2qruVlxXqs1ihVVeejl55sBEi01fUaxU/b4H3EfBTyilALATFh1MsPsK8lJsJBjSyUz+fuk+3Je975ksjMBLNFNrb2/S0E1i2FbTkSUif84PwV0eOOfLfO7Nc4iREUjNwZCdjhSFFs8rrRGQz9iarYYOsIZHR/DzSLLB1xTFoE9i3i1LoPXJjUCaJ2G1iJ/PvP8sDzYP3HVjN0kHwpSO0iHZA7JdnoDGCwz0wtcn4GGyt6Hhr5C9YGnGYc3JjRhs2WxfZBYUzwP9QUiIyN3bM7bD7TM8V4hM06HdD3NIcqSD2x/rUBcZ5sI1lYpB2nmR934120MqUDdrKIZ4PNwxIOnXhc6/l8ktmc3XOI8ysLIHF8rXvbmwQB5uY3ydwp1BvQqoZPAeOUjEwF27SIq8Mmb0K4n2qu/Tvp4q5cwvhPqQwhZ7jEqsXp86lCxv8X5JP3U/XqJSTPT9O6da+LtyN05m3g7Im0jPqUUGp+oGqUOAsucSvCm5J/L0fO3hhLxoSdQGiLK7RYAOvrCU3YiNB+OI2g6FNm9yU1j5PO0avFtfNKDA0wB/g/T5lzumh9LBPPnbMAEsno8j2u2NlWyB3s6EuYQ1mQM0FmVRVEGSE35wmWMD3RyPwp3ZYgM34zaOfWEU4VjWvOA9A19EYJU/CVQXELoq1zss0fUg4auhTK7bbVepCGnrVKAtwB9Kf+jIvPxaR/MIc8+Di/KAFtILt9YSqF88zKoBOAjAWozB6dxXff5XXFDKRzpKl+zDFu/xZ7syTq6cjL9dQIVdW2OI3OqWCnh+n7DpQ4ocCLT8dOe3HFZQ3L9faThYW+amVpoarzGJIBKO9THB/7+MKJdkQldOr2vGsLTAUZVdlxBZpjAtuaAEiZVB5HARHVdgeaWHSZvF2mLiBGq3TopJSl0z9qB0MZKiXZ0vn/XupiGhKOEXdkboqbUV+Sn2ibwXjVe5+dMgTAqdbjWDpkVOhCWRGTPQ7biTF4L1KnN0fgrlzkt/uilqg7b6BkYU85DtlEQkLwU3LB1XYk2hJIx9UohjJZ18HeEicetvr7tYeEI8KfjVH1nMOzh/5Crxvn/yaI1J3miJS6D1hzdReOD9PhUGcA9njWhVXqp7E/x9mtm7IwGZwoa5xgzpoNMjOU7WKptR2IlH8TLJhyM677/V6f/Wcebee1IBisSBwZ2GBx7oHj8alM8zf7UMK0YMk42WiJRD4xXFekq5QytznKINr4WcukG6dCoDUaVFYPkw9">
-</div>
-
-<div>
-
-	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="10C1FD69">
-</div>
-
-					
-					 
-					<div class="header">
-					    <a name="Main"></a>
-					    <a name="_articleTop" id="_articleTop"></a>
-
-					    
-						<div>
-							<span id="ctl00_TagListHorz_TagWrp">
-
-	
-	
-
-	
-	<span id="ctl00_TagListHorz_VisibleTags" class="subdue">(untagged)</span> 
-
-	
-	
-</span>
-
-
-						</div>
-					    <div class="title">
-					        <h1 id="ctl00_ArticleTitle">All in One Toolchain for Article Writing with Visual Studio Code</h1>
-					    </div>
-
-                        <div>
-					        
-					        <div class="entry flex-container">
-
-								
-
-                                <div class="flex-item" style="flex:1 1 auto">
-                                    <div class="flex-container" style="justify-content:space-between;flex-wrap:wrap-reverse">
-                                       <span id="ctl00_Authors" class="author flex-item"><a href="https://www.codeproject.com/script/Membership/View.aspx?mid=2291164" rel="author">Sergey Alexandrovich Kryukov</a></span> 
-
-                                        <div class="flex-item" style="margin-top:-4px;">
-                                            <div id="ctl00_RateArticle_RatingTable" class="small-text" data-objectref="2_1194125">
-
-	<meta itemprop="upvoteCount" content="0">
-
-
-	<div id="ctl00_RateArticle_RatingRow" class="flex-container rating-container large-stars">
-
-					
-		
-
-		
-		<div class="nowrap tooltip">
-
-			
-			<div id="ctl00_RateArticle_ResultNoHist" class="rating-result"><div class="flex-container rating-stars large-stars"><div style="width:24px;position:relative" class="clipped"><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px;position:absolute;top:0px;right:0"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div><div><img src="./Resources/star-empty-lg.png" style="width:24px;height:24px"></div></div></div>
-			
-
-			
-			
-
-			
-            
-
-			
-                
-
-		</div>
-		
-	
-		
-		<div id="ctl00_RateArticle_VoteCountNoHist" class="rating-votes nowrap">0.00/5  (No votes)</div>	
-
-		
-
-		
-		<div class="rating-undo" title="Undo vote" style="margin-left:5px;display:none"></div>
-
-		
-		
-	</div>
-
-	
-	
-
-</div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="flex-container" style="color:#666;font-size:smaller">
-                                        <span id="ctl00_LastUpdated" class="date flex-item-tight" title="Date last updated">29 June 2017, last revision: 27 Feb 2021</span><span id="ctl00_HorizontalStats" class="stats flex-item-tight"><span class="stats"><span title="Views"><img src="./Resources/views32.png" style="width:16px"> 1</span> &nbsp; </span></span>
-                                    </div>
-                                </div>
-					        </div>
-
-                            
-
-                        </div>
-
-                        <div id="ctl00_DescriptionSpot" class="summary">Now with auto-numbering! New Visual Studio Code extension “Extensible Markdown Converter” augments built-in Markdown extension to form all in one toolchain offering convenient editor, rendered document viewer, spell checker and converter to HTML, per CodeProject article submission requirements</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
-
-                    </div>
-                    
-					
-					
-
-					
-
-					
-					
-
-					
-					
-
-						
-					
-
-					
-
-						
-						<div id="contentdiv" class="text">
-						
-
-
-
-<!-- Article Starts -->
-
-<p><img title="Extensible Markdown Plugin Demo" alt="2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.webp" src="./Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.webp"></p>
-
+<html>
+<head>
+    <title>All in One Toolchain for Article Writing with Visual Studio Code</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        @import url(https://SAKryukov.github.io/publications/code/documentation.css);
+        table, td, th { border: solid thin black; border-collapse: collapse; font-size: 120%; font-weight: normal; }
+        td, th  { vertical-align: middle; padding-left: 0.4em; padding-right: 0.4em; }
+        th { background-color: lightblue; }
+        table { width: 100% }
+
+    </style>
+</head>
+<body>
+
+<p class="title">All in One Toolchain for Article Writing with Visual Studio Code</p><p class="author"><a href="https://www.SAKryukov.org"><em>Sergey A Kryukov</em></a></p><p><em>New Visual Studio Code extension “Extensible Markdown Converter” augments built-in Markdown extension to form all in one toolchain offering convenient editor, rendered document viewer, spell checker and converter to HTML, per CodeProject article submission requirements</em></p><div  data-line="6" class="code-line" dir="auto" ></div>
+<!-- <h2>Contents</h2> is not Markdown element, just to avoid adding it to TOC -->
+<div  data-line="7" class="code-line" dir="auto" ></div>
+<!-- change style in next line <ul> to <ul style="list-style-type: none"> -->
+<div  data-line="8" class="code-line" dir="auto" ></div>
+<!--
+For CodeProject, makes sure there are no HTML comments in the area to past!
+--> 
+<hr data-line="12" class="code-line" dir="auto" />
+<div  data-line="14" class="code-line" dir="auto" ></div>
+<!-- copy to CodeProject from here ------------------------------------------->
+<p><img src="Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.title.webp" alt="Extensible Markdown" data-src="Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.title.webp" /></p><div  data-line="19" class="code-line" dir="auto" ></div>
 <ul class="download">
-	<li><a href="https://github.com/SAKryukov/vscode-extensible-markdown">Download or clone extension source code from GitHub</a></li>
+    <li><a href="https://github.com/SAKryukov/vscode-markdown-to-html">Download or clone extension source code from GitHub</a></li>
+    <li><a href="Visual-Studio-Code-Markdown-samples.zip">Download Visual Studio Code workspace and document samples &mdash; 8 KB</a></li>
 </ul>
-
-<p id="img.title">&nbsp;</p>
-
-<p><img title="Visuals Studio Code plugin: Extensible Markdown" alt="2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.Logo.webp" src="./Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.Logo.webp"></p>
-
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
+<div  data-line="24" class="code-line" dir="auto" ></div>
+<blockquote id="epigraph" class="FQ"><div class="FQA">Epigraph:</div>
 <p><i>Beware of advice — even this.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Carl_Sandburg">Carl Sandburg</a></dd></dl>
+<dd><a href="https://en.wikipedia.org/wiki/Carl_Sandburg">Carl Sandburg</a></dd>
 </blockquote>
+<h2>Contents</h2>
+<p class="toc">
+<a style="margin-left: 0em;" href="#heading-important-note-on-the-article-update">Important Note on the Article Update</a><br/>
+<a style="margin-left: 0em;" href="#heading-introduction">Introduction</a><br/>
+<a style="margin-left: 0em;" href="#heading-visual-studio-code">Visual Studio Code</a><br/>
+<a style="margin-left: 0em;" href="#heading-available-extensions">Available Extensions</a><br/>
+<a style="margin-left: 6em;" href="#heading-vs-code-markdown2c-microsoft">VS Code Markdown, Microsoft</a><br/>
+<a style="margin-left: 6em;" href="#heading-markdown-all-in-one">Markdown All in One</a><br/>
+<a style="margin-left: 6em;" href="#heading-code-spellchecker-extension">Code Spellchecker Extension</a><br/>
+<a style="margin-left: 0em;" href="#heading-so2c-where-is-the-problem3f">So, Where is the Problem?</a><br/>
+<a style="margin-left: 0em;" href="#heading-the-solution3a-extensible-markdown">The Solution: Extensible Markdown</a><br/>
+<a style="margin-left: 3em;" href="#heading-markdown-it-initialization">Markdown-it Initialization</a><br/>
+<a style="margin-left: 3em;" href="#heading-performance-optimization-with-lazy-evaluation">Performance Optimization with Lazy Evaluation</a><br/>
+<a style="margin-left: 3em;" href="#heading-auto-numbering">Auto-Numbering</a><br/>
+<a style="margin-left: 3em;" href="#heading-setting-up-additional-plug-ins">Setting up Additional Plug-ins</a><br/>
+<a style="margin-left: 0em;" href="#heading-customized-workspace-settings">Customized Workspace Settings</a><br/>
+<a style="margin-left: 0em;" href="#heading-putting-all-together3a-cookbook-recipe">Putting All Together: Cookbook Recipe</a><br/>
+<a style="margin-left: 0em;" href="#heading-versions">Versions</a><br/>
+<a style="margin-left: 0em;" href="#heading-conclusions">Conclusions</a><br/>
+</p><h2 id="heading-important-note-on-the-article-update">Important Note on the Article Update</h2>
+<p>VSCode changed extension API several time, and I had to change the extension, because new VSCode versions broke backward compatibily. After v. 5.8.1, I used two different versions for software development and article wriring.</p><p>Finally, I’ve found time to fix it. Since v. 5.8.1, the complete functionality is back, but the latest version of Extensible Markdown may not work with some earlier VSCode versions. Presently, it requires VSCode v. 1.84.2. This extension is reintroduced to the <a href="https://marketplace.visualstudio.com/search?term=SAKryukov&target=VSCode">Visual Studio Marketplace</a>. Enjoy!</p><h2 id="heading-introduction">Introduction</h2>
+<p><img src="Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.logo.webp" alt="Logo" data-src="Resources-articles/2017-06-29.All-in-One-Toolchain-for-Article-Writing-with-Visual-Studio-Code.logo.webp" /></p><p>In my previous article on the topic, <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing"><em>Helpful Toolchain for Article Writing</em></a>, I expressed <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#writing-is-annoying">the annoyance of article writing</a> and tried to explain the importance of better tooling. Some variants of the toolchain I created in response to the challenge greatly improved my writing performance and promoted some piece in mind, but were far from perfection. Even the use of Visual Studio 2015 as a writing tool presented some noticeable delays. Anyway, it worked out as a proof of the concept: this activity pays off with the first article written.</p><p>Recently, I tried out <a href="https://code.visualstudio.com">Visual Studio Code</a> for the first time and immediately paid attention to the support of <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>. Could it be used for article writing? My verdict was: “almost there”. All the available support and extension could not make a really usable toolchain, without considerable additional efforts, including some code development. Some critically important features were simply missing. After some research, I figured out that the comprehensive solution needs one more <a href="https://code.visualstudio.com/docs/extensions/overview">Visual Studio Code extension</a>, to generate HTML files suitable for immediate submission through the CodeProject article submission wizard, as well as many other purposes. Note that my idea of preparation of an article for CodeProject is the possibility to paste the article to the article submission wizard in one step, without any modifications.</p><p>After I created this extension and published it on Visual Studio Marketplace, I found results quite practical. My toolchain became very lightweight and convenient.</p><p>This article is fully written with the use of the all in one toolchain based on Visual Studio Code.</p><h2 id="heading-visual-studio-code">Visual Studio Code</h2>
+<p>Why would I try out Visual Studio Code? I’m afraid to say, the benefits of this tool are somewhat understated. The way it is marketed creates the impression that this is a Visual Studio dramatically cut down in features for the sake of multi-platform qualities. This is not true. For example, it’s quite unfair to consider <a href="https://www.eclipse.org">Eclipse</a> as an “<a href="https://en.wikipedia.org/wiki/Eclipse_%28software%29">integrated development environment</a>” and Visual Studio Code as “<a href="https://en.wikipedia.org/wiki/Visual_Studio_Code">source code editor</a>”.</p><p>Perhaps the most impressive quality of Visual Studio Code is its speed, especially in contrast to <a href="https://www.visualstudio.com">“real” Visual Studio</a>. Another pleasing feature: it is really friendly to the developers used to Visual Studio.</p><p>Anyway, my initial interest started with attempts to find the best support of development and debugging of <a href="https://dotnet.github.io">.NET Core</a> code. But this is a whole different story…</p><h2 id="heading-available-extensions">Available Extensions</h2>
+<p>There is a number of out-of-the-box Markdown-related Visual Studio Code <em>extensions</em> on the <a href="https://marketplace.visualstudio.com">Visual Studio Marketplace</a>. As I could see, at the moment of writing they all had considerable deficiencies or defects. If they were perfect, this article would be totally redundant.</p><h4 id="heading-vs-code-markdown2c-microsoft">VS Code Markdown, Microsoft</h4>
+<p>Basic Markdown support extension is embedded in Visual Studio Code. It’s <em>id</em> is “Microsoft.vscode-markdown”. It provides basic document authoring and preview. The extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>” is based on this Microsoft extension and augments it with the most missing feature: saving converted Markdown in HTML files.</p><h4 id="heading-markdown-all-in-one">Markdown All in One</h4>
+<p>This is the first extension I tried out. Despite its name the word “All” in its name seems to be a great exaggeration. Perhaps the only useful feature is its explicit Table of Contents (TOC) generation and update — see the <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">description</a>. Nevertheless, I used this extension to generate TOC for <a href="https://www.codeproject.com/KB/mentor/1194125/Visual-Studio-Code-Markdown-samples.zip">Markdown samples</a>, just to avoid the dependency on the “<a href="https://www.npmjs.com/package/markdown-it">markdown-it</a>” <a href="https://www.npmjs.com/browse/keyword/markdown-it-plugin">plug-ins</a> I rely on <a href="#the-solution-extensible-markdown-converter">in my approach</a>.</p><p>The solution looks too heavy, because it does not depend on the Microsoft “VS Code Markdown” extension. Instead, the solution is based on separate installation of node.js <a href="https://www.npmjs.com">npm</a> and npm modules, such as <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> and <a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>, and more. The modules are supplied with the extension, duplicating the modules installed with the Visual Code Installation, which may lead to mismatched behavior in future.</p><p>Unfortunately, a critical bug was found in <a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>: identical heading names would break uniqueness of the values of <code>id</code> attributes, which generated renders HTML invalid. Besides, it makes little sense to have separate plug-ins for the generation of <code>id</code> attributes and Table of Constants. Instead, these two parts of functionality are closely related and should be supported in a unified plug-in, to act consistently.</p><h4 id="heading-code-spellchecker-extension">Code Spellchecker Extension</h4>
+<p>This extension is described <a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">here</a>. It provides reasonably convenient spell checking and quick type fix workflow.</p><p>Spelling problems are shown directly in the text, so they can be fixed through IntelliSense. In particular, a correct word can be added either to a global (per user) or local (per <em>workspace</em>) dictionary. The Markdown formatting does not break the detection of spelling problems. Quite importantly, there is a summary view of the problems, “Spell Checker Information”, which can be used to make sure no problems are overlooked, and to turn the feature on or off. Below, I’ll show how to add this and other commands to <a href="#keyboard-binding">keyboard binding</a>.</p><h2 id="heading-so2c-where-is-the-problem3f">So, Where is the Problem?</h2>
+<p>The most important part is not done: generation of the HTML file. So far, we did not get acceptable out-of-the-box Visual Studio Code extensions. Some output the document as HTML, but do in not in the way we can easily use, for example, put the content in the system <em>clipboard</em>.</p><p>Some ideas are provided on this <a href="https://code.visualstudio.com/docs/languages/markdown">Visual Studio Code documentation page</a>. The main idea is: the conversion to HTML should work as project build, with familiar Ctrl+Shift+B shortcut, show the result in the output window, and so on. For this purpose, proper build task should be defined in “.vscode/tasks.json”.</p><p>Will it work? Actually, it won’t. There is a number of problems rendering the whole process virtually unusable. Some problems are minor and are easy to fix. But the worst problem is: <strong>the generated file lacks <code>id</code> attributes in headings</strong>. This raises the question: why would we automatically generate a TOC with the extension code, if it won’t work with the resulting HTML anyway? Notably, the extension preview navigates with TOC correctly. This is done via another <a href="https://nodejs.org">node.js</a> module, “<a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>”, a plug-in for “markdown-it”. It cannot be used via the command-line “markdown-it” interface, as named headers are optional and not exposed through command-line arguments. Besides, they can be considered dangerous. Before explaining my solution, I need to give the reader a warning:</p><p><p><strong>Warning:</strong>
+Unfortunately, in automatic <code>id</code> and TOC generation, there is nothing to guarantee uniqueness of <code>id</code> values, as it is done in some processors (such as <a href="http://pandoc.org">Pandoc</a>, for example). Possible <code>id</code> clash, strictly speaking, would render HTML invalid. At least, the anchor-based navigation on the CodeProject article page can be broken. That said, it can happen if one creates two or more identical headers or explicitly enter non-unique <code>id</code> attributes in HTML.</p></blockquote>
+<p>Despite of this problem, uniqueness of the <code>id</code> values is not broken in the case if identical headings; this problem is solved in Extensible Markdown Converter, version 4.0.0.</p><p>Having said that, let’s consider really working solution, based on creation of separate Visual Studio Code extension.</p><h2 id="heading-the-solution3a-extensible-markdown">The Solution: Extensible Markdown</h2>
+<p>The techniques of extension development are described in the <a href="https://code.visualstudio.com/docs/extensions/publish-extension">Visual Studio Code documentation</a>.</p><h3 id="heading-markdown-it-initialization">Markdown-it Initialization</h3>
+<p id="src..main.js">Main idea of the solution is this: instead of packaging full set on npm modules for Markdown support, we need to reuse the resources provided by the dependency extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>”:</p><pre lang="JavaScript"><span class="comment text highlighter">// extension host makes it always accessible to extensions:</span>
+<span class="keyword highlighter">var</span> vscode = require(<span class="literal string highlighter">'vscode'</span>);  
 
-<h2 id="heading.contents">Contents</h2>
+<span class="keyword highlighter">const</span> idToc = require(<span class="literal string highlighter">"./id.toc.js"</span>);
 
-<div class="toc">
-<ul style="list-style-type: none; margin-top: 0; margin-bottom: 0">
-	<li><a href="#heading.introduction">Introduction</a></li>	<li><a href="#heading.visual-studio20code">Visual Studio Code</a></li>	<li><a href="#heading.available-extensions">Available Extensions</a></li>	<li><a href="#heading.so2c-where20is20the20problem3f">So, Where is the Problem?</a></li>	<li><a href="#heading.the-solution3a20extensible20markdown20converter">The Solution: Extensible Markdown Converter</a>
-	<ul style="list-style-type: none; margin-top: 0; margin-bottom: 0">
-		<li><a href="#heading.markdown-it-initialization">Markdown-it Initialization</a></li>		<li><a href="#heading.performance-optimization20with20lazy20evaluation">Performance Optimization with Lazy Evaluation</a></li>		<li><a href="#heading.auto-numbering">Auto-Numbering</a></li>		<li><a href="#heading.setting-up20additional20plug-ins">Setting up Additional Plug-ins</a></li>	</ul>
-	</li>	<li><a href="#heading.customized-workspace20settings">Customized Workspace Settings</a></li>	<li><a href="#heading.putting-all20together3a20cookbook20recipe">Putting All Together: Cookbook Recipe</a></li>	<li><a href="#heading.versions">Versions</a></li>	<li><a href="#heading.conclusions">Conclusions</a></li></ul>
-</div>
+<span class="comment text highlighter">//...</span>
 
-<h2 id="heading.introduction">Introduction</h2>
-
-<p>In my previous article on the topic, <i><u><a href="2017-03-22.Helpful-Toolchain-for-Article-Writing.html">Helpful Toolchain for Article Writing</a></u></i>, I expressed <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#writing-is-annoying">the annoyance of article writing</a> and tried to explain the importance of better tooling. Some variants of the toolchain I created in response to the challenge greatly improved my writing performance and promoted some piece in mind, but were far from perfection. Even the use of Visual Studio 2015 as a writing tool presented some noticeable delays. Anyway, it worked out as a proof of the concept: this activity pays off with the first article written.</p>
-
-<p>Recently, I tried out <a href="https://code.visualstudio.com/">Visual Studio Code</a> for the first time and immediately paid attention to the support of <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>. Could it be used for article writing? My verdict was: “almost there”. All the available support and extension could not make a really usable toolchain, without considerable additional efforts, including some code development. Some critically important features were simply missing. After some research, I figured out that the comprehensive solution needs one more <a href="https://code.visualstudio.com/docs/extensions/overview">Visual Studio Code extension</a>, to generate HTML files suitable for immediate submission through the CodeProject article submission wizard, as well as many other purposes. Note that my idea of preparation of an article for CodeProject is the possibility to paste the article to the article submission wizard in one step, without any modifications.</p>
-
-<p>After I created this extension and published it on Visual Studio Marketplace, I found results quite practical. My toolchain became very lightweight and convenient.</p>
-
-<p>This article is fully written with the use of the all in one toolchain based on Visual Studio Code.</p>
-
-<h2 id="heading.visual-studio20code">Visual Studio Code</h2>
-
-<p>Why would I try out Visual Studio Code? I’m afraid to say, the benefits of this tool are somewhat understated. The way it is marketed creates the impression that this is a Visual Studio dramatically cut down in features for the sake of multi-platform qualities. This is not true. For example, it’s quite unfair to consider <a href="https://www.eclipse.org/">Eclipse</a> as an “<a href="https://en.wikipedia.org/wiki/Eclipse_%28software%29">integrated development environment</a>” and Visual Studio Code as “<a href="https://en.wikipedia.org/wiki/Visual_Studio_Code">source code editor</a>”.</p>
-
-<p>Perhaps the most impressive quality of Visual Studio Code is its speed, especially in contrast to <a href="https://www.visualstudio.com/">“real” Visual Studio</a>. Another pleasing feature: it is really friendly to the developers used to Visual Studio.</p>
-
-<p>Anyway, my initial interest started with attempts to find the best support of development and debugging of <a href="https://dotnet.github.io/">.NET Core</a> code. But this is a whole different story…</p>
-
-<h2 id="heading.available-extensions">Available Extensions</h2>
-
-<p>There is a number of out-of-the-box Markdown-related Visual Studio Code <em>extensions</em> on the <a href="https://marketplace.visualstudio.com/">Visual Studio Marketplace</a>. As I could see, at the moment of writing they all had considerable deficiencies or defects. If they were perfect, this article would be totally redundant.</p>
-
-<h4 id="heading.vs-code20markdown2c20microsoft">VS Code Markdown, Microsoft</h4>
-
-<p>Basic Markdown support extension is embedded in Visual Studio Code. It’s <em>id</em> is “Microsoft.vscode-markdown”. It provides basic document authoring and preview. The extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>” is based on this Microsoft extension and augments it with the most missing feature: saving converted Markdown in HTML files.</p>
-
-<h4 id="heading.markdown-all20in20one">Markdown All in One</h4>
-
-<p>This is the first extension I tried out. Despite its name the word “All” in its name seems to be a great exaggeration. Perhaps the only useful feature is its explicit Table of Contents (TOC) generation and update — see the <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">description</a>. Nevertheless, I used this extension to generate TOC for <a href="https://www.codeproject.com/KB/mentor/1194125/Visual-Studio-Code-Markdown-samples.zip">Markdown samples</a>, just to avoid the dependency on the “<a href="https://www.npmjs.com/package/markdown-it">markdown-it</a>” <a href="https://www.npmjs.com/browse/keyword/markdown-it-plugin">plug-ins</a> I rely on <a href="#the-solution-extensible-markdown-converter">in my approach</a>.</p>
-
-<p>The solution looks too heavy, because it does not depend on the Microsoft “VS Code Markdown” extension. Instead, the solution is based on separate installation of node.js <a href="https://www.npmjs.com/">npm</a> and npm modules, such as <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> and <a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>, and more. The modules are supplied with the extension, duplicating the modules installed with the Visual Code Installation, which may lead to mismatched behavior in future.</p>
-
-<p>Unfortunately, a critical bug was found in <a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>: identical heading names would break uniqueness of the values of <code>id</code> attributes, which generated renders HTML invalid. Besides, it makes little sense to have separate plug-ins for the generation of <code>id</code> attributes and Table of Constants. Instead, these two parts of functionality are closely related and should be supported in a unified plug-in, to act consistently.</p>
-
-<h4 id="heading.code-spellchecker20extension">Code Spellchecker Extension</h4>
-
-<p>This extension is described <a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">here</a>. It provides reasonably convenient spell checking and quick type fix workflow.</p>
-
-<p>Spelling problems are shown directly in the text, so they can be fixed through IntelliSense. In particular, a correct word can be added either to a global (per user) or local (per <em>workspace</em>) dictionary. The Markdown formatting does not break the detection of spelling problems. Quite importantly, there is a summary view of the problems, “Spell Checker Information”, which can be used to make sure no problems are overlooked, and to turn the feature on or off. Below, I’ll show how to add this and other commands to <a href="#keyboard-binding">keyboard binding</a>.</p>
-
-<h2 id="heading.so2c-where20is20the20problem3f">So, Where is the Problem?</h2>
-
-<p>The most important part is not done: generation of the HTML file. So far, we did not get acceptable out-of-the-box Visual Studio Code extensions. Some output the document as HTML, but do in not in the way we can easily use, for example, put the content in the system <em>clipboard</em>.</p>
-
-<p>Some ideas are provided on this <a href="https://code.visualstudio.com/docs/languages/markdown">Visual Studio Code documentation page</a>. The main idea is: the conversion to HTML should work as project build, with familiar Ctrl+Shift+B shortcut, show the result in the output window, and so on. For this purpose, proper build task should be defined in “.vscode/tasks.json”.</p>
-
-<p>Will it work? Actually, it won’t. There is a number of problems rendering the whole process virtually unusable. Some problems are minor and are easy to fix. But the worst problem is: <strong>the generated file lacks <code>id</code> attributes in headings</strong>. This raises the question: why would we automatically generate a TOC with the extension code, if it won’t work with the resulting HTML anyway? Notably, the extension preview navigates with TOC correctly. This is done via another <a href="https://nodejs.org/">node.js</a> module, “<a href="https://www.npmjs.com/package/markdown-it-named-headers">markdown-it-named-headers</a>”, a plug-in for “markdown-it”. It cannot be used via the command-line “markdown-it” interface, as named headers are optional and not exposed through command-line arguments. Besides, they can be considered dangerous. Before explaining my solution, I need to give the reader a warning:</p>
-
-<blockquote>
-<p><strong>Warning:</strong><br>
-Unfortunately, in automatic <code>id</code> and TOC generation, there is nothing to guarantee uniqueness of <code>id</code> values, as it is done in some processors (such as <a href="http://pandoc.org/">Pandoc</a>, for example). Possible <code>id</code> clash, strictly speaking, would render HTML invalid. At least, the anchor-based navigation on the CodeProject article page can be broken. That said, it can happen if one creates two or more identical headers or explicitly enter non-unique <code>id</code> attributes in HTML.</p>
-</blockquote>
-
-<p>Despite of this problem, uniqueness of the <code>id</code> values is not broken in the case if identical headings; this problem is solved in Extensible Markdown Converter, version 4.0.0.</p>
-
-<p>Having said that, let’s consider really working solution, based on creation of separate Visual Studio Code extension.</p>
-
-<h2 id="heading.the-solution3a20extensible20markdown20converter">The Solution: Extensible Markdown Converter</h2>
-
-<p>The techniques of extension development are described in the <a href="https://code.visualstudio.com/docs/extensions/publish-extension">Visual Studio Code documentation</a>.</p>
-
-<h3 id="heading.markdown-it-initialization">Markdown-it Initialization</h3>
-
-<p id="src..main.js">Main idea of the solution is this: instead of packaging full set on npm modules for Markdown support, we need to reuse the resources provided by the dependency extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>”:</p>
-
-<div class="pre-lang" id="premain51544"><div>Javascript</div><div class="pre-action-link"><span class="code-collapse" data-index="51544" id="preShrink51544">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="51544" id="copycode51544" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre51544" style="margin-top: 0px;" class="notranslate"><span class="code-comment">//</span><span class="code-comment"> extension host makes it always accessible to extensions:</span>
-<span class="code-keyword">var</span> vscode = require(<span class="code-string">'</span><span class="code-string">vscode'</span>);  
-
-<span class="code-keyword">const</span> idToc = require(<span class="code-string">"</span><span class="code-string">./id.toc.js"</span>);
-
-<span class="code-comment">//</span><span class="code-comment">...</span>
-
-<span class="code-keyword">if</span> (!lazy.markdownIt)
-    lazy.markdownIt = (<span class="code-keyword">function</span> () { <span class="code-comment">//</span><span class="code-comment"> modify, depending in settings</span>
-    <span class="code-keyword">const</span> extension = vscode.extensions.getExtension(<span class="code-string">"</span><span class="code-string">Microsoft.vscode-markdown"</span>);
-    <span class="code-keyword">if</span> (!extension) <span class="code-keyword">return</span>;
-    <span class="code-keyword">const</span> extensionPath = path.join(extension.extensionPath, <span class="code-string">"</span><span class="code-string">node_modules"</span>);
-    <span class="code-keyword">let</span> md = require(path.join(extensionPath, <span class="code-string">"</span><span class="code-string">markdown-it"</span>))().set(optionSet);
+<span class="keyword highlighter">if</span> (!lazy.markdownIt)
+    lazy.markdownIt = (<span class="keyword highlighter">function</span> () { <span class="comment text highlighter">// modify, depending in settings</span>
+    <span class="keyword highlighter">const</span> extension = vscode.extensions.getExtension(<span class="literal string highlighter">"Microsoft.vscode-markdown"</span>);
+    <span class="keyword highlighter">if</span> (!extension) <span class="keyword highlighter">return</span>;
+    <span class="keyword highlighter">const</span> extensionPath = path.join(extension.extensionPath, <span class="literal string highlighter">"node_modules"</span>);
+    <span class="keyword highlighter">let</span> md = require(path.join(extensionPath, <span class="literal string highlighter">"markdown-it"</span>))().set(optionSet);
     md.use(idToc, {
         enableHeadingId: lazy.settings.headingId, 
         idPrefix: lazy.settings.headingIdPrefix,
-        stringModule: require(path.join(extensionPath, <span class="code-string">"</span><span class="code-string">string"</span>)),
-        markerPattern: <span class="code-keyword">new</span> <span class="code-sdkkeyword">RegExp</span>(lazy.settings.tocRegex, <span class="code-string">"</span><span class="code-string">m"</span>),
+        stringModule: require(path.join(extensionPath, <span class="literal string highlighter">"string"</span>)),
+        markerPattern: <span class="keyword highlighter">new</span> <span class="literal keyword highlighter">RegExp</span>(lazy.settings.tocRegex, <span class="literal string highlighter">"m"</span>),
         includeLevel: lazy.settings.tocIncludeLevels,
         tocContainerClass: lazy.settings.tocContainerClass,
         tocListType: lazy.settings.tocListType
     });
-    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> pluginData <span class="code-keyword">in</span> additionalPlugins) {
-        <span class="code-keyword">let</span> plugin;
-        <span class="code-keyword">try</span> {
+    <span class="keyword highlighter">for</span> (<span class="keyword highlighter">let</span> pluginData <span class="keyword highlighter">in</span> additionalPlugins) {
+        <span class="keyword highlighter">let</span> plugin;
+        <span class="keyword highlighter">try</span> {
             plugin = require(additionalPlugins[pluginData].name);
-        } <span class="code-keyword">catch</span> (requireException) {
-            <span class="code-keyword">continue</span>;
-        } <span class="code-comment">//</span><span class="code-comment">exception</span>
+        } <span class="keyword highlighter">catch</span> (requireException) {
+            <span class="keyword highlighter">continue</span>;
+        } <span class="comment text highlighter">//exception</span>
         md = md.use(plugin, additionalPlugins[pluginData].options);
-    } <span class="code-comment">//</span><span class="code-comment"> using additionalPlugins</span>
-    <span class="code-keyword">return</span> md;
+    } <span class="comment text highlighter">// using additionalPlugins</span>
+    <span class="keyword highlighter">return</span> md;
 })();
 
-<span class="code-comment">//</span><span class="code-comment"> now we can use markdownIt to render HTML</span>
+<span class="comment text highlighter">// now we can use markdownIt to render HTML</span>
 
-<span class="code-comment">//</span><span class="code-comment">...</span></pre>
+<span class="comment text highlighter">//...</span>
+</pre><p>Here, two <a href="https://nodejs.org">node.js</a> modules are loaded: “<a href="https://www.npmjs.com/package/markdown-it">markdown-it</a>” and “string”. They come with the embedded extension &quot;“Microsoft.vscode-markdown” and can be found by its <code>id</code>. The extension “string” is used by the module “idToc” embedded in the extension “Extensible Markdown Converter”. It implements generation of headings <code>id</code> attributes and Table of Contents and plays the role of the <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> plug-in.</p><p>Note that the function setting up <code>markdownIt</code> also loads <em>additional plug-ins</em>. The plug-ins can be installed in some arbitrary directory by the user and configured in “settings.json” shown <a href="#heading.customized-workspace-settings">explained below</a>.</p><h3 id="heading-performance-optimization-with-lazy-evaluation">Performance Optimization with Lazy Evaluation</h3>
+<p id="src..lazy.js">Another interesting point is using <em>lazy evaluation</em>. The extension itself is loaded lazily, only on the events when it is really required. It would be tempting to perform relatively long operations, such as <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> setup and processing of the setting, during extension activation, and not during execution of each commands. It won’t work correctly though, because between commands the use can enter some changes rendering current state of <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> or settings data invalid. In particular, the user can edit settings or simply one or another CSS file. Lazy evaluation combined with some invalidation mechanism solves this problem. This is how:</p><pre lang="JavaScript"><span class="keyword highlighter">const</span> lazy = { markdownIt: undefined, settings: undefined };
 
-<p>Here, two <a href="https://nodejs.org/">node.js</a> modules are loaded: “<a href="https://www.npmjs.com/package/markdown-it">markdown-it</a>” and “string”. They come with the embedded extension "“Microsoft.vscode-markdown” and can be found by its <code>id</code>. The extension “string” is used by the module “idToc” embedded in the extension “Extensible Markdown Converter”. It implements generation of headings <code>id</code> attributes and Table of Contents and plays the role of the <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> plug-in.</p>
+<span class="comment text highlighter">// ...</span>
 
-<p>Note that the function setting up <code>markdownIt</code> also loads <em>additional plug-ins</em>. The plug-ins can be installed in some arbitrary directory by the user and configured in “settings.json” shown <a href="#heading.customized-workspace-settings">explained below</a>.</p>
-
-<h3 id="heading.performance-optimization20with20lazy20evaluation">Performance Optimization with Lazy Evaluation</h3>
-
-<p id="src..lazy.js">Another interesting point is using <em>lazy evaluation</em>. The extension itself is loaded lazily, only on the events when it is really required. It would be tempting to perform relatively long operations, such as <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> setup and processing of the setting, during extension activation, and not during execution of each commands. It won’t work correctly though, because between commands the use can enter some changes rendering current state of <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> or settings data invalid. In particular, the user can edit settings or simply one or another CSS file. Lazy evaluation combined with some invalidation mechanism solves this problem. This is how:</p>
-
-<div class="pre-lang" id="premain212894"><div>Javascript</div><div class="pre-action-link"><span class="code-collapse" data-index="212894" id="preShrink212894">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="212894" id="copycode212894" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre212894" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">const</span> lazy = { markdownIt: <span class="code-keyword">undefined</span>, settings: <span class="code-keyword">undefined</span> };
-
-<span class="code-comment">//</span><span class="code-comment"> ...</span>
-
-<span class="code-keyword">if</span> (!lazy.settings)
+<span class="keyword highlighter">if</span> (!lazy.settings)
     lazy.settings = getSettings();
 
-<span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="comment text highlighter">// ...</span>
 
-<span class="code-keyword">if</span> (!lazy.markdownIt) <span class="code-comment">//</span><span class="code-comment"> already shown in first code sample</span>
-    lazy.markdownIt = (<span class="code-keyword">function</span> () {
-        <span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="keyword highlighter">if</span> (!lazy.markdownIt) <span class="comment text highlighter">// already shown in first code sample</span>
+    lazy.markdownIt = (<span class="keyword highlighter">function</span> () {
+        <span class="comment text highlighter">// ...</span>
     };    
 
-<span class="code-comment">//</span><span class="code-comment"> ...</span>
+<span class="comment text highlighter">// ...</span>
 
-vscode.workspace.onDidChangeTextDocument(<span class="code-keyword">function</span> (e) {
-    <span class="code-keyword">if</span> (e.<span class="code-sdkkeyword">document</span> === vscode.<span class="code-sdkkeyword">window</span>.activeTextEditor.<span class="code-sdkkeyword">document</span>)
+vscode.workspace.onDidChangeTextDocument(<span class="keyword highlighter">function</span> (e) {
+    <span class="keyword highlighter">if</span> (e.document === vscode.window.activeTextEditor.document)
         provider.update(previewUri);
-    <span class="code-keyword">if</span> (e.<span class="code-sdkkeyword">document</span>.languageId == <span class="code-string">"</span><span class="code-string">css"</span>) <span class="code-comment">//</span><span class="code-comment"> any change in CSS is detected</span>
-        lazy.settings = <span class="code-keyword">undefined</span>;
-}); <span class="code-comment">//</span><span class="code-comment">vscode.workspace.onDidChangeTextDocument</span>
-vscode.workspace.onDidChangeConfiguration(<span class="code-keyword">function</span> (e) {
-    lazy.settings = <span class="code-keyword">undefined</span>;
-    lazy.markdownIt = <span class="code-keyword">undefined</span>;
-}); <span class="code-comment">//</span><span class="code-comment">vscode.workspace.onDidChangeConfiguration</span></pre>
-
-<h3 id="heading.auto-numbering">Auto-Numbering</h3>
-
-<p>Version 5.0.0 introduced optional user configured auto-numbering with rich set of features. It is implemented as a part of the embedded plug-in. This plug-in is also published on <a href="https://www.npmjs.com/">npm</a> as a <a href="https://www.npmjs.com/package/markdown-it-id-and-toc">separate product</a>.</p>
-
-<p>First of all, all options come on two levels: general for the entire document (named <code>default*</code>) and per heading level, described in the property <code>pattern</code>. The exclusion is the option <code>standAlong</code> which appears only in <code>patter</code> and is only defined for individual heading levels.</p>
-
-<p>By default, a heading number is shown as a multi-component string including number of upper-level headings, such as in “2.11.3”. The option <code>standAlong</code> is used to disable upper-level part, showing, in this example, just “3”.</p>
-
-
-	<table class="grid"><thead>		<tr>			<th>Property Name</th>			<th>Default</th>			<th>Description</th>		</tr>	</thead>	<tbody>		<tr>			<td>prefix<br>
-			defaultPrefix</td>			<td><code>""</code></td>			<td>String which comes before number. Typical used include "Chapter ", "Part "</td>		</tr>		<tr>			<td>suffix<br>
-			defaultSuffix</td>			<td><code>". "</code></td>			<td>String which comes after number. It is used to separate number and heading caption</td>		</tr>		<tr>			<td>start<br>
-			defaultStart</td>			<td>1</td>			<td>Starting number in each numbered section. It can be any integer number, any string parsable to an integer number or any character.</td>		</tr>		<tr>			<td>separator<br>
-			defaultSeparator</td>			<td>1</td>			<td>Starting number in each numbered section. It can be any integer number, any string parsable to an integer number or any character.</td>		</tr>		<tr>			<td>standAlong</td>			<td><code>undefined</code></td>			<td>“Stand along” flag defining that for some individual levels of headings, the components of number inherited from upper-level headings are not shown</td>		</tr>	</tbody></table>
-
-<p>Example of auto-numbering options defined as a first paragraph in the document:</p>
-
-<div class="pre-lang" id="premain130455"><div>Plain Text</div><div class="pre-action-link"><span class="copy-code" data-index="130455" id="copycode130455" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="text" data-lang-orig="text" data-codeblock-processed="true" id="pre130455" style="margin-top: 0px;" class="notranslate">@numbering {
+    <span class="keyword highlighter">if</span> (e.document.languageId == <span class="literal string highlighter">"css"</span>) <span class="comment text highlighter">// any change in CSS is detected</span>
+        lazy.settings = undefined;
+}); <span class="comment text highlighter">//vscode.workspace.onDidChangeTextDocument</span>
+vscode.workspace.onDidChangeConfiguration(<span class="keyword highlighter">function</span> (e) {
+    lazy.settings = undefined;
+    lazy.markdownIt = undefined;
+}); <span ="comment text highlighter">//vscode.workspace.onDidChangeConfiguration</span>
+</pre><h3 id="heading-auto-numbering">Auto-Numbering</h3>
+<p>Version 5.0.0 introduced optional user configured auto-numbering with rich set of features. It is implemented as a part of the embedded plug-in. This plug-in is also published on <a href="https://www.npmjs.com">npm</a> as a <a href="https://www.npmjs.com/package/markdown-it-id-and-toc">separate product</a>.</p><p>First of all, all options come on two levels: general for the entire document (named <code>default*</code>) and per heading level, described in the property <code>pattern</code>. The exclusion is the option <code>standAlong</code> which appears only in <code>patter</code> and is only defined for individual heading levels.</p><p>By default, a heading number is shown as a multi-component string including number of upper-level headings, such as in “2.11.3”. The option <code>standAlong</code> is used to disable upper-level part, showing, in this example, just “3”.</p><table data-line="189" class="code-line" dir="auto">
+<thead data-line="189" class="code-line" dir="auto">
+<tr data-line="189" class="code-line" dir="auto">
+<th>Property Name</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody data-line="191" class="code-line" dir="auto">
+<tr data-line="191" class="code-line" dir="auto">
+<td>prefix<br/>defaultPrefix</td>
+<td><code>&quot;&quot;</code></td>
+<td>String which comes before number. Typical used include &quot;Chapter &quot;, &quot;Part &quot;</td>
+</tr>
+<tr data-line="192" class="code-line" dir="auto">
+<td>suffix<br/>defaultSuffix</td>
+<td><code>&quot;. &quot;</code></td>
+<td>String which comes after number. It is used to separate number and heading caption</td>
+</tr>
+<tr data-line="193" class="code-line" dir="auto">
+<td>start<br/>defaultStart</td>
+<td>1</td>
+<td>Starting number in each numbered section. It can be any integer number, any string parsable to an integer number or any character.</td>
+</tr>
+<tr data-line="194" class="code-line" dir="auto">
+<td>separator<br/>defaultSeparator</td>
+<td>1</td>
+<td>Starting number in each numbered section. It can be any integer number, any string parsable to an integer number or any character.</td>
+</tr>
+<tr data-line="195" class="code-line" dir="auto">
+<td>standAlong</td>
+<td><code>undefined</code></td>
+<td>“Stand along” flag defining that for some individual levels of headings, the components of number inherited from upper-level headings are not shown</td>
+</tr>
+</tbody>
+</table>
+<p>Example of auto-numbering options defined as a first paragraph in the document:</p><pre>[](=numbering {
+    "enable": true,
+    "defaultSuffix": ". ",
+    "pattern": [
+        {},
+        { "prefix": "Chapter ", "start": ["One", "Two", "Three", "Four"], "suffix": ": " },
+        {},
+        { "standAlong": true },
+        { "start": "a", "suffix": ") ", "standAlong": true }
+    ]
+}=)
+</pre><p>Version 5.8.0 introduced new simplified format for the in-document specification of the auto-numbering options.</p><p>The format used previously is JSON; it still can be used, but it is not very suitable for human input and is not fault-tolerant. Presently, it takes precedence. If JSON parsing fails, new parser tried to parse the content of the <code>[](= ... =)</code> tag using new grammar:</p><ul data-line="216" class="code-line" dir="auto">
+<li>Each property is placed on a separate line</li>
+<li>Leading and trailing blank spaces and spaced between syntactic elements are ignored</li>
+<li>Line syntax: <code>&lt;property&gt;: &lt;value&gt;</code></li>
+<li>Document properties:
+<ul data-line="220" class="code-line" dir="auto">
+<li>enabled: true</li>
+<li>defaultStart: <code>&lt;value&gt;</code></li>
+<li>defaultSeparator: <code>&lt;value&gt;</code></li>
+<li>defaultPrefix: <code>&lt;value&gt;</code></li>
+<li>defaultSuffix: <code>&lt;value&gt;</code></li>
+</ul>
+</li>
+<li>Heading level properties:
+<ul data-line="226" class="code-line" dir="auto">
+<li>h<code>&lt;level&gt;</code>.standAlong: true</li>
+<li>h<code>&lt;level&gt;</code>.start: <code>&lt;value&gt;</code></li>
+<li>h<code>&lt;level&gt;</code>.separator: <code>&lt;value&gt;</code></li>
+<li>h<code>&lt;level&gt;</code>.prefix: <code>&lt;value&gt;</code></li>
+<li>h<code>&lt;level&gt;</code>.suffix: <code>&lt;value&gt;</code>
+here, <code>&lt;level&gt;</code> values 1, 2, … correspond to Markdown headings <code>#</code>, <code>##</code>, … or HTML elements <code>h1</code>, <code>h2</code>, …</li>
+</ul>
+</li>
+<li>Valid values for .start, defaultStart:
+<ul data-line="233" class="code-line" dir="auto">
+<li>integer number</li>
+<li>string (in this case, only first character is used)</li>
+<li>array of strings</li>
+</ul>
+</li>
+</ul>
+<p>If a line fails to parse, it is ignored. It can be used for comments.</p><p>Example of auto-numbering option in-document specifications:</p><pre>[](=numbering {
     enable: true
-}</pre>
-
-<p>This example defines the use of the default auto-numbering.</p>
-
-<p>Version 5.8.0 introduced new simplified format for the in-document specification of the auto-numbering options.</p>
-
-<p>The format used previously is JSON; it still can be used, but it is not very suitable for human input and is not fault-tolerant. Presently, it takes precedence. If JSON parsing fails, new parser tried to parse the content of the <code>[](= ... =)</code> tag using new grammar:</p>
-
-<ul>
-	<li>Each property is placed on a separate line</li>	<li>Leading and trailing blank spaces and spaced between syntactic elements are ignored</li>	<li>Line syntax: <code>&lt;property&gt;: &lt;value&gt;</code></li>	<li>Document properties:
-	<ul>
-		<li>enabled: true</li>		<li>defaultStart: <code>&lt;value&gt;</code></li>		<li>defaultSeparator: <code>&lt;value&gt;</code></li>		<li>defaultPrefix: <code>&lt;value&gt;</code></li>		<li>defaultSuffix: <code>&lt;value&gt;</code></li>	</ul>
-	</li>	<li>Heading level properties:
-	<ul>
-		<li>h<code>&lt;level&gt;</code>.standAlong: true</li>		<li>h<code>&lt;level&gt;</code>.start: <code>&lt;value&gt;</code></li>		<li>h<code>&lt;level&gt;</code>.separator: <code>&lt;value&gt;</code></li>		<li>h<code>&lt;level&gt;</code>.prefix: <code>&lt;value&gt;</code></li>		<li>h<code>&lt;level&gt;</code>.suffix: <code>&lt;value&gt;</code><br>
-		here, <code>&lt;level&gt;</code> values 1, 2, … correspond to Markdown headings <code>#</code>, <code>##</code>, … or HTML elements <code>h1</code>, <code>h2</code>, …</li>	</ul>
-	</li>	<li>Valid values for .start, defaultStart:
-	<ul>
-		<li>integer number</li>		<li>string (in this case, only first character is used)</li>		<li>array of strings</li>	</ul>
-	</li></ul>
-
-<p>If a line fails to parse, it is ignored. It can be used for comments.</p>
-
-<p>Example of auto-numbering option in-document specifications:</p>
-
-<div class="pre-lang" id="premain738411"><div>Plain Text</div><div class="pre-action-link"><span class="copy-code" data-index="738411" id="copycode738411" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="text" data-lang-orig="text" data-codeblock-processed="true" id="pre738411" style="margin-top: 0px;" class="notranslate">@numbering {
-    enable: true
-    defaultSeparator: "."
-    defaultSuffix: " "
-    h1.prefix: "Chapter "
-    h1.suffix: ": "
-    h1.separator: "doesn't matter, nothing to separate on top level"
-    h1.start: ["One", "Two", "Three", "Four"]
+    defaultSuffix: 1". "
     h2.prefix: "Chapter "
-    h2.separator: ", §"
+    h2.start: ["One", "Two", "Three", "Four"]
     h2.suffix: ": "
-    h3.standAlong: true
-    h4.start: "a"
-    h4.suffix: ") "
-}</pre>
+    h5.standAlong: true
+    h4.standAlong: true
+    h5.start: "a"
+    h5.suffix: ") "
+}=)
+</pre><p>Auto-numbering “start” option can be any integer number or a string representing such number, any character, or, since version 5.5.5, an array of strings representing heading numbers, such as <code>[&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;]</code>. These different categories are iterated in natural different ways. In particular, a character-based name is iterated by incrementing of its Unicode <em>code point</em>, such as in “A”, “B”, “C”…</p><p>In implementation, an interesting point here is the universal <code>Iterator</code> covering all these cases:</p><pre lang="JavaScript"><span class="keyword highlighter">function</span> <span class="name function highlighter">Iterator</span>(first) {
+    <span class="keyword highlighter">if</span> (first.constructor == Array) <span class="keyword highlighter">this</span>.array = first;
+    <span class="keyword highlighter">this</span>.counter = <span class="keyword highlighter">this</span>.array ? <span class="literal numeric highlighter">0</span> : first;
+    Iterator.prototype.toString = <span class="keyword highlighter">function</span> () {
+        <span class="keyword highlighter">return</span> <span class="keyword highlighter">this</span>.array ?
+            <span class="keyword highlighter">this</span>.array[<span class="keyword highlighter">this</span>.counter].toString() : <span class="keyword highlighter">this</span>.counter.toString()
+    }; <span class="comment text highlighter">// toString</span>
+    Iterator.prototype.next = <span class="keyword highlighter">function</span> () {
+        <span class="keyword highlighter">if</span> (<span class="keyword highlighter">this</span>.array)
+            <span class="keyword highlighter">if</span> (!<span class="keyword highlighter">this</span>.array[<span class="keyword highlighter">this</span>.counter + <span class="literal numeric highlighter">1</span>]) {
+                <span class="keyword highlighter">this</span>.counter = <span class="keyword highlighter">this</span>.array[<span class="keyword highlighter">this</span>.array.length - <span class="literal numeric highlighter">1</span>];
+                <span class="keyword highlighter">delete</span> <span class="keyword highlighter">this</span>.array;
+            } <span class="keyword highlighter">else</span>
+                <span class="keyword highlighter">this</span>.counter++;
+        <span class="keyword highlighter">if</span> (!<span class="keyword highlighter">this</span>.array) { <span class="comment text highlighter">// again, because it could have changed by delete this.array </span>
+            <span class="keyword highlighter">let</span> tryNumeric = parseInt(<span class="keyword highlighter">this</span>.counter);
+            <span class="keyword highlighter">if</span> (isNaN(tryNumeric)) {
+                <span class="keyword highlighter">let</span> codePoint = <span class="keyword highlighter">this</span>.counter.codePointAt();
+                <span class="keyword highlighter">this</span>.counter = String.fromCodePoint(++codePoint);
+            } <span class="keyword highlighter">else</span>
+                <span class="keyword highlighter">this</span>.counter = (++tryNumeric).toString();
+        } <span class="comment text highlighter">//if</span>
+        <span class="keyword highlighter">return</span> <span class="keyword highlighter">this</span>;
+    } <span class="comment text highlighter">//next</span>
+} <span class="comment text highlighter">//Iterator</span>
+</pre><p>Let’s see how it works.</p><p>Let’s say, we have the following Markdown fragment, included in other Markdown files, different in auto-numbering options:</p><pre lang="Markdown">## Contents
 
-<p>Auto-numbering “start” option can be any integer number or a string representing such number, any character, or, since version 5.5.5, an array of strings representing heading numbers, such as <code>["One", "Two", "Three"]</code>. These different categories are iterated in natural different ways. In particular, a character-based name is iterated by incrementing of its Unicode <em>code point</em>, such as in “A”, “B”, “C”…</p>
-
-<p>In implementation, an interesting point here is the universal <code>Iterator</code> covering all these cases:</p>
-
-<div class="pre-lang" id="premain145959"><div>Javascript</div><div class="pre-action-link"><span class="code-collapse" data-index="145959" id="preShrink145959">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="145959" id="copycode145959" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre145959" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">function</span> Iterator(first) {
-    <span class="code-keyword">if</span> (first.<span class="code-keyword">constructor</span> == <span class="code-sdkkeyword">Array</span>) <span class="code-keyword">this</span>.array = first;
-    <span class="code-keyword">this</span>.counter = <span class="code-keyword">this</span>.array ? <span class="code-digit">0</span> : first;
-    Iterator.prototype.toString = <span class="code-keyword">function</span> () {
-        <span class="code-keyword">return</span> <span class="code-keyword">this</span>.array ?
-            <span class="code-keyword">this</span>.array[<span class="code-keyword">this</span>.counter].toString() : <span class="code-keyword">this</span>.counter.toString()
-    }; <span class="code-comment">//</span><span class="code-comment"> toString</span>
-    Iterator.prototype.next = <span class="code-keyword">function</span> () {
-        <span class="code-keyword">if</span> (<span class="code-keyword">this</span>.array)
-            <span class="code-keyword">if</span> (!this.array[<span class="code-keyword">this</span>.counter + <span class="code-digit">1</span>]) {
-                <span class="code-keyword">this</span>.counter = <span class="code-keyword">this</span>.array[<span class="code-keyword">this</span>.array.length - <span class="code-digit">1</span>];
-                <span class="code-keyword">delete</span> <span class="code-keyword">this</span>.array;
-            } <span class="code-keyword">else</span>
-                <span class="code-keyword">this</span>.counter++;
-        <span class="code-keyword">if</span> (!this.array) { <span class="code-comment">//</span><span class="code-comment"> again, because it could have changed by delete this.array </span>
-            <span class="code-keyword">let</span> tryNumeric = <span class="code-sdkkeyword">parseInt</span>(<span class="code-keyword">this</span>.counter);
-            <span class="code-keyword">if</span> (<span class="code-sdkkeyword">isNaN</span>(tryNumeric)) {
-                <span class="code-keyword">let</span> codePoint = <span class="code-keyword">this</span>.counter.codePointAt();
-                <span class="code-keyword">this</span>.counter = <span class="code-sdkkeyword">String</span>.fromCodePoint(++codePoint);
-            } <span class="code-keyword">else</span>
-                <span class="code-keyword">this</span>.counter = (++tryNumeric).toString();
-        } <span class="code-comment">//</span><span class="code-comment">if</span>
-        <span class="code-keyword">return</span> <span class="code-keyword">this</span>;
-    } <span class="code-comment">//</span><span class="code-comment">next</span>
-} <span class="code-comment">//</span><span class="code-comment">Iterator</span></pre>
-
-<p>Let’s see how it works.</p>
-
-<p>Let’s say, we have the following Markdown fragment, included in other Markdown files, different in auto-numbering options:</p>
-
-<div class="pre-lang" id="premain548896"><div>Markdown</div><div class="pre-action-link"><span class="copy-code" data-index="548896" id="copycode548896" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Markdown" data-lang-orig="Markdown" data-codeblock-processed="true" id="pre548896" style="margin-top: 0px;" class="notranslate">## Contents{no-toc}
-
-@toc
+[](toc)
 
 ## Introduction
 
@@ -724,567 +257,254 @@ vscode.workspace.onDidChangeConfiguration(<span class="code-keyword">function</s
 
 ### Another Section
 
-#### Sub-Section</pre>
+#### Sub-Section
+</pre><p>To enable default auto-numbering include it in this way:</p><pre lang="Markdown">[](=numbering {
+    enable: true
+}=)
 
-<p>To enable default auto-numbering include it in this way:</p>
-
-<div class="pre-lang" id="premain209271"><div>Javascript</div><div class="pre-action-link"><span class="copy-code" data-index="209271" id="copycode209271" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre209271" style="margin-top: 0px;" class="notranslate">@numbering {
-    enable: <span class="code-keyword">true</span>
-}
-
-@include(body.md)</pre>
-
-<p>It will give as the following TOC:</p>
-
-<div class="toc">
-<ul style="list-style-type: none">
-	<li>1. <a href="#heading.contents">Contents</a></li>	<li>2. <a href="#heading.introduction">Introduction</a></li>	<li>3. <a href="#heading.something-else">Something Else</a>
-	<ul style="list-style-type: none">
-		<li>1. <a href="#heading.section">Section</a></li>		<li>2. <a href="#heading.another-section">Another Section</a>
-		<ul style="list-style-type: none">
-			<li>3.2.1. <a href="#heading.sub-section">Sub-Section</a></li>		</ul>
-		</li>	</ul>
-	</li></ul>
-</div>
-
-<p>Now, let’s use some advanced auto-numbering options:</p>
-
-<div class="pre-lang" id="premain768348"><div>Javascript</div><div class="pre-action-link"><span class="copy-code" data-index="768348" id="copycode768348" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre768348" style="margin-top: 0px;" class="notranslate">@numbering {
-    enable: <span class="code-keyword">true</span>
-    defaultSuffix: <span class="code-string">"</span><span class="code-string"> "</span>
-    h2.prefix: <span class="code-string">"</span><span class="code-string">Chapter "</span>
-    h2.suffix: <span class="code-string">"</span><span class="code-string">: "</span>
-    h2.start: [<span class="code-string">"</span><span class="code-string">One"</span>, <span class="code-string">"</span><span class="code-string">Two"</span>, <span class="code-string">"</span><span class="code-string">Three"</span>]
-    h4.start: <span class="code-string">"</span><span class="code-string">a"</span>
-    h4.suffix<span class="code-string">"</span><span class="code-string">: "</span>) <span class="code-string">"</span><span class="code-string">
+[](&shy;include(body.md))
+</pre><p>It will give as the following TOC:</p><div  data-line="316" class="code-line" dir="auto" ></div>
+<div class="toc"><ul style="list-style-type: none;"><li>1. <a href="#heading.contents">Contents</a></li><li>2. <a href="#heading.introduction">Introduction</a></li><li>3. <a href="#heading.something-else">Something Else</a><ul style="list-style-type: none;"><li>1. <a href="#heading.section">Section</a></li><li>2. <a href="#heading.another-section">Another Section</a><ul style="list-style-type: none;"><li>3.2.1. <a href="#heading.sub-section">Sub-Section</a></li></ul></li></ul></li></ul></div>
+<p>Now, let’s use some advanced auto-numbering options:</p><pre lang="Markdown">[](=numbering {
+    enable: true
+    defaultSuffix: " "
+    h2.prefix: "Chapter "
+    h2.suffix: ": "
+    h2.start: ["One", "Two", "Three"]
+    h4.start: "a"
+    h4.suffix": ") "
     h4.standAlong: true
-}
+}=)
 
-@include(body.md)
+[](&shy;include(body.md))
 
 ## Out of Chapter Names
 
-No more names in "</span>start<span class="code-string">"</span><span class="code-string">: ["</span>One<span class="code-string">"</span><span class="code-string">, "</span>Two<span class="code-string">"</span><span class="code-string">, "</span>Three<span class="code-string">"</span><span class="code-string">, "</span>Four<span class="code-string">"</span><span class="code-string">]
+No more names in "start": ["One", "Two", "Three", "Four"]
 
-## Using Letters Instead of Names</span></pre>
-
-<p>It will give us more fancy TOC:</p>
-
-<div class="toc">
-<ul style="list-style-type: none">
-	<li>Chapter One: <a href="#heading.contents">Contents</a></li>	<li>Chapter Two: <a href="#heading.introduction">Introduction</a></li>	<li>Chapter Three: <a href="#heading.something-else">Something Else</a>
-	<ul style="list-style-type: none">
-		<li>1 <a href="#heading.section">Section</a></li>		<li>2 <a href="#heading.another-section">Another Section</a>
-		<ul style="list-style-type: none">
-			<li>a) <a href="#heading.sub-section">Sub-Section</a></li>		</ul>
-		</li>	</ul>
-	</li>	<li>Chapter U: <a href="#heading.out-of20chapter20names">Out of Chapter Names</a></li>	<li>Chapter V: <a href="#heading.using-letters20instead20of20names">Using Letters Instead of Names</a></li></ul>
-</div>
-
-<p>Note that iteration by <code>["One", "Two", "Three", "Four"]</code> array went out of elements. Then next iteration is performed in the following way: the last element is parsed as a character and incremented by its code point. It gives us “U” and “V”. This feature is designed to handle such situation gracefully, so the author could easily detect where more array elements needs to be supplied, without breaking if the TOC structure.</p>
-
-<p>Also note heading number 1, 2 and “a)”. This is where the “standAlong” option is used, and the specialized <code>"suffix": ") "</code> for “a”.</p>
-
-<h3 id="heading.setting-up20additional20plug-ins">Setting up Additional Plug-ins</h3>
-
-<p id="src..additional.plugins.js">The object <code>additionalPlugins</code> is constructed from the settings data in conservative manner: if something goes wrong, plug-in data is not added:</p>
-
-<div class="pre-lang" id="premain111819"><div>Javascript</div><div class="pre-action-link"><span class="code-collapse" data-index="111819" id="preShrink111819">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="111819" id="copycode111819" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre111819" style="margin-top: 0px;" class="notranslate"><span class="code-keyword">const</span> additionalPlugins = (<span class="code-keyword">function</span> () {
-    <span class="code-keyword">let</span> result = [];
-    <span class="code-keyword">if</span> (!settings.additionalPlugins) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">if</span> (!settings.additionalPlugins.plugins) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">if</span> (!settings.additionalPlugins.plugins.length) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">if</span> (settings.additionalPlugins.plugins.length &lt; <span class="code-digit">1</span>) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">let</span> effectiveParentPath = settings.additionalPlugins.absolutePath;
-    <span class="code-keyword">if</span> (!effectiveParentPath) {
-        <span class="code-keyword">let</span> relativePath = settings.additionalPlugins.relativePath;
-        <span class="code-keyword">if</span> (!relativePath) <span class="code-keyword">return</span> result;
+## Using Letters Instead of Names
+</pre><p>It will give us more fancy TOC:</p><div  data-line="342" class="code-line" dir="auto" ></div>
+<div class="toc"><ul style="list-style-type: none;"><li>Chapter One: <a href="#heading.contents">Contents</a></li><li>Chapter Two: <a href="#heading.introduction">Introduction</a></li><li>Chapter Three: <a href="#heading.something-else">Something Else</a><ul style="list-style-type: none;"><li>1 <a href="#heading.section">Section</a></li><li>2 <a href="#heading.another-section">Another Section</a><ul style="list-style-type: none;"><li>a) <a href="#heading.sub-section">Sub-Section</a></li></ul></li></ul></li><li>Chapter U: <a href="#heading.out-of20chapter20names">Out of Chapter Names</a></li><li>Chapter V: <a href="#heading.using-letters20instead20of20names">Using Letters Instead of Names</a></li></ul></div>
+<p>Note that iteration by <code>[&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot;]</code> array went out of elements. Then next iteration is performed in the following way: the last element is parsed as a character and incremented by its code point. It gives us “U” and “V”. This feature is designed to handle such situation gracefully, so the author could easily detect where more array elements needs to be supplied, without breaking if the TOC structure.</p><p>Also note heading number 1, 2 and “a)”. This is where the “standAlong” option is used, and the specialized <code>&quot;suffix&quot;: &quot;) &quot;</code> for “a”.</p><h3 id="heading-setting-up-additional-plug-ins">Setting up Additional Plug-ins</h3>
+<p id="src..additional.plugins.js">The object <code>additionalPlugins</code> is constructed from the settings data in conservative manner: if something goes wrong, plug-in data is not added:</p><pre lang="JavaScript"><span class="keyword highlighter">const</span> additionalPlugins = (<span class="keyword highlighter">function</span> () {
+    <span class="keyword highlighter">let</span> result = [];
+    <span class="keyword highlighter">if</span> (!settings.additionalPlugins) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">if</span> (!settings.additionalPlugins.plugins) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">if</span> (!settings.additionalPlugins.plugins.length) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">if</span> (settings.additionalPlugins.plugins.length &lt; <span class="literal numeric highlighter">1</span>) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">let</span> effectiveParentPath = settings.additionalPlugins.absolutePath;
+    <span class="keyword highlighter">if</span> (!effectiveParentPath) {
+        <span class="keyword highlighter">let</span> relativePath = settings.additionalPlugins.relativePath;
+        <span class="keyword highlighter">if</span> (!relativePath) <span class="keyword highlighter">return</span> result;
         relativePath = relativePath.toString();
         effectiveParentPath =
             path.join(vscode.workspace.rootPath, relativePath);
-    } <span class="code-comment">//</span><span class="code-comment">if </span>
-    <span class="code-keyword">if</span> (!effectiveParentPath) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">if</span> (!fs.existsSync(effectiveParentPath.toString())) <span class="code-keyword">return</span> result;
-    <span class="code-keyword">for</span> (<span class="code-keyword">let</span> pluginDataProperty <span class="code-keyword">in</span> settings.additionalPlugins.plugins) {
-        <span class="code-keyword">const</span> pluginData =
+    } <span class="comment text highlighter">//if </span>
+    <span class="keyword highlighter">if</span> (!effectiveParentPath) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">if</span> (!fs.existsSync(effectiveParentPath.toString())) <span class="keyword highlighter">return</span> result;
+    <span class="keyword highlighter">for</span> (<span class="keyword highlighter">let</span> pluginDataProperty <span class="keyword highlighter">in</span> settings.additionalPlugins.plugins) {
+        <span class="keyword highlighter">const</span> pluginData =
             settings.additionalPlugins.plugins[pluginDataProperty];
-        <span class="code-keyword">if</span> (!pluginData.name) <span class="code-keyword">continue</span>;
-        <span class="code-keyword">const</span> effectivePath =
+        <span class="keyword highlighter">if</span> (!pluginData.name) <span class="keyword highlighter">continue</span>;
+        <span class="keyword highlighter">const</span> effectivePath =
             path.join(
                 effectiveParentPath.toString(),
                 pluginData.name.toString());
-        <span class="code-keyword">if</span> (!fs.existsSync(effectivePath)) <span class="code-keyword">continue</span>;
-        <span class="code-keyword">if</span> (!pluginData.enable) <span class="code-keyword">continue</span>;
+        <span class="keyword highlighter">if</span> (!fs.existsSync(effectivePath)) <span class="keyword highlighter">continue</span>;
+        <span class="keyword highlighter">if</span> (!pluginData.enable) <span class="keyword highlighter">continue</span>;
         result.push({name: effectivePath, options: pluginData.options});
-    } <span class="code-comment">//</span><span class="code-comment"> loop settings.additionalPlugins.plugins</span>
-    <span class="code-keyword">return</span> result;
-}()); <span class="code-comment">//</span><span class="code-comment">additionalPlugins</span></pre>
-
-<p>Naturally, “package.json” should claim the extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>” in its dependencies:</p>
-
-<div class="pre-lang" id="premain211175"><div></div><div class="pre-action-link"><span class="copy-code" data-index="211175" id="copycode211175" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre data-codeblock-processed="true" id="pre211175" style="margin-top: 0px;" class="notranslate">{
-    "name": "convert-markdown-to-html",
-    "displayName": "Convert Markdown to HTML",
-    "description": "Converts Markdown files and saves them as HTML",
-
-    // ...
-    
-    "dependencies": {
-        "vscode": "^1.13.1"
-    },
-    "extensionDependencies": [
-        "Microsoft.vscode-markdown"
-    ],
-    
-    // ...
-
-}</pre>
-
-<p>The function <a href="#src..main.js"><code>getMarkdownPlugin</code></a> solves some more problems unsolved by existing extensions. First, it enables generation of <code>id</code> attributes in headings, which are used in TOC and elsewhere. Another important improvement is the use of the <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> <em>typographer</em>.</p>
-
-<p>One noticeable annoyance of the extension preview was that the <em>typographer</em> feature of the node.js module “markdown-it” is not used. I wrote about similar feature <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing">in my previous article</a> on the topic; check out the description of the “–smart” command-line option. In terms of the “markdown-it” module, this is the <em>typographer</em> option, which should be set before rendering. This is done in the conversion script “build.js”, so the input markup such as em dash ("‐‐‐"), apostrophes or unpaired quotation marks will be shown in a typographically correct way as “—”, “”, “’”, etc. This way, the extension preview and the final output will look different. Another reason for the difference is “fancy formatting” of the preview, not entirely controlled by CSS.</p>
-
-<p>The typographer behavior is explained in detail in the <a href="https://sakryukov.github.io/vscode-markdown-to-html/#typographer">“Extensible Markdown Converter” documentation</a>.</p>
-
-<p>The problem of mismatch between preview and generated HTML file was solved in version 2.2.0. Now preview precisely matches the file, because it’s generated from the same source. For further detail, please see <a href="https://sakryukov.github.io/vscode-markdown-to-html/#preview">documentation on preview</a>.</p>
-
-<p>Another feature to implement is adding the HTML header and footer to the generated body. The module <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> itself does not do it. There is one particular reason why it is important enough: UTF-8 encoding needs to be specified in the <code>head</code> element, to make rendering correct. CodeProject does it anyway, but it’s important to check up the document before pasting it to the CodeProject article submission wizard.</p>
-
-<p>For other implementation detail, please see <a href="https://github.com/SAKryukov/vscode-markdown-to-html">original source code</a>.</p>
-
-<h2 id="heading.customized-workspace20settings">Customized Workspace Settings</h2>
-
-<p id="src..settings.json">All settings can be customized either globally (per user), or per <em>workspace</em>. We can use it to customize markdown preview and behavior (first of all, IntelliSense) to become suitable for the workspace used for article authoring. To do it per workspace, we need to create a file “.vscode/settings.json”:</p>
-
-<div class="pre-lang" id="premain313607"><div>Javascript</div><div class="pre-action-link"><span class="code-collapse" data-index="313607" id="preShrink313607">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="313607" id="copycode313607" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre lang="Javascript" data-lang-orig="Javascript" data-codeblock-processed="true" id="pre313607" style="margin-top: 0px;" class="notranslate">{
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.reportSuccess"</span>: <span class="code-keyword">true</span>, <span class="code-comment">//</span><span class="code-comment"> default</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.showHtmlInBrowser"</span>: <span class="code-keyword">false</span>, <span class="code-comment">//</span><span class="code-comment"> default</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.embedCss"</span>: <span class="code-keyword">false</span>, <span class="code-comment">//</span><span class="code-comment"> default</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.outputPath"</span>: <span class="code-string">"</span><span class="code-string">"</span>, <span class="code-comment">//</span><span class="code-comment"> default</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.titleLocatorRegex"</span>:
-        <span class="code-string">"</span><span class="code-string">^(.*?)\\[\\]\\(title\\)"</span>, <span class="code-comment">//</span><span class="code-comment"> default</span>
-    <span class="code-comment">//</span><span class="code-comment"> markdown-it options, all defaults:</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.allowHTML"</span>: <span class="code-keyword">true</span>,
-    <span class="code-comment">//</span><span class="code-comment"> "markdown-it-named-headers" plug-in,</span>
-    <span class="code-comment">//</span><span class="code-comment"> adds id attributes to h1 .. h6 elements:</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.headingId"</span>: <span class="code-keyword">true</span>,
-    <span class="code-comment">//</span><span class="code-comment"> converts "link-like" text: for ex., "http://my.com"</span>
-    <span class="code-comment">//</span><span class="code-comment"> to HTML anchors:</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.linkify"</span>: <span class="code-keyword">false</span>,
-    <span class="code-comment">//</span><span class="code-comment"> replaces new line marker with br HTML element:</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.br"</span>: <span class="code-keyword">true</span>,
-    <span class="code-comment">//</span><span class="code-comment"> typographer, see the documentation:</span>
-    <span class="code-comment">//</span><span class="code-comment"> https://sakryukov.github.io/vscode-markdown-to-html/#typographer</span>
-    <span class="code-comment">//</span><span class="code-comment"> :</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.typographer"</span>: <span class="code-keyword">true</span>,
-    <span class="code-comment">//</span><span class="code-comment"> applicable if typographer is true:</span>
-    <span class="code-comment">//</span><span class="code-comment"> 4 characters, replacement for "" and '':</span>
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.smartQuotes"</span>: <span class="code-string">"</span><span class="code-string">"</span><span class="code-string">"</span><span class="code-string">‘’"</span>,    
-    <span class="code-string">"</span><span class="code-string">markdown.extension.convertToHtml.options.additionalPlugins"</span>: {
-        <span class="code-string">"</span><span class="code-string">absolutePath"</span>: <span class="code-keyword">null</span>, <span class="code-comment">//</span><span class="code-comment"> just a placeholder</span>
-        <span class="code-comment">//</span><span class="code-comment"> relative to workspace:</span>
-        <span class="code-string">"</span><span class="code-string">relativePath"</span>: <span class="code-string">"</span><span class="code-string">../additional_plugins/node_modules"</span>, 
-        <span class="code-string">"</span><span class="code-string">plugins"</span>: [
-            {
-                <span class="code-string">"</span><span class="code-string">name"</span>: <span class="code-string">"</span><span class="code-string">markdown-it-sub"</span>,
-                <span class="code-string">"</span><span class="code-string">enable"</span>: <span class="code-keyword">true</span>,
-                <span class="code-string">"</span><span class="code-string">syntacticDecorators"</span>: [
-                    {
-                        <span class="code-string">"</span><span class="code-string">enable"</span>: <span class="code-keyword">true</span>,
-                        <span class="code-string">"</span><span class="code-string">regexString"</span>: <span class="code-string">"</span><span class="code-string">\\~(.*?)\\~"</span>,
-                        <span class="code-string">"</span><span class="code-string">tooltipFormat"</span>: <span class="code-string">"</span><span class="code-string">Subscript: %s"</span>,
-                        <span class="code-string">"</span><span class="code-string">style"</span>: { <span class="code-string">"</span><span class="code-string">backgroundColor"</span>: <span class="code-string">"</span><span class="code-string">yellow"</span> }
-                    }
-                ]
-            },
-            {
-                <span class="code-string">"</span><span class="code-string">name"</span>: <span class="code-string">"</span><span class="code-string">markdown-it-sup"</span>,
-                <span class="code-string">"</span><span class="code-string">enable"</span>: <span class="code-keyword">true</span>,
-                <span class="code-string">"</span><span class="code-string">syntacticDecorators"</span>: [
-                    {
-                        <span class="code-string">"</span><span class="code-string">enable"</span>: <span class="code-keyword">true</span>,
-                        <span class="code-string">"</span><span class="code-string">regexString"</span>: <span class="code-string">"</span><span class="code-string">\\^(.*?)\\^"</span>,
-                        <span class="code-string">"</span><span class="code-string">tooltipFormat"</span>: <span class="code-string">"</span><span class="code-string">Superscript: %s"</span>,
-                        <span class="code-string">"</span><span class="code-string">style"</span>: { <span class="code-string">"</span><span class="code-string">backgroundColor"</span>: <span class="code-string">"</span><span class="code-string">azure"</span> }
-                    }
-                ]
-            }
-        ]
-    <span class="code-string">"</span><span class="code-string">markdown.styles"</span>: [
-        <span class="code-comment">//</span><span class="code-comment"> same styles used for preview are used in converted HTML files:</span>
-        <span class="code-string">"</span><span class="code-string">style.css"</span>, 
-        <span class="code-string">"</span><span class="code-string">someMoreStyles.css"</span>
-    ],
+    } <span class="comment text highlighter">// loop settings.additionalPlugins.plugins</span>
+    <span class="keyword highlighter">return</span> result;
+}()); <span class="comment text highlighter">//additionalPlugins</span>
+</pre><p>Naturally, “package.json” should claim the extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>” in its dependencies:</p><pre lang="JSON"><span class="operator highlighter">{</span>
+    <span class="property highlighter">"summary"</span>: <span class="operator highlighter">{</span>
+        <span class="property highlighter">"title"</span>: <span class="literal string highlighter">"Some interesting well-known people"</span>,
+        <span class="property highlighter">"description"</span>: <span class="literal string highlighter">""</span>,
+        <span class="property highlighter">"created"</span>: <span class="literal string highlighter">"2021/11/07 05:47:08 UTC−5"</span>,
+        <span class="property highlighter">"updated"</span>: <span class="literal string highlighter">"2021/11/13 09:28:58 UTC−5"</span>
+    <span class="operator highlighter">}</span>,
+    <span class="property highlighter">"properties"</span>: <span class="operator highlighter">[</span>
+        <span class="literal string highlighter">"Name"</span>,
+        <span class="literal string highlighter">"Born"</span>,
+        <span class="literal string highlighter">"Birthplace"</span>,
+        <span class="literal string highlighter">"Died"</span>,
+        <span class="literal string highlighter">"Death Place"</span>,
+        <span class="literal string highlighter">"Nickname"</span>,
+        <span class="literal string highlighter">"Interests"</span>,
+        <span class="literal string highlighter">"Notable Work"</span>
+    <span class="operator highlighter">]</span>,
+    <span class="property highlighter">"values"</span>: <span class="operator highlighter">[</span>
+        <span class="literal string highlighter">"Menes"</span>,
+        <span class="literal string highlighter">"3200–3000 BC"</span>,
+        <span class="literal string highlighter">"Egypt"</span>,
+        <span class="literal string highlighter">"Akhenaten"</span>,
+        <span class="literal string highlighter">"1336 or 1334 BC"</span>,
+        <span class="literal string highlighter">"Nebuchadnezzar I"</span>,
+        <span class="literal string highlighter">"1121 BC"</span>,
+        <span class="literal string highlighter">"1100 BC"</span>,
+    <span class="operator highlighter">]</span>,
+    <span class="property highlighter">"records"</span>: <span class="operator highlighter">[</span>
+        <span class="operator highlighter">[</span>
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"property"</span>: 0,
+                <span class="property highlighter">"value"</span>: 0
+            <span class="operator highlighter">}</span>,
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"property"</span>: 1,
+                <span class="property highlighter">"value"</span>: 1
+            <span class="operator highlighter">}</span>
+        <span class="operator highlighter">]</span>
+    <span class="operator highlighter">]</span>
+<span class="operator highlighter">}</span>
+</pre><p>The function <a href="#src..main.js"><code>getMarkdownPlugin</code></a> solves some more problems unsolved by existing extensions. First, it enables generation of <code>id</code> attributes in headings, which are used in TOC and elsewhere. Another important improvement is the use of the <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> <em>typographer</em>.</p><p>One noticeable annoyance of the extension preview was that the <em>typographer</em> feature of the node.js module “markdown-it” is not used. I wrote about similar feature <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing">in my previous article</a> on the topic; check out the description of the “–smart” command-line option. In terms of the “markdown-it” module, this is the <em>typographer</em> option, which should be set before rendering. This is done in the conversion script “build.js”, so the input markup such as em dash (“‐‐‐”), apostrophes or unpaired quotation marks will be shown in a typographically correct way as “—”, “”, “'”, etc.    This way, the extension preview and the final output will look different. Another reason for the difference is “fancy formatting” of the preview, not entirely controlled by CSS.</p><p>The typographer behavior is explained in detail in the <a href="https://sakryukov.github.io/vscode-markdown-to-html/#typographer">“Extensible Markdown Converter” documentation</a>.</p><p>The problem of mismatch between preview and generated HTML file was solved in version 2.2.0. Now preview precisely matches the file, because it’s generated from the same source. For further detail, please see <a href="https://sakryukov.github.io/vscode-markdown-to-html/#preview">documentation on preview</a>.</p><p>Another feature to implement is adding the HTML header and footer to the generated body. The module <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> itself does not do it. There is one particular reason why it is important enough: UTF-8 encoding needs to be specified in the <code>head</code> element, to make rendering correct. CodeProject does it anyway, but it’s important to check up the document before pasting it to the CodeProject article submission wizard.</p><p>For other implementation detail, please see <a href="https://github.com/SAKryukov/vscode-markdown-to-html">original source code</a>.</p><h2 id="heading-customized-workspace-settings">Customized Workspace Settings</h2>
+<p id="src..settings.json">All settings can be customized either globally (per user), or per <em>workspace</em>. We can use it to customize markdown preview and behavior (first of all, IntelliSense) to become suitable for the workspace used for article authoring. To do it per workspace, we need to create a file “.vscode/settings.json”:</p><pre lang="JSON"><span class="operator highlighter">{</span>
+    <span class="property highlighter">"markdown.extension.convertToHtml.reportSuccess"</span>: true, // default
+    <span class="property highlighter">"markdown.extension.convertToHtml.showHtmlInBrowser"</span>: false, // default
+    <span class="property highlighter">"markdown.extension.convertToHtml.embedCss"</span>: false, // default
+    <span class="property highlighter">"markdown.extension.convertToHtml.outputPath"</span>: <span class="literal string highlighter">""</span>, // default
+    <span class="property highlighter">"markdown.extension.convertToHtml.titleLocatorRegex"</span>:
+        <span class="literal string highlighter">"^(.*?)\\[\\]\\(title\\)"</span>, // default
+    // markdown-it options, all defaults:
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.allowHTML"</span>: true,
+    // <span class="literal string highlighter">"markdown-it-named-headers"</span> plug-in,
+    // adds id attributes to h1 .. h6 elements:
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.headingId"</span>: true,
+    // converts <span class="literal string highlighter">"link-like"</span> text: for ex., <span class="literal string highlighter">"http://my.com"</span>
+    // to HTML anchors:
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.linkify"</span>: false,
+    // replaces new line marker with br HTML element:
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.br"</span>: true,
+    // typographer, see the documentation:
+    // https://sakryukov.github.io/vscode-markdown-to-html/#typographer
+    // :
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.typographer"</span>: true,
+    // applicable if typographer is true:
+    // 4 characters, replacement for <span class="literal string highlighter">""</span> and '':
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.smartQuotes"</span>: <span class="literal string highlighter">"“”‘’"</span>,    
+    <span class="property highlighter">"markdown.extension.convertToHtml.options.additionalPlugins"</span>: <span class="operator highlighter">{</span>
+        <span class="property highlighter">"absolutePath"</span>: null, // just a placeholder
+        // relative to workspace:
+        <span class="property highlighter">"relativePath"</span>: <span class="literal string highlighter">"../additional_plugins/node_modules"</span>, 
+        <span class="property highlighter">"plugins"</span>: <span class="operator highlighter">[</span>
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"name"</span>: <span class="literal string highlighter">"markdown-it-sub"</span>,
+                <span class="property highlighter">"enable"</span>: true
+            <span class="operator highlighter">}</span>,
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"name"</span>: <span class="literal string highlighter">"markdown-it-sup"</span>,
+                <span class="property highlighter">"enable"</span>: true
+            <span class="operator highlighter">}</span>,
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"name"</span>: <span class="literal string highlighter">"markdown-it-table-of-contents"</span>,
+                <span class="property highlighter">"options"</span>: <span class="operator highlighter">{</span>
+                    <span class="property highlighter">"includeLevel"</span>: <span class="operator highlighter">[</span>2, 3<span class="operator highlighter">]</span>,
+                    <span class="property highlighter">"containerClass"</span>: <span class="literal string highlighter">"toc"</span>,
+                    <span class="property highlighter">"listType"</span>: <span class="literal string highlighter">"ul"</span>
+                <span class="operator highlighter">}</span>,
+                <span class="property highlighter">"enable"</span>: true
+            <span class="operator highlighter">}</span>,
+            <span class="operator highlighter">{</span>
+                <span class="property highlighter">"name"</span>: <span class="literal string highlighter">"markdown-it-footnote"</span>,
+                <span class="property highlighter">"enable"</span>: true
+            <span class="operator highlighter">}</span>
+        <span class="operator highlighter">]</span>
+    <span class="operator highlighter">}</span>,
+    <span class="property highlighter">"markdown.styles"</span>: <span class="operator highlighter">[</span>
+        // same styles used for preview are used in converted HTML files:
+        <span class="literal string highlighter">"style.css"</span>, 
+        <span class="literal string highlighter">"someMoreStyles.css"</span>
+    <span class="operator highlighter">]</span>,
  
-    <span class="code-comment">//</span><span class="code-comment"> ...</span>
-
-    <span class="code-comment">//</span><span class="code-comment"> Very important: remove entered words from suggestions,</span>
-    <span class="code-comment">//</span><span class="code-comment"> leave only markdown syntax:</span>
-    <span class="code-string">"</span><span class="code-string">editor.wordBasedSuggestions"</span>: <span class="code-keyword">false</span>,
-    <span class="code-string">"</span><span class="code-string">[markdown]"</span>: { <span class="code-comment">//</span><span class="code-comment"> for Markdown language id only:</span>
-        <span class="code-string">"</span><span class="code-string">editor.codeLens"</span>: <span class="code-keyword">true</span>,
-        <span class="code-string">"</span><span class="code-string">editor.lineNumbers"</span>: <span class="code-string">"</span><span class="code-string">off"</span>,
-        <span class="code-string">"</span><span class="code-string">editor.rulers"</span>: [
-            <span class="code-digit">79</span> <span class="code-comment">//</span><span class="code-comment">CodeProject requirements for source code samples</span>
-        ]
-    },
-    <span class="code-string">"</span><span class="code-string">git.enabled"</span>: <span class="code-keyword">false</span>, <span class="code-comment">//</span><span class="code-comment"> git is used, but not with VS Code integration </span>
-    <span class="code-string">"</span><span class="code-string">cSpell.enabled"</span>: <span class="code-keyword">true</span> <span class="code-comment">//</span><span class="code-comment"> default</span>
-}</pre>
-
-<p>All the options above “<code>markdown.styles</code>” are introduced by the extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Extensible Markdown Converter</a>”. The option “<code>markdown.styles</code>” is shared by this extension and its dependency extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>”. If one of more CSS files is defined, they are used in the generated HTML files as <em>external</em> or <em>embedded</em> style sheets, depending on the option “<code>markdown.extension.convertToHtml.embedCss</code>”. The user is responsible for supplying the CSS files themselves.</p>
-
-<p>Perhaps the most interesting “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>” option is “markdown.extension.convertToHtml.options.additionalPlugins”. Their behavior is explained in the <a href="https://github.com/SAKryukov/vscode-markdown-to-html/wiki/VSCode:-Extensible-Markdown-Converter">extension documentation</a>.</p>
-
-<p>Note one specific plug-in package, “<a href="https://www.npmjs.com/package/markdown-it-table-of-contents">markdown-it-table-of-contents</a>”. It has its own options. They are transparently passed from “settings.json” to the extension code. The code fragment <a href="#src..main.js">shown above</a> explains how it is implemented.</p>
-
-<p>The process of modification of settings is explained <a href="https://code.visualstudio.com/docs/getstarted/settings">here</a>. It makes certain sense to open the original file in Visual Studio Code and edit in text format, to keep full control and take the benefits of IntelliSense.</p>
-
-<p>Some settings are copied to the local file “.vscode/settings.json” and not modified but added for convenience of experimenting; most of them are omitted from this code sample. Note two critical items: “editor.wordBasedSuggestions” and “editor.rulers”. First one is a work-around against showing all previously entered words as IntelliSense suggestions. The second one draws a vertical line at column 79, which is important for code samples: CodeProject requires all code sample lines to be within the 80-column range.</p>
-
-<h2 id="heading.putting-all20together3a20cookbook20recipe">Putting All Together: Cookbook Recipe</h2>
-
-<ol>
-	<li>Install <a href="https://code.visualstudio.com/">Visual Studio Code</a>; it will also install the built-in extension “VS Code Markdown” by Microsoft;</li>	<li>Install Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>”, described in the present article;</li>	<li>Install Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spellchecker</a>”;</li>	<li>Open some folder with Markdown documents with Visual Studio Code; in the code sample supplied with this article, this is the root directory, where “.vscode” is found.</li></ol>
-
-<p>Optionally, I would also recommend installing Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=alefragnani.numbered-bookmarks">Numbered Bookmarks</a>”; they are very useful for editing.</p>
-
-<p>Everything is ready. Now you can test it. Create and open some .md file. In the editor, you will get the following commands:</p>
-
-<ol>
-	<li>“Ctrl-space”: see a <a href="#img.title">list of suggestions</a> in Markdown syntax and chose a snippet to enter;</li>	<li>“Ctrl+.”: if “Code Spellchecker” extension is activated, a problematic word is underlined and a cursor is located within this word, get a list of quick-fix suggestion and chose a corrected word;</li>	<li>“Ctrl+Shift+V”: Open Preview;</li>	<li>“Ctrl+K V”: Open Preview on side;</li>	<li>“Ctrl+/”: comment out or un-comment current line or selection;</li>	<li>Editor context menu: “Markdown: Convert to HTML”, converts the file loaded in a currently activated editor.</li>	<li>Editor context menu, Explorer context menu: “Markdown: Convert to HTML all .md files in workspace”.</li></ol>
-
-<p>For full list of Markdown-related commands, press either F1 or Ctrl+Shift+P and enter “Markdown”; look for other commands as required.</p>
-
-<p>It is possible to adjust a Markdown-based article to CodeProject requirements.</p>
-
-<h4>I would recommend:</h4>
-
-<p class="title">Use <code>@toc</code> for auto-built Table of Constants, and use it without auto-numbering, as HTML navigation is quite sufficient. Use regular Markdown headings starting from the level “##”, that is “##”, “###”, etc. Instead of <code>#</code>, use a regular paragraph with the extended markup <code>{title}…</code></p>
-
-<p>For the section “<code>## Contents</code>” itself, use the extended markup <code>{no-toc}</code>. This way, this heading will not appear in the TOC.</p>
-
-<p>The auto-generated <code>id</code> values for the headings will be automatically used in the TOC. If you need to reference a heading element anywhere else, generate HTML at least one and see how it is referenced in your TOC, copy/paste it, for example: <code>as it is explained [in this section](#heading-usage)…</code>.</p>
-
-<p>Use fenced code blocks to show source code. Add the <code>lang</code> and <code>id</code> attributes, which is made possible through the new Markdown extension, “attrubution” syntax. For example:</p>
-
-<div class="pre-lang" id="premain144398"><div></div><div class="pre-action-link"><span class="copy-code" data-index="144398" id="copycode144398" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
-<g>
-<path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272
-    c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729
-    c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path>
-<path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272
-    c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068
-    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001
-    C291.206,428.715,289.92,430,288.341,430z"></path>	
-</g>
-</svg></span></div></div><pre data-codeblock-processed="true" id="pre144398" style="margin-top: 0px;" class="notranslate">~~~ {lang=C#}{id=code-csharp-usage-sample}
-class MyClass { /* ... */ }
-~~~</pre>
-
-<p>The attribute <code>lang</code> will be used for proper syntax highlighting, and <code>id</code> can be used to reference a source code sample. For example: <code>in the sample [shown above](#code-csharp-usage-sample)…</code></p>
-
-<p>Add regular HTML comments: before “Contents”, add <code>&lt;!-- copy to CodeProject from this point --&gt;</code>, and, at the very end <code>&lt;!-- copy to CodeProject to this point --&gt;</code>. When an HTML file is generated, locate these two marks, copy the text between them, and paste to the source element of the CodeProject article submission wizard. Everything will be correct, no manual editing should be required.</p>
-
-<h2 id="heading.versions">Versions</h2>
-
-<h4 id="heading.initial-version">Initial version</h4>
-
-<p>June 29, 2017</p>
-
-<h4 id="heading.version-1.0.3">Version 1.0.3</h4>
-
-<p>July 4, 2017</p>
-
-<p>Code is rewritten from scratch and published on Visual Studio Marketplace as a Visual Studio Code Extension <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">“convert-markdown-to-html”</a>.</p>
-
-<p>Article is almost completely rewritten.</p>
-
-<h4 id="heading.version-1.1.0">Version 1.1.0</h4>
-
-<p>July 5, 2017</p>
-
-<p>Added support for multiple CSS files and the option to embed CSS code in HTML.</p>
-
-<h4 id="heading.version-1.1.1">Version 1.1.1</h4>
-
-<p>July 5, 2017</p>
-
-<p>Fixed a bug in a relative path to CSS files.</p>
-
-<h4 id="heading.version-2.1.0">Version 2.1.0</h4>
-
-<p>July 8, 2017</p>
-
-<p>The Visual Studio Code extension title modified to “Extensible Markdown Converter”.</p>
-
-<p>Since v. 2.0.0, the user can extend Markdown features by installing any of the <a href="https://www.npmjs.com/package/markdown-it">“markdown-it” plug-ins</a> that are <a href="https://www.npmjs.com/browse/keyword/markdown-it-plugin">abundantly available</a> in the <a href="https://www.npmjs.com/">npm package registry</a>. All the packages can be configured from a single source: “settings.json”, <a href="https://code.visualstudio.com/docs/getstarted/settings">on the user or workspace level</a>.</p>
-
-<p>That said, there is no a need for different Markdown extensions. It’s quite enough to have only the built-in extension combined with Extensible Markdown Converter. All required functionality can be assembled from available plug-ins using the single unified configuration design.</p>
-
-<p>After this version was published, due to these radical improvements, the article was massively updated.</p>
-
-<h4 id="heading.version-2.2.0">Version 2.2.0</h4>
-
-<p>July 9, 2017</p>
-
-<ul>
-	<li>Implemented preview identical to generated HTML</li>	<li>Improved performance (lazy evaluation of markdown-it module setup and settings)</li>	<li>In settings, implemented “outputPath” option</li></ul>
-
-<p>Markdown code samples updated. Now they illustrate <a href="https://sakryukov.github.io/vscode-markdown-to-html/#additional-plug-ins">additional plug-ins</a> and newly developed techniques, such as <a href="https://sakryukov.github.io/vscode-markdown-to-html/#detecting-document-title">title detection</a>.</p>
-
-<h4 id="heading.version-3.0.0">Version 3.0.0</h4>
-
-<p>July 13, 2017</p>
-
-<ul>
-	<li>Implemented extensible Markdown syntax coloring for each plug-in syntax, user-configurable</li>	<li>Implemented user-configurable syntax coloring for document title in input Markdown</li>	<li>Implemented file includes, with user-configurable syntax coloring</li>	<li>Added keybinding, to overwrite “VS Code Markdown” preview key bindings</li></ul>
-
-<p>The change relative to version 2.3.0: location of the included file is now relative to the Markdown document location.</p>
-
-<h4 id="heading.version-4.3.0">Version 4.3.0</h4>
-
-<p>Accumulated changes since Version 3.0.0:</p>
-
-<ul>
-	<li>Found critical bug in the external “markdown-it-named-headers” and “markdown-it-table-of-contents”: generated id values of headers were not unique. As a work-around, these external modules are eliminated and replaced with modules embedded in the extension.</li></ul>
-
-<p>Major version is incremented because the default Markdown pattern for Table of Content has changed to <code>^\[\]\(toc\)</code>, which means “<code>[](toc)</code>” at the beginning of line. Potentially, it could break backward compatibility with existing Markdown documents using “<code>[[toc]]</code>”, but it’s easy to fix.</p>
-
-<ul>
-	<li>Added settings option: “markdown.extension.convertToHtml.tocIncludeLevels”, default [1, 2, 3, 4, 5, 6]</li>	<li>Added settings option: “markdown.extension.convertToHtml.tocContainerClass”, default “toc”</li>	<li>Added settings option: “markdown.extension.convertToHtml.tocListType”, default “ul”</li>	<li>Table of Contents and generation of heading <code>id</code> attributes unified in a single embedded module.</li>	<li>Added settings option: “markdown.extension.convertToHtml.options.headingIdPrefix”, default “heading.”</li>	<li>Fixed a bug in heading <code>id</code> attribute generation; now the set of used <code>id</code> values is reset on each rendering</li>	<li>Added logo</li></ul>
-
-<h4 id="heading.version-5.8.1">Version 5.8.1</h4>
-
-<p>Accumulated changes since Version 4.3.0:</p>
-
-<ul>
-	<li>Added advanced Markdown extension features based on embedded markdown-it plug-in:
-	<ul>
-		<li>Syntax extension: a tag to mark a heading to be excluded from TOC</li>		<li>Extended options to make a choice between <code>ul</code> or <code>ol</code> elements in TOC, either globally or per TOC level</li>		<li>Extended options to add sets of HTML attributes to TOC list elements, either globally or per TOC level</li>		<li>Optional user-configurable <a href="#heading.auto-numbering">auto-numbering</a> with rich set of features</li>	</ul>
-	</li>	<li>Added images to conversion and preview commands and menu items to the editor title</li>	<li>Improved images</li>	<li>Found critical bugs in the legacy code of the embedded markdown-it plug-in, so this module is fully re-written</li>	<li>Improved handling of the case of invalid JSON in the in-doc auto-numbering specifications</li>	<li>Introduced new simplified format for in-document specifications of the auto-numbering options</li>	<li>Improved id generation.</li></ul>
-
-<p>The new current set features of features provides comprehensive handling of headings and TOC. Two related user-configurable syntax extensions are used “TOC” (by default, <code>[](toc</code> at the beginning of a paragraph) and “Exclude from TOC” (<code>by default,</code>, <code>{no-toc}</code> anywhere in the heading). The <code>id</code> values and their references from TOC’s <code>&lt;a href...&gt;</code> anchors are created from a single source and guarantee referential integrity and uniqueness. The markers themselves are removed from output, unless the feature is disabled.</p>
-
-<h4 id="heading.version-7.0.0">Version 7.0.0</h4>
-
-<p>VSCode extension API broke backward compatibility at least twice. This version restored compatibility with the latest VSCode version, at the moment of writing, 1.54.3.</p>
-
-<h4 id="heading.version-7.2.0">Version 7.2.0</h4>
-
-<p>Improved advanced auto-numbering.</p>
-
-<h4 id="heading.version-8.0.0">Version 8.0.0</h4>
-
-<p>Restored additional plugins feature, entire functionality re-tested, added minor fixes or improvements, refined test/demo documents.</p>
-
-<h2 id="heading.conclusions">Conclusions</h2>
-
-<p>After few prototypes of the solution and creation of the fully-fledged extension, I feel the result is pleasing.</p>
-
-<p>Even though Visual Studio Code looks still needs some stabilization time, it looks like its code and API are quite healthy and maintainable. It already gives us a great development tool, which now can be also used for article writing, with pleasure and piece in mind.</p>
-
-<p>Happy writing!</p>
-
-<!-- Article Ends -->
-
-
-						</div>
-						
-
-						
-						<h2>License</h2>
-						<div id="LicenseTerms"><p>This article has no explicit license attached to it but may contain usage terms in the article text or the download files themselves. If in doubt please contact the author via the discussion board below.</p><p>A list of licenses authors might use can be found <a href="https://www.codeproject.com/info/Licenses.aspx">here</a></p></div>
-						
-
-						
-						<br>
-						
-						    <br>
-						
-						
-
-						<div class="clearfix"></div>
-
-						<div style="padding-top:8px">
-							
-						</div>
-
-					
-
-				    
-					</form>
-
-				</div>
-
-				
-				<div class="bottom-promo"> 
-				    
-				</div>
-				
-                
-                
-
-				
-				
-				
-
-			</div>
-			
-
-            
-            
-            
-
-        </div>
-        
-
-		
-		<div class="site-footer">
-			<div class="align-left">
-				<a id="ctl00_PermaLink" href="https://www.codeproject.com/Articles/1194125/All-in-One-Toolchain-for-Article-Writing-with-Visu">Permalink</a><br>
-				<br>
-				<a id="ctl00_PrivacyLink" href="https://www.codeproject.com/info/privacy.aspx">Privacy</a><br>
-    			<a id="ctl00_CookiePolicyLink" href="https://www.codeproject.com/info/cookie.aspx">Cookies</a><br>
-                <a id="ctl00_TermsOfUseLink" href="https://www.codeproject.com/info/TermsOfUse.aspx">Terms of Use</a><br>
-			</div>
-
-            <div class="align-center">
-				
-
-
-<div class="page-width">
-    Layout: <a id="ctl00_PageWidth_FixedT" title="Fixed width layout" rel="nofollow" class=" active" href="https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode?PageFlow=FixedWidth">fixed</a>
-    |
-    <a id="ctl00_PageWidth_FluidT" title="Fluid layout" rel="nofollow" href="https://www.codeproject.com/Articles/1194125/Article-Writing-Toolchain-with-VSCode?PageFlow=Fluid">fluid</a>
-</div>
-
-
-				
-
-				
-
-	            
-
-                <br>
-			</div>
-                
-			<div class="align-right">
-				Article Copyright 2017 by Sergey Alexandrovich Kryukov<br>Everything else
-				Copyright © <a href="mailto:webmaster@codeproject.com">CodeProject</a>, 1999-2024<br>
-                <br>
-				Web01 
-				2.8:2024-12-08:1<br>
-			</div>
-		</div>
-		
-
-		<br clear="all">
-		
-			
-
-	</div> 
-	</div> 
-</div>
-
-
-
-
-
-
-
-<script type="text/javascript"> // DEFERRED script
-
-document.addEventListener('DOMContentLoaded', function() {
-
-	new CodeBlocks().initialise('#contentdiv');
-	
-	$('.author-wrapper .description').shorten({showChars: 400});
-	
-	anchorAnimate();
-	
-	$('#__EVENTVALIDATION').attr('autocomplete', 'off');
-
-})
-</script>
-
-
-
-
-
-
-
-
-
-
-<style type="text/css">.copied::after {  position: absolute;  right: 0;  display: inline-block; white-space: nowrap; content: 'copied'; color: #fff; background-color: #f90;  border-radius: 3px; padding:1px 8px; opacity: 0;  will-change: opacity, transform; animation: showcopied 1.5s ease; } @keyframes showcopied { 0% { opacity: 0; } 70% { opacity: 1; } 100% { opacity: 0; } } </style><canvas id="cv1" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas><canvas id="cv2" width="1px" height="1px" style="position:absolute;left:0;top:0;pointer-events:none"></canvas></body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
-      div.grammarly-desktop-integration {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select:none;
-        user-select:none;
-      }
-
-      div.grammarly-desktop-integration:before {
-        content: attr(data-content);
-      }
-    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
+    // ...
+
+    // Very important: remove entered words from suggestions,
+    // leave only markdown syntax:
+    <span class="property highlighter">"editor.wordBasedSuggestions"</span>: false,
+    <span class="property highlighter">"[markdown]"</span>: <span class="operator highlighter">{</span> // for Markdown language id only:
+        <span class="property highlighter">"editor.codeLens"</span>: true,
+        <span class="property highlighter">"editor.lineNumbers"</span>: <span class="literal string highlighter">"off"</span>,
+        <span class="property highlighter">"editor.rulers"</span>: <span class="operator highlighter">[</span>
+            79 //CodeProject requirements for source code samples
+        <span class="operator highlighter">]</span>
+    <span class="operator highlighter">}</span>,
+    <span class="property highlighter">"git.enabled"</span>: false, // git is used, but not with VS Code integration 
+    <span class="property highlighter">"cSpell.enabled"</span>: true // default
+<span class="operator highlighter">}</span>
+</pre><p>All the options above “<code>markdown.styles</code>” are introduced by the extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Extensible Markdown Converter</a>”. The option “<code>markdown.styles</code>” is shared by this extension and its dependency extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>”. If one of more CSS files is defined, they are used in the generated HTML files as <em>external</em> or <em>embedded</em> style sheets, depending on the option “<code>markdown.extension.convertToHtml.embedCss</code>”. The user is responsible for supplying the CSS files themselves.</p><p>Perhaps the most interesting “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>” option is “markdown.extension.convertToHtml.options.additionalPlugins”. Their behavior is explained in the <a href="https://github.com/SAKryukov/vscode-markdown-to-html/wiki/VSCode:-Extensible-Markdown-Converter">extension documentation</a>.</p><p>Note one specific plug-in package, “<a href="https://www.npmjs.com/package/markdown-it-table-of-contents">markdown-it-table-of-contents</a>”. It has its own options. They are transparently passed from “settings.json” to the extension code. The code fragment <a href="#src..main.js">shown above</a> explains how it is implemented.</p><p>The process of modification of settings is explained <a href="https://code.visualstudio.com/docs/getstarted/settings">here</a>. It makes certain sense to open the original file in Visual Studio Code and edit in text format, to keep full control and take the benefits of IntelliSense.</p><p>Some settings are copied to the local file “.vscode/settings.json” and not modified but added for convenience of experimenting; most of them are omitted from this code sample. Note two critical items: “editor.wordBasedSuggestions” and “editor.rulers”. First one is a work-around against showing all previously entered words as IntelliSense suggestions. The second one draws a vertical line at column 79, which is important for code samples: CodeProject requires all code sample lines to be within the 80-column range.</p><h2 id="heading-putting-all-together3a-cookbook-recipe">Putting All Together: Cookbook Recipe</h2>
+<ol data-line="534" class="code-line" dir="auto">
+<li>Install <a href="https://code.visualstudio.com">Visual Studio Code</a>; it will also install the built-in extension “VS Code Markdown” by Microsoft;</li>
+<li>Install Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">Convert Markdown to HTML</a>”, described in the present article;</li>
+<li>Install Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker">Code Spellchecker</a>”;</li>
+<li>Open some folder with Markdown documents with Visual Studio Code; in the code sample supplied with this article, this is the root directory, where “.vscode” is found.</li>
+</ol>
+<p>Optionally, I would also recommend installing Visual Studio Code extension “<a href="https://marketplace.visualstudio.com/items?itemName=alefragnani.numbered-bookmarks">Numbered Bookmarks</a>”; they are very useful for editing.</p><p>Everything is ready. Now you can test it. Create and open some .md file. In the editor, you will get the following commands:</p><ol data-line="543" class="code-line" dir="auto">
+<li>“Ctrl-space”: see a <a href="#img.title">list of suggestions</a> in Markdown syntax and chose a snippet to enter;</li>
+<li>“Ctrl+.”: if “Code Spellchecker” extension is activated, a problematic word is underlined and a cursor is located within this word, get a list of quick-fix suggestion and chose a corrected word;</li>
+<li>“Ctrl+Shift+V”: Open Preview;</li>
+<li>“Ctrl+K V”: Open Preview on side;</li>
+<li>“Ctrl+/”: comment out or un-comment current line or selection;</li>
+<li>Editor context menu: “Markdown: Convert to HTML”, converts the file loaded in a currently activated editor.</li>
+<li>Editor context menu, Explorer context menu: “Markdown: Convert to HTML all .md files in workspace”.</li>
+</ol>
+<p>For full list of Markdown-related commands, press either F1 or Ctrl+Shift+P and enter “Markdown”; look for other commands as required.</p><h2 id="heading-versions">Versions</h2>
+<h4>Initial version</h4>
+<p>June 29, 2017</p><h4>Version 1.0.3</h4>
+<p>July 4, 2017</p><p>Code is rewritten from scratch and published on Visual Studio Marketplace as a Visual Studio Code Extension <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">“convert-markdown-to-html”</a>.</p><p>Article is almost completely rewritten.</p><h4>Version 1.1.0</h4>
+<p>July 5, 2017</p><p>Added support for multiple CSS files and the option to embed CSS code in HTML.</p><h4>Version 1.1.1</h4>
+<p>July 5, 2017</p><p>Fixed a bug in a relative path to CSS files.</p><h4>Version 2.1.0</h4>
+<p>July 8, 2017</p><p>The Visual Studio Code extension title modified to “Extensible Markdown Converter”.</p><p>Since v. 2.0.0, the user can extend Markdown features by installing any of the <a href="https://www.npmjs.com/package/markdown-it">“markdown-it” plug-ins</a> that are <a href="https://www.npmjs.com/browse/keyword/markdown-it-plugin">abundantly available</a> in the <a href="https://www.npmjs.com">npm package registry</a>. All the packages can be configured from a single source: “settings.json”, <a href="https://code.visualstudio.com/docs/getstarted/settings">on the user or workspace level</a>.</p><p>That said, there is no a need for different Markdown extensions. It’s quite enough to have only the built-in extension combined with Extensible Markdown Converter. All required functionality can be assembled from available plug-ins using the single unified configuration design.</p><p>After this version was published, due to these radical improvements, the article was massively updated.</p><h4>Version 2.2.0</h4>
+<p>July 9, 2017</p><ul data-line="595" class="code-line" dir="auto">
+<li>Implemented preview identical to generated HTML</li>
+<li>Improved performance (lazy evaluation of markdown-it module setup and settings)</li>
+<li>In settings, implemented “outputPath” option</li>
+</ul>
+<p>Markdown code samples updated. Now they illustrate <a href="https://sakryukov.github.io/vscode-markdown-to-html/#additional-plug-ins">additional plug-ins</a> and newly developed techniques, such as <a href="https://sakryukov.github.io/vscode-markdown-to-html/#detecting-document-title">title detection</a>.</p><h4>Version 3.0.0</h4>
+<p>July 13, 2017</p><ul data-line="605" class="code-line" dir="auto">
+<li>Implemented extensible Markdown syntax coloring for each plug-in syntax, user-configurable</li>
+<li>Implemented user-configurable syntax coloring for document title in input Markdown</li>
+<li>Implemented file includes, with user-configurable syntax coloring</li>
+<li>Added keybinding, to overwrite “VS Code Markdown” preview key bindings</li>
+</ul>
+<p>The change relative to version 2.3.0: location of the included file is now relative to the Markdown document location.</p><h4>Version 4.3.0</h4>
+<p>Accumulated changes since Version 3.0.0:</p><ul data-line="616" class="code-line" dir="auto">
+<li>Found critical bug in the external “markdown-it-named-headers” and “markdown-it-table-of-contents”: generated id values of headers were not unique. As a work-around, these external modules are eliminated and replaced with modules embedded in the extension.</li>
+</ul>
+<p>Major version is incremented because the default Markdown pattern for Table of Content has changed to <code>^\[\]\(toc\)</code>, which means “<code>[](toc)</code>” at the beginning of line. Potentially, it could break backward compatibility with existing Markdown documents using “<code>[[toc]]</code>”, but it’s easy to fix.</p><ul data-line="620" class="code-line" dir="auto">
+<li>Added settings option: “markdown.extension.convertToHtml.tocIncludeLevels”, default [1, 2, 3, 4, 5, 6]</li>
+<li>Added settings option: “markdown.extension.convertToHtml.tocContainerClass”, default “toc”</li>
+<li>Added settings option: “markdown.extension.convertToHtml.tocListType”, default “ul”</li>
+<li>Table of Contents and generation of heading <code>id</code> attributes unified in a single embedded module.</li>
+<li>Added settings option: “markdown.extension.convertToHtml.options.headingIdPrefix”, default “heading.”</li>
+<li>Fixed a bug in heading <code>id</code> attribute generation; now the set of used <code>id</code> values is reset on each rendering</li>
+<li>Added logo</li>
+</ul>
+<h4>Version 5.2.0</h4>
+<p>Extended syntax changed. Please see the <a href="https://sakryukov.github.io/vscode-extensible-markdown/index.html">current syntax here</a>.</p><p>Restored compatibility with later VSCode versions based on v.&amp;thinkp;1.84.2</p><h4>Version 5.3.0</h4>
+<p>Updated documentation</p><h4>Version 5.8.0</h4>
+<p>Fixed additional plugins feature, entire functionality re-tested</p><h4>Version 8.3.1</h4>
+<p>Accumulated changes since Version 4.3.0:</p><ul data-line="646" class="code-line" dir="auto">
+<li>Added advanced Markdown extension features based on embedded markdown-it plug-in:
+<ul data-line="647" class="code-line" dir="auto">
+<li>Syntax extension: a tag to mark a heading to be excluded from TOC</li>
+<li>Extended options to make a choice between <code>ul</code> or <code>ol</code> elements in TOC, either globally or per TOC level</li>
+<li>Extended options to add sets of HTML attributes to TOC list elements, either globally or per TOC level</li>
+<li>Optional user-configurable <a href="#heading.auto-numbering">auto-numbering</a> with rich set of features</li>
+</ul>
+</li>
+<li>Added images to conversion and preview commands and menu items to the editor title</li>
+<li>Improved images</li>
+<li>Found critical bugs in the legacy code of the embedded markdown-it plug-in, so this module is fully re-written</li>
+<li>Improved handling of the case of invalid JSON in the in-doc auto-numbering specifications</li>
+<li>Introduced new simplified format for in-document specifications of the auto-numbering op22tions</li>
+<li>Improved id generation.</li>
+</ul>
+<p>The new current set features of features provides comprehensive handling of headings and TOC. Two related user-configurable syntax extensions are used “TOC” (by default, <code>[](toc</code> at the beginning of a paragraph) and “Exclude from TOC” (<code>by default, </code>[](notoc<code>anywhere in the heading). The</code>id<code>values and their references from TOC's</code><a href...>` anchors are created from a single source and guarantee referential integrity and uniqueness. The markers themselves are removed from output, unless the feature is disabled.</p><h4>Version 8.3.2</h4>
+<p>The publication moved to GitHub (CodeProject is out of business, publications are accessible but not updateable).</p><h2 id="heading-conclusions">Conclusions</h2>
+<p>After few prototypes of the solution and creation of the fully-fledged extension, I feel the result is pleasing. Since the first version, I already wrote many CodeProject articles, including the present article, and other documents. For the CodeProject publications during last years, I never touched the article text manually on the CodeProject article submission page. Instead, I only used copy and paste of the HTML, produced by this extension.</p><p>Since the first version of Extensible Markdown, Visual Studio Code seriously matured and now looks stabe, healthy and maintainable. It makes a great development tool, which can be used for article writing, with pleasure and piece in mind.</p><p>Happy writing!</p><div  data-line="672" class="code-line" dir="auto" ></div>
+<!-- copy to CodeProject to here --------------------------------------------->
+<div  data-line="674" class="code-line" dir="auto" ></div>
+<script src="https://SAKryukov.github.io/publications/code/source-code-decorator.js"></script>
+<p><em>June 29, 2017 — January 2, 2025</em></p>
+
+</body>
+</html>
