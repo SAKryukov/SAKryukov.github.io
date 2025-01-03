@@ -71,7 +71,7 @@
   "name": "Many Questions Answered at Once — Collaboration between Windows Forms or WPF Windows",
   "headline": "Many Questions Answered at Once — Collaboration between Windows Forms or WPF Windows",
   "url": "https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw",
-  "discussionUrl": "https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "VS2008,C#,.NET,Visual-Studio,Dev,Design,Beginner,GUI",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -433,7 +427,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 	<li><a href="Many-Questions-Answered-at-Once-Collaboration-between-Windows-Forms-or-WPF-Windows.zip">Download code samples — 18.2 KB</a></li></ul>
 
 <ol>
-	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a1">Motivation</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a2">The Idea</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a3">Example of Collaboration</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a4">Sample Solution for System.Windows.Forms</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a5">Sample Solution for WPF</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a6">Some Notes on Other Solutions</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a7">Is the Collaboration Good or Evil?</a></li>	<li><a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#a8">Conclusions</a></li></ol>
+	<li><a href="#a1">Motivation</a></li>	<li><a href="#a2">The Idea</a></li>	<li><a href="#a3">Example of Collaboration</a></li>	<li><a href="#a4">Sample Solution for System.Windows.Forms</a></li>	<li><a href="#a5">Sample Solution for WPF</a></li>	<li><a href="#a6">Some Notes on Other Solutions</a></li>	<li><a href="#a7">Is the Collaboration Good or Evil?</a></li>	<li><a href="#a8">Conclusions</a></li></ol>
 
 <p><a name="a1"></a></p>
 
@@ -669,7 +663,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>The really key point of form collaboration is the proper abstraction between forms, so passing direct access to some controls is a bad idea in all cases. Actually, event handling and the use of delegate instances between form also provides proper level of abstraction, only this is related to some more "advanced" requirements, when inversion of control is involved. See also: <a href="http://en.wikipedia.org/wiki/Inversion_of_control">http://en.wikipedia.org/wiki/Inversion_of_control</a>.</p>
 
-<p>I only want to stop at one illusionary aspect of this "problem", parent-child relationship for forms. Not only it is absolutely irrelevant, as I <a href="https://www.codeproject.com/Tips/889332/Many-Questions-Answered-at-Once-Collaboration-betw#irrelevant"><u>mentioned above</u></a>, but also plain wrong. Normally, none of the forms is the parent or child of another form. Even though the form is <code>System.Windows.Forms.Control</code>, which has the <code>Parent</code> property, trying to set this property for a form instance throws an exception. It can be worked around by setting <code>System.Windows.Forms.Forms.TopLevel</code> to false, but it makes very little sense. This way, the child-parent relationships between forms is effectively made defunct. Forms participate in important owner-owned relationship which I used in our examples, but it is also totally irrelevant to the subject.</p>
+<p>I only want to stop at one illusionary aspect of this "problem", parent-child relationship for forms. Not only it is absolutely irrelevant, as I <a href="#irrelevant"><u>mentioned above</u></a>, but also plain wrong. Normally, none of the forms is the parent or child of another form. Even though the form is <code>System.Windows.Forms.Control</code>, which has the <code>Parent</code> property, trying to set this property for a form instance throws an exception. It can be worked around by setting <code>System.Windows.Forms.Forms.TopLevel</code> to false, but it makes very little sense. This way, the child-parent relationships between forms is effectively made defunct. Forms participate in important owner-owned relationship which I used in our examples, but it is also totally irrelevant to the subject.</p>
 
 <p>Please see:<br>
 <a href="https://msdn.microsoft.com/en-us/library/system.windows.forms.control.parent(v=vs.110).aspx">https://msdn.microsoft.com/en-us/library/system.windows.forms.control.parent(v=vs.110).aspx</a>,<br>

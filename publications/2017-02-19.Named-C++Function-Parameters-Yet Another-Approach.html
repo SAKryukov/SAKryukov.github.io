@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -439,13 +433,14 @@ By any other name would smell as sweet<br><br>
 <dd>William Shakespeare, <i><a href="https://en.wikipedia.org/wiki/Romeo_and_Juliet">Romeo and Juliet</a></i></dd></blockquote>
 
 <div id="TOC">
+<h2>Contents</h2>
 <ul style="list-style-type: none">
-	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#motivation">Motivation</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#the-idea">The Idea</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#preventing-read-optional-unassigned-exception">Preventing Read, Optional: Unassigned Exception</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#another-alternative-private-access-to-read">Another Alternative: Private Access to Read</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#type-limitations">Type Limitations</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#references">References</a></li></ul>
+	<li><a href="#motivation">Motivation</a></li>	<li><a href="#the-idea">The Idea</a></li>	<li><a href="#preventing-read-optional-unassigned-exception">Preventing Read, Optional: Unassigned Exception</a></li>	<li><a href="#another-alternative-private-access-to-read">Another Alternative: Private Access to Read</a></li>	<li><a href="#type-limitations">Type Limitations</a></li>	<li><a href="#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="#references">References</a></li></ul>
 </div>
 
 <h2 id="motivation">Motivation</h2>
 
-<p>I came across a number of different approaches to C++ named function parameters. <a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#references">Some of them</a> look quite interesting, but I did not find anything similar to the <a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#references">approach I suggested for JavaScript</a>. No wonder people look for the ways of having named arguments. This feature is quite attractive:</p>
+<p>I came across a number of different approaches to C++ named function parameters. <a href="#references">Some of them</a> look quite interesting, but I did not find anything similar to the <a href="#references">approach I suggested for JavaScript</a>. No wonder people look for the ways of having named arguments. This feature is quite attractive:</p>
 
 <ul>
 	<li>One doesn’t need to remember the order and meaning of arguments; dealing with comprehensible names is more suitable to human nature.</li>	<li>The code of the call statement becomes more readable; it makes it obvious to see the role each value passed to a method plays.</li>	<li>Some or all named arguments can be omitted from the call statement, then the default values are used.</li>	<li>Named arguments can be used in combination with positional ones in the same function call.</li></ul>
@@ -602,7 +597,7 @@ By any other name would smell as sweet<br><br>
 
 <p>First of all, look at the template specialization for <code>Named::Parameter&lt;void&gt;</code>. It will prevent the failure to compile the declaration of the variable/member of this type, which is useless anyway. The only useful role of this specialized type is the definition of the set of named parameters of a function.</p>
 
-<p>The parameter read operation outside of the declaring class can be prevented by having the named parameter member <em>unassigned</em> and throwing the exception at the attempt to read the value in the unassigned state. It can be used in combination with the mechanism of <em>default function parameters</em>. The best thing in this approach is that it can be <em>optional</em>: if <strong><code>unassign()</code></strong> is never called, it brings us to the simplest <em>naive</em> implementation <a href="https://www.codeproject.com/Articles/1171605/Named-Cpp-Function-Parameters#the-idea">shown above</a>. The problems of the runtime-based approach are obvious. At best, it could be used as a fool-proof measure during the development. At the same time, its benefit is the simplicity, especially if <strong><code>unassign()</code></strong> is never called.</p>
+<p>The parameter read operation outside of the declaring class can be prevented by having the named parameter member <em>unassigned</em> and throwing the exception at the attempt to read the value in the unassigned state. It can be used in combination with the mechanism of <em>default function parameters</em>. The best thing in this approach is that it can be <em>optional</em>: if <strong><code>unassign()</code></strong> is never called, it brings us to the simplest <em>naive</em> implementation <a href="#the-idea">shown above</a>. The problems of the runtime-based approach are obvious. At best, it could be used as a fool-proof measure during the development. At the same time, its benefit is the simplicity, especially if <strong><code>unassign()</code></strong> is never called.</p>
 
 <p>For the usage samples, please see “NamedParametersDemo.h”.</p>
 

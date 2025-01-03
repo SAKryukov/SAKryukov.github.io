@@ -71,7 +71,7 @@
   "name": "Helpful Toolchain for Article Writing",
   "headline": "Helpful Toolchain for Article Writing",
   "url": "https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing",
-  "discussionUrl": "https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "HTML,wiki,VS2013",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -401,7 +395,8 @@ if (typeof(DemoUrl) !== 'undefined') {
 
                         </div>
 
-                        <div id="ctl00_DescriptionSpot" class="summary">This toolchain (v.2) helped me to accelerate article writing, reduce the number of mistakes and save tons of time; some of my recommendations could help</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
+<p><big>Disclaimer: this toolchain is no longer recommended. I would recommed the Visual Studio Code extension <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.extensible-markdown"><u>Extensible Markdown</u></a> instead.</big></p>
+<div id="ctl00_DescriptionSpot" class="summary">This toolchain (v.2) helped me to accelerate article writing, reduce the number of mistakes and save tons of time; some of my recommendations could help</div><span id="ctl00_ThumbnailUrl" class="date" content="https://www.codeproject.com/script/Articles/Images/article100x80.png"></span>			
 
                     </div>
                     
@@ -445,7 +440,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div id="TOC">
 <ul style="list-style-type: none; list-style-image: initial">
-	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#writing-is-annoying">Writing is Annoying</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#pandoc-and-wiki">Pandoc and Wiki</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#twiki">TWiki</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#scriptbatch">Script/Batch</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#most-painful-component-ms-word">Most Painful Component: MS Word</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#visual-studio">Visual Studio</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#codeproject-specific">CodeProject-Specific</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#take-care-of-typography">Take Care of Typography</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#versions">Versions</a></li>	<li><a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#final-words">Final Words</a></li></ul>
+	<li><a href="#writing-is-annoying">Writing is Annoying</a></li>	<li><a href="#pandoc-and-wiki">Pandoc and Wiki</a></li>	<li><a href="#twiki">TWiki</a></li>	<li><a href="#scriptbatch">Script/Batch</a></li>	<li><a href="#most-painful-component-ms-word">Most Painful Component: MS Word</a></li>	<li><a href="#visual-studio">Visual Studio</a></li>	<li><a href="#codeproject-specific">CodeProject-Specific</a></li>	<li><a href="#take-care-of-typography">Take Care of Typography</a></li>	<li><a href="#versions">Versions</a></li>	<li><a href="#final-words">Final Words</a></li></ul>
 </div>
 
 <h2 id="writing-is-annoying">Writing is Annoying</h2>
@@ -458,7 +453,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>At the same time, I would be much grateful if someone suggests some improvements of offer some informative criticism and perhaps some better ideas.</p>
 
-<p>The toolchain is cross-platform for those who would use plain text as the source (probably the best option), but Windows-specific for those who would like to start with <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#most-painful-component-ms-word">with MS Word</a>.</p>
+<p>The toolchain is cross-platform for those who would use plain text as the source (probably the best option), but Windows-specific for those who would like to start with <a href="#most-painful-component-ms-word">with MS Word</a>.</p>
 
 <h2 id="pandoc-and-wiki">Pandoc and Wiki</h2>
 
@@ -474,14 +469,14 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>I’ve chosen <a href="https://en.wikipedia.org/wiki/TWiki">TWiki</a>, not the most popular Wiki markup, because I find it the closest to required CodeProject-specific features and does the required minimum. One very attractive feature is the ease of rendering of the most frequently needed CodeProject elements: in-line code fragment. It is rendered <code>like this text</code> and looks in source code as <code>=this text=</code>. Isn’t that simple?</p>
 
-<p>A really big problem is the block code samples. By some reasons, Pandoc produces inner <code>code</code> element inside the <code>pre</code> element, and it badly spoils the formatting of the whole code fragment. The best work-around I found was also possible with TWiki. My sample markup is shown <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#someAnchor">here</a>; it also solves the problem if the anchor to the code sample, which would be some problem even with manual HTML coding.</p>
+<p>A really big problem is the block code samples. By some reasons, Pandoc produces inner <code>code</code> element inside the <code>pre</code> element, and it badly spoils the formatting of the whole code fragment. The best work-around I found was also possible with TWiki. My sample markup is shown <a href="#someAnchor">here</a>; it also solves the problem if the anchor to the code sample, which would be some problem even with manual HTML coding.</p>
 
 <p>It’s important to remember that CodeProject requires the top-level headings to be <code>h2</code>. In TWiki, it’s written as</p>
 
 <div class="pre-lang" id="premain502077"><div> </div><div class="pre-action-link"><span id="copycode502077" class="copy-code" data-index="502077" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
 <pre id="pre502077" style="margin-top:0;" data-language="text" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true" class="notranslate">---++Top-Level Article Section Heading</pre>
 
-<p>With proper Pandoc option, Table of Contents (TOC) is built automatically, and all headings are generated with automatic anchors with matching TOC <code>href</code>. Presently, TWiki does not support auto-numbered TOC, but this is not too bad, because CodeProject article style is designed for interactive reading. Also, it’s important to have some headings not showing on the TOC; this is done by a Pandoc parameter specifying maximum level of headings in the TOC. I’ll explain it on the <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#wiki2Html">script code</a>.</p>
+<p>With proper Pandoc option, Table of Contents (TOC) is built automatically, and all headings are generated with automatic anchors with matching TOC <code>href</code>. Presently, TWiki does not support auto-numbered TOC, but this is not too bad, because CodeProject article style is designed for interactive reading. Also, it’s important to have some headings not showing on the TOC; this is done by a Pandoc parameter specifying maximum level of headings in the TOC. I’ll explain it on the <a href="#wiki2Html">script code</a>.</p>
 
 <p>It does not make much sense to show example of TWiki format. I’ve shown three cases; it should be enough. To make sense of it, it’s much easier to refer to the <a href="http://twiki.org/cgi-bin/view/TWiki/TWikiUsersGuide">documentation</a>.</p>
 
@@ -514,7 +509,7 @@ goto:eof</pre>
 
 <p>The parameters <code>--toc</code> and <code>--toc-depth</code> specify the presence of TOP and the maximum heading depth used in TOC.</p>
 
-<p>The option <code>-S</code> (<code>--smart</code>) is used to simplify input of the important Unicode characters: <code>--</code> is rendered as <em>en-dash</em>, <code>---</code> as <em>em-dash</em>, <code>...</code> as the single ellipsis; ASCII quotation marks U+27 and apostrophes U+22 (used either also for quotation) are rendered as Unicode pairs <code>&amp;lsquo;</code>, <code>&amp;rsquo;</code>, <code>&amp;ldquo;</code> and =&amp;rdquo;=; the choice between left or right member of the pair is taken depending on the context. See also: <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#take-care-of-typography">Take Care of Typography</a>.</p>
+<p>The option <code>-S</code> (<code>--smart</code>) is used to simplify input of the important Unicode characters: <code>--</code> is rendered as <em>en-dash</em>, <code>---</code> as <em>em-dash</em>, <code>...</code> as the single ellipsis; ASCII quotation marks U+27 and apostrophes U+22 (used either also for quotation) are rendered as Unicode pairs <code>&amp;lsquo;</code>, <code>&amp;rsquo;</code>, <code>&amp;ldquo;</code> and =&amp;rdquo;=; the choice between left or right member of the pair is taken depending on the context. See also: <a href="#take-care-of-typography">Take Care of Typography</a>.</p>
 
 <p>I described this behavior in detail in <a href="https://sakryukov.github.io/vscode-markdown-to-html/#typographer">my documentation</a> for the <a href="https://marketplace.visualstudio.com/VSCode">Visual Studio Code extension</a> named <a href="https://marketplace.visualstudio.com/items?itemName=sakryukov.convert-markdown-to-html">“Extensible Markdown Converter”</a>. This extension is based on the <a href="https://nodejs.org/">node.js</a> module <a href="https://www.npmjs.com/package/markdown-it">“markdown-it”</a>, one of the products where this behavior is implemented.</p>
 
@@ -636,7 +631,7 @@ SomeCSharpCode(forExample);
 
 <p>CodeProject editor can add such markup automatically, based on downloaded file, but some authors missed it.</p>
 
-<p>Also note: <code>&amp;mdash;</code> instead of <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#take-care-of-typography">dash</a>.</p>
+<p>Also note: <code>&amp;mdash;</code> instead of <a href="#take-care-of-typography">dash</a>.</p>
 
 <p>Block quote:</p>
 
@@ -655,7 +650,7 @@ SomeCSharpCode(forExample);
 
 <h2 id="take-care-of-typography">Take Care of Typography</h2>
 
-<p>Just take care of that. Dash character is not ‘-’, it is <code>&amp;mdash;</code> or <code>&amp;ndash;</code>; and " is not the best or typographically standard quotation mark: it makes automatic text search harder, as left mark is the same as right. Standard Unicode <code>&amp;lsquo;</code>, <code>&amp;rsquo;</code>, <code>&amp;ldquo;</code> and <code>&amp;rdquo;</code> are different and look more cultural. Even minus is not ‘-’ but <code>&amp;minus;</code> with better visibility; ‘-’ is only the dash character. I listed almost all characters which are needed for majority of articles. There rules are not hard to observe, especially if <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing#scriptbatch">suitable software is properly used</a>.</p>
+<p>Just take care of that. Dash character is not ‘-’, it is <code>&amp;mdash;</code> or <code>&amp;ndash;</code>; and " is not the best or typographically standard quotation mark: it makes automatic text search harder, as left mark is the same as right. Standard Unicode <code>&amp;lsquo;</code>, <code>&amp;rsquo;</code>, <code>&amp;ldquo;</code> and <code>&amp;rdquo;</code> are different and look more cultural. Even minus is not ‘-’ but <code>&amp;minus;</code> with better visibility; ‘-’ is only the dash character. I listed almost all characters which are needed for majority of articles. There rules are not hard to observe, especially if <a href="#scriptbatch">suitable software is properly used</a>.</p>
 
 <p>Consult Character Map (“charmap” on Windows, “gucharmap” on most Linux distro) or <a href="https://dev.w3.org/html5/html-author/charref">HTML character entities</a>. Be careful: not all of them are rendered on all systems, but the small subset I listed above is perfectly fine.</p>
 

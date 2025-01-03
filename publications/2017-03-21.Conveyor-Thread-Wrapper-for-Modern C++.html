@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -445,7 +439,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div id="TOC">
 <ul style="list-style-type: none; list-style-image: initial">
-	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#thread-wrapper-design">Thread Wrapper Design</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#demonstration">Demonstration</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#demonstrated-algorithms">Demonstrated Algorithms</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#giving-the-wrapper-a-task">Giving the Wrapper a Task</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#queue-synchronization">Queue Synchronization</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#thread-state-synchronization">Thread State Synchronization</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#handling-shallow-abort">Handling Shallow Abort</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#delegate-and-delegate-parameter-types">Delegate and Delegate Parameter Types</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#versions">Versions</a></li>	<li><a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#conclusions">Conclusions</a></li></ul>
+	<li><a href="#introduction">Introduction</a></li>	<li><a href="#thread-wrapper-design">Thread Wrapper Design</a></li>	<li><a href="#demonstration">Demonstration</a></li>	<li><a href="#demonstrated-algorithms">Demonstrated Algorithms</a></li>	<li><a href="#giving-the-wrapper-a-task">Giving the Wrapper a Task</a></li>	<li><a href="#queue-synchronization">Queue Synchronization</a></li>	<li><a href="#thread-state-synchronization">Thread State Synchronization</a></li>	<li><a href="#handling-shallow-abort">Handling Shallow Abort</a></li>	<li><a href="#delegate-and-delegate-parameter-types">Delegate and Delegate Parameter Types</a></li>	<li><a href="#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="#versions">Versions</a></li>	<li><a href="#conclusions">Conclusions</a></li></ul>
 </div>
 
 <h2 id="introduction">Introduction</h2>
@@ -461,11 +455,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Next important component is the design and implementation of <em>delegates</em> taken from my article <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed"><em>The Impossibly Fast C++ Delegates, Fixed</em></a>. These delegates are faster than <code>std::function</code> and offer considerable convenience.</p>
 
-<p>And, finally, this is all combined with the conception of <em>blocking <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#epigraph">queue</a></em> or <em>blocking collection</em>. One well-known example of such is the <a href="https://en.wikipedia.org/wiki/Framework_Class_Library">.NET FCL</a> template class <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed"><code>BlockingCollection</code></a>. In my article <a href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and"><em>Simple Blocking Queue for Thread Communication and Inter-thread Invocation</em></a>, I offered my implementation of the blocking queue (this work originated from .NET v.3.5, where <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed"><code>BlockingCollection</code></a> wasn’t yet introduced) and demonstrated various interesting use cases, including the one relevant to the present topic.</p>
+<p>And, finally, this is all combined with the conception of <em>blocking <a href="#epigraph">queue</a></em> or <em>blocking collection</em>. One well-known example of such is the <a href="https://en.wikipedia.org/wiki/Framework_Class_Library">.NET FCL</a> template class <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed"><code>BlockingCollection</code></a>. In my article <a href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and"><em>Simple Blocking Queue for Thread Communication and Inter-thread Invocation</em></a>, I offered my implementation of the blocking queue (this work originated from .NET v.3.5, where <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed"><code>BlockingCollection</code></a> wasn’t yet introduced) and demonstrated various interesting use cases, including the one relevant to the present topic.</p>
 
 <p>Such queues are a part of some very widely used programming models, such as <a href="https://en.wikipedia.org/wiki/Message_queue">message queues</a>. It is very typical that one thread supplies data, pushing them into a queue, which is usually not a blocking call; and another thread is receiving them from a queue, which is usually a blocking call used to put a thread in the wait state when a queue is empty. Multiple threads can participate in this transport on both ends.</p>
 
-<p>The topic of this article is the specialized case of the queue, <a href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">explained in my article on the blocking queues</a>. Do the queue elements have to be just data? No. One important approach is to <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#epigraph">queue… the delegate instances</a>. More exactly, a queue element could be a delegate instance packed with the values of the parameters needed for the delegate calls.</p>
+<p>The topic of this article is the specialized case of the queue, <a href="https://www.codeproject.com/Tips/149540/Simple-Blocking-Queue-for-Thread-Communication-and">explained in my article on the blocking queues</a>. Do the queue elements have to be just data? No. One important approach is to <a href="#epigraph">queue… the delegate instances</a>. More exactly, a queue element could be a delegate instance packed with the values of the parameters needed for the delegate calls.</p>
 
 <p>This is the way to defer execution of several tasks and serialize the execution. There is nothing wrong which consecutive execution of some tasks, just the opposite, using to many or unpredictable number of threads is a pretty usual mistake. Still, parallelism is used; and the set of the queued tasks is executed in parallel with some other threads, such as UI.</p>
 
@@ -473,11 +467,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h2 id="thread-wrapper-design">Thread Wrapper Design</h2>
 
-<p>The method <code>Body</code> of the class <code>ConveyorThreadWrapper</code> is <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#handling-shallow-abort">sealed</a> by using the <code>final</code> <em>specifier</em>. The control over the code to be executed in a thread is given to the user in a different form: the user can supply different delegates and push them onto the queue. I will refer the actions performed by such delegate instances to as <em><strong>tasks</strong></em>. The class is a template class; its only template parameter is the type of the delegate parameter. To queue a task, the use code supplies a delegate instance and a value of a parameter for the its call.</p>
+<p>The method <code>Body</code> of the class <code>ConveyorThreadWrapper</code> is <a href="#handling-shallow-abort">sealed</a> by using the <code>final</code> <em>specifier</em>. The control over the code to be executed in a thread is given to the user in a different form: the user can supply different delegates and push them onto the queue. I will refer the actions performed by such delegate instances to as <em><strong>tasks</strong></em>. The class is a template class; its only template parameter is the type of the delegate parameter. To queue a task, the use code supplies a delegate instance and a value of a parameter for the its call.</p>
 
-<p>This wrapper class can be used immediately, without a need to create derived classes. Apparently, the delegates can be based on the member functions of such derived class, but it’s more natural to make them based on some user class. See also the section <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#delegate-and-delegate-parameter-types">Delegate and Delegate Parameter Types</a>.</p>
+<p>This wrapper class can be used immediately, without a need to create derived classes. Apparently, the delegates can be based on the member functions of such derived class, but it’s more natural to make them based on some user class. See also the section <a href="#delegate-and-delegate-parameter-types">Delegate and Delegate Parameter Types</a>.</p>
 
-<p>The only thing to override would be the virtual function <code>OnCurrentTaskAborted</code>, but even this is not needed; instead, since <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#section-1">v.&nbsp;2.0</a>, another delegate <code>CurrentTaskAborted</code> can be supplied by the user code for the same purpose.</p>
+<p>The only thing to override would be the virtual function <code>OnCurrentTaskAborted</code>, but even this is not needed; instead, since <a href="#section-1">v.&nbsp;2.0</a>, another delegate <code>CurrentTaskAborted</code> can be supplied by the user code for the same purpose.</p>
 
 <p>The user code can request abort on two different levels: <em>shallow</em> and <em>deep</em>. Deep abort is propagated to the to stack frame of the thread, so the whole thread is terminated, but shallow abort is propagated only to the end of the currently executing task; after this abort, the thread takes another task from the queue, which leads either to the wait state (if the queue is empty) or immediate execution of the next task.</p>
 
@@ -485,7 +479,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>To see how it all works, let’s look at the demonstration. Presently, there are two demonstrations shown one after another; first one is the modified presentation <a href="https://www.codeproject.com/Articles/1177478/Thread-Wrapper-CPP">for the first article</a>. Let’s look at the second one.</p>
 
-<p>There are two different delegate instances implementing two <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#demonstrated-algorithms">different algorithms</a>. The user is supposed to enter just one character at a time as a command, a character followed by [Enter]. Depending on the character, the thread can be put to sleep, waken up or aborted. The user can choose the either the <em>deep abort</em> (quit) or <em>shallow abort</em>, which aborts the presently executing task. For other characters, the code point of the entered character is passed to the delegate as its parameter of the type used as a template parameter type. To handle the shallow abortion, the class derived from <code>ConveyorThreadWrapper</code> is written:</p>
+<p>There are two different delegate instances implementing two <a href="#demonstrated-algorithms">different algorithms</a>. The user is supposed to enter just one character at a time as a command, a character followed by [Enter]. Depending on the character, the thread can be put to sleep, waken up or aborted. The user can choose the either the <em>deep abort</em> (quit) or <em>shallow abort</em>, which aborts the presently executing task. For other characters, the code point of the entered character is passed to the delegate as its parameter of the type used as a template parameter type. To handle the shallow abortion, the class derived from <code>ConveyorThreadWrapper</code> is written:</p>
 
 <div id="integerConveyor">
 <div class="pre-lang" id="premain446437"><div>C++</div><div class="pre-action-link"><span id="copycode446437" class="copy-code" data-index="446437" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
@@ -505,7 +499,7 @@ protected:
     <span class="code-sdkkeyword">std::cout</span> <span class="code-keyword">&lt;</span><span class="code-keyword">&lt;</span> <span class="code-string">"</span><span class="code-string">. Enter any character: "</span>;
 }; <span class="code-comment">//cv.CurrentTaskAborted</span></pre>
 
-<p>See also the <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#conveyorThreadWrapperDemo">complete demo</a>.</p>
+<p>See also the <a href="#conveyorThreadWrapperDemo">complete demo</a>.</p>
 
 <p>This wrapper and its embedded thread are driven from a main thread from a console:</p>
 
@@ -605,7 +599,7 @@ public:
 
 <p>By the way, note a pretty obvious but important lambda expression technique: passing some objects through <a href="https://en.wikipedia.org/wiki/Closure_(computer_programming)">closure</a> and not through the parameter list. For example, the lambda expression <code>sleep</code> uses the value <code>delayMs</code> from the parameter of the method <code>Run</code> as <code>auto sleep = [delayMs]</code>.</p>
 
-<p>For this application, this is essential. It could be passed in a parameter list, but let’s see how <code>sleep</code> is used. Ultimately, all those lambda expressions are called by the lambda expressions <code>lambdaHailstone</code> and <code>lambdaLgc</code> and also are passed through their closures. These two ultimate lambda expressions are never called in this context. Instead, they are assigned to the delegate instances. Their parameter lists should fit the profile of the delegate (shown <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#delegateTypes">here</a>) and cannot accept other actual parameters.</p>
+<p>For this application, this is essential. It could be passed in a parameter list, but let’s see how <code>sleep</code> is used. Ultimately, all those lambda expressions are called by the lambda expressions <code>lambdaHailstone</code> and <code>lambdaLgc</code> and also are passed through their closures. These two ultimate lambda expressions are never called in this context. Instead, they are assigned to the delegate instances. Their parameter lists should fit the profile of the delegate (shown <a href="#delegateTypes">here</a>) and cannot accept other actual parameters.</p>
 
 <p>Pay attention that multiple characters can be entered sequentially while some task is being executed. It demonstrates the cases when new tasks are queued while one of the tasks is being executed. If, say, N tasks were queued during execution of another tasks, it will take up to N+1 current task aborts to bring the thread to a wait state. When the presently executing task is aborted, the next task is taken for execution from the queue.</p>
 
@@ -649,7 +643,7 @@ public:
 
 <h2 id="queue-synchronization">Queue Synchronization</h2>
 
-<p>The elements stored in the queue are of the type <code>QueueItem</code> holding both pointers to the delegate instances and the values of the parameters needed for the call. The synchronization primitives <code>queueMutex</code> and <code>queueCondition</code> are used to synchronize operation of the function <code>Enqueue</code> shown <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#enqueue">above</a> and the thread running the task:</p>
+<p>The elements stored in the queue are of the type <code>QueueItem</code> holding both pointers to the delegate instances and the values of the parameters needed for the call. The synchronization primitives <code>queueMutex</code> and <code>queueCondition</code> are used to synchronize operation of the function <code>Enqueue</code> shown <a href="#enqueue">above</a> and the thread running the task:</p>
 
 <div id="getTask">
 <div class="pre-lang" id="premain644154"><div>C++</div><div class="pre-action-link"><span class="code-collapse" data-index="644154" id="preShrink644154">Shrink ▲</span> &nbsp; <span id="copycode644154" class="copy-code" data-index="644154" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
@@ -709,7 +703,7 @@ public:
 </span>
 }; <span class="code-comment">//class ThreadWrapper</span></pre>
 
-<p>To see how the task delegates are called, we need to look at the overridden function <a href="https://www.codeproject.com/Articles/1177869/Conveyor-Thread-Wrapper-CPP#shallowAbort"><code>Body</code></a>. Also, we can see how shallow abort is handled.</p>
+<p>To see how the task delegates are called, we need to look at the overridden function <a href="#shallowAbort"><code>Body</code></a>. Also, we can see how shallow abort is handled.</p>
 
 <h2 id="handling-shallow-abort">Handling Shallow Abort</h2>
 

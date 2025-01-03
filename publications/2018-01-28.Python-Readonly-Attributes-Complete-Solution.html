@@ -69,7 +69,7 @@
   "name": "Python Readonly Attributes: Complete Solution",
   "headline": "Python Readonly Attributes: Complete Solution",
   "url": "https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution",
-  "discussionUrl": "https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "commentCount": "0",
@@ -92,14 +92,6 @@
   "dateCreated": "2018-01-28",
   "dateModified": "2018-01-31"
 }</script>
-
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
 
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -402,7 +394,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <ul class="download">
     <li><a href="https://github.com/SAKryukov/python-readonly-class-attributes">Download or clone source code from GitHub</a></li></ul>
 <h2 id="heading.contents">Contents</h2>
-<p></p><div class="toc"><ul style="list-style-type: none; margin-top: 0; margin-bottom: 0"><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.introduction">Introduction</a></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.why-class-attributes3f">Why Class Attributes?</a></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.solution-for-class-attributes3a-usage">Solution for Class Attributes: Usage</a><ul style="list-style-type: none; margin-top: 0; margin-bottom: 0"><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.unification-of-python-2-and-3-in-the-demo">Unification of Python 2 and 3 in the Demo</a></li></ul></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.how-it-works3f">How it Works?</a></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.what-to-do-with-instance-attributes3f">What to Do with Instance Attributes?</a></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.generalized-solution">Generalized Solution</a></li><li><a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.versions">Versions</a></li></ul></div><p></p>
+<p></p><div class="toc"><ul style="list-style-type: none; margin-top: 0; margin-bottom: 0"><li><a href="#heading.introduction">Introduction</a></li><li><a href="#heading.why-class-attributes3f">Why Class Attributes?</a></li><li><a href="#heading.solution-for-class-attributes3a-usage">Solution for Class Attributes: Usage</a><ul style="list-style-type: none; margin-top: 0; margin-bottom: 0"><li><a href="#heading.unification-of-python-2-and-3-in-the-demo">Unification of Python 2 and 3 in the Demo</a></li></ul></li><li><a href="#heading.how-it-works3f">How it Works?</a></li><li><a href="#heading.what-to-do-with-instance-attributes3f">What to Do with Instance Attributes?</a></li><li><a href="#heading.generalized-solution">Generalized Solution</a></li><li><a href="#heading.versions">Versions</a></li></ul></div><p></p>
 <h2 id="heading.introduction">Introduction</h2>
 <p>This solution is based on the small code sample by <a href="https://github.com/rIZenAShes">rIZenAShes</a> found <a href="https://gist.github.com/rIZenAShes/8469932">on GitHub</a>, which demonstrates quite interesting ideas.</p>
 <p>As to the code, I found it, by far, not satisfactory. First, it is only compatible with Python 2, not 3. Worse, it is based on some naming conventions. The attributes to be exposed are marked by leading underscore, which is removed be the metaclass for exposed read-only properties. The present solution is compatible with both lines of Python versions and offers clear and concise syntax.</p>
@@ -441,7 +433,7 @@ instance = DefinitionSet()
 <span class="code-comment">#</span><span class="code-comment"> instance.RO and DefinitionSet.RO are two different</span>
 <span class="code-comment">#</span><span class="code-comment"> read-only attributes</span></pre>
 <p>In this code sample, <code>instance.RO</code> behaves as an <em>instance attribute</em> and <code>DefinitionSet.RO</code> — as a <em>class attribute</em>; they are introduced as <code>read-only properties</code>.</p>
-<p>Note certain inconvenience in development: while in usage such property is used as a peer of some “regular” attributes (for example, <code>instance.RO</code> vs. <code>instance.color</code>), it is set up on an upper level, the level of the <em>object type</em>. For <code>instance</code>, this is instance type, <code>type(instance) == DefinitionSet</code>; for <code>DefinitionSet</code>, this is its <em>metaclass</em>, <code>type(DefinitionSet) == Meta</code>. (Not so obvious way of setting up a metaclass for <code>DefinitionSet</code>, through <em>inheritance</em> is shown; this is done for the sole purpose of showing equivalent code for Python 2 and 3, <a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.unification-of-python-2-and-3-in-the-demo">see below</a>.)</p>
+<p>Note certain inconvenience in development: while in usage such property is used as a peer of some “regular” attributes (for example, <code>instance.RO</code> vs. <code>instance.color</code>), it is set up on an upper level, the level of the <em>object type</em>. For <code>instance</code>, this is instance type, <code>type(instance) == DefinitionSet</code>; for <code>DefinitionSet</code>, this is its <em>metaclass</em>, <code>type(DefinitionSet) == Meta</code>. (Not so obvious way of setting up a metaclass for <code>DefinitionSet</code>, through <em>inheritance</em> is shown; this is done for the sole purpose of showing equivalent code for Python 2 and 3, <a href="#heading.unification-of-python-2-and-3-in-the-demo">see below</a>.)</p>
 <p>Definition of read-only class properties looks a bit more complicated than in case of instance properties: with instances, the description at least can be placed in <em>almost</em> one place (compare <code>DefinitionSet.RO</code> and <code>self.greetings</code> in <code>__init__</code>). For a class attribute, the property definition should be placed in a separate class (<code>Meta</code> in our sample).</p>
 <p>Now, the problem is alleviated with the small device, <code>@property</code> <em>decorator</em>, which can be considered as kind of <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a>. If we wanted to start <em><a href="https://en.wikipedia.org/wiki/Ab_ovo">ab ovo</a></em>, we would show mode fundamental use of <em>descriptors</em>, based on <code>__get__</code>, as it is described in documentation for <a href="https://docs.python.org/2/howto/descriptor.html">Python 2</a> and <a href="https://docs.python.org/3/howto/descriptor.html">Python 3</a>.</p>
 <p>So, can we create syntactic sugar sweeter than that, shorter, more clear and concise? Would it make any practical sense?</p>
@@ -516,7 +508,7 @@ Foo.bar += <span class="code-digit">1</span>
 <span class="code-keyword">except</span> Exception:
     <span class="code-keyword">print</span> (<span class="code-string">"</span><span class="code-string">Cannot set attribute Foo.test"</span>)</pre>
 <p>Here, the attribute <code>test</code> is just marked with the assignment using <code>Readonly.Attribute</code>; the desired constant value of any type is moved to an actual argument of the call. The object <code>Attribute</code> is the inner class of the class <code>Readonly</code>; the whole line is the call to its constructor and assignment.</p>
-<p>Here is the idea: the entire trick is performed by the metaclass: if the attribute is assigned to a <code>Readonly.Attribute</code> object, instantiation of the class object removes this attributes and creates matching read-only property exposed by another metaclass. It may sounds tricky, but… it is really pretty tricky. <a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.how-it-works3f">Below, we can see how it works.</a></p>
+<p>Here is the idea: the entire trick is performed by the metaclass: if the attribute is assigned to a <code>Readonly.Attribute</code> object, instantiation of the class object removes this attributes and creates matching read-only property exposed by another metaclass. It may sounds tricky, but… it is really pretty tricky. <a href="#heading.how-it-works3f">Below, we can see how it works.</a></p>
 <p>In fact, <code>ReadonlyBase</code> base class does not have to be used. It is shown in this code sample due to different syntax of Python 2 and Python 3. The class <code>Foo</code> could directly setup its <em>metaclass</em>, without any base classes. The only problem is the different syntax. Let’s consider this unpleasant Python problem and its work-around.</p>
 <h3 id="heading.unification-of-python-2-and-3-in-the-demo">Unification of Python 2 and 3 in the Demo</h3>
 <p>The usage sample <a href="https://www.codeproject.com/Articles/1227368/heading.the-solution3a-usage">shown above</a> lacks the definition of the class <code>ReadonlyBase</code>. Without this class, the class <code>Foo</code> could be created directly from the class <code>Readonly</code> used as its metaclass, using the following syntax:</p>
@@ -689,8 +681,8 @@ Foo.bar += <span class="code-digit">1</span>
 <h2 id="heading.versions">Versions</h2>
 <p><strong>v.1.0.0</strong>: Initial fully-functional version.<br>
 <strong>v.1.0.1</strong>: Minor fixes.<br>
-<strong>v.2.0.0</strong>: Stable version; Demo comes with Python 2 and 3 unification <a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.unification-of-python-2-and-3-in-the-demo">explained above</a>.<br>
-<strong>v.3.0.0</strong>: Major <a href="https://www.codeproject.com/Articles/1227368/Python-Readonly-Attributes-Complete-Solution#heading.generalized-solution">generalization</a> of the mechanism to both class and instance attributes.</p>
+<strong>v.2.0.0</strong>: Stable version; Demo comes with Python 2 and 3 unification <a href="#heading.unification-of-python-2-and-3-in-the-demo">explained above</a>.<br>
+<strong>v.3.0.0</strong>: Major <a href="#heading.generalized-solution">generalization</a> of the mechanism to both class and instance attributes.</p>
 
 <!-- Article Ends -->
 

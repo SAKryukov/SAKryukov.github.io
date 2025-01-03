@@ -71,7 +71,7 @@
   "name": "WPF Arc!",
   "headline": "WPF Arc!",
   "url": "https://www.codeproject.com/Articles/1181872/WPF-Arc",
-  "discussionUrl": "https://www.codeproject.com/Articles/1181872/WPF-Arc#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "VS2008,C#,WPF",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1181872/WPF-Arc#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -447,16 +441,16 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div id="TOC">
 <ul style="list-style-type: none; list-style-image: initial">
-	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#is-it-really-a-problem">Is it Really a Problem?</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#the-solution">The Solution</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#if-it-looks-like-geometry-swims-like-geometry">If it Looks Like Geometry, Swims Like Geometry…</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#how-can-it-be-animatable">How can it be Animatable?</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#why-not-combinedgeometry">Why not CombinedGeometry?</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#conclusions">Conclusions</a></li></ul>
+	<li><a href="#is-it-really-a-problem">Is it Really a Problem?</a></li>	<li><a href="#the-solution">The Solution</a></li>	<li><a href="#if-it-looks-like-geometry-swims-like-geometry">If it Looks Like Geometry, Swims Like Geometry…</a></li>	<li><a href="#how-can-it-be-animatable">How can it be Animatable?</a></li>	<li><a href="#why-not-combinedgeometry">Why not CombinedGeometry?</a></li>	<li><a href="#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="#conclusions">Conclusions</a></li></ul>
 </div>
 
 <h2 id="is-it-really-a-problem">Is it Really a Problem?</h2>
 
 <p>First of all, the mere fact that there is no such <code>Geometry</code> type looks quite weird. Sectors and segments always were must-haves in all kinds of vector graphics. And, as we can see, adding such types is simply an unsolvable problem.</p>
 
-<p>But let’s consider something simpler first: is it possible to create an arc sector or segment primitive and place it on the form? Yes, of course, but how? It turned out surprisingly difficult. Of course, I could have taken it for my own dullness, if… I could find a solution working for all cases. Many answered the question on how to draw an arc from some starting to some ending angle, but… I wonder, was it so difficult to test such “solution” to have both angles in each quadrant and quadrant boundaries in <a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#top-image">all possible combinations</a>? The problem looks quite simple but no, I did not find anything completely working.</p>
+<p>But let’s consider something simpler first: is it possible to create an arc sector or segment primitive and place it on the form? Yes, of course, but how? It turned out surprisingly difficult. Of course, I could have taken it for my own dullness, if… I could find a solution working for all cases. Many answered the question on how to draw an arc from some starting to some ending angle, but… I wonder, was it so difficult to test such “solution” to have both angles in each quadrant and quadrant boundaries in <a href="#top-image">all possible combinations</a>? The problem looks quite simple but no, I did not find anything completely working.</p>
 
-<p>The only thing dealing with a part of an ellipse/circle is <code>System.Windows.Media.ArcSegment</code>; and its API looks <a href="https://www.codeproject.com/Articles/1181872/System.Windows.Media.ArcSegment">quite confusing</a>, to say the least. Well, it’s always possible to find out how it works, but it’s more important that this <code>PathSegment</code> type cannot show 360° ellipse anyway. It could be combined with <code>EllipseGeomentry</code>, but… <a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#why-not-combinedgeometry">not so fast</a>.</p>
+<p>The only thing dealing with a part of an ellipse/circle is <code>System.Windows.Media.ArcSegment</code>; and its API looks <a href="https://www.codeproject.com/Articles/1181872/System.Windows.Media.ArcSegment">quite confusing</a>, to say the least. Well, it’s always possible to find out how it works, but it’s more important that this <code>PathSegment</code> type cannot show 360° ellipse anyway. It could be combined with <code>EllipseGeomentry</code>, but… <a href="#why-not-combinedgeometry">not so fast</a>.</p>
 
 <p>Much more fundamental problem is the lack of the possibility to create custom <code>Geometry</code>. According to official Microsoft documentation on <code>System.Windows.Media.Geometry</code>, <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.pathsegment%28v=vs.110%29.aspx">“Although this class is abstract, it is not publicly extensible”</a>. All classes derived from <code>Geometry</code> are sealed, so we still cannot create a derived class indirectly. It makes certain things impossible. For example, there is no a way to place arc-related geometry in XAML where the <code>Geometry</code> type is expected, which is important for the <a href="https://msdn.microsoft.com/en-us/library/system.windows.uielement.clip%28v=vs.110%29.aspx">UIElement.Clip</a> and some other applications. End of story.</p>
 
@@ -527,7 +521,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>…no, it is <a href="https://en.wikipedia.org/wiki/Duck_test">not a duck</a>, and it <a href="https://en.wikipedia.org/wiki/Abductive_reasoning">does not even have to be</a> <code>Geometry</code>. <code>EllipticalArcGeometry</code> just can be used where <code>Geometry</code> can be used; well, <em>almost</em> everywhere; this is the whole point of having this class.</p>
 
-<p>For example, as with real <code>Geometry</code> types, it can be used to create a non-rectangular control, including <code>Window</code>. The <a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#top-image">picture at the top</a> shows a <code>ToolTip</code> “Double click to see Non-Rectangular Window Demo”. Indeed, let’s click on it and see how it looks <em>on the background of its own source code</em>:</p>
+<p>For example, as with real <code>Geometry</code> types, it can be used to create a non-rectangular control, including <code>Window</code>. The <a href="#top-image">picture at the top</a> shows a <code>ToolTip</code> “Double click to see Non-Rectangular Window Demo”. Indeed, let’s click on it and see how it looks <em>on the background of its own source code</em>:</p>
 
 <p id="img-non-rect"><img src="./Resources-articles/2017-04-12.WPF-Arc!.nonrect.webp" alt="2017-04-12.WPF-Arc!.nonrect.webp"/></p>
 <!--<p id="img-non-rect"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Image 3" data-src="/KB/dotnet/1181872/nonrect.png" class="lazyload" style="max-width: 700px; height: auto"></p>-->
@@ -540,13 +534,13 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Likewise, the <code>Geometry</code> instance coming from the <code>EllipticalArcGeometry</code> factory, can be used in other techniques, for example, in <a href="https://msdn.microsoft.com/en-us/library/ms748373%28v=vs.110%29.aspx">WPF Graphics Rendering</a> through <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.geometrydrawing%28v=vs.110%29.aspx">GeometryDrawing</a> or rendered via <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.drawingcontext%28v=vs.110%29.aspx">DrawingContext</a> by using the method <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.drawingcontext.drawgeometry%28v=vs.110%29.aspx">DrawingContext.DrawGeometry</a>.</p>
 
-<p>Those who really ran the demo <a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#img-non-rect">showing the non-rectangular window</a> could see that the window is also animated; and the subject of this animation is the same very window clip: not only the window shape is not rectangular, but this shape is also changing with time. Is it a problem or not? It would not be a problem if <code>EllipticalArcGeometry</code> was actually a <code>Geometry</code> class, of if standard WPF animation was not used.</p>
+<p>Those who really ran the demo <a href="#img-non-rect">showing the non-rectangular window</a> could see that the window is also animated; and the subject of this animation is the same very window clip: not only the window shape is not rectangular, but this shape is also changing with time. Is it a problem or not? It would not be a problem if <code>EllipticalArcGeometry</code> was actually a <code>Geometry</code> class, of if standard WPF animation was not used.</p>
 
 <h2 id="how-can-it-be-animatable">How can it be Animatable?</h2>
 
 <p>Coming back to the design of <code>EllipticalArcGeometry</code>, which works through a <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">factory method</a> providing access to some <code>Geometry</code> instance, but is not itself a <code>Geometry</code>. Would it be enough in all cases? Apparently not. There is always a way to see that some class is not derived from some other class, such as <code>Geometry</code>. For example, the method <code>BeginAnimation</code> accepts some <a href="https://msdn.microsoft.com/en-us/library/ms752914%28v=vs.110%29.aspx">dependency property</a> as a first parameter, but properties of <code>EllipticalArcGeometry</code> are not the properties of its <code>Geometry</code>, so animation would not work. How to resolve this problem?</p>
 
-<p>The <a href="https://www.codeproject.com/Articles/1181872/WPF-Arc#top-image">main demo</a> shows the animation on the class <code>EllipticalArcShape</code>, which is not a problem at all, because it derives from <code>Shape</code>, already <code>Animatable</code>. But we cannot do the same with <code>Geometry</code>. Pretty obviously, the problem can be solved if we derive from the <code>Geometry</code> base class, which is <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.animation.animatable%28v=vs.110%29.aspx">Animatable</a>. Fortunately, in contrast to <code>Geometry</code> or <code>PathSegment</code>, this class is publicly extensible; and only one method is required to be overridden in a derived class. So, the solution is quite simple:</p>
+<p>The <a href="#top-image">main demo</a> shows the animation on the class <code>EllipticalArcShape</code>, which is not a problem at all, because it derives from <code>Shape</code>, already <code>Animatable</code>. But we cannot do the same with <code>Geometry</code>. Pretty obviously, the problem can be solved if we derive from the <code>Geometry</code> base class, which is <a href="https://msdn.microsoft.com/en-us/library/system.windows.media.animation.animatable%28v=vs.110%29.aspx">Animatable</a>. Fortunately, in contrast to <code>Geometry</code> or <code>PathSegment</code>, this class is publicly extensible; and only one method is required to be overridden in a derived class. So, the solution is quite simple:</p>
 
 <div id="create-instance-core">
 <div class="pre-lang" id="premain400390"><div>C#</div><div class="pre-action-link"><span id="copycode400390" class="copy-code" data-index="400390" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>

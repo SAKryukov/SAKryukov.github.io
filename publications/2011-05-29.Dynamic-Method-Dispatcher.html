@@ -71,7 +71,7 @@
   "name": "Dynamic Method Dispatcher",
   "headline": "Dynamic Method Dispatcher",
   "url": "https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher",
-  "discussionUrl": "https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "Mono,C#,.NET,Dev,Advanced",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -444,25 +438,25 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <ul style="list-style-type: none">
 
-<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a1">1. Motivation</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a2">2. Dynamic Method Dispatcher: Full Implementation First</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a3">3. DynamicMethodDispatcher Class by Usage</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4">4. MultipleInvocationDynamicMethodDispatcher</a> 
+<li><a href="#a1">1. Motivation</a></li><li><a href="#a2">2. Dynamic Method Dispatcher: Full Implementation First</a></li><li><a href="#a3">3. DynamicMethodDispatcher Class by Usage</a></li><li><a href="#a4">4. MultipleInvocationDynamicMethodDispatcher</a> 
 
 <ul style="list-style-type: none">
 
-<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4.1">4.1. On the Nature of Delegate Instance</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a4.2">4.2. Return Values</a></li></ul>
+<li><a href="#a4.1">4.1. On the Nature of Delegate Instance</a></li><li><a href="#a4.2">4.2. Return Values</a></li></ul>
 
-</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a5">5. What if a Key is not Found in the Dictionary?</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6">6. Complement OOP or Abuse it?</a> 
-
-<ul style="list-style-type: none">
-
-<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.1">6.1. Use-case: Parallel Hierarchy Problem</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.2">6.2. Dynamic Method Dispatcher as Virtual Method Table</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6.3">6.3. On the History of the Idea</a></li></ul>
-
-</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7">7. Building the Code and Compatibility</a> 
+</li><li><a href="#a5">5. What if a Key is not Found in the Dictionary?</a></li><li><a href="#a6">6. Complement OOP or Abuse it?</a> 
 
 <ul style="list-style-type: none">
 
-<li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7.1">7.1. Compatibility: Microsoft .NET</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7.2">7.2. Compatibility: Mono</a></li></ul>
+<li><a href="#a6.1">6.1. Use-case: Parallel Hierarchy Problem</a></li><li><a href="#a6.2">6.2. Dynamic Method Dispatcher as Virtual Method Table</a></li><li><a href="#a6.3">6.3. On the History of the Idea</a></li></ul>
 
-</li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a8">8. Conclusions</a></li><li><a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a9">9. Credits</a></li></ul>
+</li><li><a href="#a7">7. Building the Code and Compatibility</a> 
+
+<ul style="list-style-type: none">
+
+<li><a href="#a7.1">7.1. Compatibility: Microsoft .NET</a></li><li><a href="#a7.2">7.2. Compatibility: Mono</a></li></ul>
+
+</li><li><a href="#a8">8. Conclusions</a></li><li><a href="#a9">9. Credits</a></li></ul>
 
 
 
@@ -656,7 +650,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<p>First of all, I want to discuss my design of the generic method being dispatched: <code>DynamicMethod</code>. Why exactly two input parameters and a return value? Why not just one parameter? Why not more? Well, this is because it enables the most universal approach. The key parameter should be isolated from any other input data, because it is distinctly special: this is a unique key used to store the delegate instances in the dictionary. This parameter along is not enough, because the application may require some data input which is not necessarily related with the <code>key</code>. This "free" parameter called <code>message</code> can carry any amount of data as its type can be an array of other data elements or any other collection of data. One interesting application of the technique can be employed when the type <code>MESSAGE</code> is <code>System.Type</code>, see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a6">6</a>.</p>
+<p>First of all, I want to discuss my design of the generic method being dispatched: <code>DynamicMethod</code>. Why exactly two input parameters and a return value? Why not just one parameter? Why not more? Well, this is because it enables the most universal approach. The key parameter should be isolated from any other input data, because it is distinctly special: this is a unique key used to store the delegate instances in the dictionary. This parameter along is not enough, because the application may require some data input which is not necessarily related with the <code>key</code>. This "free" parameter called <code>message</code> can carry any amount of data as its type can be an array of other data elements or any other collection of data. One interesting application of the technique can be employed when the type <code>MESSAGE</code> is <code>System.Type</code>, see <a href="#a6">6</a>.</p>
 
 
 
@@ -795,7 +789,7 @@ MessageDispatcher.Add(WindowsMessage.SYSKEYUP, (key, msg) =&gt; {
 
 
 
-<p>The lambda forms cannot be found in the source code I provide, because I support compatibility with C# v.2.0 as well (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a7">7</a>) which could not use lambda expressions. In this case, adding a dynamic method look just a bit wordier:</p>
+<p>The lambda forms cannot be found in the source code I provide, because I support compatibility with C# v.2.0 as well (see <a href="#a7">7</a>) which could not use lambda expressions. In this case, adding a dynamic method look just a bit wordier:</p>
 
 
 
@@ -834,7 +828,7 @@ MessageDispatcher.Add(WindowsMessage.SYSKEYUP, (key, msg) =&gt; {
 
 
 
-<p>The full source code of the multiple-invocation version of <code>DynamicMethodDispatcher</code> is already shown above (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a2">2</a>).</p>
+<p>The full source code of the multiple-invocation version of <code>DynamicMethodDispatcher</code> is already shown above (see <a href="#a2">2</a>).</p>
 
 
 
@@ -937,7 +931,7 @@ MessageDispatcher.Add(WindowsMessage.SYSKEYUP, (key, msg) =&gt; {
 
 
 
-<p>Let's consider how we can return values of the generic type <code>RETURN</code> as a result of an invocation. The simplest method is discarding the return values of all the handlers using the method <code>InvokeNoReturn</code> or <code>TryInvokeNoReturn</code>. The difference between these two methods is that the second one does not throw an exception when a key is not found in the dictionary, see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a5">5</a>. Note that this method uses exactly the same implementation as the method <code>DynamicMethodDispatcher.Invoke</code>.</p>
+<p>Let's consider how we can return values of the generic type <code>RETURN</code> as a result of an invocation. The simplest method is discarding the return values of all the handlers using the method <code>InvokeNoReturn</code> or <code>TryInvokeNoReturn</code>. The difference between these two methods is that the second one does not throw an exception when a key is not found in the dictionary, see <a href="#a5">5</a>. Note that this method uses exactly the same implementation as the method <code>DynamicMethodDispatcher.Invoke</code>.</p>
 
 
 
@@ -1223,7 +1217,7 @@ end;</pre>
 
 <ul>
 
-<li><em>SA.Universal.Technology.dll</em>: contains classes <code>MuticastDynamicMethod</code> and <code>MuticastDynamicMethodDispatcher</code>.</li><li><em>TestMessageDispatching.exe</em>: demo/test application described in <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#a3">3</a>. This application can only run on Windows as it demonstrates processing of raw Windows messages.</li></ul>
+<li><em>SA.Universal.Technology.dll</em>: contains classes <code>MuticastDynamicMethod</code> and <code>MuticastDynamicMethodDispatcher</code>.</li><li><em>TestMessageDispatching.exe</em>: demo/test application described in <a href="#a3">3</a>. This application can only run on Windows as it demonstrates processing of raw Windows messages.</li></ul>
 
 
 
@@ -1263,7 +1257,7 @@ end;</pre>
 
 
 
-<p>During my work on the article, I added many important features, including the brand new class <code>MuticastDynamicMethodDispatcher</code>, and essentially improved my understanding of the internals of .NET delegates. When I detected the read-only nature of delegate instance, <a href="http://www.codeproject.com/Members/Nishant-Sivakumar">Nishant Sivakumar</a> was the one who explained to me the importance of it (see <a href="https://www.codeproject.com/Articles/203453/Dynamic-Method-Dispatcher#Nishant">4.1</a>). Thank you very much, Nish!</p>
+<p>During my work on the article, I added many important features, including the brand new class <code>MuticastDynamicMethodDispatcher</code>, and essentially improved my understanding of the internals of .NET delegates. When I detected the read-only nature of delegate instance, <a href="http://www.codeproject.com/Members/Nishant-Sivakumar">Nishant Sivakumar</a> was the one who explained to me the importance of it (see <a href="#Nishant">4.1</a>). Thank you very much, Nish!</p>
 
 
 

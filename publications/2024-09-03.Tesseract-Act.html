@@ -71,7 +71,7 @@
   "name": "Tesseract Act",
   "headline": "Tesseract Act",
   "url": "https://www.codeproject.com/Articles/5387592/Tesseract-Act",
-  "discussionUrl": "https://www.codeproject.com/Articles/5387592/Tesseract-Act#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "Javascript,Windows,Linux,Intermediate,Advanced,macOS,Node.js,VS-Code",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -437,18 +431,18 @@ if (typeof(DemoUrl) !== 'undefined') {
     <!--<li><a href="https://www.codeproject.com/KB/Articles/5387592/vscode-tesseract-act.zip">Download source — 9.1 KB</a></li>-->
 </ul>
 
-<p class="toc"><a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-motivation" style="margin-left: 0">Motivation</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-tesseract-introduction" style="margin-left: 0">Tesseract Introduction</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-implementation2c-issues2c-and-solutions" style="margin-left: 0">Implementation, Issues, and Solutions</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-introduction" style="margin-left: 3em">Introduction</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-event-deficit" style="margin-left: 3em">Event Deficit</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-enablement" style="margin-left: 3em">Enablement</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-recognition-of-an-external-application" style="margin-left: 3em">Recognition of an External Application</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-one-way-default" style="margin-left: 3em">One-Way Default</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-pathological-cases" style="margin-left: 3em">Pathological Cases</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-asynchronous-ocr" style="margin-left: 3em">Asynchronous OCR</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-versions" style="margin-left: 0">Versions</a><br>
-<a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+<p class="toc"><a href="#heading-motivation" style="margin-left: 0">Motivation</a><br>
+<a href="#heading-tesseract-introduction" style="margin-left: 0">Tesseract Introduction</a><br>
+<a href="#heading-implementation2c-issues2c-and-solutions" style="margin-left: 0">Implementation, Issues, and Solutions</a><br>
+<a href="#heading-introduction" style="margin-left: 3em">Introduction</a><br>
+<a href="#heading-event-deficit" style="margin-left: 3em">Event Deficit</a><br>
+<a href="#heading-enablement" style="margin-left: 3em">Enablement</a><br>
+<a href="#heading-recognition-of-an-external-application" style="margin-left: 3em">Recognition of an External Application</a><br>
+<a href="#heading-one-way-default" style="margin-left: 3em">One-Way Default</a><br>
+<a href="#heading-pathological-cases" style="margin-left: 3em">Pathological Cases</a><br>
+<a href="#heading-asynchronous-ocr" style="margin-left: 3em">Asynchronous OCR</a><br>
+<a href="#heading-versions" style="margin-left: 0">Versions</a><br>
+<a href="#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
 
 <h2 id="heading-motivation">Motivation</h2>
 
@@ -620,7 +614,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <div class="pre-lang" id="premain474598"><div>Error</div><div class="pre-action-link"><span id="copycode474598" class="copy-code" data-index="474598" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
 <pre id="pre474598" style="margin-top:0;" class="lang-error notranslate" data-language="Error" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true">Error opening data file {absolute path to} eng.traineddata</pre>
 
-<p>Another abnormal situation may happen if the user uninstalls or removes tesseract during the Visual Studio Code session. This is another relatively rare situation when nothing can send a notification to the editor. If it happens between sessions or followed by the modification of the Settings, the Tesseract Code application is recognized anyway — please see the section <a href="https://www.codeproject.com/Articles/5387592/Tesseract-Act#heading-recognition-of-an-external-application">Recognition of an External Application</a>. But when it happens inside a session, the problem is recognized only at the attempt to perform OCR. Let’s test it, too:</p>
+<p>Another abnormal situation may happen if the user uninstalls or removes tesseract during the Visual Studio Code session. This is another relatively rare situation when nothing can send a notification to the editor. If it happens between sessions or followed by the modification of the Settings, the Tesseract Code application is recognized anyway — please see the section <a href="#heading-recognition-of-an-external-application">Recognition of an External Application</a>. But when it happens inside a session, the problem is recognized only at the attempt to perform OCR. Let’s test it, too:</p>
 
 <div class="pre-lang" id="premain85520"><div>Error</div><div class="pre-action-link"><span id="copycode85520" class="copy-code" data-index="85520" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve"><g><path d="M425.934,0H171.662c-18.122,0-32.864,14.743-32.864,32.864v77.134h30V32.864c0-1.579,1.285-2.864,2.864-2.864h254.272     c1.579,0,2.864,1.285,2.864,2.864v254.272c0,1.58-1.285,2.865-2.864,2.865h-74.729v30h74.729 c18.121,0,32.864-14.743,32.864-32.865V32.864C458.797,14.743,444.055,0,425.934,0z"></path><path d="M288.339,139.998H34.068c-18.122,0-32.865,14.743-32.865,32.865v254.272C1.204,445.257,15.946,460,34.068,460h254.272 c18.122,0,32.865-14.743,32.865-32.864V172.863C321.206,154.741,306.461,139.998,288.339,139.998z M288.341,430H34.068    c-1.58,0-2.865-1.285-2.865-2.864V172.863c0-1.58,1.285-2.865,2.865-2.865h254.272c1.58,0,2.865,1.285,2.865,2.865v254.273h0.001 C291.206,428.715,289.92,430,288.341,430z"></path></g></svg></span></div></div>
 <pre id="pre85520" style="margin-top:0;" class="lang-error notranslate" data-language="Error" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-string">'</span><span class="code-string">tesseract'</span> <span class="code-keyword">is</span> not recognized <span class="code-keyword">as</span> an <span class="code-keyword">internal</span> or external command,

@@ -69,7 +69,7 @@
   "name": "Illusionary XAML: Reinventing Benham's Top",
   "headline": "Illusionary XAML: Reinventing Benham's Top",
   "url": "https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top",
-  "discussionUrl": "https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "commentCount": "0",
@@ -92,14 +92,6 @@
   "dateCreated": "2018-04-01",
   "dateModified": "2018-04-01"
 }</script>
-
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
 
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -419,7 +411,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div class="toc">
 <ul style="list-style-type: none">
-	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.xaml-as-vector-graphics">XAML as Vector Graphics</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.loading-xaml-vector-graphics-dynamically">Loading XAML Vector Graphics Dynamically</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.saving-xaml-vector-graphics">Saving XAML Vector Graphics</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.playing-with-the-illusion">Playing with the Illusion</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.what-if-you-don27t-believe-the-demo3f">What if You don't Believe the Demo?</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.pattern-editor">Pattern Editor</a></li>	<li><a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.conclusions">Conclusions</a></li></ul>
+	<li><a href="#heading.introduction">Introduction</a></li>	<li><a href="#heading.xaml-as-vector-graphics">XAML as Vector Graphics</a></li>	<li><a href="#heading.loading-xaml-vector-graphics-dynamically">Loading XAML Vector Graphics Dynamically</a></li>	<li><a href="#heading.saving-xaml-vector-graphics">Saving XAML Vector Graphics</a></li>	<li><a href="#heading.playing-with-the-illusion">Playing with the Illusion</a></li>	<li><a href="#heading.what-if-you-don27t-believe-the-demo3f">What if You don't Believe the Demo?</a></li>	<li><a href="#heading.pattern-editor">Pattern Editor</a></li>	<li><a href="#heading.conclusions">Conclusions</a></li></ul>
 </div>
 
 <h2 id="heading.introduction">Introduction</h2>
@@ -443,7 +435,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <p>It seems to be pretty obvious that for our purposes our best bet would be exclusively vector graphics. With vector graphics, we can seamlessly scale our image properly and render it with no quality loss, with minimal pixelation, thanks to the <a href="https://en.wikipedia.org/wiki/Anti-aliasing">anti-aliasing techniques</a>.</p>
 
 <p>Let’s start with something simple. First of all, I would like to illustrate the power of XAML used as vector graphics.<br>
-This article comes with the <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#src-all">source code</a> showing two applications: main “ColorTop” and simple introductory application “XamlDemo”. Let’s first look at “XamlDemo”.</p>
+This article comes with the <a href="#src-all">source code</a> showing two applications: main “ColorTop” and simple introductory application “XamlDemo”. Let’s first look at “XamlDemo”.</p>
 
 <p>This simple application shows my vectorized rendition of the CodeProject mascot. The image is scalable, hence showing little to no pixelation when scaled:</p>
 
@@ -554,7 +546,7 @@ This article comes with the <a href="https://www.codeproject.com/Articles/123739
     <span class="code-comment">//</span><span class="code-comment"> ...</span>
 }</pre>
 
-<p>The animation is similar to the code <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#src-simple-animation">shown above</a>. The only notable part of this loading code is related to finding certain XAML elements, first of all, <code>Canvas</code>:</p>
+<p>The animation is similar to the code <a href="#src-simple-animation">shown above</a>. The only notable part of this loading code is related to finding certain XAML elements, first of all, <code>Canvas</code>:</p>
 
 <div class="pre-lang" id="premain581497"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="581497" id="copycode581497" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
 <g>
@@ -587,7 +579,7 @@ This article comes with the <a href="https://www.codeproject.com/Articles/123739
     <span class="code-keyword">return</span> result;
 } <span class="code-comment">//</span><span class="code-comment">findCanvas</span></pre>
 
-<p>This is done to give some freedom to the author of the XAML file. XAML code created by Inkscape uses <code>Viewbox</code> element as the root document element, but this is not a rule. The top element could be something else, first of all, <code>Canvas</code>. Therefore, top-level <code>Canvas</code> instance should be found. If its parent is <code>Viewbox</code>, it can be used, if not, an instance of <code>Viewbox</code> should be created, as it is shown in the <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#src-reload">previous code sample</a>.</p>
+<p>This is done to give some freedom to the author of the XAML file. XAML code created by Inkscape uses <code>Viewbox</code> element as the root document element, but this is not a rule. The top element could be something else, first of all, <code>Canvas</code>. Therefore, top-level <code>Canvas</code> instance should be found. If its parent is <code>Viewbox</code>, it can be used, if not, an instance of <code>Viewbox</code> should be created, as it is shown in the <a href="#src-reload">previous code sample</a>.</p>
 
 <h2 id="heading.saving-xaml-vector-graphics">Saving XAML Vector Graphics</h2>
 
@@ -649,7 +641,7 @@ This article comes with the <a href="https://www.codeproject.com/Articles/123739
 	</li>	<li>	<p>Small solid-white round shape in the middle, outlined with black thin circular band, produces additional color effect on its white background.</p>
 	</li></ul>
 
-<p>Some fairly successful samples of the patterns based on these observations are named “Experimental1.xaml”, “Experimental2.xaml” and “Experimental3.xaml”. All of them have been created using the pattern editor <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.pattern-editor">described below</a>.</p>
+<p>Some fairly successful samples of the patterns based on these observations are named “Experimental1.xaml”, “Experimental2.xaml” and “Experimental3.xaml”. All of them have been created using the pattern editor <a href="#heading.pattern-editor">described below</a>.</p>
 
 <h2 id="heading.what-if-you-don27t-believe-the-demo3f">What if You don’t Believe the Demo?</h2>
 
@@ -663,11 +655,11 @@ This article comes with the <a href="https://www.codeproject.com/Articles/123739
 
 <h2 id="heading.pattern-editor">Pattern Editor</h2>
 
-<p>The observation of the effect based on different patterns <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#heading.playing-with-the-illusion">described above</a> leads to a simple practical rule: a major class of potentially successful patterns can be designed as a combination of only one kind of element: an arc fragment of certain thickness. This shape can be also considered as an analog of a solid-black rectangular shape in polar coordinates. Obviously, this class of shapes covers solid round shapes and rings.</p>
+<p>The observation of the effect based on different patterns <a href="#heading.playing-with-the-illusion">described above</a> leads to a simple practical rule: a major class of potentially successful patterns can be designed as a combination of only one kind of element: an arc fragment of certain thickness. This shape can be also considered as an analog of a solid-black rectangular shape in polar coordinates. Obviously, this class of shapes covers solid round shapes and rings.</p>
 
 <p>One conclusion from the observations mentioned above is: some randomness of the patterns can be very useful. This conclusion was well justified by the experiments.</p>
 
-<p>All such patterns can be easily created on the fly with the use of the <em>Pattern Editor</em> shown on the <a href="https://www.codeproject.com/Articles/1237396/Illusionary-XAML-Reinventing-Benhams-Top#img-title">top picture</a>.</p>
+<p>All such patterns can be easily created on the fly with the use of the <em>Pattern Editor</em> shown on the <a href="#img-title">top picture</a>.</p>
 
 <p>There is no need to show programming aspects of this editor. It’s enough to note that all parameters can come in either one number, or two blankspace-separated numbers. If there is just on number, the parameter is deterministic. In case of two numbers, the shape is generated with the random value of the parameter, with uniform probability distribution in the interval of values between first and second number. Obviously, another way of entering a deterministic value is a pair of equal numbers.</p>
 

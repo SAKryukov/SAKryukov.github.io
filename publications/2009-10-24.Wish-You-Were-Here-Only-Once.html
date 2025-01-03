@@ -71,7 +71,7 @@
   "name": "Wish You Were Here… Only Once",
   "headline": "Wish You Were Here… Only Once",
   "url": "https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once",
-  "discussionUrl": "https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "VS2005,.NET3.5,VS2008,C#,Windows,.NET,Dev,WPF,Advanced,VS2013,VS2015,.NET4.6",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -447,7 +441,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <h2>Contents</h2>
 
 <ol>
-	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section1">Motivation</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section2">Solution: Stack Trace Comes to Help</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section3">What to do with the Instances?</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section4">What if You Want to Know More?</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section5">Solution Cost</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section6">Building Code and Samples</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section7">Conclusion</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section8">Credits</a></li>	<li><a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section9">History</a></li></ol>
+	<li><a href="#section1">Motivation</a></li>	<li><a href="#section2">Solution: Stack Trace Comes to Help</a></li>	<li><a href="#section3">What to do with the Instances?</a></li>	<li><a href="#section4">What if You Want to Know More?</a></li>	<li><a href="#section5">Solution Cost</a></li>	<li><a href="#section6">Building Code and Samples</a></li>	<li><a href="#section7">Conclusion</a></li>	<li><a href="#section8">Credits</a></li>	<li><a href="#section9">History</a></li></ol>
 
 <h2 id="section1">1. Motivation</h2>
 
@@ -630,7 +624,7 @@ FirstTime.Instance FirstTime = <span class="code-keyword">new</span> FirstTime.I
 
 <p><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=1709907">Paul B.</a> kindly provided me with his results on performance measurements.</p>
 
-<p>Based on the previous version of my code, <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=6102753">Paulo Zemek</a> pointed out the problem with garbage collection (see <a href="https://www.codeproject.com/Articles/43267/Wish-You-Were-Here-Only-Once#section3">above</a>) as well as the potential problems with thread safety. His notes helped me to re-think parts of implementation related to threading and per instance behavior.</p>
+<p>Based on the previous version of my code, <a href="http://www.codeproject.com/script/Membership/View.aspx?mid=6102753">Paulo Zemek</a> pointed out the problem with garbage collection (see <a href="#section3">above</a>) as well as the potential problems with thread safety. His notes helped me to re-think parts of implementation related to threading and per instance behavior.</p>
 
 <p><a href="http://www.codeproject.com/script/Membership/View.aspx?mid=3605">Roberto Guerzoni</a> found a critical bug which I fixed in v.2.1 of September 5, 2014. That was the regression bug in the code of non-diagnostic version of <code>FirstTime</code>; when the per-instance “first time“ behavior was implemented, I forgot to replace one reference to the dictionary, which led to the dictionary key exception. Roberto provided the exact offending code fragment where the bug was clearly noticeable by an unarmed eye. Thank you very much, Roberto!</p>
 

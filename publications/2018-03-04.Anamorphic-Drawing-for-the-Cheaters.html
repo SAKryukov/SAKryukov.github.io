@@ -69,7 +69,7 @@
   "name": "Anamorphic Drawing for the Cheaters",
   "headline": "Anamorphic Drawing for the Cheaters",
   "url": "https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters",
-  "discussionUrl": "https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "commentCount": "0",
@@ -92,14 +92,6 @@
   "dateCreated": "2019-03-04",
   "dateModified": "2019-03-08"
 }</script>
-
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
 
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -423,14 +415,14 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div class="toc">
 <ul style="list-style-type: none; margin-top: 0; margin-bottom: 0">
-	<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.anamorphic-drawing">Anamorphic Drawing</a></li>	<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.insight">Insight</a></li>	<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.how-to-create-the-illusion3f">How to Create the Illusion?</a></li>	<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.workflow">Workflow</a></li>	<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.implementation">Implementation</a>
+	<li><a href="#heading.anamorphic-drawing">Anamorphic Drawing</a></li>	<li><a href="#heading.insight">Insight</a></li>	<li><a href="#heading.how-to-create-the-illusion3f">How to Create the Illusion?</a></li>	<li><a href="#heading.workflow">Workflow</a></li>	<li><a href="#heading.implementation">Implementation</a>
 	<ul style="list-style-type: none; margin-top: 0; margin-bottom: 0">
-		<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.perspective-transform">Perspective Transform</a></li>		<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.geometry">Geometry</a></li>		<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.user-interface">User Interface</a></li>		<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.user-interface-design3a-collaboration-and-grip-couplers">User Interface Design: Collaboration and Grip Couplers</a></li>		<li><a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#heading.build-and-compatibility">Build and Compatibility</a></li>	</ul>
+		<li><a href="#heading.perspective-transform">Perspective Transform</a></li>		<li><a href="#heading.geometry">Geometry</a></li>		<li><a href="#heading.user-interface">User Interface</a></li>		<li><a href="#heading.user-interface-design3a-collaboration-and-grip-couplers">User Interface Design: Collaboration and Grip Couplers</a></li>		<li><a href="#heading.build-and-compatibility">Build and Compatibility</a></li>	</ul>
 	</li></ul>
 </div>
 
 <h2 id="heading.anamorphic-drawing">Anamorphic Drawing</h2>
-<p>What is shown in the <a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#drawing.top">picture above</a>? No, this is not a toy colt standing on a piece of paper. And this is not a photograph of a toy colt.</p>
+<p>What is shown in the <a href="#drawing.top">picture above</a>? No, this is not a toy colt standing on a piece of paper. And this is not a photograph of a toy colt.</p>
 <p>The pen reveals it: it lies flat on a piece of paper which in turn lies flat on the desk; at the same time, the colt is showing in its background. It looks impossible.</p>
 <p>In fact, only two objects are placed on the glass top of the desk: a flat piece of paper and a pen lying flat on top of it. The picture is a photograph showing this desk and these two object on top. On this piece of paper, there is a <em>drawing</em> of a colt; the paper is cut by the contour of the image of the toy colt. The photograph is taken from the special <em>vantage point</em> creating the illusion of the vertical position of the colt. It looks like it “sticks out” of the plane of the drawing. Naturally, the drawing is distorted in a special way, to support the illusion.</p>
 <p>This is one kind of <em><a href="https://en.wikipedia.org/wiki/Anamorphic_art">anamorphic art</a></em>; there are many interesting <a href="https://www.youtube.com/results?search_query=anamorphic+drawing">examples of it on youtube</a>.</p>
@@ -477,7 +469,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <h2 id="heading.implementation">Implementation</h2>
 <h3 id="heading.perspective-transform">Perspective Transform</h3>
 <p>The heart of the software is some transformation of the image, which is not an <em>affine transform</em>. Non-affine transformations are not readily available through typical imaging libraries. <a href="https://en.wikipedia.org/wiki/Affine_transformation">Affinity function</a> between <a href="https://en.wikipedia.org/wiki/Affine_space">affine spaces</a> preserves points, straight lines and planes, which is the case with the perspective transform we need. From the other hand, if some transformation is affine, a set of parallel lines remains parallel after the transformation, which is not the case.</p>
-<p>One example of such transformation is shown above as a transition between the image <a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#image.step3">before transformation</a> and <a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#image.step4">after transformation</a>.<br>
+<p>One example of such transformation is shown above as a transition between the image <a href="#image.step3">before transformation</a> and <a href="#image.step4">after transformation</a>.<br>
 Here, the brown rectangle represents the entire image transformed into a trapezoidal shape. The image of the piece of paper under the apple object is transformed from trapezoidal shape to a rectangle (with certain accuracy), which is, obviously, the case only for some special shapes.</p>
 <p>I ended up rolling out my own transformation function implemented on the pixel level of WPF <code>System.Windows.Media.Imaging</code>, only for a specific special case. For this case, we assume that the image of the piece of paper (light color) is strictly symmetrical; and the trapezoid base line is parallel to the lower edge of the photograph. In this case, it is enough to re-sample each horizontal pixel <em>stride</em> of the original image symmetrically. Let’s say, we have some separate re-sampling ratio values for the upper and lower edges of the photograph. All the strides in between should have re-sampling ratio linearly interpolated between the upper and lower ratio.</p>
 <div class="pre-lang" id="premain157887"><div>C#</div><div class="pre-action-link"><span class="code-collapse" data-index="157887" id="preShrink157887">Shrink ▲</span> &nbsp; <span class="copy-code" data-index="157887" id="copycode157887" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
@@ -598,7 +590,7 @@ Here, the brown rectangle represents the entire image transformed into a trapezo
 } <span class="code-comment">//</span><span class="code-comment">namespace AnamorphicDrawing.Main</span></pre>
 <p>The pixel res-sampling for the transform is implemented with two interpolation algorithms: nearest-neighbor (not shown above) and more accurate linear interpolation. In fact, nearest-neighbor is not used; it was developed as a first step.</p>
 <p>The transformation shown above accepts only two parameters: two aspect ratio values <code>horizontalScaleTo</code> and <code>horizontalScaleTo</code>. First one is calculated for the upper edge of the photograph, and the second one – for the lower edge. The maximum of these two values is used to make sure all sizes are scaled only down because the downscale re-sampling is more accurate.</p>
-<p>To calculate these two re-sample ratio values, we need parameters passed from the user to the software. It includes only 9 numbers: aspect ratio of the image which software finds from the image itself, and coordinates of the four corner points taken from the user input, <a href="https://www.codeproject.com/Articles/1278552/Anamorphic-Drawing-for-the-Cheaters#image.step3">as shown above</a>.</p>
+<p>To calculate these two re-sample ratio values, we need parameters passed from the user to the software. It includes only 9 numbers: aspect ratio of the image which software finds from the image itself, and coordinates of the four corner points taken from the user input, <a href="#image.step3">as shown above</a>.</p>
 <h3 id="heading.geometry">Geometry</h3>
 <p>The aspect ratio of the image and four corner points are used to calculate the geometry for the perspective transfer, which is done by the class <code>MarkFactorSet</code>. The calculated geometry parameters are passed to calculate re-sampling ratio values.</p>
 <p>The UI layer picks up corners data to calculate resulting transformed bitmap:</p>

@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -435,19 +429,19 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h2>Contents</h2>
 
-<p class="toc"><a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-msbuild3f" style="margin-left: 0">Why MSBuild?</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-cross-platform" style="margin-left: 3em">Cross-Platform</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-.net3f" style="margin-left: 0">Why .NET?</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-code-sample" style="margin-left: 0">Code Sample</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-why-ffmpeg3f" style="margin-left: 3em">Why FFmpeg?</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-implementation" style="margin-left: 0">Implementation</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-project" style="margin-left: 3em">Project</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-properties" style="margin-left: 3em">Properties</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-targets-and-parallel-execution" style="margin-left: 3em">Targets and Parallel Execution</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-custom-properties" style="margin-left: 3em">Custom Properties</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-using-visual-studio-code" style="margin-left: 0">Using Visual Studio Code</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-compatibility-and-testing" style="margin-left: 0">Compatibility and Testing</a><br>
-<a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
+<p class="toc"><a href="#heading-why-msbuild3f" style="margin-left: 0">Why MSBuild?</a><br>
+<a href="#heading-cross-platform" style="margin-left: 3em">Cross-Platform</a><br>
+<a href="#heading-why-.net3f" style="margin-left: 0">Why .NET?</a><br>
+<a href="#heading-code-sample" style="margin-left: 0">Code Sample</a><br>
+<a href="#heading-why-ffmpeg3f" style="margin-left: 3em">Why FFmpeg?</a><br>
+<a href="#heading-implementation" style="margin-left: 0">Implementation</a><br>
+<a href="#heading-project" style="margin-left: 3em">Project</a><br>
+<a href="#heading-properties" style="margin-left: 3em">Properties</a><br>
+<a href="#heading-targets-and-parallel-execution" style="margin-left: 3em">Targets and Parallel Execution</a><br>
+<a href="#heading-custom-properties" style="margin-left: 3em">Custom Properties</a><br>
+<a href="#heading-using-visual-studio-code" style="margin-left: 0">Using Visual Studio Code</a><br>
+<a href="#heading-compatibility-and-testing" style="margin-left: 0">Compatibility and Testing</a><br>
+<a href="#heading-conclusions" style="margin-left: 0">Conclusions</a></p>
 
 <h2 id="heading-why-msbuild3f">Why MSBuild?</h2>
 
@@ -465,7 +459,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h3 id="heading-cross-platform">Cross-Platform</h3>
 
-<p>The sample project provided here is cross-platform. Please see <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#paragraph-cross-platform">the explanation of why it is so below</a>.</p>
+<p>The sample project provided here is cross-platform. Please see <a href="#paragraph-cross-platform">the explanation of why it is so below</a>.</p>
 
 <p>One note on that: every time the OS “Linux” is mentioned, it actually means “non-Windows”. All the elements of the solution designed to work for Linux should also work for any other platform except Windows. For this reason, all the platform-dependent conditions are calculated as <code>$(OS.StartsWith('Windows')</code> — I hope it is self-explanatory.</p>
 
@@ -479,7 +473,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>There is another, more subtle reason: with “dotnet msbuild”, you can use very convenient .NET API functions in MSBuild property definitions. For a detailed description of this possibility, please see Microsoft documentation on <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/property-functions">property functions</a>.</p>
 
-<p id="paragraph-cross-platform">And of course, one major benefit of executing MSBuild via .NET is that this method is <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#heading-cross-platform">cross-platform</a>. It works on any platform where .NET is installed.</p>
+<p id="paragraph-cross-platform">And of course, one major benefit of executing MSBuild via .NET is that this method is <a href="#heading-cross-platform">cross-platform</a>. It works on any platform where .NET is installed.</p>
 
 <p id="code-run-cmd">“run.cmd”:</p>
 
@@ -524,7 +518,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>MSBuild concept of <a href="https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-items">items</a> is very powerful. It replaces all those silly iteration loops required by other scripting systems, as well as traversing any directories, recursive or not.</p>
 
-<p>The real set of definitions comes from three common files. One of them, “Custom.props”, is specific to the project and type of processing. The other two are applied to all projects in all downstream subdirectories: <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-props">“Directory.Build.props”</a> and <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-targets">“Directory.Build.targets”</a>.</p>
+<p>The real set of definitions comes from three common files. One of them, “Custom.props”, is specific to the project and type of processing. The other two are applied to all projects in all downstream subdirectories: <a href="#code-directory-build-props">“Directory.Build.props”</a> and <a href="#code-directory-build-targets">“Directory.Build.targets”</a>.</p>
 
 <p>This use of the shared properties and targets is analogous to the definitions for Microsoft toolchains: the common predefined sets of properties and targets come with MSBuild, Visual Studio, and other products. This way, more project files using common definitions, can be added.</p>
 
@@ -591,7 +585,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>If parallel execution should be turned into a consecutive, for whatever reason, how to do it? For Windows, the value of <code>$(Multitasking)</code>, “start”, should become an empty string. For Linux, the command delimiter “&amp;” (“%26”) should become double, “&amp;”. In this case, it can be double for Windows, too.</p>
 
-<p>There is another weird property <code>Continue</code>. It is defined to show the command in several lines, mostly for clarity and especially for the publication of the present article. It is a different character for Linux and Windows, “\” and “^” correspondently, and “\” is also the character to be escaped. Please see <a href="https://www.codeproject.com/Articles/5369187/dotnet-msbuild-nonprogramming#code-directory-build-props">“Directory.Build.props”</a>.</p>
+<p>There is another weird property <code>Continue</code>. It is defined to show the command in several lines, mostly for clarity and especially for the publication of the present article. It is a different character for Linux and Windows, “\” and “^” correspondently, and “\” is also the character to be escaped. Please see <a href="#code-directory-build-props">“Directory.Build.props”</a>.</p>
 
 <p>The other input information is custom and is defined in a separate file “Custom.props”, specific to a particular transcoding task. It supply the items and properties <code>@(InputFiles)</code>, $(Options), $(OutputPath) and, $(OutputFileType). So, finally, let’s take a look at this file.</p>
 

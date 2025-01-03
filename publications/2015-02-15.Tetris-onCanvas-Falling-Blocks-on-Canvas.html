@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -437,9 +431,9 @@ if (typeof(DemoUrl) !== 'undefined') {
 <h2>Table of Contents</h2>
 
 <ol>
-	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a1">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a2">Derived Work</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a3">New Features</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a4">Customization</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a5">General Code Design</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a6">Low-Level Tetromino</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a7">Tetromino Constructor and Prototype</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a8">Inner Functions and Event Handling: Passing "this"</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a9">Future Development?</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a10">Versions</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a11">Live Play</a></li>	<li><a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a12">Conclusions</a></li></ol>
+	<li><a href="#a1">Introduction</a></li>	<li><a href="#a2">Derived Work</a></li>	<li><a href="#a3">New Features</a></li>	<li><a href="#a4">Customization</a></li>	<li><a href="#a5">General Code Design</a></li>	<li><a href="#a6">Low-Level Tetromino</a></li>	<li><a href="#a7">Tetromino Constructor and Prototype</a></li>	<li><a href="#a8">Inner Functions and Event Handling: Passing "this"</a></li>	<li><a href="#a9">Future Development?</a></li>	<li><a href="#a10">Versions</a></li>	<li><a href="#a11">Live Play</a></li>	<li><a href="#a12">Conclusions</a></li></ol>
 
-<h2>1. Introduction</h2>
+<h2 id="a1">1. Introduction</h2>
 
 <p>This is my very first complete work on JavaScript, not counting something totally trivial. I cannot say I never tried anything in the field of pure entertainment before, but, again, nothing worth mentioning.</p>
 
@@ -462,19 +456,19 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>So, first of all, it allows to easily customize things which were totally rigid in the original work, first of all, the size of the game in blocks can be modified in reasonable limits. Even playing on the board of the size of some 100 x 100 blocks became quite possible (but, by the way, really irritating :-)).</p>
 
-<h2>3. New Features</h2>
+<h2 id="a3">3. New Features</h2>
 
 <p>I mentioned the lack of the feature which rendered the implementation of the game not playable. Unfortunately, the lack of this feature is typical for most of the implementations I saw. What is it? There should be a key press (space bar, originally) which should drop a current tetromino to the bottom, where it still can be moved, if there is a room for that. So, I added this important feature.</p>
 
 <p>I completely changed the layout of the page. Original Jake's design was based on the fixed set of predefined layouts for different page sizes. Probably he thought it would be simpler, but it wasn't. Not only it added superfluous CSS code, but looked ugly. Now, the game looks symmetrical on the Web page of any size. A user can adjust the page size at any time, even during the game play. The layout is recalculated according to the <code>window.innerHeight</code> and the size of the game board in blocks. The recalculation is made to keep the size of the block to an integer (not fractional value), so the relative size of the board compared to the inner height of the page vary to keep all the aspects ratio values at the expense of variable game area margins. In other words, it is designed in the style of a well-resized desktop application.</p>
 
-<p>More importantly, the game can be customized. First of all, the size of the game board in block could not be changed, due to the layout and aspect ratio problems I mentioned above. Now, as I mentioned before, it can be changed in a separate file, as well as the block colors and even shapes. I'll describe it in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a4">next section</a> of the article. I actually changed the colors and original orientation, to make the game more playable and closer to its original design.</p>
+<p>More importantly, the game can be customized. First of all, the size of the game board in block could not be changed, due to the layout and aspect ratio problems I mentioned above. Now, as I mentioned before, it can be changed in a separate file, as well as the block colors and even shapes. I'll describe it in <a href="#a4">next section</a> of the article. I actually changed the colors and original orientation, to make the game more playable and closer to its original design.</p>
 
 <p>I also added help showing on the same page at any moment of time.</p>
 
-<p>Internally, I created a different thoroughly structured code design, used JavaScript <i>strict mode</i> and exception handling, and improved performance. I'll briefly describe this design in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a5">section 5</a>, but first will describe what can be customized.</p>
+<p>Internally, I created a different thoroughly structured code design, used JavaScript <i>strict mode</i> and exception handling, and improved performance. I'll briefly describe this design in <a href="#a5">section 5</a>, but first will describe what can be customized.</p>
 
-<h2>4. Customization</h2>
+<h2 id="a4">4. Customization</h2>
 
 <p>The customizable part of the game is placed in a separate file "settings.js".</p>
 
@@ -485,11 +479,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 	</li>	<li>Key assignment can be changed in the object <code>key</code>. The properties of this object are named by function, not by key name. By default, [Enter] is used to start/pause/continue the game, [Esc] stops currently played game, arrow keys move the current tetromino element ("up" key rotates it), blank space drops it down, [F1] shows and hides help.<br>
 	&nbsp;</li>	<li>Timing of the game can be changed in the object <code>delays</code>. This object defines the delays in seconds before moving a tetromino element by a line: initial, minimal and decrement of the delay applied for acceleration of the game as the user progress. The delay is incremented by a constant value as total number of lines, according to the game rule, grows.<br>
 	&nbsp;</li>	<li>Score rules can be changed in the object <code>scoreRules</code>. The rules define the added score on the drop of each tetromino and when some rows are removed. The rules can be any user-defined functions calculated the added score depending on current count of removed lines, score and the number of lines to be removed at once. By default, a fixed amount of points is added for each dropped line, and the amount of points added for removed lines grows as a power function of the number of lines removed at once. This is done according the original game design, where the player is given the incentive to collect numbers of incomplete rows and then complete up to 4 of them at once.<br>
-	&nbsp;</li>	<li>Finally, tetromino colors and shapes can be changed. I'll explain it in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a6">section 6</a>.</li></ol>
+	&nbsp;</li>	<li>Finally, tetromino colors and shapes can be changed. I'll explain it in <a href="#a6">section 6</a>.</li></ol>
 
-<h2>5. General Code Design</h2>
+<h2 id="a5">5. General Code Design</h2>
 
-<p>The central unit of the game is the <code>Tetromino</code> constructor and two methods of its prototype object described in <a href="https://www.codeproject.com/Articles/876475/Tetris-on-Canvas#a7">section 7</a>.</p>
+<p>The central unit of the game is the <code>Tetromino</code> constructor and two methods of its prototype object described in <a href="#a7">section 7</a>.</p>
 
 <p>The code starts with the file "settings.js" including in HTML first, and the main code is in "application.js".</p>
 
@@ -503,7 +497,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>As a next step, I'll describe the most interesting part of the code: the code of the algorithms and its implementation.</p>
 
-<h2>6. Low-Level Tetromino</h2>
+<h2 id="a6">6. Low-Level Tetromino</h2>
 
 <p>This is a fragment if bitwise definition of tetromino shapes:</p>
 
@@ -530,7 +524,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <span class="code-comment">//</span><span class="code-comment">                               ------</span>
 <span class="code-comment">//</span><span class="code-comment">                               0x44C0</span></pre>
 
-<h2>7. Tetromino Constructor and Prototype</h2>
+<h2 id="a7">7. Tetromino Constructor and Prototype</h2>
 
 <p>I introduced the <code>Tetromino</code> constructor object for some very good reasons: to improve performance of the code and maintainability at the same time. Related JavaScript features are often referred to as "OOP" and "class", but these are very misleading or at least controversial terms; JavaScript prototype-based object machinery is principally different from "OOP with classes".</p>
 
@@ -595,7 +589,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p><a name="a8"></a></p>
 
-<h2>8. Inner Functions and Event Handling: Passing "this"</h2>
+<h2 id="a8">8. Inner Functions and Event Handling: Passing "this"</h2>
 
 <p>Let's look at one more interesting detail: now an event handlers are added. It's enough to consider just one. This is how it can be done:</p>
 
@@ -658,7 +652,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Of course, it would be possible to add an <i>explicit</i> argument and pass <code>rendering</code>, but using already-always-passing implicit <code>this</code> argument is a natural and economic solution. After all, I wanted to explain a very general technique for dealing with inner functions.</p>
 
-<h2>9. Future Development?</h2>
+<h2 id="a9">9. Future Development?</h2>
 
 <p>I have no plan on adding mouse/touch support to the game. I actually implemented experimental version with mouse control and decided to remove it: it basically worked in different variants, but playing with mouse is really awkward, inconvenient.</p>
 
@@ -677,7 +671,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>I invite anyone to send any suggestions or spin-off any kind of derived work.</p>
 
-<h2>10. Versions</h2>
+<h2 id="a10">10. Versions</h2>
 
 <p><b><big>1.0:</big></b> February 15, 2015: First fully-functional version, as described in the article.</p>
 
@@ -701,11 +695,11 @@ Now it drops down current tetromino only if the key is not auto-repeat space or 
 <p><b><big>7.1:</big></b> February 5, 2019: Fixed the problem with browsers not allowing <code>localStorage</code> (DOM Storage) — implemented the fallback: playing works, but not storing of custom data in local storage.<br>
 The problem was revealed by testing on: Microsoft Edge 42.17134.1.0, EdgeHTML 17.17134, 2018.</p>
 
-<h2>11. Live Play</h2>
+<h2 id="a11">11. Live Play</h2>
 
 <p>The game can be played live <a href="https://sakryukov.github.io/software/Tetris-on-Canvas">here</a>.</p>
 
-<h2>12. Conclusions</h2>
+<h2 id="a12">12. Conclusions</h2>
 
 <p>For some good reasons, JavaScript is sometimes claimed to be the world's most misunderstood language:<br>
 <a href="http://javascript.crockford.com/javascript.html">http://javascript.crockford.com/javascript.html</a><br>

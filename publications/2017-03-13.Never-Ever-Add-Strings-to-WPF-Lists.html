@@ -93,14 +93,6 @@
   "dateModified": "2017-03-14"
 }</script>
 
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -419,27 +411,27 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div id="TOC">
 <ul style="list-style: none">
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#introduction">Introduction</a></li>
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">Demo Application</a></li>
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">The Problem</a>
+	<li><a href="#introduction">Introduction</a></li>
+	<li><a href="#demo-application">Demo Application</a></li>
+	<li><a href="#the-problem">The Problem</a>
 	<ul style="list-style: none; margin-top: 0; margin-bottom: 0">
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#string-list-items">String List Items</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#same-problem-with-integers">Same Problem with Integers</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#same-problem-with-data-binding">Same Problem with Data Binding</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem-per-.net-version">The Problem per .NET Version</a></li>
+		<li><a href="#string-list-items">String List Items</a></li>
+		<li><a href="#same-problem-with-integers">Same Problem with Integers</a></li>
+		<li><a href="#same-problem-with-data-binding">Same Problem with Data Binding</a></li>
+		<li><a href="#the-problem-per-.net-version">The Problem per .NET Version</a></li>
 	</ul>
 	</li>
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">Explanation</a></li>
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#solutions">Solutions</a>
+	<li><a href="#explanation">Explanation</a></li>
+	<li><a href="#solutions">Solutions</a>
 	<ul style="list-style: none; margin-top: 0; margin-bottom: 0">
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#listboxitem-with-strings"><code>ListBoxItem</code> With Strings</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-data-binding">With Data Binding</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-custom-item-type">With Custom Item Type</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#with-custom-item-type-and-data-binding">With Custom Item Type and Data Binding</a></li>
-		<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#how-to-reproduce-the-problem">How to Reproduce the Problem?</a></li>
+		<li><a href="#listboxitem-with-strings"><code>ListBoxItem</code> With Strings</a></li>
+		<li><a href="#with-data-binding">With Data Binding</a></li>
+		<li><a href="#with-custom-item-type">With Custom Item Type</a></li>
+		<li><a href="#with-custom-item-type-and-data-binding">With Custom Item Type and Data Binding</a></li>
+		<li><a href="#how-to-reproduce-the-problem">How to Reproduce the Problem?</a></li>
 	</ul>
 	</li>
-	<li><a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#final-notes">Final Notes</a></li>
+	<li><a href="#final-notes">Final Notes</a></li>
 </ul>
 </div>
 
@@ -449,11 +441,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Likewise, the problem appears not just with strings used as the control’s items type; it appears with a wide set of classes, first of all, primitive and <em>enumeration types</em>, most value types and some <em>reference types</em>.</p>
 
-<p>I’ll <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">explain this a bit later</a>, so now we can jump to the discussion of <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">the problem</a>, but first I need to explain how to observe the behavior on the test cases I prepared.</p>
+<p>I’ll <a href="#explanation">explain this a bit later</a>, so now we can jump to the discussion of <a href="#the-problem">the problem</a>, but first I need to explain how to observe the behavior on the test cases I prepared.</p>
 
 <h2 id="demo-application">Demo Application</h2>
 
-<p>Before discussing the problem itself, I want to introduce my testing facility. I will experiment with only one demo/test application I called “NeverEverAddStringsToWPFLists.exe”. Here is the idea: we can use the same instance of <code>System.Windows.Controls.ListBox</code>. This control, as well as any other <code>ItemsControl</code>, is agnostic to the types of its items. The application navigates to different test cases, on a tree view shown on the right of the <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">application’s main window</a>. Each test case initially populates the list box in different ways and provides different ways of adding new items and extracting string representation of an item to be shown as a selected item.</p>
+<p>Before discussing the problem itself, I want to introduce my testing facility. I will experiment with only one demo/test application I called “NeverEverAddStringsToWPFLists.exe”. Here is the idea: we can use the same instance of <code>System.Windows.Controls.ListBox</code>. This control, as well as any other <code>ItemsControl</code>, is agnostic to the types of its items. The application navigates to different test cases, on a tree view shown on the right of the <a href="#image">application’s main window</a>. Each test case initially populates the list box in different ways and provides different ways of adding new items and extracting string representation of an item to be shown as a selected item.</p>
 
 <p>To abstract out such behavior, let’s define an abstract base class for this purpose:</p>
 
@@ -479,17 +471,17 @@ if (typeof(DemoUrl) !== 'undefined') {
 } <span class="code-comment">//</span><span class="code-comment">PreparationBase</span>
 </pre>
 
-<p>The classes representing different test cases (some of them representing the manifestation of the problem, other cases demonstrating the solution) are derived from this base class and override five virtual methods; two of these methods are <em>pseudo-abstract</em>, not <code>abstract</code>. Below, in the sections <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#the-problem">The Problem</a> and <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#solutions">Solutions</a>, I’ll show only one overridden method <code>Populate</code>, which is enough to reveal the problem.</p>
+<p>The classes representing different test cases (some of them representing the manifestation of the problem, other cases demonstrating the solution) are derived from this base class and override five virtual methods; two of these methods are <em>pseudo-abstract</em>, not <code>abstract</code>. Below, in the sections <a href="#the-problem">The Problem</a> and <a href="#solutions">Solutions</a>, I’ll show only one overridden method <code>Populate</code>, which is enough to reveal the problem.</p>
 
 <p>The solution is provided for Visual Studio 2008 which targets .NET v. 3.5, and Visual Studio 2015 targeting .NET v. 3.5 to v. 4.6.1, to make sure it covers most of the frameworks and development tools supporting WPF. Later versions of Visual Studio provide automatic conversion to later solution and project types. It can be built in one click on the batch file “build.bat”.</p>
 
 <h2 id="the-problem">The Problem</h2>
 
-<p>To observe the abnormal behavior, run the <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">demo application</a>. It will navigate to the first test case and show some instructions on the bottom panel of <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">the main window</a>.</p>
+<p>To observe the abnormal behavior, run the <a href="#demo-application">demo application</a>. It will navigate to the first test case and show some instructions on the bottom panel of <a href="#image">the main window</a>.</p>
 
-<p>First, clicking on the list items in certain order will eventually show the situation when more than one items are marked as <em>selected</em>, as shown <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#image">in the picture</a>. It’s important to understand that there is nothing like <em>multiple selection</em> here. It’s just that the major control behavior is badly broken.</p>
+<p>First, clicking on the list items in certain order will eventually show the situation when more than one items are marked as <em>selected</em>, as shown <a href="#image">in the picture</a>. It’s important to understand that there is nothing like <em>multiple selection</em> here. It’s just that the major control behavior is badly broken.</p>
 
-<p>Another abnormality can be revealed in scrolling. The <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#demo-application">demo application</a> code always scrolls to bring the newly added item into view. It always works if the newly added item is distinct. Let’s say, its string (or integer, in next test case) content is the same as of some other item already in view, no scrolling occurs.</p>
+<p>Another abnormality can be revealed in scrolling. The <a href="#demo-application">demo application</a> code always scrolls to bring the newly added item into view. It always works if the newly added item is distinct. Let’s say, its string (or integer, in next test case) content is the same as of some other item already in view, no scrolling occurs.</p>
 
 <p>As we could reasonably expect, nothing wrong happens when all the items on the list view are distinct.</p>
 
@@ -518,7 +510,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h3 id="same-problem-with-integers">Same Problem with Integers</h3>
 
-<p>It’s hard to expect that integer type could make the situation better. In fact, the abnormal behavior with types like primitive or enumeration types is <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">easier to explain</a> than with strings. Let’s try this:</p>
+<p>It’s hard to expect that integer type could make the situation better. In fact, the abnormal behavior with types like primitive or enumeration types is <a href="#explanation">easier to explain</a> than with strings. Let’s try this:</p>
 
 <div class="pre-lang" id="premain5114"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="5114" id="copycode5114" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
 <g>
@@ -591,7 +583,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>The explanation of this quite delicate mechanism would lead us too far from the topic of the present article, but this is something which is good to know. See also: <a href="https://msdn.microsoft.com/en-us/library/system.string.intern%28v=vs.110%29.aspx"><code>String.Intern</code></a>, <a href="https://msdn.microsoft.com/en-us/library/system.string.isinterned%28v=vs.110%29.aspx"><code>String.IsInterned</code></a>. Unfortunately, I could not find a review or technological articles in official MSDN documentation, only some unofficial article, for example, <a href="https://blogs.msdn.microsoft.com/ericlippert/2009/09/28/string-interning-and-string-empty">this one</a>.</p>
 
-<p>That said, to have the problem solved, we need to make sure that all the items are unique. But how to guarantee that, taking in consideration that the user can always add second “one” or second “two”. To make sure that two different “two” objects are unique, it’s enough to wrap them in some reference type with default equality method. And then, I’ll show how to <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#how-to-reproduce-the-problem">reproduce the problem by overriding <code>TObject.Equals</code></a>.</p>
+<p>That said, to have the problem solved, we need to make sure that all the items are unique. But how to guarantee that, taking in consideration that the user can always add second “one” or second “two”. To make sure that two different “two” objects are unique, it’s enough to wrap them in some reference type with default equality method. And then, I’ll show how to <a href="#how-to-reproduce-the-problem">reproduce the problem by overriding <code>TObject.Equals</code></a>.</p>
 
 <p>Let’s do exactly that.</p>
 
@@ -653,7 +645,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Actually, the WPF class <code>ListBoxItem</code> does not do any special, so there is absolutely no need to use it — well, not in the <em>logical tree</em>. Rather, it is the type of the objects automatically created when the <em>visual tree</em> is built. In two previous solutions, I simply reused already available type; also, this type will be suggested by the <em>Intellisense</em> during XAML programming.</p>
 
-<p>In fact, any custom type can play the same role. More exactly, it should be the type with a kind of unique identity: two objects created via two different constructor calls should be considered non-identical. That said, even a reference type could behave poorly and cause the same exact <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#string-list-items">problem</a>, if its identity rules are overridden in certain way; this is the problem we encountered with the <code>string</code> type. For any reference type, default identity rule uses just the <em>referential identity</em>, so such type, without redefined identity rules, will work as a perfect item type.</p>
+<p>In fact, any custom type can play the same role. More exactly, it should be the type with a kind of unique identity: two objects created via two different constructor calls should be considered non-identical. That said, even a reference type could behave poorly and cause the same exact <a href="#string-list-items">problem</a>, if its identity rules are overridden in certain way; this is the problem we encountered with the <code>string</code> type. For any reference type, default identity rule uses just the <em>referential identity</em>, so such type, without redefined identity rules, will work as a perfect item type.</p>
 
 <p>The only problem is: how the instance of such item type will be shown in a list? The simplest solution is really very simple: the method <code>System.Object.ToString()</code> should be overridden to show desired string value. Here is the example of such solution:</p>
 
@@ -711,7 +703,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h3 id="how-to-reproduce-the-problem">How to Reproduce the Problem?</h3>
 
-<p>Armed with our knowledge, we can intentionally reproduce the problem, to pin-point it precisely and confirm <a href="https://www.codeproject.com/Articles/1176230/WPF-Never-Add-Strings#explanation">our understanding of its nature</a>. Let’s override <code>System.Object.Equals</code> this way:</p>
+<p>Armed with our knowledge, we can intentionally reproduce the problem, to pin-point it precisely and confirm <a href="#explanation">our understanding of its nature</a>. Let’s override <code>System.Object.Equals</code> this way:</p>
 
 <div class="pre-lang" id="premain696560"><div>c#</div><div class="pre-action-link"><span class="copy-code" data-index="696560" id="copycode696560" style="visibility: visible;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 460 460" style="width: 16px;height:16px;" xml:space="preserve">
 <g>

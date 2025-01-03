@@ -69,7 +69,7 @@
   "name": "Unicode Art",
   "headline": "Unicode Art",
   "url": "https://www.codeproject.com/Articles/1179876/Unicode-Art",
-  "discussionUrl": "https://www.codeproject.com/Articles/1179876/Unicode-Art#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "commentCount": "0",
@@ -92,14 +92,6 @@
   "dateCreated": "2017-04-01",
   "dateModified": "2021-02-20"
 }</script>
-
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
 
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1179876/Unicode-Art#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -417,14 +409,14 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div id="TOC">
 <ul style="list-style-type: none; list-style-image: initial">
-	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#operation">Operation</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#research">Research</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#performance">Performance</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#threading">Threading</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#html-rendering">HTML Rendering</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#new-style-elements">New Style Elements</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#application-and-window-icons">Application and Window Icons</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#instead-of-conclusions-aleph-numbers">Instead of Conclusions: Aleph Numbers</a></li>	<li><a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#licensing-notes">Licensing Notes</a></li></ul>
+	<li><a href="#introduction">Introduction</a></li>	<li><a href="#operation">Operation</a></li>	<li><a href="#research">Research</a></li>	<li><a href="#performance">Performance</a></li>	<li><a href="#threading">Threading</a></li>	<li><a href="#html-rendering">HTML Rendering</a></li>	<li><a href="#new-style-elements">New Style Elements</a></li>	<li><a href="#application-and-window-icons">Application and Window Icons</a></li>	<li><a href="#compatibility-and-build">Compatibility and Build</a></li>	<li><a href="#instead-of-conclusions-aleph-numbers">Instead of Conclusions: Aleph Numbers</a></li>	<li><a href="#licensing-notes">Licensing Notes</a></li></ul>
 </div>
 
 <h2 id="introduction">Introduction</h2>
 
 <p>On this nice <a href="https://en.wikipedia.org/wiki/April_Fools&#39;_Day">spring day</a>, it’s a great time to have some fun.</p>
 
-<p>Compared to <a href="https://en.wikipedia.org/wiki/ASCII_art">ASCII art</a>, its Unicode analog is easier for the automatic generation; at the same time, the result can look more <a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#conversion">impressive</a>, due to better tonal set of the <a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#epigraph">characters</a> — there are so many of them in Unicode!</p>
+<p>Compared to <a href="https://en.wikipedia.org/wiki/ASCII_art">ASCII art</a>, its Unicode analog is easier for the automatic generation; at the same time, the result can look more <a href="#conversion">impressive</a>, due to better tonal set of the <a href="#epigraph">characters</a> — there are so many of them in Unicode!</p>
 
 <p>Human visual perception is an amazingly complicated thing. It presents a lot of subtle problems of the visual presentation of everything. On the other hand, the power of human perception is dramatically underestimated. Accordingly, the preparation of the photographs or other images for the conversion into a good-looking Unicode Art form takes some artistry.</p>
 
@@ -448,7 +440,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>It took some effort to study how different font families, metrics, and <a href="http://unicode.org/glossary/#character_repertoire">character <em>repertoires</em></a> can render the dynamic range of some images.</p>
 
-<p>To map a subset of <a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#epigraph">characters</a> and choose characters used to represent some pixel value, we first need to collect statistics on the “brightness” of each character glyph in a certain subset of characters. Such “brightness” (quotation marks intended) can be defined as the average value of the bit in a glyph rendered in black color in a white background area of the size <code>S x S</code>, where <code>S</code> is the font size. The value calculated in this way does not correctly reflect the human perception of the “color intensity”, which is essentially <em>logarithmic</em>, but it is acceptable in the given situation; in all cases, it defines the partial ordering of the characters by brightness.</p>
+<p>To map a subset of <a href="#epigraph">characters</a> and choose characters used to represent some pixel value, we first need to collect statistics on the “brightness” of each character glyph in a certain subset of characters. Such “brightness” (quotation marks intended) can be defined as the average value of the bit in a glyph rendered in black color in a white background area of the size <code>S x S</code>, where <code>S</code> is the font size. The value calculated in this way does not correctly reflect the human perception of the “color intensity”, which is essentially <em>logarithmic</em>, but it is acceptable in the given situation; in all cases, it defines the partial ordering of the characters by brightness.</p>
 
 <p>The target pixel format is the grayscale with 8 bits per pixel, which is more than enough, taking into account the limited tonal range of the set of characters. Even with this format, 0.. 255 tones, there are not enough pixels to cover it. So, we can map a given character set to these 256 tones, normalizing the mapping so the “darkest” character would be mapped to 0, and the blank space character — to 255. The problem is: not all values even in this 0.. 255 range would correspond to some character in the mapping. Apparently, there are too many “light” characters, with a bad deficiency in “dark” ones. The ratio of the pixel values corresponding to some character in the given set can be considered as one of the possible “quality” characteristics of the combination of the font parameters and character set.</p>
 
@@ -717,7 +709,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>(Unicode Art images rendered from identical original images may look different because different character repertoires were used.)</p>
 
-<p>HTML browsers have some problems with such images. From the code sample <a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#save-to-html">shown above</a>, one can see that 5 parameters are inserted in the HTML file format (see the source file “Resources/HtmlFormat.html”): original file name, the values for CSS style properties <code>font-size</code> (always 1 in <code>em</code> units), <code>line-height</code>, and <code>font-family</code>, and then the formatted stream of characters. These parameters are ultimately calculated from the font face chosen in the main window of the application.</p>
+<p>HTML browsers have some problems with such images. From the code sample <a href="#save-to-html">shown above</a>, one can see that 5 parameters are inserted in the HTML file format (see the source file “Resources/HtmlFormat.html”): original file name, the values for CSS style properties <code>font-size</code> (always 1 in <code>em</code> units), <code>line-height</code>, and <code>font-family</code>, and then the formatted stream of characters. These parameters are ultimately calculated from the font face chosen in the main window of the application.</p>
 
 <p>But what about the aspect ratio? The answer is: it is “almost correct”. One can easily observe where the aspect ratio is a bit off by using the standard Web browser Zoom feature: zooming makes the aspect ratio flowing off, to a certain extent, depending on the zoom levels.</p>
 
@@ -807,7 +799,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h2 id="instead-of-conclusions-aleph-numbers">Instead of Conclusions: Aleph Numbers</h2>
 
-<p>Why the <a href="https://www.codeproject.com/Articles/1179876/Unicode-Art#application-and-window-icons">application icon</a> is the Hebrew letter <a href="https://en.wikipedia.org/wiki/Aleph"><em>aleph</em></a>, ℵ?</p>
+<p>Why the <a href="#application-and-window-icons">application icon</a> is the Hebrew letter <a href="https://en.wikipedia.org/wiki/Aleph"><em>aleph</em></a>, ℵ?</p>
 
 <p>First of all, this letter, inherited from <a href="https://en.wikipedia.org/wiki/Phoenician_alphabet">Phoenician</a> <a href="https://en.wikipedia.org/wiki/Aleph">'Ālep</a>, symbolizes the concept of the <em>alphabet</em> and the word “alphabet”, originating, through Greek ἀλφάβητος, from the first two Phoenician letters, <a href="https://en.wikipedia.org/wiki/Aleph">'Ālep</a> and <a href="https://en.wikipedia.org/wiki/Bet_%28letter%29">Bēt</a>, dating back to the <a href="https://en.wikipedia.org/wiki/Phoenicia">Phoenicians</a>, if not earlier. So, the word “alphabet” can be interpreted as “ox house” :-).</p>
 

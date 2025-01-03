@@ -93,14 +93,6 @@
   "dateModified": "2017-07-13"
 }</script>
 
-
-
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -143,7 +135,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -410,7 +402,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <div class="toc">
 <ul style="list-style-type: none">
-	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#introduction">Introduction</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#back-to-pascal">Back to Pascal!</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#the-idea">The Idea</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#the-usage">The Usage</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#implementation">Implementation</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#my-bonus">My Bonus</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#demotest-application-build-and-platform-compatibility">Demo/Test Application, Build and Platform Compatibility</a></li>	<li><a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#credits">Credits</a></li></ul>
+	<li><a href="#introduction">Introduction</a></li>	<li><a href="#back-to-pascal">Back to Pascal!</a></li>	<li><a href="#the-idea">The Idea</a></li>	<li><a href="#the-usage">The Usage</a></li>	<li><a href="#implementation">Implementation</a></li>	<li><a href="#my-bonus">My Bonus</a></li>	<li><a href="#demotest-application-build-and-platform-compatibility">Demo/Test Application, Build and Platform Compatibility</a></li>	<li><a href="#credits">Credits</a></li></ul>
 </div>
 
 <p>&nbsp;</p>
@@ -581,7 +573,7 @@ constructor TFormMain.Create(TheOwner: TComponent);
 
 <p>Of course, anyone is free to change that and use original command line.</p>
 
-<p>It’s interesting to mention that <code>TSingleInstanceUtility</code> serializes this array of string, to send it as one single message to send it to the first instance; and the first instance needs to deserialize it, <a href="https://www.codeproject.com/Articles/1089948/SingleInstance-FreePascal#deserialize">as it’s shown in the usage code sample</a>, with the use of the helper function. The serialization is reduced to joining all strings of an array into a single string, separated by a character which can never be entered in a command line; the character #1 is chosen.</p>
+<p>It’s interesting to mention that <code>TSingleInstanceUtility</code> serializes this array of string, to send it as one single message to send it to the first instance; and the first instance needs to deserialize it, <a href="#deserialize">as it’s shown in the usage code sample</a>, with the use of the helper function. The serialization is reduced to joining all strings of an array into a single string, separated by a character which can never be entered in a command line; the character #1 is chosen.</p>
 
 <h2 id="demotest-application-build-and-platform-compatibility">Demo/Test Application, Build and Platform Compatibility</h2>
 

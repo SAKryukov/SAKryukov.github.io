@@ -71,7 +71,7 @@
   "name": "Simple Rule-Driven Smart Formatting for HTML Textarea",
   "headline": "Simple Rule-Driven Smart Formatting for HTML Textarea",
   "url": "https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta",
-  "discussionUrl": "https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "Javascript,HTML",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -437,7 +431,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 <h2>Contents</h2>
 
 <ol>
-    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a1">Motivation</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a2">Rule Set</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a3">Bra and Ket</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a4">Indent</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a5">Auto Bracket</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a6">Tidy</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a7">Auto-Completion</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a8">Features</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a9">Live Demo</a></li>    <li><a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a10">Conclusion</a></li></ol>
+    <li><a href="#a1">Motivation</a></li>    <li><a href="#a2">Rule Set</a></li>    <li><a href="#a3">Bra and Ket</a></li>    <li><a href="#a4">Indent</a></li>    <li><a href="#a5">Auto Bracket</a></li>    <li><a href="#a6">Tidy</a></li>    <li><a href="#a7">Auto-Completion</a></li>    <li><a href="#a8">Features</a></li>    <li><a href="#a9">Live Demo</a></li>    <li><a href="#a10">Conclusion</a></li></ol>
 
 <h2 id="a1">1 Motivation</h2>
 
@@ -540,7 +534,7 @@ const myObject = someArray [|] ?</pre>
 
 <p>In my default rule set, I don't use these two options, that is, always use smart indent when Enter is pressed between <code>bra</code> and <code>ket</code>.</p>
 
-<p>Now, how this kind of formatting can produce smart indentation, and, importantly, nested indentation usually used in program texts? This is done based on the indentation of present or the next line, which is determined by the set of leftmost blank space and/or tab characters in that line. When you press Enter between <code>bra</code> and <code>ket</code> on a line without indentation, it creates two new lines, with indentation of the first one and <code>ket</code> on the last one. Type on this line and Enter between bra and key again, and new indentation is added to existing indentation. The added indentation is defined by the property <code>features</code> of the option set, see the section <a href="https://www.codeproject.com/Articles/1058628/Simple-Rule-Driven-Smart-Formatting-for-HTML-Texta#a8"><u>Features</u></a>.</p>
+<p>Now, how this kind of formatting can produce smart indentation, and, importantly, nested indentation usually used in program texts? This is done based on the indentation of present or the next line, which is determined by the set of leftmost blank space and/or tab characters in that line. When you press Enter between <code>bra</code> and <code>ket</code> on a line without indentation, it creates two new lines, with indentation of the first one and <code>ket</code> on the last one. Type on this line and Enter between bra and key again, and new indentation is added to existing indentation. The added indentation is defined by the property <code>features</code> of the option set, see the section <a href="#a8"><u>Features</u></a>.</p>
 
 <p>The implementation of smart indentation is fairly simple. The existing indentation is detected by the function <code>countTabs(string)</code>. All the rules are implemented based on parsing of the existing <code>textarea</code> text into the object which carries the insertion point location and text elements on left and write to this point: character, word and line. This is done be the function <code>parseCursorContext</code>:</p>
 

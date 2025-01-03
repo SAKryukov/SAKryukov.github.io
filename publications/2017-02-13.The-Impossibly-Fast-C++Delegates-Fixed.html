@@ -71,7 +71,7 @@
   "name": "The Impossibly Fast C++ Delegates, Fixed",
   "headline": "The Impossibly Fast C++ Delegates, Fixed",
   "url": "https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed",
-  "discussionUrl": "https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#_comments",
+  "discussionUrl": "#_comments",
   "isFamilyFriendly": "true",
   "image": "https://www.codeproject.com/App_Themes/CodeProject/Img/Article100.png",
   "keywords": "C++,delegates,VS2013",
@@ -125,12 +125,6 @@
   }]
 }</script>
 
-
-	<!--<base target="_top">--><base href="." target="_top">
-	
-    
-
-
 <script type="text/javascript">
 function defrm () { /* thanks twitter */
     document.write = '';
@@ -173,7 +167,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 
 
-<a class="access-link" href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
+<a class="access-link" href="#Main"><img alt="Click here to Skip to main content" src="./Resources/t.gif"></a>
 
 
 
@@ -432,12 +426,13 @@ if (typeof(DemoUrl) !== 'undefined') {
 <ul class="download">
 	<li><a href="The-Impossibly-Fast-C++Delegates-Fixed.zip" style="">Download source code — 12.6 KB</a></li></ul>
 
+<h2>Contents</h2>
 <div id="TOC">
 <ul style="list-style-type: none; list-style-image: initial">
-	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#what-is-added">What is Added?</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#usage-by-examples">Usage By Examples</a>
+	<li><a href="#what-is-added">What is Added?</a></li>	<li><a href="#usage-by-examples">Usage By Examples</a>
 	<ul style="list-style-type: none; list-style-image: initial; margin-top: 0; margin-bottom: 0">
-		<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#multicast-delegate-usage">Multicast Delegate Usage</a></li>		<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#multicast-invocation-with-return-object-handlers">Multicast Invocation with Return Object Handlers</a></li>	</ul>
-	</li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#why-its-fast">Why it’s Fast?</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#variadic-templates-and-parsing-of-template-parameters">Variadic Templates and Parsing of Template Parameters</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#lambda-expressions">Lambda Expressions</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#multicast-delegate">Multicast Delegate</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#are-the-delegates-comparable">Are the Delegates Comparable?</a></li>	<li><a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#compatibility-and-build">Compatibility and Build</a></li></ul>
+		<li><a href="#multicast-delegate-usage">Multicast Delegate Usage</a></li>		<li><a href="#multicast-invocation-with-return-object-handlers">Multicast Invocation with Return Object Handlers</a></li>	</ul>
+	</li>	<li><a href="#why-its-fast">Why it’s Fast?</a></li>	<li><a href="#variadic-templates-and-parsing-of-template-parameters">Variadic Templates and Parsing of Template Parameters</a></li>	<li><a href="#lambda-expressions">Lambda Expressions</a></li>	<li><a href="#multicast-delegate">Multicast Delegate</a></li>	<li><a href="#are-the-delegates-comparable">Are the Delegates Comparable?</a></li>	<li><a href="#compatibility-and-build">Compatibility and Build</a></li></ul>
 </div>
 
 <p>This is a derived work based on the ideas published by <a href="https://www.codeproject.com/Members/Sergey-Ryazanov">Sergey Ryazanov</a> in his article “<a href="https://www.codeproject.com/articles/11015/the-impossibly-fast-c-delegates">The Impossibly Fast C++ Delegates</a>”, 18 Jul 2005.</p>
@@ -462,7 +457,7 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p>Notably, the instances of both delegate types can be created as “empty”. It reflects the main paradigm of the delegate usage, when the delegate instance is hosted by some class; and the code using the class sets or adds its own handlers in the course of this usage.</p>
 
-<p>Performance comparison was done with the use of <code>std::function</code>. In all cases where the time measurements might be considered as relatively valid (very roughly, starting from a hundred of delegate instances each called a hundred of times), the <code>delegate</code> type has shown superior performance compared with <code>std::function</code>. Roughly, depending on many factors, the gain in <code>delegate/std::function</code> creation time was from 10 to 60 times, and performance gain in the call operations was from 1.1 to 3 times. I performed the measurements on Windows in two platforms, x86 (IA-32) and x86-64, with <a href="http://clang.llvm.org/">Clang</a>, <a href="https://gcc.gnu.org/">GCC</a> and <a href="https://msdn.microsoft.com/en-us/library/60k1461a.aspx">Microsoft</a> compilers — see also <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#compatibility-and-build"> Compatibility and Build</a>.</p>
+<p>Performance comparison was done with the use of <code>std::function</code>. In all cases where the time measurements might be considered as relatively valid (very roughly, starting from a hundred of delegate instances each called a hundred of times), the <code>delegate</code> type has shown superior performance compared with <code>std::function</code>. Roughly, depending on many factors, the gain in <code>delegate/std::function</code> creation time was from 10 to 60 times, and performance gain in the call operations was from 1.1 to 3 times. I performed the measurements on Windows in two platforms, x86 (IA-32) and x86-64, with <a href="http://clang.llvm.org/">Clang</a>, <a href="https://gcc.gnu.org/">GCC</a> and <a href="https://msdn.microsoft.com/en-us/library/60k1461a.aspx">Microsoft</a> compilers — see also <a href="#compatibility-and-build"> Compatibility and Build</a>.</p>
 
 <h2 id="usage-by-examples">Usage By Examples</h2>
 
@@ -605,7 +600,7 @@ md(<span class="code-digit">9</span>, <span class="code-string">'</span><span cl
     <span class="code-keyword">return</span> (p-<span class="code-keyword">&gt;</span><span class="code-keyword">operator</span>())(arg...);
 }</pre>
 
-<p>The reason for such solution is this is related to what I already explained <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#why-its-fast">above</a> — too expensive overhead of possible check of the different cases.</p>
+<p>The reason for such solution is this is related to what I already explained <a href="#why-its-fast">above</a> — too expensive overhead of possible check of the different cases.</p>
 
 <p>In passing the lambda instance to the delegate instance, the most important problem is the support of the major lambda, closure capture. Notably, this feature is lost when a lambda instance is copied by value (if the capture set is not empty, the copy throws exception at its call). To me, such lambda design is questionable, but this is a standard behavior. Passing the instance by pointer created by the caller works, but this hardly could be a viable design, due to the need of dealing with null pointers. So, the only reasonable solution is to pass the lambda instance by constant reference and creation of the pointer inside the factory function.</p>
 
@@ -623,7 +618,7 @@ md(<span class="code-digit">9</span>, <span class="code-string">'</span><span cl
 <pre id="pre954748" style="margin-top:0;" class="lang-cplusplus notranslate" data-language="c++" data-allowshrink="True" data-collapse="False" data-codeblock-processed="true"><span class="code-keyword">auto</span> d = <span class="code-keyword">delegate</span><span class="code-keyword">&lt;</span><span class="code-keyword">double</span>(<span class="code-keyword">int</span>, <span class="code-keyword">char</span>, <span class="code-keyword">const</span> <span class="code-keyword">char</span>*)<span class="code-keyword">&gt;</span>
     ::create<span class="code-keyword">&lt;</span><span class="code-keyword">decltype</span>(lambda)<span class="code-keyword">&gt;</span>(lambda);</pre>
 
-<p>(See the declaration of <code>d</code> and <code>lambda</code> <a href="https://www.codeproject.com/Articles/1170503/The-Impossibly-Fast-Cplusplus-Delegates-Fixed#usage">above</a>.)</p>
+<p>(See the declaration of <code>d</code> and <code>lambda</code> <a href="#usage">above</a>.)</p>
 
 <p>However, there is no a need to do it, because the lambda type will be deduced (inferred) by a compiler from the delegate type. So, it will work if <code>&lt;decltype(lambda)&gt;</code> is omitted from the code fragment shown above. Moreover, it could be done through the assignment operator defined for the <code>delegate</code> class:</p>
 
