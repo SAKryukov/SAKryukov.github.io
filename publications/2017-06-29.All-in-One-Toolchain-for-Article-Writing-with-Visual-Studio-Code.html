@@ -161,17 +161,17 @@ vscode.workspace.onDidChangeConfiguration(<span class="keyword highlighter">func
 </tr>
 </tbody>
 </table>
-<p>Example of auto-numbering options defined as a first paragraph in the document:</p><pre>[](=numbering {
-    "enable": true,
-    "defaultSuffix": ". ",
-    "pattern": [
-        {},
-        { "prefix": "Chapter ", "start": ["One", "Two", "Three", "Four"], "suffix": ": " },
-        {},
-        { "standAlong": true },
-        { "start": "a", "suffix": ") ", "standAlong": true }
-    ]
-}=)
+<p>Example of auto-numbering options defined as a first paragraph in the document:</p><pre lang="Markdown">@numbering <span class="operator highlighter">{</span>
+    <span class="property highlighter">"enable"</span>: true,
+    <span class="property highlighter">"defaultSuffix"</span>: <span class="literal string highlighter">". "</span>,
+    <span class="property highlighter">"pattern"</span>: <span class="operator highlighter">[</span>
+        <span class="operator highlighter">{</span><span class="operator highlighter">}</span>,
+        <span class="operator highlighter">{</span> <span class="property highlighter">"prefix"</span>: <span class="property highlighter">"Chapter ", "start"</span>: <span class="operator highlighter">[</span><span class="property highlighter">"One", "Two", "Three", "Four"], "suffix"</span>: <span class="literal string highlighter">": "</span> <span class="operator highlighter">}</span>,
+        <span class="operator highlighter">{</span><span class="operator highlighter">}</span>,
+        <span class="operator highlighter">{</span> <span class="property highlighter">"standAlong"</span>: true <span class="operator highlighter">}</span>,
+        <span class="operator highlighter">{</span> <span class="property highlighter">"start"</span>: <span class="property highlighter">"a", "suffix"</span>: <span class="property highlighter">") ", "standAlong"</span>: true <span class="operator highlighter">}</span>
+    <span class="operator highlighter">]</span>
+<span class="operator highlighter">}</span>
 </pre><p>Version 5.8.0 introduced new simplified format for the in-document specification of the auto-numbering options.</p><p>The format used previously is JSON; it still can be used, but it is not very suitable for human input and is not fault-tolerant. Presently, it takes precedence. If JSON parsing fails, new parser tried to parse the content of the <code>[](= ... =)</code> tag using new grammar:</p><ul>
 <li>Each property is placed on a separate line</li>
 <li>Leading and trailing blank spaces and spaced between syntactic elements are ignored</li>
@@ -203,17 +203,17 @@ here, <code>&lt;level&gt;</code> values 1, 2, … correspond to Markdown heading
 </ul>
 </li>
 </ul>
-<p>If a line fails to parse, it is ignored. It can be used for comments.</p><p>Example of auto-numbering option in-document specifications:</p><pre>[](=numbering {
-    enable: true
-    defaultSuffix: 1". "
-    h2.prefix: "Chapter "
-    h2.start: ["One", "Two", "Three", "Four"]
-    h2.suffix: ": "
-    h5.standAlong: true
-    h4.standAlong: true
-    h5.start: "a"
-    h5.suffix: ") "
-}=)
+<p>If a line fails to parse, it is ignored. It can be used for comments.</p><p>Example of auto-numbering option in-document specifications:</p><pre lang="Markdown"><span class="keyword highlighter">@numbering</span> {
+    <span class="property highlighter">enable</span>: true
+    <span class="property highlighter">defaultSuffix</span>: 1". "
+    <span class="property highlighter">h2.prefix</span>: "Chapter "
+    <span class="property highlighter">h2.start</span>: ["One", "Two", "Three", "Four"]
+    <span class="property highlighter">h2.suffix</span>: ": "
+    <span class="property highlighter">h5.standAlong</span>: true
+    <span class="property highlighter">h4.standAlong</span>: true
+    <span class="property highlighter">h5.start</span>: "a"
+    <span class="property highlighter">h5.suffix</span>: ") "
+}
 </pre><p>Auto-numbering “start” option can be any integer number or a string representing such number, any character, or, since version 5.5.5, an array of strings representing heading numbers, such as <code>[&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;]</code>. These different categories are iterated in natural different ways. In particular, a character-based name is iterated by incrementing of its Unicode <em>code point</em>, such as in “A”, “B”, “C”…</p><p>In implementation, an interesting point here is the universal <code>Iterator</code> covering all these cases:</p><pre lang="JavaScript"><span class="keyword highlighter">function</span> <span class="name function highlighter">Iterator</span>(first) {
     <span class="keyword highlighter">if</span> (first.constructor == Array) <span class="keyword highlighter">this</span>.array = first;
     <span class="keyword highlighter">this</span>.counter = <span class="keyword highlighter">this</span>.array ? <span class="literal numeric highlighter">0</span> : first;
@@ -239,43 +239,43 @@ here, <code>&lt;level&gt;</code> values 1, 2, … correspond to Markdown heading
         <span class="keyword highlighter">return</span> <span class="keyword highlighter">this</span>;
     } <span class="comment text highlighter">//next</span>
 } <span class="comment text highlighter">//Iterator</span>
-</pre><p>Let’s see how it works.</p><p>Let’s say, we have the following Markdown fragment, included in other Markdown files, different in auto-numbering options:</p><pre lang="Markdown">## Contents
+</pre><p>Let’s see how it works.</p><p>Let’s say, we have the following Markdown fragment, included in other Markdown files, different in auto-numbering options:</p><pre lang="Markdown"><span class="keyword highlighter">##</span> Contents
 
-[](toc)
+<span class="keyword highlighter">@toc</span>
 
-## Introduction
+<span class="keyword highlighter">##</span> Introduction
 
-## Something Else 
+<span class="keyword highlighter">##</span> Something Else 
 
-### Section
+<span class="keyword highlighter">###</span> Section
 
-### Another Section
+<span class="keyword highlighter">###</span> Another Section
 
-#### Sub-Section
-</pre><p>To enable default auto-numbering include it in this way:</p><pre lang="Markdown">[](=numbering {
-    enable: true
-}=)
+<span class="keyword highlighter">####</span> Sub-Section
+</pre><p>To enable default auto-numbering include it in this way:</p><pre lang="Markdown"><span class="keyword highlighter">@numbering</span> {
+    <span class="property highlighter">enable</span>: true
+}
 
-[](&shy;include(body.md))
+<span class="keyword highlighter">@include</span>(body.md)
 </pre><p>It will give as the following TOC:</p><div class="toc"><ul style="list-style-type: none;"><li>1. <a href="#heading.contents">Contents</a></li><li>2. <a href="#heading.introduction">Introduction</a></li><li>3. <a href="#heading.something-else">Something Else</a><ul style="list-style-type: none;"><li>1. <a href="#heading.section">Section</a></li><li>2. <a href="#heading.another-section">Another Section</a><ul style="list-style-type: none;"><li>3.2.1. <a href="#heading.sub-section">Sub-Section</a></li></ul></li></ul></li></ul></div>
-<p>Now, let’s use some advanced auto-numbering options:</p><pre lang="Markdown">[](=numbering {
-    enable: true
-    defaultSuffix: " "
-    h2.prefix: "Chapter "
-    h2.suffix: ": "
-    h2.start: ["One", "Two", "Three"]
-    h4.start: "a"
-    h4.suffix": ") "
-    h4.standAlong: true
-}=)
+<p>Now, let’s use some advanced auto-numbering options:</p><pre lang="Markdown"><span class="keyword highlighter">@numbering</span> {
+    <span class="property highlighter">enable</span>: true
+    <span class="property highlighter">defaultSuffix</span>: " "
+    <span class="property highlighter">h2.prefix</span>: "Chapter "
+    <span class="property highlighter">h2.suffix</span>: ": "
+    <span class="property highlighter">h2.start</span>: ["One", "Two", "Three"]
+    <span class="property highlighter">h4.start</span>: "a"
+    <span class="property highlighter">h4.suffix</span>": ") "
+    <span class="property highlighter">h4.standAlong</span>: true
+}
 
-[](&shy;include(body.md))
+<span class="keyword highlighter">@include</span>(body.md)
 
-## Out of Chapter Names
+<span class="keyword highlighter">##</span> Out of Chapter Names
 
 No more names in "start": ["One", "Two", "Three", "Four"]
 
-## Using Letters Instead of Names
+<span class="keyword highlighter">##</span> Using Letters Instead of Names
 </pre><p>It will give us more fancy TOC:</p><div class="toc"><ul style="list-style-type: none;"><li>Chapter One: <a href="#heading.contents">Contents</a></li><li>Chapter Two: <a href="#heading.introduction">Introduction</a></li><li>Chapter Three: <a href="#heading.something-else">Something Else</a><ul style="list-style-type: none;"><li>1 <a href="#heading.section">Section</a></li><li>2 <a href="#heading.another-section">Another Section</a><ul style="list-style-type: none;"><li>a) <a href="#heading.sub-section">Sub-Section</a></li></ul></li></ul></li><li>Chapter U: <a href="#heading.out-of20chapter20names">Out of Chapter Names</a></li><li>Chapter V: <a href="#heading.using-letters20instead20of20names">Using Letters Instead of Names</a></li></ul></div>
 <p>Note that iteration by <code>[&quot;One&quot;, &quot;Two&quot;, &quot;Three&quot;, &quot;Four&quot;]</code> array went out of elements. Then next iteration is performed in the following way: the last element is parsed as a character and incremented by its code point. It gives us “U” and “V”. This feature is designed to handle such situation gracefully, so the author could easily detect where more array elements needs to be supplied, without breaking if the TOC structure.</p><p>Also note heading number 1, 2 and “a)”. This is where the “standAlong” option is used, and the specialized <code>&quot;suffix&quot;: &quot;) &quot;</code> for “a”.</p><h3 id="heading-setting-up-additional-plug-ins">Setting up Additional Plug-ins</h3>
 <p id="src..additional.plugins.js">The object <code>additionalPlugins</code> is constructed from the settings data in conservative manner: if something goes wrong, plug-in data is not added:</p><pre lang="JavaScript"><span class="keyword highlighter">const</span> additionalPlugins = (<span class="keyword highlighter">function</span> () {
@@ -308,46 +308,6 @@ No more names in "start": ["One", "Two", "Three", "Four"]
     } <span class="comment text highlighter">// loop settings.additionalPlugins.plugins</span>
     <span class="keyword highlighter">return</span> result;
 }()); <span class="comment text highlighter">//additionalPlugins</span>
-</pre><p>Naturally, “package.json” should claim the extension “<a href="#vs-code-markdown-microsoft">VS Code Markdown</a>” in its dependencies:</p><pre lang="JSON"><span class="operator highlighter">{</span>
-    <span class="property highlighter">"summary"</span>: <span class="operator highlighter">{</span>
-        <span class="property highlighter">"title"</span>: <span class="literal string highlighter">"Some interesting well-known people"</span>,
-        <span class="property highlighter">"description"</span>: <span class="literal string highlighter">""</span>,
-        <span class="property highlighter">"created"</span>: <span class="literal string highlighter">"2021/11/07 05:47:08 UTC−5"</span>,
-        <span class="property highlighter">"updated"</span>: <span class="literal string highlighter">"2021/11/13 09:28:58 UTC−5"</span>
-    <span class="operator highlighter">}</span>,
-    <span class="property highlighter">"properties"</span>: <span class="operator highlighter">[</span>
-        <span class="literal string highlighter">"Name"</span>,
-        <span class="literal string highlighter">"Born"</span>,
-        <span class="literal string highlighter">"Birthplace"</span>,
-        <span class="literal string highlighter">"Died"</span>,
-        <span class="literal string highlighter">"Death Place"</span>,
-        <span class="literal string highlighter">"Nickname"</span>,
-        <span class="literal string highlighter">"Interests"</span>,
-        <span class="literal string highlighter">"Notable Work"</span>
-    <span class="operator highlighter">]</span>,
-    <span class="property highlighter">"values"</span>: <span class="operator highlighter">[</span>
-        <span class="literal string highlighter">"Menes"</span>,
-        <span class="literal string highlighter">"3200–3000 BC"</span>,
-        <span class="literal string highlighter">"Egypt"</span>,
-        <span class="literal string highlighter">"Akhenaten"</span>,
-        <span class="literal string highlighter">"1336 or 1334 BC"</span>,
-        <span class="literal string highlighter">"Nebuchadnezzar I"</span>,
-        <span class="literal string highlighter">"1121 BC"</span>,
-        <span class="literal string highlighter">"1100 BC"</span>,
-    <span class="operator highlighter">]</span>,
-    <span class="property highlighter">"records"</span>: <span class="operator highlighter">[</span>
-        <span class="operator highlighter">[</span>
-            <span class="operator highlighter">{</span>
-                <span class="property highlighter">"property"</span>: 0,
-                <span class="property highlighter">"value"</span>: 0
-            <span class="operator highlighter">}</span>,
-            <span class="operator highlighter">{</span>
-                <span class="property highlighter">"property"</span>: 1,
-                <span class="property highlighter">"value"</span>: 1
-            <span class="operator highlighter">}</span>
-        <span class="operator highlighter">]</span>
-    <span class="operator highlighter">]</span>
-<span class="operator highlighter">}</span>
 </pre><p>The function <a href="#src..main.js"><code>getMarkdownPlugin</code></a> solves some more problems unsolved by existing extensions. First, it enables generation of <code>id</code> attributes in headings, which are used in TOC and elsewhere. Another important improvement is the use of the <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> <em>typographer</em>.</p><p>One noticeable annoyance of the extension preview was that the <em>typographer</em> feature of the node.js module “markdown-it” is not used. I wrote about similar feature <a href="https://www.codeproject.com/Articles/1177895/Helpful-Toolchain-for-Article-Writing">in my previous article</a> on the topic; check out the description of the “–smart” command-line option. In terms of the “markdown-it” module, this is the <em>typographer</em> option, which should be set before rendering. This is done in the conversion script “build.js”, so the input markup such as em dash (“‐‐‐”), apostrophes or unpaired quotation marks will be shown in a typographically correct way as “—”, “”, “'”, etc.    This way, the extension preview and the final output will look different. Another reason for the difference is “fancy formatting” of the preview, not entirely controlled by CSS.</p><p>The typographer behavior is explained in detail in the <a href="https://sakryukov.github.io/vscode-markdown-to-html/#typographer">“Extensible Markdown Converter” documentation</a>.</p><p>The problem of mismatch between preview and generated HTML file was solved in version 2.2.0. Now preview precisely matches the file, because it’s generated from the same source. For further detail, please see <a href="https://sakryukov.github.io/vscode-markdown-to-html/#preview">documentation on preview</a>.</p><p>Another feature to implement is adding the HTML header and footer to the generated body. The module <a href="https://www.npmjs.com/package/markdown-it">markdown-it</a> itself does not do it. There is one particular reason why it is important enough: UTF-8 encoding needs to be specified in the <code>head</code> element, to make rendering correct. CodeProject does it anyway, but it’s important to check up the document before pasting it to the CodeProject article submission wizard.</p><p>For other implementation detail, please see <a href="https://github.com/SAKryukov/vscode-markdown-to-html">original source code</a>.</p><h2 id="heading-customized-workspace-settings">Customized Workspace Settings</h2>
 <p id="src..settings.json">All settings can be customized either globally (per user), or per <em>workspace</em>. We can use it to customize markdown preview and behavior (first of all, IntelliSense) to become suitable for the workspace used for article authoring. To do it per workspace, we need to create a file “.vscode/settings.json”:</p><pre lang="JSON"><span class="operator highlighter">{</span>
     <span class="property highlighter">"markdown.extension.convertToHtml.reportSuccess"</span>: true, // default
