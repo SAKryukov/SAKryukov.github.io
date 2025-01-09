@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>XAML Data to Code, Advanced</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        @import url(https://SAKryukov.github.io/publications/code/documentation.css);
+	blockquote { margin-left: 2em; }
+	th, td { border: thin solid black; padding-left: 1em; padding-right: 1em; }
+	th { border-bottom: solid black 2px; }
+	th { background-color: lightGray; font-weight: normal; font-size: 100%; }
+	table { border: solid black 2px; border-collapse: collapse; }
+    </style>
+</head>
+<body>
+
+<p class="title">XAML Data to Code, Advanced</p><p class="author"><a href="https://www.SAKryukov.org"><em>Sergey A Kryukov</em></a></p><p>Another article related to XML Data to Code covers more advanced topics: localizable dynamic string interpolation and XML-defined read-only data.</p><p>Many people asked this question about the generation of code from XAML. And there are many unsatisfactory answers. At the same time, the problem is pretty easy to solve. And code generation is not the only approach. Another approach would be a data type designed to be presented via XAML markup, so its instance could be populated from the XAML data. Both approaches have their benefits, are easy to use, and are covered in detail in the present article, as well as XAML-based Globalization and Localization of arbitrary data, not necessarily related to UI.</p><div  data-line="10" class="code-line" dir="auto" ></div>
+<!-- https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code -->
+<div  data-line="12" class="code-line" dir="auto" ></div>
+<!-- copy to CodeProject from here ------------------------------------------->
+<p id="image-title">
+<img src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" alt="Read-only, substitute" data-src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" /></p><div  data-line="17" class="code-line" dir="auto" ></div>
+<blockquote id="epigraph" class="FQ"><div class="FQA">Epigraphs:</div>
+<dt><i>A writer only begins a book. A reader finishes it.</i></dt>
+<dd><a href="https://en.wikipedia.org/wiki/Samuel_Johnson">Samuel Johnson<a/></dd>
+<p></p>
+<dt><i>Honestly, I thought <a href="https://www.interpol.int">Interpol</a> was an online <a href="https://en.wikipedia.org/wiki/String_interpolation">interpolation</a> service.</i></dt>
+<dd><a href="https://SAKryukov.org">Author<a/></dd>
+</blockquote>
+<h2>Contents</h2>
+<p class="toc">
+<a style="margin-left: 0em;" href="#heading-introduction">Introduction</a><br/>
+<a style="margin-left: 0em;" href="#heading-dynamic-string-interpolation">Dynamic String Interpolation</a><br/>
+<a style="margin-left: 3em;" href="#heading-presentation-in-xaml">Presentation in XAML</a><br/>
+<a style="margin-left: 3em;" href="#heading-implementation">Implementation</a><br/>
+<a style="margin-left: 3em;" href="#heading-substitution">Substitution</a><br/>
+<a style="margin-left: 3em;" href="#heading-limitations">Limitations</a><br/>
+<a style="margin-left: 3em;" href="#heading-string-interpolation3a-summary">String Interpolation: Summary</a><br/>
+<a style="margin-left: 0em;" href="#heading-read-only-access">Read-Only Access</a><br/>
+<a style="margin-left: 3em;" href="#heading-pseudo-read-only-properties">Pseudo-Read-Only Properties</a><br/>
+<a style="margin-left: 3em;" href="#heading-using-objectdataprovider">Using ObjectDataProvider</a><br/>
+<a style="margin-left: 3em;" href="#heading-stack-frame-test">Stack Frame Test</a><br/>
+<a style="margin-left: 3em;" href="#heading-duck-typing-approach">Duck-Typing Approach</a><br/>
+<a style="margin-left: 3em;" href="#heading-xaml-sample">XAML Sample</a><br/>
+<a style="margin-left: 3em;" href="#heading-testing-read-only-properties">Testing Read-Only Properties</a><br/>
+<a style="margin-left: 3em;" href="#heading-read-only-access3a-summary">Read-Only Access: Summary</a><br/>
+<a style="margin-left: 0em;" href="#heading-solution-structure-preview">Solution Structure Preview</a><br/>
+<a style="margin-left: 0em;" href="#heading-compatibility-and-testing">Compatibility and Testing</a><br/>
+<a style="margin-left: 0em;" href="#heading-conclusions">Conclusions</a><br/>
+</p><h2 id="heading-introduction">Introduction</h2>
+<p>This article is the continuation of the article <a href="https://sakryukov.github.io/publications/2023-09-23.XAML-Data-to-Code.html">XAML Data to Code</a>. It suggests more advanced XAML techniques used for definition of any arbitrary data, not necessarily related to UI or graphics.</p><h2 id="heading-dynamic-string-interpolation">Dynamic String Interpolation</h2>
+<p>Now, we’re approaching the trickiest part of the entire topic. It is relevant to the use of XAML data in general, no matter how exactly we obtain this data from XAML. For this reason, this new section is placed after the sections on XAML markup and code generation.</p><p>Can <a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated">string interpolation</a> be globalized?</p><p>The first conclusion from the analysis of this topic is this: not using the way it is implemented in C#. We can only think about mimicking this behavior during runtime. String interpolation is a language feature, and the mechanism of interpolation is statically known, it is a compile-time action. In other terms, the names of the variables for substitution are local to the piece of code where the format string is defined. We cannot pass the format string to another stack frame and then dynamically add “$” to it. It does not mean that we cannot use it dynamically, because we can create a static function and call it with different parameters, for example:</p><pre lang="C#"><span class="keyword highlighter">static</span> <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">DefinitionSet</span> {
+    <span class="comment text highlighter">//...</span>
+    <span class="keyword highlighter">internal</span> <span class="keyword highlighter">static</span> <span class="type keyword highlighter">string</span> FormatCulture(
+        <span class="type keyword highlighter">string</span> name,
+        <span class="type keyword highlighter">string</span> EnglishName,
+        <span class="type keyword highlighter">string</span> nativeName) =&gt;
+            $<span class="literal string highlighter">"{name}: {EnglishName}, {nativeName}"</span>;
+}
+</pre><p>This technique is very useful because it helps to isolate string resources from the code using them. However, when we need to globalize resources, it cannot help us at all, because it has an apparent <em>ad hoc</em> use. In every case, it works on a concrete set of arguments with concrete names. We need a mechanism to abstract out both set of arguments and the format string, so the format string could be different in different localizations, but applicable to the same set of arguments.</p><p>Such a mechanism does exist, and this is the mechanism of <code>string.Format</code>. It uses numeric format notation “…{0}, {1}, {2}…”. Can it be used? Certainly, and we don’t need to invent anything specific to XAML. We would just define the format string in XAML and use it in the way people used it before.</p><p>But is it convenient enough? No, it is not, and it is even a usual subject of human mistakes. In contrast to string interpolation, the compiler does not give us any clue of possible developer’s mistakes, and only a look at the output during runtime can reveal those mistakes. Moreover, is it not so easy to see immediately what parameter should go where, because the places in code where the parameters are substituted and the format string are often different, especially with XAML, where the format string would be in XAML, and the place when the parameters are substituted is in some C# code.</p><p>Can we do better than that? I think we can, and I examined several ideas and even tried out some of them to feel the development process better. Here is the idea: we can mimic the form of the format string placed in XAML; it should resemble the format string in the $-notation. However we cannot use C# string interpolation for processing this string, so we need to develop the processing from scratch, and the processing can happen only during runtime.</p><p>First, we need to understand how the object, representing our new string interpolating mechanism should look in XAML.</p><h3 id="heading-presentation-in-xaml">Presentation in XAML</h3>
+<p>The formatting rules for string interpolation should be presented in XAML in the same way as with $-notation for C# string interpolation, using a single string that carries all required information. Here is how it looks in XAML:</p><p id="code-string-format">“SingleObjectDataSource.xaml”:</p><pre lang="XAML"><span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">My:Main.FormatInstitution</span></span><span class="xmltag close highlighter">&gt;</span>
+    <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">e:StringFormat</span></span><span class="xmltag close highlighter">&gt;</span>
+        Organization: {string name},
+        number of members on {System.DateTime date:D}:
+        {ulong number of members:N0}
+    <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">e:StringFormat</span></span><span class="xmltag close highlighter">&gt;</span>
+<span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">My:Main.FormatInstitution</span></span><span class="xmltag close highlighter">&gt;</span>
+</pre><p>In this example, the strings “string name”, “System.DateTime date”, and “ulong number of members” are parameter names.
+The major difference with $-notation is that the parameter names don’t have to be valid identifiers, they can come with whitespace characters. They can contain any characters except “:”, “{”, and “}”.
+These names play two roles: they should serve as unique keys used to identify placeholders for actual parameter substitutions, and they remind the developer of the meanings and order of the parameters.</p><p>Note that we can also supply format strings <a href="https://learn.microsoft.com/en-us/dotnet/csharp/tutorials/string-interpolation#how-to-specify-a-format-string-for-an-interpolation-expression">specific for each separate parameter</a>. In our example, these format strings are “D” and “N0”.</p><p>After I substituted the actual data on Code Project on the date of writing, I obtained:
+“Organization: Code Project, number of members on October 1, 2023: 15,747,139”
+Note that many of my system settings correspond to US culture, but not all of them.
+If I ran through localization, the only implemented culture for this test application is “it”, so I get
+“Organizzazione: Code Project, numero di membri al domenica 1 ottobre 2023: 15.747.139”.
+(Those who know Italian better please correct me if I made a mistake somewhere.)</p><p>The format string can be entered in two different ways. The XAML sample shown above demonstrates <em>direct content</em>.</p><p>Alternatively, the same string could be entered as the attribute <code>Format</code>. However, I would recommend using only the direct content form, and here is why: you can face a ridiculous limitation with the attribute <code>Format</code>: you won’t be able to enter “{” as a first character. It happens because if an attribute string value begins with “{”, it is interpreted as a XAML <a href="https://learn.microsoft.com/en-us/dotnet/desktop/xaml-services/markup-extensions-overview">markup extension</a>, but that extension does not exist.</p><p>Now we need to understand how to implement the mechanism used to take the format string prescribed in XAML and perform the substitution of the parameters during runtime, that is, the string interpolation itself.</p><h3 id="heading-implementation">Implementation</h3>
+<p>Let’s look at the implementation. Note that the application of the attribute <code>[ContentProperty(nameof(Format))]</code> defines that <code>Format</code> can be entered as direct content of the element <code>e:StringFormat</code>.</p><p id="code-class-string-format">This is the entire implementation:</p><pre lang="C#"><span class="keyword highlighter">namespace</span> SA.Agnostic.UI.Markup {
+    <span class="keyword highlighter">using</span> ContentPropertyAttribute =
+        System.Windows.Markup.ContentPropertyAttribute;
+    <span class="keyword highlighter">using</span> Regex = System.Text.RegularExpressions.Regex;
+    <span class="keyword highlighter">using</span> Match = System.Text.RegularExpressions.Match;
+    <span class="keyword highlighter">using</span> StringDictionary =
+        System.Collections.Generic.Dictionary&lt;<span class="type keyword highlighter">string</span>, <span class="type keyword highlighter">int</span>&gt;;
+
+    [ContentProperty(nameof(Format))]
+    <span class="keyword highlighter">public</span> <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">StringFormat</span> {
+
+        <span class="keyword highlighter">public</span> <span class="_custom-word_ highlighter">StringFormat</span>() { }
+        <span class="keyword highlighter">public</span> <span class="_custom-word_ highlighter">StringFormat</span>(<span class="type keyword highlighter">string</span> format) { stringFormat = format; }
+
+        <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> Format {
+            <span class="keyword highlighter">get</span> =&gt; stringFormat;
+            <span class="keyword highlighter">set</span> {
+                ParseXamlFormat(<span class="keyword highlighter">value</span>);
+                stringFormat = <span class="keyword highlighter">value</span>;
+            } <span class="comment text highlighter">//set Format</span>
+        } <span class="comment text highlighter">//Format</span>
+
+        <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> Substitute(<span class="keyword highlighter">params</span> <span class="type keyword highlighter">object</span>[] actualParameters) {
+            <span class="keyword highlighter">this</span>.actualParameters = actualParameters;
+            <span class="keyword highlighter">if</span> (actualParameters == <span class="literal keyword highlighter">null</span>) { <span class="comment text highlighter">// reset</span>
+                numberedStringFormat = <span class="literal keyword highlighter">null</span>;
+                <span class="keyword highlighter">return</span> <span class="literal keyword highlighter">null</span>;
+            } <span class="comment text highlighter">//if</span>
+            <span class="keyword highlighter">if</span> (formalParameters.Length != actualParameters.Length)
+                <span class="keyword highlighter">throw</span> <span class="keyword highlighter">new</span> <span class="_custom-word_ highlighter">StringFormatException</span>(
+                    <span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.InvalidParameterNumber(
+                        formalParameters.Length,
+                        actualParameters.Length));
+            <span class="keyword highlighter">return</span> ToString();
+        } <span class="comment text highlighter">//Substitute</span>
+
+        <span class="keyword highlighter">public</span> <span class="keyword highlighter">override</span> <span class="type keyword highlighter">string</span> ToString() {
+            <span class="keyword highlighter">return</span> actualParameters == <span class="literal keyword highlighter">null</span>
+                || <span class="type keyword highlighter">string</span>.IsNullOrWhiteSpace(numberedStringFormat)
+                || actualParameters.Length &lt; <span class="literal numeric highlighter">1</span>
+                ? <span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.FormalParameterDeclaration(
+                    <span class="type keyword highlighter">string</span>.Join(
+                        <span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.toStringSeparator,
+                        formalParameters))
+                : <span class="type keyword highlighter">string</span>.Format(numberedStringFormat, actualParameters);
+        } <span class="comment text highlighter">//ToString()</span>
+
+        <span class="type keyword highlighter">string</span>[] formalParameters;
+        <span class="type keyword highlighter">object</span>[] actualParameters;
+        <span class="type keyword highlighter">string</span> stringFormat;
+        <span class="type keyword highlighter">string</span> numberedStringFormat;
+        <span class="keyword highlighter">readonly</span> StringDictionary dictionary = <span class="keyword highlighter">new</span>();
+
+        <span class="keyword highlighter">void</span> ParseXamlFormat(<span class="type keyword highlighter">string</span> <span class="keyword highlighter">value</span>) {
+            <span class="keyword highlighter">if</span> (formalParameters != <span class="literal keyword highlighter">null</span> || formalParameters.Length &gt; <span class="literal numeric highlighter">0</span>)
+                <span class="keyword highlighter">throw</span> <span class="keyword highlighter">new</span> <span class="_custom-word_ highlighter">StringFormatException</span>(
+                    <span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.InvalidFormatStringAssignment(
+                        formalParameters.Length));
+            Regex regex = <span class="keyword highlighter">new</span>(<span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.regularExpression);
+            <span class="keyword highlighter">var</span> matches = regex.Matches(<span class="keyword highlighter">value</span>);
+            dictionary.Clear();
+            <span class="type keyword highlighter">int</span> dictionaryIndex = <span class="literal numeric highlighter">0</span>;
+            <span class="keyword highlighter">for</span> (<span class="type keyword highlighter">int</span> index = <span class="literal numeric highlighter">0</span>; index &lt; matches.Count; ++index) {
+                <span class="type keyword highlighter">string</span> key = matches[index].Groups[<span class="literal numeric highlighter">1</span>].Value;
+                <span class="keyword highlighter">if</span> (!dictionary.ContainsKey(key))
+                    dictionary[key] = dictionaryIndex++;
+            } <span class="comment text highlighter">//loop</span>
+            formalParameters = <span class="keyword highlighter">new</span> <span class="type keyword highlighter">string</span>[dictionary.Count];
+            <span class="keyword highlighter">foreach</span> (<span class="keyword highlighter">var</span> pair <span class="keyword highlighter">in</span> dictionary)
+                formalParameters[pair.Value] = pair.Key;
+            numberedStringFormat = <span class="keyword highlighter">value</span>;
+            <span class="keyword highlighter">foreach</span> (Match match <span class="keyword highlighter">in</span> matches) {
+                <span class="type keyword highlighter">string</span> toReplace = match.Groups[<span class="literal numeric highlighter">0</span>].Value;
+                <span class="type keyword highlighter">string</span> key = match.Groups[<span class="literal numeric highlighter">1</span>].Value;
+                <span class="type keyword highlighter">string</span> subformat = match.Groups[<span class="literal numeric highlighter">2</span>].Value;
+                numberedStringFormat = 
+                    numberedStringFormat.Replace(
+                        toReplace,
+                        <span class="_custom-word_ highlighter">DefinitionSet</span>.<span class="_custom-word_ highlighter">StringFormat</span>.BracketParameter(
+                            dictionary[key],
+                            subformat));
+            } <span class="comment text highlighter">//loop</span>
+        } <span class="comment text highlighter">//ParseXamlFormat</span>
+
+        <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">StringFormatException</span> : System.ApplicationException {
+            <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">StringFormatException</span>(<span class="type keyword highlighter">string</span> message) : <span class="keyword highlighter">base</span>(message) { }
+        } <span class="comment text highlighter">//class StringFormatException</span>
+
+    } <span class="comment text highlighter">//class StringFormat</span>
+
+}
+</pre><p>Let’s see what’s going on here. The instance of <code>StringFormat</code> can be in two states: when substitution is not done, <code>actualParameters</code> and <code>numberedStringFormat</code> are <code>null</code> objects. After the substitution of actual parameters, these two objects are defined. In the first state, the instance’s <code>ToString()</code> value can be used as an instruction on what parameters are required and in what order they should come. In the second state, the instance’s <code>ToString()</code> value is the interpolated string.</p><p>Normally, the string property <code>Format</code> comes from XAML. It is parsed in a pretty interesting way using the method <code>ParseXamlFormat</code>. It creates the array <code>formalParameters</code> used as a notation for a developer. Importantly, it also creates a format string <code>numberedStringFormat</code> for <code>string.Format</code> using old good “{0}{1}…{2}” numeric notation.</p><p>Why <code>StringDictionary</code> is used here? It is very important because the same parameter name can come in the XAML-provided format string not once. For example, if this string is simply “… {name},… {date},… {value}…”, our string <code>numberedStringFormat</code> should become “… {0},… {1},… {2}…”.</p><p>But what if it is “… {name},… {date},…, {name}, … {value},… {name}…”? This is a more general case. Our <code>numberedStringFormat</code> should become “… {0},… {1},…, {0}, … {2},… {0}…”. Our <code>StringDictionary</code> tracks the indices of the elements of the array <code>actualParameters</code> to be substituted.</p><p>Note that there is a way to reset <code>StringFormat</code> instance to its state before substitution. To do so, the developer can call <code>Substitute(null)</code>. It can be useful if the same <code>StringFormat</code> instances should be used more than once during development.</p><p>Note that the method <code>Substitute</code> throws an exception when the number of actual parameters does not match the number of formal parameters, in contrast to <code>string.Format</code>. It makes the detection of problems earlier and the problem is clearly presented to the developer.</p><p>Now, let’s see how it translates into the application development process.</p><h3 id="heading-substitution">Substitution</h3>
+<p>Here is the workflow by example:</p><p>I have the object of the type <code>My.Main</code>, and its instance is represented in XAML.
+From this XAML, I obtain the object <code>main</code> and look at <code>main.FormatInstitution</code>. The debugger shows the string value “Formal parameters: string name, System.DateTime date, ulong number of members”. The is the list of names provided as <code>main.ToString()</code>.</p><p>This string shows the number and the order of required parameters to be used for substitution and suggests what the parameters are used for, and I can see it under the debugger. Then I calculate the required parameter objects and add a call <code>member.FormatInstitution.Substitute</code>. If I run the application under the debugger past this line of code, I can see the result of the substitution on the string representation of the <code>member.FormatInstitution</code> instance.</p><p>At this point, I can assign <code>member.FormatInstitution.ToString()</code> to some string object and hence preserve the result, and then reset <code>member.FormatInstitution</code> by calling <code>member.FormatInstitution.Substitute(null)</code>. It can only be helpful if I need to reuse the object <code>member.FormatInstitution</code> later in the same process with a different set of parameters, and if I still need a reminder of the required set of parameters for a later development step.</p><h3 id="heading-limitations">Limitations</h3>
+<p>At this moment, I can see only one limitation. What if the order of parameters in the string should be different in different cultures? With the current <code>StringFormat</code> design, it is impossible, so every translation of the originally developed format string should somehow follow the original order of the parameters. My experience dealing with typologically extremely different languages shows that it is always possible, albeit not always easy. If someone has a better idea and can share it, I would greatly appreciate it.</p><h3 id="heading-string-interpolation3a-summary">String Interpolation: Summary</h3>
+<p>Essentially, dynamic string interpolation is just a usage sugar over the old good <code>string.Format</code>. With <code>StringFormat</code>, the substitution of parameters remains positional, but it is closer to the positional arguments of a function.</p><p>Nevertheless, when the globalization requirements present additional hassles of dealing with XAML, the sugar feels sweet enough. In contrast to <code>string.Format</code>, we still can see the formal parameter names and use the hints shown by the debugger. The notation used in the format string entered in XAML is the same as $-notation, and is even better, because the parameter names don’t need to be valid identifiers and can contain detailed descriptions of each parameter, including its type.</p><h2 id="heading-read-only-access">Read-Only Access</h2>
+<p>The usual purposes of data stored in resources typically imply that we are supposed to have read-only access to the data. At the same time, XAML is supposed to write data into the instances of data types, and XAML access is no different from any other access. It seems to be a contradiction, but it is not, it only seems to be so. This issue can be resolved.</p><p><a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code">So far</a>, we considered only the examples of read-write access to properties of fields defined in XAML. Now let’s consider the examples where XAML can create any arbitrary data, but only read-only access to this data is provided thereafter.</p><h3 id="heading-pseudo-read-only-properties">Pseudo-Read-Only Properties</h3>
+<p>One solution is pretty obvious: we can use properties that are formally read-write, but the write accessor allows to write data only once, presumably by the code loading a XAML. When the value is already assigned to the property, the accessor code can detect it by one or another criterion. When it happens, we have a choice: the assignment via the accessor may cause no effect, or the assignment attempt can throw an exception. Here is an example:</p><pre lang="C#" id="code-pseudo-readonly-data-det"><span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">PseudoReadonlyDataSet</span> {
+    <span class="keyword highlighter">public</span> <span class="_custom-word_ highlighter">PseudoReadonlyDataSet</span>() { }
+    <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> C {
+        <span class="keyword highlighter">get</span> =&gt; c;
+        <span class="keyword highlighter">set</span> {
+            <span class="keyword highlighter">if</span> (c == <span class="literal keyword highlighter">null</span>) c = <span class="keyword highlighter">value</span>;
+        }
+    } <span class="comment text highlighter">//C</span>
+    <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> D {
+        <span class="keyword highlighter">get</span> =&gt; d;
+        <span class="keyword highlighter">set</span> {
+            <span class="keyword highlighter">if</span> (d == <span class="literal keyword highlighter">null</span>)
+                d = <span class="keyword highlighter">value</span>;
+            <span class="keyword highlighter">else</span>
+                <span class="keyword highlighter">throw</span> <span class="keyword highlighter">new</span> ReadonlyViolationException(
+                    GetType(),
+                    nameof(D),
+                    <span class="keyword highlighter">value</span>);
+        }
+    } <span class="comment text highlighter">//D</span>
+    <span class="type keyword highlighter">string</span> c, d;
+    <span class="comment text highlighter">//...</span>
+}
+</pre><p>A specialized case of such a pseudo-read-only property is implemented for <a href="#code-class-string-format"><code>StringFormat.Format</code></a>. Generally, a value can be assigned to this property at an arbitrary moment of time, but its modification fails if <code>formalParameters</code> are defined, and their number is greater than zero. This is natural: it means the format string is already defined correctly and can be used with read-only access. If this is not the case, something went wrong, and the developer is given the chance to play with this value in an ad-hoc manner, to figure out what’s wrong.</p><h3 id="heading-using-objectdataprovider">Using ObjectDataProvider</h3>
+<p>Another very obvious idea is this: we can have truly read-only properties of fields. They are only initialized and never modified thereafter. This is not a problem at all:</p><pre lang="C#" id="code-readonly-data-det"><span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">ReadonlyDataSet</span> {
+    <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">ReadonlyDataSet</span>() { }
+    <span class="keyword highlighter">public</span> <span class="_custom-word_ highlighter">ReadonlyDataSet</span>(<span class="type keyword highlighter">string</span> a, <span class="type keyword highlighter">string</span> b) { A = a; B = b; }
+    <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">string</span> A { <span class="keyword highlighter">get</span>; init; }
+    <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">string</span> B { <span class="keyword highlighter">get</span>; init; }
+    <span class="comment text highlighter">//...</span>
+}
+</pre><p>The only tricky problem is this: how to call the constructor in XAML?</p><p>Fortunately, .NET already has a predefined facility for doing such things: <code>System.Windows.Data.ObjectDataProvider</code>. This is a wrapper for arbitrary objects. It can be used to call a constructor indirectly, through reflection. It has the <code>IList</code> property <code>ConstructorParameters</code>. And the collection properties are quite accessible through XAML. We can add all the objects to pass to the constructor one by one, and a <code>ObjectDataProvider</code> instance will use them the call the constructor.</p><p>Let’s design the method used to obtain the instance of the data class wrapped by <code>ObjectDataProvider</code>.</p><p id="code-get-wrapped-object"><code>Agnostic.UI.Markup.ResourseDictionaryUtility.GetWrappedObject</code>:</p><pre lang="C#"><span class="keyword highlighter">public</span> <span class="keyword highlighter">static</span> T_REQUIRED GetWrappedObject&lt;T_REQUIRED&gt;(
+    <span class="_custom-word_ highlighter">ResourceDictionary</span> dictionary) {
+        <span class="_custom-word_ highlighter">ObjectDataProvider</span> provider =
+            (<span class="_custom-word_ highlighter">ObjectDataProvider</span>)dictionary[<span class="keyword highlighter">typeof</span>(T_REQUIRED)];
+        <span class="keyword highlighter">return</span> (T_REQUIRED)provider?.ObjectInstance;
+}
+</pre><p>Note that this method assumes that each instance of <code>ObjectDataProvider</code> is marked in a resource dictionary not by its one type, but by the type of wrapped object. To see how it works, look at <a href="#heading-xaml-sample">the XAML code sample where all three methods are combined</a>.</p><h3 id="heading-stack-frame-test">Stack Frame Test</h3>
+<p>Stack Frame Test is a different sort of pseudo-read-only property mechanism. Can we see if the attempt to assign a value to a property comes from XAML or not? We can find out how the property setter is called from the stack trace in the setter implementation. Let’s try:</p><pre lang="C#"><span class="keyword highlighter">abstract</span> <span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">StackTraceValidator</span> {
+    <span class="keyword highlighter">private</span> <span class="keyword highlighter">protected</span> <span class="keyword highlighter">void</span> Validate(<span class="type keyword highlighter">string</span> propertyName, <span class="type keyword highlighter">object</span> newValue) {
+        StackTrace stackTrace = <span class="keyword highlighter">new</span>();
+        <span class="type keyword highlighter">int</span> count = stackTrace.FrameCount;
+        <span class="keyword highlighter">for</span> (<span class="type keyword highlighter">int</span> level = <span class="literal numeric highlighter">0</span>; level &lt; count; level++) {
+            StackFrame frame = stackTrace.GetFrame(level);
+            MethodBase method = frame.GetMethod();
+            System.Type declaringType = method.DeclaringType;
+            <span class="keyword highlighter">if</span> (!declaringType.IsAssignableTo(
+                <span class="keyword highlighter">typeof</span>(<span class="_custom-word_ highlighter">StackTraceValidator</span>))) {
+                    <span class="keyword highlighter">if</span> (declaringType.Assembly !=
+                        <span class="keyword highlighter">typeof</span>(System.IntPtr).Assembly)
+                            <span class="keyword highlighter">throw</span> <span class="keyword highlighter">new</span> ReadonlyViolationException(
+                                GetType(),
+                                propertyName,
+                                newValue);
+                    <span class="keyword highlighter">break</span>;
+            }
+        } <span class="comment text highlighter">//loop</span>
+    } <span class="comment text highlighter">//Validate</span>
+}
+</pre><p>Here is the idea: we start from the deepest stack frame and iterate state frames until we go out of the declaring types of the method described above, or the derived types. We use the fact that any derived type is <code>IsAssignableTo</code> the class described above. If the declaring type is a type outside of this inheritance chain, we can check it up and then break out of the stack frames loop.</p><p>How we can check where this call comes from? We test the code above under the debugger, and then we can see, that if the call comes from XAML, it happens in the assembly <code>System.Private.CoreLib</code>. This name does not matter. What does matter is that this is the same core assembly where the primitive types are defined, for example, the type <code>System.IntPtr</code>.</p><p>From this check, we can see that this approach is not entirely reliable. Most likely, it will work in the future, but who knows what can happen to future .NET implementations? What if Microsoft people decide to radically restructure the .NET solution?</p><p>So, I suggest thinking of this method as food for thought and a kind of fun.</p><p>Nevertheless, let’s see how it can be used for a property:</p><pre lang="C#"><span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">PseudoReadonlyDataSetXamlOnly</span> : <span class="_custom-word_ highlighter">StackTraceValidator</span> {
+    <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> E {
+        <span class="keyword highlighter">get</span> =&gt; e;
+        <span class="keyword highlighter">set</span> {
+            <span class="keyword highlighter">if</span> (e == <span class="literal keyword highlighter">null</span>) e = <span class="keyword highlighter">value</span>;
+        }
+    } <span class="comment text highlighter">//E</span>
+    <span class="keyword highlighter">public</span> <span class="type keyword highlighter">string</span> F {
+        <span class="keyword highlighter">get</span> =&gt; f;
+        <span class="keyword highlighter">set</span> {
+            Validate(nameof(F), <span class="keyword highlighter">value</span>); <span class="comment text highlighter">//StackTraceValidator.Validate</span>
+            f = <span class="keyword highlighter">value</span>;
+        }
+    } <span class="comment text highlighter">//F</span>
+    <span class="type keyword highlighter">string</span> e, f;
+    <span class="comment text highlighter">//...</span>
+}
+</pre><h3 id="heading-duck-typing-approach">Duck-Typing Approach</h3>
+<p>The data type <a href="#code-readonly-data-det"><code>ReadonlyDataSet</code> shown above</a> is quite suitable for the duck-typing approach.</p><p>However, if we wanted to the use duck-typing approach only, it could be simplified:</p><pre lang="C#"><span class="keyword highlighter">class</span> <span class="_custom-word_ highlighter">SimplerReadonlyDataSet</span> {
+    <span class="keyword highlighter">internal</span> <span class="_custom-word_ highlighter">SimplerReadonlyDataSet</span>() { }
+    <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">string</span> A { <span class="keyword highlighter">get</span>; <span class="keyword highlighter">private</span> <span class="keyword highlighter">set</span>; }
+    <span class="keyword highlighter">internal</span> <span class="type keyword highlighter">string</span> B { <span class="keyword highlighter">get</span>; <span class="keyword highlighter">private</span> <span class="keyword highlighter">set</span>; }
+    <span class="comment text highlighter">//...</span>
+}
+</pre><p>The duck-typing approach is discussed in detail in the <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing">previous article</a>. It is explaned that this approach can work with both properties and fields, public or non-public, because it uses reflection. Therefore, we can populate an instance of the data type, even its read-only properties. The member information is taken from XAML by scanning it for all the <code>Member</code> elements.</p><p>Now, we can see how all four approaches are represented in a single XAML sample.</p><h3 id="heading-xaml-sample">XAML Sample</h3>
+<p>Finally, this is the XAML sample where all four approaches are combined:</p><pre lang="XAML"><span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">FrameworkContentElement</span></span> x:<span class="xmltag attribute highlighter">Class</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">My.Advanced</span><span class="literal quote highlighter">"</span>
+        <span class="xmltag attribute highlighter">xmlns</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">http://schemas.microsoft.com/winfx/2006/xaml/presentation</span><span class="literal quote highlighter">"</span>
+        xmlns:<span class="xmltag attribute highlighter">my</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">clr-namespace:My</span><span class="literal quote highlighter">"</span>
+        xmlns:<span class="xmltag attribute highlighter">e</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">clr-namespace:SA.Agnostic.UI.Markup;assembly=Agnostic.UI</span><span class="literal quote highlighter">"</span>
+        xmlns:<span class="xmltag attribute highlighter">System</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">clr-namespace:System;assembly=netstandard</span><span class="literal quote highlighter">"</span>
+        xmlns:<span class="xmltag attribute highlighter">x</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">http://schemas.microsoft.com/winfx/2006/xaml</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">&gt;</span>
+    <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">FrameworkContentElement</span></span>.Resources<span class="xmltag close highlighter">&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">ObjectDataProvider</span></span> x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">{x:Type my:ReadonlyDataSet}</span><span class="literal quote highlighter">"</span>
+                            <span class="xmltag attribute highlighter">ObjectType</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">{x:Type my:ReadonlyDataSet}</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">&gt;</span>
+            <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">ObjectDataProvider</span></span>.ConstructorParameters<span class="xmltag close highlighter">&gt;</span>
+                <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">System</span></span>:String<span class="xmltag close highlighter">&gt;</span>aa<span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">System</span></span>:String<span class="xmltag close highlighter">&gt;</span>
+                <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">System</span></span>:String<span class="xmltag close highlighter">&gt;</span>bb<span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">System</span></span>:String<span class="xmltag close highlighter">&gt;</span>
+            <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">ObjectDataProvider</span></span>.ConstructorParameters<span class="xmltag close highlighter">&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">ObjectDataProvider</span></span><span class="xmltag close highlighter">&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">my:PseudoReadonlyDataSet</span></span>
+                        x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">{x:Type my:PseudoReadonlyDataSet}</span><span class="literal quote highlighter">"</span>
+                        <span class="xmltag attribute highlighter">C</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">ccc</span><span class="literal quote highlighter">"</span> <span class="xmltag attribute highlighter">D</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">ddd</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">/&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">my:PseudoReadonlyDataSetXamlOnly</span></span>
+                        x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">{x:Type my:PseudoReadonlyDataSetXamlOnly}</span><span class="literal quote highlighter">"</span>
+                        <span class="xmltag attribute highlighter">E</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">eeee</span><span class="literal quote highlighter">"</span> <span class="xmltag attribute highlighter">F</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">ffff</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">/&gt;</span>
+        <span class="comment block highlighter">&lt;!-- Duck typing: --&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">e:Member</span></span> x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">A</span><span class="literal quote highlighter">"</span>
+            <span class="xmltag attribute highlighter">Value</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">String value for init-only property A</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">/&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">e:Member</span></span> x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">B</span><span class="literal quote highlighter">"</span>
+            <span class="xmltag attribute highlighter">Value</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">String value for init-only property B</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">/&gt;</span>
+        <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag name highlighter">e:Member</span></span> x:<span class="xmltag attribute highlighter">Key</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">DuckTyped</span><span class="literal quote highlighter">"</span>
+            <span class="xmltag attribute highlighter">Value</span><span class="xmltag operator highlighter">=</span><span class="literal quote highlighter">"</span><span class="literal string highlighter">Yes, this is an example of duck typing</span><span class="literal quote highlighter">"</span><span class="xmltag close highlighter">/&gt;</span>
+    <span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">FrameworkContentElement</span></span>.Resources<span class="xmltag close highlighter">&gt;</span>
+<span class="xmltag all highlighter"><span class="xmltag all highlighter">&lt;</span><span class="xmltag special highlighter">/</span><span class="xmltag name highlighter">FrameworkContentElement</span></span><span class="xmltag close highlighter">&gt;</span>
+</pre><h3 id="heading-testing-read-only-properties">Testing Read-Only Properties</h3>
+<p>This is how the relevant part of the test looks like:</p><pre lang="C#"><span class="keyword highlighter">static</span> <span class="keyword highlighter">void</span> TestReadonly() {
+    Console.WriteLine(<span class="_custom-word_ highlighter">DefinitionSet</span>.ReadonlyAccess.title);
+    My.Advanced adv = <span class="keyword highlighter">new</span>();
+    My.<span class="_custom-word_ highlighter">ReadonlyDataSet</span> dataSet = ResourseDictionaryUtility.
+        GetWrappedObject&lt;My.<span class="_custom-word_ highlighter">ReadonlyDataSet</span>&gt;(adv.Resources);
+    My.<span class="_custom-word_ highlighter">PseudoReadonlyDataSet</span> anotherSet = ResourseDictionaryUtility.
+        GetObject&lt;My.<span class="_custom-word_ highlighter">PseudoReadonlyDataSet</span>&gt;(adv.Resources);
+    anotherSet.C = <span class="_custom-word_ highlighter">DefinitionSet</span>.ReadonlyAccess.attemptedNewValueAssignmentC;
+    <span class="keyword highlighter">try</span> {
+        anotherSet.D =
+            <span class="_custom-word_ highlighter">DefinitionSet</span>.ReadonlyAccess.attemptedNewValueAssignmentD;
+    } <span class="keyword highlighter">catch</span> (System.Exception e) {
+        Console.WriteLine(e.ToString());
+    } <span class="comment text highlighter">//exception</span>
+    My.<span class="_custom-word_ highlighter">PseudoReadonlyDataSetXamlOnly</span> stackSample =
+        ResourseDictionaryUtility.GetObject&lt;My.<span class="_custom-word_ highlighter">PseudoReadonlyDataSetXamlOnly</span>&gt;
+            (adv.Resources);
+    <span class="keyword highlighter">try</span> {
+        stackSample.F =
+            <span class="_custom-word_ highlighter">DefinitionSet</span>.ReadonlyAccess.attemptedNewValueAssignmentF;
+    } <span class="keyword highlighter">catch</span> (System.Exception e) {
+        Console.WriteLine(e.ToString());
+    } <span class="comment text highlighter">//exception</span>
+    My.<span class="_custom-word_ highlighter">ReadonlyDataSet</span> duckTypedDataSet = <span class="keyword highlighter">new</span>();
+    ResourseDictionaryUtility.CollectForDuckTypedInstance(
+        adv.Resources,
+        duckTypedDataSet);
+    Console.WriteLine(dataSet);
+    Console.WriteLine(anotherSet);
+    Console.WriteLine(stackSample);
+    Console.WriteLine(duckTypedDataSet);
+}
+</pre><p>Output:</p><pre>Demonstration of read-only and pseudo-read-only properties:
+My.ReadonlyViolationException: Attempt to
+    assing a new value "another new value"
+    to read-only property My.PseudoReadonlyDataSet.D
+   at ...
+My.ReadonlyViolationException: Attempt to
+    assing a new value "new value, stack validation"
+    to read-only property My.PseudoReadonlyDataSetXamlOnly.F
+   at ...
+ReadonlyDataSet:
+  A: aa, B: bb
+PseudoReadonlyDataSet:
+  C: ccc, D: ddd
+PseudoReadonlyDataSetXamlOnly:
+  E: eeee, F: ffff
+ReadonlyDataSet:
+  DuckTyped: Yes, this is an example of duck typing,
+  A: String value for init-only property A,
+  B: String value for init-only property B
+</pre><h3 id="heading-read-only-access3a-summary">Read-Only Access: Summary</h3>
+<p>I would recommend taking a little more effort and using <code>ObjectDataProvider</code>, not a pseudo-read-only approach.</p><p>As to the duck-typing approach… well, it depends. It is very universal and is pretty nice if you don’t care about the performance of the process of scanning the data dictionary. I would say, for most applications the dictionary would be too small to care too much about it, but again, it depends.</p><p>See also the <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing">detailed description of the duck-typing approach</a>, especially its <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-two-approaches3a-pro-and-contra">pro and contra</a>.</p><h2 id="heading-solution-structure-preview">Solution Structure Preview</h2>
+<p>The code provided with this article is a part of a bigger solution “SolutionStructure” under the title “Improved .NET Solution Structure”. This is a collection of units and illustrative materials used to share several ideas on the improvement of the .NET solution structure. The code is nearly ready for publication but I may upgrade it during the preparation of other articles related to this work. It can also be found in a GitHub repository <a href="https://github.com/SAKryukov/dotnet-solution-structure">dotnet-solution-structure</a> where I also keep the sources for the CodeProject articles. Please see the repository title page — it shows the topic covered.</p><h2 id="heading-compatibility-and-testing">Compatibility and Testing</h2>
+<p>The solution requires .NET version 5 or later. The build is based on .NET and batch build, it does not require Visual Studio or any other IDE.</p><p>Tested on .NET 5, 7, 8, and 9.</p><p>To change a target framework, edit the file “Directory.Build.props”, and modify the property <code>&lt;TargetFramework&gt;</code>. It will change target frameworks in all projects automatically, taking into account the suffix “-windows” where it is required.</p><h2 id="heading-conclusions">Conclusions</h2>
+<p>The <a href="#image-title">title image on top of the present article</a> symbolizes the merging of dictionaries, the help provided to the readers, and different ways to take. Also, the mess of characters of various writing systems suggests the importance of globalization and localization.</p><p>All the approaches presented here are productive, if the right way is taken, and the right way is the one most suitable to the development goals of a particular project.</p><p>In the solution, there are many techniques I’ve developed recently and using them for the very first time, and I would greatly appreciate any suggestions, advice, and criticism.</p><p class="date">January 9, 2025 </p><div  data-line="510" class="code-line" dir="auto" ></div>
+<script src="https://SAKryukov.github.io/publications/code/source-code-decorator.js"></script>
+
+</body>
+</html>
