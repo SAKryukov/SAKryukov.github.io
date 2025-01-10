@@ -4,7 +4,7 @@
     <title>XAML Data to Code, Advanced</title>
     <meta charset="utf-8"/>
     <style type="text/css">
-        @import url(https://SAKryukov.github.io/publications/code/documentation.css);
+        @import url(code/documentation.css);
 	blockquote { margin-left: 2em; }
 	th, td { border: thin solid black; padding-left: 1em; padding-right: 1em; }
 	th { border-bottom: solid black 2px; }
@@ -18,9 +18,10 @@
 <!-- https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code -->
 <div  data-line="12" class="code-line" dir="auto" ></div>
 <!-- copy to CodeProject from here ------------------------------------------->
-<p id="image-title">
-<img src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" alt="Read-only, substitute" data-src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" /></p><div  data-line="17" class="code-line" dir="auto" ></div>
+<p><a href="https://github.com/SAKryukov/dotnet-solution-structure">Download or clone source code from GitHub, see: XamlToData</a></p><p id="image-title">
+<img src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" alt="Read-only, substitute" data-src="Resources-articles/2025-01-09.XAML-Data-to-Code-Advanced.one-way.webp" /></p><div  data-line="19" class="code-line" dir="auto" ></div>
 <blockquote id="epigraph" class="FQ"><div class="FQA">Epigraphs:</div>
+<br/>
 <dt><i>A writer only begins a book. A reader finishes it.</i></dt>
 <dd><a href="https://en.wikipedia.org/wiki/Samuel_Johnson">Samuel Johnson<a/></dd>
 <p></p>
@@ -339,7 +340,7 @@ ReadonlyDataSet:
 <p>I would recommend taking a little more effort and using <code>ObjectDataProvider</code>, not a pseudo-read-only approach.</p><p>As to the duck-typing approach… well, it depends. It is very universal and is pretty nice if you don’t care about the performance of the process of scanning the data dictionary. I would say, for most applications the dictionary would be too small to care too much about it, but again, it depends.</p><p>See also the <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-approach-2323a-duck-typing">detailed description of the duck-typing approach</a>, especially its <a href="https://www.codeproject.com/Articles/5368892/XAML-Data-to-Code#heading-two-approaches3a-pro-and-contra">pro and contra</a>.</p><h2 id="heading-solution-structure-preview">Solution Structure Preview</h2>
 <p>The code provided with this article is a part of a bigger solution “SolutionStructure” under the title “Improved .NET Solution Structure”. This is a collection of units and illustrative materials used to share several ideas on the improvement of the .NET solution structure. The code is nearly ready for publication but I may upgrade it during the preparation of other articles related to this work. It can also be found in a GitHub repository <a href="https://github.com/SAKryukov/dotnet-solution-structure">dotnet-solution-structure</a> where I also keep the sources for the CodeProject articles. Please see the repository title page — it shows the topic covered.</p><h2 id="heading-compatibility-and-testing">Compatibility and Testing</h2>
 <p>The solution requires .NET version 5 or later. The build is based on .NET and batch build, it does not require Visual Studio or any other IDE.</p><p>Tested on .NET 5, 7, 8, and 9.</p><p>To change a target framework, edit the file “Directory.Build.props”, and modify the property <code>&lt;TargetFramework&gt;</code>. It will change target frameworks in all projects automatically, taking into account the suffix “-windows” where it is required.</p><h2 id="heading-conclusions">Conclusions</h2>
-<p>The <a href="#image-title">title image on top of the present article</a> symbolizes the merging of dictionaries, the help provided to the readers, and different ways to take. Also, the mess of characters of various writing systems suggests the importance of globalization and localization.</p><p>All the approaches presented here are productive, if the right way is taken, and the right way is the one most suitable to the development goals of a particular project.</p><p>In the solution, there are many techniques I’ve developed recently and using them for the very first time, and I would greatly appreciate any suggestions, advice, and criticism.</p><p class="date">January 9, 2025 </p><div  data-line="510" class="code-line" dir="auto" ></div>
+<p>The <a href="#image-title">title image on top of the present article</a> symbolizes the merging of dictionaries, the help provided to the readers, and different ways to take. Also, the mess of characters of various writing systems suggests the importance of globalization and localization.</p><p>All the approaches presented here are productive, if the right way is taken, and the right way is the one most suitable to the development goals of a particular project.</p><p>In the solution, there are many techniques I’ve developed recently and using them for the very first time, and I would greatly appreciate any suggestions, advice, and criticism.</p><p class="date">January 9, 2025 </p><div  data-line="513" class="code-line" dir="auto" ></div>
 <script src="https://SAKryukov.github.io/publications/code/source-code-decorator.js"></script>
 
 </body>
