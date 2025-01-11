@@ -78,8 +78,7 @@ pre span.xmltag.close.highlighter {
     color: blue;
 }
 pre span.xmltag.attribute.highlighter {
-    color: purple;
-    font-style: italic;
+    color: darkmagenta;
 }
 pre span.xmltag.operator.highlighter {
     color: blue;
