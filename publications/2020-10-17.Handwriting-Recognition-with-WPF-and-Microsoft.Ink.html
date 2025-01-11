@@ -18,6 +18,7 @@
 	<title>Handwriting Recognition with WPF and Microsoft.Ink- CodeProject</title> 
     
 	<link type="text/css" rel="stylesheet" href="./Resources/Article.min.css">
+	<link type="text/css" rel="stylesheet" href="./code/documentation.css">
 
 
     <script type="text/javascript" async="" src="./Resources/analytics.js.download"></script><script type="text/javascript" src="./Resources/jquery-3.4.1.min.js.download" defer=""></script>
@@ -428,14 +429,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <p id="picture.main"><img alt="Hello, Microsoft Ink!" src="./Resources-articles/2020-10-17.Handwriting-Recognition-with-WPF-and-Microsoft.Ink.main.webp"/></p>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>A skeptic is a person who, when he sees the handwriting on the wall, claims it is a forgery.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Morris_Bender">Morris Bender</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>A skeptic is a person who, when he sees the handwriting on the wall, claims it is a forgery.</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Morris_Bender">Morris Bender</a></strong>
+</p>
 
 <h2>Contents</h2>
 
@@ -462,14 +460,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h2 id="heading-motivation">Motivation</h2>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>There is nothing more stimulating than a case where everything goes against you.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Sherlock_Holmes">Sherlock Holmes</a>, <i><a href="https://en.wikipedia.org/wiki/The_Hound_of_the_Baskervilles">The Hound of the Baskervilles</a></i> by Sir <a href="https://en.wikipedia.org/wiki/Arthur_Conan_Doyle">Arthur Conan Doyle</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>There is nothing more stimulating than a case where everything goes against you.</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Sherlock_Holmes">Sherlock Holmes</a>, <i><a href="https://en.wikipedia.org/wiki/The_Hound_of_the_Baskervilles">The Hound of the Baskervilles</a></i> by Sir <a href="https://en.wikipedia.org/wiki/Arthur_Conan_Doyle">Arthur Conan Doyle</a></strong>
+</p>
 
 <p>About 2005, I was pleasantly surprised by the quality of the handwriting recognition available with <a href="https://en.wikipedia.org/wiki/Microsoft_Tablet_PC">Microsoft Tablet PC</a>. I didn’t have a Tablet PC, I only had a drawing tablet and done a good deal of drawing, only wanted to get better use of it. It turns out that one doesn’t really need a Tablet PC, as it was quite enough to install a separate product, an SDK for this product, and that it could be used on a non-specialized Windows version. It’s hard to understand why Microsoft could not supply something equivalent to the other users, not software developers. The demo software supplied with SDK was already fairly good to serve as a user-level software. I could not say it was perfect, but even to me. it was almost practical to enter texts using a pen. If I had to work without a physical keyboard, I would even use it in my practice.</p>
 
@@ -479,14 +474,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h2 id="heading-microsoft-handwriting-recognition-problems">Microsoft Handwriting Recognition Problems</h2>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>You may not be able to read a doctor's handwriting and prescription, but you'll notice his bills are neatly typewritten.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Earl_Wilson_%28columnist%29">Earl Wilson</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>You may not be able to read a doctor's handwriting and prescription, but you'll notice his bills are neatly typewritten.</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Earl_Wilson_%28columnist%29">Earl Wilson</a></strong>
+</p>
 
 <p>Microsoft Windows pen computer components really offer very good performance and quality of recognition.</p>
 
@@ -587,14 +579,11 @@ if (typeof(DemoUrl) !== 'undefined') {
 
 <h3 id="heading-adjusting-strokes">Adjusting Strokes</h3>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>It was decided to make it totally error-free. They produced twenty proofreading prints and nevertheless on the title page it was printed: "<a href="https://en.wikipedia.org/wiki/Cyclopidae">Encyclopidae</a> Britannica"</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Ilya_Ilf">Ilya Ilf</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>It was decided to make it totally error-free. They produced twenty proofreading prints and nevertheless on the title page it was printed: "<a href="https://en.wikipedia.org/wiki/Cyclopidae">Encyclopidae</a> Britannica"</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Ilya_Ilf">Ilya Ilf</a></strong>
+</p>
 
 <p>The control class <code>System.Windows.Controls.InkCanvas</code> already has everything needed to manipulate already entered strokes.</p>
 
@@ -660,14 +649,14 @@ inkCanvas.EditingMode = InkCanvasEditingMode.Select;</pre>
 
 <h2 id="heading-recognizing-in-different-languages">Recognizing in Different Languages</h2>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>A family of mice was surprised by a big cat. Father Mouse jumped and said, "Bow-wow!"<br>
-The cat ran away.<br>
-"What was that, Father?" asked Baby Mouse.<br>
-"Well, son, that's why it's important to learn a second language."</i></p>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>
+A family of mice was surprised by a big cat. Father Mouse jumped and said, &ldquo;Bow-wow!&rdquo;<br/>
+The cat ran away.<br/>
+&ldquo;What was that, Father?&rdquo; asked Baby Mouse.<br/>
+&ldquo;Well, son, that's why it's important to learn a second language.&rdquo;</em>
+</p>
 
 <p>Well, let’s add a second language to the system and see if we can achieve handwriting recognition for each language. If the system has only one handwriting recognition language pack, an additional language pack can be downloaded and installed. In particular, with Windows 10 it can be done using main Settings menu <code>=&gt;</code> “Time &amp; Language” <code>=&gt;</code> “Region &amp; Language” <code>=&gt;</code> “Add Language”. It pops up a dialog showing supported languages with a small legend at the button helping to see if handwriting recognition is supported for a required language.</p>
 
@@ -962,14 +951,11 @@ The cat ran away.<br>
 
 <h2 id="heading-what-else3f">What Else?</h2>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>Nobody will embrace the unembraceable.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>Nobody will embrace the unembraceable.</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></strong>
+</p>
 
 <p>WPF has a lot more features related to ink support, even without Microsoft.Ink. First of all, it includes recognition of <em>gestures</em>, which can be used to invoke various input events, typically, interpreted as commands. This functionality partially overlaps with Microsoft.Ink, which also has its own gesture recognition.</p>
 
@@ -991,14 +977,11 @@ The cat ran away.<br>
 
 <h2 id="heading-conclusions">Conclusions</h2>
 
-<blockquote class="FQ" id="epigraph">
-<div class="FQA">Epigraph:</div>
-
-<p><i>If you have a fountain, shut it down. Let even a fountain have a rest.</i></p>
-
-<dl>
-	<dd><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></dd></dl>
-</blockquote>
+<p class="epigraph">Epigraph:<br/>
+<br/>
+<em>If you have a fountain, shut it down. Let even a fountain have a rest.</em><br/>
+<strong><a href="https://en.wikipedia.org/wiki/Kozma_Prutkov">Kozma Prutkov</a></strong>
+</p>
 
 <p>Through this article, I paved a path to a fully-functional recognition of handwriting using Windows and Microsoft pen computing components, without covering all related topics. The description of the techniques can be used for the development of a wide range of application features based on WPF and Microsoft.Ink assemblies, but only for the features limited to recognition of handwriting as plain text.</p>
 
