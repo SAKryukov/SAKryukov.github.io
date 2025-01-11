@@ -1,5 +1,7 @@
 ﻿        @import url(source-code-decorator.css);
         @import url(highlighter.css);
+        @import url(epigraph.css);
+        @import url(download.css);
         * { font-family: sans-serif; }
         summary + pre { margin-top: 0; }
         pre, pre span { font-family: monospace; letter-spacing: 0; }
@@ -16,11 +18,3 @@
         pre { margin-top: 0; margin-bottom: 0; }
         p, h1, h2, h3, h4 { margin-top: 1em; margin-bottom: 0.4em; }
         p.toc br { content: ""; display: block; margin-top: 0.2em; }
-    	p.epigraph {
-            background: no-repeat; background-color: #E8E8E8; padding: 0.2em;
-            padding-left: 2em;
-    	    padding-right: 0.6em;
-    	    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' font-family='sans-serif' version='1.1'><text x='-2' y='47' fill='green' font-size='4em'>“</text></svg>");
-    	}
-        p.epigraph em { font-style: italic; }
-        p.epigraph strong { padding-left: 3em; font-weight: normal; }
