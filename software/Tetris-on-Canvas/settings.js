@@ -31,7 +31,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 "use strict";
 
-const version = "8.0.1";
+const version = "9.0.0";
 
 const gameSizeInBlocks = { x: 10, y:20 };
 
@@ -53,19 +53,19 @@ const layoutMetrics = {
 }; //layoutMetrics
 
 const key = {
-    start: { keyCode: 13, display: "Enter", ids: ["help.startPauseContinue"] },	// (start/pause/continue)
-    cancel: { keyCode: 27, display: "Escape", ids: ["help.cancelGame"] },
-    left: { keyCode: 37, display: "&larr;", ids: ["help.left"] },
-    right: { keyCode: 39, display: "&rarr;", ids: ["help.right"] },
-    down: { keyCode: 40, display: "&darr;", ids: ["help.down"] },
-    space: { keyCode: 32, display: "Space", ids: [] },
-    dropDown: { keyCode: 32, display: "Space", ids: ["help.dropDown"] },
-    rotate: { keyCode: 38, display: "&uarr;", ids: ["help.rotateRight", "help.rotateLeft"] }, // Up, Ctrl-Up
-    help: { keyCode: 112, display: "F1", ids: ["help.help"] },
-    downloadSource: { keyCode: 86, display: 'V', ids: ["help.downloadSource"]  },
-    settings: { keyCode: 83, display: 'S', ids: ["help.settings"] }
-}; //key
+    start: { code: "Enter", display: "Enter", ids: ["help.startPauseContinue"] },	// (start/pause/continue)
+    cancel: { code: "Escape", display: "Escape", ids: ["help.cancelGame"] },
+    left: { code: "ArrowLeft", display: "&larr;", ids: ["help.left"] },
+    right: { code: "ArrowRight", display: "&rarr;", ids: ["help.right"] },
+    down: { code: "ArrowDown", display: "&darr;", ids: ["help.down"] },
 
+    space: { code: "Space", display: "Space", ids: [] },
+    dropDown: { code: "Space", display: "Space", ids: ["help.dropDown"] },
+    rotate: { code: "ArrowUp", display: "&uarr;", ids: ["help.rotateRight", "help.rotateLeft"] }, // Up, Ctrl-Up
+    help: { code: "F1", display: "F1", ids: ["help.help"] },
+    downloadSource: { code: "KeyV", display: 'V', ids: ["help.downloadSource"]  },
+    settings: { code: "KeyS", display: 'S', ids: ["help.settings"] }
+}; //key
 
 const delays = { // before piece drops by 1 row (seconds)
     start: 0.7,

@@ -68,7 +68,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       #left p { text-align: center; }
       #board { width: 10em; height: 20em; }
       #upcoming { width: 8em; height: 6em; }
-      #checkboxClutter { margin-right: 0.2em; }
+      #checkboxClutter { margin-right: 0.2em; white-space: nowrap; }
       #touch-indicator { display: none; position: absolute; }
     </style> 
   </head>
@@ -97,7 +97,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
         <p>Rows: <em id="rows"></em></p>
       </div>
       <div id="sectionClutter" title="Clutter created at the start of the game">
-        <label for="checkboxClutter" accesskey="U"><input type="checkbox" id="checkboxClutter" checked="checked"/>Cl<u>u</u>tter</label>&ThinSpace;
+        <!-- accesskey will be removed by the script: -->
+        <label for="checkboxClutter"><input accesskey="KeyU" type="checkbox" id="checkboxClutter" checked="checked"/>&thinsp;Cl<u>u</u>tter</label>&ThinSpace;
         <select id="clutterSelector"></select>
       </div>
     </div>
@@ -132,6 +133,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 <br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
 </div>
 
+<script src="accesskey.js"></script>
 <script src="touch.js"></script>
 <script src="settings.js"></script>
 <script src="application.js"></script>

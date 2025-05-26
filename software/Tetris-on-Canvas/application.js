@@ -31,6 +31,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 "use strict";
 
+fixAccessKeyAttributes();
+
 function Tetromino(shape, x, y, orientation, color) {
     this.shape = shape; //TetrominoShape
     this.shape.color = color;
@@ -396,27 +398,30 @@ const game = {
     settingsHandler: function() { window.location = fileNames.settingsEditor; },
 
     keydownBody: function (event) {
-        if (rendering.showingHelp && event.keyCode != this.effectiveSettings.key.help.keyCode)
+        if (rendering.showingHelp && event.code != this.effectiveSettings.key.help.code)
             return;            
-        if (this.specialKeySet.has(event.keyCode)) {
-            if (event.keyCode === this.effectiveSettings.key.help.keyCode) rendering.help();
-            if (event.keyCode === this.effectiveSettings.key.downloadSource.keyCode) this.downloadHandler();
-            if (event.keyCode === this.effectiveSettings.key.settings.keyCode) this.settingsHandler();
+        if (this.specialKeySet.has(event.code)) {
+            if (event.code === this.effectiveSettings.key.help.code) rendering.help();
+            if (event.code === this.effectiveSettings.key.downloadSource.code) this.downloadHandler();
+            if (event.code === this.effectiveSettings.key.settings.code) this.settingsHandler();
             event.preventDefault();
             return;
         } //if help		
         let handled = false;
         if (this.states.current === this.states.playing) {
-            switch (event.keyCode) {
-                case this.effectiveSettings.key.left.keyCode: this.queue.push(this.actions.left); handled = true; break;
-                case this.effectiveSettings.key.right.keyCode: this.queue.push(this.actions.right); handled = true; break;
-                case this.effectiveSettings.key.rotate.keyCode:
+            switch (event.code) {
+                case this.effectiveSettings.key.left.code: this.queue.push(this.actions.left); handled = true; break;
+                case this.effectiveSettings.key.right.code: this.queue.push(this.actions.right); handled = true; break;
+                case this.effectiveSettings.key.rotate.code:
                     const action = event.ctrlKey ? this.actions.rotateLeft : this.actions.rotateRight;
                     this.queue.push(action);
                     handled = true;
                     break;
-                case this.effectiveSettings.key.down.keyCode: this.queue.push(this.actions.down); handled = true; break;
-                case this.effectiveSettings.key.dropDown.keyCode:
+                case this.effectiveSettings.key.down.code:
+                    this.queue.push(this.actions.down);
+                    handled = true;
+                    break;
+                case this.effectiveSettings.key.dropDown.code:
                     // using this.repeatedKeyDropDown because event.repeat, reportedly, is not currently supported by some smartphone/tablet browsers:
                     if (!this.repeatedKeyDropDown) {
                         this.repeatedKeyDropDown = true;
@@ -424,10 +429,10 @@ const game = {
                     } //if
                     handled = true;
                     break;
-                case this.effectiveSettings.key.cancel.keyCode: this.cancel(); handled = true; break;
-                case this.effectiveSettings.key.start.keyCode: this.pause(); handled = true; break;
+                case this.effectiveSettings.key.cancel.code: this.cancel(); handled = true; break;
+                case this.effectiveSettings.key.start.code: this.pause(); handled = true; break;
             } //switch 
-        } else if (event.keyCode === this.effectiveSettings.key.start.keyCode) {
+        } else if (event.code === this.effectiveSettings.key.start.code) {
             this.startContinue();
             handled = true;
         } //if
@@ -440,7 +445,7 @@ const game = {
     keyupBody: function (event) {
         if (indirectChildOf(event.target, elements.sectionClutter))
             return;
-        if (event.keyCode == this.effectiveSettings.key.dropDown.keyCode)
+        if (event.code == this.effectiveSettings.key.dropDown.code)
             this.repeatedKeyDropDown = false;
         event.preventDefault();
     }, //keyupBody
@@ -595,7 +600,7 @@ try {
         game.effectiveSettings = effectiveSettings;
         rendering.effectiveSettings = effectiveSettings;
         layout.showKeyboard(effectiveSettings);
-        game.specialKeySet = new Set([effectiveSettings.key.help.keyCode, effectiveSettings.key.downloadSource.keyCode, effectiveSettings.key.settings.keyCode]);
+        game.specialKeySet = new Set([effectiveSettings.key.help.code, effectiveSettings.key.downloadSource.code, effectiveSettings.key.settings.code]);
         document.body.title = document.title;
         game.initializeClutterLevels();
         rendering.initializeHelp();
