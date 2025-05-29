@@ -232,6 +232,28 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
     fixAccessKeyAttributes();
 
+    const assignProperty = (targetObject, propertyName, value) => {
+        const propertyChain = propertyName.split(".");
+            for (let index = 0; index < propertyChain.length; ++index) {
+                if (targetObject[propertyChain[index]] != undefined)
+                    targetObject = targetObject[propertyChain[index]];
+                else {
+                    if (index == propertyChain.length - 1)
+                        targetObject[propertyChain[index]] = value;
+                    else
+                        targetObject[propertyChain[index]] = {};
+                    targetObject = targetObject[propertyChain[index]]; 
+                } //if
+            } //loop propertyChain
+    }; //assignProperty
+
+    const readProperty = (targetObject, propertyName) => {
+        const propertyChain = propertyName.split(".");
+        for (let property of propertyChain)
+            targetObject = targetObject[property];
+        return targetObject;
+    }; //readProperty
+
     const setTargetImage = (node) => {
         const cell = node.parentElement;
         if (cell.constructor != HTMLTableCellElement) return;
@@ -252,11 +274,10 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
     const populate = (elements, defaultOnly) => {
         const effectiveSettings = getSettings(defaultOnly);
-        const effectiveSettingsNamePrefix = settingsEditor.getVariableName({effectiveSettings}) + ".";
         settingsEditor.traverse(document.body, function(node) {
             if (!node.dataset) return;
             if (!node.dataset.property) return;
-            let value = eval(effectiveSettingsNamePrefix + node.dataset.property);
+            let value = readProperty(effectiveSettings, node.dataset.property);
             if (node.constructor == HTMLTableRowElement) { // keyboard
                 const keyboardEditorElements = detectKeyboardEditorElements(node);            
                 keyboardEditorElements.inputName.value = value.code;
@@ -264,7 +285,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
                 keyboardEditorElements.inputName.data.code = value.code;
                 keyboardEditorElements.button.onclick = () => {
                     elements.keyEditor.tabIndex = 0;
-                    elements.keyEditor.onkeydown = (event) => {
+                    elements.keyEditor.onkeydown = event => {
                         event.preventDefault();
                         event.target.innerHTML = event.code;
                         keyboardEditorElements.inputName.value = event.code;
@@ -301,7 +322,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
                     } //loop
                     node.targetImage.style.backgroundColor = node.value;
                 } else { //if image, now considering text
-                    const editorOptionSet = eval(effectiveSettingsNamePrefix + node.dataset.editor);
+                    const editorOptionSet = readProperty(effectiveSettings, node.dataset.editor);
                     if (!editorOptionSet) return;
                     const count = ((editorOptionSet.max - editorOptionSet.min) / editorOptionSet.step) + 1;
                     const rounder = settingsEditor.findRoundingFactor(editorOptionSet);
@@ -322,20 +343,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
         return effectiveSettings.localStorageAccessible; 
     }; //populate
 
-    const createDisplayName = code => {
-        if ((code.length == 4 && code.startsWith("Key"))
-        || (code.length == 6 && code.startsWith("Digit")))
-            return code.slice(-1);
-        else switch (code) {
-            case "ArrowLeft": return "&larr;";
-            case "ArrowRight": return "&rarr;";
-            case "ArrowDown": return "&darr;";
-            case "ArrowUp": return "&uarr;";
-        } //if/case
-        return code;
-    };
-    const extractKeyboardData = node => {
-        const parentProperty = eval(node.dataset.property)
+    const extractKeyboardData = (settings, node) => {
+        const parentProperty = readProperty(settings, node.dataset.property);
         const keyboardEditorElements = detectKeyboardEditorElements(node);
         const code = keyboardEditorElements.inputName.data.code;
         const display = createDisplayName(keyboardEditorElements.inputName.value);
@@ -346,16 +355,16 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
     const apply = () => {
         const target = {};
+        const currentSettings = getSettings(false); // effective
         settingsEditor.traverse(document.body, function(node) {
             if (!node.dataset) return;
             if (!node.dataset.property) return;
             if (node.constructor != HTMLTableRowElement && node.constructor != HTMLSelectElement && node.type != "checkbox") return;
-            const propertyChain = node.dataset.property.split(".");
             let currentObject = target;
             let lastSlot = null;
             let value = null;
             if (node.constructor == HTMLTableRowElement) {
-                value = extractKeyboardData(node);
+                value = extractKeyboardData(currentSettings, node);
             } else {
                 value = node.value;
                 if (node.type == "checkbox") 
@@ -366,17 +375,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
                 } //if
             } //if
             if (value == undefined || value == null) return;
-            for (let index = 0; index < propertyChain.length; ++index) {
-                if (currentObject[propertyChain[index]] != undefined)
-                    currentObject = currentObject[propertyChain[index]];
-                else {
-                    if (index == propertyChain.length - 1)
-                        currentObject[propertyChain[index]] = value;
-                    else
-                        currentObject[propertyChain[index]] = {};
-                    currentObject = currentObject[propertyChain[index]]; 
-                } //if
-            } //loop slots
+            assignProperty(currentObject, node.dataset.property, value);
         });
         const result = JSON.stringify(target);
         localStorage.setItem(settingsEditor.localStorageKey, result);

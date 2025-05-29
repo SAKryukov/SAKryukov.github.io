@@ -52,19 +52,31 @@ const layoutMetrics = {
     relativeVerticalInfoPanelPadding: 1.6 // in spacing.inside units
 }; //layoutMetrics
 
-const key = {
-    start: { code: "Enter", display: "Enter", ids: ["help.startPauseContinue"] },	// (start/pause/continue)
-    cancel: { code: "Escape", display: "Escape", ids: ["help.cancelGame"] },
-    left: { code: "ArrowLeft", display: "&larr;", ids: ["help.left"] },
-    right: { code: "ArrowRight", display: "&rarr;", ids: ["help.right"] },
-    down: { code: "ArrowDown", display: "&darr;", ids: ["help.down"] },
+const createDisplayName = code => {
+    if ((code.length == 4 && code.startsWith("Key"))
+    || (code.length == 6 && code.startsWith("Digit")))
+        return code.slice(-1);
+    else switch (code) {
+        case "ArrowLeft": return "&larr;";
+        case "ArrowRight": return "&rarr;";
+        case "ArrowDown": return "&darr;";
+        case "ArrowUp": return "&uarr;";
+    } //if/case
+    return code;
+}; //createDisplayName
 
-    space: { code: "Space", display: "Space", ids: [] },
-    dropDown: { code: "Space", display: "Space", ids: ["help.dropDown"] },
-    rotate: { code: "ArrowUp", display: "&uarr;", ids: ["help.rotateRight", "help.rotateLeft"] }, // Up, Ctrl-Up
-    help: { code: "F1", display: "F1", ids: ["help.help"] },
-    downloadSource: { code: "KeyV", display: 'V', ids: ["help.downloadSource"]  },
-    settings: { code: "KeyS", display: 'S', ids: ["help.settings"] }
+const key = {
+    start: { code: "Enter", ids: ["help.startPauseContinue"] },	// (start/pause/continue)
+    cancel: { code: "Escape", ids: ["help.cancelGame"] },
+    left: { code: "ArrowLeft", ids: ["help.left"] },
+    right: { code: "ArrowRight", ids: ["help.right"] },
+    down: { code: "ArrowDown", ids: ["help.down"] },
+    space: { code: "Space", ids: [] },
+    dropDown: { code: "Space", ids: ["help.dropDown"] },
+    rotate: { code: "ArrowUp", ids: ["help.rotateRight", "help.rotateLeft"] }, // Up, Ctrl-Up
+    help: { code: "F1", ids: ["help.help"] },
+    downloadSource: { code: "KeyV", ids: ["help.downloadSource"]  },
+    settings: { code: "KeyS", ids: ["help.settings"] }
 }; //key
 
 const delays = { // before piece drops by 1 row (seconds)
@@ -74,8 +86,8 @@ const delays = { // before piece drops by 1 row (seconds)
 }; //delays
 
 const scoreRules = {
-    addOnDrop: function(totalRemovedLineCount, currentScore) { return 10; },
-    addOnRemovedLines: function(lineCount, totalRemovedLineCount, currentScore) { return 100 * Math.pow(2, lineCount - 1); }
+    addOnDrop: (totalRemovedLineCount, currentScore) => 10,
+    addOnRemovedLines: (lineCount, totalRemovedLineCount, currentScore) => 100 * Math.pow(2, lineCount - 1),
 }; //scoreRules
 
 const tetrominoColor = {
@@ -120,6 +132,12 @@ const tetrominoSet = [
 //
 //-------------------------------------------------------------------------
 
+/**
+ * Uncaught DOMException DataCloneError: Failed to execute 'structuredClone' on 'Window': (totalRemovedLineCount, currentScore) => 10 could not be cloned.
+    at <anonymous> (c:\sa\papers\My\CodeProject\Tetris.On.Canvas.fork\code\settings.js:178:21)
+
+ */
+
 const clutterOptionSet = {   
     clutterEnabledDefault: false,
     min: 5, //%
@@ -143,7 +161,6 @@ const defaultSettings = {
         decrement: { min: 0.001, max: 0.5, step: 0.0001, unit: " s" },
         min: { min: 0, max: 0.5, step: 0.01, unit: " s" }
     },
-    scoreRules: scoreRules,
     tetrominoColor: tetrominoColor,
     tetrominoSet: tetrominoSet,
     clutterOptionSet: clutterOptionSet,
@@ -164,9 +181,9 @@ const defaultSettings = {
     }
 }; //defaultSettings
 
-const getSettings = (defaultOnly) => {
+const getSettings = defaultOnly => {
     try {
-        function populateWithOverride(value, overrideValue) {
+        const populateWithOverride = (value, overrideValue) => {
             if (!overrideValue) return;
             if (!value) return;
             if ((overrideValue.constructor == Object && value.constructor == Object) || (overrideValue.constructor == Array && value.constructor == Array)) {
@@ -181,7 +198,7 @@ const getSettings = (defaultOnly) => {
             } else
                 value = defaultValue;
         }; //populateWithOverride
-        const effectiveSettings = new Object(defaultSettings);
+        const effectiveSettings =  structuredClone(defaultSettings);
         if (defaultOnly) return effectiveSettings;
         const localStorageJson = localStorage.getItem(settingsEditor.localStorageKey);
         if (localStorageJson) {

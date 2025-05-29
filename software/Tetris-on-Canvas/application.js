@@ -33,6 +33,39 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 fixAccessKeyAttributes();
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const element = id => document.getElementById(id);
+const indirectChildOf = (child, parent) => { if (child == parent) return true; while((child = child.parentNode) && child !== parent); return !!child; };
+const hide = (object, noDisplay) => { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; };
+const show = object => { object.style.visibility = null; };
+const setVisibility = (object, visible) => {
+    if (visible) {
+        show(object);
+        object.style.display = "block";
+    } else
+        hide(object);
+}; //setVisibility
+const setText = (object, text) => { object.innerHTML = text; };
+const maximum = function () {
+    let big = Number.NEGATIVE_INFINITY;
+    for (let argument of arguments) {
+        let value = argument;
+        if (value >= big)
+            big = value;
+    } //loop
+    return big;
+} //maximum
+const showException = exception => {
+    //return;
+    alert(exception.name + ":\n" + exception.message +
+        "\n" + "\nLine: " + exception.lineNumber + "; column: " + (exception.columnNumber + 1) +
+        "\n\n" + exception.stack);
+}; //showException
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function Tetromino(shape, x, y, orientation, color) {
     this.shape = shape; //TetrominoShape
     this.shape.color = color;
@@ -109,7 +142,6 @@ const layout = {
         let verticalSize = window.innerHeight - 2 * layoutMetrics.spacing.outsize - 2 * layoutMetrics.spacing.inside - 2 * layoutMetrics.spacing.border;
         this.blockSize = Math.floor(verticalSize / this.effectiveSettings.gameSizeInBlocks.y);
         const adjustedVerticalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.y;
-        const horizontalSize = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
         elements.board.style.height = settingsEditor.sizeStyle(adjustedVerticalSize);
         let boardWidth = this.blockSize * this.effectiveSettings.gameSizeInBlocks.x;
         elements.board.style.width = settingsEditor.sizeStyle(boardWidth);
@@ -119,7 +151,7 @@ const layout = {
         setText(elements.statusVerb, UiTexts.statusWordSet.continue);
         let width1 = elements.promptText.offsetWidth;
         setText(elements.statusVerb, UiTexts.statusWordSet.start);
-        setText(elements.statusKeyName, this.effectiveSettings.key.start.display);
+        setText(elements.statusKeyName, this.effectiveSettings.key.start.code);
         let width2 = elements.promptText.offsetWidth;
         const leftWidth = maximum(upcomingWidth, width1, width2, upcomingWidth);
         elements.left.style.width = settingsEditor.sizeStyle(leftWidth);
@@ -133,17 +165,17 @@ const layout = {
 
     resize: function () { try { this.resizeBody(); } catch (e) { showException(e); } },
     
-    showKeyboard : function (settings) {
+    showKeyboard: settings => {
         for (let index in settings.key) {
             const keyboardItem = settings.key[index];
             for (let id in keyboardItem.ids)
-                document.getElementById(keyboardItem.ids[id]).innerHTML = keyboardItem.display;
+                document.getElementById(keyboardItem.ids[id]).innerHTML = createDisplayName(keyboardItem.code);
         } //loop
         elements.helpImageHelp.title = settings.key.help.display + UiTexts.toolBayKeyboardHintSpacer + elements.helpImageHelp.title;
         elements.helpImageClose.title = settings.key.help.display + UiTexts.toolBayKeyboardHintSpacer + elements.helpImageClose.title;
         elements.downloadImage.title = settings.key.downloadSource.display + UiTexts.toolBayKeyboardHintSpacer + elements.downloadImage.title;
         elements.settingsImage.title = settings.key.settings.display + UiTexts.toolBayKeyboardHintSpacer + elements.settingsImage.title;
-    } //showKeyboard
+    }, //showKeyboard
 
 }; //layout
 
@@ -200,7 +232,7 @@ const game = {
 
     willHitObstacle: function (tetromino, x0, y0, orientation) { // tentative move is blocked with some obstacle
         const gameSizeInBlocks = this.effectiveSettings.gameSizeInBlocks;
-        return tetromino.first(x0, y0, orientation, function (x, y) {
+        return tetromino.first(x0, y0, orientation, (x, y) => {
             if ((x < 0) || (x >= gameSizeInBlocks.x) || (y < 0) || (y >= gameSizeInBlocks.y) || game.getBlock(x, y))
                 return true; // performance gain
         }, true);
@@ -280,7 +312,7 @@ const game = {
                 break;
     }, //moveDownToTouchStop
 
-    showTouchHelp: function() {
+    showTouchHelp: () => {
         elements.helpTouchNoSupport.style.display = "none";
         elements.helpTouch.style.display = "block";
     }, //showTouchHelp
@@ -297,7 +329,7 @@ const game = {
 
     drop: function (updateScore) {
         if (this.move(this.actions.down)) return false;
-        if (updateScore) this.addScore(this.effectiveSettings.scoreRules.addOnDrop(this.rows, this.score));
+        if (updateScore) this.addScore(scoreRules.addOnDrop(this.rows, this.score));
         this.dropTetromino();
         this.removeLines();
         this.setCurrentTetromino(this.next);
@@ -311,9 +343,7 @@ const game = {
     }, //drop
 
     dropTetromino: function () {
-        this.current.all(function (x, y) {
-            game.setBlock(x, y, game.current.shape);
-        });
+        this.current.all((x, y) => game.setBlock(x, y, game.current.shape));
     }, //dropTetromino
 
     dropDown: function (updateScore) {
@@ -358,7 +388,7 @@ const game = {
         } //loop y
         if (removedLines > 0) {
             this.addRows(removedLines);
-            this.addScore(this.effectiveSettings.scoreRules.addOnRemovedLines(removedLines, this.rows, this.score));
+            this.addScore(scoreRules.addOnRemovedLines(removedLines, this.rows, this.score));
         } //if removedLines
     }, //removeLines
 
@@ -385,8 +415,8 @@ const game = {
 
     click: function (event) { try { this.clickBody(event); } catch (e) { showException(e); } },
 
-    downloadHandler: function() {
-        const downloadAnchor = (function() {
+    downloadHandler: () => {
+        const downloadAnchor = (() => {
             const downloader = document.createElement('a');
             downloader.href = fileNames.sourceCode;
             document.body.appendChild(downloader);
@@ -395,7 +425,7 @@ const game = {
         downloadAnchor.click();
         document.body.removeChild(downloadAnchor);
     },
-    settingsHandler: function() { window.location = fileNames.settingsEditor; },
+    settingsHandler: () => { window.location = fileNames.settingsEditor; },
 
     keydownBody: function (event) {
         if (rendering.showingHelp && event.code != this.effectiveSettings.key.help.code)
@@ -470,7 +500,7 @@ const rendering = {
     invalidateState: function (controls) { this.invalid.state = true; },
     showingHelp: false,
 
-    showHelpImage: function(doShow) {
+    showHelpImage: doShow => {
         if (doShow) {
             elements.helpImageHelp.style.display = "inline"; 
             elements.helpImageClose.style.display = "none"; 
@@ -488,23 +518,18 @@ const rendering = {
         setVisibility(elements.helpWindow, this.showingHelp = !this.showingHelp);
     }, //help
 
-    draw: function () {
-        const drawTetromino = function (context, tetromino) {
-            tetromino.all(function (x, y) {
-                drawBlock(context, x, y, tetromino.shape.color);
-            });
-        }; //drawTetromino
-        const drawTetrominoAt = function (context, tetromino, location) {
-            tetromino.all(function (x, y) {
-                drawBlock(context, x + location.x - tetromino.x, y + location.y - tetromino.y, tetromino.shape.color);
-            });
-        }; //drawTetrominoAt
-        const drawBlock = function (context, x, y, color) {
+    draw: function() {
+        const drawTetromino = (context, tetromino) =>
+            tetromino.all((x, y) => drawBlock(context, x, y, tetromino.shape.color));
+        const drawTetrominoAt = (context, tetromino, location) =>
+            tetromino.all((x, y) =>
+                drawBlock(context, x + location.x - tetromino.x, y + location.y - tetromino.y, tetromino.shape.color));
+        const drawBlock = (context, x, y, color) => {
             context.fillStyle = color;
             context.fillRect(x * layout.blockSize, y * layout.blockSize, layout.blockSize, layout.blockSize);
             context.strokeRect(x * layout.blockSize, y * layout.blockSize, layout.blockSize, layout.blockSize)
         }; //drawBlock
-        const finerLines = function (context) {
+        const finerLines = context => {
             context.lineWidth = 1;
             context.translate(0.5, 0.5);
         }; //finerLines
@@ -564,35 +589,6 @@ const rendering = {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
-function element(id) { return document.getElementById(id); }
-function indirectChildOf(child, parent) { if (child == parent) return true; while((child = child.parentNode) && child !== parent); return !!child; }
-function hide(object, noDisplay) { object.style.visibility = "hidden"; if (noDisplay) object.style.display = "none"; }
-function show(object) { object.style.visibility = null; }
-function setVisibility(object, visible) {
-    if (visible) {
-        show(object);
-        object.style.display = "block";
-    } else
-        hide(object);
-} //setVisibility
-function setText(object, text) { object.innerHTML = text; }
-function maximum() {
-    let big = Number.NEGATIVE_INFINITY;
-    for (let argument of arguments) {
-        let value = argument;
-        if (value >= big)
-            big = value;
-    } //loop
-    return big;
-} //maximum
-function showException(exception) {
-    //return;
-    alert(exception.name + ":\n" + exception.message +
-        "\n" + "\nLine: " + exception.lineNumber + "; column: " + (exception.columnNumber + 1) +
-        "\n\n" + exception.stack);
-} //showException
-
 try {
     (() => { // main
         const effectiveSettings = getSettings();
@@ -606,13 +602,13 @@ try {
         rendering.initializeHelp();
         layout.resize();
         game.reset();
-        window.onresize = function () { layout.resize(); };
-        window.onkeydown = function (event) { game.keydown(event); };
-        window.onkeyup = function (event) { game.keyup(event); };
-        window.onclick = function (event) { game.click(event); };
-        elements.helpWindow.onclick = function () { rendering.help(); };
-        elements.helpImageHelp.onclick = function () { rendering.help(); };
-        elements.helpImageClose.onclick = function () { rendering.help(); };
+        window.onresize = () => layout.resize();
+        window.onkeydown = event => game.keydown(event);
+        window.onkeyup = event => game.keyup(event);
+        window.onclick = event => game.click(event); 
+        elements.helpWindow.onclick = () => rendering.help(); 
+        elements.helpImageHelp.onclick = () => rendering.help();
+        elements.helpImageClose.onclick = () => rendering.help(); 
         elements.checkboxClutter.focus();
         (() => { // downloader setup
             const downloader = document.createElement('a');

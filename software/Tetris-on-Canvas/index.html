@@ -57,7 +57,7 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       img.download { cursor: grab; }
       #help img { vertical-align: middle; width: 1em; height: 1em; background-color: Brown; color: red; }
       #help { display: none; position: absolute; left: 4em; right: 4em; top: 2em; padding: 2em; background-color: white; border: solid black 2px; cursor: help; }
-      #help b { font-size: 120%; }
+      #help span { font-size: 120%; }
       #help p { margin-bottom: 0.8em; }
       #help hr, #help-touch, #help-touch-no-support { margin-top: 1.8em; }
       #help-touch { display: none; }
@@ -108,8 +108,8 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 <div id="help">
 <h1>Tetris on Canvas v.&thinsp;<span id="version"></span></h1>
-<p><b id="help.left"></b>, <b id="help.right"></b>, <b id="help.down"></b>: move tetromino</p>
-<p><b id="help.rotateRight"></b>: rotate tetromino <b>&orarr;</b>; Ctrl+<b id="help.rotateLeft"></b>: rotate <b>&olarr;</b></p>
+<p><span id="help.left"></span>, <span id="help.right"></span>, <span id="help.down"></span>: move tetromino</p>
+<p><span id="help.rotateRight"></span>: rotate tetromino &orarr;; Ctrl+<span id="help.rotateLeft"></span>: rotate &olarr;</p>
 <p><i id="help.dropDown"></i>: drop tetromino down</p>
 <p><i id="help.startPauseContinue"></i>: start/pause/continue game</p>
 <p><i id="help.cancelGame"></i>: cancel game</p>
