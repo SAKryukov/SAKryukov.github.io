@@ -30,19 +30,25 @@ Code improvements, exception handling, readability, fixes
 
 Publication:
 http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
+https://sakryukov.github.io/publications/2015-02-15.Tetris-onCanvas-Falling-Blocks-on-Canvas.html
 
 -->
 
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
+    <script src="accesskey.js"></script>
+    <script src="touch.js"></script>
+    <script src="settings.js"></script>
+    <script src="application.js"></script>  
     <meta name="generator" content="SAEditU Unicode editor, XHTML plug-in, (c) 2004, 2007 by S A Kryukov, http://www.SAKryukov.org" />
     <title>Tetris on Canvas</title>
     <style>
-      * { padding: 0; margin: 0; box-sizing: border-box; user-select: none; }
-      body, html { font-family: "Verdana", sans-serif; background-color: Brown; height: 100%; }
-      body { display: flex; flex-flow: row; height: 100%; }
-      body main { display: flex; align-items: center; justify-content: center; width: 100%; }
+      * { font-family: sans-serif; padding: 0; margin: 0; box-sizing: border-box; user-select: none; }
+      body, html { background-color: Brown; height: 100%; }
+      /* game: */
+      main { display: flex; flex-flow: row; height: 100%; }
+      body section#play-area { display: flex; align-items: center; justify-content: center; width: 100%; }
       nav { padding-left: 0.6em; padding-top: 1em; }
       nav br { margin: 0.2em; }
       .noselect { -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
@@ -70,73 +76,303 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
       #upcoming { width: 8em; height: 6em; }
       #checkboxClutter { margin-right: 0.2em; white-space: nowrap; }
       #touch-indicator { display: none; position: absolute; }
+      div#section-clutter:has(input:disabled) label { color: lightgray;  }
+      main#settings { display: none; }
+      /* settings: */
+      main#settings header { padding-left: 1em; padding-top: 0.2em; }
+      main#settings header h2 { margin-bottom: 0.2em; }
+      main#settings { padding-bottom: 0.4em; }
+      main#settings details ul { list-style-type: none; margin-top: 0.1em; }
+      main#settings details { margin-top: 0.2em; margin-bottom: 0.2em; }
+      main#settings summary { padding-left: 0.4em; }
+      main#settings p { margin-top: 1em; margin-bottom: 0; }
+      main#settings section { display: table-row; width: 100%; }
+      main#settings section > nav { background-color: transparent; width: 50%; padding-left: 2em; padding-right: 2em; }
+      main#settings section > aside { background-color: transparent; border-left: solid thin black; padding-left: 2em; vertical-align: bottom; }
+      main#settings section nav, main#settings section aside { display: table-cell; vertical-align: top; }
+      main#settings section > aside button { margin-top: 2em; padding-top: 0.2em; padding-bottom: 0.2em; }
+      main#settings button { white-space: nowrap; padding-left: 1em; padding-right: 1em; }
+      main#settings td { white-space: nowrap; }
+      main#settings td button { padding-left: 0.1em; padding-right: 0.1em; margin-left: 1px; }
+      main#settings table { margin-top: 0.4em; margin-left: 2em; }
+      main#settings td, main#settings tr { margin: 0; padding: 0; }
+      main#settings tr > td:first-child { padding-right: 0.2em; }
+      main#settings input[type=text] { margin-left: 0.2em; padding-left: 0.2em; padding-right: 0.2em; }
+      main#settings input[type=checkbox] { margin: 0; }
+      main#settings table.default select { width: 8em; }
+      main#settings details table:last-child { margin-bottom: 1em; }
+      main#settings ul.keyboard button { padding: 0; padding-left: 0.2em; padding-right: 0.2em; }
+      main#settings ul.keyboard button, ul.keyboard li input { margin: 0; }
+      main#settings ul.keyboard input { width: 12em; }
+      main#settings #keyEditor { display: none; position: absolute; background-color: moccasin; padding: 0.2em; padding-left: 1em; padding-right: 1em;  }
+      main#settings option aside { width: 2em; height: 1em; display: inline-block; margin-right: 0.4em; }
+      main#settings details table 
     </style> 
   </head>
 <body>
 
-<img id="touch-indicator" src="images/touch.svg" />
+  <main id="settings">
 
-<nav id="toolbar">
-<img alt="Help" id="id.help" class="help" src="images/help.svg" title="Help"/><img alt="Close Help" id="id.close-help" class="close" src="images/close.svg" title="Help"/><br/>
-<img alt="Download source code" id="id.download" class="download" src="images/download.svg" title="Download source code"/><br/>
-<img alt="Settings" id="id.settings" class="settings" src="images/settings.svg" title="Settings"/>
-</nav>
+    <div id="keyEditor"></div>
 
-<main id="main">
-  <div id="game">
-    <div id="left">
-      <div>
-        <p id="prompt">Press <span id="statusKeyName"></span><br/>to <span id="statusVerb"></span></p>
-        <br/>
-        <p id="paused">Paused</p>
-      </div>
-      <canvas id="upcoming" title="Next tetromino"></canvas>
-      <div>
-        <p>Score: <em id="score"></em></p>
-        <br/>
-        <p>Rows: <em id="rows"></em></p>
-      </div>
-      <div id="sectionClutter" title="Clutter created at the start of the game">
+    <header>
+      <h2>Settings <span id="badBrowser"></span></h2>
+      <h4>Tetris On Canvas v.&ThinSpace;<span id="version"></span></h4>
+    </header>
+
+    <section>
+
+      <nav>
+        <details open="open">
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Size of game board in blocks" accesskey="KeyG"><u>G</u>ame Board Size</summary>
+          <table class="default">
+            <tr title="Game board width in blocks">
+              <td>Horizontal:</td>
+              <td><select data-property="gameSizeInBlocks.x" data-editor="gameSizeInBlocksEditor.x"></select></td>
+            </tr>
+            <tr title="Game board height in blocks">
+              <td>Vertical:</td>
+              <td><select data-property="gameSizeInBlocks.y" data-editor="gameSizeInBlocksEditor.y"></select></td>
+            </tr>
+          </table>
+        </details>
+        <details open="open">
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Delays defining speed of tetromino moving down" accesskey="KeyS">Delay<u>s</u></summary>
+          <table class="default">
+            <tr title="Delay at the start of the game">
+              <td>Start:</td>
+              <td><select data-property="delays.start" data-editor="delaysEditor.start"></select></td>
+            <tr title="Delay decrement applied when row is removed">
+              <td>Decrement:</td>
+              <td><select data-property="delays.decrement" data-editor="delaysEditor.decrement"></select></td>
+            </tr>
+            <tr title="Minimum delay">
+              <td>Minimum:</td>
+              <td><select data-property="delays.min" data-editor="delaysEditor.min"></select></td>
+            </tr>
+          </table>
+        </details>
+        <details open="open">
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Colors of different tetromino" accesskey="KeyO">C<u>o</u>lors</summary>
+          <table class="colors">
+            <tr>
+              <td><img id="image.J" src="images/settings.J.png" alt="" /></td>
+              <td><img id="image.S" src="images/settings.S.png" alt="" /></td>
+              <td><img id="image.T" src="images/settings.T.png" alt="" /></td>
+            </tr>
+            <tr>
+              <td><select data-property="tetrominoColor.J"></select></td>
+              <td><select data-property="tetrominoColor.S"></select></td>
+              <td><select data-property="tetrominoColor.T"></select></td>
+            </tr>
+          </table>
+          <table class="colors">
+            <tr>
+              <td><img id="image.L" src="images/settings.L.png" alt="" /></td>
+              <td><img id="image.Z" src="images/settings.Z.png" alt="" /></td>
+              <td><img id="image.O" src="images/settings.O.png" alt="" /></td>
+              <td><img id="image.I" src="images/settings.I.png" alt="" /></td>
+            </tr>
+            <tr>
+              <td><select data-property="tetrominoColor.L"></select></td>
+              <td><select data-property="tetrominoColor.Z"></select></td>
+              <td><select data-property="tetrominoColor.O"></select></td>
+              <td><select data-property="tetrominoColor.I"></select></td>
+            </tr>
+          </table>
+        </details>
+        <details>
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Clutter created automatically at the start of the game" accesskey="KeyC"><u>C</u>lutter
+          </summary>
+          <table class="default">
+            <tr>
+              <!-- accesskey will be removed by the script: -->
+              <td><label for="clutterEnabledDefault" accesskey="KeyE"><u>E</u>nabled by default:</label></td>
+              <td><input type="checkbox" data-property="clutterOptionSet.clutterEnabledDefault"
+                  id="clutterEnabledDefault" /></td>
+            </tr>
+            <tr>
+              <td>Minimum:</td>
+              <td><select data-property="clutterOptionSet.min" data-editor="clutterEditor.min"></select></td>
+            </tr>
+            <tr>
+              <td>Maximum:</td>
+              <td><select data-property="clutterOptionSet.max" data-editor="clutterEditor.max"></select></td>
+            </tr>
+            <tr>
+              <td>Step:</td>
+              <td><select data-property="clutterOptionSet.step" data-editor="clutterEditor.step"></select></td>
+            </tr>
+            <tr>
+              <td><u>D</u>efault value:</td>
+              <td><select accesskey="KeyD" data-property="clutterOptionSet.default"
+                  data-editor="clutterEditor.default"></select></td>
+            </tr>
+          </table>
+        </details>
+        <details>
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Keyboard assignments" accesskey="KeyK"><u>K</u>eyboard</summary>
+          <table>
+            <tr data-property="key.start">
+              <td>Start/Pause/Continue:</td>
+              </td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.cancel">
+              <td>Cancel:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.left">
+              <td>Left:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.right">
+              <td>Right:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.down">
+              <td>Down:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.dropDown">
+              <td>Drop Down:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.rotate">
+              <td>Rotate:</td>
+              </td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.help">
+              <td>Help:</td>
+              </td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.downloadSource">
+              <td>Download source code:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+            <tr data-property="key.settings">
+              <td>Settings:</td>
+              <td><input type="text" /><button>&Congruent;</button></td>
+            </tr>
+          </table>
+        </details>
+        <details>
+          <!-- accesskey will be removed by the script: -->
+          <summary title="Touch screen options" accesskey="KeyT"><u>T</u>ouch Screen</summary>
+          <table class="default">
+            <tr title="If checked, a touch moves tetromino to the touch spot">
+              <td><label for="touchScreen.moveTetrominoToTouch">Move Tetromino on Touch:</label></td>
+              <td><input type="checkbox" data-property="touchScreen.moveTetrominoToTouch"
+                  id="touchScreen.moveTetrominoToTouch" /></td>
+            </tr>
+            <tr title="Threshold time used to recognize touch clicks">
+              <td>
+                Click Threshold:</td>
+              <td><select data-property="touchScreen.clickThresholdMs"
+                  data-editor="touchScreenEditor.clickThresholdMs"></select>
+              </td>
+            </tr>
+            <tr title="Threshold size of swipe in pixels used to recognize fast swipe">
+              <td>Swipe Down Threshold:</td>
+              <td><select data-property="touchScreen.swipeThresholdPx"
+                  data-editor="touchScreenEditor.swipeThresholdPx"></select></td>
+            </tr>
+          </table>
+        </details>
+      </nav>
+
+      <aside>
         <!-- accesskey will be removed by the script: -->
-        <label for="checkboxClutter"><input accesskey="KeyU" type="checkbox" id="checkboxClutter" checked="checked"/>&thinsp;Cl<u>u</u>tter</label>&ThinSpace;
-        <select id="clutterSelector"></select>
+        <button id="apply" accesskey="KeyA" title="Store custom settings and play game"><u>A</u>pply</button><br />
+        <button id="reset" accesskey="KeyR" title="Reset settings to default values"><u>R</u>eset</button><br />
+        <button id="clean" accesskey="KeyL" title="Clean Tetris data from browser local storage">Clean <u>L</u>ocal
+          Storage<br/>and<br/>Restart</button>
+      </aside>
+
+    </section>
+
+  </main> <!--id="settings" -->
+
+  <main id="game-main">
+
+    <img id="touch-indicator" src="images/touch.svg" />
+
+    <nav id="toolbar">
+      <img alt="Help" id="id.help" class="help" src="images/help.svg" title="Help" /><img alt="Close Help"
+        id="id.close-help" class="close" src="images/close.svg" title="Help" /><br />
+      <img alt="Download source code" id="id.download" class="download" src="images/download.svg"
+        title="Download source code" /><br />
+      <img alt="Settings" id="id.settings" class="settings" src="images/settings.svg" title="Settings" />
+    </nav>
+
+    <section id="play-area">
+      <div id="game">
+        <div id="left">
+          <div>
+            <p id="prompt">Press <span id="statusKeyName"></span><br />to <span id="statusVerb"></span></p>
+            <br />
+            <p id="paused">Paused</p>
+          </div>
+          <canvas id="upcoming" title="Next tetromino"></canvas>
+          <div>
+            <p>Score: <em id="score"></em></p>
+            <br />
+            <p>Rows: <em id="rows"></em></p>
+          </div>
+          <div id="section-clutter" title="Clutter created at the start of the game">
+            <!-- accesskey will be removed by the script: -->
+            <label><input accesskey="KeyU" type="checkbox" id="checkboxClutter"
+                checked="checked" />&thinsp;Cl<u>u</u>tter</label>&ThinSpace;
+            <select id="clutterSelector"></select>
+          </div>
+        </div>
+        <div id="right"><canvas id="board"></canvas></div>
       </div>
+    </section>
+
+    <div id="help">
+      <h1>Tetris on Canvas v.&thinsp;<span id="help-version"></span></h1>
+      <p><span id="help.left"></span>, <span id="help.right"></span>, <span id="help.down"></span>: move tetromino</p>
+      <p><span id="help.rotateRight"></span>: rotate tetromino &orarr;; Ctrl+<span id="help.rotateLeft"></span>: rotate
+        &olarr;</p>
+      <p><i id="help.dropDown"></i>: drop tetromino down</p>
+      <p><i id="help.startPauseContinue"></i>: start/pause/continue game</p>
+      <p><i id="help.cancelGame"></i>: cancel game</p>
+      <p><i id="help.downloadSource"></i>: download source code <img alt="Help" src="images/download.svg" /></p>
+      <p><i id="help.settings"></i>: settings <img alt="Settings" src="images/settings.svg" /></p>
+      <p><i id="help.help"></i>: show/hide help</p>
+      <p id="help-touch-no-support"><i>This browser does not support touch screen.</i></p>
+      <div id="help-touch">
+        <p>Touch screen gestures:</p>
+        <p>Single touch: start game, optionally (see <img alt="Settings" src="images/settings.svg" />) move tetromino
+          horizontally to touch spot.</p>
+        <p>Touch spot move, first finger: move tetromino horizontally to touch spot.</p>
+        <p>Fast swipe down, first finger: move tetromino down to touch spot.</p>
+        <p>Second-finger touch and swipe: rotate tetromino <b>&orarr;</b> or <b>&olarr;</b>, depending on swipe
+          direction.
+        </p>
+        <p>Single-finger tap: drop tetromino down.</p>
+        <p>Two-finger tap: pause game, which can be resumed with a single touch.</p>
+        <p>Three-finger tap: cancel game, which can be started again with a single touch.</p>
+        <p>To avoid interference with tetromino horizontal and vertical &ldquo;to the spot&rdquo; motion (already
+          minimized), rotation and taps can be performed outside of the game board.</p>
+      </div>
+      <hr />
+      <p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original
+          game</a>, <a href="contributors.html">contributors</a>, <a
+          href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
+      <br />
+      <p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
     </div>
-    <div id="right"><canvas id="board"></canvas></div>
-  </div>
-</main>
 
-<div id="help">
-<h1>Tetris on Canvas v.&thinsp;<span id="version"></span></h1>
-<p><span id="help.left"></span>, <span id="help.right"></span>, <span id="help.down"></span>: move tetromino</p>
-<p><span id="help.rotateRight"></span>: rotate tetromino &orarr;; Ctrl+<span id="help.rotateLeft"></span>: rotate &olarr;</p>
-<p><i id="help.dropDown"></i>: drop tetromino down</p>
-<p><i id="help.startPauseContinue"></i>: start/pause/continue game</p>
-<p><i id="help.cancelGame"></i>: cancel game</p>
-<p><i id="help.downloadSource"></i>: download source code <img alt="Help" src="images/download.svg"/></p>
-<p><i id="help.settings"></i>: settings <img alt="Settings" src="images/settings.svg"/></p>
-<p><i id="help.help"></i>: show/hide help</p>
-<p id="help-touch-no-support"><i>This browser does not support touch screen.</i></p>
-<div id="help-touch">
-  <p>Touch screen gestures:</p>
-  <p>Single touch: start game, optionally (see <img alt="Settings" src="images/settings.svg"/>) move tetromino horizontally to touch spot.</p>
-  <p>Touch spot move, first finger: move tetromino horizontally to touch spot.</p>
-  <p>Fast swipe down, first finger: move tetromino down to touch spot.</p>
-  <p>Second-finger touch and swipe: rotate tetromino <b>&orarr;</b> or <b>&olarr;</b>, depending on swipe direction.</p>
-  <p>Single-finger tap: drop tetromino down.</p>
-  <p>Two-finger tap: pause game, which can be resumed with a single touch.</p>
-  <p>Three-finger tap: cancel game, which can be started again with a single touch.</p>
-  <p>To avoid interference with tetromino horizontal and vertical &ldquo;to the spot&rdquo; motion (already minimized), rotation and taps can be performed outside of the game board.</p>
-</div>
-<hr/>
-<p>Please see: <a href="LICENSE.txt">License</a>, <a href="http://en.wikipedia.org/wiki/Tetris">about original game</a>, <a href="contributors.html">contributors</a>, <a href="http://www.codeproject.com/Articles/876475/Tetris-On-Canvas">original publication</a>.</p>
-<br/><p><small>Press F1 or click on this text or <code>X</code> to close help window&hellip;</small></p>
-</div>
-
-<script src="accesskey.js"></script>
-<script src="touch.js"></script>
-<script src="settings.js"></script>
-<script src="application.js"></script>
+  </main> <!-- id="game-main" -->
 
 </body>
 </html>

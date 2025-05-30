@@ -31,14 +31,13 @@ http://www.codeproject.com/Articles/876475/Tetris-On-Canvas
 
 "use strict";
 
-const version = "9.0.0";
+const version = "10.0.0";
 
 const gameSizeInBlocks = { x: 10, y:20 };
 
 const fileNames = {
     main: "index.html",
     sourceCode: "Tetris.zip",
-    settingsEditor: "settings.html"
 }; //fileNames
 
 const UiTexts = {
@@ -132,12 +131,6 @@ const tetrominoSet = [
 //
 //-------------------------------------------------------------------------
 
-/**
- * Uncaught DOMException DataCloneError: Failed to execute 'structuredClone' on 'Window': (totalRemovedLineCount, currentScore) => 10 could not be cloned.
-    at <anonymous> (c:\sa\papers\My\CodeProject\Tetris.On.Canvas.fork\code\settings.js:178:21)
-
- */
-
 const clutterOptionSet = {   
     clutterEnabledDefault: false,
     min: 5, //%
@@ -222,7 +215,7 @@ const getSettings = defaultOnly => {
 const settingsEditor = {
     localStorageKey: "S.A.Kryukov-Tetris-on-Canvas-61133481-30CA-4F41-82B8-8C4D2450A73C",
     keyEditorInstruction: "Press desired key<br/>Optionally, edit a key name to make it more descriptive",
-    badBrowserHTML: "&mdash; you cannot store or use your custom settings with your browser unless you can configure it to use local storage or DOM storage",
+    badBrowserHTML: ": you cannot store or use your custom settings with your browser unless you configure it to use local storage",
     badBrowserColor: "red",
     sizeStyle: (number, unit) => { if (!unit) unit = "px"; return number + unit; },
     traverse: function(node, handler) {
