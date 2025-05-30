@@ -161,7 +161,7 @@ if (typeof(DemoUrl) !== 'undefined') {
         gtag('config', 'UA-1735123-1' , {'user_id': '42a7d533-9829-4f88-8fc6-84dc936250c9'});
     </script>
 
-<style type="text/css"></style></head>	
+<style type="text/css">* { font-family: sans-serif }</style></head>	
 
 <body class="chrome chrome120" data-new-gr-c-s-check-loaded="14.1215.0" data-gr-ext-installed="">
 
@@ -690,10 +690,16 @@ Now it drops down current tetromino only if the key is not auto-repeat space or 
 <p><b><big>7.0:</big></b> February 1, 2019: Many new features.</p>
 
 <ul>
-	<li>Added "Download source code" and "Settings" commands.</li>	<li>New "Settings" page provides interactive and convenient way to customize game size in blocks, timing (speed and speed growth), tetromino colors and key assignments, as well as "clutter". Custom data is saved in a browser's local storage and can be removed at any time.</li>	<li>"Clutter" is the feature typical for best old implementations of classical Tetris which adds interest to the game. The game field is cluttered with random tetrominoes up to certain height (specified by the user in percents via settings or immediately before the game). Then the user can try to clean up the clutter.</li>	<li>Many convenience feature and better help. In particular, custom key assignments are reflected in help.</li></ul>
+	<li>Added &ldquo;Download source code&rdquo; and &ldquo;Settings&rdquo; commands.</li>	<li>New &ldquo;Settings&rdquo; page provides interactive and convenient way to customize game size in blocks, timing (speed and speed growth), tetromino colors and key assignments, as well as &ldquo;clutter&rdquo;. Custom data is saved in a browser's local storage and can be removed at any time.</li>	<li>&ldquo;Clutter&rdquo; is the feature typical for best old implementations of classical Tetris which adds interest to the game. The game field is cluttered with random tetrominoes up to certain height (specified by the user in percents via settings or immediately before the game). Then the user can try to clean up the clutter.</li>	<li>Many convenience feature and better help. In particular, custom key assignments are reflected in help.</li></ul>
 
 <p><b><big>7.1:</big></b> February 5, 2019: Fixed the problem with browsers not allowing <code>localStorage</code> (DOM Storage) — implemented the fallback: playing works, but not storing of custom data in local storage.<br>
 The problem was revealed by testing on: Microsoft Edge 42.17134.1.0, EdgeHTML 17.17134, 2018.</p>
+
+<p><b><big>10.0:</big></b> May 30, 2025: Major refactoring, mostly related to the issues with Firefox 139.0.</p>
+<ul>
+<li>The files &ldquo;index.html&rdquo; (the game) and &ldquo;settings.html&rdquo; are now merged into &ldquo;index.html&rdquo;. Due to the Firefox 139.0 issue, <code>localStorage</code> is isolated by URLs, but it should be isolated by origin. It rendered custom settings not working with Firefox. With the single index.html file, the URLs are the same.</li>
+<li>Many new improvements.</li>
+</ul>
 
 <h2 id="a11">11. Live Play</h2>
 
