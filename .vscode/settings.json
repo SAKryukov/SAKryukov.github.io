@@ -104,7 +104,7 @@
     // Controls the line height used in the markdown preview. This number is relative to the font size.
     "markdown.preview.lineHeight": 1.4,
     // Very important: remove entred words from suggestions, leave only markdown syntax:
-    "editor.wordBasedSuggestions": false,
+    "editor.wordBasedSuggestions": "off",
     "[markdown]": { // for Markdown language id only:
         "editor.codeLens": true,
         "editor.lineNumbers": "off",
